@@ -1,0 +1,214 @@
+In the TOOLS\EXPORTERS\MAX2SDK directory, you must reconstruct the 
+following hierarchy in order to build the 3DS Max exporters for 
+exporting Actor data.
+
+ Volume in drive F is GENESIS        Serial number is 4549:13F0
+ Directory of  F:\genesis10\Tools\Exporters\max2sdk\*
+
+ 4/23/99  17:31         <DIR>    . 
+ 4/23/99  17:31         <DIR>    ..
+ 4/23/99  17:31         <DIR>    include
+ 4/23/99  17:31         <DIR>    lib
+ 4/26/99  13:03               0  manifest.txt
+              0 bytes in 1 file and 4 dirs    0 bytes allocated
+
+ Directory of  F:\genesis10\Tools\Exporters\max2sdk\include\*
+
+ 4/23/99  17:31         <DIR>    . 
+ 4/23/99  17:31         <DIR>    ..
+ 3/23/99  18:16           5,482  ACOLOR.H
+ 3/23/99  18:16             557  ALERTS.H
+ 3/23/99  18:16          36,893  ANIMTBL.H
+ 3/23/99  18:16           4,435  APPIO.H
+ 3/23/99  18:16             962  ARCDLG.H
+ 3/23/99  18:16             467  ASSERT1.H
+ 3/23/99  18:16           5,579  BEZFONT.H
+ 3/23/99  18:16           2,240  BITARRAY.H
+ 3/23/99  18:16          81,867  BITMAP.H
+ 3/23/99  18:16             113  BMMLIB.H
+ 3/23/99  18:16           1,994  BOX2.H
+ 3/23/99  18:16           2,142  BOX3.H
+ 3/23/99  18:16             970  BUILDVER.H
+ 3/23/99  18:16           7,722  CAPTYPES.H
+ 3/23/99  18:16           1,651  CHANNELS.H
+ 3/23/99  18:16           4,793  CLIENT.H
+ 3/23/99  18:16           3,813  CMDMODE.H
+ 3/23/99  18:16           5,949  COLOR.H
+ 3/23/99  18:16          30,767  CONTROL.H
+ 3/23/99  18:16             477  COREEXP.H
+ 3/23/99  18:16             522  COREGEN.H
+ 3/23/99  18:16          22,675  CUSTCONT.H
+ 3/23/99  18:16             457  DBGPRINT.H
+ 3/23/99  18:16             757  DECOMP.H
+ 3/23/99  18:16           3,513  DPOINT3.H
+ 3/23/99  18:16           2,731  DUMMY.H
+ 3/23/99  18:16           1,085  EULER.H
+ 3/23/99  18:16             933  EVROUTER.H
+ 3/23/99  18:16           1,271  EVUSER.H
+ 3/23/99  18:16             167  EXPORT.H
+ 3/23/99  18:16           3,704  EXPR.H
+ 3/23/99  18:16             127  EXPRLIB.H
+ 3/23/99  18:16           2,749  FBWIN.H
+ 3/23/99  18:16          26,767  FILTERS.H
+ 3/23/99  18:16             790  FLTAPI.H
+ 3/23/99  18:16             162  FLTLIB.H
+ 3/23/99  18:16           8,003  FRONTEND.H
+ 3/23/99  18:16           3,808  GAMMA.H
+ 3/23/99  18:16           7,742  GCOMM.H
+ 3/23/99  18:16             114  GCOMMLIB.H
+ 3/23/99  18:16           1,665  GENCAM.H
+ 3/23/99  18:16           2,222  GENHIER.H
+ 3/23/99  18:16           4,684  GENLIGHT.H
+ 3/23/99  18:16             463  GENSHAPE.H
+ 3/23/99  18:16             461  GEOM.H
+ 3/23/99  18:16             127  GEOMLIB.H
+ 3/23/99  18:16           1,510  GFLOAT.H
+ 3/23/99  18:16          16,453  GFX.H
+ 3/23/99  18:16             123  GFXLIB.H
+ 3/23/99  18:16           2,560  GIZMO.H
+ 3/23/99  18:16           3,933  GIZMOIMP.H
+ 3/23/99  18:16           3,822  GPORT.H
+ 3/23/99  18:16           2,090  GUTIL.H
+ 3/23/99  18:16             467  HITDATA.H
+ 3/23/99  18:16           2,401  HOLD.H
+ 3/23/99  18:16             679  HOTCHECK.H
+ 3/23/99  18:16           2,205  HSV.H
+ 3/23/99  18:16           1,330  IKCTRL.H
+ 3/23/99  18:16           5,200  IMPAPI.H
+ 3/23/99  18:16           2,910  IMPEXP.H
+ 3/23/99  18:16          40,103  IMTL.H
+ 3/23/99  18:16          20,978  INODE.H
+ 3/23/99  18:16           6,971  INTERPIK.H
+ 3/23/99  18:16           2,016  INTERVAL.H
+ 3/23/99  18:16           4,393  IOAPI.H
+ 3/23/99  18:16           8,279  IPARAMB.H
+ 3/23/99  18:16           5,111  IPARAMM.H
+ 3/23/99  18:16           3,174  IPOINT2.H
+ 3/23/99  18:16           2,670  IPOINT3.H
+ 3/23/99  18:16          23,785  ISTDPLUG.H
+ 3/23/99  18:16           1,482  KEYREDUC.H
+ 3/23/99  18:16           1,805  LINKLIST.H
+ 3/23/99  18:16           5,188  LINSHAPE.H
+ 3/23/99  18:16             113  LOCKID.H
+ 3/23/99  18:16           3,139  LOG.H
+ 3/23/99  18:16           3,070  MATRIX2.H
+ 3/23/99  18:16           5,982  MATRIX3.H
+ 3/23/99  18:16           1,505  MAX.H
+ 3/23/99  18:16          47,749  MAXAPI.H
+ 3/23/99  18:16           7,262  MAXCOM.H
+ 3/23/99  18:16           1,318  MAXTESS.H
+ 3/23/99  18:16           2,556  MAXTYPES.H
+ 3/23/99  18:16           2,549  MCAPDEV.H
+ 3/23/99  18:16          23,612  MESH.H
+ 3/23/99  18:16             748  MESHACC.H
+ 3/23/99  18:16           2,224  MESHADJ.H
+ 3/23/99  18:16             127  MESHLIB.H
+ 3/23/99  18:16           2,179  MIDIMAN.H
+ 3/23/99  18:16             949  MNBIGMAT.H
+ 3/23/99  18:16           2,008  MNCOMMON.H
+ 3/23/99  18:16             182  MNMATH.H
+ 3/23/99  18:16          13,412  MNMESH.H
+ 3/23/99  18:16           2,308  MODSTACK.H
+ 3/23/99  18:16           3,276  MOUSEMAN.H
+ 3/23/99  18:16             360  MSTSHAPE.H
+ 3/23/99  18:16           1,070  MTL.H
+ 3/23/99  18:16           1,019  NAMETAB.H
+ 3/23/99  18:16           4,552  NOTETRCK.H
+ 3/23/99  18:16           1,920  NOTIFY.H
+ 3/23/99  18:16           2,113  NSCLIP.H
+ 3/23/99  18:16          52,205  OBJECT.H
+ 3/23/99  18:16          20,302  OBJMODE.H
+ 3/23/99  18:16           1,330  OMANAPI.H
+ 3/23/99  18:16           3,999  OSNAP.H
+ 3/23/99  18:16             510  OSNAPAPI.H
+ 3/23/99  18:16           1,621  OSNAPDLG.H
+ 3/23/99  18:16           4,144  OSNAPHIT.H
+ 3/23/99  18:16             930  OSNAPMK.H
+ 3/23/99  18:16           1,827  PALUTIL.H
+ 3/23/99  18:16             145  PARTCLIB.H
+ 3/23/99  18:16           2,145  PARTICLE.H
+ 3/23/99  18:16          19,940  PATCH.H
+ 3/23/99  18:16           1,088  PATCHCAP.H
+ 3/23/99  18:16             131  PATCHLIB.H
+ 3/23/99  18:16           5,763  PATCHOBJ.H
+ 3/23/99  18:16           9,023  PHYEXP.H
+ 3/23/99  18:16           1,633  PIXELBUF.H
+ 3/23/99  18:16          14,246  PLUGAPI.H
+ 3/23/99  18:16           5,744  PLUGIN.H
+ 3/23/99  18:16           3,229  POINT2.H
+ 3/23/99  18:16           4,173  POINT3.H
+ 3/23/99  18:16           3,338  POINT4.H
+ 3/23/99  18:16           9,901  POLYSHP.H
+ 3/23/99  18:16             491  PROPS.H
+ 3/23/99  18:16           2,033  PTRVEC.H
+ 3/23/99  18:16           4,277  QUAT.H
+ 3/23/99  18:16          22,704  REF.H
+ 3/23/99  18:16          20,031  RENDER.H
+ 3/23/99  18:16           1,408  RTCLICK.H
+ 3/23/99  18:16             999  SCENEAPI.H
+ 3/23/99  18:16          10,660  SHAPE.H
+ 3/23/99  18:16           1,045  SHPHIER.H
+ 3/23/99  18:16           3,202  SHPSELS.H
+ 3/23/99  18:16           7,399  SIMPMOD.H
+ 3/23/99  18:16          10,920  SIMPOBJ.H
+ 3/23/99  18:16           5,714  SIMPSHP.H
+ 3/23/99  18:16           6,395  SIMPSPL.H
+ 3/23/99  18:16           1,941  SNAP.H
+ 3/23/99  18:16             985  SOUNDOBJ.H
+ 3/23/99  18:16          10,253  SPLINE3D.H
+ 3/23/99  18:16          31,330  SPLSHAPE.H
+ 3/23/99  18:16           1,176  STACK.H
+ 3/23/99  18:16             899  STACK3.H
+ 3/23/99  18:17          11,255  STDMAT.H
+ 3/23/99  18:17           2,081  STRBASIC.H
+ 3/23/99  18:17           6,323  STRCLASS.H
+ 3/23/99  18:17          31,293  SURF_API.H
+ 3/23/99  18:17           5,512  TAB.H
+ 3/23/99  18:17             784  TCBGRAPH.H
+ 3/23/99  18:17           8,233  TCP.H
+ 3/23/99  18:17           1,268  TEMPLT.H
+ 3/23/99  18:17             867  TESSINT.H
+ 3/23/99  18:17           3,375  TEXUTIL.H
+ 3/23/99  18:17             873  TOOLMAP.H
+ 3/23/99  18:17             683  TRIG.H
+ 3/23/99  18:17           5,429  TRIOBJ.H
+ 3/23/99  18:17           2,462  TVNODE.H
+ 3/23/99  18:17           1,971  TVUTIL.H
+ 3/23/99  18:17           4,144  UNITS.H
+ 3/23/99  18:17             842  UTILAPI.H
+ 3/23/99  18:17             477  UTILEXP.H
+ 3/23/99  18:17             470  UTILLIB.H
+ 3/23/99  18:17             626  VEDGE.H
+ 3/23/99  18:17           1,654  VIEWFILE.H
+ 3/23/99  18:17           3,163  WINUTIL.H
+      1,010,526 bytes in 165 files and 2 dirs    5,603,328 bytes allocated
+
+ Directory of  F:\genesis10\Tools\Exporters\max2sdk\lib\*
+
+ 4/23/99  17:31         <DIR>    . 
+ 4/23/99  17:31         <DIR>    ..
+ 3/23/99  18:17           8,568  ACAP.LIB
+ 3/23/99  18:17         206,568  BMM.LIB
+ 3/23/99  18:17           7,008  CLIENT.LIB
+ 3/23/99  18:17       1,916,044  CORE.LIB
+ 3/23/99  18:17         353,230  EDMODEL.LIB
+ 3/23/99  18:17          24,936  EXPR.LIB
+ 3/23/99  18:17         612,494  FLILIBD.LIB
+ 3/23/99  18:17         612,628  FLILIBH.LIB
+ 3/23/99  18:17         213,918  FLILIBR.LIB
+ 3/23/99  18:17          65,026  FLT.LIB
+ 3/23/99  18:17         175,892  GAPTESS.LIB
+ 3/23/99  18:17          49,276  GCOMM.LIB
+ 3/23/99  18:17         199,860  GEOM.LIB
+ 3/23/99  18:17          15,402  GFX.LIB
+ 3/23/99  18:17          81,156  MESH.LIB
+ 3/23/99  18:17          89,952  MNMATH.LIB
+ 3/23/99  18:17           6,558  PARTICLE.LIB
+ 3/23/99  18:17          70,244  PATCH.LIB
+ 3/23/99  18:17          90,782  UTIL.LIB
+ 3/23/99  18:17           4,968  VIEWFILE.LIB
+      4,804,510 bytes in 20 files and 2 dirs    5,144,576 bytes allocated
+
+    Total for:  F:\genesis10\Tools\Exporters\max2sdk\*
+      5,815,036 bytes in 186 files and 8 dirs    10,747,904 bytes allocated
+     33,357,824 bytes free

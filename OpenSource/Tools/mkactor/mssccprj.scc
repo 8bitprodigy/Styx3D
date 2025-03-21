@@ -1,0 +1,7 @@
+SCC = This is a Source Code Control file
+
+[ActBuild.mak]
+SCC_Project_Name = "$/Genesis10/Tools/mkactor", VLVBAAAA
+
+[AStudio.mak]
+SCC_Project_Name = "$/Genesis10/Tools/mkactor", XLVBAAAA

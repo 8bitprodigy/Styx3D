@@ -1,0 +1,7 @@
+SCC = This is a Source Code Control file
+
+[Genesis.mak]
+SCC_Project_Name = "$/Genesis10/Source", KQQBAAAA
+
+[GenesisDLL.mak]
+SCC_Project_Name = "$/Genesis10/Source", HTYBAAAA

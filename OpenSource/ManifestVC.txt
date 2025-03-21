@@ -1,0 +1,327 @@
+In the MSDEV60 directory, you must reconstruct the following hierarchy in 
+order to build the engine and components.  The BIN directory is required 
+only if you wish to do an independent command line build of the projects.  
+If you will always be using Developer Studio for your builds, you do not 
+need to include the BIN directory.
+
+ Volume in drive X is Disk        
+ Directory of  X:\GenesisSDK10\MSDev60\*
+
+ 1/27/99  16:10         <DIR>    . 
+ 1/27/99  16:10         <DIR>    ..
+ 2/08/99  19:10         <DIR>    bin
+ 3/10/99  12:08         <DIR>    include
+ 3/10/99  12:08         <DIR>    lib
+ 2/08/99  19:10         <DIR>    MFC
+              0 bytes in 0 files and 6 dirs
+
+ Directory of  X:\GenesisSDK10\MSDev60\bin\*
+
+ 2/08/99  19:10         <DIR>    . 
+ 2/08/99  19:10         <DIR>    ..
+ 6/17/98   0:00         667,697  C1.DLL
+ 6/17/98   0:00       1,183,795  C1XX.DLL
+ 6/17/98   0:00         737,329  C2.DLL
+ 6/17/98   0:00          65,536  CL.EXE
+ 4/30/98   0:00          15,632  CVTRES.EXE
+ 4/24/98   0:00         276,480  HCRTF.EXE
+ 4/24/98   0:00         500,736  HCW.EXE
+ 4/24/98   0:00         154,112  HWDLL.DLL
+ 6/17/98   0:00          16,436  LIB.EXE
+ 6/25/98   0:00         462,901  LINK.EXE
+ 6/17/98   0:00          20,551  MAKEHM.EXE
+ 6/17/98   0:00         180,276  MSPDB60.DLL
+ 6/17/98   0:00          77,882  NMAKE.EXE
+ 6/24/98   0:00           7,440  RC.EXE
+ 6/24/98   0:00         107,792  RCDLL.DLL
+      4,474,595 bytes in 15 files and 2 dirs    4,751,360 bytes allocated
+
+ Directory of  X:\GenesisSDK10\MSDev60\include\*
+
+ 3/10/99  12:08         <DIR>    . 
+ 3/10/99  12:08         <DIR>    ..
+ 1/27/99  16:10         <DIR>    gl
+ 6/15/98   0:00           1,173  ASSERT.H
+ 5/05/98   0:00           3,369  BASETSD.H
+ 4/24/98   0:00           2,194  CDERR.H
+ 4/24/98   0:00           3,716  CGUID.H
+ 4/24/98   0:00         189,522  COMMCTRL.H
+ 4/24/98   0:00           7,329  COMMCTRL.RH
+ 4/24/98   0:00          31,909  COMMDLG.H
+ 6/15/98   0:00           2,619  CONIO.H
+ 6/15/98   0:00          14,734  CRTDBG.H
+ 6/15/98   0:00          11,298  CTYPE.H
+ 4/24/98   0:00          14,944  DBT.H
+ 4/24/98   0:00           5,405  DDE.H
+ 4/24/98   0:00             790  DDE.RH
+ 4/24/98   0:00          17,859  DDEML.H
+ 6/15/98   0:00           3,194  DIRECT.H
+ 4/24/98   0:00           5,735  DLGS.H
+ 4/24/98   0:00          53,098  DOCOBJ.H
+ 6/15/98   0:00           2,756  DOS.H
+ 6/15/98   0:00           2,657  ERRNO.H
+ 6/15/98   0:00           3,392  EXCPT.H
+ 4/24/98   0:00         246,634  EXDISP.H
+ 6/15/98   0:00          13,020  FLOAT.H
+ 4/24/98   0:00          25,183  IMM.H
+ 4/24/98   0:00           1,651  Initguid.h
+ 6/15/98   0:00           7,215  IO.H
+ 4/24/98   0:00             746  ISGUIDS.H
+ 6/15/98   0:00           4,143  LIMITS.H
+ 4/24/98   0:00           1,679  LZEXPAND.H
+ 6/15/98   0:00           3,741  MALLOC.H
+ 6/15/98   0:00          21,570  MATH.H
+ 6/15/98   0:00           4,115  MBCTYPE.H
+ 6/15/98   0:00           7,371  MBSTRING.H
+ 4/24/98   0:00           3,912  MCX.H
+ 6/15/98   0:00           2,132  MEMORY.H
+ 4/24/98   0:00         154,494  MMSYSTEM.H
+ 4/24/98   0:00          46,575  MSXML.H
+ 4/24/98   0:00          12,688  NB30.H
+ 6/15/98   0:00           2,276  NEW.H
+ 4/24/98   0:00         224,051  OAIDL.H
+ 4/24/98   0:00          32,184  OBJBASE.H
+ 4/24/98   0:00         434,757  OBJIDL.H
+ 4/24/98   0:00         271,369  OCIDL.H
+ 4/24/98   0:00          15,040  OLE2.H
+ 4/24/98   0:00          40,727  OLEAUTO.H
+ 4/24/98   0:00          22,280  OLECTL.H
+ 4/24/98   0:00         160,354  OLEIDL.H
+ 4/24/98   0:00           1,020  POPPACK.H
+ 6/15/98   0:00           9,010  PROCESS.H
+ 4/24/98   0:00          15,999  PRSHT.H
+ 4/24/98   0:00             908  PSHPACK1.H
+ 4/24/98   0:00             908  PSHPACK2.H
+ 4/24/98   0:00             908  PSHPACK4.H
+ 4/24/98   0:00             908  PSHPACK8.H
+ 4/24/98   0:00          31,611  RICHEDIT.H
+ 4/24/98   0:00           3,817  RPC.H
+ 4/24/98   0:00           3,590  RPCASYNC.H
+ 4/24/98   0:00          45,607  RPCDCE.H
+ 4/24/98   0:00          12,573  RPCDCEP.H
+ 4/24/98   0:00          79,107  RPCNDR.H
+ 4/24/98   0:00          15,175  RPCNSI.H
+ 4/24/98   0:00           1,176  RPCNSIP.H
+ 4/24/98   0:00           1,756  RPCNTERR.H
+ 4/24/98   0:00           6,713  SERVPROV.H
+ 6/15/98   0:00           7,869  SETJMP.H
+ 4/24/98   0:00          22,729  SHELLAPI.H
+ 4/24/98   0:00           8,976  SHLGUID.H
+ 4/24/98   0:00         131,880  SHLOBJ.H
+ 6/15/98   0:00           2,663  signal.h
+ 6/15/98   0:00           4,858  STDARG.H
+ 6/15/98   0:00           2,165  STDDEF.H
+ 6/15/98   0:00          11,997  STDIO.H
+ 6/15/98   0:00          13,809  STDLIB.H
+ 6/15/98   0:00           8,019  STRING.H
+ 6/15/98   0:00          27,914  TCHAR.H
+ 6/15/98   0:00           5,018  TIME.H
+ 4/24/98   0:00          10,022  UNKNWN.H
+ 4/24/98   0:00         229,204  URLMON.H
+ 4/24/98   0:00         173,538  WINBASE.H
+ 4/24/98   0:00          15,763  WINCON.H
+ 4/24/98   0:00         320,885  WINCRYPT.H
+ 4/24/98   0:00           8,635  WINDEF.H
+ 4/24/98   0:00           7,085  WINDOWS.H
+ 4/24/98   0:00          73,884  WINDOWSX.H
+ 4/24/98   0:00         271,824  WINERROR.H
+ 4/24/98   0:00         172,522  WINGDI.H
+ 4/24/98   0:00          22,798  WINNETWK.H
+ 4/24/98   0:00          48,337  WINNLS.H
+ 5/13/98   0:00         252,068  WINNT.H
+ 4/24/98   0:00          10,335  WINNT.RH
+ 4/24/98   0:00          28,650  WINPERF.H
+ 4/24/98   0:00          14,486  WINREG.H
+ 4/24/98   0:00             459  WINRESRC.H
+ 4/24/98   0:00          33,608  WINSOCK.H
+ 4/24/98   0:00          65,179  WINSPOOL.H
+ 4/24/98   0:00          22,408  WINSVC.H
+ 4/24/98   0:00         237,169  WINUSER.H
+ 4/24/98   0:00          41,894  WINUSER.RH
+ 4/24/98   0:00           9,575  WINVER.H
+ 4/24/98   0:00          34,421  WTYPES.H
+ 4/24/98   0:00           7,305  ZMOUSE.H
+      4,728,337 bytes in 100 files and 3 dirs    6,914,048 bytes allocated
+
+ Directory of  X:\GenesisSDK10\MSDev60\include\gl\*
+
+ 1/27/99  16:10         <DIR>    . 
+ 1/27/99  16:10         <DIR>    ..
+ 4/24/98   0:00          69,083  GL.H
+ 4/24/98   0:00          12,024  GLAUX.H
+ 4/24/98   0:00          18,282  GLU.H
+         99,389 bytes in 3 files and 2 dirs    163,840 bytes allocated
+
+    Total for:  X:\GenesisSDK10\MSDev60\include\*
+      4,827,726 bytes in 103 files and 5 dirs    7,077,888 bytes allocated
+
+ Directory of  X:\GenesisSDK10\MSDev60\lib\*
+
+ 3/10/99  12:08         <DIR>    . 
+ 3/10/99  12:08         <DIR>    ..
+ 5/13/98   0:00         117,982  ADVAPI32.LIB
+ 5/13/98   0:00          72,746  COMCTL32.LIB
+ 5/13/98   0:00           7,196  COMDLG32.LIB
+ 5/13/98   0:00          15,566  CTL3D32.LIB
+ 5/13/98   0:00          44,754  CTL3D32S.LIB
+ 5/13/98   0:00          81,080  GDI32.LIB
+ 5/13/98   0:00       1,312,394  GLAUX.LIB
+ 5/13/98   0:00          12,648  GLU32.LIB
+ 5/13/98   0:00          27,692  IMAGEHLP.LIB
+ 5/13/98   0:00         175,226  KERNEL32.LIB
+ 6/17/98   0:00          16,436  LIB.EXE
+ 6/17/98   0:00         874,382  LIBCMT.LIB
+ 6/17/98   0:00       3,108,270  LIBCMTD.LIB
+ 6/17/98   0:00         735,302  LIBCPMT.LIB
+ 6/17/98   0:00       1,647,760  LIBCPMTD.LIB
+ 6/17/98   8:01          65,372  OLDNAMES.LIB
+ 5/13/98   0:00          68,152  OLE32.LIB
+ 5/13/98   0:00         292,862  OLEAUT32.LIB
+ 5/13/98   0:00           6,654  OLEDLG.LIB
+ 5/13/98   0:00           5,446  OLEPRO32.LIB
+ 5/13/98   0:00          77,112  OPENGL32.LIB
+ 5/13/98   0:00          97,768  SHELL32.LIB
+ 5/13/98   0:00          61,374  URLMON.LIB
+ 5/13/98   0:00         135,444  USER32.LIB
+ 6/17/98   0:00       1,103,672  UUID.LIB
+ 5/13/98   0:00         153,480  WININET.LIB
+ 5/13/98   0:00          43,982  WINMM.LIB
+ 5/13/98   0:00          44,858  WINSPOOL.LIB
+ 5/13/98   0:00          16,820  WSOCK32.LIB
+     10,422,430 bytes in 29 files and 2 dirs    10,911,744 bytes allocated
+
+ Directory of  X:\GenesisSDK10\MSDev60\MFC\*
+
+ 2/08/99  19:10         <DIR>    . 
+ 2/08/99  19:10         <DIR>    ..
+ 2/08/99  19:10         <DIR>    include
+ 2/08/99  19:10         <DIR>    Lib
+              0 bytes in 0 files and 4 dirs
+
+ Directory of  X:\GenesisSDK10\MSDev60\MFC\include\*
+
+ 2/08/99  19:10         <DIR>    . 
+ 2/08/99  19:10         <DIR>    ..
+ 2/08/99  19:10         <DIR>    Res
+ 6/15/98   0:00          60,113  AFX.H
+ 6/15/98   0:00          19,188  AFX.INL
+ 6/15/98   0:00           4,809  AFXADV.H
+ 6/15/98   0:00             178  AFXBLD_.H
+ 6/15/98   0:00          35,867  AFXCMN.H
+ 6/15/98   0:00          52,459  AFXCMN.INL
+ 6/15/98   0:00          23,978  AFXCMN2.INL
+ 6/15/98   0:00          34,536  AFXCOLL.H
+ 6/15/98   0:00          20,749  AFXCOLL.INL
+ 6/15/98   0:00          13,267  AFXCOM_.H
+ 6/15/98   0:00           2,245  AFXCONV.H
+ 6/15/98   0:00          67,476  AFXCTL.H
+ 6/15/98   0:00           5,492  AFXCTL.INL
+ 6/15/98   0:00          10,613  AFXCTL.RC
+ 6/15/98   0:00           2,920  AFXCVIEW.H
+ 6/15/98   0:00             978  AFXCVIEW.INL
+ 6/15/98   0:00          39,140  AFXDAO.H
+ 6/15/98   0:00           2,505  AFXDAO.INL
+ 6/15/98   0:00          35,092  AFXDB.H
+ 6/15/98   0:00           5,078  AFXDB.INL
+ 6/15/98   0:00           3,940  AFXDB.RC
+ 6/15/98   0:00           2,229  AFXDB_.H
+ 6/15/98   0:00           4,597  AFXDD_.H
+ 6/15/98   0:00          50,093  AFXDISP.H
+ 6/15/98   0:00          23,260  AFXDLGS.H
+ 6/15/98   0:00           5,334  AFXDLGS.INL
+ 6/15/98   0:00           2,544  AFXDLLX.H
+ 6/15/98   0:00           3,231  AFXDLL_.H
+ 6/15/98   0:00          10,726  AFXDOCOB.H
+ 6/15/98   0:00           5,295  AFXDTCTL.H
+ 6/15/98   0:00           4,297  AFXDTCTL.INL
+ 6/15/98   0:00          37,344  AFXEXT.H
+ 6/15/98   0:00           5,998  AFXEXT.INL
+ 6/15/98   0:00          13,423  AFXHELP.HM
+ 6/15/98   0:00           6,611  AFXHTML.H
+ 6/15/98   0:00           4,717  AFXHTML.INL
+ 6/15/98   0:00          20,523  AFXINET.H
+ 6/15/98   0:00           2,427  AFXINET.INL
+ 6/15/98   0:00          19,813  AFXISAPI.H
+ 6/15/98   0:00           4,338  AFXISAPI.INL
+ 6/15/98   0:00           1,989  AFXISAPI.RC
+ 6/15/98   0:00          34,210  AFXMSG_.H
+ 6/15/98   0:00           5,408  AFXMT.H
+ 6/15/98   0:00           1,842  AFXMT.INL
+ 6/15/98   0:00          13,934  AFXODLGS.H
+ 6/15/98   0:00          68,427  AFXOLE.H
+ 6/15/98   0:00          18,491  AFXOLE.INL
+ 6/15/98   0:00           2,573  AFXOLECL.RC
+ 6/15/98   0:00           3,182  AFXOLEDB.H
+ 6/15/98   0:00           1,693  AFXOLESV.RC
+ 6/15/98   0:00           1,299  AFXPLEX_.H
+ 6/15/98   0:00           3,262  AFXPRINT.RC
+ 6/15/98   0:00          25,356  AFXPRIV.H
+ 6/15/98   0:00           5,776  AFXPRIV2.H
+ 6/15/98   0:00          32,525  AFXRES.H
+ 6/15/98   0:00           9,684  AFXRES.RC
+ 6/15/98   0:00          12,480  AFXRICH.H
+ 6/15/98   0:00           2,420  AFXRICH.INL
+ 6/15/98   0:00          10,073  AFXSOCK.H
+ 6/15/98   0:00           3,297  AFXSOCK.INL
+ 6/15/98   0:00          10,331  AFXSTAT_.H
+ 6/15/98   0:00          48,379  AFXTEMPL.H
+ 6/15/98   0:00           6,816  AFXTLS_.H
+ 6/15/98   0:00          11,517  AFXVER_.H
+ 6/15/98   0:00             693  AFXV_CFG.H
+ 6/15/98   0:00           1,553  AFXV_CPU.H
+ 6/15/98   0:00           1,643  AFXV_DLL.H
+ 6/15/98   0:00           5,349  AFXV_W32.H
+ 6/15/98   0:00         154,220  AFXWIN.H
+ 6/15/98   0:00          58,816  AFXWIN1.INL
+ 6/15/98   0:00          58,743  AFXWIN2.INL
+ 6/15/98   0:00           1,151  WINRES.H
+      1,284,555 bytes in 72 files and 3 dirs    3,014,656 bytes allocated
+
+ Directory of  X:\GenesisSDK10\MSDev60\MFC\include\Res\*
+
+ 2/08/99  19:10         <DIR>    . 
+ 2/08/99  19:10         <DIR>    ..
+ 6/15/98   0:00           1,522  3DCHECK.BMP
+ 6/15/98   0:00             338  95CHECK.BMP
+ 6/15/98   0:00             518  COPY4WAY.CUR
+ 6/15/98   0:00             518  HELP.CUR
+ 6/15/98   0:00             378  HELP.RSC
+ 6/15/98   0:00             518  MAGNIFY.CUR
+ 6/15/98   0:00             378  MAGNIFY.RSC
+ 6/15/98   0:00             198  MINIFWND.BMP
+ 6/15/98   0:00             518  MOVE4WAY.CUR
+ 6/15/98   0:00             518  NODROP.CUR
+ 6/15/98   0:00             378  NTCHECK.BMP
+ 6/15/98   0:00             518  SARROWS.CUR
+ 6/15/98   0:00             546  SPLIT.RSC
+ 6/15/98   0:00             518  SPLITH.CUR
+ 6/15/98   0:00             518  SPLITV.CUR
+ 6/15/98   0:00             518  TRCK4WAY.CUR
+ 6/15/98   0:00             722  TRCKNESW.CUR
+ 6/15/98   0:00             722  TRCKNS.CUR
+ 6/15/98   0:00             722  TRCKNWSE.CUR
+ 6/15/98   0:00             722  TRCKWE.CUR
+ 6/15/98   0:00             262  TRUETYPE.BMP
+         11,550 bytes in 21 files and 2 dirs    688,128 bytes allocated
+
+    Total for:  X:\GenesisSDK10\MSDev60\MFC\include\*
+      1,296,105 bytes in 93 files and 5 dirs    3,702,784 bytes allocated
+
+ Directory of  X:\GenesisSDK10\MSDev60\MFC\Lib\*
+
+ 2/08/99  19:10         <DIR>    . 
+ 2/08/99  19:10         <DIR>    ..
+ 6/17/98   0:00       2,157,890  MFC42.LIB
+ 6/17/98   0:00       1,502,076  MFC42D.LIB
+ 6/17/98   0:00         200,148  MFCS42.LIB
+ 6/17/98   0:00         204,842  MFCS42D.LIB
+ 6/17/98   0:00       8,611,006  NAFXCW.LIB
+ 6/17/98   0:00       9,936,908  NAFXCWD.LIB
+     22,612,870 bytes in 6 files and 2 dirs    22,708,224 bytes allocated
+
+    Total for:  X:\GenesisSDK10\MSDev60\MFC\*
+     23,908,975 bytes in 99 files and 11 dirs    26,411,008 bytes allocated
+
+    Total for:  X:\GenesisSDK10\MSDev60\*
+     43,633,726 bytes in 246 files and 26 dirs    49,152,000 bytes allocated
+  2,147,450,880 bytes free

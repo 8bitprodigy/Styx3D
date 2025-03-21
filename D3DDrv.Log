@@ -1,0 +1,56 @@
+=================================================================
+ D3DDrv v100.3
+ Build Date: Nov 17 1999, Time: 00:22:43
+=================================================================
+
+Current Time:  8:10:17
+Current Date:  3-20-2025
+
+ ** D3D Driver Initializing **
+
+--- D3DMain_CreateDDFromName ---
+  Name: DirectDraw HAL
+   DDCAPS2_CANRENDERWINDOWED    : YES
+   DDCAPS2_NO2DDURING3DSCENE    : NO
+--- D3DMain_GetTextureMemory ---
+  Ram free: -14745601
+--- D3DMain_RememberOldMode ---
+--- D3DMain_EnumDisplayModes ---
+--- D3DMain_CreateD3D ---
+--- D3DMain_EnumDevices ---
+--- D3DMain_SetDisplayMode ---
+  W: 480, H: 360, Bpp: 32, FullScreen: NO
+--- D3DMain_PickDevice ---
+--- D3DMain_CreateBuffers ---
+--- D3DMain_CreateZBuffer ---
+--- D3DMain_CreateDevice ---
+   Vender ID =   4098
+   Device ID =  26840
+--- D3DMain_CreateViewPort ---
+--- D3DMain_GetSurfaceFormats ---
+--- D3DMain_SetRenderState --- 
+--- D3DMain_GetTextureMemory ---
+  Ram free: -30528001
+
+ ** Initialization was successful **
+
+THandle_CheckCache:  Resetting texture cache...
+   NO 3dfx card detected, using larger number of handles...
+THandle_CheckCache:  Resetting texture cache...
+   NO 3dfx card detected, using larger number of handles...
+THandle_CheckCache:  Resetting texture cache...
+   NO 3dfx card detected, using larger number of handles...
+THandle_CheckCache:  Resetting texture cache...
+   NO 3dfx card detected, using larger number of handles...
+THandle_CheckCache:  Resetting texture cache...
+   NO 3dfx card detected, using larger number of handles...
+THandle_CheckCache:  Resetting texture cache...
+   NO 3dfx card detected, using larger number of handles...
+THandle_CheckCache:  Resetting texture cache...
+   NO 3dfx card detected, using larger number of handles...
+THandle_CheckCache:  Resetting texture cache...
+   NO 3dfx card detected, using larger number of handles...
+
+--- D3DMain_ShutdownD3D ---
+  Shutdown was successful...
+

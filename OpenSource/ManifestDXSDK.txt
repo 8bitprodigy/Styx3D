@@ -1,0 +1,62 @@
+In the SDK\DX6SDK directory, you must construct the following hierarchy in 
+order to build the Genesis3D engine.
+
+ Volume in drive F is GENESIS        Serial number is 4549:13F0
+ Directory of  F:\genesis10\sdk\DX6SDK\*
+
+ 2/26/99  15:19         <DIR>    . 
+ 2/26/99  15:19         <DIR>    ..
+ 2/26/99  15:19         <DIR>    Include
+ 2/26/99  15:19         <DIR>    Lib
+              0 bytes in 0 files and 4 dirs
+
+ Directory of  F:\genesis10\sdk\DX6SDK\Include\*
+
+ 2/26/99  15:19         <DIR>    . 
+ 2/26/99  15:19         <DIR>    ..
+ 1/19/99  16:30          67,788  d3d.h
+ 1/19/99  16:30          19,700  d3dcaps.h
+ 1/19/99  16:30          14,968  d3drm.h
+ 1/19/99  16:30          24,277  d3drmdef.h
+ 1/19/99  16:30          79,564  d3drmobj.h
+ 1/19/99  16:30           1,184  d3drmwin.h
+ 1/19/99  16:30          54,339  d3dtypes.h
+ 1/19/99  16:30           5,476  d3dvec.inl
+ 1/19/99  16:30         184,662  ddraw.h
+ 1/19/99  16:30          73,129  dinput.h
+ 1/19/99  16:30           9,350  dls1.h
+ 1/19/99  16:30          32,085  dmusicc.h
+ 1/19/99  16:30          36,801  dmusicf.h
+ 1/19/99  16:30          49,246  dmusici.h
+ 1/19/99  16:30          86,551  dplay.h
+ 1/19/99  16:30          31,073  dplobby.h
+ 1/19/99  16:30           8,846  dsetup.h
+ 1/19/99  16:30          40,943  dsound.h
+ 1/19/99  16:30          30,536  dvp.h
+ 1/19/99  16:30           8,154  dxfile.h
+ 1/19/99  16:30           3,137  dxsdk.inc
+ 1/19/99  16:30          13,262  multimon.h
+ 1/19/99  16:30           8,753  rmxfguid.h
+ 1/19/99  16:30          19,921  rmxftmpl.h
+ 1/19/99  16:30           4,044  rmxftmpl.x
+        907,789 bytes in 25 files and 2 dirs    1,376,256 bytes allocated
+
+ Directory of  F:\genesis10\sdk\DX6SDK\Lib\*
+
+ 2/26/99  15:19         <DIR>    . 
+ 2/26/99  15:19         <DIR>    ..
+ 1/19/99  16:30          16,972  d3dim.lib
+ 1/19/99  16:30          21,540  d3drm.lib
+ 1/19/99  16:30           2,594  d3dxof.lib
+ 1/19/99  16:30          25,094  ddraw.lib
+ 1/19/99  16:30           1,536  ddraw16.lib
+ 1/19/99  16:30          15,336  dinput.lib
+ 1/19/99  16:30           7,264  dplayx.lib
+ 1/19/99  16:30          10,090  dsetup.lib
+ 1/19/99  16:30           6,734  dsound.lib
+ 1/19/99  16:30          42,584  dxguid.lib
+        149,744 bytes in 10 files and 2 dirs    360,448 bytes allocated
+
+    Total for:  F:\genesis10\sdk\DX6SDK\*
+      1,057,533 bytes in 35 files and 8 dirs    1,736,704 bytes allocated
+     35,094,528 bytes free

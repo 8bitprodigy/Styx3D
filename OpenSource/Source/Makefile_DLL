@@ -1,0 +1,201 @@
+# Genesis Engine Makefile (POSIX)
+# Converted from GenesisDLL.mak
+
+# Define default configuration
+ifndef CONFIG
+CONFIG = debug
+endif
+
+# Validate configuration
+ifeq ($(CONFIG),release)
+	OUTDIR = ReleaseDLL
+	DEBUG_FLAGS = 
+	OPTIMIZE_FLAGS = -O2
+else ifeq ($(CONFIG),debug)
+	OUTDIR = DebugDLL
+	DEBUG_FLAGS = -g -DDEBUG
+	OPTIMIZE_FLAGS = -O0
+else
+	$(error Invalid configuration "$(CONFIG)" specified. Use "make CONFIG=release" or "make CONFIG=debug")
+endif
+
+# Toolchain
+CC = gcc
+AR = ar
+LINK = gcc
+MKDIR = mkdir -p
+
+# Directories
+SRCDIR = .
+OBJDIR = $(OUTDIR)
+
+# Include directories
+INCLUDES = \
+	-I. \
+	-I./World \
+	-I./Engine \
+	-I./Engine/Drivers \
+	-I./Actor \
+	-I./BSP \
+	-I./Math \
+	-I./Entities \
+	-I./Support \
+	-I./Physics \
+	-I./VFile \
+	-I./Bitmap \
+	-I./Bitmap/Compression \
+	-I./guWorld
+
+# Compiler flags
+CFLAGS = -Wall -fPIC $(DEBUG_FLAGS) $(OPTIMIZE_FLAGS) $(INCLUDES) \
+	-DWIN32 -D_WINDOWS -D_MBCS -DBUILDGENESIS -DGENESISDLLVERSION
+
+# Linker flags
+LDFLAGS = -shared
+LIBS = -lm -lpthread -ldl
+
+# Output files
+TARGET = $(OUTDIR)/libgenesis.so
+IMPORT_LIB = $(OUTDIR)/libgenesisi.a
+
+# Object files
+OBJECTS = \
+	$(OBJDIR)/actor.o \
+	$(OBJDIR)/body.o \
+	$(OBJDIR)/bodyinst.o \
+	$(OBJDIR)/motion.o \
+	$(OBJDIR)/path.o \
+	$(OBJDIR)/pose.o \
+	$(OBJDIR)/puppet.o \
+	$(OBJDIR)/QKFrame.o \
+	$(OBJDIR)/strblock.o \
+	$(OBJDIR)/tkarray.o \
+	$(OBJDIR)/tkevents.o \
+	$(OBJDIR)/vkframe.o \
+	$(OBJDIR)/XFArray.o \
+	$(OBJDIR)/palcreate.o \
+	$(OBJDIR)/palettize.o \
+	$(OBJDIR)/paloptimize.o \
+	$(OBJDIR)/yuv.o \
+	$(OBJDIR)/bitmap.o \
+	$(OBJDIR)/bitmap_blitdata.o \
+	$(OBJDIR)/bitmap_gamma.o \
+	$(OBJDIR)/pixelformat.o \
+	$(OBJDIR)/A_CORONA.o \
+	$(OBJDIR)/A_STREAK.o \
+	$(OBJDIR)/CORONA.o \
+	$(OBJDIR)/electric.o \
+	$(OBJDIR)/logo.o \
+	$(OBJDIR)/LogoActor.o \
+	$(OBJDIR)/streak.o \
+	$(OBJDIR)/BitmapList.o \
+	$(OBJDIR)/engine.o \
+	$(OBJDIR)/fontbmp.o \
+	$(OBJDIR)/System.o \
+	$(OBJDIR)/Entities.o \
+	$(OBJDIR)/Box.o \
+	$(OBJDIR)/crc32.o \
+	$(OBJDIR)/ExtBox.o \
+	$(OBJDIR)/quatern.o \
+	$(OBJDIR)/Vec3d.o \
+	$(OBJDIR)/Xform3d.o \
+	$(OBJDIR)/Errorlog.o \
+	$(OBJDIR)/geAssert.o \
+	$(OBJDIR)/log.o \
+	$(OBJDIR)/mempool.o \
+	$(OBJDIR)/Ram.o \
+	$(OBJDIR)/ramdll.o \
+	$(OBJDIR)/dirtree.o \
+	$(OBJDIR)/fsdos.o \
+	$(OBJDIR)/Fsmemory.o \
+	$(OBJDIR)/fsvfs.o \
+	$(OBJDIR)/vfile.o \
+	$(OBJDIR)/Fog.o \
+	$(OBJDIR)/Frustum.o \
+	$(OBJDIR)/Gbspfile.o \
+	$(OBJDIR)/Light.o \
+	$(OBJDIR)/Plane.o \
+	$(OBJDIR)/Surface.o \
+	$(OBJDIR)/Trace.o \
+	$(OBJDIR)/User.o \
+	$(OBJDIR)/Vis.o \
+	$(OBJDIR)/WBitmap.o \
+	$(OBJDIR)/World.o \
+	$(OBJDIR)/font.o \
+	$(OBJDIR)/wgClip.o \
+	$(OBJDIR)/matrix33.o \
+	$(OBJDIR)/PhysicsJoint.o \
+	$(OBJDIR)/PhysicsObject.o \
+	$(OBJDIR)/PhysicsSystem.o \
+	$(OBJDIR)/Camera.o \
+	$(OBJDIR)/CSNetMgr.o \
+	$(OBJDIR)/Ge.o \
+	$(OBJDIR)/list.o \
+	$(OBJDIR)/Netplay.o \
+	$(OBJDIR)/Sound.o \
+	$(OBJDIR)/Sound3d.o \
+	$(OBJDIR)/Tclip.o \
+	$(OBJDIR)/timer.o \
+	$(OBJDIR)/tsc.o \
+	$(OBJDIR)/WebUrl.o
+
+# Main targets
+all: $(OUTDIR) $(TARGET) $(IMPORT_LIB)
+
+clean:
+	rm -rf $(OUTDIR)
+
+# Create output directory
+$(OUTDIR):
+	$(MKDIR) $(OUTDIR)
+
+# Link the shared library
+$(TARGET): $(OBJECTS)
+	$(LINK) $(LDFLAGS) -o $@ $^ $(LIBS)
+
+# Create the import library
+$(IMPORT_LIB): $(TARGET) $(OBJDIR)/ramdll.o
+	$(AR) crs $@ $(OBJDIR)/ramdll.o
+
+# Pattern rules for compilation
+$(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OUTDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR)/%.o: $(SRCDIR)/Actor/%.c | $(OUTDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR)/%.o: $(SRCDIR)/Bitmap/%.c | $(OUTDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR)/%.o: $(SRCDIR)/Bitmap/Compression/%.c | $(OUTDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR)/%.o: $(SRCDIR)/Engine/%.c | $(OUTDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR)/%.o: $(SRCDIR)/Engine/Logo/%.c | $(OUTDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR)/%.o: $(SRCDIR)/Entities/%.c | $(OUTDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR)/%.o: $(SRCDIR)/Math/%.c | $(OUTDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR)/%.o: $(SRCDIR)/Support/%.c | $(OUTDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR)/%.o: $(SRCDIR)/VFile/%.c | $(OUTDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR)/%.o: $(SRCDIR)/World/%.c | $(OUTDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR)/%.o: $(SRCDIR)/Font/%.c | $(OUTDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR)/%.o: $(SRCDIR)/Physics/%.c | $(OUTDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Mark targets as phony
+.PHONY: all clean

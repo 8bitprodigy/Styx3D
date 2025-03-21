@@ -1,0 +1,301 @@
+=================
+Table of Contents
+=================
+
+1. Introduction
+2. Build Structure Philosophy
+3. Required External Tools
+4. Itemization of Builds
+
+---------------
+1. Introduction
+---------------
+
+There are ten major components that can be built from this source:
+
+Engine
+D3D Driver
+Glide Driver
+Software Driver
+Actor Studio
+Actor Builder
+Actor Viewer
+Texture Packer
+GEdit
+GBSPLib
+
+Each component has its own project file, and in some cases an independent 
+copy of the Genesis3D SDK.
+
+This document is a guide to the build process for these tools, including 
+information about what external tools you will need in order to build them.  
+We include some recommendations concerning the build process, which we hope 
+you will weight heavily.
+
+-----------------------------
+2. Build Structure Philosophy
+-----------------------------
+
+To help you understand the reasons for the current build structure, we will 
+go into a little detail on a software development cycle.
+
+At every step in the development cycle of a product, it is extremely 
+useful (even necessary) to be able to reproduce what you are shipping to 
+your customers.  In some cases there are legal requirements of this.  
+Consequently, most developers are in the habit of archiving off the code, 
+content and tools that were used to produce a given build that is provided 
+as a milestone, or as a deliverable to customers.  In this way you, the 
+developer, can ensure that you will be able to go back to a reference point 
+to rebuild a product if, for example, you have to put out a patch release, 
+or a point release for the product.  It is critical that you be able to 
+depend on the archive for a completely faithful reproduction of the product 
+that you have shipped, or else you risk a disaster if you ever have to go 
+back to do a low risk patch to a product.  If you cannot faithfully 
+reproduce the build that shipped, then you are accepting some unknown risk 
+when you go to build that patch - you do not know for certain what is 
+different between the shipping product and your patch.  This risk is liable 
+to increase the occurrences of ulcers in most software development managers 
+(heart attacks in the case of catastrophic oversights).
+
+Most of the content production tools included in this release have 
+independent copies of the Genesis3D engine accompanying them.  There are 
+independent build projects for each of these tools, as well.  We chose to 
+seperate these tools in this way, rather than keep a monolithic build 
+process, to avoid a cascade effect late in the development process.
+
+Most of the changes that are made to the codebase, particularly late in the 
+development cycle, will have no effect on the output of the content 
+production tools.  The majority of the changes to the codebase will be to 
+fix application specific problems.  If a monolithic build were used for the 
+engine and tools, then the tools would be rebuilt for each change to the 
+engine, regardless of whether or not there would truly be any change to the 
+output of the tool.  This has two deletarious side effects.  First, the 
+build time for the engine increases dramatically as new tools are added to 
+the project, and as existing tools grow.  This can be debilitating in the 
+later phases of development where hours really count.  If a build takes 4 
+hours to complete, and it breaks in the middle, then you've lost 2 hours 
+for nothing.  Early on it doesn't seem like much, but when you near a beta 
+ship date, you start to feel the pain of extended builds.  The second 
+negative effect is more insidious and more severe.  If the content 
+production tools change with each build, then you are in the logical 
+position of needing to rebuild all of the content at each build to ensure 
+that it still works with the new tools.  Logically, the new tools should 
+work, but who wants to adopt that risk when building the archive?  Without 
+having actually tried to rebuild the content, you cannot be sure that you 
+can faithfully reproduce the build for a patch release if the tools are 
+always rebuilt with the engine build.  The build times for most content for 
+a large application are prohibitive.  You would not want to have to rebuild 
+all the content late in the development cycle over and over again.
+
+For the reasons above, we have made the content production tools keep 
+independent copies of the Genesis3D SDK.  This allows a given tool to 
+freeze on a working SDK and not have to be rebuilt on every engine change.  
+This improves engine build times, and makes separates the content build 
+cycle from the application code build cycle.  In addition, you have a 
+reliable archive that you can return to to rebuild your entire application 
+from in a faithful manner.
+
+There are a few compromises to the structure that we have just discussed.  
+First, you have to accept that each tool carries the extra overhead of a 
+version controlled SDK.  Second, whenever there is an incompatible change 
+in the engine, you have to build the engine, then check in new SDKs to the 
+tools, and build the tools.  Version mismatches can stall the production 
+cycle if you are not careful.  Third, while you have faithful archives for 
+the code of the tools used for content production, you do not have faithful 
+archives of the underlying SDKs used to build those tools.  We made this 
+cutoff as a matter of practicality.  Finally, a word of of warning - we 
+have used a single version of MS VC++ and assorted SDKs to build the engine 
+and all tools.  If you change the compiler or SDKs, you have to rebuild 
+everything to get a faithful reproduction.
+
+We very strongly recommend that you follow our lead on the current build 
+structure.
+
+--------------------------
+3. Required External Tools
+--------------------------
+
+There are a number of external tools required to build all the components 
+of the engine and tools.  These are not redistributable tools, and hence we 
+can only present a manifest of what you need and where you need to put it 
+in order to build these components.
+
+MS VC++ 6.0	We used Microsoft VC 6.0 in 
+		all of our builds.  We started the engine 
+		project using MS VC++ 4.2, and went directly 
+		to 6.0 for most of the components.  We 
+		skipped version 5.0 because of problems we 
+		experienced with the floating point 
+		optimization support in VC++ 5.0.  We do not 
+		recommend building the engine with VC++ 5.0.  
+		It will either fail to build, or will not run 
+		reliably in release mode.  See the manifest 
+		file MANIFESTVC.TXT for the complete listing 
+		of files that you need in order to build all 
+		components here.  
+
+MS Masm 6.11	Masm 6.11 is needed in order to support the
+		AMD instructions used in the software driver.  
+		See the manifest file MANIFESTMASM.TXT for 
+		the complete listing of required files.  
+ 
+MS DirectX 6.0	Microsoft DirectX 6.0 is required in order to
+		build the engine.  The sound system, network 
+		APIs, D3D and software driver all depend on 
+		it.  The other systems don't require it, and 
+		the end applications do not need the DX SDK, 
+		as the DirectX data types are kept at the low 
+		level of the engine.  See the file 
+		MANIFESTDXSDK.TXT for a complete listing of 
+		the required files.  
+
+Glide SDK 7.0	The Glide version 7.0 SDK is required in
+		order to build the Glide driver for the 
+		engine.  The SDK is not needed for any other 
+		part of the engine build.  See the file 
+		MANIFESTGLIDE.TXT for a complete listing of 
+		required files.  
+
+3DS Max SDK (version?)
+		The 3DS Max SDK is required in order to build 
+		the exporters for the animation system.  No 
+		other builds require this SDK.  The SDK is 
+		available with each copy of 3DS Max that you 
+		purchase.  Please refer to www.ktx.com for 
+		more information on this.  The file 
+		MANIFESTMAX.TXT contains the complete listing 
+		of required files.
+
+------------------------
+4. Itemization of Builds
+------------------------
+
+Each component has a seperate .DSP file.  The DSP files all contain self 
+relative path references to all the dependent components of the builds.  As 
+long as the shape of the source tree is not changed, the code should build 
+anywhere.
+
+Most of the builds have two configurations: Debug and Release. In each case 
+below, we describe what the component is, the targets that it builds, and 
+the end location of the result.
+
+
+ --------
+| Engine |
+ --------
+Project File: SOURCE\GENESIS.DSP
+Targets:      SOURCE\RELEASE\GENESIS.LIB
+	      SOURCE\DEBUG  \GENESIS.LIB
+
+Project File: SOURCE\GENESISDLL.DSP
+Targets:      SOURCE\RELEASEDLL\GENESISI.LIB
+              SOURCE\RELEASEDLL\GENESIS.DLL
+	      SOURCE\DEBUGDLL  \GENESISID.LIB
+	      SOURCE\DEBUGDLL  \GENESIS.DLL
+	      
+The engine build comprises static link libraries and dynamic link 
+libraries, in both release and debug configurations.  For the DLL builds, 
+import libraries are generated that will be needed by the application to 
+link.
+
+ ------------
+| D3D Driver |
+ ------------
+Project File: SOURCE\ENGINE\DRIVERS\D3DDRV\D3DDRV.DSP
+Targets:      SOURCE\ENGINE\DRIVERS\D3DDRV\RELEASE\D3DDRV.DLL
+	      SOURCE\ENGINE\DRIVERS\D3DDRV\DEBUG  \D3DDRV.DLL
+	      
+The D3D Driver build builds the D3D hardware driver that the engine uses.  
+There is no need for the application to have import libraries for these, as 
+the engine loads them automatically.  The only target that you need be 
+interested in, therefore, is the DLL itself.
+	      
+ --------------
+| Glide Driver |
+ --------------
+Project File: SOURCE\ENGINE\DRIVERS\GLIDEDRV\GLIDEDRV.DSP
+Targets:      SOURCE\ENGINE\DRIVERS\GLIDEDRV\RELEASE\GLIDEDRV.DLL
+	      SOURCE\ENGINE\DRIVERS\GLIDEDRV\DEBUG  \GLIDEDRV.DLL
+	      
+The Glide Driver build builds the 3DFX hardware driver that the engine 
+uses.  There is no need for the application to have import libraries for 
+these, as the engine loads them automatically.  The only target that you 
+need be interested in, therefore, is the DLL itself.  
+	      
+ --------------
+| Software Driver |
+ --------------
+Project File: SOURCE\ENGINE\DRIVERS\SOFTDRV\SOFTDRV.DSP
+Targets:      SOURCE\ENGINE\DRIVERS\SOFTDRV\RELEASE\SOFTDRV.DLL
+	      SOURCE\ENGINE\DRIVERS\SOFTDRV\DEBUG  \SOFTDRV.DLL
+	      
+The Software Driver build builds the generic software driver that the 
+engine uses.  There is no need for the application to have import libraries 
+for these, as the engine loads them automatically.  The only target that 
+you need be interested in, therefore, is the DLL itself.  
+	      
+ --------------
+| Actor Studio |
+ --------------
+Project File: TOOLS\MKACTOR\ASTUDIO.DSP
+Targets:      TOOLS\MKACTOR\RELEASE\ASTUDIO\ASTUDIO.EXE
+	      TOOLS\MKACTOR\DEBUG  \ASTUDIO\ASTUDIO.EXE
+	      
+This project builds the Actor Studio project manager, which in turn handles 
+exported information from 3DS Max and combines it into .ACT files for 
+consumption by the engine.
+
+ ---------------
+| Actor Builder |
+ ---------------
+Project File: TOOLS\MKACTOR\ACTBUILD.DSP
+Targets:      TOOLS\MKACTOR\RELEASE\ACTBUILD\ACTBUILD.EXE
+	      TOOLS\MKACTOR\DEBUG  \ACTBUILD\ACTBUILD.EXE
+
+The Actor Builder is a command line version of Actor Studio.  This tool 
+is designed to be used for automated builds of Actor content for your 
+applications.  If you do not need to do command line builds, you do not 
+need this project.
+ 
+ ---------------
+| Actor Viewer  |
+ ---------------
+Project File: TOOLS\MKACTOR\ACTVIEW.DSP
+Targets:      TOOLS\MKACTOR\RELEASE\ACTVIEW\ACTVIEW.EXE
+	      TOOLS\MKACTOR\DEBUG  \ACTVIEW\ACTVIEW.EXE
+	      
+The Actor Viewer is a tool for viewing the output of Actor Studio or Actor 
+Builder.  This tool is provided for modellers to use to preview the results 
+of their work without having to wait until the content is running in the 
+actual application.
+
+ ----------------
+| Texture Packer |
+ ----------------
+Project File: TOOLS\TPACK\TPACK.DSP
+Targets:      TOOLS\TPACK\RELEASE\TPACK.EXE
+	      TOOLS\TPACK\DEBUG  \TPACK.EXE
+	      
+The Texture Packer builds the .TXL files that GEdit and GBSPLIB use to 
+build your world geometry.
+
+ -------
+| GEdit |
+ -------
+Project File: TOOLS\FUSION2\FUSION.DSP
+Targets:      TOOLS\FUSION2\RELEASE\FUSION.EXE
+	      TOOLS\FUSION2\DEBUG  \FUSION.EXE
+	      
+GEdit is the 3D level builder that you use to build your 3D worlds.
+
+ ---------
+| GBSPLIB |
+ ---------
+Project File: TOOLS\GBSPLIB\GBSPLIB.DSP
+Targets:      TOOLS\GBSPLIB\RELEASE\GBSPLIB.DLL
+	      TOOLS\GBSPLIB\DEBUG  \GBSPLIB.DLL
+
+GBSPLIB is a geometry compiler which is used solely by GEdit.  It converts 
+intermediate output from the editor into .BSP files which are consumed by 
+the engine.
+

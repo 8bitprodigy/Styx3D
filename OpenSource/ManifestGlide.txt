@@ -1,0 +1,41 @@
+In the SDK\Glide directory, you must construct the following hierarchy in 
+order to build the Genesis3D engine.
+
+
+ Volume in drive F is GENESIS        Serial number is 4549:13F0
+ Directory of  F:\genesis10\sdk\Glide\*
+
+ 2/26/99  15:19         <DIR>    . 
+ 2/26/99  15:19         <DIR>    ..
+ 2/26/99  15:19         <DIR>    Include
+ 2/26/99  15:19         <DIR>    Lib
+              0 bytes in 0 files and 4 dirs
+
+ Directory of  F:\genesis10\sdk\Glide\Include\*
+
+ 2/26/99  15:19         <DIR>    . 
+ 2/26/99  15:19         <DIR>    ..
+ 1/19/99  16:31           2,880  3DFX.H
+ 1/19/99  16:31           3,391  FXDLL.H
+ 1/19/99  16:31             908  FXGLOB.H
+ 1/19/99  16:31           1,255  FXOS.H
+ 1/19/99  16:31          37,068  glide.h
+ 1/19/99  16:31           3,697  glidesys.h
+ 1/19/99  16:31           3,078  glideutl.h
+ 1/19/99  16:31             866  MAKEFILE
+ 1/19/99  16:31           3,179  SST1VID.H
+         56,322 bytes in 9 files and 2 dirs    327,680 bytes allocated
+
+ Directory of  F:\genesis10\sdk\Glide\Lib\*
+
+ 2/26/99  15:19         <DIR>    . 
+ 2/26/99  15:19         <DIR>    ..
+ 1/19/99  16:31          39,536  fxmisc.lib
+ 1/19/99  16:31          82,426  fxpci.lib
+ 1/19/99  16:31          98,320  glide2x.lib
+ 1/19/99  16:31          93,190  texus.lib
+        313,472 bytes in 4 files and 2 dirs    393,216 bytes allocated
+
+    Total for:  F:\genesis10\sdk\Glide\*
+        369,794 bytes in 13 files and 8 dirs    720,896 bytes allocated
+     35,061,760 bytes free

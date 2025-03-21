@@ -1,0 +1,30 @@
+In the MASM directory, you must reconstruct the following hierarchy in 
+order to build the engine and tools.  The BIN directory is required.
+ 
+ Volume in drive X is Disk        
+ Directory of  X:\GenesisSDK10\masm\*
+
+ 1/27/99  16:10         <DIR>    . 
+ 1/27/99  16:10         <DIR>    ..
+ 1/27/99  16:10         <DIR>    BIN
+ 1/27/99  16:10         <DIR>    Include
+              0 bytes in 0 files and 4 dirs
+
+ Directory of  X:\GenesisSDK10\masm\BIN\*
+
+ 1/27/99  16:10         <DIR>    . 
+ 1/27/99  16:10         <DIR>    ..
+10/29/97  21:01           9,622  ML.ERR
+10/29/97  21:04         351,744  ML.EXE
+        361,366 bytes in 2 files and 2 dirs    393,216 bytes allocated
+
+ Directory of  X:\GenesisSDK10\masm\Include\*
+
+ 1/27/99  16:10         <DIR>    . 
+ 1/27/99  16:10         <DIR>    ..
+ 8/02/93  15:00           7,708  STDCALL.INC
+          7,708 bytes in 1 file and 2 dirs    32,768 bytes allocated
+
+    Total for:  X:\GenesisSDK10\masm\*
+        369,074 bytes in 3 files and 8 dirs    425,984 bytes allocated
+  2,147,450,880 bytes free
