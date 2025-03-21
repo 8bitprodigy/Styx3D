@@ -30,35 +30,6 @@ LIB_NAME = Genesis
 LIB = $(OUTDIR)/lib$(LIB_NAME).a
 
 # Source files by directory
-WORLD_SRCS = \
-	World/Fog.c \
-	World/Frustum.c \
-	World/Gbspfile.c \
-	World/Light.c \
-	World/Plane.c \
-	World/Surface.c \
-	World/Trace.c \
-	World/User.c \
-	World/Vis.c \
-	World/WBitmap.c \
-	World/World.c
-
-LOGO_SRCS = \
-	Engine/Logo/A_CORONA.c \
-	Engine/Logo/A_STREAK.c \
-	Engine/Logo/CORONA.c \
-	Engine/Logo/electric.c \
-	Engine/Logo/logo.c \
-	Engine/Logo/LogoActor.c \
-	Engine/Logo/streak.c \
-	Engine/Logo/WebUrl.c
-
-ENGINE_SRCS = \
-	Engine/BitmapList.c \
-	Engine/engine.c \
-	Engine/fontbmp.c \
-	Engine/System.c
-
 ACTOR_SRCS = \
 	Actor/actor.c \
 	Actor/body.c \
@@ -74,38 +45,6 @@ ACTOR_SRCS = \
 	Actor/vkframe.c \
 	Actor/XFArray.c
 
-MATH_SRCS = \
-	Math/Box.c \
-	Math/crc32.c \
-	Math/ExtBox.c \
-	Math/quatern.c \
-	Math/Vec3d.c \
-	Math/Xform3d.c
-
-ENTITIES_SRCS = \
-	Entities/Entities.c
-
-SUPPORT_SRCS = \
-	Support/Errorlog.c \
-	Support/geAssert.c \
-	Support/log.c \
-	Support/mempool.c \
-	Support/Ram.c \
-	Support/ramdll.c
-
-PHYSICS_SRCS = \
-	Physics/matrix33.c \
-	Physics/PhysicsJoint.c \
-	Physics/PhysicsObject.c \
-	Physics/PhysicsSystem.c
-
-VFILE_SRCS = \
-	VFile/dirtree.c \
-	VFile/fsdos.c \
-	VFile/Fsmemory.c \
-	VFile/fsvfs.c \
-	VFile/vfile.c
-
 BITMAP_COMPRESSION_SRCS = \
 	Bitmap/Compression/palcreate.c \
 	Bitmap/Compression/palettize.c \
@@ -118,9 +57,42 @@ BITMAP_SRCS = \
 	Bitmap/bitmap_gamma.c \
 	Bitmap/pixelformat.c
 
+ENGINE_SRCS = \
+	Engine/BitmapList.c \
+	Engine/engine.c \
+	Engine/fontbmp.c \
+	Engine/System.c
+
+ENTITIES_SRCS = \
+	Entities/Entities.c
+
 FONT_SRCS = \
 	Font/font.c \
 	Font/wgClip.c
+
+LOGO_SRCS = \
+	Engine/Logo/A_CORONA.c \
+	Engine/Logo/A_STREAK.c \
+	Engine/Logo/CORONA.c \
+	Engine/Logo/electric.c \
+	Engine/Logo/logo.c \
+	Engine/Logo/LogoActor.c \
+	Engine/Logo/streak.c \
+	Engine/Logo/WebUrl.c
+
+MATH_SRCS = \
+	Math/Box.c \
+	Math/crc32.c \
+	Math/ExtBox.c \
+	Math/quatern.c \
+	Math/Vec3d.c \
+	Math/Xform3d.c
+
+PHYSICS_SRCS = \
+	Physics/matrix33.c \
+	Physics/PhysicsJoint.c \
+	Physics/PhysicsObject.c \
+	Physics/PhysicsSystem.c
 
 ROOT_SRCS = \
 	Camera.c \
@@ -133,6 +105,35 @@ ROOT_SRCS = \
 	Tclip.c \
 	timer.c \
 	tsc.c
+
+SUPPORT_SRCS = \
+	Support/Errorlog.c \
+	Support/geAssert.c \
+	Support/log.c \
+	Support/mempool.c \
+	Support/Ram.c \
+	Support/ramdll.c
+
+VFILE_SRCS = \
+	VFile/dirtree.c \
+	VFile/fsdos.c \
+	VFile/Fsmemory.c \
+	VFile/fsvfs.c \
+	VFile/vfile.c
+
+WORLD_SRCS = \
+	World/Fog.c \
+	World/Frustum.c \
+	World/Gbspfile.c \
+	World/Light.c \
+	World/Plane.c \
+	World/Surface.c \
+	World/Trace.c \
+	World/User.c \
+	World/Vis.c \
+	World/WBitmap.c \
+	World/World.c
+
 
 # All source files
 SRCS = $(WORLD_SRCS) $(LOGO_SRCS) $(ENGINE_SRCS) $(ACTOR_SRCS) $(MATH_SRCS) \
@@ -157,40 +158,43 @@ prepare:
 $(OUTDIR)/%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(OUTDIR)/%.o: World/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(OUTDIR)/%.o: Engine/Logo/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(OUTDIR)/%.o: Engine/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
 $(OUTDIR)/%.o: Actor/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(OUTDIR)/%.o: Math/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(OUTDIR)/%.o: Entities/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(OUTDIR)/%.o: Support/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(OUTDIR)/%.o: Physics/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(OUTDIR)/%.o: VFile/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(OUTDIR)/%.o: Bitmap/Compression/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OUTDIR)/%.o: Bitmap/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+$(OUTDIR)/%.o: Bitmap/Compression/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OUTDIR)/%.o: Debug/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OUTDIR)/%.o: Engine/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OUTDIR)/%.o: Engine/Logo/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OUTDIR)/%.o: Entities/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
 $(OUTDIR)/%.o: Font/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OUTDIR)/%.o: Math/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OUTDIR)/%.o: Physics/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OUTDIR)/%.o: Support/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OUTDIR)/%.o: VFile/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OUTDIR)/%.o: World/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Clean target

@@ -29,7 +29,7 @@
 */
 
 #include <stdio.h>
-#include "basetype.h"
+#include "BaseType.h"
 #include "path.h"
 #include "vfile.h"
 

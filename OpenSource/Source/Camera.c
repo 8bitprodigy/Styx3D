@@ -20,8 +20,8 @@
 /*                                                                                      */
 /****************************************************************************************/
 #include <math.h>
-#include <Assert.h>
-#include <Memory.h>		// memset
+#include <assert.h>
+#include <memory.h>    // memset
 
 #include "Camera.h"
 #include "Ram.h"
@@ -30,7 +30,8 @@
 
 #include "DCommon.h"
 
-typedef struct geCamera 
+typedef struct 
+geCamera 
 {
 	geFloat		Fov;						// Field of View for Camera
 	geFloat		Width;						// Width of viewport
@@ -64,7 +65,8 @@ typedef struct geCamera
 	geBoolean	ZFarEnable;					// GE_TRUE == Use ZFar clipplane
 	geFloat		ZFar;						// ZFar clip plane distance
 	
-} geCamera;
+} 
+geCamera;
 
 
 #ifndef max
@@ -76,7 +78,8 @@ typedef struct geCamera
 //=====================================================================================
 //	geCamera_Create
 //=====================================================================================
-GENESISAPI geCamera *GENESISCC geCamera_Create(geFloat Fov, const geRect *Rect)
+GENESISAPI geCamera *GENESISCC 
+geCamera_Create(geFloat Fov, const geRect *Rect)
 {
 	geCamera *Camera;
 
@@ -105,7 +108,8 @@ GENESISAPI geCamera *GENESISCC geCamera_Create(geFloat Fov, const geRect *Rect)
 //=====================================================================================
 //	geCamera_Destroy
 //=====================================================================================
-GENESISAPI void GENESISCC geCamera_Destroy(geCamera **pCamera)
+GENESISAPI void GENESISCC 
+geCamera_Destroy(geCamera **pCamera)
 {
 	assert( pCamera  != NULL );
 	assert( *pCamera != NULL );
@@ -116,7 +120,8 @@ GENESISAPI void GENESISCC geCamera_Destroy(geCamera **pCamera)
 //=====================================================================================
 //	geCamera_SetZScale
 //=====================================================================================
-GENESISAPI void GENESISCC geCamera_SetZScale(geCamera *Camera, geFloat ZScale)
+GENESISAPI void GENESISCC 
+geCamera_SetZScale(geCamera *Camera, geFloat ZScale)
 {
 	assert(Camera);
 	Camera->ZScale = ZScale;
@@ -125,7 +130,8 @@ GENESISAPI void GENESISCC geCamera_SetZScale(geCamera *Camera, geFloat ZScale)
 //=====================================================================================
 //	geCamera_GetZScale
 //=====================================================================================
-GENESISAPI geFloat GENESISCC geCamera_GetZScale(const geCamera *Camera)
+GENESISAPI geFloat GENESISCC 
+geCamera_GetZScale(const geCamera *Camera)
 {
 	assert(Camera);
 	return Camera->ZScale;
@@ -134,7 +140,8 @@ GENESISAPI geFloat GENESISCC geCamera_GetZScale(const geCamera *Camera)
 //=====================================================================================
 //	geCamera_SetFarClipPlane
 //=====================================================================================
-GENESISAPI void GENESISCC geCamera_SetFarClipPlane(geCamera *Camera, geBoolean Enable, geFloat ZFar)
+GENESISAPI void GENESISCC 
+geCamera_SetFarClipPlane(geCamera *Camera, geBoolean Enable, geFloat ZFar)
 {
 	assert(Camera);
 
@@ -145,7 +152,8 @@ GENESISAPI void GENESISCC geCamera_SetFarClipPlane(geCamera *Camera, geBoolean E
 //=====================================================================================
 //	geCamera_GetFarClipPlane
 //=====================================================================================
-GENESISAPI void GENESISCC geCamera_GetFarClipPlane(const geCamera *Camera, geBoolean *Enable, geFloat *ZFar)
+GENESISAPI void GENESISCC 
+geCamera_GetFarClipPlane(const geCamera *Camera, geBoolean *Enable, geFloat *ZFar)
 {
 	assert(Camera);
 
@@ -156,7 +164,8 @@ GENESISAPI void GENESISCC geCamera_GetFarClipPlane(const geCamera *Camera, geBoo
 //=====================================================================================
 //	geCamera_GetClippingRect
 //=====================================================================================
-GENESISAPI void GENESISCC geCamera_GetClippingRect(const geCamera *Camera, geRect *Rect)
+GENESISAPI void GENESISCC 
+geCamera_GetClippingRect(const geCamera *Camera, geRect *Rect)
 {
 	assert( Camera != NULL );
 	assert( Rect != NULL );
@@ -169,7 +178,8 @@ GENESISAPI void GENESISCC geCamera_GetClippingRect(const geCamera *Camera, geRec
 //=====================================================================================
 //	geCamera_GetWidthHeight
 //=====================================================================================
-void GENESISCC geCamera_GetWidthHeight(const geCamera *Camera,geFloat *Width,geFloat *Height)
+void GENESISCC 
+geCamera_GetWidthHeight(const geCamera *Camera,geFloat *Width,geFloat *Height)
 {
 	assert( Width  != NULL );
 	assert( Height != NULL );
@@ -182,7 +192,8 @@ void GENESISCC geCamera_GetWidthHeight(const geCamera *Camera,geFloat *Width,geF
 //=====================================================================================
 //	geCamera_GetScale
 //=====================================================================================
-float GENESISCC geCamera_GetScale(const geCamera *Camera)
+float GENESISCC 
+geCamera_GetScale(const geCamera *Camera)
 {
 	assert( Camera != NULL );
 
@@ -192,7 +203,8 @@ float GENESISCC geCamera_GetScale(const geCamera *Camera)
 //=====================================================================================
 //	geCamera_SetAttributes
 //=====================================================================================
-GENESISAPI void GENESISCC geCamera_SetAttributes(geCamera *Camera, geFloat Fov, const geRect *Rect)
+GENESISAPI void GENESISCC 
+geCamera_SetAttributes(geCamera *Camera, geFloat Fov, const geRect *Rect)
 {
 
 #define TOO_SMALL (0.0001f)		// width and Fov must be >= TOO_SMALL
@@ -256,7 +268,8 @@ GENESISAPI void GENESISCC geCamera_SetAttributes(geCamera *Camera, geFloat Fov, 
 //	geCamera_FillDriverInfo
 //	HACK!!!!
 //========================================================================================
-void geCamera_FillDriverInfo(geCamera *Camera)
+void 
+geCamera_FillDriverInfo(geCamera *Camera)
 {
 	// this is for the software driver to cache out some stuff
 
@@ -282,10 +295,13 @@ extern GInfo GlobalInfo;
 //========================================================================================
 //	geCamera_ScreenPointToWorld
 //========================================================================================
-GENESISAPI void GENESISCC geCamera_ScreenPointToWorld (	const geCamera	*Camera,
-														int32			 ScreenX,
-														int32			 ScreenY,
-														geVec3d			*Vector)
+GENESISAPI void GENESISCC 
+geCamera_ScreenPointToWorld (
+	const geCamera *Camera,
+	      int32     ScreenX,
+	      int32     ScreenY,
+	      geVec3d  *Vector
+)
 // Takes a screen X and Y pair, and a camera and generates a vector pointing
 // in the direction from the camera position to the screen point.
 {
@@ -319,9 +335,12 @@ GENESISAPI void GENESISCC geCamera_ScreenPointToWorld (	const geCamera	*Camera,
 //========================================================================================
 //	geCamera_Project
 //========================================================================================
-GENESISAPI void GENESISCC geCamera_Project(const geCamera *Camera, 
-								const geVec3d *PointInCameraSpace, 
-								geVec3d *ProjectedPoint)
+GENESISAPI void GENESISCC 
+geCamera_Project(
+	const geCamera *Camera, 
+	const geVec3d  *PointInCameraSpace, 
+	      geVec3d  *ProjectedPoint
+)
 	// project from camera space to projected space
 	// projected space is left-handed.
 	// projection is onto x-y plane  x is right, y is down, z is in
@@ -352,9 +371,12 @@ GENESISAPI void GENESISCC geCamera_Project(const geCamera *Camera,
 //========================================================================================
 //	geCamera_ProjectZ
 //========================================================================================
-GENESISAPI void GENESISCC geCamera_ProjectZ(const geCamera *Camera, 
-								const geVec3d *PointInCameraSpace, 
-								geVec3d *ProjectedPoint)
+GENESISAPI void GENESISCC 
+geCamera_ProjectZ(
+	const geCamera *Camera, 
+	const geVec3d  *PointInCameraSpace, 
+	      geVec3d  *ProjectedPoint
+)
 	// project from camera space to projected space
 	// projected space is not right-handed.
 	// projection is onto x-y plane  x is right, y is down, z is in
@@ -390,9 +412,12 @@ GENESISAPI void GENESISCC geCamera_ProjectZ(const geCamera *Camera,
 //========================================================================================
 //	geCamera_ProjectAndClamp
 //========================================================================================
-void GENESISCC geCamera_ProjectAndClamp(const geCamera *Camera, 
-										const geVec3d *PointInCameraSpace, 
-										geVec3d *ProjectedPoint)
+void GENESISCC 
+geCamera_ProjectAndClamp(
+	const geCamera *Camera, 
+	const geVec3d  *PointInCameraSpace, 
+	      geVec3d  *ProjectedPoint
+)
 	// project from camera space to projected space
 	// projected space is not right-handed.
 	// projection is onto x-y plane  x is right, y is down, z is in
@@ -438,7 +463,8 @@ void GENESISCC geCamera_ProjectAndClamp(const geCamera *Camera,
 //========================================================================================
 //	geCamera_GetViewAngleXSinCos
 //========================================================================================
-void GENESISCC geCamera_GetViewAngleXSinCos( const geCamera *Camera, geFloat *SinAngle, geFloat *CosAngle )
+void GENESISCC 
+geCamera_GetViewAngleXSinCos( const geCamera *Camera, geFloat *SinAngle, geFloat *CosAngle )
 {
 	assert( Camera != NULL );
 	assert( SinAngle );
@@ -450,7 +476,8 @@ void GENESISCC geCamera_GetViewAngleXSinCos( const geCamera *Camera, geFloat *Si
 //========================================================================================
 //	geCamera_GetViewAngleYSinCos
 //========================================================================================
-void GENESISCC geCamera_GetViewAngleYSinCos( const geCamera *Camera, geFloat *SinAngle, geFloat *CosAngle )
+void GENESISCC 
+geCamera_GetViewAngleYSinCos( const geCamera *Camera, geFloat *SinAngle, geFloat *CosAngle )
 {
 	assert( Camera != NULL );
 	assert( SinAngle );
@@ -462,9 +489,12 @@ void GENESISCC geCamera_GetViewAngleYSinCos( const geCamera *Camera, geFloat *Si
 //============================================================================================
 //	geCamera_Transform
 //============================================================================================
-GENESISAPI void GENESISCC geCamera_Transform(const geCamera *Camera, 
-						const geVec3d *WorldSpacePoint, 
-						      geVec3d *CameraSpacePoint)
+GENESISAPI void GENESISCC 
+geCamera_Transform(
+	const geCamera *Camera, 
+	const geVec3d  *WorldSpacePoint, 
+	      geVec3d  *CameraSpacePoint
+)
 {
 	assert( Camera );
 	assert( WorldSpacePoint );
@@ -478,9 +508,12 @@ GENESISAPI void GENESISCC geCamera_Transform(const geCamera *Camera,
 //============================================================================================
 //	geCamera_TransformArray
 //============================================================================================
-GENESISAPI void GENESISCC geCamera_TransformArray(const geCamera *Camera, 
-						const geVec3d *WorldSpacePointPtr, 
-						      geVec3d *CameraSpacePointPtr, int count)
+GENESISAPI void GENESISCC 
+geCamera_TransformArray(
+	const geCamera *Camera, 
+	const geVec3d  *WorldSpacePointPtr, 
+	      geVec3d  *CameraSpacePointPtr, int count
+)
 {
 	assert( Camera );
 	assert( WorldSpacePointPtr );
@@ -495,10 +528,13 @@ GENESISAPI void GENESISCC geCamera_TransformArray(const geCamera *Camera,
 //============================================================================================
 //	geCamera_TransformAndProjectArray
 //============================================================================================
-GENESISAPI void GENESISCC geCamera_TransformAndProjectArray(const geCamera *Camera, 
-						const geVec3d *WorldSpacePointPtr, 
-						      geVec3d *ProjectedSpacePointPtr,
-							int count)
+GENESISAPI void GENESISCC 
+geCamera_TransformAndProjectArray(
+	const geCamera *Camera, 
+	const geVec3d  *WorldSpacePointPtr, 
+	      geVec3d  *ProjectedSpacePointPtr,
+	      int       count
+)
 {
 	assert( Camera );
 	assert( WorldSpacePointPtr );
@@ -512,9 +548,11 @@ GENESISAPI void GENESISCC geCamera_TransformAndProjectArray(const geCamera *Came
 //============================================================================================
 //	geCamera_TransformAndProjectLArray
 //============================================================================================
-GENESISAPI void GENESISCC geCamera_TransformAndProjectLArray(const geCamera *Camera, 
-						const GE_LVertex *WorldSpacePointPtr, 
-						      GE_TLVertex *ProjectedSpacePointPtr, int count)
+GENESISAPI void GENESISCC 
+geCamera_TransformAndProjectLArray(
+	const geCamera    *Camera, 
+	const GE_LVertex  *WorldSpacePointPtr, 
+	      GE_TLVertex *ProjectedSpacePointPtr, int count)
 {
 	assert( Camera );
 	assert( WorldSpacePointPtr );
@@ -528,9 +566,12 @@ GENESISAPI void GENESISCC geCamera_TransformAndProjectLArray(const geCamera *Cam
 //============================================================================================
 //	geCamera_TransformAndProject
 //============================================================================================
-GENESISAPI void GENESISCC geCamera_TransformAndProject(const geCamera *Camera,
-								const geVec3d *Point, 
-								geVec3d *ProjectedPoint)
+GENESISAPI void GENESISCC 
+geCamera_TransformAndProject(
+	const geCamera *Camera,
+	const geVec3d  *Point, 
+	      geVec3d  *ProjectedPoint
+)
 	// project from *WORLD* space to projected space
 	// projected space is not right-handed.
 	// projection is onto x-y plane  x is right, y is down, z is in
@@ -559,9 +600,12 @@ GENESISAPI void GENESISCC geCamera_TransformAndProject(const geCamera *Camera,
 //============================================================================================
 //	geCamera_TransformAndProjectL
 //============================================================================================
-GENESISAPI void GENESISCC geCamera_TransformAndProjectL(const geCamera *Camera,
-								const GE_LVertex *Point, 
-								GE_TLVertex *ProjectedPoint)
+GENESISAPI void GENESISCC 
+geCamera_TransformAndProjectL(
+	const geCamera    *Camera,
+	const GE_LVertex  *Point, 
+	      GE_TLVertex *ProjectedPoint
+)
 	// project from *WORLD* space to projected space
 	// projected space is not right-handed.
 	// projection is onto x-y plane  x is right, y is down, z is in

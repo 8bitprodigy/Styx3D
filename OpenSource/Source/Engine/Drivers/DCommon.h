@@ -24,12 +24,12 @@
 
 //#include <Windows.h>	// {} CB commented out windows
 // If you include Windows it MUST be before dcommon!
-
+#include <stdlib.h>
 // FIXME:  What should we do with these?
 #include "XForm3d.h"
 #include "Vec3d.h"
 #include "PixelFormat.h"
-#include "geTypes.h"		// This is a no no
+#include "GeTypes.h"		// This is a no no
 
 #ifdef __cplusplus
 extern "C" {
@@ -65,11 +65,11 @@ typedef UCHAR *PUCHAR;
 typedef char *PSZ;
 #endif  /* !BASETYPES */
 
-typedef unsigned long       DWORD;
-typedef int                 geBoolean;
-typedef unsigned char       BYTE;
-typedef unsigned short      WORD;
-typedef float               FLOAT;
+typedef int32_t     DWORD;
+typedef int8_t      geBoolean;
+typedef uint8_t     BYTE;
+typedef uint16_t    WORD;
+typedef float       FLOAT;
 
 typedef struct tagRECT
 {
@@ -81,14 +81,31 @@ typedef struct tagRECT
 
 #endif // WINVER
 
-#define	DRIVERCC _fastcall
-
-#ifndef __cplusplus
-	#define DllImport	__declspec( dllimport )
-	#define DllExport	__declspec( dllexport )
+#if defined(_MSC_VER)
+  #define DRIVERCC _fastcall
+#elif (defined(__GNUC__) || defined(__clang__)) && defined(__i386__)  // x86 Fastcall for GCC/Clang
+  #define DRIVERCC __attribute__((fastcall))
 #else
-	#define DllImport	extern "C" __declspec( dllimport )
-	#define DllExport	extern "C" __declspec( dllexport )
+  #define DRIVERCC
+#endif
+
+#if defined(_WIN32) && defined(_MSC_VER)  // Microsoft Visual Studio (Windows)
+  #define DllImport __declspec(dllimport)
+  #define DllExport __declspec(dllexport)
+#elif defined(__GNUC__) || defined(__clang__)  // GCC/Clang (Linux, macOS, MSYS)
+  #define DllImport __attribute__((visibility("default")))
+  #define DllExport __attribute__((visibility("default")))
+#else  // Other compilers
+  #define DllImport
+  #define DllExport
+#endif
+
+// C++ Compatibility
+#ifdef __cplusplus
+  #undef DllImport
+  #undef DllExport
+  #define DllImport extern "C" DllImport
+  #define DllExport extern "C" DllExport
 #endif
 
 #define DRV_VERSION_MAJOR		100			// Genesis 1.0
@@ -99,13 +116,13 @@ typedef struct tagRECT
 #ifndef US_TYPEDEFS
 #define US_TYPEDEFS
 
-	typedef uint8	U8;
-	typedef uint16	U16;
-	typedef uint32	U32;
-	typedef char	C8;
-	typedef int8	S8;
-	typedef int16	S16;
-	typedef int32	S32;
+	typedef uint8_t     U8;
+	typedef uint16_t    U16;
+	typedef uint32_t    U32;
+	typedef uint8_t     C8;
+	typedef int8_t      S8;
+	typedef int16_t     S16;
+	typedef int32_t     S32;
 #endif
 
 //===

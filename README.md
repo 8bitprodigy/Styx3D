@@ -2,8 +2,6 @@
 
 Tryna rework Genesis3D to work on modern systems, port it to some homebrew consoles, like DreamCast and PSP, and maybe add some features that will improve QOL, like perhaps scripting.
 
-
-
 ## Rationale
 
 There aren't really any other engines out there that are of this vintage under permissive licenses with the following feature set:
@@ -11,8 +9,6 @@ There aren't really any other engines out there that are of this vintage under p
 - Skeletal models/animations
 - BSP 3D level format which can be modeled in a brush-based editor
 - Fixed function pipeline 
-
-
 
 ## Plans
 
@@ -26,9 +22,11 @@ There aren't really any other engines out there that are of this vintage under p
 
 - [ ] Get it ported to DreamCast and PSP
 
+- [ ] Add support for game data being stored in a compressed format, like PK3 or WAD
+
+- [ ] Create command-line versions of the tools
+
 - [ ] Maybe add scripting support (Lua or Umka)
-
-
 
 ## License
 

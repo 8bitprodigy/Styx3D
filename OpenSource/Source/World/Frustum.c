@@ -20,7 +20,13 @@
 /*                                                                                      */
 /****************************************************************************************/
 #include <assert.h>
-//#include <Windows.h>
+
+#ifdef _WIN32
+    #include <windows.h>
+#else
+    #include <string.h> 
+#endif
+
 #include <math.h>
 
 #include "Camera.h"

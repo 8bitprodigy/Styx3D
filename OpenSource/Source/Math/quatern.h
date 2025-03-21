@@ -92,8 +92,8 @@
 
 ********************************************/
 
-#include "basetype.h"
-#include "xform3d.h"
+#include "BaseType.h"
+#include "XForm3d.h"
 
 #ifdef __cplusplus
 extern "C" {

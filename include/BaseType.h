@@ -30,16 +30,30 @@ extern "C" {
 
 /******** The Genesis Calling Conventions ***********/ 
 
-#define	GENESISCC	_fastcall
-
-#if	defined(BUILDGENESIS) && defined(GENESISDLLVERSION)
-  #define GENESISAPI	_declspec(dllexport)
+#if defined(_MSC_VER)  
+  #define GENESISCC _fastcall
+#elif defined(__GNUC__) && defined(__i386__)  // Only apply fastcall for x86 on GCC
+  #define GENESISCC __attribute__((fastcall))
 #else
-  #if	defined(GENESISDLLVERSION)
-    #define GENESISAPI	_declspec(dllimport)
+  #define GENESISCC
+#endif
+
+#if defined(_WIN32) && defined(_MSC_VER)  // Microsoft Visual Studio (Windows)
+  #if defined(BUILDGENESIS) && defined(GENESISDLLVERSION)
+    #define GENESISAPI __declspec(dllexport)
+  #elif defined(GENESISDLLVERSION)
+    #define GENESISAPI __declspec(dllimport)
   #else
     #define GENESISAPI
   #endif
+#elif defined(__GNUC__) || defined(__clang__)  // GCC and Clang (Linux, macOS, MSYS)
+  #if defined(BUILDGENESIS) && defined(GENESISDLLVERSION)
+    #define GENESISAPI __attribute__((visibility("default")))
+  #else
+    #define GENESISAPI
+  #endif
+#else  // Other compilers
+  #define GENESISAPI
 #endif
 
 /******** The Basic Types ****************************/
