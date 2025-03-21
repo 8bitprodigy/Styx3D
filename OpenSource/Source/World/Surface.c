@@ -19,9 +19,15 @@
 /*  Copyright (C) 1999 WildTangent, Inc. All Rights Reserved           */
 /*                                                                                      */
 /****************************************************************************************/
-#include <Assert.h>
-#include <Windows.h>
-#include <Math.h>
+#include <assert.h>
+
+#ifdef _WIN32
+    #include <windows.h>
+#else
+    #include <string.h> 
+#endif
+
+#include <math.h>
 
 
 #include "BaseType.h"
@@ -179,7 +185,7 @@ void Surf_WorldShutdown(geWorld *World)
 //================================================================================
 //	Surf_InSurfBoundingBox
 //================================================================================
-BOOL Surf_InSurfBoundingBox(Surf_SurfInfo *Surf, geVec3d *Pos, float Box)
+geBoolean Surf_InSurfBoundingBox(Surf_SurfInfo *Surf, geVec3d *Pos, float Box)
 {
    assert(Surf != NULL);
    assert(Pos != NULL);
@@ -187,9 +193,9 @@ BOOL Surf_InSurfBoundingBox(Surf_SurfInfo *Surf, geVec3d *Pos, float Box)
    if (Pos->X+Box >= Surf->VMins.X && Pos->X-Box <= Surf->VMaxs.X)
    if (Pos->Y+Box >= Surf->VMins.Y && Pos->Y-Box <= Surf->VMaxs.Y)
    if (Pos->Z+Box >= Surf->VMins.Z && Pos->Z-Box <= Surf->VMaxs.Z)
-        return TRUE;
+        return GE_TRUE;
 
-   return FALSE;
+   return GE_FALSE;
 }
 
 //================================================================================

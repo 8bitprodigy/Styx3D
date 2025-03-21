@@ -26,9 +26,9 @@
 
 #include "Vec3d.h"
 #include "BaseType.h"
-#include "GeTypes.h"
-#include "Ram.h"
-#include "Errorlog.h"
+#include "GETypes.h"
+#include "RAM.h"
+#include "ErrorLog.h"
 
 #ifdef __cplusplus
 extern "C" {

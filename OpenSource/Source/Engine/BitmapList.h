@@ -22,7 +22,7 @@
 #ifndef BITMAPLIST_H
 #define BITMAPLIST_H
 
-#include "GeTypes.h"
+#include "GETypes.h"
 #include "DCommon.h"
 #include "Bitmap.h"
 

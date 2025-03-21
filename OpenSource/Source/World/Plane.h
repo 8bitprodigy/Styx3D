@@ -1,8 +1,8 @@
 /****************************************************************************************/
-/*  BASETYPE.H                                                                          */
+/*  Plane.h                                                                             */
 /*                                                                                      */
-/*  Author:                                                                             */
-/*  Description: Basic type definitions and calling convention defines                  */
+/*  Author: John Pollard                                                                */
+/*  Description: Handy functions that deal with GFX_Plane's                             */
 /*                                                                                      */
 /*  The contents of this file are subject to the Genesis3D Public License               */
 /*  Version 1.01 (the "License"); you may not use this file except in                   */
@@ -19,65 +19,45 @@
 /*  Copyright (C) 1999 WildTangent, Inc. All Rights Reserved           */
 /*                                                                                      */
 /****************************************************************************************/
-#ifndef GE_BASETYPE_H
-#define GE_BASETYPE_H
- 
+#ifndef GE_PLANE_H
+#define GE_PLANE_H
+
+#include <assert.h>
+
+#ifdef _WIN32
+    #include <windows.h>
+#else
+    #include <string.h> 
+#endif
+
+
+#include "GBSPFile.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/******** The Genesis Calling Conventions ***********/ 
+//=====================================================================================
+//	Defines / Structure defines
+//=====================================================================================
 
-#define	GENESISCC	_fastcall
+//=====================================================================================
+//	Function ProtoTypes
+//=====================================================================================
+geBoolean GENESISCC Plane_SetEngine(geEngine *Engine);
+geBoolean GENESISCC Plane_SetWorld(geWorld *World);
+geBoolean GENESISCC Plane_SetGBSP(World_BSP *BSP);
 
-#if	defined(BUILDGENESIS) && defined(GENESISDLLVERSION)
-  #define GENESISAPI	_declspec(dllexport)
-#else
-  #if	defined(GENESISDLLVERSION)
-    #define GENESISAPI	_declspec(dllimport)
-  #else
-    #define GENESISAPI
-  #endif
-#endif
+int32 GENESISCC Plane_FindLeaf(const geWorld *World, int32 Node, const geVec3d *POV);
 
-/******** The Basic Types ****************************/
+float GENESISCC Plane_PlaneDistanceFast(const GFX_Plane *Plane, const geVec3d *Point);
+float GENESISCC Plane_FaceDistanceFast(const GFX_Face *Face, const geVec3d *Point);
+float GENESISCC Plane_PlaneDistance(const GFX_Plane *Plane, const geVec3d *Point);
+void gePlane_SetFromVerts(GFX_Plane *Plane, const geVec3d *V1, const geVec3d *V2, const geVec3d *V3);
 
-typedef signed int geBoolean;
-#define GE_FALSE	(0)
-#define GE_TRUE		(1)
-
-typedef float geFloat;
-
-#ifndef NULL
-#define NULL	((void *)0)
-#endif
-
-typedef signed long     int32;
-typedef signed short    int16;
-typedef signed char     int8 ;
-typedef unsigned long  uint32;
-typedef unsigned short uint16;
-typedef unsigned char  uint8 ;
-
-/******** Macros on Genesis basic types *************/
-
-#define GE_ABS(x)				( (x) < 0 ? (-(x)) : (x) )
-#define GE_CLAMP(x,lo,hi)		( (x) < (lo) ? (lo) : ( (x) > (hi) ? (hi) : (x) ) )
-#define GE_CLAMP8(x)			GE_CLAMP(x,0,255)
-#define GE_CLAMP16(x)			GE_CLAMP(x,0,65536)
-#define GE_BOOLSAME(x,y)		( ( (x) && (y) ) || ( !(x) && !(y) ) )
-
-#define GE_EPSILON				((geFloat)0.000797f)
-#define GE_FLOATS_EQUAL(x,y)	( GE_ABS((x) - (y)) < GE_EPSILON )
-#define GE_FLOAT_ISZERO(x)		GE_FLOATS_EQUAL(x,0.0f)
-
-#define	GE_PI					((geFloat)3.14159265358979323846f)
-
-/****************************************************/
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif
- 

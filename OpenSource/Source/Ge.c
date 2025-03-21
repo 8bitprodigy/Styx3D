@@ -20,9 +20,14 @@
 /*                                                                                      */
 /****************************************************************************************/
 
-#include <Windows.h>
-#include <Math.h>
-#include <Assert.h>
+#ifdef _WIN32
+    #include <windows.h>
+#else
+    #include <string.h> 
+#endif
+
+#include <math.h>
+#include <assert.h>
 
 #include "Genesis.H"
 #include "System.h"
@@ -46,13 +51,14 @@
 //=====================================================================================
 //	local static globals
 //=====================================================================================
-static	geEngine			*CEngine;				// The current engine object
-static char *geTag="Eclipse!";
+static geEngine *CEngine;				// The current engine object
+static char     *geTag="Eclipse!";
 
 //=====================================================================================
 //	local static function prototypes
 //=====================================================================================
-geBoolean geEngine_SetWorld(geEngine *Engine, geWorld *World);
+geBoolean 
+geEngine_SetWorld(geEngine *Engine, geWorld *World);
 
 //=====================================================================================
 //	Engine
@@ -61,7 +67,8 @@ geBoolean geEngine_SetWorld(geEngine *Engine, geWorld *World);
 //=====================================================================================
 //	geEngine_CreateWithVersion
 //=====================================================================================
-GENESISAPI geEngine *geEngine_CreateWithVersion(HWND hWnd, const char *AppName, const char *DriverDirectory, uint32 Version)
+GENESISAPI geEngine *
+geEngine_CreateWithVersion(HWND hWnd, const char *AppName, const char *DriverDirectory, uint32 Version)
 {
 	assert(AppName != NULL);
 
@@ -74,7 +81,8 @@ GENESISAPI geEngine *geEngine_CreateWithVersion(HWND hWnd, const char *AppName, 
 //=====================================================================================
 //	geEngine_Free
 //=====================================================================================
-GENESISAPI void geEngine_Free(geEngine *Engine)
+GENESISAPI void 
+geEngine_Free(geEngine *Engine)
 {
 	Sys_EngineFree(Engine);
 }
@@ -82,7 +90,8 @@ GENESISAPI void geEngine_Free(geEngine *Engine)
 //=====================================================================================
 //	geEngine_FillRect
 //=====================================================================================
-GENESISAPI void		geEngine_FillRect(geEngine *Engine, const GE_Rect *Rect, const GE_RGBA *Color)
+GENESISAPI void
+geEngine_FillRect(geEngine *Engine, const GE_Rect *Rect, const GE_RGBA *Color)
 {
 	User_EngineFillRect(Engine, Rect, Color);
 }
@@ -90,7 +99,8 @@ GENESISAPI void		geEngine_FillRect(geEngine *Engine, const GE_Rect *Rect, const 
 //=====================================================================================
 //	GE_ScreenShot
 //=====================================================================================
-GENESISAPI geBoolean geEngine_ScreenShot(geEngine *Engine, const char *FileName)
+GENESISAPI geBoolean 
+geEngine_ScreenShot(geEngine *Engine, const char *FileName)
 {
 	assert(Engine);
 
@@ -100,7 +110,8 @@ GENESISAPI geBoolean geEngine_ScreenShot(geEngine *Engine, const char *FileName)
 //=====================================================================================
 //	geEngine_EnabledFrameRateCounter
 //=====================================================================================
-GENESISAPI void	geEngine_EnableFrameRateCounter(geEngine *Engine, geBoolean Enabled)
+GENESISAPI void
+geEngine_EnableFrameRateCounter(geEngine *Engine, geBoolean Enabled)
 {
 	assert(Engine);
 	Engine->DisplayFrameRateCounter = Enabled;
@@ -118,7 +129,8 @@ GENESISAPI void	geEngine_EnableFrameRateCounter(geEngine *Engine, geBoolean Enab
 //	geWorld_CreateMesh
 //	Create a mesh definition object
 //========================================================================================
-GENESISAPI geMesh_Def *geWorld_CreateMesh(geWorld *World, const char *BitmapPath, const char *FileName)
+GENESISAPI geMesh_Def *
+geWorld_CreateMesh(geWorld *World, const char *BitmapPath, const char *FileName)
 {
 	assert(World != NULL);
 	assert(FileName != NULL);
@@ -129,7 +141,8 @@ GENESISAPI geMesh_Def *geWorld_CreateMesh(geWorld *World, const char *BitmapPath
 //========================================================================================
 //	geWorld_FreeMesh
 //========================================================================================
-GENESISAPI void geWorld_FreeMesh(geWorld *World, geMesh_Def *MeshDef)
+GENESISAPI void 
+geWorld_FreeMesh(geWorld *World, geMesh_Def *MeshDef)
 {
 	assert(World != NULL);
 	assert(MeshDef != NULL);
@@ -140,7 +153,8 @@ GENESISAPI void geWorld_FreeMesh(geWorld *World, geMesh_Def *MeshDef)
 //========================================================================================
 //	geWorld_AddMesh
 //========================================================================================
-GENESISAPI geMesh *geWorld_AddMesh(geWorld *World, geMesh_Def *MeshDef, uint32 Flags, uint32 UserFlags)
+GENESISAPI geMesh *
+geWorld_AddMesh(geWorld *World, geMesh_Def *MeshDef, uint32 Flags, uint32 UserFlags)
 {
 	return (geMesh*)Mesh_WorldAddMesh(World,(Mesh_MeshDef*)MeshDef, Flags, UserFlags);
 }
@@ -148,7 +162,8 @@ GENESISAPI geMesh *geWorld_AddMesh(geWorld *World, geMesh_Def *MeshDef, uint32 F
 //========================================================================================
 //	geWorld_RemoveMesh
 //========================================================================================
-GENESISAPI void geWorld_RemoveMesh(geWorld *World, geMesh *Mesh)
+GENESISAPI void 
+geWorld_RemoveMesh(geWorld *World, geMesh *Mesh)
 {
 	assert(World != NULL);
 	assert(Mesh!= NULL);
@@ -159,7 +174,8 @@ GENESISAPI void geWorld_RemoveMesh(geWorld *World, geMesh *Mesh)
 //========================================================================================
 //	geWorld_SetMeshXForm
 //========================================================================================
-GENESISAPI geBoolean geWorld_SetMeshXForm(geWorld *World, geMesh *Mesh, const geXForm3d *XForm)
+GENESISAPI geBoolean 
+geWorld_SetMeshXForm(geWorld *World, geMesh *Mesh, const geXForm3d *XForm)
 {
 	assert(World != NULL);
 	assert(Mesh!= NULL);
@@ -171,7 +187,8 @@ GENESISAPI geBoolean geWorld_SetMeshXForm(geWorld *World, geMesh *Mesh, const ge
 //========================================================================================
 //	geWorld_SetMeshFrame
 //========================================================================================
-GENESISAPI geBoolean geWorld_SetMeshFrame(geWorld *World, geMesh *Mesh, int32 Frame)
+GENESISAPI geBoolean 
+geWorld_SetMeshFrame(geWorld *World, geMesh *Mesh, int32 Frame)
 {
 	assert(World != NULL);
 	assert(Mesh!= NULL);
@@ -182,7 +199,8 @@ GENESISAPI geBoolean geWorld_SetMeshFrame(geWorld *World, geMesh *Mesh, int32 Fr
 //========================================================================================
 //	geWorld_GetMeshBox
 //========================================================================================
-GENESISAPI geBoolean geWorld_GetMeshBox(geWorld *World, geMesh_Def *MeshDef, geVec3d *Mins, geVec3d *Maxs)
+GENESISAPI geBoolean 
+geWorld_GetMeshBox(geWorld *World, geMesh_Def *MeshDef, geVec3d *Mins, geVec3d *Maxs)
 {
 	assert (World != NULL);
 	assert (MeshDef != NULL);
@@ -194,7 +212,8 @@ GENESISAPI geBoolean geWorld_GetMeshBox(geWorld *World, geMesh_Def *MeshDef, geV
 //========================================================================================
 //	geWorld_GetMeshFrameCount
 //========================================================================================
-GENESISAPI int			geWorld_GetMeshFrameCount(const geWorld *World, const geMesh *Mesh)
+GENESISAPI int
+geWorld_GetMeshFrameCount(const geWorld *World, const geMesh *Mesh)
 {
 	Mesh_RenderQ *	mesh;
 
@@ -209,12 +228,14 @@ GENESISAPI int			geWorld_GetMeshFrameCount(const geWorld *World, const geMesh *M
 //========================================================================================
 //	geWorld_SetModelXForm
 //========================================================================================
-GENESISAPI geBoolean geWorld_SetModelXForm(geWorld *World, geWorld_Model *Model, const geXForm3d *XForm)
+GENESISAPI geBoolean 
+geWorld_SetModelXForm(geWorld *World, geWorld_Model *Model, const geXForm3d *XForm)
 {
 	return World_SetModelXForm(World, Model, XForm);
 }
 
-GENESISAPI geBoolean geWorld_ModelMotionGetTimeExtents(
+GENESISAPI geBoolean 
+geWorld_ModelMotionGetTimeExtents(
 	const GE_ModelMotion *	M,
 	GE_TimeType *			StartTime,
 	GE_TimeType *			EndTime)
@@ -222,15 +243,18 @@ GENESISAPI geBoolean geWorld_ModelMotionGetTimeExtents(
 	return geMotion_GetTimeExtents((const geMotion *)M, StartTime, EndTime);
 }
 
-GENESISAPI GE_ModelMotion *geWorld_ModelGetMotion(geWorld_Model *Model)
+GENESISAPI GE_ModelMotion *
+geWorld_ModelGetMotion(geWorld_Model *Model)
 {
 	return (GE_ModelMotion *)World_ModelGetMotion(Model);
 }
 
-GENESISAPI void geWorld_ModelMotionSample(
+GENESISAPI void 
+geWorld_ModelMotionSample(
 	GE_ModelMotion *	M,
 	GE_TimeType 		Time,
-	geXForm3d *			XForm)
+	geXForm3d *			XForm
+)
 {
 	gePath *	P;
 
@@ -239,12 +263,14 @@ GENESISAPI void geWorld_ModelMotionSample(
 	gePath_Sample(P, Time, XForm);
 }
 
-GENESISAPI void * geWorld_ModelGetUserData(const geWorld_Model *Model)
+GENESISAPI void *
+geWorld_ModelGetUserData(const geWorld_Model *Model)
 {
 	return World_ModelGetUserData(Model);
 }
 
-GENESISAPI void geWorld_ModelSetUserData(geWorld_Model *Model, void *UserData)
+GENESISAPI void 
+geWorld_ModelSetUserData(geWorld_Model *Model, void *UserData)
 {
 	World_ModelSetUserData(Model, UserData);
 }
@@ -253,7 +279,8 @@ GENESISAPI void geWorld_ModelSetUserData(geWorld_Model *Model, void *UserData)
 //========================================================================================
 //	geWorld_AddLight
 //========================================================================================
-GENESISAPI geLight *geWorld_AddLight(geWorld *World)
+GENESISAPI geLight *
+geWorld_AddLight(geWorld *World)
 {
 	assert(World != NULL);
 
@@ -263,7 +290,8 @@ GENESISAPI geLight *geWorld_AddLight(geWorld *World)
 //========================================================================================
 //	geWorld_RemoveLight
 //========================================================================================
-GENESISAPI void geWorld_RemoveLight(geWorld *World, geLight *Light)
+GENESISAPI void 
+geWorld_RemoveLight(geWorld *World, geLight *Light)
 {
 	assert(World != NULL);
 	assert(Light != NULL);
@@ -274,12 +302,15 @@ GENESISAPI void geWorld_RemoveLight(geWorld *World, geLight *Light)
 //========================================================================================
 //	geWorld_SetLightAttributes
 //========================================================================================
-GENESISAPI geBoolean geWorld_SetLightAttributes(	geWorld *World,
-										geLight		*Light, 
-										const		geVec3d *Pos, 
-										const		GE_RGBA *RGBA, 
-										float		Radius,
-										geBoolean	CastShadow)
+GENESISAPI geBoolean 
+geWorld_SetLightAttributes(	
+	      geWorld   *World,
+	      geLight   *Light, 
+	const geVec3d   *Pos, 
+	const GE_RGBA   *RGBA, 
+	      float      Radius,
+	      geBoolean  CastShadow
+)
 {
 	assert(World != NULL);
 	assert(Light != NULL);
@@ -292,7 +323,8 @@ GENESISAPI geBoolean geWorld_SetLightAttributes(	geWorld *World,
 //========================================================================================
 //	geWorld_SetLTypeTable
 //========================================================================================
-GENESISAPI geBoolean geWorld_SetLTypeTable(geWorld *World, int32 LType, const char *Table)
+GENESISAPI geBoolean 
+geWorld_SetLTypeTable(geWorld *World, int32 LType, const char *Table)
 {
 	assert(World != NULL);
 	assert(Table != NULL);
@@ -303,11 +335,16 @@ GENESISAPI geBoolean geWorld_SetLTypeTable(geWorld *World, int32 LType, const ch
 //========================================================================================
 // geWorld_TestModelMove
 //========================================================================================
-GENESISAPI geBoolean geWorld_TestModelMove(	geWorld			*World, 
-											geWorld_Model	*Model, 
-											const geXForm3d	*DXForm, 
-											const geVec3d	*Mins, const geVec3d *Maxs,
-											const geVec3d	*In, geVec3d *Out)
+GENESISAPI geBoolean 
+geWorld_TestModelMove(	
+	      geWorld       *World, 
+	      geWorld_Model *Model, 
+	const geXForm3d     *DXForm, 
+	const geVec3d       *Mins, 
+	const geVec3d       *Maxs,
+	const geVec3d       *In,
+	      geVec3d       *Out
+)
 {
 	return Trace_TestModelMove(	World, Model, DXForm, 
 								Mins, Maxs,
@@ -317,10 +354,13 @@ GENESISAPI geBoolean geWorld_TestModelMove(	geWorld			*World,
 //========================================================================================
 // geWorld_ModelCollision
 //========================================================================================
-GENESISAPI geBoolean geWorld_ModelCollision(geWorld			*World, 
-											geWorld_Model	*Model, 
-											const geXForm3d	*DXForm, 
-											GE_Collision	*Collision)
+GENESISAPI geBoolean 
+geWorld_ModelCollision(
+	      geWorld       *World, 
+	      geWorld_Model *Model, 
+	const geXForm3d     *DXForm, 
+	      GE_Collision  *Collision
+)
 {
 	Collision->Mesh  = NULL;
 	Collision->Actor = NULL;
@@ -337,7 +377,19 @@ GENESISAPI geBoolean geWorld_ModelCollision(geWorld			*World,
 //	geWorld_Collision
 //========================================================================================
 
-GENESISAPI geBoolean geWorld_Collision(geWorld *World, const geVec3d *Mins, const geVec3d *Maxs, const geVec3d *Front, const geVec3d *Back, uint32 Contents, uint32 CollideFlags, uint32 UserFlags, GE_CollisionCB *CollisionCB, void *Context, GE_Collision *Col)
+GENESISAPI geBoolean 
+geWorld_Collision(
+          geWorld        *World, 
+	const geVec3d        *Mins, 
+	const geVec3d        *Maxs, 
+	const geVec3d        *Front, 
+	const geVec3d        *Back, 
+	      uint32          Contents, 
+	      uint32          CollideFlags, 
+	      uint32          UserFlags, 
+	      GE_CollisionCB *CollisionCB,
+	      void           *Context, 
+	      GE_Collision   *Col)
 {
 	return Trace_GEWorldCollision(World, Mins, Maxs, Front, Back, Contents, CollideFlags, UserFlags, CollisionCB, Context, Col);
 }

@@ -18,7 +18,7 @@ OUTDIR = $(OUTDIR_$(shell echo $(CFG) | tr '[:lower:]' '[:upper:]'))
 CFLAGS_COMMON = -Wall -I../SDK/DXSDK/Include -I../Source \
 	-I./World -I./Engine -I./Engine/Drivers -I./Actor -I./BSP \
 	-I./Math -I./Entities -I./Support -I./Physics -I./VFile \
-	-I./Bitmap -I./Bitmap/Compression -I../../include
+	-I./Bitmap -I./Bitmap/Compression# -I../../include
 
 CFLAGS_RELEASE = $(CFLAGS_COMMON) -O2 -DNDEBUG
 CFLAGS_DEBUG = $(CFLAGS_COMMON) -g -O0 -D_DEBUG

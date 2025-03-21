@@ -24,8 +24,8 @@
 /****************************************************************************************/
 
 #include "BaseType.h"
-#include "pixelformat.h"
-#include "vfile.h"
+#include "PixelFormat.h"
+#include "VFile.h"
 
 #ifdef __cplusplus
 extern "C" {

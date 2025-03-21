@@ -25,7 +25,7 @@
 #include "BaseType.h"
 #include "XForm3d.h"
 #include "quatern.h"
-#include "vfile.h"
+#include "VFile.h"
 
 #ifdef __cplusplus
 	extern "C" {

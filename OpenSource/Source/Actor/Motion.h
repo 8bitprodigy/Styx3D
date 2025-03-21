@@ -30,8 +30,8 @@
 
 #include <stdio.h>
 #include "BaseType.h"
-#include "path.h"
-#include "vfile.h"
+#include "Path.h"
+#include "VFile.h"
 
 #ifdef __cplusplus
 extern "C" {

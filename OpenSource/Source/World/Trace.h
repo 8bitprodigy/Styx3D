@@ -22,8 +22,14 @@
 #ifndef GE_TRACE_H
 #define GE_TRACE_H
 
-#include <Assert.h>
-#include <Windows.h>
+#include <assert.h>
+
+#ifdef _WIN32
+    #include <windows.h>
+#else
+    #include <string.h> 
+#endif
+
 
 #include "Genesis.h"
 #include "BaseType.h"

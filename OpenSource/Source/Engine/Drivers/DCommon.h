@@ -25,6 +25,7 @@
 //#include <Windows.h>	// {} CB commented out windows
 // If you include Windows it MUST be before dcommon!
 #include <stdlib.h>
+#include <stdint.h>
 // FIXME:  What should we do with these?
 #include "XForm3d.h"
 #include "Vec3d.h"

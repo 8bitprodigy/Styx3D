@@ -33,7 +33,7 @@
 #include "User.h"
 #include "Light.h"
 
-#include "Bitmaplist.h"
+#include "BitmapList.h"
 
 #include "Actor.h"			
 

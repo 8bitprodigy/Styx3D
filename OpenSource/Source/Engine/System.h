@@ -58,7 +58,7 @@ typedef enum
 	FrameState_None = 0,
 	FrameState_Begin,
 } 
-eEngine_FrameState;
+geEngine_FrameState;
 
 //=====================================================================================
 //	Structure defines

@@ -478,13 +478,13 @@ static geBoolean ReadChunk(GBSP_BSPData *BSP, GBSP_Chunk *Chunk, geVFile *f)
 			return GE_FALSE;
 	}
 
-	return TRUE;
+	return GE_TRUE;
 }
 
 //========================================================================================
 //	GBSP_LoadGBSPFile
 //========================================================================================
-BOOL GBSP_LoadGBSPFile(geVFile *File, GBSP_BSPData *BSP)
+geBoolean GBSP_LoadGBSPFile(geVFile *File, GBSP_BSPData *BSP)
 {
 	GBSP_Chunk	Chunk;
 
@@ -503,13 +503,13 @@ BOOL GBSP_LoadGBSPFile(geVFile *File, GBSP_BSPData *BSP)
 			break;
 	}
 
-	return TRUE;
+	return GE_TRUE;
 }
 
 //========================================================================================
 //	GBSP_FreeGBSPFile
 //========================================================================================
-BOOL GBSP_FreeGBSPFile(GBSP_BSPData *BSP)
+geBoolean GBSP_FreeGBSPFile(GBSP_BSPData *BSP)
 {
 	if (BSP->GFXModels)
 	{
@@ -612,6 +612,6 @@ BOOL GBSP_FreeGBSPFile(GBSP_BSPData *BSP)
 	BSP->NumGFXVisData = 0;
 	BSP->NumGFXPortals = 0;
 
-	return TRUE;
+	return GE_TRUE;
 }
 
