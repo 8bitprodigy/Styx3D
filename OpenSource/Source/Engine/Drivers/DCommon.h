@@ -29,7 +29,7 @@
 #include "XForm3d.h"
 #include "Vec3d.h"
 #include "PixelFormat.h"
-#include "GeTypes.h"		// This is a no no
+#include "GETypes.h"		// This is a no no
 
 #ifdef __cplusplus
 extern "C" {
@@ -115,7 +115,6 @@ typedef struct tagRECT
 
 #ifndef US_TYPEDEFS
 #define US_TYPEDEFS
-
 	typedef uint8_t     U8;
 	typedef uint16_t    U16;
 	typedef uint32_t    U32;
@@ -153,7 +152,8 @@ typedef struct
 {
 	gePixelFormat	PixelFormat;
 	uint32			Flags;				
-} geRDriver_PixelFormat;
+} 
+geRDriver_PixelFormat;
 
 #define RDRIVER_THANDLE_HAS_COLORKEY	(1<<0)		// The thandle is using color keying
 
@@ -165,15 +165,16 @@ typedef struct
 	uint32					ColorKey;
 	uint32					Flags;
 	geRDriver_PixelFormat	PixelFormat;
-
-} geRDriver_THandleInfo;
+} 
+geRDriver_THandleInfo;
 
 //===
 
 typedef struct
 {
 	S32	LMapCount[16][4];				// LMap size / MipLevel
-} DRV_Debug;
+} 
+DRV_Debug;
 
 typedef struct
 {
@@ -182,7 +183,8 @@ typedef struct
 	int32		CacheFlushes;
 	int32		TexMisses;
 	int32		LMapMisses;
-} DRV_CacheInfo;
+} 
+DRV_CacheInfo;
 
 typedef struct
 {
@@ -207,12 +209,14 @@ typedef struct
 	S32			R_width;
 	S32			G_width;
 	S32			B_width;
-} DRV_Window;
+} 
+DRV_Window;
 
 typedef struct 
 {
     U8 r, g, b;								// RGB components for RGB lightmaps
-} DRV_RGB;
+} 
+DRV_RGB;
 
 //===========================================================================================
 // FIXME:  Get palette stuff, and bitmap out of dcommon
@@ -233,7 +237,8 @@ typedef struct
 	// Driver sets these in register functions
 	//S32		Id;								// Bitmap handle for hardware...
 	geRDriver_THandle	*THandle;
-} DRV_Bitmap;
+} 
+DRV_Bitmap;
 //===========================================================================================
 
 #define LMAP_TYPE_LIGHT			0
@@ -249,7 +254,8 @@ typedef struct
 
 	S32					Face;						// Face that this map belongs too
 	geRDriver_THandle	*THandle;
-} DRV_LInfo;
+} 
+DRV_LInfo;
 
 typedef struct
 {
@@ -258,7 +264,8 @@ typedef struct
 
 	float		DrawScaleU;						// How much to scale right before draw
 	float		DrawScaleV;
-} DRV_TexInfo;
+} 
+DRV_TexInfo;
     
 // Render Flags for ALL render functions
 #define DRV_RENDER_ALPHA		(1<<0)	// Render function should expect alpha set in vertices
@@ -281,7 +288,8 @@ typedef struct
 	float	x,y,z;						// float 3d z value
 	float	u,v;						// float texture coords
 	float	r,g,b,a;					// Color of point, and Alpha
-} DRV_TLVertex;
+} 
+DRV_TLVertex;
 
 typedef struct
 {
@@ -293,7 +301,8 @@ typedef struct
 	S32					Width;
 	S32					Height;
 	HWND				hWnd;
-} DRV_DriverHook;
+} 
+DRV_DriverHook;
 
 typedef struct
 {
@@ -325,7 +334,8 @@ typedef struct
 	float		PlaneDist;
 	geVec3d		RPlaneNormal;		// Rotated Face normal
 	geVec3d		Pov;
-} GInfo;
+} 
+GInfo;
 
 // What the driver can support as far as texture mapping is concerned
 #define DRV_SUPPORT_ALPHA					(1<<0)		// Driver can do alpha blending
@@ -344,7 +354,8 @@ typedef struct
 	U32			PreferenceFlags;
 	U32			Reserved1;
 	U32			Reserved2;
-} DRV_EngineSettings;
+} 
+DRV_EngineSettings;
 
 // Enumeration defines
 typedef geBoolean DRV_ENUM_MODES_CB( S32 Mode, char *ModeName, S32 Width, S32 Height, void *Context);
@@ -482,7 +493,8 @@ typedef struct
 
 	// Temp hack global
 	GInfo				*GlobalInfo;
-} DRV_Driver;
+} 
+DRV_Driver;
 
 typedef geBoolean DRV_Hook(DRV_Driver **Hook);
 
@@ -507,7 +519,8 @@ typedef enum
 	RENDER_WORLD,
 	RENDER_MESHES,
 	RENDER_MODELS
-} DRV_RENDER_MODE;
+} 
+DRV_RENDER_MODE;
 
 #ifdef __cplusplus
 }

@@ -124,7 +124,7 @@ VFILE_SRCS = \
 WORLD_SRCS = \
 	World/Fog.c \
 	World/Frustum.c \
-	World/Gbspfile.c \
+	World/GBSPFile.c \
 	World/Light.c \
 	World/Plane.c \
 	World/Surface.c \

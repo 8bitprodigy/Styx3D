@@ -57,7 +57,7 @@ see {} for notes/long-term-todos
 #include	<stdlib.h>
 #include	<string.h>
 
-#include	"basetype.h"
+#include	"BaseType.h"
 #include	"getypes.h"
 #include	"ram.h"
 
@@ -66,11 +66,11 @@ see {} for notes/long-term-todos
 #include	"Log.h"
 #include	"mempool.h"
 
-#include	"bitmap.h"
-#include	"bitmap._h"
-#include	"bitmap.__h"
-#include	"bitmap_blitdata.h"
-#include	"bitmap_gamma.h"
+#include	"Bitmap.h"
+#include	"Bitmap_private.h"
+#include	"Bitmap__private.h"
+#include	"Bitmap_blitdata.h"
+#include	"Bitmap_gamma.h"
 
 #include	"palcreate.h"
 #include	"palettize.h"

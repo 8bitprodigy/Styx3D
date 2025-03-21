@@ -24,10 +24,21 @@
 
 //#define OLD_FONT
 
+#ifdef _WIN32
+    #include <windows.h>
+    typedef HINSTANCE ModuleHandle;
+#else
+    #include <dlfcn.h>
+    #include <stdint.h>
+    #include <string.h> 
+    typedef void* ModuleHandle;
+    typedef int64_t LARGE_INTEGER;
+#endif
+
+
 #include "ErrorLog.h"
 #include "Genesis.h"
-#include <windows.h>
-#include "dcommon.h"
+#include "DCommon.h"
 #include "Camera.h"
 #include "PtrTypes.h"
 
@@ -46,7 +57,8 @@ typedef enum
 {
 	FrameState_None = 0,
 	FrameState_Begin,
-} geEngine_FrameState;
+} 
+eEngine_FrameState;
 
 //=====================================================================================
 //	Structure defines
@@ -59,7 +71,8 @@ typedef struct
 {
 	int32			x,y;
 	char			String[MAX_CLIENT_STRING_LEN];
-}	Sys_String;
+}	
+Sys_String;
 
 typedef struct
 {
@@ -68,12 +81,14 @@ typedef struct
 	uint32			FontLUT1[256];
 	Sys_String		ClientStrings[MAX_CLIENT_STRINGS];
 	int32			NumStrings;
-} Sys_FontInfo;
+} 
+Sys_FontInfo;
 
 typedef struct
 {
 	int32		Freq;
-} Sys_CPUInfo;
+} 
+Sys_CPUInfo;
 
 typedef struct geDriver_Mode
 {
@@ -81,7 +96,8 @@ typedef struct geDriver_Mode
 	char			Name[DRV_MODE_STR_SIZE];		// Driver assigned mode name
 	int32			Width;						// Mode width
 	int32			Height;						// Mode height
-} geDriver_Mode;
+} 
+geDriver_Mode;
 
 typedef struct geDriver
 {
@@ -92,24 +108,26 @@ typedef struct geDriver
 	geDriver_Mode	Modes[MAX_DRIVER_MODES];	// Modes for this driver
 	int32			NumModes;					// Num modes for this driver
 
-} geDriver;
+} 
+geDriver;
 
 typedef struct
 {
 	// Info the enuming fills in
-	geDriver		SubDrivers[MAX_SUB_DRIVERS];
-	int32			NumSubDrivers;
-	char			*CurFileName;
+	geDriver         SubDrivers[MAX_SUB_DRIVERS];
+	int32            NumSubDrivers;
+	char            *CurFileName;
 
 	//	Data for current driver
-	geBoolean		Active;				// GE_TRUE if a driver and mode has been initialized
+	geBoolean        Active;				// GE_TRUE if a driver and mode has been initialized
 	
-	HINSTANCE		DriverHandle;		// CurrentDriver Handle (for DLL)
+	ModuleHandle     DriverHandle;		// CurrentDriver Handle (for DLL)
 	
-	geDriver		*CurDriver;			// Current driver
-	geDriver_Mode	*CurMode;			// Current mode
-	DRV_Driver		*RDriver;			// Current driver function hook
-} Sys_DriverInfo;
+	geDriver        *CurDriver;			// Current driver
+	geDriver_Mode   *CurMode;			// Current mode
+	DRV_Driver      *RDriver;			// Current driver function hook
+} 
+Sys_DriverInfo;
 
 typedef struct
 {
@@ -127,7 +145,8 @@ typedef struct
 	int32			NumFog;
 	int32			LMap1;				// Lmaps gone through first pass (reg light)
 	int32			LMap2;				// LMaps gone through 2nd pass (fog)
-} Sys_DebugInfo;
+} 
+Sys_DebugInfo;
 
 //{} Hack:
 
@@ -149,7 +168,8 @@ typedef struct
 	geWorld		*World;
 	int32		RefCount;
 
-} geEngine_WorldList;
+} 
+geEngine_WorldList;
 
 // System globals initialized by module it belongs to...
 typedef struct geEngine
@@ -205,7 +225,8 @@ typedef struct geEngine
 
 	geEngine_FrameState	FrameState;
 
-} geEngine;
+} 
+geEngine;
 
 //=====================================================================================
 //	Function prototypes

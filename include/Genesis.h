@@ -90,7 +90,8 @@ typedef enum
 	GE_TEXTURED_POLY,
 	GE_GOURAUD_POLY,
 	GE_TEXTURED_POINT					
-} gePoly_Type;
+} 
+gePoly_Type;
 
 // Poly Fx flags
 #define	GE_RENDER_DO_NOT_OCCLUDE_OTHERS	(1<<0)			// Poly will not occlude others
@@ -177,7 +178,8 @@ typedef struct
 	geWorld_Model	*Model;
 	geActor			*Actor;
 	int32			Contents;
-} GE_Contents;
+} 
+GE_Contents;
 
 typedef geBoolean GE_CollisionCB(geWorld_Model *Model, geActor *Actor, void *Context);
 
@@ -186,7 +188,8 @@ typedef struct
 {
 	geVec3d	Normal;									// Orientation of plane
 	float	Dist;									// Distance from origin
-} GE_Plane;
+} 
+GE_Plane;
 
 typedef struct
 {
@@ -196,7 +199,8 @@ typedef struct
 	geVec3d			Impact;							// Impact Point
 	float			Ratio;							// Percent from 0 to 1.0, how far along the line for the impact point
 	GE_Plane		Plane;							// Impact Plane
-} GE_Collision;
+} 
+GE_Collision;
 
 // If these render states change, they must change in DCommon.h too!!!
 // These are still under construction, and are for debug purposes only.
