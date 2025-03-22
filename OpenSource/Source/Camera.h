@@ -23,8 +23,8 @@
 #define GE_CAMERA_H
 
 #include "BaseType.h"
-#include "Vec3d.h"
-#include "XForm3d.h"
+#include "Vec3D.h"
+#include "XForm3D.h"
 #include "GETypes.h"
 
 #ifdef __cplusplus

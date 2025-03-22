@@ -19,14 +19,21 @@
 /*  Copyright (C) 1999 WildTangent, Inc. All Rights Reserved           */
 /*                                                                                      */
 /****************************************************************************************/
-#include <Windows.h>
-#include <Assert.h>
+
+#include <assert.h>
+
+#ifdef _WIN32
+    #include <windows.h>
+#else
+    #include <string.h> 
+#endif
+
 
 #include "Entities.h"
 #include "BaseType.h"
-#include "Errorlog.h"
-#include "Vec3d.h"
-#include "Ram.h"
+#include "ErrorLog.h"
+#include "Vec3D.h"
+#include "RAM.h"
 
 // These are temporary until we find a better way to get models pointers into the entity stuff
 #include "World.h"
@@ -1056,7 +1063,8 @@ geBoolean geEntity_EntitySetLoadEntities(geEntity_EntitySet *EntitySet, geVFile 
 //====================================================================================
 //	geEntity_LoadEntitySet
 //====================================================================================
-geEntity_EntitySet *LoadEntitySet(const char *EntityData, int32 EntityDataSize)
+geEntity_EntitySet *
+LoadEntitySet(const char *EntityData, int32 EntityDataSize)
 {
 	geEntity_EntitySet		*EntitySet;
 	geVFile_MemoryContext	Context;
@@ -1073,7 +1081,7 @@ geEntity_EntitySet *LoadEntitySet(const char *EntityData, int32 EntityDataSize)
 	MemFile = geVFile_OpenNewSystem(NULL, GE_VFILE_TYPE_MEMORY, NULL, &Context, GE_VFILE_OPEN_READONLY);
 
 	if (!MemFile)
-		return FALSE;
+		return GE_FALSE;
 
 	// Create the entityset
 	EntitySet = geEntity_EntitySetCreate();

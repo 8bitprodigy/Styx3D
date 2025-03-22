@@ -19,12 +19,18 @@
 /*  Copyright (C) 1999 WildTangent, Inc. All Rights Reserved           */
 /*                                                                                      */
 /****************************************************************************************/
-#include <Assert.h>
-#include <Windows.h>
+#include <assert.h>
+
+#ifdef _WIN32
+    #include <windows.h>
+#else
+    #include <string.h> 
+#endif
+
 
 #include "User.h"
 #include "World.h"
-#include "Ram.h"
+#include "RAM.h"
 #include "ErrorLog.h"
 #include "System.h"
 #include "Surface.h"
@@ -35,7 +41,7 @@
 
 #include "DCommon.h"
 
-#include "Bitmap._h"
+#include "Bitmap_private.h"
 
 extern int32	MirrorRecursion;					// GLOBAL!!! in World.c
 

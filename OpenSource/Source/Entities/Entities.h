@@ -22,15 +22,21 @@
 #ifndef GE_ENTITIES_H
 #define GE_ENTITIES_H
 
-#include <Assert.h>
-#include <Windows.h>
+#include <assert.h>
+
+#ifdef _WIN32
+    #include <windows.h>
+#else
+    #include <string.h> 
+#endif
+
 
 #include "BaseType.h"
-#include "Errorlog.h"
-#include "Vec3d.h"
+#include "ErrorLog.h"
+#include "Vec3D.h"
 #include "System.h"
 #include "World.h"
-#include "Ram.h"
+#include "RAM.h"
 
 #ifdef __cplusplus
 extern "C" {

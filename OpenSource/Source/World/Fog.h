@@ -24,7 +24,7 @@
 
 #include <assert.h>
 
-#include "Vec3d.h"
+#include "Vec3D.h"
 #include "BaseType.h"
 #include "GETypes.h"
 #include "RAM.h"

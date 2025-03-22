@@ -32,7 +32,7 @@
 
 #include "BaseType.h"
 #include "PtrTypes.h"
-#include "Vec3d.h"
+#include "Vec3D.h"
 #include "DCommon.h"
 
 #ifdef __cplusplus

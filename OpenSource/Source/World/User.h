@@ -32,8 +32,8 @@
 
 
 #include "BaseType.h"
-#include "Vec3d.h"
-#include "XForm3d.h"
+#include "Vec3D.h"
+#include "XForm3D.h"
 #include "Camera.h"
 #include "Genesis.h"
 #include "World.h"

@@ -18,7 +18,7 @@ OUTDIR = $(OUTDIR_$(shell echo $(CFG) | tr '[:lower:]' '[:upper:]'))
 CFLAGS_COMMON = -Wall -I../SDK/DXSDK/Include -I../Source \
 	-I./World -I./Engine -I./Engine/Drivers -I./Actor -I./BSP \
 	-I./Math -I./Entities -I./Support -I./Physics -I./VFile \
-	-I./Bitmap -I./Bitmap/Compression# -I../../include
+	-I./Bitmap -I./Bitmap/Compression -lwinpr3 -lwine -lSDL3# -I../../include
 
 CFLAGS_RELEASE = $(CFLAGS_COMMON) -O2 -DNDEBUG
 CFLAGS_DEBUG = $(CFLAGS_COMMON) -g -O0 -D_DEBUG
@@ -31,65 +31,65 @@ LIB = $(OUTDIR)/lib$(LIB_NAME).a
 
 # Source files by directory
 ACTOR_SRCS = \
-	Actor/actor.c \
-	Actor/body.c \
-	Actor/bodyinst.c \
-	Actor/motion.c \
-	Actor/path.c \
-	Actor/pose.c \
-	Actor/puppet.c \
+	Actor/Actor.c \
+	Actor/Body.c \
+	Actor/BodyInst.c \
+	Actor/Motion.c \
+	Actor/Path.c \
+	Actor/Pose.c \
+	Actor/Puppet.c \
 	Actor/QKFrame.c \
-	Actor/strblock.c \
-	Actor/tkarray.c \
-	Actor/tkevents.c \
-	Actor/vkframe.c \
+	Actor/StrBlock.c \
+	Actor/TKArray.c \
+	Actor/TKEvents.c \
+	Actor/VKFrame.c \
 	Actor/XFArray.c
 
 BITMAP_COMPRESSION_SRCS = \
-	Bitmap/Compression/palcreate.c \
-	Bitmap/Compression/palettize.c \
-	Bitmap/Compression/paloptimize.c \
-	Bitmap/Compression/yuv.c
+	Bitmap/Compression/PalCreate.c \
+	Bitmap/Compression/Palettize.c \
+	Bitmap/Compression/PalOptimize.c \
+	Bitmap/Compression/YUV.c
 
 BITMAP_SRCS = \
-	Bitmap/bitmap.c \
-	Bitmap/bitmap_blitdata.c \
-	Bitmap/bitmap_gamma.c \
-	Bitmap/pixelformat.c
+	Bitmap/Bitmap.c \
+	Bitmap/Bitmap_BlitData.c \
+	Bitmap/Bitmap_Gamma.c \
+	Bitmap/PixelFormat.c
 
 ENGINE_SRCS = \
 	Engine/BitmapList.c \
-	Engine/engine.c \
-	Engine/fontbmp.c \
+	Engine/Engine.c \
+	Engine/FontBMP.c \
 	Engine/System.c
 
 ENTITIES_SRCS = \
 	Entities/Entities.c
 
 FONT_SRCS = \
-	Font/font.c \
-	Font/wgClip.c
+	Font/Font.c \
+	Font/WgClip.c
 
 LOGO_SRCS = \
-	Engine/Logo/A_CORONA.c \
-	Engine/Logo/A_STREAK.c \
-	Engine/Logo/CORONA.c \
-	Engine/Logo/electric.c \
-	Engine/Logo/logo.c \
+	Engine/Logo/A_Corona.c \
+	Engine/Logo/A_Streak.c \
+	Engine/Logo/Corona.c \
+	Engine/Logo/Electric.c \
+	Engine/Logo/Logo.c \
 	Engine/Logo/LogoActor.c \
-	Engine/Logo/streak.c \
-	Engine/Logo/WebUrl.c
+	Engine/Logo/Streak.c \
+	Engine/Logo/WebURL.c
 
 MATH_SRCS = \
 	Math/Box.c \
 	Math/crc32.c \
 	Math/ExtBox.c \
-	Math/quatern.c \
-	Math/Vec3d.c \
-	Math/Xform3d.c
+	Math/Quatern.c \
+	Math/Vec3D.c \
+	Math/XForm3D.c
 
 PHYSICS_SRCS = \
-	Physics/matrix33.c \
+	Physics/Matrix33.c \
 	Physics/PhysicsJoint.c \
 	Physics/PhysicsObject.c \
 	Physics/PhysicsSystem.c
@@ -98,28 +98,28 @@ ROOT_SRCS = \
 	Camera.c \
 	CSNetMgr.c \
 	Ge.c \
-	list.c \
+	List.c \
 	Netplay.c \
 	Sound.c \
 	Sound3d.c \
-	Tclip.c \
-	timer.c \
-	tsc.c
+	TClip.c \
+	Timer.c \
+	TSC.c
 
 SUPPORT_SRCS = \
-	Support/Errorlog.c \
-	Support/geAssert.c \
-	Support/log.c \
-	Support/mempool.c \
-	Support/Ram.c \
-	Support/ramdll.c
+	Support/ErrorLog.c \
+	Support/GEAssert.c \
+	Support/Log.c \
+	Support/MemPool.c \
+	Support/RAM.c \
+	Support/RAMDLL.c
 
 VFILE_SRCS = \
-	VFile/dirtree.c \
-	VFile/fsdos.c \
-	VFile/Fsmemory.c \
-	VFile/fsvfs.c \
-	VFile/vfile.c
+	VFile/DirTree.c \
+	VFile/FSOps.c \
+	VFile/FSMemory.c \
+	VFile/FSVFS.c \
+	VFile/VFile.c
 
 WORLD_SRCS = \
 	World/Fog.c \

@@ -46,7 +46,7 @@
 
 #include "TKArray.h"
 #include "Quatern.h"
-#include "vfile.h"
+#include "VFile.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -71,10 +71,11 @@ geTKArray *GENESISCC geQKFrame_SquadCreate();
 
 
 geBoolean GENESISCC geQKFrame_Insert(
-	geTKArray **KeyList,			// keyframe list to insert into
-	geTKArray_TimeType Time,		// time of new keyframe
-	const geQuaternion *Q,			// quaternion at new keyframe
-	int *Index);					// index of new frame
+	     geTKArray           **KeyList, // keyframe list to insert into
+	      geTKArray_TimeType   Time,    // time of new keyframe
+	const geQuaternion        *Q,       // quaternion at new keyframe
+	      int                 *Index	// index of new frame
+);
 	// inserts a new keyframe with the given time and vector into the list.
 
 void GENESISCC geQKFrame_Query(
@@ -134,12 +135,20 @@ geBoolean GENESISCC geQKFrame_LinearRead(geVFile* pFile, void* geQKFrame);
 geBoolean GENESISCC geQKFrame_SlerpRead(geVFile* pFile, void* geQKFrame);
 geBoolean GENESISCC geQKFrame_SquadRead(geVFile* pFile, void* geQKFrame);
 
-geBoolean GENESISCC geQKFrame_WriteToFile(geVFile *pFile, void *geQKFrame, 
-								geQKFrame_InterpolationType InterpolationType, int Looping);
+geBoolean GENESISCC geQKFrame_WriteToFile(
+	geVFile                     *pFile, 
+	geTKArray                   *geQKFrame, 
+	geQKFrame_InterpolationType  InterpolationType, 
+	int                          Looping
+);
 geTKArray *GENESISCC geQKFrame_CreateFromFile(geVFile *pFile, geQKFrame_InterpolationType *InterpolationType, int *Looping);
 geTKArray *GENESISCC geQKFrame_CreateFromBinaryFile(geVFile *pFile, int *InterpolationType, int *Looping);
-geBoolean GENESISCC geQKFrame_WriteToBinaryFile(geVFile *pFile, geTKArray *KeyList, 
-		geQKFrame_InterpolationType InterpolationType, int Looping);
+geBoolean GENESISCC geQKFrame_WriteToBinaryFile(
+	geVFile                     *pFile,
+	geTKArray                   *KeyList, 
+	geQKFrame_InterpolationType  InterpolationType,
+	int                          Looping
+);
 
 
 

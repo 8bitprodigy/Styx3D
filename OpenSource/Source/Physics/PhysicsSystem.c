@@ -25,11 +25,11 @@
 #include <string.h>
 #include <float.h>
 
-#include "vec3d.h"
-#include "xform3d.h"
-#include "ram.h"
-#include "matrix33.h"
-#include "quatern.h"
+#include "Vec3D.h"
+#include "XForm3D.h"
+#include "RAM.h"
+#include "Matrix33.h"
+#include "Quatern.h"
 
 #include "PhysicsObject.h"
 #include "PhysicsJoint.h"
@@ -235,11 +235,12 @@ GENESISAPI geBoolean GENESISCC gePhysicsSystem_Destroy(gePhysicsSystem** ppPhyss
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // physics stuff follows
-
+#if defined(_MSC_VER) && _MSC_VER < 1800  // Visual Studio before 2013
 static float fmin(float a, float b)
 {
 	return a < b ? a : b;
 }
+#endif
 
 GENESISAPI geBoolean GENESISCC gePhysicsSystem_Iterate(gePhysicsSystem* psPtr, float Time)
 {

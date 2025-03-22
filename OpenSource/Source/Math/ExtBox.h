@@ -23,7 +23,7 @@
 #define GE_EXTBOX_H
 
 #include "BaseType.h"
-#include "Vec3d.h"
+#include "Vec3D.h"
 
 #ifdef __cplusplus
 	extern "C" {

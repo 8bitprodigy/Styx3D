@@ -19,12 +19,12 @@
 /*  Copyright (C) 1999 WildTangent, Inc. All Rights Reserved           */
 /*                                                                                      */
 /****************************************************************************************/
-#include <Assert.h>
-#include <Math.h>
+#include <assert.h>
+#include <math.h>
 
 #include "World.h"
 #include "System.h"
-#include "Ram.h"
+#include "RAM.h"
 #include "BaseType.h"
 #include "GBSPFile.h"
 #include "Camera.h"
@@ -43,10 +43,10 @@
 
 #include "Trace.h"
 
-#include "list.h"
+#include "List.h"
 
 #include "Bitmap.h"
-#include "Bitmap._h"
+#include "Bitmap_private.h"
 
 //#define BSP_BACK_TO_FRONT
 
@@ -1629,13 +1629,16 @@ static geBoolean RenderWorldModel(geCamera *Camera, Frustum_Info *FrustumInfo, g
 //=====================================================================================
 static geBoolean RenderSubModels(geCamera *Camera, Frustum_Info *FrustumInfo, geWorld_SkyBoxTData *SkyTData)
 {
-	int32				i;
-	BOOL				OldVis;
+	int32                 i;
+	geBoolean             OldVis;
 	geWorld_Model		*Model;
-	geXForm3d			OldXForm, NewXForm, CXForm;
-	Frustum_Info		ModelSpaceFrustum;
-	uint32				StartClipFlags;
-	geWorld_RenderInfo	RenderInfo;
+	geXForm3d             
+	                      OldXForm,
+	                      NewXForm, 
+	                      CXForm;
+	Frustum_Info          ModelSpaceFrustum;
+	uint32                StartClipFlags;
+	geWorld_RenderInfo    RenderInfo;
 
 
 	if (!RDriver->BeginModels())
@@ -1649,7 +1652,7 @@ static geBoolean RenderSubModels(geCamera *Camera, Frustum_Info *FrustumInfo, ge
 	
 	OldVis = CWorld->VisInfo;		// Save old vis info flag
 
-	CWorld->VisInfo = FALSE;		// Fake no vis info so ALL model faces/modes will draw
+	CWorld->VisInfo = GE_FALSE;		// Fake no vis info so ALL model faces/modes will draw
 	
 	Model = &CBSP->Models[1];		// Start with the model (skip the world, Models[0])
 	

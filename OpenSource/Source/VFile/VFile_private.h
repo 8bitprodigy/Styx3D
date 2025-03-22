@@ -23,7 +23,7 @@
 #define VFILE__H
 
 #include	"BaseType.h"
-#include	"vfile.h"
+#include	"VFile.h"
 
 typedef void * 		(GENESISCC *geVFile_FinderCreateFN)(geVFile *FileSystem, void *Handle, const char *FileSpec);
 typedef geBoolean 	(GENESISCC *geVFile_FinderGetNextFileFN)(void *Handle);

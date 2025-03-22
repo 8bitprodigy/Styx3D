@@ -33,7 +33,7 @@
 #include "Frustum.h"
 #include "Surface.h"
 
-#include "Vec3d.h"
+#include "Vec3D.h"
 
 //#define RIGHT_HANDED
 

@@ -23,10 +23,10 @@
 #include <assert.h>
 #include <stdio.h>
 
-#include "genesis.h"
-#include "ram.h"
-#include "matrix33.h"
-#include "quatern.h"
+#include "Genesis.h"
+#include "RAM.h"
+#include "Matrix33.h"
+#include "Quatern.h"
 
 
 #include "PhysicsObject.h"

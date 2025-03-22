@@ -33,10 +33,10 @@
 #include "BaseType.h"
 #include "System.h"
 #include "World.h"
-#include "Ram.h"
+#include "RAM.h"
 #include "Surface.h"
 #include "WBitmap.h"	
-#include "Vec3d.h"
+#include "Vec3D.h"
 #include "Vis.h"
 
 #include "Light.h"

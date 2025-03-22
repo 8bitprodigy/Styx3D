@@ -20,9 +20,16 @@
 /*                                                                                      */
 /****************************************************************************************/
 #define WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#include <stdio.h>
+
 #include <assert.h>		// assert()	
+
+#ifdef _WIN32
+    #include <windows.h>
+#else
+    #include <string.h> 
+#endif
+
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>		// memmove(), strncpy() strncat()
 

@@ -33,8 +33,8 @@
 #include "System.h"
 #include "World.h"
 #include "GBSPFile.h"
-#include "Vec3d.h"
-#include "XForm3d.h"
+#include "Vec3D.h"
+#include "XForm3D.h"
 #include "Plane.h"
 
 //=====================================================================================

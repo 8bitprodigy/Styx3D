@@ -33,7 +33,7 @@
 
 #include "Genesis.h"
 #include "BaseType.h"
-#include "Vec3d.h"
+#include "Vec3D.h"
 #include "World.h"
 //#include "System.h"
 

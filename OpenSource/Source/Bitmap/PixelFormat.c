@@ -33,10 +33,11 @@ this code only work on Intel-Endian CPU's
 	}
 
 ***/
-
-#include <stdlib.h>
 #include <assert.h>
-#include "pixelformat.h"
+#include <stdlib.h>
+
+#include "PixelFormat.h"
+
 
 #define isinrange(x,lo,hi)	( (x)>=(lo) && (x)<=(hi) )
 

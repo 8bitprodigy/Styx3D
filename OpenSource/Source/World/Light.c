@@ -30,9 +30,9 @@
 #include <math.h>
 
 #include "BaseType.h"
-#include "Ram.h"
+#include "RAM.h"
 #include "System.h"
-#include "Vec3d.h"
+#include "Vec3D.h"
 #include "Light.h"
 #include "Surface.h"
 #include "GBSPFile.h"

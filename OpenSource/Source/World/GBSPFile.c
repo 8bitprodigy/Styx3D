@@ -23,8 +23,8 @@
 #include <assert.h>
 
 #include "GBSPFile.h"
-#include "Vec3d.h"
-#include "Ram.h"
+#include "Vec3D.h"
+#include "RAM.h"
 #include "System.h"
 
 #include "ErrorLog.h"

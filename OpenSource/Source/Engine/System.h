@@ -32,7 +32,14 @@
     #include <stdint.h>
     #include <string.h> 
     typedef void* ModuleHandle;
-    typedef int64_t LARGE_INTEGER;
+    typedef union {
+		struct {
+			uint32_t LowPart;
+			int32_t HighPart;
+		};
+		int64_t QuadPart;
+    }
+    LARGE_INTEGER;
 #endif
 
 

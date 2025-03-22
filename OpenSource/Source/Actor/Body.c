@@ -24,10 +24,10 @@
 #include <math.h> 						//fabs()
 #include <stdio.h>						//sscanf
 
-#include "body.h"
-#include "body._h"
-#include "ram.h"
-#include "errorlog.h"
+#include "Body.h"
+#include "Body_private.h"
+#include "RAM.h"
+#include "ErrorLog.h"
 
 
 #define MAX(aa,bb)   ( (aa)>(bb)?(aa):(bb) )
@@ -37,7 +37,8 @@
 
 
 #if defined(DEBUG) || !defined(NDEBUG)
-static geBoolean GENESISCC geBody_SanityCheck(const geBody *B)
+geBoolean GENESISCC 
+geBody_SanityCheck(const geBody *B)
 {
 	int i,j,k;
 	int Lod,FaceCount,VertexCount,NormalCount,BoneCount;

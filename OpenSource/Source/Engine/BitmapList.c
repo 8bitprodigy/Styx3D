@@ -19,21 +19,27 @@
 /*  Copyright (C) 1999 WildTangent, Inc. All Rights Reserved           */
 /*                                                                                      */
 /****************************************************************************************/
-#include <Assert.h>
+#include <assert.h>
 
 #ifdef _DEBUG
-#include <windows.h>
+
+#ifdef _WIN32
+    #include <windows.h>
+#else
+    #include <string.h> 
+#endif
+
 #include <stdio.h>
 #endif
 
 #include "BitmapList.h"
 #include "DCommon.h"
 #include "Bitmap.h"
-#include "Bitmap._h"
-#include "list.h"
-#include "mempool.h"
-#include "errorlog.h"
-#include "ram.h"
+#include "Bitmap_private.h"
+#include "List.h"
+#include "MemPool.h"
+#include "ErrorLog.h"
+#include "RAM.h"
 //#include "tsc.h"
 
 struct BitmapList

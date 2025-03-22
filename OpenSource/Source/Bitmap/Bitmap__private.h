@@ -22,8 +22,8 @@
 /*                                                                                      */
 /****************************************************************************************/
 
-#include "bitmap.h"
-#include "bitmap._h"
+#include "Bitmap.h"
+#include "Bitmap_private.h"
 
 // Hey ! 
 // this is bitmap.__h : for inclusion by bitmap friends ONLY!

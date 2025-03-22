@@ -44,10 +44,10 @@
 #include <string.h>
 #include <stdio.h>
 
-#include "vec3d.h"
+#include "Vec3D.h"
 #include "QKFrame.h"
-#include "errorlog.h"
-#include "ram.h"
+#include "ErrorLog.h"
+#include "RAM.h"
 
 #define LINEAR_BLEND(a,b,t)  ( (t)*((b)-(a)) + (a) )	
 			// linear blend of a and b  0<t<1 where  t=0 ->a and t=1 ->b
@@ -686,8 +686,13 @@ static int GENESISCC geQKFrame_DetermineCompressionType(geTKArray *KeyList)
 
 
 
-geBoolean GENESISCC geQKFrame_WriteToFile(geVFile *pFile, geTKArray *KeyList, 
-		geQKFrame_InterpolationType InterpolationType, int Looping)
+geBoolean GENESISCC 
+geQKFrame_WriteToFile(
+	geVFile                     *pFile, 
+	geTKArray                   *KeyList, 
+	geQKFrame_InterpolationType  InterpolationType, 
+	int                          Looping
+)
 {
 	int NumElements,i;
 	geFloat Time,DeltaTime;
@@ -791,7 +796,8 @@ geBoolean GENESISCC geQKFrame_WriteToFile(geVFile *pFile, geTKArray *KeyList,
 }
 
 
-geTKArray *GENESISCC geQKFrame_CreateFromFile(geVFile *pFile, int *InterpolationType, int *Looping)
+geTKArray *GENESISCC 
+geQKFrame_CreateFromFile(geVFile *pFile, geQKFrame_InterpolationType *InterpolationType, int *Looping)
 {
 	int i,u,NumElements;
 	int Compression;

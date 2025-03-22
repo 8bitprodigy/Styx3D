@@ -19,23 +19,39 @@
 /*  Copyright (C) 1999 WildTangent, Inc. All Rights Reserved           */
 /*                                                                                      */
 /****************************************************************************************/
-#define	WIN32_LEAN_AND_MEAN
-#include	<windows.h>
+#ifdef _WIN32
+	#define  WIN32_LEAN_AND_MEAN
+    #include <windows.h>
+#else
+	#include <stdint.h>
+    #include <string.h>
+    #include <time.h>
+
+	#define  CRITICAL_SECTION void*
+	
+	typedef struct {
+		uint32_t dwLowDateTime;
+		uint32_t dwHighDateTime;
+	} FILETIME;
+	typedef FILETIME *LPFILETIME;
+#endif
 
 #include	<stdio.h>
 #include	<assert.h>
 #include	<stdarg.h>
 #include	<string.h>
 
-#include	"basetype.h"
-#include	"ram.h"
+#include	"BaseType.h"
+#include	"RAM.h"
 
-#include	"vfile.h"
-#include	"vfile._h"
+#include	"VFile.h"
+#include	"VFile_private.h"
 
-#include	"fsdos.h"
-#include	"fsmemory.h"
-#include	"fsvfs.h"
+#include	"FSOps.h"
+#include	"FSMemory.h"
+#include	"FSVFS.h"
+
+
 
 typedef	struct	FSSearchList
 {
@@ -44,7 +60,8 @@ typedef	struct	FSSearchList
 }	FSSearchList;
 
 
-typedef	struct	geVFile
+typedef	struct	
+geVFile
 {
 	geVFile_TypeIdentifier		SystemType;
 	const geVFile_SystemAPIs *	APIs;
@@ -53,7 +70,8 @@ typedef	struct	geVFile
 	FSSearchList *				SearchList;
 	CRITICAL_SECTION			CriticalSection;
 	geVFile *					BaseFile;
-}	geVFile;
+}
+geVFile;
 
 typedef struct	geVFile_Finder
 {

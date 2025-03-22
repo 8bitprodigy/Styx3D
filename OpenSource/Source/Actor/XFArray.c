@@ -21,7 +21,7 @@
 /****************************************************************************************/
 #include <assert.h>
 #include "XFArray.h"
-#include "Ram.h"
+#include "RAM.h"
 #include "ErrorLog.h"
 
 

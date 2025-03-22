@@ -36,29 +36,35 @@ typedef	struct	geVFile_Finder	geVFile_Finder;
 typedef int     		geVFile_TypeIdentifier;
 typedef unsigned int    geVFile_Attributes;
 
-typedef struct	geVFile_Hints
+typedef struct
+geVFile_Hints
 {
 	void *	HintData;
 	int		HintDataLength;
-}	geVFile_Hints;
+}
+geVFile_Hints;
 
-typedef	struct	geVFile_Time
+typedef	struct
+geVFile_Time
 {
 	unsigned long	Time1;
 	unsigned long	Time2;
-}	geVFile_Time;
+}
+geVFile_Time;
 
 #define	GE_VFILE_ATTRIB_READONLY	0x00000001
 #define	GE_VFILE_ATTRIB_DIRECTORY	0x00000002
 
-typedef	struct	geVFile_Properties
+typedef	struct
+geVFile_Properties
 {
 	geVFile_Time				Time;
 	geVFile_Attributes		AttributeFlags;
 	long					Size;
 	geVFile_Hints				Hints;
 	char					Name[1024];
-}	geVFile_Properties;
+}
+geVFile_Properties;
 
 #ifdef _INC_WINDOWS
 GENESISAPI void GENESISCC geVFile_TimeToWin32FileTime(const geVFile_Time *, LPFILETIME Win32FileTime);
@@ -85,11 +91,13 @@ GENESISAPI geBoolean GENESISCC geVFile_FinderGetProperties(const geVFile_Finder 
 
 //--------- File System Operations ----
 
-typedef	struct	geVFile_MemoryContext
+typedef struct
+geVFile_MemoryContext
 {
 	void *	Data;
 	int		DataLength;
-}	geVFile_MemoryContext;
+}
+geVFile_MemoryContext;
 
 #define GE_VFILE_TYPE_DOS	    ( (geVFile_TypeIdentifier) 1L )
 #define GE_VFILE_TYPE_MEMORY	( (geVFile_TypeIdentifier) 2L )

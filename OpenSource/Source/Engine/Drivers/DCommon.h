@@ -27,8 +27,8 @@
 #include <stdlib.h>
 #include <stdint.h>
 // FIXME:  What should we do with these?
-#include "XForm3d.h"
-#include "Vec3d.h"
+#include "XForm3D.h"
+#include "Vec3D.h"
 #include "PixelFormat.h"
 #include "GETypes.h"		// This is a no no
 

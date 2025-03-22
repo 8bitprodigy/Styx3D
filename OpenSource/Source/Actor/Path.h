@@ -23,8 +23,8 @@
 #define GE_PATH_H
 
 #include "BaseType.h"
-#include "XForm3d.h"
-#include "quatern.h"
+#include "XForm3D.h"
+#include "Quatern.h"
 #include "VFile.h"
 
 #ifdef __cplusplus

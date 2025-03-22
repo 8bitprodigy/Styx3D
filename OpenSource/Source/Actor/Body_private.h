@@ -22,11 +22,11 @@
 #ifndef GE_BODY__H
 #define GE_BODY__H 
 
-#include "basetype.h"
-#include "xform3d.h"
-#include "body.h"
-#include "strblock.h"
-#include "bitmap.h"
+#include "BaseType.h"
+#include "XForm3D.h"
+#include "Body.h"
+#include "StrBlock.h"
+#include "Bitmap.h"
 
 
 #ifdef __cplusplus

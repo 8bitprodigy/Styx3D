@@ -26,7 +26,7 @@
 #include <time.h>
 
 #include "BaseType.h"
-#include "Vec3d.h"
+#include "Vec3D.h"
 
 #ifdef _WIN32
     #include <windows.h>
