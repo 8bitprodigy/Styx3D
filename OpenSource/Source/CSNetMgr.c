@@ -20,37 +20,38 @@
 /*                                                                                      */
 /****************************************************************************************/
 #include <assert.h>
-
+#include <string.h>
 //#define INITGUID
-#include <Windows.H>
-#include <objbase.h>
-
-#include "CSNetMgr.h"
-#include "NetPlay.h"
+#ifdef _WIN32
+	#include <initguid.h>
+	#include <objbase.h>
+	#include <windows.H>
+#endif /* _WIN32 */
 
 #include "BaseType.h"
-#include "Ram.h"
+#include "CSNetMgr.h"
 #include "ErrorLog.h"
+#include "NetPlay.h"
+#include "RAM.h"
 
-#include <InitGuid.h>
 
 #pragma message(" some assertions in here would be nice:")
 
-#define PACKET_HEADER_SIZE				1
+#define PACKET_HEADER_SIZE 1
 
-#define NET_TIMEOUT						15000		// Givem 15 secs
+#define NET_TIMEOUT        15000		// Givem 15 secs
 
-
+/*
 // {33925241-05F8-11d0-8063-00A0C90AE891}
 DEFINE_GUID(GENESIS_GUID, 
 //0x33925241, 0x5f8, 0x11d0, 0x80, 0x63, 0x0, 0xa0, 0xc9, 0xa, 0xe8, 0x91);
 0x33925241, 0x0, 0x11d0, 0x80, 0x63, 0x0, 0xa0, 0xc9, 0xa, 0xe8, 0x91);
+*/
 
-
-static  geBoolean	NetSession = GE_FALSE;
-static	geBoolean	WeAreTheServer = GE_FALSE;
-static  DPID		OurPlayerId;
-static	DPID		ServerId;					// The servers Id we are connected too
+static geBoolean NetSession     = GE_FALSE;
+static geBoolean WeAreTheServer = GE_FALSE;
+static DPID      OurPlayerId;
+static DPID      ServerId;					// The servers Id we are connected too
 
 #define BUFFER_SIZE			20000
 //#define BUFFER_SIZE			65535
@@ -59,16 +60,25 @@ static uint8				Packet[BUFFER_SIZE];
 
 static geCSNetMgr_NetClient	gClient;
 
-static BOOL geCSNetMgr_ProcessSystemMessage(geCSNetMgr *M,geCSNetMgr_NetID IdTo, LPDPMSG_GENERIC lpMsg, geCSNetMgr_NetMsgType *Type, geCSNetMgr_NetClient *Client);
+static geBoolean geCSNetMgr_ProcessSystemMessage(
+	geCSNetMgr            *M,
+	geCSNetMgr_NetID       IdTo, 
+	LPDPMSG_GENERIC        lpMsg, 
+	geCSNetMgr_NetMsgType *Type, 
+	geCSNetMgr_NetClient  *Client
+);
 
-typedef struct geCSNetMgr
+typedef struct 
+geCSNetMgr
 {
 	// instance data goes here
-	geCSNetMgr *Valid;
-} geCSNetMgr;
+	struct geCSNetMgr *Valid;
+} 
+geCSNetMgr;
 
 
-geBoolean geCSNetMgr_IsValid(geCSNetMgr *M)
+geBoolean 
+geCSNetMgr_IsValid(geCSNetMgr *M)
 {
 	if ( M == NULL )
 		return GE_FALSE;
@@ -79,7 +89,8 @@ geBoolean geCSNetMgr_IsValid(geCSNetMgr *M)
 	return GE_TRUE;
 }
 
-GENESISAPI geCSNetMgr * GENESISCC geCSNetMgr_Create(void)
+GENESISAPI geCSNetMgr *GENESISCC 
+geCSNetMgr_Create(void)
 {
 	geCSNetMgr *M;
 
@@ -97,7 +108,8 @@ GENESISAPI geCSNetMgr * GENESISCC geCSNetMgr_Create(void)
 }
 
 	
-GENESISAPI void GENESISCC geCSNetMgr_Destroy(geCSNetMgr **ppM)
+GENESISAPI void GENESISCC 
+geCSNetMgr_Destroy(geCSNetMgr **ppM)
 {
 	assert( ppM != NULL );
 	assert( geCSNetMgr_IsValid(*ppM)!=GE_FALSE );
@@ -110,7 +122,8 @@ GENESISAPI void GENESISCC geCSNetMgr_Destroy(geCSNetMgr **ppM)
 //================================================================================
 //	geCSNetMgr_ReceiveFromServer
 //================================================================================
-GENESISAPI geBoolean GENESISCC geCSNetMgr_ReceiveFromServer(geCSNetMgr *M, geCSNetMgr_NetMsgType *Type, int32 *Size, uint8 **Data)
+GENESISAPI geBoolean GENESISCC 
+geCSNetMgr_ReceiveFromServer(geCSNetMgr *M, geCSNetMgr_NetMsgType *Type, int32 *Size, uint8 **Data)
 {
 	DPID				IdTo;
 	DWORD				BSize = BUFFER_SIZE;
@@ -171,7 +184,14 @@ GENESISAPI geBoolean GENESISCC geCSNetMgr_ReceiveFromServer(geCSNetMgr *M, geCSN
 //================================================================================
 //	geCSNetMgr_ReceiveFromClient
 //================================================================================
-GENESISAPI geBoolean GENESISCC geCSNetMgr_ReceiveFromClient(geCSNetMgr *M, geCSNetMgr_NetMsgType *Type, geCSNetMgr_NetID *IdClient, int32 *Size, uint8 **Data)
+GENESISAPI geBoolean GENESISCC 
+geCSNetMgr_ReceiveFromClient(
+	geCSNetMgr             *M,
+	geCSNetMgr_NetMsgType  *Type, 
+	geCSNetMgr_NetID       *IdClient, 
+	int32                  *Size, 
+	uint8                 **Data
+)
 {
 	DPID				IdTo;
 	DWORD				BSize = BUFFER_SIZE;
@@ -223,7 +243,13 @@ GENESISAPI geBoolean GENESISCC geCSNetMgr_ReceiveFromClient(geCSNetMgr *M, geCSN
 //================================================================================
 //	geCSNetMgr_ReceiveSystemMessage
 //================================================================================
-GENESISAPI geBoolean GENESISCC geCSNetMgr_ReceiveSystemMessage(geCSNetMgr *M, geCSNetMgr_NetID IdFor, geCSNetMgr_NetMsgType *Type, geCSNetMgr_NetClient *Client)
+GENESISAPI geBoolean GENESISCC 
+geCSNetMgr_ReceiveSystemMessage(
+	geCSNetMgr            *M, 
+	geCSNetMgr_NetID       IdFor, 
+	geCSNetMgr_NetMsgType *Type, 
+	geCSNetMgr_NetClient  *Client
+)
 {
 	DPID				SystemId, IdTo;
 	DWORD				BSize = BUFFER_SIZE;
@@ -262,7 +288,14 @@ GENESISAPI geBoolean GENESISCC geCSNetMgr_ReceiveSystemMessage(geCSNetMgr *M, ge
 //================================================================================
 //	geCSNetMgr_ProcessSystemMessage
 //================================================================================
-static geBoolean geCSNetMgr_ProcessSystemMessage(geCSNetMgr *M, geCSNetMgr_NetID IdTo, LPDPMSG_GENERIC lpMsg, geCSNetMgr_NetMsgType *Type, geCSNetMgr_NetClient *Client)
+static geBoolean 
+geCSNetMgr_ProcessSystemMessage(
+	geCSNetMgr            *M, 
+	geCSNetMgr_NetID       IdTo, 
+	LPDPMSG_GENERIC        lpMsg, 
+	geCSNetMgr_NetMsgType *Type, 
+	geCSNetMgr_NetClient  *Client
+)
 {
 	DWORD dwSize;
 
@@ -339,7 +372,15 @@ static geBoolean geCSNetMgr_ProcessSystemMessage(geCSNetMgr *M, geCSNetMgr_NetID
 //================================================================================
 //	geCSNetMgr_ReceiveAllMessages
 //================================================================================
-GENESISAPI geBoolean GENESISCC geCSNetMgr_ReceiveAllMessages(geCSNetMgr *M, geCSNetMgr_NetID *IdFrom, geCSNetMgr_NetID *IdTo, geCSNetMgr_NetMsgType *Type, int32 *Size, uint8 **Data)
+GENESISAPI geBoolean GENESISCC 
+geCSNetMgr_ReceiveAllMessages(
+	geCSNetMgr             *M, 
+	geCSNetMgr_NetID       *IdFrom, 
+	geCSNetMgr_NetID       *IdTo, 
+	geCSNetMgr_NetMsgType  *Type, 
+	int32                  *Size, 
+	uint8                 **Data
+)
 {
 	DWORD				BSize = BUFFER_SIZE;
 	HRESULT				Result;
@@ -402,7 +443,8 @@ GENESISAPI geBoolean GENESISCC geCSNetMgr_ReceiveAllMessages(geCSNetMgr *M, geCS
 //================================================================================
 //	geCSNetMgr_GetServerID
 //================================================================================
-GENESISAPI geCSNetMgr_NetID GENESISCC geCSNetMgr_GetServerID(geCSNetMgr *M)
+GENESISAPI geCSNetMgr_NetID GENESISCC 
+geCSNetMgr_GetServerID(geCSNetMgr *M)
 {
 	assert( geCSNetMgr_IsValid(M)!=GE_FALSE );
 	return(ServerId);
@@ -411,7 +453,8 @@ GENESISAPI geCSNetMgr_NetID GENESISCC geCSNetMgr_GetServerID(geCSNetMgr *M)
 //================================================================================
 //	geCSNetMgr_GetOurID
 //================================================================================
-GENESISAPI geCSNetMgr_NetID GENESISCC geCSNetMgr_GetOurID(geCSNetMgr *M)
+GENESISAPI geCSNetMgr_NetID GENESISCC 
+geCSNetMgr_GetOurID(geCSNetMgr *M)
 {
 	assert( geCSNetMgr_IsValid(M)!=GE_FALSE );
 	return(OurPlayerId);
@@ -420,7 +463,8 @@ GENESISAPI geCSNetMgr_NetID GENESISCC geCSNetMgr_GetOurID(geCSNetMgr *M)
 //================================================================================
 //	geCSNetMgr_GetAllPlayerID
 //================================================================================
-GENESISAPI geCSNetMgr_NetID GENESISCC geCSNetMgr_GetAllPlayerID(geCSNetMgr *M)
+GENESISAPI geCSNetMgr_NetID GENESISCC 
+geCSNetMgr_GetAllPlayerID(geCSNetMgr *M)
 {
 	assert( geCSNetMgr_IsValid(M)!=GE_FALSE );
 	return(DPID_ALLPLAYERS);
@@ -429,7 +473,8 @@ GENESISAPI geCSNetMgr_NetID GENESISCC geCSNetMgr_GetAllPlayerID(geCSNetMgr *M)
 //================================================================================
 //	geCSNetMgr_WeAreTheServer
 //================================================================================
-GENESISAPI geBoolean GENESISCC geCSNetMgr_WeAreTheServer(geCSNetMgr *M)
+GENESISAPI geBoolean GENESISCC 
+geCSNetMgr_WeAreTheServer(geCSNetMgr *M)
 {
 	assert( geCSNetMgr_IsValid(M)!=GE_FALSE );
 	return (WeAreTheServer);
@@ -438,7 +483,8 @@ GENESISAPI geBoolean GENESISCC geCSNetMgr_WeAreTheServer(geCSNetMgr *M)
 //================================================================================
 //	geCSNetMgr_StartSession
 //================================================================================
-GENESISAPI geBoolean GENESISCC geCSNetMgr_StartSession(geCSNetMgr *M, const char *SessionName, const char *PlayerName)
+GENESISAPI geBoolean GENESISCC 
+geCSNetMgr_StartSession(geCSNetMgr *M, const char *SessionName, const char *PlayerName)
 {
 	char		Name2[MAX_CLIENT_NAME];
 
@@ -477,7 +523,13 @@ GENESISAPI geBoolean GENESISCC geCSNetMgr_StartSession(geCSNetMgr *M, const char
 //================================================================================
 //	geCSNetMgr_FindSession
 //================================================================================
-GENESISAPI geBoolean GENESISCC geCSNetMgr_FindSession(geCSNetMgr *M, const char *IPAdress, geCSNetMgr_NetSession **SessionList, int32 *SessionNum)
+GENESISAPI geBoolean GENESISCC 
+geCSNetMgr_FindSession(
+	      geCSNetMgr             *M, 
+	const char                   *IPAdress, 
+	      geCSNetMgr_NetSession **SessionList, 
+	      int32                  *SessionNum
+)
 {
 	assert( geCSNetMgr_IsValid(M)!=GE_FALSE );
 
@@ -496,7 +548,8 @@ GENESISAPI geBoolean GENESISCC geCSNetMgr_FindSession(geCSNetMgr *M, const char 
 //================================================================================
 //	geCSNetMgr_JoinSession
 //================================================================================
-GENESISAPI geBoolean GENESISCC geCSNetMgr_JoinSession(geCSNetMgr *M, const char *Name, const geCSNetMgr_NetSession* Session)
+GENESISAPI geBoolean GENESISCC 
+geCSNetMgr_JoinSession(geCSNetMgr *M, const char *Name, const geCSNetMgr_NetSession* Session)
 {
 
 	uint32	StartTime;
@@ -565,7 +618,8 @@ GENESISAPI geBoolean GENESISCC geCSNetMgr_JoinSession(geCSNetMgr *M, const char 
 //================================================================================
 //	geCSNetMgr_StopSession
 //================================================================================
-GENESISAPI geBoolean GENESISCC geCSNetMgr_StopSession(geCSNetMgr *M)
+GENESISAPI geBoolean GENESISCC 
+geCSNetMgr_StopSession(geCSNetMgr *M)
 {
 	assert( geCSNetMgr_IsValid(M)!=GE_FALSE );
 
@@ -597,7 +651,8 @@ GENESISAPI geBoolean GENESISCC geCSNetMgr_StopSession(geCSNetMgr *M)
 //================================================================================
 //	geCSNetMgr_SendToServer
 //================================================================================
-GENESISAPI geBoolean GENESISCC geCSNetMgr_SendToServer(geCSNetMgr *M,  BOOL Guaranteed, uint8 *Data, int32 DataSize)
+GENESISAPI geBoolean GENESISCC 
+geCSNetMgr_SendToServer(geCSNetMgr *M,  BOOL Guaranteed, uint8 *Data, int32 DataSize)
 {
     DWORD           dwFlags = 0;
 
@@ -626,7 +681,14 @@ GENESISAPI geBoolean GENESISCC geCSNetMgr_SendToServer(geCSNetMgr *M,  BOOL Guar
 //================================================================================
 //	geCSNetMgr_SendToClient
 //================================================================================
-GENESISAPI geBoolean GENESISCC geCSNetMgr_SendToClient(geCSNetMgr *M, geCSNetMgr_NetID To, BOOL Guaranteed, uint8 *Data, int32 DataSize)
+GENESISAPI geBoolean GENESISCC 
+geCSNetMgr_SendToClient(
+	geCSNetMgr       *M, 
+	geCSNetMgr_NetID  To, 
+	geBoolean         Guaranteed, 
+	uint8            *Data, 
+	int32             DataSize
+)
 {
     DWORD           dwFlags = 0;
 

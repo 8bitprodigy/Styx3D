@@ -19,12 +19,12 @@
 /*  Copyright (C) 1999 WildTangent, Inc. All Rights Reserved           */
 /*                                                                                      */
 /****************************************************************************************/
-#include <math.h>
 #include <assert.h>
+#include <math.h>
 #include <memory.h>    // memset
 
 #include "Camera.h"
-#include "Ram.h"
+#include "RAM.h"
 #include "ErrorLog.h"
 
 

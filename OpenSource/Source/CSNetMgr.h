@@ -69,24 +69,24 @@ typedef struct
 		#pragma message("define a geGUID?.. wouldn't need a windows dependency here...")
 	} geCSNetMgr_NetSession;
 
-GENESISAPI geBoolean		GENESISCC geCSNetMgr_FindSession(geCSNetMgr *M, const char *IPAdress, geCSNetMgr_NetSession **SessionList, int32 *SessionNum );
-GENESISAPI geBoolean		GENESISCC geCSNetMgr_JoinSession(geCSNetMgr *M, const char *Name, const geCSNetMgr_NetSession* Session);
+GENESISAPI geBoolean         GENESISCC geCSNetMgr_FindSession(         geCSNetMgr  *M, const char *IPAdress, geCSNetMgr_NetSession **SessionList, int32 *SessionNum );
+GENESISAPI geBoolean         GENESISCC geCSNetMgr_JoinSession(         geCSNetMgr  *M, const char *Name, const geCSNetMgr_NetSession* Session);
 #endif
 
-GENESISAPI geCSNetMgr *		GENESISCC geCSNetMgr_Create(void);
-GENESISAPI void				GENESISCC geCSNetMgr_Destroy(geCSNetMgr **ppM);
-GENESISAPI geCSNetMgr_NetID	GENESISCC geCSNetMgr_GetServerID(geCSNetMgr *M);
-GENESISAPI geCSNetMgr_NetID	GENESISCC geCSNetMgr_GetOurID(geCSNetMgr *M);
-GENESISAPI geCSNetMgr_NetID	GENESISCC geCSNetMgr_GetAllPlayerID(geCSNetMgr *M);
-GENESISAPI geBoolean GENESISCC		geCSNetMgr_ReceiveFromServer(geCSNetMgr *M, geCSNetMgr_NetMsgType *Type, int32 *Size, uint8 **Data);
-GENESISAPI geBoolean GENESISCC		geCSNetMgr_ReceiveFromClient(geCSNetMgr *M, geCSNetMgr_NetMsgType *Type, geCSNetMgr_NetID *IdClient, int32 *Size, uint8 **Data);
-GENESISAPI geBoolean GENESISCC		geCSNetMgr_ReceiveSystemMessage(geCSNetMgr *M, geCSNetMgr_NetID IdFor, geCSNetMgr_NetMsgType *Type, geCSNetMgr_NetClient *Client);
-GENESISAPI geBoolean GENESISCC		geCSNetMgr_ReceiveAllMessages(geCSNetMgr *M, geCSNetMgr_NetID *IdFrom, geCSNetMgr_NetID *IdTo, geCSNetMgr_NetMsgType *Type, int32 *Size, uint8 **Data);
-GENESISAPI geBoolean GENESISCC		geCSNetMgr_WeAreTheServer(geCSNetMgr *M);
-GENESISAPI geBoolean GENESISCC		geCSNetMgr_StartSession(geCSNetMgr *M, const char *SessionName, const char *PlayerName );
-GENESISAPI geBoolean GENESISCC		geCSNetMgr_StopSession(geCSNetMgr *M);
-GENESISAPI geBoolean GENESISCC		geCSNetMgr_SendToServer(geCSNetMgr *M, geBoolean Guaranteed, uint8 *Data, int32 DataSize);
-GENESISAPI geBoolean GENESISCC		geCSNetMgr_SendToClient(geCSNetMgr *M, geCSNetMgr_NetID To, geBoolean Guaranteed, uint8 *Data, int32 DataSize);
+GENESISAPI geCSNetMgr       *GENESISCC geCSNetMgr_Create(              void);
+GENESISAPI void              GENESISCC geCSNetMgr_Destroy(             geCSNetMgr **ppM);
+GENESISAPI geCSNetMgr_NetID  GENESISCC geCSNetMgr_GetServerID(         geCSNetMgr  *M);
+GENESISAPI geCSNetMgr_NetID  GENESISCC geCSNetMgr_GetOurID(            geCSNetMgr  *M);
+GENESISAPI geCSNetMgr_NetID  GENESISCC geCSNetMgr_GetAllPlayerID(      geCSNetMgr  *M);
+GENESISAPI geBoolean         GENESISCC geCSNetMgr_ReceiveFromServer(   geCSNetMgr  *M,    geCSNetMgr_NetMsgType *Type,        int32                 *Size,        uint8                 **Data);
+GENESISAPI geBoolean         GENESISCC geCSNetMgr_ReceiveFromClient(   geCSNetMgr  *M,    geCSNetMgr_NetMsgType *Type,        geCSNetMgr_NetID      *IdClient,    int32                  *Size,       uint8 **Data);
+GENESISAPI geBoolean         GENESISCC geCSNetMgr_ReceiveSystemMessage(geCSNetMgr  *M,    geCSNetMgr_NetID       IdFor,       geCSNetMgr_NetMsgType *Type,        geCSNetMgr_NetClient   *Client);
+GENESISAPI geBoolean         GENESISCC geCSNetMgr_ReceiveAllMessages(  geCSNetMgr  *M,    geCSNetMgr_NetID      *IdFrom,      geCSNetMgr_NetID      *IdTo,        geCSNetMgr_NetMsgType  *Type,       int32  *Size,     uint8 **Data);
+GENESISAPI geBoolean         GENESISCC geCSNetMgr_WeAreTheServer(      geCSNetMgr *M);
+GENESISAPI geBoolean         GENESISCC geCSNetMgr_StartSession(        geCSNetMgr *M,     const char            *SessionName, const char            *PlayerName);
+GENESISAPI geBoolean         GENESISCC geCSNetMgr_StopSession(         geCSNetMgr *M);
+GENESISAPI geBoolean         GENESISCC geCSNetMgr_SendToServer(        geCSNetMgr *M,    geBoolean               Guaranteed,  uint8                 *Data,        int32                   DataSize);
+GENESISAPI geBoolean         GENESISCC geCSNetMgr_SendToClient(        geCSNetMgr *M,    geCSNetMgr_NetID        To,          geBoolean              Guaranteed,  uint8                  *Data,      int32   DataSize);
 
 
 // GENESIS_PRIVATE_APIS
