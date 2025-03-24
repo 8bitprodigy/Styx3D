@@ -57,12 +57,17 @@
 
 	#define DPSEND_GUARANTEED           0x0008
 
-	// Message Types
-	#define DPSYS_CREATEPLAYERORGROUP   0x0001
-	#define DPSYS_DESTROYPLAYERORGROUP  0x0002
-	#define DPSYS_ADDPLAYERTOGROUP      0x0003
-	#define DPSYS_DELETEPLAYERFROMGROUP 0x0004
-	#define DPSYS_SESSIONLOST           0x0005
+	typedef enum 
+	{
+		// Message Types
+		DPSYS_HOST                  = 0x0000,
+		DPSYS_CREATEPLAYERORGROUP   = 0x0001,
+		DPSYS_DESTROYPLAYERORGROUP  = 0x0002,
+		DPSYS_ADDPLAYERTOGROUP      = 0x0003,
+		DPSYS_DELETEPLAYERFROMGROUP = 0x0004,
+		DPSYS_SESSIONLOST           = 0x0005,
+	} 
+	DPSYS_MESSAGE_TYPE;
 
 	// Generic DirectPlay message structure
 	typedef struct 
@@ -106,14 +111,6 @@
 	}*
 	LPDPMSG_HOST;
 
-	typedef enum 
-	{
-		DPMSG_CREATEPLAYERORGROUP,
-		DPMSG_DESTROYPLAYERORGROUP,
-		DPSYS_HOST,
-		DPSYS_SESSIONLOST,
-	} 
-	DPSYS_MESSAGE_TYPE;
 #endif
 
 #include "BaseType.h"

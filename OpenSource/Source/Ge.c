@@ -29,9 +29,9 @@
 #include <math.h>
 #include <assert.h>
 
-#include "Genesis.H"
+#include "Genesis.h"
 #include "System.h"
-#include "Ram.h"
+#include "RAM.h"
 
 //#include "Sound.h"
 //#include "Sound3d.h"

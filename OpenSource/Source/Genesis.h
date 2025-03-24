@@ -572,11 +572,13 @@ typedef struct
 
 #ifdef _INC_WINDOWS
 	// Windows.h must be included before genesis.h for this api to be exposed.
-	typedef struct geCSNetMgr_NetSession
+	typedef struct 
+	geCSNetMgr_NetSession
 	{
 		char		SessionName[200];					// Description of Service provider
 		GUID		Guid;								// Service Provider GUID
-	} geCSNetMgr_NetSession;
+	} 
+	geCSNetMgr_NetSession;
 GENESISAPI 	geBoolean		GENESISCC geCSNetMgr_FindSession(geCSNetMgr *M, const char *IPAdress, geCSNetMgr_NetSession **SessionList, int32 *SessionNum );
 GENESISAPI 	geBoolean		GENESISCC geCSNetMgr_JoinSession(geCSNetMgr *M, const char *Name, const geCSNetMgr_NetSession* Session);
 #endif

@@ -26,7 +26,25 @@
 	#include <initguid.h>
 	#include <objbase.h>
 	#include <windows.H>
-#endif /* _WIN32 */
+	// {33925241-05F8-11d0-8063-00A0C90AE891}
+	DEFINE_GUID(GENESIS_GUID, 
+	//0x33925241, 0x5f8, 0x11d0, 0x80, 0x63, 0x0, 0xa0, 0xc9, 0xa, 0xe8, 0x91);
+	0x33925241, 0x0, 0x11d0, 0x80, 0x63, 0x0, 0xa0, 0xc9, 0xa, 0xe8, 0x91);
+#else /* _WIN32 */
+	#include <stdint.h>
+	struct _GENESIS_GUID {
+        uint32_t Data1;
+        uint16_t Data2;
+        uint16_t Data3;
+        uint8_t Data4[8];
+    };
+    const struct _GENESIS_GUID GENESIS_GUID = {
+        0x33925241,
+        0x0000,
+        0x11d0,
+        {0x80, 0x63, 0x00, 0xa0, 0xc9, 0x0a, 0xe8, 0x91}
+    };
+#endif
 
 #include "BaseType.h"
 #include "CSNetMgr.h"
@@ -34,6 +52,13 @@
 #include "NetPlay.h"
 #include "RAM.h"
 
+typedef struct 
+geCSNetMgr_NetSession
+{
+	char		SessionName[200];					// Description of Service provider
+	GUID		Guid;								// Service Provider GUID
+} 
+geCSNetMgr_NetSession;
 
 #pragma message(" some assertions in here would be nice:")
 
@@ -41,12 +66,8 @@
 
 #define NET_TIMEOUT        15000		// Givem 15 secs
 
-/*
-// {33925241-05F8-11d0-8063-00A0C90AE891}
-DEFINE_GUID(GENESIS_GUID, 
-//0x33925241, 0x5f8, 0x11d0, 0x80, 0x63, 0x0, 0xa0, 0xc9, 0xa, 0xe8, 0x91);
-0x33925241, 0x0, 0x11d0, 0x80, 0x63, 0x0, 0xa0, 0xc9, 0xa, 0xe8, 0x91);
-*/
+
+
 
 static geBoolean NetSession     = GE_FALSE;
 static geBoolean WeAreTheServer = GE_FALSE;
@@ -652,7 +673,7 @@ geCSNetMgr_StopSession(geCSNetMgr *M)
 //	geCSNetMgr_SendToServer
 //================================================================================
 GENESISAPI geBoolean GENESISCC 
-geCSNetMgr_SendToServer(geCSNetMgr *M,  BOOL Guaranteed, uint8 *Data, int32 DataSize)
+geCSNetMgr_SendToServer(geCSNetMgr *M,geBoolean Guaranteed, uint8 *Data, int32 DataSize)
 {
     DWORD           dwFlags = 0;
 
