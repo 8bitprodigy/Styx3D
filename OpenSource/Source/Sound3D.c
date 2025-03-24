@@ -22,10 +22,10 @@
 #include <math.h>
 
 #include "Trace.h"
-#include "Vec3d.h"
-#include "XForm3d.h"
+#include "Vec3D.h"
+#include "XForm3D.h"
 #include "Camera.h"
-#include "Sound3d.h"
+#include "Sound3D.h"
 
 // Sound
 typedef struct geSound3d_Cfg

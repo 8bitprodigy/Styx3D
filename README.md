@@ -14,7 +14,8 @@ There aren't really any other engines out there that are of this vintage under p
 
 - [ ] Get it compiling on Linux & other modern systems (in progress)
   
-  - Currently working on the engine in `./OpenSource/Source`
+  - Engine library currently builds in `./OpenSource/Source`
+  - Now to work on `GTest` in `./src`
 
 - [ ] Port to SDL
 

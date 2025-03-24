@@ -19,16 +19,26 @@
 /*  Copyright (C) 1999 WildTangent, Inc. All Rights Reserved           */
 /*                                                                                      */
 /****************************************************************************************/
-#define IDIRECTPLAY2_OR_GREATER
+#ifdef _WIN32
+	#define IDIRECTPLAY2_OR_GREATER
 
-#include <Windows.H>
-#include <Assert.h>
+	#include <windows.H>
+	#include <assert.h>
 
-#include <dplay.h>
-#include <dplobby.h>
-#include <Stdio.h>
+	#include <dplay.h>
+	#include <dplobby.h>
+#else
+	#define FAR
+	#define PASCAL
+	#define WINAPI
+	typedef void* LPDIRECTPLAY4A;
+	typedef void* LPCDPSESSIONDESC2;
+	typedef void* LPDPENUMSESSIONSCALLBACK2;
+#endif
 
-#include "netplay.h"
+#include <stdio.h>
+
+#include "NetPlay.h"
 #include "ErrorLog.h"
 
 //#define INIT_GUID
@@ -45,13 +55,13 @@ LPGUID							glpGuid;
 SP_DESC							GlobalSP;				
 SESSION_DESC					*GlobalSession;			// Global sessions availible
 DWORD							gSessionCnt;
-BOOL							FoundSP = FALSE;		// If the provider was found
-BOOL							FoundSession = FALSE;
+geBoolean						FoundSP = GE_FALSE;		// If the provider was found
+geBoolean						FoundSession = GE_FALSE;
 
 //LPDIRECTPLAY3A					g_lpDP = NULL;
-LPDIRECTPLAY4A					g_lpDP = NULL;
+LPDIRECTPLAY4A g_lpDP = NULL;
 
-BOOL							FoundConnection = FALSE;
+geBoolean						FoundConnection = GE_FALSE;
 LPVOID							lpConnectionBuffer = NULL;
 	
 // ************************************************************************************
@@ -59,7 +69,7 @@ LPVOID							lpConnectionBuffer = NULL;
 // ************************************************************************************
 HRESULT DPlayCreateSession(LPTSTR lptszSessionName, DWORD MaxPlayers);
 HRESULT DPlayOpenSession(LPGUID lpSessionGuid);
-BOOL WINAPI EnumSession(LPCDPSESSIONDESC2 lpDPSessionDesc, LPDWORD lpdwTimeOut, DWORD dwFlags, 
+geBoolean WINAPI EnumSession(LPCDPSESSIONDESC2 lpDPSessionDesc, LPDWORD lpdwTimeOut, DWORD dwFlags, 
                         LPVOID lpContext);
 HRESULT DPlayEnumSessions(DWORD dwTimeout, LPDPENUMSESSIONSCALLBACK2 lpEnumCallback, 
                           LPVOID lpContext, DWORD dwFlags);
@@ -71,13 +81,15 @@ HRESULT DPlayRelease(void);
 static HRESULT DPlayCreate(void );
 
 // New dp3 Connection callback 
-BOOL FAR PASCAL DPEnumConnectionsCallback(
-						LPCGUID			lpguidSP,
-						LPVOID			lpConnection,
-						DWORD			dwSize,
-						LPCDPNAME		lpName,
-						DWORD			dwFlags,
-						LPVOID			lpContext);
+geBoolean FAR PASCAL 
+DPEnumConnectionsCallback(
+	LPCGUID   lpguidSP,
+	LPVOID    lpConnection,
+	DWORD     dwSize,
+	LPCDPNAME lpName,
+	DWORD     dwFlags,
+	LPVOID    lpContext
+);
 
 static void DoDPError(HRESULT Hr);
 
@@ -87,20 +99,20 @@ FILE *DebugF;
 //	InitNetPlay
 //	Enumerate the service providers, and everything else...
 //========================================================================================================
-BOOL InitNetPlay(LPGUID lpGuid)
+geBoolean InitNetPlay(LPGUID lpGuid)
 {
 	HRESULT		Hr;
 
 	glpGuid = lpGuid;
 	
-	FoundSP = FALSE;
+	FoundSP = GE_FALSE;
 
 	Hr = DPlayCreate();
 
 	if (Hr != DP_OK)
 	{
 		DoDPError(Hr);
-		return FALSE;
+		return GE_FALSE;
 	}
 	
 	IDirectPlayX_EnumConnections( g_lpDP, glpGuid, DPEnumConnectionsCallback, NULL, 0);
@@ -108,20 +120,20 @@ BOOL InitNetPlay(LPGUID lpGuid)
 	if (!FoundConnection)
 	{
 		geErrorLog_AddString(-1, "InitNetPlay:  No connections available.\n", NULL);
-		return FALSE;
+		return GE_FALSE;
 	}
 
-	return TRUE;
+	return GE_TRUE;
 }
 
 //====================================================================================================
 //	 NetPlayEnumSession
 //====================================================================================================
-BOOL NetPlayEnumSession(LPSTR IPAdress, SESSION_DESC **SessionList, DWORD *SessionNum)
+geBoolean NetPlayEnumSession(LPSTR IPAdress, SESSION_DESC **SessionList, DWORD *SessionNum)
 {	
 	HRESULT		hr;
 
-#if 1
+/*#if 1
 	char					tempBuf[1024];
 	DWORD					tempLng = 1024;
 	LPDIRECTPLAYLOBBY2A		lpDPL = NULL;
@@ -139,7 +151,7 @@ BOOL NetPlayEnumSession(LPSTR IPAdress, SESSION_DESC **SessionList, DWORD *Sessi
 	if (hr != DP_OK)
 	{
 		DoDPError(hr);
-		return( FALSE );
+		return( GE_FALSE );
 	}
 
  	hr = IDirectPlayLobby_CreateAddress(lpDPL, &DPSPGUID_TCPIP, &DPAID_INet, (LPVOID)IPAdress, strlen(IPAdress), tempBuf, &tempLng);
@@ -147,7 +159,7 @@ BOOL NetPlayEnumSession(LPSTR IPAdress, SESSION_DESC **SessionList, DWORD *Sessi
 	if (hr != DP_OK)
 	{
 		DoDPError(hr);
-		return( FALSE );
+		return( GE_FALSE );
 	}
 
 	if (lpDPL)
@@ -157,20 +169,20 @@ BOOL NetPlayEnumSession(LPSTR IPAdress, SESSION_DESC **SessionList, DWORD *Sessi
 		if (hr != DP_OK)
 		{
 			DoDPError(hr);
-			return( FALSE );
+			return( GE_FALSE );
 		}
 		lpDPL = NULL;
 	}
 
 	hr = IDirectPlayX_InitializeConnection( g_lpDP, tempBuf, 0);
-#else
+#else */
 	hr = IDirectPlayX_InitializeConnection( g_lpDP, lpConnectionBuffer, 0);
-#endif
+//#endif
 
 	if (hr != DP_OK)
 	{
 		DoDPError(hr);
-		return( FALSE );
+		return( GE_FALSE );
 	}
 	
 	GlobalSession = NULL;
@@ -181,14 +193,14 @@ BOOL NetPlayEnumSession(LPSTR IPAdress, SESSION_DESC **SessionList, DWORD *Sessi
 	*SessionList = GlobalSession;
 	*SessionNum = gSessionCnt;
 	
-	return( TRUE );
+	return( GE_TRUE );
 
 }
 
 //==================================================================================================
 //	NetPlayCreateSession
 //==================================================================================================
-BOOL NetPlayCreateSession(LPSTR SessionName, DWORD MaxPlayers)
+geBoolean NetPlayCreateSession(LPSTR SessionName, DWORD MaxPlayers)
 {
 	HRESULT	Hr;
 
@@ -200,7 +212,7 @@ BOOL NetPlayCreateSession(LPSTR SessionName, DWORD MaxPlayers)
 	if (Hr != DP_OK)
 	{
 		DoDPError(Hr);
-		return FALSE;
+		return GE_FALSE;
 	}
 
 	Hr = DPlayCreateSession(SessionName, MaxPlayers);
@@ -208,16 +220,16 @@ BOOL NetPlayCreateSession(LPSTR SessionName, DWORD MaxPlayers)
 	if (Hr != DP_OK)
 	{
 		DoDPError(Hr);
-		return FALSE;
+		return GE_FALSE;
 	}
 
-	return TRUE;
+	return GE_TRUE;
 }
 
 //==================================================================================================
 //	NetPlayJoinSession
 //==================================================================================================
-BOOL NetPlayJoinSession(SESSION_DESC *Session)
+geBoolean NetPlayJoinSession(SESSION_DESC *Session)
 {
     HRESULT Hr;
 	
@@ -226,17 +238,17 @@ BOOL NetPlayJoinSession(SESSION_DESC *Session)
 	if (Hr != DP_OK)
 	{
 		DoDPError(Hr);
-		return FALSE;
+		return GE_FALSE;
 	}
 
-	return TRUE;
+	return GE_TRUE;
 }
 
 //==================================================================================================
 //	NetPlayCreatePlayer
 //	Creates a player for session
 //==================================================================================================
-BOOL NetPlayCreatePlayer(LPDPID lppidID, LPTSTR lptszPlayerName, HANDLE hEvent, LPVOID lpData, DWORD dwDataSize, geBoolean ServerPlayer)
+geBoolean NetPlayCreatePlayer(LPDPID lppidID, LPTSTR lptszPlayerName, HANDLE hEvent, LPVOID lpData, DWORD dwDataSize, geBoolean ServerPlayer)
 {
     HRESULT		hr = DPERR_GENERIC;
     DPNAME		name;
@@ -263,26 +275,26 @@ BOOL NetPlayCreatePlayer(LPDPID lppidID, LPTSTR lptszPlayerName, HANDLE hEvent, 
 	if (hr != DP_OK)
 	{
 		DoDPError(hr);
-		return FALSE;
+		return GE_FALSE;
 	}
 
-	return TRUE;
+	return GE_TRUE;
 }
 
 //=========================================================================================================
 //	NetPlayDestroyPlayer
 //=========================================================================================================
-BOOL NetPlayDestroyPlayer(DPID pid)
+geBoolean NetPlayDestroyPlayer(DPID pid)
 {
 	HRESULT Hr = DPlayDestroyPlayer(pid);
 	
 	if (Hr != DP_OK)
 	{
 		DoDPError(Hr);
-		return FALSE;
+		return GE_FALSE;
 	}
 
-	return TRUE;
+	return GE_TRUE;
 }
 
 //=========================================================================================================
@@ -334,7 +346,7 @@ HRESULT NetPlaySend(DPID idFrom, DPID idTo, DWORD dwFlags, LPVOID lpData, DWORD 
 //=========================================================================================================
 //	DeInitNetPlay
 //=========================================================================================================
-BOOL DeInitNetPlay(void)
+geBoolean DeInitNetPlay(void)
 {
 	HRESULT Hr;
 
@@ -344,18 +356,18 @@ BOOL DeInitNetPlay(void)
 		lpConnectionBuffer = NULL;
 	}
 
-	FoundConnection = FALSE;
-	FoundSP = FALSE;
+	FoundConnection = GE_FALSE;
+	FoundSP = GE_FALSE;
 	
 	Hr = DPlayRelease();
 	
 	if (Hr != DP_OK)
 	{
 		DoDPError(Hr);
-		return FALSE;
+		return GE_FALSE;
 	}
 
-	return TRUE;
+	return GE_TRUE;
 }
 
 //====================================================================================================
@@ -395,34 +407,36 @@ geBoolean NetPlayGetNumMessages(int32 *NumMsgSend, int32 *NumBytesSend, int32 *N
 //========================================================================================
 //	DPlayCreate
 //========================================================================================
-HRESULT DPlayCreate( void )
+HRESULT 
+DPlayCreate( void )
 {
     HRESULT			hr=E_FAIL;
     LPDIRECTPLAY	lpDP=NULL;
 
 	CoInitialize( NULL );
-
+/*
 	hr = CoCreateInstance(	&CLSID_DirectPlay, NULL, CLSCTX_INPROC_SERVER,
 							&IID_IDirectPlay4A, (LPVOID *) &g_lpDP );
 	//hr = CoCreateInstance(	&CLSID_DirectPlay, NULL, CLSCTX_INPROC_SERVER,
 	//						&IID_IDirectPlay3A, (LPVOID *) &g_lpDP );
-
+*/
     return hr;
 }
 
 //========================================================================================
 //	DPlayCreateSession
 //========================================================================================
-HRESULT DPlayCreateSession(LPTSTR lptszSessionName, DWORD MaxPlayers)
+HRESULT 
+DPlayCreateSession(LPTSTR lptszSessionName, DWORD MaxPlayers)
 {
     HRESULT hr = E_FAIL;
     DPSESSIONDESC2 dpDesc;
 
 	assert(g_lpDP);
-
+/*
     ZeroMemory(&dpDesc, sizeof(dpDesc));
     dpDesc.dwSize = sizeof(dpDesc);
-    
+
 	dpDesc.dwFlags = DPSESSION_KEEPALIVE;
 
 #if 0		// Just keeping these here for reference...
@@ -450,20 +464,21 @@ HRESULT DPlayCreateSession(LPTSTR lptszSessionName, DWORD MaxPlayers)
 	{
 		DoDPError(hr);
 	}
-
+*/
     return hr;
 }
 
 //========================================================================================================
 //	DPlayOpenSession
 //========================================================================================================
-HRESULT DPlayOpenSession(LPGUID lpSessionGuid)
+HRESULT 
+DPlayOpenSession(LPGUID lpSessionGuid)
 {
     HRESULT hr = E_FAIL;
     DPSESSIONDESC2 dpDesc;
 
 	assert(g_lpDP);
-
+/*
     ZeroMemory(&dpDesc, sizeof(dpDesc));
     dpDesc.dwSize = sizeof(dpDesc);
 
@@ -479,19 +494,24 @@ HRESULT DPlayOpenSession(LPGUID lpSessionGuid)
 
     // open it
 	hr = IDirectPlayX_Open(g_lpDP, &dpDesc, DPOPEN_JOIN);
-
+*/
     return hr;
 }
 
 //========================================================================================================
 //	DPlayEnumSessions
 //========================================================================================================
-HRESULT DPlayEnumSessions(DWORD dwTimeout, LPDPENUMSESSIONSCALLBACK2 lpEnumCallback, 
-                          LPVOID lpContext, DWORD dwFlags)
+HRESULT 
+DPlayEnumSessions(
+	DWORD                     dwTimeout, 
+	LPDPENUMSESSIONSCALLBACK2 lpEnumCallback, 
+	LPVOID                    lpContext, 
+	DWORD                     dwFlags
+)
 {
     HRESULT hr = E_FAIL;
     DPSESSIONDESC2 dpDesc;
-
+/*
     ZeroMemory(&dpDesc, sizeof(dpDesc));
     dpDesc.dwSize = sizeof(dpDesc);
 
@@ -501,15 +521,22 @@ HRESULT DPlayEnumSessions(DWORD dwTimeout, LPDPENUMSESSIONSCALLBACK2 lpEnumCallb
     if (g_lpDP)
         hr = IDirectPlayX_EnumSessions(g_lpDP, &dpDesc, dwTimeout, lpEnumCallback,
                                         lpContext, dwFlags);
+*/
     return hr;
 }
 
 //========================================================================================================
 //	Callback for enum session
 //========================================================================================================
-BOOL WINAPI EnumSession(LPCDPSESSIONDESC2 lpDPSessionDesc, LPDWORD lpdwTimeOut, DWORD dwFlags, 
-                        LPVOID lpContext)
+geBoolean WINAPI 
+EnumSession(
+	LPCDPSESSIONDESC2 lpDPSessionDesc, 
+	LPDWORD           lpdwTimeOut, 
+	DWORD             dwFlags, 
+    LPVOID            lpContext
+)
 {
+/*
     HWND hWnd = (HWND) lpContext;
 	LPSTR Str = NULL;
 
@@ -530,8 +557,8 @@ BOOL WINAPI EnumSession(LPCDPSESSIONDESC2 lpDPSessionDesc, LPDWORD lpdwTimeOut, 
 #else
 	strcpy(GlobalSession[gSessionCnt-1].SessionName, lpDPSessionDesc->lpszSessionNameA);
 #endif
-
-    return(TRUE);
+*/
+    return(GE_TRUE);
 }
 
 //====================================================================================================
@@ -544,7 +571,7 @@ HRESULT DPlayCreatePlayer(LPDPID lppidID, LPTSTR lptszPlayerName, HANDLE hEvent,
     DPNAME		name;
 
 	assert(g_lpDP);
-    
+/*
     ZeroMemory(&name,sizeof(name));
     name.dwSize = sizeof(DPNAME);
 
@@ -555,7 +582,7 @@ HRESULT DPlayCreatePlayer(LPDPID lppidID, LPTSTR lptszPlayerName, HANDLE hEvent,
 #endif
 
 	hr = IDirectPlayX_CreatePlayer(g_lpDP, lppidID, &name, hEvent, lpData, dwDataSize, DPPLAYER_SERVERPLAYER);
-                                    
+*/                            
     return hr;
 }
 
@@ -596,19 +623,21 @@ HRESULT DPlayRelease(void)
 //====================================================================================================
 //	DPEnumConnectionsCallback
 //====================================================================================================
-BOOL FAR PASCAL DPEnumConnectionsCallback(
-						LPCGUID			lpguidSP,
-						LPVOID			lpConnection,
-						DWORD			dwSize,
-						LPCDPNAME		lpName,
-						DWORD			dwFlags,
-						LPVOID			lpContext)
+geBoolean FAR PASCAL 
+DPEnumConnectionsCallback(
+	LPCGUID   lpguidSP,
+	LPVOID    lpConnection,
+	DWORD     dwSize,
+	LPCDPNAME lpName,
+	DWORD     dwFlags,
+	LPVOID    lpContext
+)
 {
 	LPSTR Str;
 	
 	if (FoundConnection)
-		return TRUE;
-
+		return GE_TRUE;
+/*
 	Str = lpName->lpszShortNameA;
 
 	// Loop through and try to see if this is the service provider we want (TCP/IP for now...)
@@ -630,14 +659,14 @@ BOOL FAR PASCAL DPEnumConnectionsCallback(
 				goto FAILURE;
 
 			memcpy(lpConnectionBuffer, lpConnection, dwSize);
-			FoundConnection = TRUE;
+			FoundConnection = GE_TRUE;
 			break;
 		}
 		Str++;
 	}
-
+*/
 FAILURE:
-    return (TRUE);
+    return (GE_TRUE);
 }
 
 
@@ -646,6 +675,7 @@ FAILURE:
 //====================================================================================================
 static void DoDPError(HRESULT Hr)
 {
+/*
 	switch (Hr)
 	{
 	case CLASS_E_NOAGGREGATION:
@@ -860,4 +890,5 @@ static void DoDPError(HRESULT Hr)
 		geErrorLog_AddString(-1, "NetPlayError:  Don't know this one...\n", NULL);
 		break;
 	}
+*/
 }

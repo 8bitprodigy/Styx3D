@@ -22,6 +22,8 @@
 #ifndef	GE_SOUND_H
 #define	GE_SOUND_H
 
+#include "VFile.h"
+
 #ifdef	__cplusplus
 extern "C" {
 #endif
@@ -36,30 +38,33 @@ typedef struct geSound			geSound;
 
 #ifdef _INC_WINDOWS
 	// Windows.h must be previously included for this api to be exposed.
-GENESISAPI	geSound_System *geSound_CreateSoundSystem(HWND hWnd);
+GENESISAPI geSound_System *geSound_CreateSoundSystem(HWND hWnd);
 #endif
 
-GENESISAPI	void			geSound_DestroySoundSystem(geSound_System *Sound);
+GENESISAPI void         geSound_DestroySoundSystem(geSound_System *Sound);
 
 
-GENESISAPI	geSound_Def	   *geSound_LoadSoundDef(geSound_System *SoundS, geVFile *File);
-GENESISAPI	void			geSound_FreeSoundDef(geSound_System *SoundS, 
-									geSound_Def *SoundDef);
+GENESISAPI geSound_Def *geSound_LoadSoundDef(      geSound_System *SoundS, geVFile     *File);
+GENESISAPI void         geSound_FreeSoundDef(      geSound_System *SoundS, geSound_Def *SoundDef);
 
-GENESISAPI	geSound		   *geSound_PlaySoundDef(geSound_System *SoundS, 
-									geSound_Def *SoundDef, 
-									geFloat Volume, 
-									geFloat Pan, 
-									geFloat Frequency, 
-									geBoolean Loop);
-GENESISAPI	geBoolean		geSound_StopSound(geSound_System *SoundS, geSound *Sound);
-GENESISAPI	geBoolean		geSound_ModifySound(geSound_System *SoundS, 
-									geSound *Sound, 
-									geFloat Volume, 
-									geFloat Pan, 
-									geFloat Frequency);
-GENESISAPI	geBoolean		geSound_SoundIsPlaying(geSound_System *SoundS, geSound *Sound);
-GENESISAPI	geBoolean		geSound_SetMasterVolume( geSound_System *SoundS, geFloat Volume );
+GENESISAPI geSound     *geSound_PlaySoundDef(
+	geSound_System *SoundS, 
+	geSound_Def    *SoundDef, 
+	geFloat         Volume, 
+	geFloat         Pan, 
+	geFloat         Frequency, 
+	geBoolean       Loop
+);
+GENESISAPI geBoolean    geSound_StopSound(         geSound_System *SoundS, geSound *Sound);
+GENESISAPI geBoolean    geSound_ModifySound(
+	geSound_System *SoundS, 
+	geSound        *Sound, 
+	geFloat         Volume, 
+	geFloat         Pan, 
+	geFloat         Frequency
+);
+GENESISAPI geBoolean    geSound_SoundIsPlaying(    geSound_System *SoundS, geSound *Sound);
+GENESISAPI geBoolean    geSound_SetMasterVolume(   geSound_System *SoundS, geFloat  Volume);
 
 // GENESIS_PRIVATE_APIS
 

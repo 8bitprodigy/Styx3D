@@ -191,8 +191,8 @@ struct LinkNode
 #define zLN_Fix(          Node)                  do { (Node)->Prev->Next =    Node; (Node)->Next->Prev = Node; } while(0)
 #define zLN_AddAfter(     Node, List)            do { (Node)->Prev = List;   (Node)->Next = (List)->Next; LN_Fix(Node); } while(0)
 #define zLN_AddBefore(    Node, List)            do { (Node)->Next = List;   (Node)->Prev = (List)->Prev; LN_Fix(Node); } while(0)
-#define zLN_Walk_Editting(Node, List, Holder)    for( (Node) = (List)->Next; (Node) != (List) && ((Holder) = (Node)->Next) != NULL ; Node = Holder )
-#define zLN_Walk(         Node, List)            for(  Node  = (List)->Next;     Node  != (List);                                       Node = (Node)->Next)
+#define zLN_Walk_Editting(Node, List, Holder)    for(  Node  = (List)->Next;  Node != (List) && (Holder = (Node)->Next) != NULL ; Node = Holder )
+#define zLN_Walk(         Node, List)            for(  Node  = (List)->Next;  Node != (List);                                     Node = (Node)->Next)
 #define zLN_EmptyList(    List)                  ( (List)->Next == (List) )
 
 #define LN_InitList(      List)                  zLN_InitList(     (LinkNode *)List)
@@ -200,8 +200,8 @@ struct LinkNode
 #define LN_Fix(           Node)                  zLN_Fix(          (LinkNode *)Node)
 #define LN_AddAfter(      Node, List)            zLN_AddAfter(     (LinkNode *)Node,(LinkNode *)List)
 #define LN_AddBefore(     Node, List)            zLN_AddBefore(    (LinkNode *)Node,(LinkNode *)List)
-#define LN_Walk(          Node, List)            zLN_Walk(         (LinkNode *)Node,(LinkNode *)List)
-#define LN_Walk_Editting( Node, List, Holder)    zLN_Walk_Editting((LinkNode *)Node,(LinkNode *)List,((LinkNode *)Holder))
+#define LN_Walk(          Node, List)            zLN_Walk(         Node, List)/*(LinkNode *)Node,(LinkNode *)List)*/
+//#define LN_Walk_Editting( Node, List, Holder)    zLN_Walk_Editting((LinkNode *)Node,(LinkNode *)List,((LinkNode *)Holder))
 #define LN_EmptyList(     List)                  zLN_EmptyList(    (LinkNode *)List)
 #define LN_Prev(          Node)                  (void *)(        ((LinkNode *)Node)->Prev)
 #define LN_Next(          Node)                  (void *)(        ((LinkNode *)Node)->Next)

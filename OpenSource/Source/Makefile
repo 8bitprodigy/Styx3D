@@ -18,7 +18,7 @@ OUTDIR = $(OUTDIR_$(shell echo $(CFG) | tr '[:lower:]' '[:upper:]'))
 CFLAGS_COMMON = -Wall -I../SDK/DXSDK/Include -I../Source \
 	-I./World -I./Engine -I./Engine/Drivers -I./Actor -I./BSP \
 	-I./Math -I./Entities -I./Support -I./Physics -I./VFile \
-	-I./Bitmap -I./Bitmap/Compression -lSDL3 -lSDL3_ttf
+	-I./Bitmap -I./Bitmap/Compression -lSDL3 -lSDL3_ttf 
 
 CFLAGS_RELEASE = $(CFLAGS_COMMON) -O2 -DNDEBUG
 CFLAGS_DEBUG = $(CFLAGS_COMMON) -g -O0 -D_DEBUG
@@ -99,9 +99,9 @@ ROOT_SRCS = \
 	CSNetMgr.c \
 	Ge.c \
 	List.c \
-	Netplay.c \
+	NetPlay.c \
 	Sound.c \
-	Sound3d.c \
+	Sound3D.c \
 	TClip.c \
 	Timer.c \
 	TSC.c

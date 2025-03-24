@@ -74,17 +74,17 @@ TIMER_VARS(List_RadixInit);
 
 void * mymalloc(int size)
 {
-void *ret;
-TIMER_P(List_Ram);
-ret = MemAlloc(size);
-TIMER_Q(List_Ram);
-return ret;
+	void *ret;
+	TIMER_P(List_Ram);
+	ret = MemAlloc(size);
+	TIMER_Q(List_Ram);
+	return ret;
 }
 void myfree(void *mem)
 {
-TIMER_P(List_Ram);
-MemFree(mem);
-TIMER_Q(List_Ram);
+	TIMER_P(List_Ram);
+	MemFree(mem);
+	TIMER_Q(List_Ram);
 }
 
 #undef MemAlloc
@@ -112,9 +112,9 @@ int LN_ListLen(LinkNode *pList)
 {
 LinkNode *pNode;
 int Len=0;
-	if ( ! pList )
-		return 0;
-	LN_Walk(pNode,pList) {
+	if ( ! pList )    return 0;
+	
+	zLN_Walk(pNode, pList)    {
 		Len++;
 	}
 return Len;
@@ -917,7 +917,7 @@ the cost of adding N nodes to hash of size M is only O(N + M*M)
 (because the first M adds are O(M) and the later adds are O(1))
 
 *****************************/
-
+#define SAFE_HASH_DEBUG 1
 #ifdef SAFE_HASH_DEBUG //{
 
 #pragma message("using safe debug hash implementation")
@@ -936,16 +936,18 @@ struct HashNode
 	uint32	Data;
 };
 
-Hash *	Hash_Create(void)
+Hash *
+Hash_Create(void)
 {
-Hash * H;
+	Hash *H;
 	H = new(Hash);
 	assert(H);
 	//memset(H,0,sizeof(*H));
-return H;
+	return H;
 }
 
-void Hash_Destroy(Hash *H)
+void 
+Hash_Destroy(Hash *H)
 {
 	assert(H);
 	if ( H->NodeArray )
@@ -961,9 +963,10 @@ void Hash_Destroy(Hash *H)
 	destroy(H);
 }	
 
-HashNode *	LISTCALL Hash_Add(Hash *H,uint32 Key,uint32 Data)
+HashNode *LISTCALL
+Hash_Add(Hash *H,uint32 Key,uint32 Data)
 {
-HashNode * hn;
+	HashNode * hn;
 	hn = MemPool_GetHunk(HashNodePool_g);
 	assert(hn);
 	hn->Key = Key;
@@ -1413,3 +1416,5 @@ geBoolean List_Stop(void)
 	}
 	return GE_TRUE;
 }
+
+#undef SAFE_HASH_DEBUG

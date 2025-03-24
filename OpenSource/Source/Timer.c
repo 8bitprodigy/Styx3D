@@ -19,23 +19,27 @@
 /*  Copyright (C) 1999 WildTangent, Inc. All Rights Reserved           */
 /*                                                                                      */
 /****************************************************************************************/
+#include <stdio.h>
 
-#include "timer.h"
+#include "Timer.h"
 
-FILE * timerFP = stdout;
+
+FILE * timerFP;// = stdout;
 
 int timerCount = 0;
 
 double time_Master = 0.0;
 static tsc_type tsc_Master;
 
+
 void Timer_Start(void)
 {
-readTSC(tsc_Master);
+    readTSC(tsc_Master);
 }
+
 void Timer_Stop(void)
 {
-tsc_type tsc_Master2;
-readTSC(tsc_Master2);
-time_Master += diffTSC(tsc_Master,tsc_Master2);
+    tsc_type tsc_Master2;
+    readTSC(tsc_Master2);
+    time_Master += diffTSC(tsc_Master,tsc_Master2);
 }

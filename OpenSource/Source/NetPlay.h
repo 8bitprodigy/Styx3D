@@ -35,13 +35,23 @@
 	typedef uint32_t  DPID;
 	typedef uuid_t    GUID;
 	typedef GUID*     LPGUID;
+	typedef GUID*     LPCDPNAME;
+	typedef GUID*     LPCGUID;
 	typedef uint32_t* LPDPID;
 	typedef uint32_t* LPDWORD;
 	typedef int       HRESULT;
+	#define DPERR_GENERIC 0x80004005L
+	#define DPERR_PENDING 0x00040001L
+	#define DPMESSAGEQUEUE_SEND    0x00000001
+	#define DPMESSAGEQUEUE_RECEIVE 0x00000002
+
 	#define S_OK      0
 	#define E_FAIL   -1
 	typedef void*     HANDLE;
 	typedef void*     LPVOID;
+	typedef void*     LPDIRECTPLAYLOBBY2A;
+	typedef void*     LPDIRECTPLAY;
+	typedef void*     DPSESSIONDESC2;
 	typedef uint32_t  DPID;  // DirectPlay ID
 	typedef DPID*     LPDPID;
 
@@ -77,12 +87,22 @@
 	} 
 	DPMSG_GENERIC, *
 	LPDPMSG_GENERIC;
-
+	
+	typedef struct _DPNAME {
+		DWORD    dwSize;   // Size of this structure
+		DWORD    dwFlags;  // Flags (typically 0, reserved for future use)
+		int16_t *lpszShortNameA;  // Pointer to a short name (display name)
+		int16_t *lpszLongName;   // Pointer to a long name (full descriptive name)
+	} 
+	DPNAME, *
+	LPDPNAME;
+	
 	typedef struct 
 	{
 		char *lpszShortNameA;
 	} 
 	DPNNAME;
+	
 	// Player creation message structure
 	typedef struct 
 	{
@@ -110,7 +130,6 @@
 		DWORD               dwReserved;      // Reserved for future use
 	}*
 	LPDPMSG_HOST;
-
 #endif
 
 #include "BaseType.h"
@@ -143,16 +162,16 @@ extern SP_DESC       GlobalSP;      // Global info about the sp
 extern SESSION_DESC *GlobalSession; // Global sessions availible
 extern LPGUID        glpGuid;
 													
-void      DoDPError(           HRESULT       Hr);
-geBoolean InitNetPlay(         LPGUID        lpGuid);
-geBoolean NetPlayEnumSession(  LPSTR         IPAdress,    SESSION_DESC **SessionList,     DWORD *SessionNum);
-geBoolean NetPlayJoinSession(  SESSION_DESC *SessionList);
-geBoolean NetPlayCreateSession(LPSTR         SessionName, DWORD          MaxPlayers);
-geBoolean NetPlayCreatePlayer( LPDPID        lppidID,     LPTSTR         lptszPlayerName, HANDLE  hEvent,  LPVOID lpData, DWORD   dwDataSize,    geBoolean ServerPlayer);
-geBoolean NetPlayDestroyPlayer(DPID          pid);
-HRESULT   NetPlaySend(         DPID          idFrom,      DPID           idTo,            DWORD   dwFlags, LPVOID lpData, DWORD   dwDataSize);
-HRESULT   NetPlayReceive(      LPDPID        lpidFrom,    LPDPID         lpidTo,          DWORD   dwFlags, LPVOID lpData, LPDWORD lpdwDataSize);
-geBoolean DeInitNetPlay(       void);
+static void      DoDPError(           HRESULT       Hr);
+       geBoolean InitNetPlay(         LPGUID        lpGuid);
+       geBoolean NetPlayEnumSession(  LPSTR         IPAdress,    SESSION_DESC **SessionList,     DWORD *SessionNum);
+       geBoolean NetPlayJoinSession(  SESSION_DESC *SessionList);
+       geBoolean NetPlayCreateSession(LPSTR         SessionName, DWORD          MaxPlayers);
+       geBoolean NetPlayCreatePlayer( LPDPID        lppidID,     LPTSTR         lptszPlayerName, HANDLE  hEvent,  LPVOID lpData, DWORD   dwDataSize,    geBoolean ServerPlayer);
+       geBoolean NetPlayDestroyPlayer(DPID          pid);
+       HRESULT   NetPlaySend(         DPID          idFrom,      DPID           idTo,            DWORD   dwFlags, LPVOID lpData, DWORD   dwDataSize);
+       HRESULT   NetPlayReceive(      LPDPID        lpidFrom,    LPDPID         lpidTo,          DWORD   dwFlags, LPVOID lpData, LPDWORD lpdwDataSize);
+       geBoolean DeInitNetPlay(       void);
 
 // HACK!!!! Function is in Engine.cpp (So NetPlay.C can call it...)
 geBoolean AFX_CPrintfC(        char         *String);
