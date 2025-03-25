@@ -15,10 +15,14 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <Windows.h>
+#ifdef _WIN32
+	#include <windows.h>
+#else
+	#include <string.h>
+#endif
 
 #include "Genesis.h"
-#include "Ram.h"
+#include "RAM.h"
 
 #include "GenVSI.h"
 #include "GPlayer.h"

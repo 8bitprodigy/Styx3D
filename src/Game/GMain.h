@@ -15,7 +15,11 @@
 #ifndef GMAIN_H
 #define GMAIN_H
 
-#include <Windows.h>
+#ifdef _WIN32
+	#include <windows.h>
+#else
+	#include <string.h>
+#endif
 
 #include "Game.h"
 
@@ -142,17 +146,17 @@ extern GPlayer	*CurrentPlayerStart;
 //===========================================================================
 
 // GMain.c
-BOOL		XFormFromVector(const geVec3d *Source, const geVec3d *Target, float Roll, geXForm3d *Out);
-void		SqueezeVector(geVec3d *Vect, float Epsilon);
-void		ClampVector(geVec3d *Vect, float Epsilon);
-void		ReflectVelocity(geVec3d *In, geVec3d *Normal, geVec3d *Out, float Scale);
+geBoolean  XFormFromVector(       const geVec3d *Source, const geVec3d *Target,   float    Roll, geXForm3d *Out);
+void       SqueezeVector(               geVec3d *Vect,         float    Epsilon);
+void       ClampVector(                 geVec3d *Vect,         float    Epsilon);
+void       ReflectVelocity(             geVec3d *In,           geVec3d *Normal,   geVec3d *Out,  float      Scale);
 
-geBoolean	AnimatePlayer(GenVSI *VSI, void *PlayerData, uint16 MotionIndex, float Speed, geBoolean Loop);
-geBoolean	AnimatePlayer2(GenVSI *VSI, void *PlayerData, int32 MotionSlot, float Speed, geBoolean Loop);
+geBoolean	AnimatePlayer(             GenVSI  *VSI, void *PlayerData, uint16 MotionIndex, float Speed, geBoolean Loop);
+geBoolean	AnimatePlayer2(            GenVSI  *VSI, void *PlayerData, int32 MotionSlot, float Speed, geBoolean Loop);
 
-void		UpdateClientInventory(GenVSI *VSI, GPlayer *Player, int32 Slot);
+void		UpdateClientInventory(      GenVSI  *VSI, GPlayer *Player, int32 Slot);
 
-geBoolean	CheckVelocity(GenVSI *VSI, void *PlayerData, float BounceScale, geBoolean AllowBounce, float Time);
+geBoolean	CheckVelocity(             GenVSI  *VSI, void *PlayerData, float BounceScale, geBoolean AllowBounce, float Time);
 
 // Weapons.c
 geBoolean	DammagePlayer(GenVSI *VSI, void *PlayerData, void *TargetData, int32 Amount, float Power, float Time);

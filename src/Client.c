@@ -12,15 +12,31 @@
 /*  or FITNESS FOR ANY PURPOSE.  Refer to LICENSE.TXT for more details.                 */
 /*                                                                                      */
 /****************************************************************************************/
-#include <Windows.h>
-#include <Assert.h>
-#include <Math.h>
+#include <assert.h>
+#include <math.h>
+#include <SDL3/SDL.h>
+
+#ifdef _WIN32
+	#include <windows.h>
+#else
+	#include <limits.h>
+	#include <stdint.h>
+	#include <string.h>
+	#define MAX_PATH PATH_MAX
+	typedef struct
+	{
+		uint32_t 
+			LowPart,
+			HighPart;
+	}
+	LARGE_INTEGER;
+#endif
 
 #include "Client.h"
 
 #include "Buffer.h"
-#include "Gmenu.h"
-#include "cd.h"
+#include "CD.h"
+#include "GMenu.h"
 
 LARGE_INTEGER			g_Freq, g_OldTick, g_CurTick;
 
@@ -30,6 +46,7 @@ static int32			CurAvg;
 
 static void SubLarge(LARGE_INTEGER *start, LARGE_INTEGER *end, LARGE_INTEGER *delta)
 {
+/*
 	_asm {
 		mov ebx,dword ptr [start]
 		mov esi,dword ptr [end]
@@ -44,6 +61,14 @@ static void SubLarge(LARGE_INTEGER *start, LARGE_INTEGER *end, LARGE_INTEGER *de
 		mov dword ptr [ebx+0],eax
 		mov dword ptr [ebx+4],edx
 	}
+*/
+    delta->LowPart = start->LowPart - end->LowPart;
+    delta->HighPart = start->HighPart - end->HighPart;
+    
+    // Handle borrow
+    if (delta->LowPart > start->LowPart) {
+        delta->HighPart--;
+    }
 }
 
 #define BEGIN_TIMER()		QueryPerformanceCounter(&g_OldTick)
@@ -159,9 +184,9 @@ void		GenVS_Error(const char *Msg, ...);
 //=====================================================================================
 //	Local Static functions
 //=====================================================================================
-static BOOL IsKeyDown(int KeyCode, HWND hWnd);
-BOOL NewKeyDown(int KeyCode, HWND hWnd);
-geBoolean ReadServerMessages(Client_Client *Client, GameMgr *GMgr, float Time);
+static geBoolean IsKeyDown(int KeyCode, HWND hWnd);
+geBoolean NewKeyDown(int KeyCode, HWND hWnd);
+static geBoolean ReadServerMessages(Client_Client *Client, GameMgr *GMgr, float Time);
 static void UpdatePlayers(Client_Client *Client, float Time);
 static geBoolean RenderWorld(Client_Client *Client, GameMgr *GMgr, float Time);
 static void SetupCamera(geCamera *Camera, GE_Rect *Rect, geXForm3d *XForm);
@@ -1078,6 +1103,7 @@ void Client_ValidateWeapon(Client_Client *Client)
 //=====================================================================================
 geBoolean Client_SendMove(Client_Client *Client, float Time)
 {
+/*
 	Buffer_Data		Buffer;
 	uint8			Data[512];
 	uint16			ButtonBits;
@@ -1248,7 +1274,7 @@ geBoolean Client_SendMove(Client_Client *Client, float Time)
 		Client_AddMove(Client, &Move);
 	#endif
 	}
-
+*/
 	return GE_TRUE;
 }
 
@@ -1325,7 +1351,8 @@ geBoolean NetPlayGetNumMessages(int32 *NumMsgSend, int32 *NumBytesSend, int32 *N
 //	ReadServerMessages
 //	Read ALL mesages from server
 //===========================================================================
-static geBoolean ReadServerMessages(Client_Client *Client, GameMgr *GMgr, float Time)
+static geBoolean 
+ReadServerMessages(Client_Client *Client, GameMgr *GMgr, float Time)
 {
 	uint8			Type;
 	Buffer_Data		Buffer;
@@ -1842,7 +1869,8 @@ static geBoolean ReadServerMessages(Client_Client *Client, GameMgr *GMgr, float 
 //	On each update from the server, make sure the PROXY players on the
 //	PROXY server are up to snuff with the BOSS server...
 //===========================================================================
-static void UpdateProxyPlayer(Client_Client *Client, GPlayer *Player)
+static void 
+UpdateProxyPlayer(Client_Client *Client, GPlayer *Player)
 {
 	int32		PlayerIndex;
 	geXForm3d	XForm;

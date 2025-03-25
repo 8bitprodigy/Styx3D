@@ -12,14 +12,14 @@
 /*  or FITNESS FOR ANY PURPOSE.  Refer to LICENSE.TXT for more details.                 */
 /*                                                                                      */
 /****************************************************************************************/
-#include <Assert.h>
-#include <Stdlib.h>
-#include <Math.h>
+#include <assert.h>
+#include <math.h>
+#include <stdlib.h>
+#include <string.h>
 
-#include "Procedural.h"
-#include "String.h"
 #include "Bitmap.h"
-#include "Ram.h"
+#include "Procedural.h"
+#include "RAM.h"
 
 typedef struct Procedural
 {

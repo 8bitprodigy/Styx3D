@@ -28,8 +28,8 @@ extern "C" {
 
 #include <stdint.h>
 
-/******** The Genesis Calling Conventions ***********/ 
 
+/******** The Genesis Calling Conventions ***********/ 
 #if defined(_MSC_VER)  
   #define GENESISCC _fastcall
 #elif defined(__GNUC__) && defined(__i386__)  // Only apply fastcall for x86 on GCC
@@ -57,9 +57,10 @@ extern "C" {
 #endif
 
 /******** The Basic Types ****************************/
-typedef int8_t    geBoolean;
-#define GE_FALSE	(0)
-#define GE_TRUE	 (!GE_FALSE)
+
+typedef int8_t      geBoolean;
+#define GE_FALSE    (0)
+#define GE_TRUE     (!GE_FALSE)
 
 typedef float geFloat;
 
@@ -75,20 +76,19 @@ typedef uint32_t  uint32;
 typedef uint16_t  uint16;
 typedef uint8_t   uint8 ;
 
-
 /******** Macros on Genesis basic types *************/
 
-#define GE_ABS(x)             ( (x) < 0 ? (-(x)) : (x) )
-#define GE_CLAMP(x,lo,hi)		 ( (x) < (lo) ? (lo) : ( (x) > (hi) ? (hi) : (x) ) )
-#define GE_CLAMP8(x)          GE_CLAMP(x,0,255)
-#define GE_CLAMP16(x)         GE_CLAMP(x,0,65536)
-#define GE_BOOLSAME(x,y)      ( ( (x) && (y) ) || ( !(x) && !(y) ) )
+#define GE_ABS(x)				( (x) < 0 ? (-(x)) : (x) )
+#define GE_CLAMP(x,lo,hi)		( (x) < (lo) ? (lo) : ( (x) > (hi) ? (hi) : (x) ) )
+#define GE_CLAMP8(x)			GE_CLAMP(x,0,255)
+#define GE_CLAMP16(x)			GE_CLAMP(x,0,65536)
+#define GE_BOOLSAME(x,y)		( ( (x) && (y) ) || ( !(x) && !(y) ) )
 
-#define GE_EPSILON				    ((geFloat)0.000797f)
+#define GE_EPSILON				((geFloat)0.000797f)
 #define GE_FLOATS_EQUAL(x,y)	( GE_ABS((x) - (y)) < GE_EPSILON )
 #define GE_FLOAT_ISZERO(x)		GE_FLOATS_EQUAL(x,0.0f)
 
-#define	GE_PI					      ((geFloat)3.14159265358979323846f)
+#define	GE_PI					((geFloat)3.14159265358979323846f)
 
 /****************************************************/
 

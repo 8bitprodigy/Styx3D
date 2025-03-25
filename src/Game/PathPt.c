@@ -1,17 +1,22 @@
 /****************************************************************************/
 /*    FILE: PathPt.c														*/
 /****************************************************************************/
-#define	WIN32_LEAN_AND_MEAN
-#include	<windows.h>
+#include	<assert.h>
+#include	<math.h>
+#include	<stdlib.h>
+
+#ifdef _WIN32
+	#define	WIN32_LEAN_AND_MEAN
+	#include <windows.h>
+#else
+	#include <string.h>
+#endif
 
 // PathPt kind of does a naughty thing.  It digs directly into the world, to get the entities needed
 // to make a path.  This is ok, UNTIL the game stuff gets put into a dll.  Then we'll need to make
 // an interface to all the genesis API's needed to access the world.  ALSO, NOTE that this stuff will
 // still only happen on the server side...
 
-#include	<math.h>
-#include	<stdlib.h>
-#include	<assert.h>
 
 #include	"PathPt.h"
 #include    "_Bot.h"

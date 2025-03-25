@@ -13,15 +13,19 @@
 /*                                                                                      */
 /****************************************************************************************/
 
-#include    <stdlib.h>  // qsort 
-#include	<assert.h>
-#include    <Windows.h>
+#include <assert.h>
+#include <stdlib.h>  // qsort 
+
+#ifdef _WIN32
+	#include <windows.h>
+#else
+	#include <string.h>
+#endif
 
 
 #include	"AutoSelect.h"
-
 #include    "ErrorLog.h"
-#include    "Ram.h"
+#include    "RAM.h"
 
 
 

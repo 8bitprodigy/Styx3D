@@ -12,9 +12,14 @@
 /*  or FITNESS FOR ANY PURPOSE.  Refer to LICENSE.TXT for more details.                 */
 /*                                                                                      */
 /****************************************************************************************/
-#include <Windows.h>
-#include <Assert.h>
-#include <Math.h>
+#include <assert.h>
+#include <math.h>
+
+#ifdef _WIN32
+	#include <windows.h>
+#else
+	#include <string.h>
+#endif
 
 #include "GMain.h"
 
@@ -44,8 +49,8 @@ static geBoolean Plat_Trigger(GenVSI *VSI, void *PlayerData, void *TargetData, v
 
 static geBoolean PhysicsObject_Spawn(GenVSI* VSI, void* PlayerData, void* Class,char *EntityName);
 static void PhysicsObject_Destroy(GenVSI *VSI, void *PlayerData, void *ClassData);
-static geBoolean PhysicsObject_Trigger(GenVSI* VSI, void* PlayerData, void* TargetData, void* data);
-static geBoolean PhysicsObject_Control(GenVSI* VSI, void* PlayerData, float Time);
+static geBoolean PhysicsObject_Trigger(GenVSI *VSI, void *PlayerData, GPlayer *TargetData, void *data);
+static geBoolean PhysicsObject_Control(GenVSI *VSI, void *PlayerData, float Time);
 
 static geBoolean PhysicsJoint_Spawn(GenVSI* VSI, void* PlayerData, void* Class,char *EntityName);
 static void PhysicsJoint_Destroy(GenVSI *VSI, void *PlayerData, void *ClassData);
@@ -1578,7 +1583,8 @@ static void PhysicsObject_Destroy(GenVSI *VSI, void *PlayerData, void *ClassData
 			}
 }
 
-static geBoolean PhysicsObject_Trigger(GenVSI *VSI, void *PlayerData, GPlayer *Target, void *data)
+static geBoolean 
+PhysicsObject_Trigger(GenVSI *VSI, void *PlayerData, GPlayer *Target, void *data)
 {
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	// PlayerData actually points to the PhysicsObject.
@@ -2115,7 +2121,7 @@ static geBoolean IsKeyDown(int KeyCode)
 //=====================================================================================
 //	XFormFromVector
 //=====================================================================================
-BOOL XFormFromVector(const geVec3d *Source, const geVec3d *Target, float Roll, geXForm3d *Out)
+geBoolean XFormFromVector(const geVec3d *Source, const geVec3d *Target, float Roll, geXForm3d *Out)
 {
 	geVec3d		p1, p2, Vect;
 	geVec3d		Origin = {0.0f, 0.0f, 0.0f};
@@ -2163,7 +2169,7 @@ BOOL XFormFromVector(const geVec3d *Source, const geVec3d *Target, float Roll, g
 	// Put the translation in...
 	Out->Translation = *Source;
 
-	return TRUE;
+	return GE_TRUE;
 }
 
 //=====================================================================================

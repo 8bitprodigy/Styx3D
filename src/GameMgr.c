@@ -12,18 +12,23 @@
 /*  or FITNESS FOR ANY PURPOSE.  Refer to LICENSE.TXT for more details.                 */
 /*                                                                                      */
 /****************************************************************************************/
-#include <Windows.h>
-#include <Assert.h>
+#include <assert.h>
 #include <stdio.h>
-#include <direct.h>
 
-#include "Ram.h"
-#include "Errorlog.h"
+#ifdef _WIN32
+	#include <direct.h>
+	#include <Windows.h>
+#else
+	#include <string.h>
+#endif
 
+#include "ErrorLog.h"
 #include "GameMgr.h"
+#include "RAM.h"
+#include "VFile.h"
 
-#include "Procedurals\gebmutil.h"
-#include "procedurals/ProcEng.h"
+#include "Procedurals/GeBMUtil.h"
+#include "Procedurals/ProcEng.h"
 
 
 extern void	GenVS_Error(const char *Msg, ...);

@@ -60,59 +60,59 @@ IMPORT_LIB = $(OUTDIR)/libgenesisi.a
 
 # Object files
 OBJECTS = \
-	$(OBJDIR)/actor.o \
-	$(OBJDIR)/body.o \
-	$(OBJDIR)/bodyinst.o \
-	$(OBJDIR)/motion.o \
-	$(OBJDIR)/path.o \
-	$(OBJDIR)/pose.o \
-	$(OBJDIR)/puppet.o \
+	$(OBJDIR)/Actor.o \
+	$(OBJDIR)/Body.o \
+	$(OBJDIR)/BodyInst.o \
+	$(OBJDIR)/Motion.o \
+	$(OBJDIR)/Path.o \
+	$(OBJDIR)/Pose.o \
+	$(OBJDIR)/Puppet.o \
 	$(OBJDIR)/QKFrame.o \
-	$(OBJDIR)/strblock.o \
-	$(OBJDIR)/tkarray.o \
-	$(OBJDIR)/tkevents.o \
-	$(OBJDIR)/vkframe.o \
+	$(OBJDIR)/StrBlock.o \
+	$(OBJDIR)/TKArray.o \
+	$(OBJDIR)/TKEvents.o \
+	$(OBJDIR)/VKFrame.o \
 	$(OBJDIR)/XFArray.o \
-	$(OBJDIR)/palcreate.o \
-	$(OBJDIR)/palettize.o \
-	$(OBJDIR)/paloptimize.o \
-	$(OBJDIR)/yuv.o \
-	$(OBJDIR)/bitmap.o \
-	$(OBJDIR)/bitmap_blitdata.o \
-	$(OBJDIR)/bitmap_gamma.o \
-	$(OBJDIR)/pixelformat.o \
-	$(OBJDIR)/A_CORONA.o \
-	$(OBJDIR)/A_STREAK.o \
-	$(OBJDIR)/CORONA.o \
-	$(OBJDIR)/electric.o \
-	$(OBJDIR)/logo.o \
+	$(OBJDIR)/PalCreate.o \
+	$(OBJDIR)/Palettize.o \
+	$(OBJDIR)/PalOptimize.o \
+	$(OBJDIR)/YUV.o \
+	$(OBJDIR)/Bitmap.o \
+	$(OBJDIR)/Bitmap_BlitData.o \
+	$(OBJDIR)/Bitmap_Gamma.o \
+	$(OBJDIR)/PixelFormat.o \
+	$(OBJDIR)/A_Corona.o \
+	$(OBJDIR)/A_Streak.o \
+	$(OBJDIR)/Corona.o \
+	$(OBJDIR)/Electric.o \
+	$(OBJDIR)/Logo.o \
 	$(OBJDIR)/LogoActor.o \
-	$(OBJDIR)/streak.o \
+	$(OBJDIR)/Streak.o \
 	$(OBJDIR)/BitmapList.o \
-	$(OBJDIR)/engine.o \
-	$(OBJDIR)/fontbmp.o \
+	$(OBJDIR)/Engine.o \
+	$(OBJDIR)/FontBMP.o \
 	$(OBJDIR)/System.o \
 	$(OBJDIR)/Entities.o \
 	$(OBJDIR)/Box.o \
 	$(OBJDIR)/crc32.o \
 	$(OBJDIR)/ExtBox.o \
-	$(OBJDIR)/quatern.o \
-	$(OBJDIR)/Vec3d.o \
-	$(OBJDIR)/Xform3d.o \
-	$(OBJDIR)/Errorlog.o \
-	$(OBJDIR)/geAssert.o \
-	$(OBJDIR)/log.o \
-	$(OBJDIR)/mempool.o \
-	$(OBJDIR)/Ram.o \
-	$(OBJDIR)/ramdll.o \
-	$(OBJDIR)/dirtree.o \
-	$(OBJDIR)/fsdos.o \
-	$(OBJDIR)/Fsmemory.o \
-	$(OBJDIR)/fsvfs.o \
-	$(OBJDIR)/vfile.o \
+	$(OBJDIR)/Quatern.o \
+	$(OBJDIR)/Vec3D.o \
+	$(OBJDIR)/XForm3D.o \
+	$(OBJDIR)/ErrorLog.o \
+	$(OBJDIR)/GEAssert.o \
+	$(OBJDIR)/Log.o \
+	$(OBJDIR)/MemPool.o \
+	$(OBJDIR)/RAM.o \
+	$(OBJDIR)/RAMDLL.o \
+	$(OBJDIR)/DirTree.o \
+	$(OBJDIR)/FSDOS.o \
+	$(OBJDIR)/FSMemory.o \
+	$(OBJDIR)/FSVFS.o \
+	$(OBJDIR)/VFile.o \
 	$(OBJDIR)/Fog.o \
 	$(OBJDIR)/Frustum.o \
-	$(OBJDIR)/Gbspfile.o \
+	$(OBJDIR)/GBSPFile.o \
 	$(OBJDIR)/Light.o \
 	$(OBJDIR)/Plane.o \
 	$(OBJDIR)/Surface.o \
@@ -121,23 +121,23 @@ OBJECTS = \
 	$(OBJDIR)/Vis.o \
 	$(OBJDIR)/WBitmap.o \
 	$(OBJDIR)/World.o \
-	$(OBJDIR)/font.o \
-	$(OBJDIR)/wgClip.o \
-	$(OBJDIR)/matrix33.o \
+	$(OBJDIR)/Font.o \
+	$(OBJDIR)/WgClip.o \
+	$(OBJDIR)/Matrix33.o \
 	$(OBJDIR)/PhysicsJoint.o \
 	$(OBJDIR)/PhysicsObject.o \
 	$(OBJDIR)/PhysicsSystem.o \
 	$(OBJDIR)/Camera.o \
 	$(OBJDIR)/CSNetMgr.o \
 	$(OBJDIR)/Ge.o \
-	$(OBJDIR)/list.o \
-	$(OBJDIR)/Netplay.o \
+	$(OBJDIR)/List.o \
+	$(OBJDIR)/NetPlay.o \
 	$(OBJDIR)/Sound.o \
-	$(OBJDIR)/Sound3d.o \
-	$(OBJDIR)/Tclip.o \
-	$(OBJDIR)/timer.o \
-	$(OBJDIR)/tsc.o \
-	$(OBJDIR)/WebUrl.o
+	$(OBJDIR)/Sound3D.o \
+	$(OBJDIR)/TClip.o \
+	$(OBJDIR)/Timer.o \
+	$(OBJDIR)/TSC.o \
+	$(OBJDIR)/WebURL.o
 
 # Main targets
 all: $(OUTDIR) $(TARGET) $(IMPORT_LIB)
@@ -154,8 +154,8 @@ $(TARGET): $(OBJECTS)
 	$(LINK) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 # Create the import library
-$(IMPORT_LIB): $(TARGET) $(OBJDIR)/ramdll.o
-	$(AR) crs $@ $(OBJDIR)/ramdll.o
+$(IMPORT_LIB): $(TARGET) $(OBJDIR)/RAMDLL.o
+	$(AR) crs $@ $(OBJDIR)/RAMDLL.o
 
 # Pattern rules for compilation
 $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OUTDIR)

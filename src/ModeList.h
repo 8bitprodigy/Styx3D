@@ -15,7 +15,7 @@
 #ifndef MODELIST_H
 #define MODELIST_H
 
-#include	"genesis.h"
+#include	"Genesis.h"
 
 #ifdef __cplusplus
 extern "C" {

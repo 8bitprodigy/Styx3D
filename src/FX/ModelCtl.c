@@ -1,13 +1,18 @@
-#define	WIN32_LEAN_AND_MEAN
-#include	<windows.h>
-
+#include	<assert.h>
 #include	<math.h>
 #include	<stdlib.h>
-#include	<assert.h>
+
+#ifdef _WIN32
+	#define  WIN32_LEAN_AND_MEAN
+	#include <windows.h>
+#else
+	#include <string.h>
+#endif
+
 
 #define	BUILD_MODELCTL
-#include	"modelctl.h"
-#include	"errorlog.h"
+#include	"ModelCtl.h"
+#include	"ErrorLog.h"
 
 geBoolean ModelCtl_Init(void)
 {

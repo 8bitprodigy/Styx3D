@@ -1,18 +1,23 @@
 /****************************************************************************/
 /*    FILE: Track.c															*/
 /****************************************************************************/
-#define	WIN32_LEAN_AND_MEAN
-#include	<windows.h>
-
+#include	<assert.h>
 #include	<math.h>
 #include	<stdlib.h>
-#include	<assert.h>
+
+#ifdef _WIN32
+    #define	WIN32_LEAN_AND_MEAN
+	#include <windows.h>
+#else
+	#include <string.h>
+#endif
+
 
 #include	"GMain.h"
 
-#include	"_bot.h"
-#include	"track.h"
-#include    "bit.h"
+#include	"_Bot.h"
+#include	"Track.h"
+#include    "Bit.h"
 
 static geBoolean Track_LinkTest(geWorld *World, TrackPt *tp, TrackPt *tp2);
 static geBoolean Track_LinkTrack(geWorld *World, Track* t, Track *t2);
@@ -693,7 +698,7 @@ static geBoolean Track_FakeTrack(geWorld *World, geVec3d *Pos)
 	for (t2 = &TrackList[0]; t2 < &TrackList[TrackCount]; t2++)
 		{
         if (Track_LinkTrack(World, t, t2))
-            found = TRUE;
+            found = GE_TRUE;
 		}
 
 	return (found);

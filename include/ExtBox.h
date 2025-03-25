@@ -23,7 +23,7 @@
 #define GE_EXTBOX_H
 
 #include "BaseType.h"
-#include "Vec3d.h"
+#include "Vec3D.h"
 
 #ifdef __cplusplus
 	extern "C" {
@@ -33,8 +33,7 @@ typedef struct geExtBox
 {
 	geVec3d Min;
 	geVec3d Max;
-} 
-geExtBox;
+} geExtBox;
 
 // Set the values in a box
 void GENESISCC geExtBox_Set (  geExtBox *B,

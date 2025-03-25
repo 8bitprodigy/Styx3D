@@ -12,9 +12,14 @@
 /*  or FITNESS FOR ANY PURPOSE.  Refer to LICENSE.TXT for more details.                 */
 /*                                                                                      */
 /****************************************************************************************/
-#include <Windows.h>
-#include <Assert.h>
-#include <Math.h>
+#include <assert.h>
+#include <math.h>
+
+#ifdef _WIN32
+	#include <windows.h>
+#else
+	#include <string.h>
+#endif
 
 #include "GMain.h"
 extern void GenVS_Error(const char *Msg, ...);

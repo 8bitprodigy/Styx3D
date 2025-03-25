@@ -1,7 +1,7 @@
 #ifndef	DYNLIGHT_H
 #define	DYNLIGHT_H
 
-#include "genesis.h"
+#include "Genesis.h"
 
 #pragma warning( disable : 4068 )
 

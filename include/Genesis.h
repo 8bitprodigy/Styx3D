@@ -22,8 +22,8 @@
 #define GENESIS_H
 
 #include "BaseType.h"
-#include "Vec3d.h"
-#include "XForm3d.h"
+#include "Vec3D.h"
+#include "XForm3D.h"
 #include "GETypes.h"
 #include "ExtBox.h"
 #include "VFile.h"
@@ -37,39 +37,39 @@ extern "C" {
 //	Constants / Defines / TypDefs
 //================================================================================
 
-typedef struct    geEngine             geEngine;
+typedef struct		geEngine			geEngine;
 
-typedef struct    geDriver_System       geDriver_System;
-typedef struct    geDriver              geDriver;
-typedef struct    geDriver_Mode         geDriver_Mode;
+typedef struct		geDriver_System		geDriver_System;
+typedef struct		geDriver			geDriver;
+typedef struct		geDriver_Mode		geDriver_Mode;
 
-typedef struct    geSound_System        geSound_System;
-typedef struct    geSound_Cfg           geSound_Cfg;
-typedef struct    geSound_Def           geSound_Def;
-typedef struct    geSound               geSound;
+typedef struct		geSound_System		geSound_System;
+typedef struct		geSound_Cfg			geSound_Cfg;
+typedef struct		geSound_Def			geSound_Def;
+typedef struct		geSound				geSound;
 										
-typedef struct    geActor               geActor;
-typedef struct    geActor_Def           geActor_Def;		// the definition of an actor's geometry/bone structure
+typedef struct		geActor				geActor;
+typedef struct		geActor_Def			geActor_Def;		// the definition of an actor's geometry/bone structure
 
-typedef struct    geWorld               geWorld;
+typedef struct		geWorld				geWorld;
 
-typedef struct    geWorld_Model         geWorld_Model;
+typedef struct		geWorld_Model		geWorld_Model;
 
-typedef struct    geEntity              geEntity;
-typedef struct    geEntity_EntitySet    geEntity_EntitySet;
+typedef struct		geEntity			geEntity;
+typedef struct		geEntity_EntitySet	geEntity_EntitySet;
 
-typedef struct    geCamera              geCamera;
+typedef struct		geCamera			geCamera;
 
-typedef struct    geCSNetMgr            geCSNetMgr;
+typedef struct		geCSNetMgr			geCSNetMgr;
 
-typedef struct    gePoly                gePoly;
+typedef struct		gePoly				gePoly;
 
-typedef struct    geLight               geLight;			
+typedef struct		geLight				geLight;			
 
-typedef struct    geFog                 geFog;
+typedef struct		geFog				geFog;
 
-typedef struct    geMesh_Def            geMesh_Def;			// Mesh def
-typedef struct    geMesh                geMesh;				
+typedef struct		geMesh_Def			geMesh_Def;			// Mesh def
+typedef struct		geMesh				geMesh;				
 
 #define GE_VERSION_MAJOR		(1UL)
 #define GE_VERSION_MINOR		(3UL)
@@ -90,8 +90,7 @@ typedef enum
 	GE_TEXTURED_POLY,
 	GE_GOURAUD_POLY,
 	GE_TEXTURED_POINT					
-} 
-gePoly_Type;
+} gePoly_Type;
 
 // Poly Fx flags
 #define	GE_RENDER_DO_NOT_OCCLUDE_OTHERS	(1<<0)			// Poly will not occlude others
@@ -178,8 +177,7 @@ typedef struct
 	geWorld_Model	*Model;
 	geActor			*Actor;
 	int32			Contents;
-} 
-GE_Contents;
+} GE_Contents;
 
 typedef geBoolean GE_CollisionCB(geWorld_Model *Model, geActor *Actor, void *Context);
 
@@ -188,8 +186,7 @@ typedef struct
 {
 	geVec3d	Normal;									// Orientation of plane
 	float	Dist;									// Distance from origin
-} 
-GE_Plane;
+} GE_Plane;
 
 typedef struct
 {
@@ -199,8 +196,7 @@ typedef struct
 	geVec3d			Impact;							// Impact Point
 	float			Ratio;							// Percent from 0 to 1.0, how far along the line for the impact point
 	GE_Plane		Plane;							// Impact Plane
-} 
-GE_Collision;
+} GE_Collision;
 
 // If these render states change, they must change in DCommon.h too!!!
 // These are still under construction, and are for debug purposes only.
@@ -576,11 +572,13 @@ typedef struct
 
 #ifdef _INC_WINDOWS
 	// Windows.h must be included before genesis.h for this api to be exposed.
-	typedef struct geCSNetMgr_NetSession
+	typedef struct 
+	geCSNetMgr_NetSession
 	{
 		char		SessionName[200];					// Description of Service provider
 		GUID		Guid;								// Service Provider GUID
-	} geCSNetMgr_NetSession;
+	} 
+	geCSNetMgr_NetSession;
 GENESISAPI 	geBoolean		GENESISCC geCSNetMgr_FindSession(geCSNetMgr *M, const char *IPAdress, geCSNetMgr_NetSession **SessionList, int32 *SessionNum );
 GENESISAPI 	geBoolean		GENESISCC geCSNetMgr_JoinSession(geCSNetMgr *M, const char *Name, const geCSNetMgr_NetSession* Session);
 #endif

@@ -15,15 +15,21 @@
 #ifndef SERVER_H
 #define SERVER_H
 
-#include <Windows.h>
+#ifdef _WIN32
+	#include <windows.h>
+	#include "Game\Game.h"
+	#include "Game\GenVSI.h"
+	#include "Game\GPlayer.h"
+#else
+	#include <string.h>
+	#include "Game/Game.h"
+	#include "Game/GenVSI.h"
+	#include "Game/GPlayer.h"
+#endif
 
 #include "Genesis.h"
-#include "Errorlog.h"
-#include "Ram.h"
-
-#include "Game\Game.h"
-#include "Game\GPlayer.h"
-#include "Game\GenVSI.h"
+#include "ErrorLog.h"
+#include "RAM.h"
 
 #include "Client.h"
 #include "GameMgr.h"

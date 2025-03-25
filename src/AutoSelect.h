@@ -15,8 +15,13 @@
 #ifndef AUTOSELECT_H
 #define AUTOSELECT_H
 
-#include "genesis.h"
+#include "Genesis.h"
 #include "ModeList.h"
+
+#ifndef _WIN32
+    typedef void* HANDLE;
+    typedef void* HWND;
+#endif
 
 #ifdef __cplusplus
 extern "C" {

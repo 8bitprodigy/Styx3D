@@ -29,6 +29,14 @@ There aren't really any other engines out there that are of this vintage under p
 
 - [ ] Maybe add scripting support (Lua or Umka)
 
+## Contributing:
+
+If you'd like to contribute, take note that this code is to be released under the 0BSD license, which is public domain-equivalent. This is not much different from most permissive licenses like MIT or 2-clause BSD, but it does not require attribution or the inclusion of the license in any derivative work, so keep that in mind if you wish to contribute.
+
+Contributions should follow the [Suckless coding style](https://suckless.org/coding_style/).
+
+- Currently, there is no consistent style in this code, so contributions of just styling the code would be very welcome.
+
 ## License
 
 Genesis3D was originally distributed under the Genesis3D public license, however, according to the [Genesis3D website](https://www.genesis3d.com/), the terms of this license have been waived:

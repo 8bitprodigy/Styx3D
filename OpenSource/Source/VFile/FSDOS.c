@@ -19,22 +19,25 @@
 /*  Copyright (C) 1999 WildTangent, Inc. All Rights Reserved           */
 /*                                                                                      */
 /****************************************************************************************/
+#include	<assert.h>
+#include	<stdio.h>
+#include	<stdlib.h>
+#include	<string.h>
+
 #ifdef _WIN32
 	#define	WIN32_LEAN_AND_MEAN
 	#include <windows.h>
 	#define  PATH_MAX _MAX_PATH
 #else
 	#include <limits.h>
-    #include <string.h> 
+	#include <stdint.h>
     #include <unistd.h>   // close(), read(), write()
     typedef int HANDLE;   // Use file descriptor instead of HANDLE
     #define INVALID_HANDLE_VALUE (-1)
+    typedef void* WIN32_FIND_DATA;
+    typedef int32_t DWORD;
 #endif
 
-#include	<stdio.h>
-#include	<stdlib.h>
-#include	<string.h>
-#include	<assert.h>
 
 #include	"BaseType.h"
 #include	"RAM.h"
@@ -178,7 +181,7 @@ static	geBoolean	GENESISCC FSDos_FinderGetNextFile(void *Handle)
 	DosFinder *	Finder;
 
 	Finder = Handle;
-
+/*
 	CHECK_FINDER(Finder);
 
 	if	(Finder->FindHandle == INVALID_HANDLE_VALUE)
@@ -197,7 +200,7 @@ static	geBoolean	GENESISCC FSDos_FinderGetNextFile(void *Handle)
 		if	(Finder->FindData.cFileName[0] != '.')
 			return GE_TRUE;
 	}
-
+*/
 	return GE_FALSE;
 }
 
@@ -208,7 +211,7 @@ static	geBoolean	GENESISCC FSDos_FinderGetProperties(void *Handle, geVFile_Prope
 	int					Length;
 
 	assert(Props);
-
+/*
 	Finder = Handle;
 
 	CHECK_FINDER(Finder);
@@ -234,7 +237,7 @@ static	geBoolean	GENESISCC FSDos_FinderGetProperties(void *Handle, geVFile_Prope
 	if	(Length > sizeof(Props->Name) - 1)
 		return GE_FALSE;
 	memcpy(Props->Name, Finder->FindData.cFileName, Length + 1);
-
+*/
 	return GE_TRUE;
 }
 
@@ -297,7 +300,7 @@ static	void *	GENESISCC FSDos_Open(
 	char *		NamePtr;
 
 	DosFS = Handle;
-
+/*
 	if	(DosFS && DosFS->IsDirectory != GE_TRUE)
 		return NULL;
 
@@ -407,7 +410,7 @@ static	void *	GENESISCC FSDos_Open(
 	NewFile->Signature = DOSFILE_SIGNATURE;
 
 	return (void *)NewFile;
-
+*/
 fail:
 	if	(NewFile->FullPath)
 		geRam_Free(NewFile->FullPath);
@@ -456,17 +459,17 @@ static	void	GENESISCC FSDos_Close(void *Handle)
 
 static	geBoolean	GENESISCC FSDos_GetS(void *Handle, void *Buff, int MaxLen)
 {
-	DosFile *	File;
-	DWORD		BytesRead;
-	BOOL		Result;
-	char *		p;
-	char *		End;
+	DosFile   *File;
+	DWORD      BytesRead;
+	geBoolean  Result;
+	char      *p;
+	char      *End;
 
 	assert(Buff);
 	assert(MaxLen != 0);
 
 	File = Handle;
-
+/*
 	CHECK_HANDLE(File);
 
 	assert(File->FileHandle != INVALID_HANDLE_VALUE);
@@ -496,7 +499,7 @@ static	geBoolean	GENESISCC FSDos_GetS(void *Handle, void *Buff, int MaxLen)
 			\r	Character changed to \n, next char set to 0
 			\n	Next char set to 0
 			\r\n	First \r changed to \n.  \n changed to 0.
-		*/
+		*//*
 		if	(*p == '\r')
 		{
 			int Skip = 0;
@@ -525,12 +528,13 @@ static	geBoolean	GENESISCC FSDos_GetS(void *Handle, void *Buff, int MaxLen)
 		}
 		p++;
 	}
-
+*/
 	return GE_FALSE;
 }
 
 
-static	geBoolean	GENESISCC FSDos_Read(void *Handle, void *Buff, int Count)
+static geBoolean GENESISCC 
+FSDos_Read(void *Handle, void *Buff, int Count)
 {
 	DosFile *	File;
 	DWORD		BytesRead;
@@ -608,7 +612,7 @@ static	geBoolean	GENESISCC FSDos_Seek(void *Handle, int Where, geVFile_Whence Wh
 	DosFile *	File;
 
 	File = Handle;
-
+/*
 	CHECK_HANDLE(File);
 
 	if	(File->IsDirectory == GE_TRUE)
@@ -633,17 +637,18 @@ static	geBoolean	GENESISCC FSDos_Seek(void *Handle, int Where, geVFile_Whence Wh
 
 	if	(SetFilePointer(File->FileHandle, Where, NULL, RTLWhence) == 0xffffffff)
 		return GE_FALSE;
-
+*/
 	return GE_TRUE;
 }
 
-static	geBoolean	GENESISCC FSDos_EOF(const void *Handle)
+static geBoolean GENESISCC 
+FSDos_EOF(const void *Handle)
 {
 	const DosFile *	File;
 	DWORD			CurPos;
 
 	File = Handle;
-
+/*
 	CHECK_HANDLE(File);
 
 	if	(File->IsDirectory == GE_TRUE)
@@ -656,16 +661,17 @@ static	geBoolean	GENESISCC FSDos_EOF(const void *Handle)
 
 	if	(CurPos == GetFileSize(File->FileHandle, NULL))
 		return GE_TRUE;
-
+*/
 	return GE_FALSE;
 }
 
-static	geBoolean	GENESISCC FSDos_Tell(const void *Handle, long *Position)
+static geBoolean GENESISCC 
+FSDos_Tell(const void *Handle, long *Position)
 {
 	const DosFile *	File;
 
 	File = Handle;
-
+/*
 	CHECK_HANDLE(File);
 
 	if	(File->IsDirectory == GE_TRUE)
@@ -676,7 +682,7 @@ static	geBoolean	GENESISCC FSDos_Tell(const void *Handle, long *Position)
 	*Position = SetFilePointer(File->FileHandle, 0, NULL, FILE_CURRENT);
 	if	(*Position == -1L)
 		return GE_FALSE;
-
+*/
 	return GE_TRUE;
 }
 
@@ -701,7 +707,7 @@ static	geBoolean	GENESISCC FSDos_Size(const void *Handle, long *Size)
 }
 
 static	geBoolean	GENESISCC FSDos_GetProperties(const void *Handle, geVFile_Properties *Properties)
-{
+{/*
 	const DosFile *				File;
 	geVFile_Attributes			Attribs;
 	BY_HANDLE_FILE_INFORMATION	Info;
@@ -745,7 +751,7 @@ static	geBoolean	GENESISCC FSDos_GetProperties(const void *Handle, geVFile_Prope
 	if	(Length > sizeof(Properties->Name))
 		return GE_FALSE;
 	memcpy(Properties->Name, File->Name, Length);
-
+*/
 	return GE_TRUE;
 }
 
@@ -754,7 +760,7 @@ static	geBoolean	GENESISCC FSDos_SetSize(void *Handle, long size)
 	DosFile *	File;
 
 	File = Handle;
-
+/*
 	CHECK_HANDLE(File);
 
 	if	(File->IsDirectory == GE_FALSE)
@@ -767,7 +773,7 @@ static	geBoolean	GENESISCC FSDos_SetSize(void *Handle, long size)
 		if	(SetEndOfFile(File->FileHandle) == GE_FALSE)
 			return GE_FALSE;
 	}
-
+*/
 	return GE_FALSE;
 }
 
@@ -777,7 +783,7 @@ static	geBoolean	GENESISCC FSDos_SetAttributes(void *Handle, geVFile_Attributes 
 	DWORD		Win32Attributes;
 
 	File = Handle;
-
+/*
 	CHECK_HANDLE(File);
 
 	assert(File->FileHandle != INVALID_HANDLE_VALUE);
@@ -792,12 +798,12 @@ static	geBoolean	GENESISCC FSDos_SetAttributes(void *Handle, geVFile_Attributes 
 
 	if	(SetFileAttributes(File->FullPath, Win32Attributes) == GE_FALSE)
 		return GE_FALSE;
-
+*/
 	return GE_TRUE;
 }
 
 static	geBoolean	GENESISCC FSDos_SetTime(void *Handle, const geVFile_Time *Time)
-{
+{/*
 	DosFile *	File;
 	FILETIME	Win32Time;
 
@@ -811,7 +817,7 @@ static	geBoolean	GENESISCC FSDos_SetTime(void *Handle, const geVFile_Time *Time)
 	Win32Time.dwHighDateTime = Time->Time2;
 	if	(SetFileTime(File->FileHandle, &Win32Time, &Win32Time, &Win32Time) == GE_FALSE)
 		return GE_FALSE;
-
+*/
 	return GE_TRUE;
 }
 

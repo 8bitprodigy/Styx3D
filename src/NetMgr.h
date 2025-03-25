@@ -15,11 +15,15 @@
 #ifndef NETMGR_H
 #define NETMGR_H
 
-#include <Windows.h>
-
-#include "Genesis.h"
+#ifdef _WIN32
+    #include <windows.h>
+#else
+    #include <string.h>
+#endif
 
 #include "Buffer.h"
+#include "Genesis.h"
+
 
 #ifdef __cplusplus
 extern "C" {

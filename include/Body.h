@@ -28,7 +28,7 @@
 */
 
 #include "BaseType.h"
-#include "XForm3d.h"
+#include "XForm3D.h"
 #include "VFile.h"
 #include "Bitmap.h"
 
