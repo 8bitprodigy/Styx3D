@@ -196,17 +196,15 @@ DlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 }
 */
 geBoolean DrvList_PickDriver(
-	HANDLE    hInstance, 
-	HWND      hwndParent, 
-	ModeList *List, 
-	int       ListLength, 
-	int      *ListSelection
+	SDL_Window *hwndParent, 
+	ModeList   *List, 
+	int         ListLength, 
+	int        *ListSelection
 )
 {
 	int				res;
 	DrvList_LocalStruct *DL = &DrvList_Locals;
 
-	assert( hInstance != 0 );
 	assert( List  != NULL );
 	assert( ListLength >=0 );
 	assert( ListSelection != NULL );

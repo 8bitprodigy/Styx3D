@@ -16,6 +16,8 @@
 #ifndef DRVLIST_H
 #define DRVLIST_H
 
+#include <SDL3/SDL.h>
+
 #include "ModeList.h"
 
 #ifndef _WIN32
@@ -27,7 +29,7 @@
 extern "C" {
 #endif
 
-geBoolean DrvList_PickDriver(HANDLE hInstance, HWND hwndParent, 
+geBoolean DrvList_PickDriver(SDL_Window *hwndParent, 
 		ModeList *List, int ListLength, int *ListSelection);
 
 #ifdef __cplusplus

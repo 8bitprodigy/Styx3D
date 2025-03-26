@@ -34,7 +34,12 @@ GAME_SRCS = \
 	Game/Track.c \
 	Game/Weapons.c
 
-FX_SRCS = FX/Corona.c FX/DynLight.c FX/Electric.c FX/FX.c FX/ModelCtl.c
+FX_SRCS = \
+	FX/Corona.c \
+	FX/DynLight.c \
+	FX/Electric.c \
+	FX/FX.c \
+	FX/ModelCtl.c
 
 PROCEDURAL_SRCS = \
 	Procedurals/BumpMap.c \
@@ -59,7 +64,7 @@ ADDITIONAL_SRCS = \
 	Client.c \
 	Console.c \
 	GameMgr.c \
-	Genvs.c \
+	GenVS.c \
 	Gmenu.c \
 	Host.c \
 	IPAddr.c \

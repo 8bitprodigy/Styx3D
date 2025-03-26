@@ -12,57 +12,88 @@
 /*  or FITNESS FOR ANY PURPOSE.  Refer to LICENSE.TXT for more details.                 */
 /*                                                                                      */
 /****************************************************************************************/
-#include <Stdio.h>
-#include <Dos.h>
-#include <Math.h>
-#include <Windows.H>
-#include <MMSystem.H>
-#include <StdLib.h>
-#include <Assert.h>
-#include <Time.h>
-#include <direct.h>		//_chdir()
+#include <assert.h>
+#include <math.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>	//_chdir()
+#include <sys/time.h>
 
-#include "Genesis.h"
-#include "bitmap.h"
-#include "Errorlog.h"
+#include <SDL3/SDL.h>
 
-#include "GameMgr.h"
-#include "NetMgr.h"
+#ifdef _WIN32
+	#include <direct.h>	
+	#include <dos.h>
+	#include <mmsystem.H>
+	#include <windows.H>
+#else
+	#include <limits.h>
+	#define _MAX_PATH PATH_MAX
+	#define MAX_PATH PATH_MAX
+	#define CALLBACK
+	#define WINAPI
+	#define WinMain main
+	typedef void* LRESULT;
+	typedef void* WPARAM;
+	typedef void* LPARAM;
+	typedef union
+	{
+		struct {
+			uint32_t LowPart;
+			int32_t HighPart;
+		};
+		struct {
+			uint32_t LowPart;
+			int32_t HighPart;
+		} u;
+		int64_t QuadPart;
+	}
+	LARGE_INTEGER;
+#endif
 
-#include "Host.h"
+#include "AutoSelect.h"
+#include "BaseType.h"
+#include "Bitmap.h"
 #include "Client.h"
 #include "Console.h"
-
 #include "DrvList.h"
-
-#include "Menu.h"
+#include "ErrorLog.h"
+#include "GameMgr.h"
+#include "Genesis.h"
 #include "GMenu.h"
+#include "Host.h"
+#include "Menu.h"
+#include "NetMgr.h"
 #include "Text.h"
-#include "AutoSelect.h"
+
+
+
 
 #define CLIP_CURSOR
 //#define DO_CAPTURE
 
-void		GenVS_Error(const char *Msg, ...);
+void	      	GenVS_Error(const char *Msg, ...);
 
-LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK  WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
 
-static char *GetCommandText(char *CmdLine, char *Data, geBoolean Cmd);
+static char      *GetCommandText(char *CmdLine, char *Data, geBoolean Cmd);
 
-void ShutdownAll(void);
+void              ShutdownAll(void);
 
-static geBoolean NewKeyDown(int KeyCode);
-static void GetMouseInput(HWND hWnd, int Width, int Height);
+static geBoolean  NewKeyDown(int KeyCode);
+static void       GetMouseInput(HWND hWnd, int Width, int Height);
 
 #define STARTING_WIDTH  (500)
 #define STARTING_HEIGHT (400)
 
 // Misc global info
-geBoolean				PopupD3DLog     = GE_FALSE;
-BOOL					Running			= TRUE;
-BOOL					GameRunning		= FALSE;
-BOOL					ResetMouse		= TRUE;
-char					AppName[256]	= "Genesis3D Sample Game";
+geBoolean				PopupD3DLog = GE_FALSE;
+geBoolean				Running     = GE_TRUE;
+geBoolean				GameRunning = GE_FALSE;
+geBoolean				ResetMouse  = GE_TRUE;
+char					AppName[256] = "Genesis3D Sample Game";
 
 #define DEFAULT_LEVEL	"Levels\\GenVS.BSP"
 
@@ -185,8 +216,9 @@ float	GlobalMouseSpeedX;
 float	GlobalMouseSpeedY;
 uint32	GlobalMouseFlags;	
 
-static void SubLarge(LARGE_INTEGER *start, LARGE_INTEGER *end, LARGE_INTEGER *delta)
-{
+static void 
+SubLarge(LARGE_INTEGER *start, LARGE_INTEGER *end, LARGE_INTEGER *delta)
+{/*
 	_asm {
 		mov ebx,dword ptr [start]
 		mov esi,dword ptr [end]
@@ -200,7 +232,8 @@ static void SubLarge(LARGE_INTEGER *start, LARGE_INTEGER *end, LARGE_INTEGER *de
 		mov ebx,dword ptr [delta]
 		mov dword ptr [ebx+0],eax
 		mov dword ptr [ebx+4],edx
-	}
+	}*/
+	delta->QuadPart = end->QuadPart - start->QuadPart;
 }
 
 Host_Init		HostInit;
@@ -211,47 +244,70 @@ geVFile *			MainFS;
 //=====================================================================================
 //	NewKeyDown
 //=====================================================================================
-static geBoolean NewKeyDown(int KeyCode)
+static geBoolean 
+NewKeyDown(int KeyCode) 
 {
-	if (GetAsyncKeyState(KeyCode) & 1)
-			return GE_TRUE;
+    const bool *keyState = SDL_GetKeyboardState(NULL);
 
-	return GE_FALSE;
+    if (
+    	keyState[SDL_GetScancodeFromKey(KeyCode, NULL)]
+    ) {
+        return GE_TRUE;
+    }
+
+    return GE_FALSE;
 }
 
-static void PickMode(HWND hwnd, HANDLE hInstance, geBoolean NoSelection, geBoolean ManualSelection, 
-		ModeList *List, int ModeListLength, int *Selection);
+static void 
+PickMode(
+	SDL_Window *hwnd, 
+	geBoolean   NoSelection, 
+	geBoolean   ManualSelection, 
+	ModeList   *List, 
+	int         ModeListLength, 
+	int        *Selection
+);
 
 
 //=====================================================================================
 //	WinMain
 //=====================================================================================
+/*
 #pragma warning (disable: 4028)
-int WINAPI WinMain(HANDLE hInstance, HANDLE hPrevInstance,
-				   LPSTR lpszCmdParam, int nCmdShow)
+int WINAPI 
+WinMain(
+	HANDLE hInstance, 
+	HANDLE hPrevInstance,
+	LPSTR lpszCmdParam, 
+	int nCmdShow
+)
+*/
+int 
+main(int argc, char *argv[]) 
 {
-#pragma warning (default: 4028)
-	geDriver		*Driver     = NULL;
-	geDriver_Mode	*DriverMode = NULL;
+    geDriver        *Driver     = NULL;
+    geDriver_Mode   *DriverMode = NULL;
 
-	SYSTEMTIME		SystemTime;
-	MSG				Msg;
-	char			*CmdLine = lpszCmdParam;
-	int32			i;
-	LARGE_INTEGER	Freq, OldTick, CurTick;
-	char			TempName[256];
-	int32			TempNameLength;
-	geBoolean		ManualPick=GE_FALSE;
+    //struct timeval  SystemTime;
+    char            *CmdLine = (argc > 1) ? argv[1] : NULL;
+    int32           i;
+    struct timespec Freq;
+    uint64          OldTick, CurTick;
+    char            TempName[256];
+    int32           TempNameLength;
+    geBoolean       ManualPick = GE_FALSE;
 
-	MainTime = 0.0f;
+    MainTime = 0.0f;
 
-	AdjustPriority(THREAD_PRIORITY_NORMAL);
-
-	for (i=0; i<255; i++)
-	{
+	//AdjustPriority(THREAD_PRIORITY_NORMAL);
+	if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO)) {
+		return -1;
+	}
+	
+	for (i=0; i<255; i++) {
 		NewKeyDown(i);		// Need to flush all the keys
 	}
-
+/*
 	GetSystemTime(&SystemTime);
 
 #if 0
@@ -263,7 +319,7 @@ int WINAPI WinMain(HANDLE hInstance, HANDLE hPrevInstance,
 		return 0;
 	}
 #endif
-
+*/
 
 // set the currrent directory to where the exe is
 	{
@@ -271,7 +327,7 @@ int WINAPI WinMain(HANDLE hInstance, HANDLE hPrevInstance,
 		char	PathBuf[_MAX_PATH];
 
 		// get the exe's path and name
-		if (GetModuleFileName(hInstance,PathBuf,_MAX_PATH-1)==0)
+		if (!SDL_GetBasepath())
 		{
 			GenVS_Error("Could not get exe file name.");
 		}
@@ -446,7 +502,7 @@ int WINAPI WinMain(HANDLE hInstance, HANDLE hPrevInstance,
 	//
 	//	Create the Game Mgr
 	//
-	GMgr = GameMgr_Create(hInstance, STARTING_WIDTH, STARTING_HEIGHT, AppName);
+	GMgr = GameMgr_Create(STARTING_WIDTH, STARTING_HEIGHT, AppName);
 	
 	if (!GMgr)
 		GenVS_Error("Could not create the game mgr.");
@@ -471,7 +527,7 @@ int WINAPI WinMain(HANDLE hInstance, HANDLE hPrevInstance,
 			VidMode VidMode;
 
 			// Pick mode
-			PickMode(GameMgr_GethWnd(GMgr),hInstance,ChangingDisplayMode, ManualPick, 
+			PickMode(GameMgr_GethWnd(GMgr),ChangingDisplayMode, ManualPick, 
 					 DriverModeList, DriverModeListLength, &ChangeDisplaySelection);
 			ChangingDisplayMode = 0;		
 
@@ -545,43 +601,42 @@ int WINAPI WinMain(HANDLE hInstance, HANDLE hPrevInstance,
 			QueryPerformanceCounter(&OldTick);
 
 			//SetCapture(GameMgr_GethWnd(GMgr));
-			ShowCursor(FALSE);
+			ShowCursor(GE_FALSE);
 			
 			#ifdef CLIP_CURSOR	
 			{
-				RECT	ClipRect;
-				RECT	ClientRect;
-				POINT	RPoint;
+				    SDL_Rect ClipRect;
+					int 
+						win_x, 
+						win_y, 
+						win_w, 
+						win_h;
 
-				GetClientRect(GameMgr_GethWnd(GMgr), &ClientRect);
-				RPoint.x		=ClientRect.left;
-				RPoint.y		=ClientRect.top;
-				ClientToScreen(GameMgr_GethWnd(GMgr), &RPoint);
-				ClipRect.left	=RPoint.x;
-				ClipRect.top	=RPoint.y;
+					SDL_GetWindowPosition(GameMgr_GethWnd(GMgr), &win_x, &win_y);
+					SDL_GetWindowSize(    GameMgr_GethWnd(GMgr), &win_w, &win_h);
 
-				RPoint.x		=ClientRect.right;
-				RPoint.y		=ClientRect.bottom;
-				ClientToScreen(GameMgr_GethWnd(GMgr), &RPoint);
-				ClipRect.right	=RPoint.x;
-				ClipRect.bottom	=RPoint.y;
-				ClipCursor(&ClipRect);
+					ClipRect.x = win_x;
+					ClipRect.y = win_y;
+					ClipRect.w = win_w;
+					ClipRect.h = win_h;
+
+					SDL_SetWindowMouseRect(GameMgr_GethWnd(GMgr), &ClipRect);
 			}
 			#endif
 			
-			Running = TRUE;
+			Running = true;
 			VidMode = GameMgr_GetVidMode(GMgr);
 			hWnd    = GameMgr_GethWnd(GMgr);
 
 
 			while (Running)
 			{
-				LARGE_INTEGER	DeltaTick;
-				float			ElapsedTime;
-				geWorld			*World;
-				geCamera		*Camera;
+				uint64         DeltaTick;
+				float          ElapsedTime;
+				geWorld       *World;
+				geCamera      *Camera;
 
-				GameRunning	=TRUE;
+				GameRunning =  true;
 
 				// see runtime menu options for stats and video mode changing.  (Mike)
 
@@ -591,15 +646,14 @@ int WINAPI WinMain(HANDLE hInstance, HANDLE hPrevInstance,
 				#endif
 
 				// Get timing info
-				QueryPerformanceCounter(&CurTick);
+				uint64 CurTick = SDL_GetPerformanceCounter();
 
-				SubLarge(&OldTick, &CurTick, &DeltaTick);
-
+				DeltaTick = CurTick - OldTick;
 				OldTick = CurTick;
 
-				if (DeltaTick.LowPart > 0)
-					ElapsedTime =  1.0f / (((float)Freq.LowPart / (float)DeltaTick.LowPart));
-				else 
+				if (DeltaTick > 0)
+					ElapsedTime = 1.0f / ((float)SDL_GetPerformanceFrequency() / (float)DeltaTick);
+				else
 					ElapsedTime = 0.001f;
 
 				//MainTime += ElapsedTime;
@@ -708,7 +762,7 @@ int WINAPI WinMain(HANDLE hInstance, HANDLE hPrevInstance,
 				if (ChangingDisplayMode)
 					{
 						Running = 0;		
-						GameRunning	= FALSE;
+						GameRunning	= GE_FALSE;
 					}
 			} 
 			
@@ -731,24 +785,31 @@ int WINAPI WinMain(HANDLE hInstance, HANDLE hPrevInstance,
 							{
 								ReleaseCapture();
 							}
-						ShowCursor(TRUE);
+						ShowCursor(GE_TRUE);
 					}
 
 			
 		}
 	while (ChangingDisplayMode != GE_FALSE);
 
-	ShutdownAll();
+	//ShutdownAll();
+	SDL_Quit();
 	return (0);
 }
 
 
-static void PickMode(HWND hwnd, HANDLE hInstance, geBoolean NoSelection, geBoolean ManualSelection, 
-		ModeList *List, int ListLength, int *ListSelection)
+static void 
+PickMode(
+	SDL_Window *hwnd, 
+	geBoolean   NoSelection, 
+	geBoolean   ManualSelection, 
+	ModeList   *List, 
+	int         ListLength, 
+	int        *ListSelection
+)
 {
 
 	assert( hwnd != 0 );
-	assert( hInstance != 0 );
 	assert( List != NULL );
 	assert( ListSelection != NULL );
 
@@ -839,7 +900,7 @@ void ShutdownAll(void)
 	{
 		ReleaseCapture();
 	}
-	ShowCursor(TRUE);
+	ShowCursor(GE_TRUE);
 
 	// Free each object (sub objects are freed by their parents...)
 	if (MenusCreated)
@@ -870,11 +931,11 @@ void ShutdownAll(void)
 	
 	geVFile_Close(MainFS);
 
-	GMgr			= NULL;
-	Engine			= NULL;
-	Console			= NULL;
-	SoundSys		= NULL;
-	Host			= NULL;
+	GMgr     = NULL;
+	Engine   = NULL;
+	Console  = NULL;
+	SoundSys = NULL;
+	Host     = NULL;
 
 	#ifdef _DEBUG
 	{
@@ -916,7 +977,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 				if (DriverModeList)
 					{
 						if (DriverModeList[ChangeDisplaySelection].InAWindow)
-							ChangingDisplayMode=GE_TRUE;
+							ChangingDisplayMode = true;
 					}
 				break;
 			}
@@ -950,11 +1011,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 					ClipRect.right	=RPoint.x;
 					ClipRect.bottom	=RPoint.y;
 					ClipCursor(&ClipRect);
-					ResetMouse	=TRUE;
+					ResetMouse = true;
 				}
 				else
 				{
-					ResetMouse	=FALSE;
+					ResetMouse = false;
 					ClipCursor(NULL);
 				}
 			#endif
@@ -973,10 +1034,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		{
 			if(GameRunning)
 			{
-				geRect		ClipRect;
-				RECT		ClientRect;
-				POINT		RPoint;
-				geBoolean	Ret;
+				geRect ClipRect;
+				RECT   ClientRect;
+				POINT  RPoint;
+				bool   Ret;
 
 				GetClientRect(GameMgr_GethWnd(GMgr), &ClientRect);
 				RPoint.x		=ClientRect.left;
@@ -992,7 +1053,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 				ClipRect.Bottom	=RPoint.y;
 				Ret = geEngine_UpdateWindow(Engine);
 
-				assert(Ret == GE_TRUE);
+				assert(Ret == true);
 			}
 			return	0;
 		}

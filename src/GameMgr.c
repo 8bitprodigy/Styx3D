@@ -15,11 +15,31 @@
 #include <assert.h>
 #include <stdio.h>
 
+#include <SDL3/SDL.h>
+
 #ifdef _WIN32
 	#include <direct.h>
 	#include <Windows.h>
 #else
+	#include <limits.h>
 	#include <string.h>
+	#include <stdint.h>
+	typedef uint32_t UINT;
+	typedef void* LRESULT;
+	typedef void* HANDLE;
+	typedef void* LPARAM;
+	typedef void* WPARAM;
+	#define CALLBACK
+	#define _MAX_PATH PATH_MAX
+	typedef struct
+	{
+		long
+			left,
+			top,
+			right,
+			bottom;
+	}
+	RECT;
 #endif
 
 #include "ErrorLog.h"
@@ -50,7 +70,7 @@ typedef struct
 	char				WorldName[GAMEMGR_MAX_WORLD_NAME];
 
 	int32				NumModels;
-	geWorld_Model		*Models[GAMEMGR_MAX_MODELS];
+	geWorld_Model		*Models[ GAMEMGR_MAX_MODELS];
 
 } GameMgr_WorldInfo;
 
@@ -62,32 +82,32 @@ typedef struct GameMgr
 	float				Time;
 
 	// Objects the the game mgr maintains...
-	geEngine			*Engine;							// Engine object
-	geSound_System		*SoundSys;							// Soundsystem object
-	Console_Console		*Console;
+	geEngine               *Engine;      // Engine object
+	geSound_System         *SoundSys;    // Soundsystem object
+	Console_Console        *Console;
 
-	HWND				hWnd;
+	SDL_Window             *hWnd;
 
-	GameMgr_FrameState	FrameState;
-	Fx_System			*FxSystem;
-	geBitmap			*ShadowMap;
+	GameMgr_FrameState      FrameState;
+	Fx_System              *FxSystem;
+	geBitmap               *ShadowMap;
 
 
-	GameMgr_WorldInfo	WorldInfo[GAMEMGR_MAX_WORLDS];
+	GameMgr_WorldInfo       WorldInfo[GAMEMGR_MAX_WORLDS];
 
 	// Mode specific stuff
-	VidMode				VidMode;							// Current VidMode
-	geCamera			*Camera;
+	VidMode                 VidMode;    // Current VidMode
+	geCamera               *Camera;
 
-	GameMgr_ActorIndex		ActorIndex[GAMEMGR_MAX_ACTOR_INDEX];
-	GameMgr_MotionIndexDef	MotionIndexDefs[GAMEMGR_MAX_MOTION_INDEX];
-	GameMgr_BoneIndex		BoneIndex[GAMEMGR_MAX_BONE_INDEX];
-	GameMgr_TextureIndex	TextureIndex[GAMEMGR_MAX_TEXTURE_INDEX];
-	GameMgr_SoundIndex		SoundIndex[GAMEMGR_MAX_SOUND_INDEX];
+	GameMgr_ActorIndex      ActorIndex[     GAMEMGR_MAX_ACTOR_INDEX];
+	GameMgr_MotionIndexDef  MotionIndexDefs[GAMEMGR_MAX_MOTION_INDEX];
+	GameMgr_BoneIndex       BoneIndex[      GAMEMGR_MAX_BONE_INDEX];
+	GameMgr_TextureIndex    TextureIndex[   GAMEMGR_MAX_TEXTURE_INDEX];
+	GameMgr_SoundIndex      SoundIndex[     GAMEMGR_MAX_SOUND_INDEX];
 
-	ProcEng				*ProcEng;
+	ProcEng                *ProcEng;
 
-	GameMgr				*SelfCheck2;						// Tail self valid check
+	GameMgr                *SelfCheck2;  // Tail self valid check
 } GameMgr;
 
 //====================================================================================
@@ -126,7 +146,7 @@ void GameMgr_FreeAllObjects(GameMgr *GMgr)
 //====================================================================================
 //	GameMgr_Create
 //====================================================================================
-GameMgr *GameMgr_Create(HINSTANCE hInstance, int32 Width, int32 Height, const char *AppName)
+GameMgr *GameMgr_Create(int32 Width, int32 Height, const char *AppName)
 {
 	GameMgr	*GMgr;
 	char	PathBuf[_MAX_PATH];
@@ -150,7 +170,7 @@ GameMgr *GameMgr_Create(HINSTANCE hInstance, int32 Width, int32 Height, const ch
 	GMgr->SelfCheck2 = GMgr;
 
 	// Create the window
-	GMgr->hWnd = CreateMainWindow(hInstance, AppName, Width, Height);
+	GMgr->hWnd = SDL_CreateWindow(AppName, Width, Height, 0);
 	
 	// Create an engine object
 	if (_getcwd(PathBuf,_MAX_PATH)==NULL)
@@ -1294,7 +1314,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 void GameMgr_ResetMainWindow(HWND hWnd, int32 Width, int32 Height)
 {
 	RECT ScreenRect;
-
+/*
 	GetWindowRect(GetDesktopWindow(),&ScreenRect);
 
 	SetWindowLong(hWnd, 
@@ -1344,6 +1364,7 @@ void GameMgr_ResetMainWindow(HWND hWnd, int32 Width, int32 Height)
 	ShowWindow(hWnd, SW_SHOWNORMAL);
 	UpdateWindow(hWnd);
 	SetFocus(hWnd);
+*/
 }
 
 //=====================================================================================
@@ -1351,10 +1372,10 @@ void GameMgr_ResetMainWindow(HWND hWnd, int32 Width, int32 Height)
 //=====================================================================================
 static HWND CreateMainWindow(HANDLE hInstance, const char *AppName, int32 Width, int32 Height)
 {
-	WNDCLASS		wc;
+	//WNDCLASS		wc;
 	HWND			hWnd;
 	RECT		    ScreenRect;
-	
+/*
 	//
 	// Set up and register application window class
 	//
@@ -1399,7 +1420,7 @@ static HWND CreateMainWindow(HANDLE hInstance, const char *AppName, int32 Width,
 	
 	GameMgr_ResetMainWindow(hWnd, Width, Height);
 	SetFocus(hWnd);
-
+*/
 	return hWnd;
 
 }

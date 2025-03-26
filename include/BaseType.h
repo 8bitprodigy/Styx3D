@@ -58,23 +58,31 @@ extern "C" {
 
 /******** The Basic Types ****************************/
 
-typedef int8_t      geBoolean;
-#define GE_FALSE    (0)
-#define GE_TRUE     (!GE_FALSE)
+/* [DEPRECATED] Use C99 `bool`, `true`, and `false` instead */
+typedef bool        geBoolean; 
+#define GE_FALSE    false
+#define GE_TRUE     true
+/* [/DEPRECATED] kept for legacy code -- replace where used. */
 
-typedef float geFloat;
+#ifdef STYX3D_USE_DOUBLE
+  typedef double geFloat;
+#else
+  typedef float geFloat;
+#endif
 
 #ifndef NULL
 #define NULL	((void *)0)
 #endif
 
 // You'll never guess how these were originally typedef'd! /s
+typedef int64_t   int64;
 typedef int32_t   int32;
 typedef int16_t   int16;
-typedef int8_t    int8 ;
+typedef int8_t    int8;
+typedef uint64_t  uint64;
 typedef uint32_t  uint32;
 typedef uint16_t  uint16;
-typedef uint8_t   uint8 ;
+typedef uint8_t   uint8;
 
 /******** Macros on Genesis basic types *************/
 

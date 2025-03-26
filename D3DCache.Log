@@ -1,31 +1,8 @@
 =======================================================
-Date: 3/23/2025, Time: 9:43
+Date: 3/25/2025, Time: 4:16
 Cache Name: Lightmap Cache
-Total Mem: 1073127424
-Free Mem: 1073127424
- --- Slots ---
-Total Ref:    0, Total Used:    0
-=======================================================
-Date: 3/23/2025, Time: 9:43
-Cache Name: Main Texture Cache
-Total Mem: -1075585025
-Free Mem: -1075585025
- --- Slots ---
-Width:  64, Height  64, Mips:  1, Stage:  0, Ref:    3, Used:    3
-Width:  32, Height  32, Mips:  1, Stage:  0, Ref:    3, Used:    3
-Width:  16, Height  16, Mips:  1, Stage:  0, Ref:    5, Used:    5
-Width:   8, Height   8, Mips:  1, Stage:  0, Ref:    3, Used:    3
-Width: 128, Height 128, Mips:  1, Stage:  0, Ref:    2, Used:    2
-Width: 128, Height 128, Mips:  1, Stage:  0, Ref:    2, Used:    2
-Width: 256, Height 256, Mips:  1, Stage:  0, Ref:    1, Used:    1
-Width:   4, Height   4, Mips:  1, Stage:  0, Ref:    2, Used:    2
-Width:   2, Height   2, Mips:  1, Stage:  0, Ref:    2, Used:    2
-Total Ref:   23, Total Used:   23
-=======================================================
-Date: 3/23/2025, Time: 9:43
-Cache Name: Lightmap Cache
-Total Mem: 1073127424
-Free Mem: 1072458752
+Total Mem: 1072168960
+Free Mem: 1071500288
  --- Slots ---
 Width:   8, Height   8, Mips:  1, Stage:  1, Ref: 1647, Used: 1024
 Width:   4, Height   4, Mips:  1, Stage:  1, Ref: 1372, Used:  256
@@ -34,26 +11,26 @@ Width:   2, Height   2, Mips:  1, Stage:  1, Ref:  220, Used:  128
 Width:  32, Height  32, Mips:  1, Stage:  1, Ref:    2, Used:    2
 Total Ref: 5447, Total Used: 2434
 =======================================================
-Date: 3/23/2025, Time: 9:43
+Date: 3/25/2025, Time: 4:16
 Cache Name: Main Texture Cache
-Total Mem: -1075585025
-Free Mem: -1075585025
+Total Mem: -1078460417
+Free Mem: -1078460417
  --- Slots ---
+Width:  32, Height  32, Mips:  1, Stage:  0, Ref:    7, Used:    7
 Width: 256, Height 256, Mips:  1, Stage:  0, Ref:   15, Used:   15
 Width: 128, Height 128, Mips:  1, Stage:  0, Ref:   26, Used:   26
 Width:  64, Height  64, Mips:  1, Stage:  0, Ref:   30, Used:   30
 Width:  32, Height  32, Mips:  1, Stage:  0, Ref:   31, Used:   31
-Width:  64, Height  64, Mips:  1, Stage:  0, Ref:   20, Used:   20
 Width:  16, Height  16, Mips:  1, Stage:  0, Ref:   22, Used:   22
-Width:  32, Height  32, Mips:  1, Stage:  0, Ref:    7, Used:    7
+Width:  64, Height  64, Mips:  1, Stage:  0, Ref:   20, Used:   20
 Width:   8, Height   8, Mips:  1, Stage:  0, Ref:    5, Used:    5
 Width:   4, Height   4, Mips:  1, Stage:  0, Ref:    1, Used:    1
 Total Ref:  157, Total Used:  157
 =======================================================
-Date: 3/23/2025, Time: 9:43
+Date: 3/25/2025, Time: 4:16
 Cache Name: Lightmap Cache
-Total Mem: 1073127424
-Free Mem: 1072458752
+Total Mem: 1072168960
+Free Mem: 1071500288
  --- Slots ---
 Width:   8, Height   8, Mips:  1, Stage:  1, Ref: 1647, Used: 1024
 Width:   4, Height   4, Mips:  1, Stage:  1, Ref: 1372, Used:  256
@@ -62,18 +39,18 @@ Width:   2, Height   2, Mips:  1, Stage:  1, Ref:  220, Used:  128
 Width:  32, Height  32, Mips:  1, Stage:  1, Ref:    2, Used:    2
 Total Ref: 5447, Total Used: 2434
 =======================================================
-Date: 3/23/2025, Time: 9:43
+Date: 3/25/2025, Time: 4:16
 Cache Name: Main Texture Cache
-Total Mem: -1075585025
-Free Mem: -1075585025
+Total Mem: -1078460417
+Free Mem: -1078460417
  --- Slots ---
+Width: 128, Height 128, Mips:  1, Stage:  0, Ref:   56, Used:   56
 Width:  64, Height  64, Mips:  1, Stage:  0, Ref:   71, Used:   71
 Width:  32, Height  32, Mips:  1, Stage:  0, Ref:   74, Used:   32
 Width:  16, Height  16, Mips:  1, Stage:  0, Ref:   54, Used:   32
+Width:  32, Height  32, Mips:  1, Stage:  0, Ref:    8, Used:    8
 Width:   8, Height   8, Mips:  1, Stage:  0, Ref:   18, Used:   18
-Width: 128, Height 128, Mips:  1, Stage:  0, Ref:   56, Used:   56
 Width: 256, Height 256, Mips:  1, Stage:  0, Ref:   26, Used:   26
 Width:  64, Height  64, Mips:  1, Stage:  0, Ref:   20, Used:   20
-Width:  32, Height  32, Mips:  1, Stage:  0, Ref:    8, Used:    8
 Width:   4, Height   4, Mips:  1, Stage:  0, Ref:    3, Used:    3
 Total Ref:  330, Total Used:  266
