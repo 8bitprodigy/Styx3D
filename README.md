@@ -43,7 +43,7 @@ Genesis3D was originally distributed under the Genesis3D public license, however
 
 > If you care to develop with Genesis3D 1.1, you may do so, free of licensing obligations as the engine is abandonware and the stakeholders are long gone.
 
-As such, I am redistributing this as public domain software, dual licensed under the terms of the Zero-Clause BSD license, as some territories do not legally recognize the public domain.
+As such, I am redistributing this as public domain or under the terms of the Zero-Clause BSD license as some territories do not legally recognize the public domain.
 
 The terms of the Zero-Clause BSD license are thus:
 

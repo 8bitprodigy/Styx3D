@@ -12,16 +12,19 @@
 /*  or FITNESS FOR ANY PURPOSE.  Refer to LICENSE.TXT for more details.                 */
 /*                                                                                      */
 /****************************************************************************************/
-#include <Windows.h>
-#include <Assert.h>
+#include <assert.h>
 #include <stdio.h>
 
-#include "Genesis.h"
-#include "Errorlog.h"
-#include "Ram.h"
+#ifdef _WIN32
+	#include <windows.h>
+#endif /* _WIN32 */
 
-#include "NetMgr.h"
 #include "Buffer.h"
+#include "ErrorLog.h"
+#include "Genesis.h"
+#include "NetMgr.h"
+#include "RAM.h"
+
 
 //=====================================================================================
 //=====================================================================================
@@ -158,32 +161,33 @@ geBoolean NetMgr_StartSession(NetMgr *NMgr, const char *SessionName, const char 
 //	NetMgr_JoinSession
 //===========================================================================
 geBoolean NetMgr_JoinSession(NetMgr *NMgr, const char *IPAddress, const char *PlayerName)
-{
+{/*
 	geCSNetMgr_NetSession	*SessionList;
 	int32					NumSessions;
 
 	assert(NetMgr_IsValid(NMgr));
-	assert(NMgr->UseLocalBuffers == GE_FALSE);
+	assert(NMgr->UseLocalBuffers == false);
 
 	if (!geCSNetMgr_FindSession(NMgr->CSNetMgr, IPAddress, &SessionList, &NumSessions))
 	{
 		geErrorLog_AddString(-1, "NetMgr_JoinSession:  geCSNetMgr_JoinSession failed...", NULL);
-		return GE_FALSE;
+		return false;
 	}
 
 	if (!NumSessions)
 	{
 		geErrorLog_AddString(-1, "NetMgr_JoinSession:  Could not find a session at address:", IPAddress);
-		return GE_FALSE;
+		return false;
 	}
 
 	if (!geCSNetMgr_JoinSession(NMgr->CSNetMgr, PlayerName, &SessionList[0]))
 	{
 		geErrorLog_AddString(-1, "NetMgr_JoinSession:  Could not join a session at address:", IPAddress);
-		return GE_FALSE;
+		return false;
 	}
 
-	return GE_TRUE;
+	return  true;*/
+	return false;
 }
 
 //===========================================================================

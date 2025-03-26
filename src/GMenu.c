@@ -12,28 +12,32 @@
 //	Peter Siamidis	07/08/98	Created.
 //
 ////////////////////////////////////////////////////////////////////////////////////////
-#define	WIN32_LEAN_AND_MEAN
-#pragma warning ( disable : 4201 4214 )
-#include <windows.h>
-#pragma warning ( default : 4201 4214 )
 #include <assert.h>
 #include <string.h>
+
+#ifdef _WIN32
+	#define WIN32_LEAN_AND_MEAN
+	#pragma warning ( disable : 4201 4214 )
+	#include <windows.h>
+	#pragma warning ( default : 4201 4214 )
+#endif
+
 #include "GMenu.h"
 #include "Menu.h"
-#include "ipaddr.h"
+#include "IPAddr.h"
 #include "AutoSelect.h"
 
-#include "Errorlog.h"
+#include "ErrorLog.h"
 
 #include "Host.h"
 
 // this is ugly
-extern Host_Host		*Host;
-extern geSound_System	*SoundSys;
-extern geEngine			*Engine;	
-extern geBoolean         ShowStats;
-extern geDriver			*ChangeDisplaySelection;
-extern geBoolean		 ChangingDisplayMode;
+extern Host_Host      *Host;
+extern geSound_System *SoundSys;
+extern geEngine       *Engine;	
+extern geBoolean       ShowStats;
+extern geDriver       *ChangeDisplaySelection;
+extern geBoolean       ChangingDisplayMode;
 
 #define GMENU_VERSION		0x100
 
@@ -48,35 +52,37 @@ extern geBoolean		 ChangingDisplayMode;
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //	Keyboard mappings ( action, wParam, lParam )
-////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////// 0b10000000_00000000_00000000_00000000
+
 typedef struct
 {
-	int32 Action;		// game action identifier
-	int32 wParam;		// wParam from WM_KEYDOWN message
-	int32 lParam;		// lParam from WM_KEYDOWN message
-} GMenu_SingleKeyMapping;
+	int32     Action;		// game action identifier
+	int32     wParam;		// wParam from WM_KEYDOWN message [SDL_SCANCODE_*]
+	int32     lParam;		// lP
+} 
+GMenu_SingleKeyMapping;
 
 static GMenu_SingleKeyMapping OriginalKeyMapping[NUM_MAPPED_KEYS] =
-{
-	{ GMenu_KeyShoot, VK_LBUTTON, 1 },
-	{ GMenu_KeyJump, VK_RBUTTON, 2 },
-	{ GMenu_KeyStrafeLeft, VK_LEFT, 21692417 },
-	{ GMenu_KeyStrafeRight, VK_RIGHT, 21823489 },
-	{ GMenu_KeyForward, VK_UP, 21495809 },
-	{ GMenu_KeyBackward, VK_DOWN, 22020097 },
-	{ GMenu_KeyNextWeapon, VK_CONTROL, 18677761 }
+{ 
+    { GMenu_KeyShoot,       SDL_BUTTON_LEFT   + MOUSE_BUTTON, SDL_KMOD_NONE },  // Left Mouse Button
+    { GMenu_KeyJump,        SDL_BUTTON_RIGHT  + MOUSE_BUTTON, SDL_KMOD_NONE },  // Right Mouse Button
+    { GMenu_KeyStrafeLeft,  SDLK_LEFT,          SDL_KMOD_NONE },
+    { GMenu_KeyStrafeRight, SDLK_RIGHT,         SDL_KMOD_NONE },
+    { GMenu_KeyForward,     SDLK_UP,            SDL_KMOD_NONE },
+    { GMenu_KeyBackward,    SDLK_DOWN,          SDL_KMOD_NONE },
+    { GMenu_KeyNextWeapon,  SDLK_LCTRL,         SDL_KMOD_NONE }
 };
 
 
 static GMenu_SingleKeyMapping KeyMapping[NUM_MAPPED_KEYS] =
 {
-	{ GMenu_KeyShoot, VK_LBUTTON, 1 },
-	{ GMenu_KeyJump, VK_RBUTTON, 2 },
-	{ GMenu_KeyStrafeLeft, VK_LEFT, 21692417 },
-	{ GMenu_KeyStrafeRight, VK_RIGHT, 21823489 },
-	{ GMenu_KeyForward, VK_UP, 21495809 },
-	{ GMenu_KeyBackward, VK_DOWN, 22020097 },
-	{ GMenu_KeyNextWeapon, VK_CONTROL, 18677761 }
+    { GMenu_KeyShoot,       SDL_BUTTON_LEFT   + MOUSE_BUTTON, SDL_KMOD_NONE },  // Left Mouse Button
+    { GMenu_KeyJump,        SDL_BUTTON_RIGHT  + MOUSE_BUTTON, SDL_KMOD_NONE },  // Right Mouse Button
+    { GMenu_KeyStrafeLeft,  SDLK_LEFT,          SDL_KMOD_NONE },
+    { GMenu_KeyStrafeRight, SDLK_RIGHT,         SDL_KMOD_NONE },
+    { GMenu_KeyForward,     SDLK_UP,            SDL_KMOD_NONE },
+    { GMenu_KeyBackward,    SDLK_DOWN,          SDL_KMOD_NONE },
+    { GMenu_KeyNextWeapon,  SDLK_LCTRL,         SDL_KMOD_NONE }
 };
 
 //undone
@@ -88,25 +94,25 @@ int32		MenuBotCount = 1;
 ////////////////////////////////////////////////////////////////////////////////////////
 //	Globals
 ////////////////////////////////////////////////////////////////////////////////////////
-static Menu_T				*MainMenu = NULL;
-static Menu_T				*SingleMapMenu = NULL;
-static Menu_T				*OptionsMenu = NULL;
-static Menu_T				*BotsMenu = NULL;
-static Menu_T				*JoinMenu = NULL;
-static Menu_T				*CreateNetMenu = NULL;
-static Menu_T				*ControlMenu = NULL;
-static Menu_T				*ActiveMenu = NULL;
-static Menu_T				*CreditsMenu = NULL;
-static Menu_T				*DriverMenu = NULL;
-static Menu_T				*ModeMenuList[GMENU_MAX_DISPLAY_MODES];
-static geBitmap				*SliderBar = NULL;
-static geBitmap				*SliderRange = NULL;
-static geBitmap				*CreditsArt = NULL;
-static geEngine				*SaveEngine = NULL;
-static float				VolumePercent = 0.7f;
-static float				BotPercent = 0.25f;
+static Menu_T   *MainMenu = NULL;
+static Menu_T   *SingleMapMenu = NULL;
+static Menu_T   *OptionsMenu = NULL;
+static Menu_T   *BotsMenu = NULL;
+static Menu_T   *JoinMenu = NULL;
+static Menu_T   *CreateNetMenu = NULL;
+static Menu_T   *ControlMenu = NULL;
+static Menu_T   *ActiveMenu = NULL;
+static Menu_T   *CreditsMenu = NULL;
+static Menu_T   *DriverMenu = NULL;
+static Menu_T   *ModeMenuList[GMENU_MAX_DISPLAY_MODES];
+static geBitmap *SliderBar = NULL;
+static geBitmap *SliderRange = NULL;
+static geBitmap *CreditsArt = NULL;
+static geEngine *SaveEngine = NULL;
+static float     VolumePercent = 0.7f;
+static float     BotPercent = 0.25f;
 
-float						UserGamma = 1.0f;
+float            UserGamma = 1.0f;
 
 
 
@@ -150,7 +156,7 @@ int MyGetKeyNameText( int lParam, char *KeyText, int Size)
 //
 //	Set a new keyboard mapping.
 //
-////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////// 
 static geBoolean GMenu_SetKeyMapping(
 	int32	Identifier,	// control type whose mapping will be changed
 	int32	wParam,		// wParam
@@ -165,13 +171,13 @@ static geBoolean GMenu_SetKeyMapping(
 		{
 			KeyMapping[i].wParam = wParam;
 			KeyMapping[i].lParam = lParam;
-			return GE_TRUE;
+			return true;
 		}
 	}
 
 	// if we got to here then no mapping was set
-	assert( 0 );
-	return GE_FALSE;
+	//assert( 0 );
+	return false;
 
 } // GMenu_SetKeyMapping()
 
@@ -1049,10 +1055,10 @@ int32 GMenu_Key(
 		//}
 
 		Change = Menu_GetStringText( ActiveMenu, NameChangeIdentifier, TempString );
-		assert( Change == GE_TRUE );
+		assert( Change == true );
 
 		// stop name entry if enter is pressed
-		if ( wParam == VK_RETURN  || wParam == VK_ESCAPE )
+		if ( wParam == SDLK_RETURN  || wParam == SDLK_ESCAPE )
 		{
 			// locals
 			int32	Size;
@@ -1062,16 +1068,16 @@ int32 GMenu_Key(
 			TempString[Size-1] = '\0';
 
 			Change = Menu_SetStringText( ActiveMenu, NameChangeIdentifier, TempString );
-			assert( Change == GE_TRUE );
+			assert( Change == true );
 
-			Change = Menu_FlagString( ActiveMenu, NameChangeIdentifier, GE_FALSE );
-			assert( Change == GE_TRUE );
+			Change = Menu_FlagString( ActiveMenu, NameChangeIdentifier, false );
+			assert( Change == true );
 			NameChangeIdentifier = -1;
 			return Result;
 		}
 
 		// delete a character...
-		if ( wParam == VK_BACK )
+		if ( wParam == SDLK_BACKSPACE )
 		{
 
 			// locals
@@ -1108,7 +1114,7 @@ int32 GMenu_Key(
 
 		// set new string text
 		Change = Menu_SetStringText( ActiveMenu, NameChangeIdentifier, TempString );
-		assert( Change == GE_TRUE );
+		assert( Change == true );
 
 		// all done
 		return Result;
@@ -1122,7 +1128,7 @@ int32 GMenu_Key(
 		char		KeyText[64];
 
 		// skip ESC
-		if ( wParam == VK_ESCAPE )
+		if ( wParam == SDLK_ESCAPE )
 		{
 			return Result;
 		}
@@ -1131,21 +1137,21 @@ int32 GMenu_Key(
 
 		// set new field text
 		Change = Menu_SetFieldText( ActiveMenu, ControlChangeIdentifier, KeyText );
-		assert( Change == GE_TRUE );
+		assert( Change == true );
 
 		// set new key mapping
 		KeyLut[GMenu_GetOriginalKeyMapping(ControlChangeIdentifier)] = wParam;
 		GMenu_SetKeyMapping( ControlChangeIdentifier, wParam, lParam );
 
 		// all done
-		Change = Menu_FlagField( ActiveMenu, ControlChangeIdentifier, GE_FALSE );
-		assert( Change == GE_TRUE );
+		Change = Menu_FlagField( ActiveMenu, ControlChangeIdentifier, true );
+		assert( Change == true );
 		ControlChangeIdentifier = -1;
 		return Result;
 	}
 
 	// if ESC was hit then back out of the menus as required
-	if ( wParam == VK_ESCAPE )
+	if ( wParam == SDLK_ESCAPE )
 	{
 
 		// locals
@@ -1222,8 +1228,8 @@ int32 GMenu_Key(
 	{
 
 		// process sliders
-		case VK_LEFT:
-		case VK_RIGHT:
+		case SDLK_LEFT:
+		case SDLK_RIGHT:
 		{
 			switch ( Identifier )
 			{
@@ -1314,7 +1320,7 @@ int32 GMenu_Key(
 		}
 
 		// if enter was hit then check if we need to do anything
-		case VK_RETURN:
+		case SDLK_RETURN:
 		{
 		switch ( Identifier )
 			{
@@ -1347,7 +1353,7 @@ int32 GMenu_Key(
 						Change = Menu_SetStringText( ActiveMenu, GMenu_IPAddress, "Not Available");
 					}
 
-					assert(Change == GE_TRUE);
+					assert(Change == true);
 
 					break;
 				}
@@ -1445,14 +1451,14 @@ int32 GMenu_Key(
 				case GMenu_KeyBackward:
 				case GMenu_KeyNextWeapon:
 				{
-					Menu_FlagField( ActiveMenu, Identifier, GE_TRUE );
+					Menu_FlagField( ActiveMenu, Identifier, true );
 					ControlChangeIdentifier = Identifier;
 					break;
 				}
 
 				case GMenu_NameEntry:
 				{
-					Menu_FlagString( ActiveMenu, Identifier, GE_TRUE );
+					Menu_FlagString( ActiveMenu, Identifier, true );
 					NameChangeIdentifier = Identifier;
 					break;
 				}
@@ -1461,7 +1467,7 @@ int32 GMenu_Key(
 				{
 					//char TempString[MENU_MAXSTRINGSIZE];
 					
-					Menu_FlagString( ActiveMenu, Identifier, GE_TRUE );
+					Menu_FlagString( ActiveMenu, Identifier, true );
 					NameChangeIdentifier = Identifier;
 					
 					/*
@@ -1484,8 +1490,8 @@ int32 GMenu_Key(
 				case GMenu_ShowStatistics:
 				{
 					Menu_ToggleItem( ActiveMenu, Identifier );
-					if ( ShowStats ) ShowStats = GE_FALSE;
-					else ShowStats = GE_TRUE;
+					if ( ShowStats ) ShowStats = false;
+					else ShowStats = true;
 					geEngine_EnableFrameRateCounter(Engine, ShowStats);		
 					break;
 				}
@@ -1502,14 +1508,14 @@ int32 GMenu_Key(
 						}
 					else if (Identifier>=GMenu_Mode && Identifier<GMenu_ModeMenu)
 						{
-							if (Menu_GetCheckedData(ActiveMenu,Identifier,(int32 *)(&ChangeDisplaySelection))==GE_FALSE)
+							if (Menu_GetCheckedData(ActiveMenu,Identifier,(int32 *)(&ChangeDisplaySelection))==false)
 								{
 									// error
 									break;
 								}
 							else
 								{
-									ChangingDisplayMode = GE_TRUE;
+									ChangingDisplayMode = true;
 									ActiveMenu = NULL;
 								}
 							break;

@@ -12,6 +12,7 @@
 /*  or FITNESS FOR ANY PURPOSE.  Refer to LICENSE.TXT for more details.                 */
 /*                                                                                      */
 /****************************************************************************************/
+#include <SDL3/SDL_mouse.h>
 #include <assert.h>
 #include <math.h>
 #include <stdint.h>
@@ -83,7 +84,7 @@ static char      *GetCommandText(char *CmdLine, char *Data, geBoolean Cmd);
 void              ShutdownAll(void);
 
 static geBoolean  NewKeyDown(int KeyCode);
-static void       GetMouseInput(HWND hWnd, int Width, int Height);
+static void       GetMouseInput(SDL_Window *hWnd, int Width, int Height);
 
 #define STARTING_WIDTH  (500)
 #define STARTING_HEIGHT (400)
@@ -285,6 +286,8 @@ WinMain(
 int 
 main(int argc, char *argv[]) 
 {
+	//MSG              Msg;
+	SDL_Event        event;
     geDriver        *Driver     = NULL;
     geDriver_Mode   *DriverMode = NULL;
 
@@ -523,7 +526,7 @@ main(int argc, char *argv[])
 	
 	do 
 		{
-			HWND hWnd;
+			SDL_Window *hWnd;
 			VidMode VidMode;
 
 			// Pick mode
@@ -605,22 +608,22 @@ main(int argc, char *argv[])
 			
 			#ifdef CLIP_CURSOR	
 			{
-				    SDL_Rect ClipRect;
-					int 
-						win_x, 
-						win_y, 
-						win_w, 
-						win_h;
+				SDL_Rect ClipRect;
+				int 
+					win_x, 
+					win_y, 
+					win_w, 
+					win_h;
 
-					SDL_GetWindowPosition(GameMgr_GethWnd(GMgr), &win_x, &win_y);
-					SDL_GetWindowSize(    GameMgr_GethWnd(GMgr), &win_w, &win_h);
+				SDL_GetWindowPosition(GameMgr_GethWnd(GMgr), &win_x, &win_y);
+				SDL_GetWindowSize(    GameMgr_GethWnd(GMgr), &win_w, &win_h);
 
-					ClipRect.x = win_x;
-					ClipRect.y = win_y;
-					ClipRect.w = win_w;
-					ClipRect.h = win_h;
+				ClipRect.x = win_x;
+				ClipRect.y = win_y;
+				ClipRect.w = win_w;
+				ClipRect.h = win_h;
 
-					SDL_SetWindowMouseRect(GameMgr_GethWnd(GMgr), &ClipRect);
+				SDL_SetWindowMouseRect(GameMgr_GethWnd(GMgr), &ClipRect);
 			}
 			#endif
 			
@@ -661,8 +664,8 @@ main(int argc, char *argv[])
 				// Get the mouse input (FIXME:  Move this into client?)
 				{
 					int Width, Height;
-					VidMode_GetResolution(VidMode,&Width,&Height);
-					GetMouseInput(hWnd,Width,Height);
+					SDL_GetWindowSize(VidMode, &Width, &Height);
+					GetMouseInput(hWnd, Width, Height);
 				}
 
 				// Do a host frame (physics, etc)
@@ -739,8 +742,7 @@ main(int argc, char *argv[])
 				}
 
 				// Do the'ol message pump
-				
-				while (PeekMessage( &Msg, NULL, 0, 0, PM_NOREMOVE))
+				/*while (PeekMessage( &Msg, NULL, 0, 0, PM_NOREMOVE))
 				{
 					if (!GetMessage(&Msg, NULL, 0, 0 ))
 					{
@@ -755,8 +757,30 @@ main(int argc, char *argv[])
 						{
 							break;
 						}
+				} */
+				while (SDL_PollEvent(&event)) {
+					switch (event.type) {
+					case SDL_EVENT_QUIT:
+						Running = 0;
+						break;
+						
+					case SDL_EVENT_KEY_DOWN:
+						// Handle key presses
+						break;
+						
+					case SDL_EVENT_KEY_UP:
+						// Handle key releases
+						break;
+						
+					case SDL_EVENT_WINDOW_RESIZED:
+						ChangingDisplayMode = true;
+						break;
+					}
+					
+					if (ChangingDisplayMode) {
+						break;
+					}
 				}
-				
 				
 
 				if (ChangingDisplayMode)
@@ -831,7 +855,7 @@ PickMode(
 				{
 					if (!NoSelection)
 						{
-							if (DrvList_PickDriver(hInstance, GameMgr_GethWnd(GMgr), List, ListLength, ListSelection)==GE_FALSE)
+							if (DrvList_PickDriver(GameMgr_GethWnd(GMgr), List, ListLength, ListSelection)==GE_FALSE)
 								{
 									geErrorLog_AddString(-1,"Driver pick dialog failed",NULL);
 									ShutdownAll();
@@ -870,7 +894,7 @@ PickMode(
 								}
 							GameMgr_ResetMainWindow(hwnd,STARTING_WIDTH,STARTING_HEIGHT);
 							geErrorLog_AddString(-1, "geEngine_SetDriverAndMode failed. (continuing)", NULL);
-							MessageBox(GameMgr_GethWnd(GMgr), "Driver failed to properly set the selected mode.","Error:",MB_OK);
+							SDL_ShowSimpleMessageBox( SDL_MESSAGEBOX_ERROR, "Styx Driver Error", "Driver failed to properly set the selected mode.", GameMgr_GethWnd(GMgr));
 						}
 					else
 						{ 
@@ -918,11 +942,11 @@ void ShutdownAll(void)
 
 	if (GMgr)
 		{
-			HWND hWnd = GameMgr_GethWnd(GMgr);
+			SDL_Window *hWnd = GameMgr_GethWnd(GMgr);
 			if (hWnd)
 				{
-					ShowWindow(hWnd, SW_HIDE);
-					UpdateWindow(hWnd);
+					SDL_HideWindow(hWnd);
+					SDL_UpdateWindowSurface(hWnd);
 				}
 		}
 
@@ -964,7 +988,9 @@ extern uint32	GlobalButtonBits;
 //=====================================================================================
 //	WndProc
 //=====================================================================================
-LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
+/* Is this even used for anything? Let's find out!
+LRESULT CALLBACK 
+WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 {
 	switch(iMessage)
 	{
@@ -1174,7 +1200,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 							strcpy(HostInit.LevelHack, "Levels\\Gallery.BSP");
 							HostInit.Mode = HOST_MODE_SINGLE_PLAYER;
 							break;
-						}*/
+						}*//*
 
 						case GMenu_StartGame:
 						{
@@ -1287,7 +1313,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 	}
 	return 0;
 }
-
+*/
 
 geBoolean IsAMenuActive(void)
 {
@@ -1298,38 +1324,35 @@ geBoolean IsAMenuActive(void)
 
 //=====================================================================================
 //=====================================================================================
-static void GetMouseInput(HWND hWnd, int Width, int Height)
+static void GetMouseInput(SDL_Window *hWnd, int Width, int Height)
 {
-	POINT	Point;
-	float	dx, dy;
-	int32	x, y;
+	float px, py;
+	int   wx, wy;
+	int   dx, dy;
+	int32 x,  y;
 	
 	assert( Width > 0 );
 	assert( Height > 0 );
-	GetCursorPos(&Point);
+	SDL_GetMouseState(&px, &py);
   
-	if (ScreenToClient( hWnd, &Point)==0)
-		{
-			geErrorLog_AddString(0,"GetMouseInput:  ScreenToClient failed",NULL); 
-			return;
-		}
-	x = Point.x;
-	y = Point.y;
+	//if (
+		!SDL_GetWindowPosition(hWnd, wx, wy);
+	/*) {
+		geErrorLog_AddString(0,"GetMouseInput: SDL_GetWindowPosition failed",NULL); 
+		return;
+	}*/
+	x = px;
+	y = py;
 
-	dx = ((float) (((float)Width/2.0f) - Point.x) / 350.0f);
-	dy = ((float) (((float)Height/2.0f) - Point.y) / 350.0f);
+	dx = ((float) (((float)Width/2.0f) - px) / 350.0f);
+	dy = ((float) (((float)Height/2.0f) - py) / 350.0f);
 
-	Point.x = Width/2;
-	Point.y = Height/2;
-
-	if (ClientToScreen( hWnd, &Point)==0)
-		{
-			geErrorLog_AddString(0,"GetMouseInput:  ClientToScreen failed",NULL); 
-			return;
-		}
+	px = Width/2.0;
+	py = Height/2.0;
+	
 	if(ResetMouse)
 	{
-		SetCursorPos(Point.x,Point.y);
+		SDL_WarpMouseGlobal(px, py);
 	}
 
 	GlobalMouseSpeedX = dx;
@@ -1385,18 +1408,20 @@ void GenVS_Error(const char *Msg, ...)
 		
 		sprintf(TempStr2, "%s\nPlease refer to GTest.Log for more info.", TempStr);
 
-		MessageBox(0, TempStr2, "** Genesis3D Virtual System Error **", MB_OK);
-		WinExec( "Notepad GTest.Log", SW_SHOW );
+		//MessageBox(0, TempStr2, "** Genesis3D Virtual System Error **", MB_OK);
+		SDL_ShowSimpleMessageBox( SDL_MESSAGEBOX_ERROR, "** Genesis3D Virtual System Error **", TempStr, GameMgr_GethWnd(GMgr));
+		SDL_OpenURL( "GTest.Log" );
 		if (PopupD3DLog)
 			{
-				WinExec( "Notepad d3ddrv.log", SW_SHOW);
+				SDL_OpenURL( "d3ddrv.log" );
 			}
 	}
 	else
 	{
 		sprintf(TempStr2, "%s\nCould NOT output GTest.log!!!", TempStr);
 
-		MessageBox(0, TempStr2, "** Genesis3D Virtual System Error **", MB_OK);
+		//MessageBox(0, TempStr2, "** Genesis3D Virtual System Error **", MB_OK);
+		SDL_ShowSimpleMessageBox( SDL_MESSAGEBOX_ERROR, "** Genesis3D Virtual System Error **", TempStr, GameMgr_GethWnd(GMgr));
 	}
 
 	_exit(1);

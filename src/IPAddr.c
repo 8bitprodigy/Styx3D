@@ -1,9 +1,14 @@
-#include <windows.h>
-#include <winsock.h>
-#include	<stdio.h>
-
+#include <stdio.h>
 #include <string.h>
-#include "ipaddr.h"
+
+#include <enet/enet.h>
+
+#ifdef _WIN32
+	#include <windows.h>
+	#include <winsock.h>
+#endif /* _WIN32 */
+
+#include "IPAddr.h"
 
 #define	MAXHOSTNAME	256
 
@@ -26,7 +31,7 @@ static	void	IPAddr_AddrToString(unsigned long Addr, char *AddrBuff)
 #define	WS_VERSION_MINOR    LOBYTE(WS_VERSION_REQD)
 
 int IPAddr_GetHostID (char *AddrBuff)
-{
+{ /*
 	WSADATA			wsaData;
     char			HostName[MAXHOSTNAME];
     LPHOSTENT		HostEnt;
@@ -83,7 +88,7 @@ int IPAddr_GetHostID (char *AddrBuff)
 
 		closesocket(Socket);
 	}
-
+*/
 	return 0;
 }
 

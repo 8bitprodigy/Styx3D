@@ -12,19 +12,19 @@
 /*  or FITNESS FOR ANY PURPOSE.  Refer to LICENSE.TXT for more details.                 */
 /*                                                                                      */
 /****************************************************************************************/
-#include <Windows.h>
-#include <Assert.h>
+#include <assert.h>
 
-#include "Host.h"
+#ifdef _WIN32
+	#include <windows.h>
+#endif /* _WIN32 */
 
-#include "Server.h"
+#include "CD.h"
 #include "Client.h"
-
+#include "Game/Game.h"
 #include "GMenu.h"
+#include "Host.h"
+#include "Server.h"
 
-#include "Game\Game.h"
-
-#include "cd.h"
 
 extern int32			CWidth;
 extern int32			CHeight;

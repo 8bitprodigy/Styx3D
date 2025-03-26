@@ -22,6 +22,13 @@
 
 #define BOT_UPDATE 
 
+#define MOUSE_BUTTON  0x80000000
+#define KEYBOARD_MASK 0x7FFFFFFF
+
+#define MOUSE_ENCODE( Button ) ((int32)Button | MOUSE_BUTTON)
+#define KEY_ENCODE(   Key )    ((int32)Key    & KEYBOARD_MASK)
+#define MOUSE_DECODE( Button ) ((Button & MOUSE_BUTTON) ? (SDL_MouseButton)(Button & KEYBOARD_MASK) : 0)
+#define KEY_DECODE(   Key )    (Key     & MOUSE_BUTTON) ? 0 : (SDL_Keycode)Key)
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //	Menu ID's
@@ -115,10 +122,11 @@ geBoolean GMenu_IsAMenuActive(
 void GMenu_SetActive(geBoolean Active);
 
 geBoolean GMenu_Create(
-	geEngine	  *Engine,
-	ModeList	  *List,
-	int			   ListLength,
-	int			   ListSelection);
+	geEngine *Engine,
+	ModeList *List,
+	int       ListLength,
+	int       ListSelection
+);
 
 void GMenu_DestroyAllData(void);
 

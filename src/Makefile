@@ -65,7 +65,7 @@ ADDITIONAL_SRCS = \
 	Console.c \
 	GameMgr.c \
 	GenVS.c \
-	Gmenu.c \
+	GMenu.c \
 	Host.c \
 	IPAddr.c \
 	Menu.c \

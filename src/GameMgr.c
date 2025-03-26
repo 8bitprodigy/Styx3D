@@ -1291,7 +1291,7 @@ float GameMgr_GetTime(GameMgr *GMgr)
 //====================================================================================
 //	GameMgr_GethWnd
 //====================================================================================
-HWND GameMgr_GethWnd(GameMgr *GMgr)
+SDL_Window *GameMgr_GethWnd(GameMgr *GMgr)
 {
 	assert(GameMgr_IsValid(GMgr) == GE_TRUE);
 

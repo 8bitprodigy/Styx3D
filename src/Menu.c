@@ -12,16 +12,22 @@
 //	Peter Siamidis	07/08/98	Created.
 //
 ////////////////////////////////////////////////////////////////////////////////////////
-#define	WIN32_LEAN_AND_MEAN
-#pragma warning ( disable : 4201 4214 )
-#include <windows.h>
-#pragma warning ( default : 4201 4214 )
-#include <string.h>
 #include <assert.h>
+#include <string.h>
+
+#include <SDL3/SDL.h>
+
+#ifdef _WIN32
+	#define	WIN32_LEAN_AND_MEAN
+	#pragma warning ( disable : 4201 4214 )
+	#include <windows.h>
+	#pragma warning ( default : 4201 4214 )
+#endif /* _WIN32 */
+
 #include "Genesis.h"
-#include "Ram.h"
-#include "Text.h"
 #include "MenuItem.h"
+#include "RAM.h"
+#include "Text.h"
 
 
 #define MENU_ITEMCHECKED_ACTIVE_STRING ("x ")
@@ -1472,7 +1478,7 @@ int32 Menu_Key(
 	{
 
 		// up arrow
-		case VK_UP:
+		case SDLK_UP:
 		{
 
 			// pick item above as curently selected one...
@@ -1509,7 +1515,7 @@ int32 Menu_Key(
 		}
 
 		// down arrow
-		case VK_DOWN:
+		case SDLK_DOWN:
 		{
 
 			// pick item below as curently selected one...
@@ -1539,7 +1545,7 @@ int32 Menu_Key(
 		}
 
 		// left arrow
-		case VK_LEFT:
+		case SDLK_LEFT:
 		{
 
 			// adjust a slider...
@@ -1564,7 +1570,7 @@ int32 Menu_Key(
 		}
 
 		// right arrow
-		case VK_RIGHT:
+		case SDLK_RIGHT:
 		{
 
 			// adjust a slider...

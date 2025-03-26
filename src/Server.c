@@ -12,12 +12,17 @@
 /*  or FITNESS FOR ANY PURPOSE.  Refer to LICENSE.TXT for more details.                 */
 /*                                                                                      */
 /****************************************************************************************/
-#include <Windows.h>
-#include <Assert.h>
-#include <Time.h>
+#include <assert.h>
+#include <time.h>
 
+#ifdef _WIN32
+	#include <Windows.h>
+#endif
+
+#include "BaseType.h"
 #include "Server.h"
 
+#define LARGE_INTEGER int64
 LARGE_INTEGER			g_Freq, g_OldTick, g_CurTick;
 
 #define	NUM_AVG			10
@@ -26,7 +31,7 @@ static int32			CurAvg;
 
 static void SubLarge(LARGE_INTEGER *start, LARGE_INTEGER *end, LARGE_INTEGER *delta)
 {
-	_asm {
+	/*_asm {
 		mov ebx,dword ptr [start]
 		mov esi,dword ptr [end]
 
@@ -39,7 +44,8 @@ static void SubLarge(LARGE_INTEGER *start, LARGE_INTEGER *end, LARGE_INTEGER *de
 		mov ebx,dword ptr [delta]
 		mov dword ptr [ebx+0],eax
 		mov dword ptr [ebx+4],edx
-	}
+	}*/
+	*delta = *start - *end;
 }
 
 #define BEGIN_TIMER()		QueryPerformanceCounter(&g_OldTick)
@@ -190,13 +196,13 @@ void Server_Destroy(Server_Server *Server)
 	
 	Ret = Server_FreeWorldData(Server);
 
-	assert(Ret == GE_TRUE);
+	assert(Ret ==  true);
 
 	// Make sure everybody knows we are quiting as the server
 	Buffer_Set(&Buffer, Data, 128);
 	Buffer_FillByte(&Buffer, NETMGR_MSG_SHUTDOWN);
 
-	SendAllClientsMessage(Server, &Buffer, GE_TRUE);
+	SendAllClientsMessage(Server, &Buffer,  true);
 
 	geRam_Free(Server);
 }
@@ -233,7 +239,7 @@ static geBoolean FillBufferWithClientInfo(Server_Server *Server, Buffer_Data *Bu
 		Buffer_FillSLong(Buffer, Client->Health);
 	}
 
-	return GE_TRUE;
+	return  true;
 }
 
 //=====================================================================================
@@ -265,10 +271,10 @@ static geBoolean SendClientPlayerData(Server_Server *Server, Server_Client *Clie
 		FillBufferWithPlayerData(Server, &Buffer, Player, 0xffff);	// Send all on a force update
 	}
 
-	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer, GE_TRUE))
+	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer,  true))
 		GenVS_Error("SendClientPlayerData:  NetMgr_SendClientMessage failed.\n");
 
-	return GE_TRUE;
+	return  true;
 }
 
 //=====================================================================================
@@ -287,13 +293,13 @@ geBoolean Server_ChangeClientState(Server_Server *Server, Server_Client *Client,
 	Buffer_FillByte(&Buffer, NETMGR_MSG_NET_STATE_CHANGE);
 	Buffer_FillSLong(&Buffer, NetState);
 
-	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer, GE_TRUE))
+	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer, true))
 		GenVS_Error("Server_ChangeClientState:  NetMgr_SendClientMessage failed.\n");
 
 	Client->NetState = NetState;
-	Client->NetStateConfirmed[NetState] = GE_FALSE;
+	Client->NetStateConfirmed[NetState] = false;
 
-	return GE_TRUE;
+	return  true;
 }
 
 //=====================================================================================
@@ -321,7 +327,7 @@ geBoolean Server_SetupClientWithCurrentWorld(Server_Server *Server, Server_Clien
 	if (!Server_ChangeClientState(Server, Client, NetState_WorldActive))
 		GenVS_Error("Server_SetupClientWithCurrentWorld:  Server_ChangeClientState failed.\n");
 
-	return GE_TRUE;
+	return  true;
 }
 
 //=====================================================================================
@@ -349,7 +355,7 @@ geBoolean Server_SetupAllClientsWithCurrentWorld(Server_Server *Server)
 		}
 	}
 
-	return GE_TRUE;
+	return  true;
 }
 
 //=====================================================================================
@@ -374,7 +380,7 @@ geBoolean Server_SendClientStartupData(Server_Server *Server, Server_Client *Cli
 	Buffer_FillByte(&Buffer, NETMGR_MSG_CLIENT_INDEX);
 	Buffer_FillByte(&Buffer, (uint8)ClientIndex);
 	
-	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer, GE_TRUE))
+	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer,  true))
 		GenVS_Error("Server_SendClientStartupData:  NetMgr_SendClientMessage failed.\n");
 
 	Buffer_Set(&Buffer, Data, 20000);
@@ -383,7 +389,7 @@ geBoolean Server_SendClientStartupData(Server_Server *Server, Server_Client *Cli
 		GenVS_Error("Server_SendClientStartupData:  FillBufferWithClientInfo failed.\n");
 
 	// Send everyone (even client) the info about the clients, score, health, active, etc...
-	if (!SendAllClientsMessage(Server, &Buffer, GE_TRUE))		// Everyone needs to know about this one...
+	if (!SendAllClientsMessage(Server, &Buffer,  true))		// Everyone needs to know about this one...
 		GenVS_Error("Server_SendClientStartupData:  SendAllClientsMessage failed.\n");
 
 	World = GameMgr_GetWorld(Server->GMgr);
@@ -394,7 +400,7 @@ geBoolean Server_SendClientStartupData(Server_Server *Server, Server_Client *Cli
 			GenVS_Error("Server_SendClientStartupData:  Server_SetupClientWithCurrentWorld failed.\n");
 	}
 
-	return GE_TRUE;
+	return  true;
 }
 
 //=====================================================================================
@@ -419,11 +425,11 @@ static geBoolean SendAllClientsMessage(Server_Server *Server, Buffer_Data *Buffe
 		if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, Buffer, G))
 		{
 			Server_ClientDisconnect(Server, Client->NetID, Client->Name);
-			//return GE_TRUE;
+			//return  true;
 		}
 	}
 
-	return GE_TRUE;
+	return  true;
 }
 
 //=====================================================================================
@@ -438,14 +444,14 @@ geBoolean Server_SendClientCurrentWorldData(Server_Server *Server, Server_Client
 	char		Data[20000];
 
 	assert(GameMgr_GetWorld(Server->GMgr));
-	assert(Client->Active == GE_TRUE);
+	assert(Client->Active ==  true);
 
 	// Fill message with world data
 	Buffer_Set(&Buffer, Data, 20000);
 	Buffer_FillByte(&Buffer, NETMGR_MSG_SET_WORLD);
 	Buffer_FillString(&Buffer, Server->WorldName);
 
-	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer, GE_TRUE))
+	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer,  true))
 		GenVS_Error("Server_SendClientCurrentWorldData:  NetMgr_SendClientMessage failed 1.\n");
 
 	// fill message with actor index data
@@ -464,7 +470,7 @@ geBoolean Server_SendClientCurrentWorldData(Server_Server *Server, Server_Client
 		Buffer_FillString(&Buffer, ActorIndex->FileName);
 	}
 
-	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer, GE_TRUE))
+	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer,  true))
 		GenVS_Error("Server_SendClientCurrentWorldData:  NetMgr_SendClientMessage failed 2.\n");
 
 	// fill message with motion index data
@@ -484,7 +490,7 @@ geBoolean Server_SendClientCurrentWorldData(Server_Server *Server, Server_Client
 		Buffer_FillString(&Buffer, MotionIndex->MotionName);
 	}
 
-	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer, GE_TRUE))
+	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer,  true))
 		GenVS_Error("Server_SendClientCurrentWorldData:  NetMgr_SendClientMessage failed 3.\n");
 
 	// fill message with bone index data
@@ -504,7 +510,7 @@ geBoolean Server_SendClientCurrentWorldData(Server_Server *Server, Server_Client
 		Buffer_FillString(&Buffer, BoneIndex->BoneName);
 	}
 
-	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer, GE_TRUE))
+	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer,  true))
 		GenVS_Error("Server_SendClientCurrentWorldData:  NetMgr_SendClientMessage failed 4.\n");
 
 	// Fill message with texture index data
@@ -525,7 +531,7 @@ geBoolean Server_SendClientCurrentWorldData(Server_Server *Server, Server_Client
 		Buffer_FillString(&Buffer, TextureIndex->AFileName);
 	}
 
-	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer, GE_TRUE))
+	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer,  true))
 		GenVS_Error("Server_SendClientCurrentWorldData:  NetMgr_SendClientMessage failed 5.\n");
 
 	// Fill message with sound index data
@@ -545,7 +551,7 @@ geBoolean Server_SendClientCurrentWorldData(Server_Server *Server, Server_Client
 		Buffer_FillString(&Buffer, SoundIndex->FileName);
 	}
 
-	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer, GE_TRUE))
+	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer,  true))
 		GenVS_Error("Server_SendClientCurrentWorldData:  NetMgr_SendClientMessage failed 6.\n");
 
 	// Tell the client what player he is
@@ -560,11 +566,11 @@ geBoolean Server_SendClientCurrentWorldData(Server_Server *Server, Server_Client
 		Buffer_FillByte(&Buffer, NETMGR_MSG_CLIENT_PLAYER_INDEX);
 		Buffer_FillSLong(&Buffer, PlayerIndex);
 
-		if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer, GE_TRUE))
+		if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer,  true))
 			GenVS_Error("Server_SendClientCurrentWorldData:  NetMgr_SendClientMessage failed 7.\n");
 	}
 
-	return GE_TRUE;
+	return  true;
 }
 
 //=====================================================================================
@@ -617,7 +623,7 @@ void Server_ValidateClient(Server_Server *Server, Server_Client *Client)
 		if (!Client->Active)		// Client got removed...
 			return;
 
-		Client->Spawned = GE_TRUE;
+		Client->Spawned =  true;
 		
 		//??bot HACK ask john if its ok
 		if (!Player->DFunc)
@@ -630,7 +636,7 @@ void Server_ValidateClient(Server_Server *Server, Server_Client *Client)
 		Buffer_FillByte(&Buffer, NETMGR_MSG_CLIENT_PLAYER_INDEX);
 		Buffer_FillSLong(&Buffer, PlayerIndex);
 
-		if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer, GE_TRUE))
+		if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer,  true))
 		{
 			Server_ClientDisconnect(Server, Client->NetID, Client->Name);
 		}
@@ -658,14 +664,14 @@ geBoolean Server_ClientConnect(Server_Server *Server, const geCSNetMgr_NetClient
 	}
 	
 	if (i >= NETMGR_MAX_CLIENTS)
-		return FALSE;
+		return  false;
 	
 	memset(SClient, 0, sizeof(Server_Client));
 	
 	strcpy(SClient->Name, Client->Name);
 	SClient->NetID = Client->Id;
 
-	SClient->Active = GE_TRUE;
+	SClient->Active =  true;
 	
 	// Send version to client FIRST thing
 	Buffer_Set(&Buffer, Data, 128);
@@ -673,10 +679,10 @@ geBoolean Server_ClientConnect(Server_Server *Server, const geCSNetMgr_NetClient
 	Buffer_FillLong(&Buffer, NETMGR_VERSION_MAJOR);
 	Buffer_FillLong(&Buffer, NETMGR_VERSION_MINOR);
 
-	if (!NetMgr_SendClientMessage(Server->NMgr, SClient->NetID, &Buffer, GE_TRUE))
+	if (!NetMgr_SendClientMessage(Server->NMgr, SClient->NetID, &Buffer,  true))
 	{
 		Server_ClientDisconnect(Server, SClient->NetID, SClient->Name);
-		return GE_TRUE;
+		return  true;
 	}
 
 	// Let the client know that it is currently connecting
@@ -686,7 +692,7 @@ geBoolean Server_ClientConnect(Server_Server *Server, const geCSNetMgr_NetClient
 	Server_ValidateClient(Server, SClient);
 
 	if (!SClient->Active)		// Client was dicconected...
-		return GE_TRUE;
+		return  true;
 
 	// Send this client the startupdata for everything at it's current state
 	if (!Server_SendClientStartupData(Server, SClient))
@@ -694,12 +700,12 @@ geBoolean Server_ClientConnect(Server_Server *Server, const geCSNetMgr_NetClient
 		Server_ClientDisconnect(Server, SClient->NetID, SClient->Name);
 		
 		GenVS_Error("Server_ClientConnect:  Server_SendClientStartupData failed.\n");
-		return GE_FALSE;
+		return  false;
 	}
 
 	Console_Printf(GameMgr_GetConsole(Server->GMgr), "   Client connected: %s, %i...\n", Client->Name, Client->Id);
 
-	return GE_TRUE;
+	return  true;
 }
 
 
@@ -727,7 +733,7 @@ Server_Client *Server_BotConnect(Server_Server *Server, const char *BotName)
 	strcpy(SClient->Name, BotName);
 	SClient->NetID = NETMGR_SPECIAL_BOT_NETID;
 
-	SClient->Active = GE_TRUE;
+	SClient->Active =  true;
 	
 	// Make the client legit, create it's player, etc...
 	Server_ValidateClient(Server, SClient);
@@ -775,7 +781,7 @@ geBoolean Server_ClientDisconnect(Server_Server *Server, geCSNetMgr_NetID Id, co
 				Server_DestroyPlayer(Server, SClient->Player);
 			
 			SClient->Player = NULL;
-			SClient->Active = GE_FALSE;
+			SClient->Active =  false;
 
 			// Tell all clients (execpt this one of course), that this client is not active
 			Buffer_Set(&Buffer, Data, 512);
@@ -784,16 +790,16 @@ geBoolean Server_ClientDisconnect(Server_Server *Server, geCSNetMgr_NetID Id, co
 			Buffer_FillByte(&Buffer, (char)i);
 			Buffer_FillByte(&Buffer, 0);		// The client is not active anymore!!!
 
-			SendAllClientsMessage(Server, &Buffer, GE_TRUE);
+			SendAllClientsMessage(Server, &Buffer,  true);
 
 			Console_Printf(GameMgr_GetConsole(Server->GMgr), "[SERVER] Client disconnected: %s, %i...\n", Name, Id);
-			return GE_TRUE;
+			return  true;
 		}
 	}
 	
 	Console_Printf(GameMgr_GetConsole(Server->GMgr), "[SERVER] Client not found for disconnect: %s, %i...\n", Name, Id);
 
-	return GE_FALSE;
+	return  false;
 }
 
 //=====================================================================================
@@ -815,7 +821,7 @@ geBoolean Server_ClientDisconnectByHandle(Server_Server *Server, GenVSI_CHandle 
 		Server_DestroyPlayer(Server, SClient->Player);
 	
 	SClient->Player = NULL;
-	SClient->Active = GE_FALSE;
+	SClient->Active =  false;
 
 	// Tell all clients (execpt this one of course), that this client is not active
 	Buffer_Set(&Buffer, Data, 512);
@@ -824,9 +830,9 @@ geBoolean Server_ClientDisconnectByHandle(Server_Server *Server, GenVSI_CHandle 
 	Buffer_FillByte(&Buffer, (char)ClientHandle);
 	Buffer_FillByte(&Buffer, 0);		// The client is not active anymore!!!
 
-	SendAllClientsMessage(Server, &Buffer, GE_TRUE);
+	SendAllClientsMessage(Server, &Buffer,  true);
 	
-	return GE_TRUE;
+	return  true;
 }
 
 
@@ -864,7 +870,7 @@ GPlayer *Server_CreatePlayer(Server_Server *Server, const char *ClassName)
 	
 	memset(&Server->SvPlayers[i], 0, sizeof(GPlayer));
 
-	Server->SvPlayers[i].Active = GE_TRUE;
+	Server->SvPlayers[i].Active =  true;
 	// Default to no view index, and local only player
 	Server->SvPlayers[i].OldViewFlags = VIEW_TYPE_NONE | VIEW_TYPE_LOCAL;
 	Server->SvPlayers[i].ViewFlags = VIEW_TYPE_NONE | VIEW_TYPE_LOCAL;
@@ -937,7 +943,7 @@ geBoolean Server_FreeWorldData(Server_Server *Server)
 		Player->DFunc = NULL;
 	}
 
-	return GE_TRUE;
+	return  true;
 }
 
 //=====================================================================================
@@ -969,10 +975,10 @@ geBoolean Server_NewWorldDefaults(Server_Server *Server)
 		Client->NextUpdate = 0.0f;	// Reset all the timer stuff
 		Client->OldMoveTime = 0.0f;
 		Client->MoveTime = 0.0f;
-		Client->Spawned = GE_FALSE;	// Make sure clients are respawned in the new world
+		Client->Spawned =  false;	// Make sure clients are respawned in the new world
 	}
 
-	return GE_TRUE;
+	return  true;
 }
 
 //=====================================================================================
@@ -1063,7 +1069,7 @@ geBoolean Server_SpawnWorld(Server_Server *Server)
 
 	//DebugBreak();
 	
-	return GE_TRUE;
+	return  true;
 }
 
 extern geVFile *MainFS;
@@ -1099,7 +1105,7 @@ geBoolean Server_SetupWorld(Server_Server *Server)
 		GenVS_Error("Server_SetWorld:  Failed send all clients world data.\n");
 
 	//Console_Printf(GameMgr_GetConsole(Server->GMgr), "[SERVER] SetWorld: %s\n", Name);
-	return GE_TRUE;
+	return  true;
 }
 
 //=====================================================================================
@@ -1117,7 +1123,7 @@ geBoolean Server_Frame(Server_Server *Server, GameMgr *GMgr, float Time)
 
 	if (Server->ChangeWorldRequest)
 	{
-		Server->ChangeWorldRequest = GE_FALSE;
+		Server->ChangeWorldRequest =  false;
 
 		if (!Server_FreeWorldData(Server))
 			GenVS_Error("Server_Frame:  Server_FreeWorldData failed.\n");
@@ -1140,11 +1146,11 @@ geBoolean Server_Frame(Server_Server *Server, GameMgr *GMgr, float Time)
 		Server->ShutdownWorldCB1 = Server->ShutdownWorldCB2;
 		Server->ShutdownWorldCB2 = NULL;
 
-		//return GE_TRUE;
+		//return  true;
 	}
 
 	if (!GameMgr_GetWorld(GMgr))	
-		return GE_TRUE;
+		return  true;
 
 	//memset(&Server->NetStats, 0, sizeof(Server_NetStat));
 
@@ -1215,7 +1221,7 @@ geBoolean Server_Frame(Server_Server *Server, GameMgr *GMgr, float Time)
 }
 #endif
 	
-	return GE_TRUE;
+	return  true;
 }
 
 //=====================================================================================
@@ -1339,11 +1345,11 @@ static geBoolean ParseClientMessage(Server_Server *Server, geCSNetMgr_NetID Clie
 	{
 		//GenVS_Error("Server_ParseClientMessage:  FindClient failed.\n");
 		Console_Printf(GameMgr_GetConsole(Server->GMgr), "ParseClientMessage:  FindClient failed.\n");
-		return GE_TRUE;		// Ignore??
+		return  true;		// Ignore??
 	}
 
 	if (!Client->Player)		
-		return GE_TRUE;			// The client spawn function has not beed called yet in the game code...
+		return  true;			// The client spawn function has not beed called yet in the game code...
 
 	Buffer->Pos = 0;
 
@@ -1371,7 +1377,7 @@ static geBoolean ParseClientMessage(Server_Server *Server, geCSNetMgr_NetID Clie
 				//Console_Printf(GameMgr_GetConsole(Server->GMgr), "Client %s, confirmed state: %i\n", Client->Name, NetState);
 
 				// This NetState has been confirmed
-				Client->NetStateConfirmed[NetState] = GE_TRUE;
+				Client->NetStateConfirmed[NetState] =  true;
 
 				break;
 			}	
@@ -1383,7 +1389,7 @@ static geBoolean ParseClientMessage(Server_Server *Server, geCSNetMgr_NetID Clie
 		}
 	}
 
-	return GE_TRUE;
+	return  true;
 }
 
 //=====================================================================================
@@ -1450,7 +1456,7 @@ static geBoolean ReadClientMessages(Server_Server *Server, float Time)
 		}
 	}
 
-	return GE_TRUE;
+	return  true;
 }
 
 #define ANGLE_EPSILON		0.0001f
@@ -1773,7 +1779,7 @@ static geBoolean SendPlayersToClients(Server_Server *Server)
 	World = GameMgr_GetWorld(Server->GMgr);
 
 	if (!World)
-		return GE_TRUE;
+		return  true;
 
 	SetupClientPlayerSendFlags(Server);
 
@@ -1923,7 +1929,7 @@ static geBoolean SendPlayersToClients(Server_Server *Server)
 	#endif
 
 		// Rip out the message to this client
-		if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer, FALSE))
+		if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer,  false))
 			Server_ClientDisconnect(Server, Client->NetID, Client->Name);
 	}
 #else
@@ -1971,14 +1977,14 @@ static geBoolean SendPlayersToClients(Server_Server *Server)
 		if (!Server->Clients[i].Active)
 			continue;
 
-		if (!NetMgr_SendClientMessage(Server->NMgr, Server->Clients[i].NetID, &Buffer, FALSE))
+		if (!NetMgr_SendClientMessage(Server->NMgr, Server->Clients[i].NetID, &Buffer,  false))
 			GenVS_Error("SendPlayersToClients:  NetMgr_SendClientMessage failed.\n");
 
 		Server->NetStats.NumBytesToSend += Buffer.Pos;
 	}
 
 #endif
-	return GE_TRUE;
+	return  true;
 }
 
 //====================================================================================
@@ -2082,14 +2088,14 @@ static void ForceServerPlayerOnLocalClient(Server_Server *Server, GPlayer *Playe
 	// FIXME:  Call Buffer_Reset
 	Buffer.Pos = 0;
 
-	Client_ParsePlayerData(Server->Client, &Buffer, GE_FALSE);
+	Client_ParsePlayerData(Server->Client, &Buffer,  false);
 
 	// Override some important ones...
 	ClientPlayer->Pos = Player->Pos;
 	ClientPlayer->Angles = Player->Angles;
 
 	// Make the client update this player NOW
-	Client_UpdateSinglePlayer(Server->Client, ClientPlayer, 1.0f, GameMgr_GetTime(Server->GMgr), GE_FALSE);
+	Client_UpdateSinglePlayer(Server->Client, ClientPlayer, 1.0f, GameMgr_GetTime(Server->GMgr),  false);
 	
 }
 
@@ -2175,7 +2181,7 @@ static geBoolean ControlPlayers(Server_Server *Server, float Time)
 		ForceServerPlayerOnLocalClient(Server, Player);
 	}
 
-	return GE_TRUE;
+	return  true;
 }
 
 //=====================================================================================
@@ -2293,7 +2299,7 @@ static geBoolean Server_ManageBots(Server_Server *Server)
 		}
 
 	if (ServerBotCount == MenuBotCount)
-		return GE_TRUE;
+		return  true;
 
     cnt = Server_CountBots(Server);
 
@@ -2317,12 +2323,12 @@ static geBoolean Server_ManageBots(Server_Server *Server)
 					geVec3d			Normal = {0.0f, 1.0f, 0.0f};
 
 					geActor_SetLightingOptions(	Server->Client->Players[Index].Actor, 
-												GE_TRUE, &Normal, 
+												 true, &Normal, 
 												BotLight[RandomSet][i].r, 
 												BotLight[RandomSet][i].g, 
 												BotLight[RandomSet][i].b, 
 												1.0f, 1.0f, 1.0f, 
-												GE_TRUE, 3, NULL, GE_FALSE);
+												 true, 3, NULL,  false);
 					}
 				}
 
@@ -2341,7 +2347,7 @@ static geBoolean Server_ManageBots(Server_Server *Server)
             }
         }
 
-	return GE_TRUE;
+	return  true;
 }
 
 
@@ -2392,7 +2398,7 @@ static void Server_SetWorldRequest(Server_Server *Server, GenVSI_NewWorldCB *New
 	assert(Name);
 
 	strcpy(Server->WorldName, Name);
-	Server->ChangeWorldRequest = GE_TRUE;
+	Server->ChangeWorldRequest =  true;
 
 	Server->NewWorldCB = NewWorldCB;
 
@@ -2498,7 +2504,7 @@ static void Server_PlaySound(Server_Server *Server, uint16 SoundIndex, const geV
 		if (!Client->Active)
 			continue;
 
-		if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer, FALSE))
+		if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer,  false))
 		{
 			Server_ClientDisconnect(Server, Client->NetID, Client->Name);
 			//GenVS_Error("Server_PlaySound:  Could not sent message to client.\n");
@@ -2522,7 +2528,7 @@ static void Server_SpawnFx(Server_Server *Server, uint8 Type, const geVec3d *Pos
 	Buffer_FillByte(&Buffer, Type);
 	Buffer_FillByte(&Buffer, Sound);
 	
-	if (!SendAllClientsMessage(Server, &Buffer, GE_FALSE))
+	if (!SendAllClientsMessage(Server, &Buffer,  false))
 		GenVS_Error("Server_SpawnFx:  Could not send mesages to clients.\n");
 }
 
@@ -2554,7 +2560,7 @@ static void Server_SetClientScore(Server_Server *Server, GenVSI_CHandle ClientHa
 	Buffer_FillByte(&Buffer, (uint8)ClientHandle);
 	Buffer_FillSLong(&Buffer, Client->Score);
 	
-	if (!SendAllClientsMessage(Server, &Buffer, GE_TRUE))
+	if (!SendAllClientsMessage(Server, &Buffer,  true))
 		GenVS_Error("Server_SetClientScore:  Could not send message.\n");
 }
 
@@ -2568,16 +2574,16 @@ static geBoolean Server_IsClientBot(Server_Server *Server, GenVSI_CHandle Client
 	assert(Server);
 
 	if (ClientHandle < 0 || ClientHandle > NETMGR_MAX_CLIENTS)
-		return GE_FALSE;
+		return  false;
 
 	Client = &Server->Clients[ClientHandle];
 	
 	assert(Client->Active);
 
 	if (Client->NetID == NETMGR_SPECIAL_BOT_NETID)
-		return GE_TRUE;
+		return  true;
 
-	return GE_FALSE;
+	return  false;
 }
 
 //=====================================================================================
@@ -2608,7 +2614,7 @@ static void Server_SetClientHealth(Server_Server *Server, GenVSI_CHandle ClientH
 	Buffer_FillByte(&Buffer, (uint8)ClientHandle);
 	Buffer_FillSLong(&Buffer, Client->Health);
 	
-	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer, GE_TRUE))
+	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer,  true))
 	{
 		Server_ClientDisconnect(Server, Client->NetID, Client->Name);
 		//GenVS_Error("Server_SetClientHealth:  Could not send message.\n");
@@ -2641,7 +2647,7 @@ static void Server_SetClientWeapon(Server_Server *Server, GenVSI_CHandle ClientH
 	Buffer_FillByte(&Buffer, (uint8)ClientHandle);
 	Buffer_FillShort(&Buffer, (uint16)Client->CurrentWeapon);
 	
-	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer, GE_FALSE))
+	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer,  false))
 	{
 		Server_ClientDisconnect(Server, Client->NetID, Client->Name);
 		//GenVS_Error("Server_SetClientWeapon:  Could not send message.\n");
@@ -2684,7 +2690,7 @@ static void Server_SetClientInventory(Server_Server *Server, GenVSI_CHandle Clie
 	Buffer_FillByte(&Buffer, (uint8)Slot);
 	Buffer_FillShort(&Buffer, SendVal);
 	
-	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer, GE_TRUE))
+	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer,  true))
 	{
 		Server_ClientDisconnect(Server, Client->NetID, Client->Name);
 		//GenVS_Error("Server_SetClientInventory:  Could not send message.\n");
@@ -2847,7 +2853,7 @@ static void Server_SetViewPlayer(Server_Server *Server, GenVSI_CHandle ClientHan
 	
 	Console_Printf(GameMgr_GetConsole(Server->GMgr), "View Player sent: %i\n", i);
 	
-	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer, GE_TRUE))
+	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer,  true))
 	{
 		Server_ClientDisconnect(Server, Client->NetID, Client->Name);
 		//GenVS_Error("Server_SetViewPlayer:  Could not send message.\n");
@@ -2868,7 +2874,7 @@ static geBoolean Server_MovePlayerModel(Server_Server *Server, GPlayer *Player, 
 	World = GameMgr_GetWorld(Server->GMgr);
 	assert(World);
 
-	CanMove = GE_TRUE;
+	CanMove =  true;
 
 	for (i=0; i< NETMGR_MAX_PLAYERS; i++)
 	{
@@ -2895,7 +2901,7 @@ static geBoolean Server_MovePlayerModel(Server_Server *Server, GPlayer *Player, 
 		// Test the models move intentions agianst all the players in the level
 		if (!geWorld_TestModelMove(World, Player->Model, DestXForm, &Mins, &Maxs, &Pos, &Out))
 		{
-			CanMove = GE_FALSE;		// Can't move, would've pushed player into world
+			CanMove =  false;		// Can't move, would've pushed player into world
 
 			// The model was blocked by player target
 			if (Player->Blocked)	// Call the blocked callback, and tell Player that Target is in the way..
@@ -3026,11 +3032,11 @@ static void Server_ConsoleHeaderPrintf(Server_Server *Server, int32 ClientHandle
 
 	if (AllClients)
 	{
-		SendAllClientsMessage(Server, &Buffer, GE_TRUE);
+		SendAllClientsMessage(Server, &Buffer,  true);
 	}
 	else if (Client->Active)
 	{
-		if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer, GE_TRUE))
+		if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer,  true))
 		{
 			//GenVS_Error("Could not send local client message!!!");
 

@@ -13,11 +13,12 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////
 #pragma warning ( disable : 4514 )
+#include <assert.h>
 #include <stdlib.h>
 #include <string.h>
-#include <assert.h>
+
 #include "Text.h"
-#include "Errorlog.h"
+#include "ErrorLog.h"
 
 #define	MAX_SUPPORTED_CHARS	128
 
