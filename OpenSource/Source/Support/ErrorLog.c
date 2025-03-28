@@ -45,14 +45,16 @@ typedef struct
 	geErrorLog_ErrorIDEnumType ErrorID;
 	char String[MAX_USER_NAME_LEN+1];
 	char Context[MAX_CONTEXT_LEN+1];
-} geErrorType;
+} 
+geErrorType;
 
 typedef struct
 {
 	int ErrorCount;
 	int MaxErrors;
 	geErrorType ErrorList[MAX_ERRORS];
-} geErrorLogType;
+} 
+geErrorLogType;
 
 geErrorLogType geErrorLog_Locals = {0,MAX_ERRORS};
 

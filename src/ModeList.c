@@ -13,11 +13,12 @@
 /*                                                                                      */
 /****************************************************************************************/
 #include <assert.h>
-#include <string.h>	// strupr, strncpy
+#include <string.h>
 
+#include "ErrorLog.h"
 #include "ModeList.h"
 #include "RAM.h"
-#include "ErrorLog.h"
+#include "XPlatUtils.h"
 
 #define MODELIST_MAX_NAME (1000)
 #define MODELIST_ALLOCATION_BLOCK_SIZE (10)
@@ -33,6 +34,15 @@ void	ModeList_Destroy(ModeList *List)
 	geRam_Free( List );
 }
 
+void strupr(char *str)
+{
+    if (str == NULL) return; // Handle NULL pointer
+
+    for (int i = 0; str[i] != '\0'; ++i)
+    {
+        str[i] = (char)toupper((unsigned char)str[i]); // Convert to uppercase
+    }
+}
 
 ModeList *ModeList_Create(geEngine *Engine,int *ListLength)
 {

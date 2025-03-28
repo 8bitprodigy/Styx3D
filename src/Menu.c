@@ -15,7 +15,7 @@
 #include <assert.h>
 #include <string.h>
 
-#include <SDL3/SDL.h>
+#include <SDL2/SDL.h>
 
 #ifdef _WIN32
 	#define	WIN32_LEAN_AND_MEAN

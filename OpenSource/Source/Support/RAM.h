@@ -53,18 +53,18 @@ GENESISAPI int geRam_EnableCriticalCallback(int add);
   mode, we track where the memory was allocated and can optionally provide a
   report of allocated blocks.  See geRam_ReportAllocations.
 */
-#ifndef NDEBUG
+/*#ifndef NDEBUG
 
 #define geRam_Allocate(size) _geRam_DebugAllocate(size, __FILE__, __LINE__)
 
 // Do not call _geRam_DebugAllocate directly.
-GENESISAPI void* _geRam_DebugAllocate(uint32 size, const char* pFile, int line);
+GENESISAPI void *_geRam_DebugAllocate(uint32 size, const char* pFile, int line);
 
-#else
+#else*/
 
 GENESISAPI void *geRam_Allocate(uint32 size);
 
-#endif
+//#endif
 
 /*
   Free an allocated memory block.
@@ -87,7 +87,7 @@ GENESISAPI void geRam_Free_(void *ptr);
 #define geRam_Realloc(ptr, newsize) _geRam_DebugRealloc(ptr, newsize, __FILE__, __LINE__)
 
 // Do not call _geRam_DebugRealloc directly.
-GENESISAPI void* _geRam_DebugRealloc(void* ptr, uint32 size, const char* pFile, int line);
+GENESISAPI void *_geRam_DebugRealloc(void* ptr, uint32 size, const char* pFile, int line);
 
 #else
 
@@ -117,7 +117,7 @@ GENESISAPI     void geRam_AddAllocation(int n,uint32 size);
 #endif
 
 // allocate the ram & clear it. (calloc)
-GENESISAPI void * geRam_AllocateClear(uint32 size);
+GENESISAPI void *geRam_AllocateClear(uint32 size);
 
 #define GE_RAM_ALLOCATE_STRUCT(type)      (type *)geRam_Allocate (sizeof (type))
 #define GE_RAM_ALLOCATE_ARRAY(type,count) (type *)geRam_Allocate (sizeof (type) * (count))

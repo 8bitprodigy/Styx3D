@@ -4,14 +4,16 @@
 #include <assert.h>
 #include <math.h>
 
+#include <SDL2/SDL.h>
+
 #ifdef _WIN32
 	#include <windows.h>
 #else
 	#include <string.h>
 #endif
 
+#include "BaseType.h"
 #include "GMain.h"
-
 #include "_Bot.h"
 #include "Track.h"
 #include "Bot.h"
@@ -424,8 +426,10 @@ geBoolean Bot_Control(GenVSI *VSI, void *PlayerData, float Time)
 
 	// Purely for debug purposes so we can break at any point
     #if BOT_DEBUG
-	if (GetAsyncKeyState('M') & 0x8000)
-		Player = Player;
+    const Uint8 *keystates = SDL_GetKeyboardState(NULL);
+    if (keystates[SDL_SCANCODE_M]) {
+        Player = Player;
+    }
     #endif
 
     assert(DBot->Action);
@@ -5795,8 +5799,10 @@ geBoolean Bot_Keys(GenVSI *VSI, void *PlayerData, float Time)
 	assert(Player);
 	DBot = (Bot_Var*)Player->userData;
 	assert(DBot);
-
-	if (GetAsyncKeyState('O') & 0x8000)
+	
+    const Uint8 *keystates = SDL_GetKeyboardState(NULL);
+    
+	if (keystates[SDL_SCANCODE_O])
 		{
 		static geBoolean Mode = GE_FALSE;
 		if (Mode)
@@ -5806,30 +5812,30 @@ geBoolean Bot_Keys(GenVSI *VSI, void *PlayerData, float Time)
 		Mode = !Mode;
 		}
 
-	if (GetAsyncKeyState('I') & 0x8000)
+	if (keystates[SDL_SCANCODE_I])
 		{
 		GodMode = !GodMode;
-		GenVSI_ConsoleHeaderPrintf(VSI, DBot->ClientPlayer->ClientHandle, GE_TRUE, "God Mode %d", GodMode);
+		GenVSI_ConsoleHeaderPrintf(VSI, DBot->ClientPlayer->ClientHandle, true, "God Mode %d", GodMode);
 		}
 
-	if (GetAsyncKeyState('P') & 0x8000)
+	if (keystates[SDL_SCANCODE_P])
 		{
 		PathLight = !PathLight;
-		GenVSI_ConsoleHeaderPrintf(VSI, DBot->ClientPlayer->ClientHandle, GE_TRUE, "Path Light %d", PathLight);
+		GenVSI_ConsoleHeaderPrintf(VSI, DBot->ClientPlayer->ClientHandle, true, "Path Light %d", PathLight);
 		}
 
-	if (GetAsyncKeyState('N') & 0x8000)
+	if (keystates[SDL_SCANCODE_N])
 		{
 		MultiPathLight = !MultiPathLight;
-		GenVSI_ConsoleHeaderPrintf(VSI, DBot->ClientPlayer->ClientHandle, GE_TRUE, "Multi-Path Light %d", MultiPathLight);
+		GenVSI_ConsoleHeaderPrintf(VSI, DBot->ClientPlayer->ClientHandle, true, "Multi-Path Light %d", MultiPathLight);
 		}
 
-	if (GetAsyncKeyState('D') & 0x8000)
+	if (keystates[SDL_SCANCODE_D])
 		{
 		BotDebugPrint = !BotDebugPrint;
-		GenVSI_ConsoleHeaderPrintf(VSI, DBot->ClientPlayer->ClientHandle, GE_TRUE, "Debug Print %d", BotDebugPrint);
+		GenVSI_ConsoleHeaderPrintf(VSI, DBot->ClientPlayer->ClientHandle, true, "Debug Print %d", BotDebugPrint);
 		}
 
-	return GE_TRUE;
+	return true;
 	}
 

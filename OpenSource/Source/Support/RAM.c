@@ -116,71 +116,73 @@ return mem;
 
 #ifdef MINIMAL_CONFIG
 
-    /*
-      Minimal configuration acts almost exactly like standard malloc, free,
-      and realloc.  The only difference is the critical allocation stuff.
-    */
+/*
+  Minimal configuration acts almost exactly like standard malloc, free,
+  and realloc.  The only difference is the critical allocation stuff.
+*/
 
 
-    /*
-      Allocate memory of the given size.  In debug mode, the memory is filled
-      with 0xA5, and we keep track of the amount of memory allocated.
-    */
-    void *geRam_Allocate
-        (
-          uint32 size
-        )
+/*
+  Allocate memory of the given size.  In debug mode, the memory is filled
+  with 0xA5, and we keep track of the amount of memory allocated.
+*/
+void *
+geRam_Allocate
+(
+  uint32 size
+)
+{
+    void *p;
+
+    do
     {
-        void *p;
+        p = malloc(size);
+    } while ((p == NULL) && (geRam_DoCriticalCallback ()));
 
-        do
-        {
-            p = malloc(size);
-        } while ((p == NULL) && (geRam_DoCriticalCallback ()));
+    return p;
+}
 
-        return p;
-    }
-
-    // free an allocated block
-    void geRam_Free_
-        (
-          void *ptr
-        )
-    {
-      free (ptr);
-    }
+// free an allocated block
+void geRam_Free_
+    (
+      void *ptr
+    )
+{
+  free (ptr);
+}
 
     // reallocate a block...
     // This acts like the standard realloc
-GENESISAPI     void *geRam_Realloc
-        (
-          void *ptr,
-          uint32 newsize
-        )
+GENESISAPI     void *
+geRam_Realloc
+(
+  void *ptr,
+  uint32 newsize
+)
+{
+    char *p;
+    char * NewPtr;
+
+    if (ptr == NULL)
     {
-        char *p;
-        char * NewPtr;
-
-        if (ptr == NULL)
-        {
-            return geRam_Allocate (newsize);
-        }
-
-        // if newsize is NULL, then it's a free and return NULL
-        if (newsize == 0)
-        {
-            geRam_Free (ptr);
-            return NULL;
-        }
-
-        p = ptr;
-        do
-        {
-            NewPtr = (char *)realloc (p, newsize);
-        } while ((NewPtr == NULL) && (geRam_DoCriticalCallback ()));
-
-        return NewPtr;
+        return geRam_Allocate (newsize);
     }
+
+    // if newsize is NULL, then it's a free and return NULL
+    if (newsize == 0)
+    {
+        geRam_Free (ptr);
+        return NULL;
+    }
+
+    p = ptr;
+    do
+    {
+        NewPtr = (char *)realloc (p, newsize);
+    } while ((NewPtr == NULL) && (geRam_DoCriticalCallback ()));
+
+    return NewPtr;
+}
 
 #else  // MINIMAL_CONFIG
      /*
@@ -311,40 +313,41 @@ GENESISAPI     void *geRam_Realloc
     }
   #endif
 #else // NDEBUG
+#endif // NDEBUG [TEMP!!] 
+GENESISAPI void * 
+geRam_Allocate (uint32 size)
+{
+  char *p;
 
-GENESISAPI     void * geRam_Allocate (uint32 size)
-    {
-      char *p;
+  do
+  {
+      p = (char*)malloc (size + EXTRA_SIZE);
+  } while ((p == NULL) && geRam_DoCriticalCallback ());
 
-      do
-      {
-          p = (char*)malloc (size + EXTRA_SIZE);
-      } while ((p == NULL) && geRam_DoCriticalCallback ());
+  if (p == NULL)
+  {
+     return NULL;
+  }
 
-      if (p == NULL)
-      {
-         return NULL;
-      }
+  // setup size stamps and memory overwrite checks
+  geRam_SetupBlock (p, size, INITIALIZE_MEMORY);
 
-      // setup size stamps and memory overwrite checks
-      geRam_SetupBlock (p, size, INITIALIZE_MEMORY);
+  // and update the allocations stuff
+  geRam_NumberOfAllocations++;
+  geRam_CurrentlyUsed += size;
 
-      // and update the allocations stuff
-      geRam_NumberOfAllocations++;
-      geRam_CurrentlyUsed += size;
+  if (geRam_NumberOfAllocations > geRam_MaximumNumberOfAllocations)
+  {
+      geRam_MaximumNumberOfAllocations = geRam_NumberOfAllocations;
+  }
+  if (geRam_CurrentlyUsed > geRam_MaximumUsed)
+  {
+      geRam_MaximumUsed = geRam_CurrentlyUsed;
+  }
 
-      if (geRam_NumberOfAllocations > geRam_MaximumNumberOfAllocations)
-      {
-          geRam_MaximumNumberOfAllocations = geRam_NumberOfAllocations;
-      }
-      if (geRam_CurrentlyUsed > geRam_MaximumUsed)
-      {
-          geRam_MaximumUsed = geRam_CurrentlyUsed;
-      }
-
-      return p+HEADER_SIZE;
-    }
-#endif // NDEBUG
+  return p+HEADER_SIZE;
+}
+//#endif // NDEBUG
 
     static char * ram_verify_block
           (

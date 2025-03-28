@@ -99,6 +99,16 @@ typedef uint8_t   uint8;
 
 #define	GE_PI					((geFloat)3.14159265358979323846f)
 
+#ifndef min
+#define min(a,b) ((a) < (b) ? (a) : (b))
+#endif
+
+#ifndef max
+#define max(a,b) ((a) > (b) ? (a) : (b))
+#endif
+
+#define strnicmp strncasecmp
+
 /****************************************************/
 
 #ifdef __cplusplus

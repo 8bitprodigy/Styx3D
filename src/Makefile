@@ -4,7 +4,7 @@
 # Compiler settings
 CC = gcc
 CXX = g++
-CFLAGS = -Wall -O2 -I../Src -I../include -I./DrvMenu -I./
+CFLAGS = -Wall -I../Src -I../include -I./DrvMenu -I./ -I./DrvMenu -I./FX -I./Game -I./Procedurals 
 LDFLAGS = 
 
 # Build configurations
@@ -86,7 +86,7 @@ OBJS = $(GAME_SRCS:%.c=$(BUILDDIR)/%.o) \
 TARGET = ../GTest
 
 # Libraries
-LIBS = -lm -lwinmm -lws2_32
+LIBS = -lSDL2main -lSDL2 -lenet -L../lib/ -lgenesis -lc -lm
 
 # Default target
 all: $(TARGET)

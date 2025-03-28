@@ -13,6 +13,7 @@
 /*                                                                                      */
 /****************************************************************************************/
 #include <assert.h>
+#include <stdarg.h>
 #include <stdio.h>
 
 #ifdef _WIN32
@@ -350,7 +351,7 @@ void GenVSI_ConsolePrintf(GenVSI *VSI, const char *Str, ...)
 	assert(Str);
 
 	va_start (ArgPtr, Str);
-    VSI->ConsolePrintf(VSI->UData, Str, ArgPtr);
+		VSI->ConsolePrintf(VSI->UData, Str, ArgPtr);
 	va_end (ArgPtr);
 }
 

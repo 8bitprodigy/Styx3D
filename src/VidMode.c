@@ -49,9 +49,9 @@ geBoolean VidMode_SetResolution (VidMode *V, int Width, int Height)
 			||  ( Height < 200  ) 
 			||  ( Height > 8000 )
 		)
-		return GE_FALSE;
+		return false;
 	
 	*V = PACK(Width,Height);
-	return GE_TRUE;
+	return true;
 }
 

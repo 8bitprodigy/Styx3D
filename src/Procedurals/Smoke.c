@@ -525,7 +525,7 @@ int32 Smoke_GetPalIndexFromString(const char *Str)
 
 	for (i=0; i<PalStrTableSize; i++)
 	{
-		if (!stricmp(Str, PalStr[i]))
+		if (!strcmp(Str, PalStr[i]))
 			return i;
 	}
 

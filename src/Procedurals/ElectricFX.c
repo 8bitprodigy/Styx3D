@@ -727,7 +727,7 @@ int32 ElectricFx_GetPalIndexFromString(const char *Str)
 
 	for (i=0; i<PalStrTableSize; i++)
 	{
-		if (!stricmp(Str, PalStr[i]))
+		if (!strcmp(Str, PalStr[i]))
 			return i;
 	}
 
@@ -743,7 +743,7 @@ ElectricFx_TypeData	*ElectricFx_GetFxTypeDataFromString(const char *Str)
 
 	for (i=0; i<FxTypeDataTableSize; i++)
 	{
-		if (!stricmp(Str, FxTypeDataTable[i].Str))
+		if (!strcmp(Str, FxTypeDataTable[i].Str))
 			return &FxTypeDataTable[i];
 	}
 

@@ -12,10 +12,12 @@
 /*  or FITNESS FOR ANY PURPOSE.  Refer to LICENSE.TXT for more details.                 */
 /*                                                                                      */
 /****************************************************************************************/
+#include <SDL2/SDL_filesystem.h>
+#include <SDL2/SDL_video.h>
 #include <assert.h>
 #include <stdio.h>
 
-#include <SDL3/SDL.h>
+#include <SDL2/SDL.h>
 
 #ifdef _WIN32
 	#include <direct.h>
@@ -42,6 +44,7 @@
 	RECT;
 #endif
 
+#include "Genesis.h"
 #include "ErrorLog.h"
 #include "GameMgr.h"
 #include "RAM.h"
@@ -146,7 +149,8 @@ void GameMgr_FreeAllObjects(GameMgr *GMgr)
 //====================================================================================
 //	GameMgr_Create
 //====================================================================================
-GameMgr *GameMgr_Create(int32 Width, int32 Height, const char *AppName)
+GameMgr *
+GameMgr_Create(int32 Width, int32 Height, const char *AppName)
 {
 	GameMgr	*GMgr;
 	char	PathBuf[_MAX_PATH];
@@ -170,10 +174,17 @@ GameMgr *GameMgr_Create(int32 Width, int32 Height, const char *AppName)
 	GMgr->SelfCheck2 = GMgr;
 
 	// Create the window
-	GMgr->hWnd = SDL_CreateWindow(AppName, Width, Height, 0);
+	GMgr->hWnd = SDL_CreateWindow(
+		AppName, 
+		SDL_WINDOWPOS_UNDEFINED,
+		SDL_WINDOWPOS_UNDEFINED,
+		Width, 
+		Height, 
+		0
+	);
 	
 	// Create an engine object
-	if (_getcwd(PathBuf,_MAX_PATH)==NULL)
+	if (!(strcpy(PathBuf,SDL_GetBasePath()),PathBuf))
 		{
 			geErrorLog_AddString(-1, "GameMgr_Create:  Could not get current working directory.", NULL);
 			goto ExitWithError;

@@ -64,25 +64,25 @@ GMenu_SingleKeyMapping;
 
 static GMenu_SingleKeyMapping OriginalKeyMapping[NUM_MAPPED_KEYS] =
 { 
-    { GMenu_KeyShoot,       SDL_BUTTON_LEFT   + MOUSE_BUTTON, SDL_KMOD_NONE },  // Left Mouse Button
-    { GMenu_KeyJump,        SDL_BUTTON_RIGHT  + MOUSE_BUTTON, SDL_KMOD_NONE },  // Right Mouse Button
-    { GMenu_KeyStrafeLeft,  SDLK_LEFT,          SDL_KMOD_NONE },
-    { GMenu_KeyStrafeRight, SDLK_RIGHT,         SDL_KMOD_NONE },
-    { GMenu_KeyForward,     SDLK_UP,            SDL_KMOD_NONE },
-    { GMenu_KeyBackward,    SDLK_DOWN,          SDL_KMOD_NONE },
-    { GMenu_KeyNextWeapon,  SDLK_LCTRL,         SDL_KMOD_NONE }
+    { GMenu_KeyShoot,       SDL_BUTTON_LEFT   + MOUSE_BUTTON, KMOD_NONE },  // Left Mouse Button
+    { GMenu_KeyJump,        SDL_BUTTON_RIGHT  + MOUSE_BUTTON, KMOD_NONE },  // Right Mouse Button
+    { GMenu_KeyStrafeLeft,  SDLK_LEFT,          KMOD_NONE },
+    { GMenu_KeyStrafeRight, SDLK_RIGHT,         KMOD_NONE },
+    { GMenu_KeyForward,     SDLK_UP,            KMOD_NONE },
+    { GMenu_KeyBackward,    SDLK_DOWN,          KMOD_NONE },
+    { GMenu_KeyNextWeapon,  SDLK_LCTRL,         KMOD_NONE }
 };
 
 
 static GMenu_SingleKeyMapping KeyMapping[NUM_MAPPED_KEYS] =
 {
-    { GMenu_KeyShoot,       SDL_BUTTON_LEFT   + MOUSE_BUTTON, SDL_KMOD_NONE },  // Left Mouse Button
-    { GMenu_KeyJump,        SDL_BUTTON_RIGHT  + MOUSE_BUTTON, SDL_KMOD_NONE },  // Right Mouse Button
-    { GMenu_KeyStrafeLeft,  SDLK_LEFT,          SDL_KMOD_NONE },
-    { GMenu_KeyStrafeRight, SDLK_RIGHT,         SDL_KMOD_NONE },
-    { GMenu_KeyForward,     SDLK_UP,            SDL_KMOD_NONE },
-    { GMenu_KeyBackward,    SDLK_DOWN,          SDL_KMOD_NONE },
-    { GMenu_KeyNextWeapon,  SDLK_LCTRL,         SDL_KMOD_NONE }
+    { GMenu_KeyShoot,       SDL_BUTTON_LEFT   + MOUSE_BUTTON, KMOD_NONE },  // Left Mouse Button
+    { GMenu_KeyJump,        SDL_BUTTON_RIGHT  + MOUSE_BUTTON, KMOD_NONE },  // Right Mouse Button
+    { GMenu_KeyStrafeLeft,  SDLK_LEFT,          KMOD_NONE },
+    { GMenu_KeyStrafeRight, SDLK_RIGHT,         KMOD_NONE },
+    { GMenu_KeyForward,     SDLK_UP,            KMOD_NONE },
+    { GMenu_KeyBackward,    SDLK_DOWN,          KMOD_NONE },
+    { GMenu_KeyNextWeapon,  SDLK_LCTRL,         KMOD_NONE }
 };
 
 //undone
@@ -144,9 +144,16 @@ int MyGetKeyNameText( int lParam, char *KeyText, int Size)
 	}
 	else
 	{
-		return (GetKeyNameText( lParam, KeyText, Size));
+		// Handle keyboard key name retrieval
+        const char *keyName = SDL_GetKeyName((SDL_Keycode)lParam);
+        if (keyName) {
+            strncpy(KeyText, keyName, Size - 1);
+        } else {
+            return 0; // Failed to get key name
+        }
 	}
 
+	KeyText[Size - 1] = '\0'; // Ensure null-termination
 	return 1;
 }
 
@@ -1107,8 +1114,8 @@ int32 GMenu_Key(
 			{
 				return Result;
 			}
-			TempString[Size-1] = (char)MapVirtualKey(wParam, 2);
-			TempString[Size] = 0x40;
+			TempString[Size-1] = (char)wParam;
+			TempString[Size]   = 0x40;
 			TempString[Size+1] = '\0';
 		}
 

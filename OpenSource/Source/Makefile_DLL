@@ -99,6 +99,7 @@ OBJECTS = \
 	$(OBJDIR)/Quatern.o \
 	$(OBJDIR)/Vec3D.o \
 	$(OBJDIR)/XForm3D.o \
+	$(OBJDIR)/XPlatUtils.o \
 	$(OBJDIR)/ErrorLog.o \
 	$(OBJDIR)/GEAssert.o \
 	$(OBJDIR)/Log.o \

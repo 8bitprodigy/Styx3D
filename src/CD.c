@@ -114,7 +114,7 @@ void	main(void)
 #else
 void	TestCd(void)
 #endif
-{
+{/*
 	UINT	id;
 
 	id = OpenCDPlayer();
@@ -126,4 +126,4 @@ void	TestCd(void)
 	Sleep(2000);
 	StopCDPlayer(id);
 	CloseCDPlayer(id);
-}
+*/}

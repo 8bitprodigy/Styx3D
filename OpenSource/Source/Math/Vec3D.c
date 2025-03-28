@@ -215,7 +215,7 @@ GENESISAPI geFloat GENESISCC geVec3d_Length(const geVec3d *V1)
 	return (geFloat)sqrt(geVec3d_DotProduct(V1, V1));
 }
 
-GENESISAPI void GENESISCC geVec3d_Subtrat(const geVec3d *V1, const geVec3d *V2, geVec3d *V1MinusV2)
+GENESISAPI void GENESISCC geVec3d_Subtract(const geVec3d *V1, const geVec3d *V2, geVec3d *V1MinusV2)
 {
 	assert( geVec3d_IsValid(V1) != GE_FALSE );
 	assert( geVec3d_IsValid(V2) != GE_FALSE );

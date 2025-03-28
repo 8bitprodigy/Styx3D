@@ -12,9 +12,10 @@
 /*  or FITNESS FOR ANY PURPOSE.  Refer to LICENSE.TXT for more details.                 */
 /*                                                                                      */
 /****************************************************************************************/
+#include <SDL2/SDL_scancode.h>
 #include <assert.h>
 #include <math.h>
-#include <SDL3/SDL.h>
+#include <SDL2/SDL.h>
 
 #ifdef _WIN32
 	#include <windows.h>
@@ -23,24 +24,19 @@
 	#include <stdint.h>
 	#include <string.h>
 	#define MAX_PATH PATH_MAX
-	typedef struct
-	{
-		uint32_t 
-			LowPart,
-			HighPart;
-	}
-	LARGE_INTEGER;
+	#define LARGE_INTEGER Uint64
 #endif
 
-#include "Client.h"
-
+#include "BaseType.h"
 #include "Buffer.h"
 #include "CD.h"
+#include "Client.h"
 #include "GMenu.h"
 
-LARGE_INTEGER			g_Freq, g_OldTick, g_CurTick;
+LARGE_INTEGER  g_Freq, g_OldTick, g_CurTick;
+const Uint8 *keystates[SDL_NUM_SCANCODES];
 
-#define	NUM_AVG			10
+#define NUM_AVG 10
 static float			AvgTime[NUM_AVG];
 static int32			CurAvg;
 
@@ -62,16 +58,10 @@ static void SubLarge(LARGE_INTEGER *start, LARGE_INTEGER *end, LARGE_INTEGER *de
 		mov dword ptr [ebx+4],edx
 	}
 */
-    delta->LowPart = start->LowPart - end->LowPart;
-    delta->HighPart = start->HighPart - end->HighPart;
-    
-    // Handle borrow
-    if (delta->LowPart > start->LowPart) {
-        delta->HighPart--;
-    }
+    *delta = *start - *end;
 }
 
-#define BEGIN_TIMER()		QueryPerformanceCounter(&g_OldTick)
+#define BEGIN_TIMER()		(g_OldTick = SDL_GetPerformanceCounter())
 				
 #define END_TIMER(g)											\
 				{												\
@@ -79,8 +69,8 @@ static void SubLarge(LARGE_INTEGER *start, LARGE_INTEGER *end, LARGE_INTEGER *de
 					float			ElapsedTime, Total;			\
 					int32			i;							\
 																\
-					QueryPerformanceCounter(&g_CurTick);		\
-					SubLarge(&g_OldTick, &g_CurTick, &DeltaTick);	\
+					g_CurTick = SDL_GetPerformanceCounter();		\
+					DeltaTick = g_OldTick - g_CurTick;	\
 																\
 					if (DeltaTick.LowPart > 0)					\
 						ElapsedTime =  1.0f / (((float)g_Freq.LowPart / (float)DeltaTick.LowPart));		\
@@ -98,10 +88,10 @@ static void SubLarge(LARGE_INTEGER *start, LARGE_INTEGER *end, LARGE_INTEGER *de
 																\
 					geEngine_Printf(GameMgr_GetEngine(g), 1, 50, "Timer ms: %2.3f/%2.3f", ElapsedTime, Total);	\
 				}
-extern	geVFile *MainFS;
-extern	geFloat	EffectScale;
+extern geVFile *MainFS;
+extern geFloat EffectScale;
 
-static	int32 NumUpdates = 0;		// For status bar updating...
+static int32 NumUpdates = 0;		// For status bar updating...
 
 #ifdef _DEBUG
 	Fx_Player *PLAYER_TO_FXPLAYER(Client_Client *Client, GPlayer *Player)
@@ -184,16 +174,16 @@ void		GenVS_Error(const char *Msg, ...);
 //=====================================================================================
 //	Local Static functions
 //=====================================================================================
-static geBoolean IsKeyDown(int KeyCode, HWND hWnd);
-geBoolean NewKeyDown(int KeyCode, HWND hWnd);
-static geBoolean ReadServerMessages(Client_Client *Client, GameMgr *GMgr, float Time);
+static inline bool IsKeyDown(int KeyCode, HWND hWnd);
+static inline bool NewKeyDown(int KeyCode, HWND hWnd);
+static bool ReadServerMessages(Client_Client *Client, GameMgr *GMgr, float Time);
 static void UpdatePlayers(Client_Client *Client, float Time);
-static geBoolean RenderWorld(Client_Client *Client, GameMgr *GMgr, float Time);
+static bool RenderWorld(Client_Client *Client, GameMgr *GMgr, float Time);
 static void SetupCamera(geCamera *Camera, GE_Rect *Rect, geXForm3d *XForm);
-static void ParsePlayerDataLocally(Client_Client *Client, Buffer_Data *Buffer, geBoolean Fake);
+static void ParsePlayerDataLocally(Client_Client *Client, Buffer_Data *Buffer, bool Fake);
 static void Client_SetupGenVSI(Client_Client *Client);
-static geBoolean Client_MovePlayerModel(Client_Client *Client, GPlayer *Player, const geXForm3d *DestXForm);
-static geBoolean CheckClientPlayerChanges(Client_Client *Client, GPlayer *Player, geBoolean TempPlayer);
+static bool Client_MovePlayerModel(Client_Client *Client, GPlayer *Player, const geXForm3d *DestXForm);
+static bool CheckClientPlayerChanges(Client_Client *Client, GPlayer *Player, bool TempPlayer);
 void Client_DestroyPlayer(Client_Client *Client, GPlayer *Player);
 
 #define M_PI	(3.14159f)
@@ -203,17 +193,44 @@ void Client_DestroyPlayer(Client_Client *Client, GPlayer *Player);
 uint8		SData[5000];
 Buffer_Data	SendBuffer;
 
+/*
+	[NOTE] Move this into its own header/source pair in the engine proper.
+*/
+typedef enum {
+    KEY_UP       = 0, // Key is not pressed
+    KEY_PRESSED  = 1, // Key was just pressed this frame
+    KEY_RELEASED = 2, // Key was just released this frame
+    KEY_HELD     = 3  // Key is being held down for multiple frames
+} 
+KeyStateDetail;
+
+void
+GetKeyState(Uint8 *key_states) 
+{
+    const Uint8* sdl_keystates = SDL_GetKeyboardState(NULL);
+    // Update key states based on current SDL keyboard state
+    for (int i = 0; i < SDL_NUM_SCANCODES; i++) {
+		if (!key_states[i]) return;
+		key_states[i] = (key_states[i]<<1)+sdl_keystates[i];
+    }
+    return;
+}
+/* [/NOTE] Move this into its own header/source pair in the engine proper. */
+
 //=====================================================================================
 //	Client_Create
 //=====================================================================================
-Client_Client *Client_Create(	geEngine	*Engine, 
-								Client_Mode Mode, 
-								GameMgr		*GMgr, 
-								NetMgr		*NMgr, 
-								VidMode		VidMode,
-								int32		DemoMode,
-								const char	*DemoName,
-								geBoolean	MultiPlayer)
+Client_Client *
+Client_Create(	
+	geEngine    *Engine, 
+	Client_Mode  Mode, 
+	GameMgr     *GMgr, 
+	NetMgr      *NMgr, 
+	VidMode      VidMode,
+	int32        DemoMode,
+	const char  *DemoName,
+	geBoolean    MultiPlayer
+)
 {
 	geRect		Rect = {0, 0, 0, 0};
 
@@ -284,7 +301,7 @@ Client_Client *Client_Create(	geEngine	*Engine,
 	Client_Main(&NewClient->GenVSI);
 	Console_Printf(GameMgr_GetConsole(GMgr), "Client_Create:  Client_Main initialized...\n");
 
-	QueryPerformanceFrequency(&g_Freq);
+	g_Freq = SDL_GetPerformanceFrequency();
 
 	return NewClient;
 
@@ -416,12 +433,12 @@ geBoolean Client_CreateStatusBar(Client_Client *Client, VidMode VidMode)
 		}
 	}
 
-	return GE_TRUE;
+	return true;
 
 	ExitWithError:
 	{
 		Client_FreeALLResources(Client);
-		return GE_FALSE;
+		return false;
 	}
 }
 
@@ -432,7 +449,7 @@ void Client_DestroyStatusBar(Client_Client *Client)
 {
 	int32		i, k;
 
-	assert(Client_IsValid(Client) == GE_TRUE);
+	assert(Client_IsValid(Client) == true);
 
 	// Delete the status bar bitmaps bitmaps
 	for (i=0; i<6; i++)
@@ -1281,25 +1298,17 @@ geBoolean Client_SendMove(Client_Client *Client, float Time)
 //=====================================================================================
 //	IsKeyDown
 //=====================================================================================
-static geBoolean IsKeyDown(int KeyCode, HWND hWnd)
+static inline bool IsKeyDown(int KeyCode, HWND hWnd)
 {
-	//if (GetFocus() == hWnd)
-		if (GetAsyncKeyState(KeyCode) & 0x8000)
-			return GE_TRUE;
-
-	return GE_FALSE;
+	return (int)keystates[KeyCode]&KEY_HELD;
 }
 
 //=====================================================================================
 //	NewKeyDown
 //=====================================================================================
-geBoolean NewKeyDown(int KeyCode, HWND hWnd)
+static inline bool NewKeyDown(int KeyCode, HWND hWnd)
 {
-	//if (GetFocus() == hWnd)
-	if (GetAsyncKeyState(KeyCode) & 1)
-			return GE_TRUE;
-
-	return GE_FALSE;
+	return (int)keystates[KeyCode]&KEY_PRESSED;
 }
 
 //===========================================================================

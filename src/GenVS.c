@@ -12,7 +12,7 @@
 /*  or FITNESS FOR ANY PURPOSE.  Refer to LICENSE.TXT for more details.                 */
 /*                                                                                      */
 /****************************************************************************************/
-#include <SDL3/SDL_mouse.h>
+#include <SDL2/SDL_events.h>
 #include <assert.h>
 #include <math.h>
 #include <stdint.h>
@@ -22,13 +22,15 @@
 #include <time.h>	//_chdir()
 #include <sys/time.h>
 
-#include <SDL3/SDL.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_mouse.h>
 
 #ifdef _WIN32
 	#include <direct.h>	
 	#include <dos.h>
 	#include <mmsystem.H>
 	#include <windows.H>
+	#define chdir _chdir
 #else
 	#include <limits.h>
 	#define _MAX_PATH PATH_MAX
@@ -68,6 +70,7 @@
 #include "Menu.h"
 #include "NetMgr.h"
 #include "Text.h"
+#include "XPlatUtils.h"
 
 
 
@@ -90,16 +93,16 @@ static void       GetMouseInput(SDL_Window *hWnd, int Width, int Height);
 #define STARTING_HEIGHT (400)
 
 // Misc global info
-geBoolean				PopupD3DLog = GE_FALSE;
-geBoolean				Running     = GE_TRUE;
-geBoolean				GameRunning = GE_FALSE;
-geBoolean				ResetMouse  = GE_TRUE;
+geBoolean				PopupD3DLog = false;
+geBoolean				Running     = true;
+geBoolean				GameRunning = false;
+geBoolean				ResetMouse  = true;
 char					AppName[256] = "Genesis3D Sample Game";
 
 #define DEFAULT_LEVEL	"Levels\\GenVS.BSP"
 
 geFloat					EffectScale;
-geBoolean				ChangingDisplayMode = GE_FALSE;	
+geBoolean				ChangingDisplayMode = false;	
 int						ChangeDisplaySelection;
 
 // Game Manager
@@ -123,8 +126,8 @@ static geBoolean		MenusCreated;
 ModeList			   *DriverModeList;
 int						DriverModeListLength;
 
-geBoolean				g_FogEnable = GE_FALSE;
-geBoolean				g_FarClipPlaneEnable = GE_FALSE;
+geBoolean				g_FogEnable = false;
+geBoolean				g_FarClipPlaneEnable = false;
 
 //=====================================================================================
 //	GetCommandText
@@ -170,11 +173,11 @@ static char *GetCommandText(char *CmdLine, char *Data, geBoolean Cmd)
 
 	if (ch == '"')
 	{
-		Quote = GE_TRUE;
+		Quote = true;
 		ch = *++CmdLine;
 	}
 	else
-		Quote = GE_FALSE;
+		Quote = false;
 
 	dp = 0;
 
@@ -251,12 +254,12 @@ NewKeyDown(int KeyCode)
     const bool *keyState = SDL_GetKeyboardState(NULL);
 
     if (
-    	keyState[SDL_GetScancodeFromKey(KeyCode, NULL)]
+    	keyState[SDL_GetScancodeFromKey(KeyCode)]
     ) {
-        return GE_TRUE;
+        return true;
     }
 
-    return GE_FALSE;
+    return false;
 }
 
 static void 
@@ -294,11 +297,13 @@ main(int argc, char *argv[])
     //struct timeval  SystemTime;
     char            *CmdLine = (argc > 1) ? argv[1] : NULL;
     int32           i;
-    struct timespec Freq;
-    uint64          OldTick, CurTick;
+    uint64          
+	                Freq, 
+	                OldTick, 
+	                CurTick;
     char            TempName[256];
     int32           TempNameLength;
-    geBoolean       ManualPick = GE_FALSE;
+    geBoolean       ManualPick = false;
 
     MainTime = 0.0f;
 
@@ -326,11 +331,11 @@ main(int argc, char *argv[])
 
 // set the currrent directory to where the exe is
 	{
-		int i;
-		char	PathBuf[_MAX_PATH];
+		int   i;
+		char *PathBuf = SDL_GetBasePath();
 
 		// get the exe's path and name
-		if (!SDL_GetBasepath())
+		if (!PathBuf)
 		{
 			GenVS_Error("Could not get exe file name.");
 		}
@@ -351,7 +356,7 @@ main(int argc, char *argv[])
 		
 		// move the current working directory to the executables directory.
 		// this is a little rude
-		if (_chdir(PathBuf)==-1)
+		if (chdir(PathBuf)==-1)
 		{
 			GenVS_Error("Could not change current working directory to exe's path.");
 		}
@@ -362,11 +367,11 @@ main(int argc, char *argv[])
 	sprintf(AppName, "GTest v1.0 "__DATE__","__TIME__"");
 
 	// Get defaults
-	ShowStats = Mute = GE_FALSE;
+	ShowStats = Mute = false;
 
 	strcpy(IPAddress, "");							// Deafult our IP address to blank (LAN game)
 	TempNameLength = sizeof(TempName);
-	if( GetUserName( TempName, &TempNameLength ) == 0 )
+	if( geGetUserName( TempName, &TempNameLength ) == 0 )
 	{
 		strcpy( PlayerName, "Player" );
 	}
@@ -382,7 +387,7 @@ main(int argc, char *argv[])
 	HostInit.LevelHack[0] = 0;
 	HostInit.DemoFile[0] = 0;
 
-	GetCurrentDirectory(sizeof(TempName), TempName);
+	geGetCurrentDir(sizeof(TempName), TempName);
 	MainFS = geVFile_OpenNewSystem(NULL,
 								   GE_VFILE_TYPE_DOS,
 								   TempName,
@@ -395,59 +400,59 @@ main(int argc, char *argv[])
 	{	
 		char			Data[MAX_PATH];
 
-		if (!(CmdLine = GetCommandText(CmdLine, Data, GE_TRUE)))
+		if (!(CmdLine = GetCommandText(CmdLine, Data, true)))
 			break;
 
-		if (!stricmp(Data, "Server"))
+		if (!strcmp(Data, "Server"))
 		{
 			if (!HostInit.LevelHack[0])	
 				strcpy(HostInit.LevelHack, DEFAULT_LEVEL);
 
 			HostInit.Mode = HOST_MODE_SERVER_CLIENT;
 		}
-		else if (!stricmp(Data, "Dedicated"))
+		else if (!strcmp(Data, "Dedicated"))
 		{
 			HostInit.Mode = HOST_MODE_SERVER_DEDICATED;
 		}
-		else if (!stricmp(Data, "Client"))
+		else if (!strcmp(Data, "Client"))
 		{
 			HostInit.Mode = HOST_MODE_CLIENT;
 		}
-		else if (!stricmp(Data, "BotPathDebug"))
+		else if (!strcmp(Data, "BotPathDebug"))
 		{
 			extern geBoolean PathLight; // hacked in
-			PathLight = GE_TRUE;
+			PathLight = true;
 		}
-		else if (!stricmp(Data, "Record"))
+		else if (!strcmp(Data, "Record"))
 		{
 			HostInit.DemoMode = HOST_DEMO_RECORD;
 
-			if (!(CmdLine = GetCommandText(CmdLine, Data, GE_FALSE)))
+			if (!(CmdLine = GetCommandText(CmdLine, Data, false)))
 				GenVS_Error("No demo name specified on command line.");
 
 			strcpy(HostInit.DemoFile, Data);
 		}
-		else if (!stricmp(Data, "Play"))
+		else if (!strcmp(Data, "Play"))
 		{
 			HostInit.DemoMode = HOST_DEMO_PLAY;
 
-			if (!(CmdLine = GetCommandText(CmdLine, Data, GE_FALSE)))
+			if (!(CmdLine = GetCommandText(CmdLine, Data, false)))
 				GenVS_Error("No demo name specified on command line.");
 
 			strcpy(HostInit.DemoFile, Data);
 		}
-		else if (!stricmp(Data, "Name"))
+		else if (!strcmp(Data, "Name"))
 		{
 			// Get name
-			if (!(CmdLine = GetCommandText(CmdLine, Data, GE_FALSE)))
+			if (!(CmdLine = GetCommandText(CmdLine, Data, false)))
 				GenVS_Error("No name specified on command line.");
 			
 			strcpy(PlayerName, Data);
 		}
-		else if (!stricmp(Data, "IP"))
+		else if (!strcmp(Data, "IP"))
 		{
 			// Get name
-			if (!(CmdLine = GetCommandText(CmdLine, Data, GE_FALSE)))
+			if (!(CmdLine = GetCommandText(CmdLine, Data, false)))
 				GenVS_Error("No IP Address specified on command line.");
 			
 			if (strlen(Data) >= NETMGR_MAX_IP_ADDRESS)
@@ -455,46 +460,46 @@ main(int argc, char *argv[])
 
 			strcpy(IPAddress, Data);		// User wants to override IP at command line
 		}
-		else if (!stricmp(Data, "Map"))
+		else if (!strcmp(Data, "Map"))
 		{
 			// Get name
-			if (!(CmdLine = GetCommandText(CmdLine, Data, GE_FALSE)))
+			if (!(CmdLine = GetCommandText(CmdLine, Data, false)))
 				GenVS_Error("No map name specified on command line.");
 			sprintf(HostInit.LevelHack, "Levels\\%s", Data);
 			//sprintf(HostInit.UserLevel, "Levels\\%s", Data);
 		}
-		else if (!stricmp(Data, "Gamma"))
+		else if (!strcmp(Data, "Gamma"))
 		{
 			// Get name
-			if (!(CmdLine = GetCommandText(CmdLine, Data, GE_FALSE)))
+			if (!(CmdLine = GetCommandText(CmdLine, Data, false)))
 				GenVS_Error("No gamma value specified on command line.");
 			
 			// <>
 			UserGamma = (float)atof(Data);
 		}
-		else if (!stricmp(Data, "ShowStats"))
+		else if (!strcmp(Data, "ShowStats"))
 		{
-			ShowStats = GE_TRUE;
+			ShowStats = true;
 		}
-		else if (!stricmp(Data, "Mute"))
+		else if (!strcmp(Data, "Mute"))
 		{
-			Mute = GE_TRUE;
+			Mute = true;
 		}
-		else if (!stricmp(Data, "VidMode"))
+		else if (!strcmp(Data, "VidMode"))
 		{
 			GenVS_Error("VidMode Parameter no longer supported");
 		}
-		else if (!stricmp(Data,"PickMode"))
+		else if (!strcmp(Data,"PickMode"))
 		{
-			ManualPick=GE_TRUE;
+			ManualPick=true;
 		}
-		else if (!stricmp(Data,"Fog"))
+		else if (!strcmp(Data,"Fog"))
 		{
-			g_FogEnable = GE_TRUE;
+			g_FogEnable = true;
 		}
-		else if (!stricmp(Data,"FarClip"))
+		else if (!strcmp(Data,"FarClip"))
 		{
-			g_FarClipPlaneEnable = GE_TRUE;
+			g_FarClipPlaneEnable = true;
 		}
 		else
 			GenVS_Error("Unknown Option: %s.", Data);
@@ -542,7 +547,7 @@ main(int argc, char *argv[])
 			if (!GMenu_Create( Engine , DriverModeList, DriverModeListLength, ChangeDisplaySelection))
 				GenVS_Error("GMenu_Create failed.");
 			
-			MenusCreated = GE_TRUE;
+			MenusCreated = true;
 
 			// Set the text in the menus for the name/ipaddress etc...
 			{
@@ -574,7 +579,7 @@ main(int argc, char *argv[])
 			if (HostInit.DemoMode != HOST_DEMO_RECORD && !HostInit.LevelHack[0] && HostInit.Mode != HOST_MODE_CLIENT)
 				HostInit.DemoMode = HOST_DEMO_PLAY;
 			else
-				GMenu_SetActive(GE_FALSE);			// Menu should start out as non active when recording a demo...
+				GMenu_SetActive(false);			// Menu should start out as non active when recording a demo...
 
 			// If the user wants to load a level at the command prompt, or wants to play back a demo
 			// then load a host now, else just let them do it through the menus later...
@@ -598,13 +603,13 @@ main(int argc, char *argv[])
 
 			// Setup the fog (if enabled)
 			if (g_FogEnable)
-				geEngine_SetFogEnable(Engine, GE_TRUE, 200.0f, 10.0f, 10.0f, 200.0f, 1300.0f);
+				geEngine_SetFogEnable(Engine, true, 200.0f, 10.0f, 10.0f, 200.0f, 1300.0f);
 			
-			QueryPerformanceFrequency(&Freq);
-			QueryPerformanceCounter(&OldTick);
+			Freq    = SDL_GetPerformanceFrequency();
+			OldTick = SDL_GetPerformanceCounter();
 
 			//SetCapture(GameMgr_GethWnd(GMgr));
-			ShowCursor(GE_FALSE);
+			SDL_ShowCursor(SDL_DISABLE);
 			
 			#ifdef CLIP_CURSOR	
 			{
@@ -643,9 +648,9 @@ main(int argc, char *argv[])
 
 				// see runtime menu options for stats and video mode changing.  (Mike)
 
-				SetCursor(NULL);
+				SDL_ShowCursor(SDL_DISABLE);
 				#ifdef DO_CAPTURE
-				SetCapture(hWnd);
+				SDL_SetRelativeMouseMode(true);
 				#endif
 
 				// Get timing info
@@ -685,12 +690,12 @@ main(int argc, char *argv[])
 				// Begin frame
 				if (g_FarClipPlaneEnable)		// If we are using a far clip plane, then clear the screen
 				{
-					if (!GameMgr_BeginFrame(GMgr, World, GE_TRUE))
+					if (!GameMgr_BeginFrame(GMgr, World, true))
 						GenVS_Error("GameMgr_BeginFrame failed.\n");
 				}
-				else if (!GameMgr_BeginFrame(GMgr, World, GE_FALSE))
+				else if (!GameMgr_BeginFrame(GMgr, World, false))
 				{
-					if (!GameMgr_BeginFrame(GMgr, World, GE_TRUE))
+					if (!GameMgr_BeginFrame(GMgr, World, true))
 						GenVS_Error("GameMgr_BeginFrame failed.\n");
 				}
 
@@ -711,7 +716,7 @@ main(int argc, char *argv[])
 					if (!World)
 						GameMgr_ClearBackground(GMgr, 0, 0, NULL);
 
-					if (Host_RenderFrame(Host, ElapsedTime)==GE_FALSE)
+					if (Host_RenderFrame(Host, ElapsedTime)==false)
 						GenVS_Error("Host_RenderFrame failed in main game loop.\n");
 
 					Console_Frame(Console, ElapsedTime);
@@ -760,21 +765,23 @@ main(int argc, char *argv[])
 				} */
 				while (SDL_PollEvent(&event)) {
 					switch (event.type) {
-					case SDL_EVENT_QUIT:
+					case SDL_QUIT:
 						Running = 0;
 						break;
 						
-					case SDL_EVENT_KEY_DOWN:
+					case SDL_KEYDOWN:
 						// Handle key presses
 						break;
 						
-					case SDL_EVENT_KEY_UP:
+					case SDL_KEYUP:
 						// Handle key releases
 						break;
 						
-					case SDL_EVENT_WINDOW_RESIZED:
-						ChangingDisplayMode = true;
-						break;
+					case SDL_WINDOWEVENT:
+						if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
+							ChangingDisplayMode = true;
+							break;
+						}
 					}
 					
 					if (ChangingDisplayMode) {
@@ -786,7 +793,7 @@ main(int argc, char *argv[])
 				if (ChangingDisplayMode)
 					{
 						Running = 0;		
-						GameRunning	= GE_FALSE;
+						GameRunning	= false;
 					}
 			} 
 			
@@ -796,7 +803,7 @@ main(int argc, char *argv[])
 							{
 								Text_Destroy();
 								GMenu_Destroy();
-								MenusCreated = GE_FALSE;
+								MenusCreated = false;
 							}
 
 						if (Host)
@@ -805,16 +812,16 @@ main(int argc, char *argv[])
 								Host = NULL;
 							}
 						
-						if ( GetCapture() )
+						if ( SDL_GetRelativeMouseMode() )
 							{
-								ReleaseCapture();
+								SDL_SetRelativeMouseMode(false);
 							}
-						ShowCursor(GE_TRUE);
+						SDL_ShowCursor(SDL_ENABLE);
 					}
 
 			
 		}
-	while (ChangingDisplayMode != GE_FALSE);
+	while (ChangingDisplayMode != false);
 
 	//ShutdownAll();
 	SDL_Quit();
@@ -841,10 +848,10 @@ PickMode(
 
 	if (!NoSelection && !ManualSelection)
 			{
-				if (AutoSelect_PickDriver(GameMgr_GethWnd(GMgr),Engine,List, ListLength, ListSelection)==GE_FALSE)
+				if (AutoSelect_PickDriver(GameMgr_GethWnd(GMgr),Engine,List, ListLength, ListSelection)==false)
 					{
 						geErrorLog_AddString(-1,"Automatic video mode selection failed to find good mode.  Trying manual selection.",NULL);
-						ManualSelection = GE_TRUE;
+						ManualSelection = true;
 					}
 			}
 
@@ -855,14 +862,14 @@ PickMode(
 				{
 					if (!NoSelection)
 						{
-							if (DrvList_PickDriver(GameMgr_GethWnd(GMgr), List, ListLength, ListSelection)==GE_FALSE)
+							if (DrvList_PickDriver(GameMgr_GethWnd(GMgr), List, ListLength, ListSelection)==false)
 								{
 									geErrorLog_AddString(-1,"Driver pick dialog failed",NULL);
 									ShutdownAll();
 									exit(1);
 								}
 						}
-					NoSelection = GE_FALSE;
+					NoSelection = false;
 
 					if ( *ListSelection < 0 )	// no selection made
 						{
@@ -880,17 +887,17 @@ PickMode(
 						 (List[*ListSelection].DriverType == MODELIST_TYPE_D3D_SECONDARY) ||
 						 (List[*ListSelection].DriverType == MODELIST_TYPE_D3D_3DFX) )
 						{
-							PopupD3DLog = GE_TRUE;
+							PopupD3DLog = true;
 						}
 					else
 						{
-							PopupD3DLog = GE_FALSE;
+							PopupD3DLog = false;
 						}
 					if (!geEngine_SetDriverAndMode(Engine, List[*ListSelection].Driver, List[*ListSelection].Mode))
 						{
-							if ( GetCapture() )  // just in case
+							if ( SDL_GetRelativeMouseMode() )  // just in case
 								{
-									ReleaseCapture();
+									SDL_SetRelativeMouseMode(false);
 								}
 							GameMgr_ResetMainWindow(hwnd,STARTING_WIDTH,STARTING_HEIGHT);
 							geErrorLog_AddString(-1, "geEngine_SetDriverAndMode failed. (continuing)", NULL);
@@ -920,18 +927,12 @@ PickMode(
 //=====================================================================================
 void ShutdownAll(void)
 {
-	if ( GetCapture() )
-	{
-		ReleaseCapture();
-	}
-	ShowCursor(GE_TRUE);
-
 	// Free each object (sub objects are freed by their parents...)
 	if (MenusCreated)
 	{
 		Text_Destroy();
 		GMenu_Destroy();
-		MenusCreated = GE_FALSE;
+		MenusCreated = false;
 	}
 
 	if (Host)
@@ -945,8 +946,14 @@ void ShutdownAll(void)
 			SDL_Window *hWnd = GameMgr_GethWnd(GMgr);
 			if (hWnd)
 				{
+					SDL_SetWindowGrab(hWnd, false);
+					SDL_ShowCursor(SDL_ENABLE);
 					SDL_HideWindow(hWnd);
 					SDL_UpdateWindowSurface(hWnd);
+					
+					#ifdef CLIP_CURSOR	
+						SDL_SetWindowGrab(hWnd, false);
+					#endif
 				}
 		}
 
@@ -977,9 +984,6 @@ void ShutdownAll(void)
 	}
 	#endif
 
-	#ifdef CLIP_CURSOR	
-		ClipCursor(NULL);
-	#endif
 
 }
 
@@ -1115,7 +1119,7 @@ WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 			}
 
 			// intentionally falls through if required
-			if ( GMenu_IsAMenuActive() == GE_FALSE )
+			if ( GMenu_IsAMenuActive() == false )
 			{
 				break;
 			}
@@ -1292,7 +1296,7 @@ WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 
 				default:
 					if (Console)
-						Console_KeyDown(Console, (char)wParam, GE_TRUE);
+						Console_KeyDown(Console, (char)wParam, true);
 					break;
 			}
 			break;
@@ -1336,7 +1340,7 @@ static void GetMouseInput(SDL_Window *hWnd, int Width, int Height)
 	SDL_GetMouseState(&px, &py);
   
 	//if (
-		!SDL_GetWindowPosition(hWnd, wx, wy);
+		SDL_GetWindowPosition(hWnd, wx, wy);
 	/*) {
 		geErrorLog_AddString(0,"GetMouseInput: SDL_GetWindowPosition failed",NULL); 
 		return;
@@ -1363,7 +1367,7 @@ static void GetMouseInput(SDL_Window *hWnd, int Width, int Height)
 //	GenVS_Error
 //=====================================================================================
 extern geBoolean	PopupD3DLog;
-static geBoolean	ErrorHandled = GE_FALSE;
+static geBoolean	ErrorHandled = false;
 
 void GenVS_Error(const char *Msg, ...)
 {
@@ -1375,7 +1379,7 @@ void GenVS_Error(const char *Msg, ...)
 	if (ErrorHandled)
 		return;
 
-	ErrorHandled = GE_TRUE;
+	ErrorHandled = true;
 
 	va_start (ArgPtr, Msg);
     vsprintf (TempStr, Msg, ArgPtr);

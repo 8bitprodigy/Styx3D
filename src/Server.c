@@ -22,8 +22,14 @@
 #include "BaseType.h"
 #include "Server.h"
 
-#define LARGE_INTEGER int64
-LARGE_INTEGER			g_Freq, g_OldTick, g_CurTick;
+typedef struct
+{
+	uint32_t 
+		LowPart,
+		HighPart;
+}
+LARGE_INTEGER;
+LARGE_INTEGER			sg_Freq, sg_OldTick, sg_CurTick;
 
 #define	NUM_AVG			10
 static float			AvgTime[NUM_AVG];
@@ -45,10 +51,16 @@ static void SubLarge(LARGE_INTEGER *start, LARGE_INTEGER *end, LARGE_INTEGER *de
 		mov dword ptr [ebx+0],eax
 		mov dword ptr [ebx+4],edx
 	}*/
-	*delta = *start - *end;
+    delta->LowPart = start->LowPart - end->LowPart;
+    delta->HighPart = start->HighPart - end->HighPart;
+    
+    // Handle borrow
+    if (delta->LowPart > start->LowPart) {
+        delta->HighPart--;
+    }
 }
 
-#define BEGIN_TIMER()		QueryPerformanceCounter(&g_OldTick)
+#define BEGIN_TIMER()		QueryPerformanceCounter(&sg_OldTick)
 				
 #define END_TIMER(g)											\
 				{												\
@@ -56,11 +68,11 @@ static void SubLarge(LARGE_INTEGER *start, LARGE_INTEGER *end, LARGE_INTEGER *de
 					float			ElapsedTime, Total;			\
 					int32			i;							\
 																\
-					QueryPerformanceCounter(&g_CurTick);		\
-					SubLarge(&g_OldTick, &g_CurTick, &DeltaTick);	\
+					QueryPerformanceCounter(&sg_CurTick);		\
+					SubLarge(&sg_OldTick, &sg_CurTick, &DeltaTick);	\
 																\
 					if (DeltaTick.LowPart > 0)					\
-						ElapsedTime =  1.0f / (((float)g_Freq.LowPart / (float)DeltaTick.LowPart));		\
+						ElapsedTime =  1.0f / (((float)sg_Freq.LowPart / (float)DeltaTick.LowPart));		\
 					else										\
 						ElapsedTime = 0.001f;					\
 																\

@@ -15,6 +15,8 @@
 #include <assert.h>
 #include <math.h>
 
+#include <SDL2/SDL.h>
+
 #ifdef _WIN32
 	#include <windows.h>
 #else
@@ -22,7 +24,6 @@
 #endif
 
 #include "GMain.h"
-
 #include "Quatern.h"
 
 #define INCHES_PER_METER (39.37007874016f)
@@ -66,7 +67,7 @@ static geBoolean ForceField_Spawn(GenVSI* VSI, void* PlayerData, void* Class,cha
 static geBoolean ForceField_Trigger(GenVSI* VSI, void* PlayerData, void* TargetData, void* data);
 static geBoolean ForceField_Control(GenVSI* VSI, void* PlayerData, float Time);
 
-static geBoolean IsKeyDown(int KeyCode);
+//static geBoolean IsKeyDown(int KeyCode);
 
 GPlayer	*CurrentPlayerStart;
 
@@ -871,6 +872,8 @@ geBoolean Client_Control(GenVSI *VSI, void *PlayerData, float Time)
 
 	assert(Player->ClientHandle != CLIENT_NULL_HANDLE);
 	
+    const Uint8 *keystates = SDL_GetKeyboardState(NULL);
+	
 	// FIXME:  Make this function take care of dead players also.  Use a switch statement or somthing.
 	// We should not be changing control functions on the fly like that.  Could confuse the server/client...
 	//assert(Player->State != PSTATE_Dead && Player->State != PSTATE_DeadOnGround);
@@ -878,7 +881,7 @@ geBoolean Client_Control(GenVSI *VSI, void *PlayerData, float Time)
 	if (PlayerDead(Player))
 		return GE_TRUE;
 	
-	if (IsKeyDown('L'))		
+	if (keystates[SDL_SCANCODE_L])		
 	{
 		GenVSI_SetWorld(VSI, SetupWorldCB, ShutdownWorldCB, "Levels\\GenVs.Bsp");
 		return GE_TRUE;
@@ -2110,13 +2113,15 @@ void ReflectVelocity(geVec3d *In, geVec3d *Normal, geVec3d *Out, float Scale)
 //=====================================================================================
 //	IsKeyDown
 //=====================================================================================
-static geBoolean IsKeyDown(int KeyCode)
+/*
+static bool 
+IsKeyDown(int KeyCode)
 {
 	if (GetAsyncKeyState(KeyCode) & 0x8000)
-		return GE_TRUE;
+		return true;
 
-	return GE_FALSE;
-}
+	return false;
+}*/
 
 //=====================================================================================
 //	XFormFromVector

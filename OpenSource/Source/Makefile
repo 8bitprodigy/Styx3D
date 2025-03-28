@@ -107,6 +107,7 @@ ROOT_SRCS = \
 	TSC.c
 
 SUPPORT_SRCS = \
+	Support/XplatUtils.c \
 	Support/ErrorLog.c \
 	Support/GEAssert.c \
 	Support/Log.c \

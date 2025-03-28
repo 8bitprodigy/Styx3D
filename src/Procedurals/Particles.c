@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "BaseType.h"
 #include "ErrorLog.h"
 #include "GeBMUtil.h"
 #include "Genesis.h"
@@ -168,9 +169,9 @@ static const char * strbreakers = " ,`\t\n\r\034\009";
 
 Procedural * Particles_Create(geBitmap **ppBitmap, const char *InputParams)
 {
-Procedural * Proc;
-int i;
-char ParamWork[8192],*pstr;
+	Procedural * Proc;
+	int i;
+	char ParamWork[8192],*pstr;
 
 	if ( ! (Proc = geRam_AllocateClear(sizeof(Procedural))) )
 		return NULL;

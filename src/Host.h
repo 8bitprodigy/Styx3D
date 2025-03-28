@@ -17,7 +17,7 @@
 
 #include <stdio.h>
 
-#include <SDL3/SDL.h>
+#include <SDL2/SDL.h>
 
 #ifdef _WIN32
 	#include <windows.h>

@@ -16,7 +16,7 @@
 #ifndef DRVLIST_H
 #define DRVLIST_H
 
-#include <SDL3/SDL.h>
+#include <SDL2/SDL.h>
 
 #include "ModeList.h"
 

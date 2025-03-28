@@ -15,7 +15,7 @@
 #ifndef GAMEMGR_H
 #define GAMEMGR_H
 
-#include <SDL3/SDL.h>
+#include <SDL2/SDL.h>
 
 #ifdef _WIN32
 	#include <windows.h>

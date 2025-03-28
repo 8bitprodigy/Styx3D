@@ -26,6 +26,7 @@
 #include "Procedural.h"
 #include "ProcEng.h"
 #include "RAM.h"
+#include "XPlatUtils.h"
 
 
 // at the end of this file :
@@ -39,22 +40,27 @@ extern int NumGetProceduralFunctions;
 
 //====================================================================================
 //====================================================================================
-typedef struct ProcEng_PTable
+typedef struct 
+ProcEng_PTable
 {
 	char				DllName[_MAX_PATH];
 	HINSTANCE			DllHandle;
 	Procedural_Table	*Table;
 	int					Uses;
-} ProcEng_PTable;
+} 
+ProcEng_PTable;
 
-typedef struct ProcEng_Proc
+typedef struct 
+ProcEng_Proc
 {
 	Procedural_Table	*Table;				// Table used to create this proc (So we can destroy it)
 	Procedural			*Proc;
 	geBitmap			*Bitmap;
-} ProcEng_Proc;
+} 
+ProcEng_Proc;
 
-typedef struct ProcEng
+typedef struct 
+ProcEng
 {
 	geWorld				*World;
 
@@ -63,7 +69,8 @@ typedef struct ProcEng
 
 	int32				NumProcs;
 	ProcEng_Proc		Procs[PROCENG_MAX_PROCS];
-} ProcEng;
+} 
+ProcEng;
 
 geBoolean VFile_ReadBetween(geVFile * File,char *Into,char Start,char Stop);
 geBoolean VFile_SeekPastString(geVFile * File,const char *str);
@@ -80,8 +87,8 @@ static char * stristr(const char *StrBase,const char *SubBase);
 //====================================================================================
 ProcEng *ProcEng_Create(geVFile *CfgFile, geWorld *World)
 {
-	ProcEng		*PEng;
-	int32		i;
+	ProcEng *PEng;
+	int32    i;
 
 	// For now, hard code in the procedures (but later, load *.dll)...
 	PEng = geRam_Allocate(sizeof(*PEng));
@@ -144,11 +151,11 @@ ProcEng *ProcEng_Create(geVFile *CfgFile, geWorld *World)
 
 		while( geVFile_FinderGetNextFile(Finder) )
 		{
-		GetProceduralFunc GetProcFunc;
-		HMODULE TheDll;
-		geVFile_Properties Properties;
-		char DLLName[_MAX_PATH];
-		Procedural_Table * pTable;
+			GetProceduralFunc GetProcFunc;
+			geModule TheDll;
+			geVFile_Properties Properties;
+			char DLLName[_MAX_PATH];
+			Procedural_Table * pTable;
 		
 			geVFile_FinderGetProperties(Finder,&Properties);
 
@@ -156,7 +163,7 @@ ProcEng *ProcEng_Create(geVFile *CfgFile, geWorld *World)
 			strcat(DLLName,"\\");
 			strcat(DLLName,Properties.Name);
 
-			TheDll = LoadLibrary(DLLName);
+			TheDll = geLoadLibrary(DLLName);
 			if ( ! TheDll )
 			{
 				#if 0
@@ -181,14 +188,14 @@ ProcEng *ProcEng_Create(geVFile *CfgFile, geWorld *World)
 				continue;
 			}
 
-			GetProcFunc = (GetProceduralFunc) GetProcAddress(TheDll,"GetProceduralTable");
+			GetProcFunc = (GetProceduralFunc) geGetProcAddress(TheDll,"GetProceduralTable");
 			
 			if ( ! GetProcFunc )
 			{
 			//char ErrStr[_MAX_PATH+1024];
 			//	sprintf(ErrStr,"ProcEng_Create : no GetProceduralTable in DLL : %s : non-fatal",DLLName);
 			//	geErrorLog_AddString(-1,ErrStr);
-				FreeLibrary(TheDll);
+				geFreeLibrary(TheDll);
 				continue;
 			}
 
@@ -198,7 +205,7 @@ ProcEng *ProcEng_Create(geVFile *CfgFile, geWorld *World)
 			//char ErrStr[1024];
 			//	sprintf(ErrStr,"ProcEng_Create : found procedural : %s : but ignored because of version mismatch",pTable == NULL ? "null!" : pTable->Name);
 			//	geErrorLog_AddString(-1,ErrStr);
-				FreeLibrary(TheDll);
+				geFreeLibrary(TheDll);
 				continue;
 			}
 
@@ -355,7 +362,7 @@ void ProcEng_Destroy(ProcEng **pPEng)
 	{
 		if ( pTable->DllHandle )
 		{
-			FreeLibrary(pTable->DllHandle);
+			geFreeLibrary(pTable->DllHandle);
 		}
 		memset(pTable, 0, sizeof(*pTable));
 	}
@@ -389,7 +396,7 @@ ProcEng_PTable	*pTableLast;
 		{
 			if ( pTable->DllHandle )
 			{
-				FreeLibrary(pTable->DllHandle);
+				geFreeLibrary(pTable->DllHandle);
 			}
 			*pTable = *pTableLast;
 			pTableLast--;
@@ -427,7 +434,7 @@ geBoolean ProcEng_AddProcedural(ProcEng *PEng, const char *ProcName, geBitmap **
 	for (i=0; i< PEng->NumPTables; i++, pTable++)
 	{
 		// Should we ignore case? ! YES!
-		if ( stricmp(pTable->Table->Name, ProcName) == 0)
+		if ( strcmp(pTable->Table->Name, ProcName) == 0)
 			break;
 	}
 
@@ -519,7 +526,7 @@ int len;
 			goto fail;
 		Buf[len] = 0;
 
-		if ( stricmp(Buf,str) == 0 )
+		if ( strcmp(Buf,str) == 0 )
 			return GE_TRUE;
 		
 		len = 1 - len;
