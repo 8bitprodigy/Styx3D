@@ -24,6 +24,7 @@
 #endif
 
 #include "GMain.h"
+#include "GPlayer.h"
 #include "Quatern.h"
 
 #define INCHES_PER_METER (39.37007874016f)
@@ -35,36 +36,36 @@ void		GenVS_Error(const char *Msg, ...);  //oh, dear.
 // FIXME:  Take out Genesis.h dependency.  Replace with server API code that sits on top
 //		   of Genesis calls...
 
-geBoolean		Client_Control(GenVSI *VSI, void *PlayerData, float Time);
-static geBoolean Door_Control(GenVSI *VSI, void *PlayerData, float Time);
-static geBoolean Plat_Control(GenVSI *VSI, void *PlayerData, float Time);
-static geBoolean Door_Trigger(GenVSI *VSI, void *PlayerData, void *TargetData, void* data);
+       geBoolean Client_Control( GenVSI *VSI, void *PlayerData, float Time);
+static geBoolean Door_Control(   GenVSI *VSI, void *PlayerData, float Time);
+static geBoolean Plat_Control(   GenVSI *VSI, void *PlayerData, float Time);
+static geBoolean Door_Trigger(   GenVSI *VSI, void *PlayerData, GPlayer *TargetData, void* data);
 void			SetupPlayerXForm(GenVSI *VSI, void *PlayerData, float Time);
 
-geBoolean Bot_Main(GenVSI *VSI, const char *LevelName);
+       geBoolean Bot_Main(    GenVSI *VSI, const char *LevelName);
 static geBoolean Player_Spawn(GenVSI *VSI, void *PlayerData, void *ClassData,char *EntityName);
-static geBoolean Door_Spawn(GenVSI *VSI, void *PlayerData, void *ClassData,char *EntityName);
-static geBoolean Plat_Spawn(GenVSI *VSI, void *PlayerData, void *ClassData,char *EntityName);
-static geBoolean Plat_Trigger(GenVSI *VSI, void *PlayerData, void *TargetData, void* data);
+static geBoolean Door_Spawn(  GenVSI *VSI, void *PlayerData, void *ClassData,char *EntityName);
+static geBoolean Plat_Spawn(  GenVSI *VSI, void *PlayerData, void *ClassData,char *EntityName);
+static geBoolean Plat_Trigger(GenVSI *VSI, void *PlayerData, GPlayer *TargetData, void* data);
 
 
-static geBoolean PhysicsObject_Spawn(GenVSI* VSI, void* PlayerData, void* Class,char *EntityName);
-static void PhysicsObject_Destroy(GenVSI *VSI, void *PlayerData, void *ClassData);
+static geBoolean PhysicsObject_Spawn(  GenVSI* VSI, void* PlayerData, void* Class,char *EntityName);
+static void PhysicsObject_Destroy(     GenVSI *VSI, void *PlayerData, void *ClassData);
 static geBoolean PhysicsObject_Trigger(GenVSI *VSI, void *PlayerData, GPlayer *TargetData, void *data);
 static geBoolean PhysicsObject_Control(GenVSI *VSI, void *PlayerData, float Time);
 
-static geBoolean PhysicsJoint_Spawn(GenVSI* VSI, void* PlayerData, void* Class,char *EntityName);
-static void PhysicsJoint_Destroy(GenVSI *VSI, void *PlayerData, void *ClassData);
-static geBoolean PhysicsJoint_Trigger(GenVSI* VSI, void* PlayerData, void* TargetData, void* data);
+static geBoolean PhysicsJoint_Spawn(  GenVSI* VSI, void* PlayerData, void* Class,char *EntityName);
+static void PhysicsJoint_Destroy(     GenVSI *VSI, void *PlayerData, void *ClassData);
+static geBoolean PhysicsJoint_Trigger(GenVSI* VSI, void* PlayerData, GPlayer* TargetData, void* data);
 static geBoolean PhysicsJoint_Control(GenVSI* VSI, void* PlayerData, float Time);
 
-static geBoolean PhysicalSystem_Spawn(GenVSI* VSI, void* PlayerData, void* Class,char *EntityName);
-static void PhysicalSystem_Destroy(GenVSI *VSI, void *PlayerData, void *ClassData);
-static geBoolean PhysicalSystem_Trigger(GenVSI* VSI, void* PlayerData, void* TargetData, void* data);
+static geBoolean PhysicalSystem_Spawn(  GenVSI* VSI, void* PlayerData, void* Class,char *EntityName);
+static void PhysicalSystem_Destroy(     GenVSI *VSI, void *PlayerData, void *ClassData);
+static geBoolean PhysicalSystem_Trigger(GenVSI* VSI, void* PlayerData, GPlayer* TargetData, void* data);
 static geBoolean PhysicalSystem_Control(GenVSI* VSI, void* PlayerData, float Time);
 
-static geBoolean ForceField_Spawn(GenVSI* VSI, void* PlayerData, void* Class,char *EntityName);
-static geBoolean ForceField_Trigger(GenVSI* VSI, void* PlayerData, void* TargetData, void* data);
+static geBoolean ForceField_Spawn(  GenVSI* VSI, void* PlayerData, void* Class,char *EntityName);
+static geBoolean ForceField_Trigger(GenVSI* VSI, void* PlayerData, GPlayer* TargetData, void* data);
 static geBoolean ForceField_Control(GenVSI* VSI, void* PlayerData, float Time);
 
 //static geBoolean IsKeyDown(int KeyCode);
@@ -1259,7 +1260,7 @@ static geBoolean Plat_Control(GenVSI *VSI, void *PlayerData, float Time)
 //=====================================================================================
 //	Door_Trigger
 //=====================================================================================
-static geBoolean Door_Trigger(GenVSI *VSI, void *PlayerData, void *TargetData, void* data)
+static geBoolean Door_Trigger(GenVSI *VSI, void *PlayerData, GPlayer *TargetData, void* data)
 {
 	GPlayer		*Player, *Target;
 
@@ -1284,7 +1285,8 @@ static geBoolean Door_Trigger(GenVSI *VSI, void *PlayerData, void *TargetData, v
 //=====================================================================================
 //	Door_Blocked
 //=====================================================================================
-static geBoolean Door_Blocked(GenVSI *VSI, void *PlayerData, void *TargetData)
+static geBoolean 
+Door_Blocked(GenVSI *VSI, void *PlayerData, GPlayer *TargetData)
 {
 	return GE_TRUE;
 }
@@ -1292,14 +1294,20 @@ static geBoolean Door_Blocked(GenVSI *VSI, void *PlayerData, void *TargetData)
 //=====================================================================================
 //	Door_Spawn
 //=====================================================================================
-static geBoolean Door_Spawn(GenVSI *VSI, void *PlayerData, void *ClassData, char *EntityName)
+static geBoolean 
+Door_Spawn(
+	GenVSI *VSI, 
+	void   *PlayerData, 
+	void   *ClassData, 
+	char   *EntityName
+)
 {
-	geWorld_Model	*Model;
-	geMotion		*Motion;
-	gePath			*Path;
-	GPlayer			*Player;
-	Door			*FuncDoor;
-	geWorld			*World;
+	geWorld_Model *Model;
+	geMotion      *Motion;
+	gePath        *Path;
+	GPlayer       *Player;
+	Door          *FuncDoor;
+	geWorld       *World;
 
 	Player = (GPlayer*)PlayerData;
 
@@ -1361,7 +1369,8 @@ static geBoolean Door_Spawn(GenVSI *VSI, void *PlayerData, void *ClassData, char
 //=====================================================================================
 //	Plat_Trigger
 //=====================================================================================
-static geBoolean Plat_Trigger(GenVSI *VSI, void *PlayerData, void *TargetData, void* data)
+static geBoolean 
+Plat_Trigger(GenVSI *VSI, void *PlayerData, GPlayer *TargetData, void* data)
 {
 	geVec3d		Pos;
 	GPlayer		*Player, *Target;
@@ -1400,7 +1409,8 @@ static geBoolean Plat_Trigger(GenVSI *VSI, void *PlayerData, void *TargetData, v
 //=====================================================================================
 //	Plat_Spawn
 //=====================================================================================
-static geBoolean Plat_Spawn(GenVSI *VSI, void *PlayerData, void *ClassData, char *EntityName)
+static geBoolean 
+Plat_Spawn(GenVSI *VSI, void *PlayerData, void *ClassData, char *EntityName)
 {
 	geWorld_Model	*Model;
 	geMotion		*Motion;
@@ -1477,7 +1487,13 @@ static geBoolean Plat_Spawn(GenVSI *VSI, void *PlayerData, void *ClassData, char
 //=====================================================================================
 //	PhysicsObject_Spawn
 //=====================================================================================
-static geBoolean PhysicsObject_Spawn(GenVSI *VSI, void *PlayerData, void *ClassData, char *EntityName)
+static geBoolean 
+PhysicsObject_Spawn(
+	GenVSI *VSI, 
+	void   *PlayerData, 
+	void   *ClassData, 
+	char   *EntityName
+)
 {
 	geWorld_Model				*Model;
 	GPlayer						*Player;
@@ -1571,7 +1587,8 @@ static geBoolean PhysicsObject_Spawn(GenVSI *VSI, void *PlayerData, void *ClassD
 	return GE_TRUE;
 }
 
-static void PhysicsObject_Destroy(GenVSI *VSI, void *PlayerData, void *ClassData)
+static void 
+PhysicsObject_Destroy(GenVSI *VSI, void *PlayerData, void *ClassData)
 {
 	GPlayer								*Player;
 	PhysicsObject						*po;
@@ -1587,7 +1604,12 @@ static void PhysicsObject_Destroy(GenVSI *VSI, void *PlayerData, void *ClassData
 }
 
 static geBoolean 
-PhysicsObject_Trigger(GenVSI *VSI, void *PlayerData, GPlayer *Target, void *data)
+PhysicsObject_Trigger(
+	GenVSI  *VSI, 
+	void    *PlayerData, 
+	GPlayer *Target, 
+	void    *data
+)
 {
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	// PlayerData actually points to the PhysicsObject.
@@ -1787,7 +1809,8 @@ static geBoolean PhysicsObject_Control(GenVSI* VSI, void* PlayerData, float Time
 //=====================================================================================
 //	PhysicsJoint_Spawn
 //=====================================================================================
-static geBoolean PhysicsJoint_Spawn(GenVSI *VSI, void *PlayerData, void *ClassData, char *EntityName)
+static geBoolean 
+PhysicsJoint_Spawn(GenVSI *VSI, void *PlayerData, void *ClassData, char *EntityName)
 {
 	GPlayer			*Player;
 	PhysicsJoint	*ij;
@@ -1833,7 +1856,8 @@ static geBoolean PhysicsJoint_Spawn(GenVSI *VSI, void *PlayerData, void *ClassDa
 
 //=====================================================================================
 //=====================================================================================
-static void PhysicsJoint_Destroy(GenVSI *VSI, void *PlayerData, void *ClassData)
+static void 
+PhysicsJoint_Destroy(GenVSI *VSI, void *PlayerData, void *ClassData)
 {
 	GPlayer			*Player;
 	PhysicsJoint	*ij;
@@ -1850,12 +1874,19 @@ static void PhysicsJoint_Destroy(GenVSI *VSI, void *PlayerData, void *ClassData)
 
 //=====================================================================================
 //=====================================================================================
-static geBoolean PhysicsJoint_Trigger(GenVSI* VSI, void* PlayerData, void* TargetData, void* data)
+static geBoolean 
+PhysicsJoint_Trigger(
+	GenVSI  *VSI, 
+	void    *PlayerData, 
+	GPlayer *TargetData, 
+	void    *data
+)
 {
 	return GE_TRUE;
 }
 
-static geBoolean PhysicsJoint_Control(GenVSI* VSI, void* PlayerData, float Time)
+static geBoolean 
+PhysicsJoint_Control(GenVSI* VSI, void* PlayerData, float Time)
 {
 	return GE_TRUE;
 }
@@ -1867,7 +1898,8 @@ static geBoolean PhysicsJoint_Control(GenVSI* VSI, void* PlayerData, float Time)
 //=====================================================================================
 //	PhysicalSystem_Spawn
 //=====================================================================================
-static geBoolean PhysicalSystem_Spawn(GenVSI *VSI, void *PlayerData, void *ClassData, char *EntityName)
+static geBoolean 
+PhysicalSystem_Spawn(GenVSI *VSI, void *PlayerData, void *ClassData, char *EntityName)
 {
 	GPlayer									*Player;
 	PhysicalSystem					*ips;
@@ -1966,7 +1998,8 @@ static geBoolean PhysicalSystem_Spawn(GenVSI *VSI, void *PlayerData, void *Class
 
 //=====================================================================================
 //=====================================================================================
-static void PhysicalSystem_Destroy(GenVSI *VSI, void *PlayerData, void *ClassData)
+static void 
+PhysicalSystem_Destroy(GenVSI *VSI, void *PlayerData, void *ClassData)
 {
 	GPlayer				*Player;
 	PhysicalSystem		*ips;
@@ -1984,14 +2017,16 @@ static void PhysicalSystem_Destroy(GenVSI *VSI, void *PlayerData, void *ClassDat
 
 //=====================================================================================
 //=====================================================================================
-static geBoolean PhysicalSystem_Trigger(GenVSI* VSI, void* PlayerData, void* TargetData, void* data)
+static geBoolean 
+PhysicalSystem_Trigger(GenVSI* VSI, void* PlayerData, GPlayer* TargetData, void* data)
 {
 	return GE_TRUE;
 }
 
 //=====================================================================================
 //=====================================================================================
-static geBoolean PhysicalSystem_Control(GenVSI* VSI, void* PlayerData, float Time)
+static geBoolean 
+PhysicalSystem_Control(GenVSI* VSI, void* PlayerData, float Time)
 {
 	GPlayer* player;
 	PhysicalSystem* psPtr;
@@ -2039,7 +2074,8 @@ static geBoolean ForceField_Spawn(GenVSI* VSI, void* PlayerData, void* Class, ch
 	return GE_TRUE;
 }
 
-static geBoolean ForceField_Trigger(GenVSI* VSI, void* PlayerData, void* TargetData, void* data)
+static geBoolean 
+ForceField_Trigger(GenVSI* VSI, void* PlayerData, GPlayer* TargetData, void* data)
 {
 	
 	return GE_TRUE;

@@ -21,29 +21,29 @@
 /****************************************************************************************/
 #include <assert.h>
 
+#include <SDL2/SDL.h>
+
 #include "BaseType.h"
-#include "System.h"
-#include "Genesis.h"
-#include "ErrorLog.h"
-#include "RAM.h"
-#include "Engine.h"
-
-#include "List.h"
-#include "Surface.h"
-#include "World.h"
-#include "Plane.h"
-#include "Light.h"
-#include "WBitmap.h"
-#include "Camera.h"
-#include "Sound.h"
-#include "Entities.h"
-#include "User.h"
-
-#include "DCommon.h"
-
-#include "GEAssert.h"
-
 #include "BitmapList.h"
+#include "Camera.h"
+#include "DCommon.h"
+#include "Entities.h"
+#include "ErrorLog.h"
+#include "GEAssert.h"
+#include "Genesis.h"
+#include "Engine.h"
+#include "Light.h"
+#include "List.h"
+#include "Plane.h"
+#include "RAM.h"
+#include "Sound.h"
+#include "Surface.h"
+#include "System.h"
+#include "User.h"
+#include "WBitmap.h"
+#include "World.h"
+#include "XPlatUtils.h"
+
 //#define SKY_HACK
 //extern BOOL GlobalReset;
 
@@ -329,17 +329,17 @@ Sys_EngineFree(geEngine *Engine)
 geBoolean 
 Sys_GetCPUFreq(Sys_CPUInfo *Info)
 {
-	LARGE_INTEGER Freq;
+	int64 Freq;
 
 	assert(Info != NULL);
 
-	if (!QueryPerformanceFrequency(&Freq))
+	if (!(Freq = SDL_GetPerformanceFrequency(), Freq))
 	{
 		geErrorLog_Add(GE_ERR_NO_PERF_FREQ, NULL);
 		return GE_FALSE;
 	}
 
-	Info->Freq = Freq.LowPart;
+	Info->Freq = Freq;
 
 	return GE_TRUE;
 }
@@ -471,23 +471,23 @@ EnumSubDrivers(Sys_DriverInfo *DriverInfo, const char *DriverDirectory)
 
 		DriverInfo->CurFileName = DriverFileNames[i];
 
-		DriverHook = (DRV_Hook*)GetProcAddress(Handle, "DriverHook");
+		DriverHook = (DRV_Hook*)geGetProcAddress(Handle, "DriverHook");
 
 		if (!DriverHook)
 		{
-			FreeLibrary(Handle);
+			geFreeLibrary(Handle);
 			continue;
 		}
 
 		if (!DriverHook(&RDriver))
 		{
-			FreeLibrary(Handle);
+			geFreeLibrary(Handle);
 			continue;
 		}
 
 		if (RDriver->VersionMajor != DRV_VERSION_MAJOR || RDriver->VersionMinor != DRV_VERSION_MINOR)
 		{
-			FreeLibrary(Handle);
+			geFreeLibrary(Handle);
 			geErrorLog_AddString(-1,"EnumSubDrivers : found driver of different version; ignoring; non-fatal",DriverFileNames[i]);
 			continue;
 		}
@@ -496,11 +496,11 @@ EnumSubDrivers(Sys_DriverInfo *DriverInfo, const char *DriverDirectory)
 		
 		if (!RDriver->EnumSubDrivers(EnumSubDriversCB, (void*)DriverInfo))
 		{
-			FreeLibrary(Handle);
+			geFreeLibrary(Handle);
 			continue;		// Should we return FALSE, or just continue?
 		}
 
-		FreeLibrary(Handle);
+		geFreeLibrary(Handle);
 
 		if (!strcmp(DriverFileNames[i], "GlideDrv.dll"))
 			GlideFound = GE_TRUE;

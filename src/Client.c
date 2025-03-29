@@ -182,7 +182,7 @@ static bool RenderWorld(Client_Client *Client, GameMgr *GMgr, float Time);
 static void SetupCamera(geCamera *Camera, GE_Rect *Rect, geXForm3d *XForm);
 static void ParsePlayerDataLocally(Client_Client *Client, Buffer_Data *Buffer, bool Fake);
 static void Client_SetupGenVSI(Client_Client *Client);
-static bool Client_MovePlayerModel(Client_Client *Client, GPlayer *Player, const geXForm3d *DestXForm);
+static bool Client_MovePlayerModel(void *Client, void *Player, const geXForm3d *DestXForm);
 static bool CheckClientPlayerChanges(Client_Client *Client, GPlayer *Player, bool TempPlayer);
 void Client_DestroyPlayer(Client_Client *Client, GPlayer *Player);
 
@@ -3248,34 +3248,42 @@ geBoolean Client_SetupDemos(Client_Client *Client, int32 Mode, const char *DemoF
 
 //=====================================================================================
 //=====================================================================================
-static float Client_GetTime(Client_Client *Client)
+static float 
+Client_GetTime(void *Client)
 {
-	assert(Client_IsValid(Client) == GE_TRUE);
-
-	return GameMgr_GetTime(Client->GMgr);
+	assert(Client != NULL);  // Basic validation
+    Client_Client *client = (Client_Client *)Client;
+    assert(client != NULL && Client_IsValid(client) == GE_TRUE);
+    
+    return GameMgr_GetTime(client->GMgr);
 }
 
 //=====================================================================================
 //	Client_GetWorld
 //=====================================================================================
-geWorld *Client_GetWorld(Client_Client *Client)
+geWorld *
+Client_GetWorld(void *Client)
 {
 	assert(Client_IsValid(Client) == GE_TRUE);
+	Client_Client *client = (Client_Client*)Client;
+    assert(client != NULL && Client_IsValid(client) == GE_TRUE);
 
-	return GameMgr_GetWorld(Client->GMgr);
+	return GameMgr_GetWorld(client->GMgr);
 }
 
 //=====================================================================================
 //	Client_GetClientMove
 //=====================================================================================
-static GenVSI_CMove *Client_GetClientMove(Client_Client *Client, GenVSI_CHandle ClientHandle)
+static GenVSI_CMove *
+Client_GetClientMove(void *Client, GenVSI_CHandle ClientHandle)
 {
 	assert(Client_IsValid(Client) == GE_TRUE);
-
+	Client_Client *client = (Client_Client*)Client;
+    assert(client != NULL && Client_IsValid(client) == GE_TRUE);
 	// Return NULL if it is not us we are controlling
 	// For now, the game code should return on a NULL move...
-	if (ClientHandle == Client->ClientIndex)
-		return &Client->Move;
+	if (ClientHandle == client->ClientIndex)
+		return &client->Move;
 	else
 		return NULL;
 }
@@ -3283,13 +3291,16 @@ static GenVSI_CMove *Client_GetClientMove(Client_Client *Client, GenVSI_CHandle 
 //=====================================================================================
 //	Client_ProcIndex
 //=====================================================================================
-static void Client_ProcIndex(Client_Client *Client, uint16 Index, void *Proc)
+static void 
+Client_ProcIndex(void *Client, uint16 Index, void *Proc)
 {
 	assert(Client_IsValid(Client) == GE_TRUE);
 	assert(Index >= 0 && Index < 65535);
 	assert(Index >= 0 && Index < CLIENT_MAX_PROC_INDEX);
+	Client_Client *client = (Client_Client*)Client;
+    assert(client != NULL && Client_IsValid(client) == GE_TRUE);
 	
-	Client->ProcIndex[Index] = Proc;
+	client->ProcIndex[Index] = Proc;
 
 	g_ProcIndex[Index] = Proc;
 }
@@ -3297,15 +3308,18 @@ static void Client_ProcIndex(Client_Client *Client, uint16 Index, void *Proc)
 //=====================================================================================
 //	Server_MovePlayerModel
 //=====================================================================================
-static geBoolean Client_MovePlayerModel(Client_Client *Client, GPlayer *Player, const geXForm3d *DestXForm)
+static geBoolean 
+Client_MovePlayerModel(void *Client, void *Player, const geXForm3d *DestXForm)
 {
-	geBoolean	CanMove;
-	int32		i;
-	geWorld		*World;
+	geBoolean  CanMove;
+	int32      i;
+	geWorld   *World;
 
 	assert(Client_IsValid(Client) == GE_TRUE);
+	Client_Client *client = (Client_Client*)Client;
+	GPlayer       *player = (GPlayer*)Player;
 
-	World = GameMgr_GetWorld(Client->GMgr);
+	World = GameMgr_GetWorld(client->GMgr);
 	assert(World);
 
 	CanMove = GE_TRUE;
@@ -3315,7 +3329,7 @@ static geBoolean Client_MovePlayerModel(Client_Client *Client, GPlayer *Player, 
 		geVec3d		Mins, Maxs, Pos, Out;
 		GPlayer		*Target;
 
-		Target = &Client->Players[i];
+		Target = &client->Players[i];
 
 		if (!Target->Active)			// Not an active player...
 			continue;
@@ -3323,7 +3337,7 @@ static geBoolean Client_MovePlayerModel(Client_Client *Client, GPlayer *Player, 
 		if (Target->ViewFlags & VIEW_TYPE_MODEL)	// Don't check other models, don't care...
 			continue;
 
-		if (i != Client->ClientPlayer)
+		if (i != client->ClientPlayer)
 			continue;
 
 		Mins = Target->Mins;
@@ -3332,14 +3346,14 @@ static geBoolean Client_MovePlayerModel(Client_Client *Client, GPlayer *Player, 
 		Pos = Target->XForm.Translation;
 
 		// Test the models move intentions agianst all the players in the level
-		if (!geWorld_TestModelMove(World, Player->Model, DestXForm, &Mins, &Maxs, &Pos, &Out))
+		if (!geWorld_TestModelMove(World, player->Model, DestXForm, &Mins, &Maxs, &Pos, &Out))
 		{
 			CanMove = GE_FALSE;		// Can't move, would've pushed player into world
 
 			// The model was blocked by player target
-			if (Player->Blocked)	// Call the blocked callback, and tell Player that Target is in the way..
+			if (player->Blocked)	// Call the blocked callback, and tell Player that Target is in the way..
 			{
-				Player->Blocked(&Client->GenVSI, Player, Target);
+				player->Blocked(&client->GenVSI, player, Target);
 			}
 
 		}
@@ -3354,12 +3368,12 @@ static geBoolean Client_MovePlayerModel(Client_Client *Client, GPlayer *Player, 
 	if (CanMove)
 	{
 		if (World)
-			geWorld_SetModelXForm(World, Player->Model, DestXForm);
+			geWorld_SetModelXForm(World, player->Model, DestXForm);
 		else
-			Console_Printf(GameMgr_GetConsole(Client->GMgr), "Client_MovePlayerModel:  No world!\n");
+			Console_Printf(GameMgr_GetConsole(client->GMgr), "Client_MovePlayerModel:  No world!\n");
 
-		Player->Pos = DestXForm->Translation;
-		Player->XForm.Translation = DestXForm->Translation;
+		player->Pos = DestXForm->Translation;
+		player->XForm.Translation = DestXForm->Translation;
 	}
 
 	return CanMove;
@@ -3369,16 +3383,19 @@ static geBoolean Client_MovePlayerModel(Client_Client *Client, GPlayer *Player, 
 //=====================================================================================
 //	Client_SpawnTempPlayer
 //=====================================================================================
-static GPlayer *Client_SpawnTempPlayer(Client_Client *Client, const char *ClassName)
+static GPlayer *Client_SpawnTempPlayer(void *Client, const char *ClassName)
 {
 	int32		i;
 
 	assert(Client_IsValid(Client) == GE_TRUE);
+	Client_Client *client = (Client_Client*)Client;
+    assert(client != NULL && Client_IsValid(client) == GE_TRUE);
+	
 	assert(strlen(ClassName) < MAX_CLASS_NAME_SIZE);
 
 	for (i=0; i< CLIENT_MAX_TEMP_PLAYERS; i++)
 	{
-		if (!Client->TempPlayers[i].Active)
+		if (!client->TempPlayers[i].Active)
 			break;
 	}
 
@@ -3388,14 +3405,14 @@ static GPlayer *Client_SpawnTempPlayer(Client_Client *Client, const char *ClassN
 		return NULL;
 	}
 
-	memset(&Client->TempPlayers[i], 0, sizeof(GPlayer));
+	memset(&client->TempPlayers[i], 0, sizeof(GPlayer));
 
-	SetPlayerDefaults(&Client->TempPlayers[i]);
+	SetPlayerDefaults(&client->TempPlayers[i]);
 
-	Client->TempPlayers[i].Active = GE_TRUE;
-	Client->TempPlayers[i].SpawnTime = Client->Move.MoveTime;
+	client->TempPlayers[i].Active = GE_TRUE;
+	client->TempPlayers[i].SpawnTime = client->Move.MoveTime;
 
-	return &Client->TempPlayers[i];
+	return &client->TempPlayers[i];
 }
 
 //=====================================================================================
@@ -3432,19 +3449,21 @@ void Client_DestroyPlayerWorldObjects(Client_Client *Client, GPlayer *Player)
 //=====================================================================================
 //	Client_DestroyTempPlayer
 //=====================================================================================
-void Client_DestroyTempPlayer(Client_Client *Client, GPlayer *Player)
+void Client_DestroyTempPlayer(void *Client, void *Player)
 {
 	assert(Client_IsValid(Client) == GE_TRUE);
+	Client_Client *client = (Client_Client*)Client;
+    assert(client != NULL && Client_IsValid(client) == GE_TRUE);
 	assert(Player);
-
 	assert(Player->Active);
+	GPlayer *player = (GPlayer*)Player;
 
 	//if (!Fx_PlayerSetFxFlags(GameMgr_GetFxSystem(Client->GMgr), TEMP_PLAYER_TO_FXPLAYER(Client, Player), 0))
 	//	GenVS_Error("[CLIENT] UpdatePlayers:  Could not set Fx_Player flags.\n");
 
-	Client_DestroyPlayerWorldObjects(Client, Player);
+	Client_DestroyPlayerWorldObjects(client, player);
 
-	memset(Player, 0, sizeof(GPlayer));
+	memset(player, 0, sizeof(GPlayer));
 }
 
 //=====================================================================================

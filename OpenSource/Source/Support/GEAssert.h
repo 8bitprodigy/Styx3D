@@ -24,6 +24,8 @@
 
 #include <assert.h>
 
+#include "Genesis.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -54,9 +56,9 @@ typedef void geAssertCallbackFn( void *exp, void *file, unsigned line );
 
 geAssertCallbackFn *geAssertSetCallback( geAssertCallbackFn *newAssertCallback );
 
-typedef void (*geAssert_CriticalShutdownCallback) (void *Context);
+typedef geBoolean (*geAssert_CriticalShutdownCallback) (geEngine *Context); // Formerly (void *context)
 
-extern void geAssert_SetCriticalShutdownCallback( geAssert_CriticalShutdownCallback CB , void *Context);
+void geAssert_SetCriticalShutdownCallback(geAssert_CriticalShutdownCallback CB, geEngine *Context);
 
 /************************************************************/
 

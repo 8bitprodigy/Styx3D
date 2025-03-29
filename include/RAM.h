@@ -22,7 +22,7 @@
 #ifndef GE_RAM_H
 #define GE_RAM_H
 
-#include "BaseType.h"
+#include "GETypes.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -52,7 +52,7 @@ GENESISAPI int geRam_EnableCriticalCallback(int add);
   with 0xA5, and we keep track of the amount of memory allocated.  Also, in debug
   mode, we track where the memory was allocated and can optionally provide a
   report of allocated blocks.  See geRam_ReportAllocations.
-*/
+*//*
 #ifndef NDEBUG
 
 #define geRam_Allocate(size) _geRam_DebugAllocate(size, __FILE__, __LINE__)
@@ -60,11 +60,11 @@ GENESISAPI int geRam_EnableCriticalCallback(int add);
 // Do not call _geRam_DebugAllocate directly.
 GENESISAPI void* _geRam_DebugAllocate(uint32 size, const char* pFile, int line);
 
-#else
+#else*/
 
 GENESISAPI void *geRam_Allocate(uint32 size);
 
-#endif
+//#endif
 
 /*
   Free an allocated memory block.

@@ -21,9 +21,8 @@
 /*                                                                                      */
 /****************************************************************************************/
 #include <assert.h>
-#include <SDL3/SDL.h>
-#include <SDL3_ttf/SDL_ttf.h>
-#include <SDL3_ttf/SDL_textengine.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include <string.h>
 #include <stdint.h>
 
@@ -66,10 +65,10 @@
    GLYPHMETRICS;
 #endif
 
-#include "BaseType.h"
 #include "DCommon.h"
 #include "ExtBox.h"
 #include "Font.h"
+#include "GETypes.h"
 #include "RAM.h"
 #include "WgClip.h"
 

@@ -14,6 +14,7 @@
 /****************************************************************************************/
 #include <assert.h>
 #include <assert.h>
+#include <math.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -288,7 +289,7 @@ int sgn (long a)
 //                                                                         //
 /////////////////////////////////////////////////////////////////////////////
 
-int round (long a) 
+int roundi (long a) 
 {
 	if ( (a - (int)a) < 0.5) 
 		return (int)floor(a);
@@ -336,7 +337,7 @@ void ElectricFx_ZLine(Procedural *Fx, int a, int b, int c, int d, int32 ZVal, fl
 
 	s = (int)(m>>1);						// s is the m distance (either x or y) divided by 2
 
-	for (i=round(m); i>0; i--)				// repeat this loop until it
+	for (i=roundi(m); i>0; i--)				// repeat this loop until it
 	{ 
 											// is = to m (y or x distance)
 		ElectricFx_PutZ(Fx, a, b, ZVal, ZAge);// plot a pixel at the original x1, y1
@@ -414,7 +415,7 @@ void ElectricFx_ZLine2(Procedural *Fx, int x1, int y1, int x2, int y2, int32 ZVa
 		{
 			for (x=x1; x<x2+1; x++) 
 			{
-				y = round((int)(yslope*x));
+				y = roundi((int)(yslope*x));
 				ElectricFx_PutZ(Fx, x, y, ZVal, ZAge);
 			}
 		}
@@ -422,7 +423,7 @@ void ElectricFx_ZLine2(Procedural *Fx, int x1, int y1, int x2, int y2, int32 ZVa
 		{
 			for (x=x2; x<x1+1; x++) 
 			{
-				y = round((int)(yslope*x));
+				y = roundi((int)(yslope*x));
 				ElectricFx_PutZ(Fx, x, y, ZVal, ZAge);
 			}
 		}
@@ -433,7 +434,7 @@ void ElectricFx_ZLine2(Procedural *Fx, int x1, int y1, int x2, int y2, int32 ZVa
 		{
 			for (y=x1; y<x2+1; y++) 
 			{
-				x = round((int)(xslope*y));
+				x = roundi((int)(xslope*y));
 				ElectricFx_PutZ(Fx, x, y, ZVal, ZAge);
 			}
 		}
@@ -441,7 +442,7 @@ void ElectricFx_ZLine2(Procedural *Fx, int x1, int y1, int x2, int y2, int32 ZVa
 		{
 			for (y=x2; y<x1+1; y++) 
 			{
-				x = round((int)(xslope*y));
+				x = roundi((int)(xslope*y));
 				ElectricFx_PutZ(Fx, x, y, ZVal, ZAge);
 			}
 		}

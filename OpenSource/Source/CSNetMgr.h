@@ -22,7 +22,7 @@
 #ifndef GE_CSNETMGR_H
 #define GE_CSNETMGR_H
 
-#include "BaseType.h"
+#include "GETypes.h"
 
 #ifdef __cplusplus
 extern "C" {

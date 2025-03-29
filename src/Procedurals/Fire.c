@@ -2,6 +2,7 @@
 #define SMOOTH_WRAP (GE_FALSE)
 
 #include <assert.h>
+#include <ctype.h>
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>

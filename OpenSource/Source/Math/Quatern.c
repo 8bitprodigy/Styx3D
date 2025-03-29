@@ -21,12 +21,12 @@
 /****************************************************************************************/
 #include <assert.h>
 #include <math.h>
-#include "BaseType.h"
+#include "GETypes.h"
 #include "Quatern.h"
 
 
 #ifndef NDEBUG
-	static geQuaternion_MaximalAssertionMode = GE_TRUE;
+	static geBoolean geQuaternion_MaximalAssertionMode = GE_TRUE;
 	#define geQuaternion_Assert if (geQuaternion_MaximalAssertionMode) assert
 
 	void GENESISCC geQuaternion_SetMaximalAssertionMode( geBoolean Enable )

@@ -12,7 +12,7 @@
 	#include <string.h>
 #endif
 
-#include "BaseType.h"
+#include "GETypes.h"
 #include "GMain.h"
 #include "_Bot.h"
 #include "Track.h"
@@ -325,7 +325,7 @@ CONTROLp Bot_ModeAction[MODE_MAX] =
 	NULL,//WanderGoal,
 	};
 
-
+int
 RankTable[3][3] = 
 {//close    med     long
 	{0,		2,		4},		//weak
@@ -1299,7 +1299,8 @@ geBoolean Bot_ModeThinkUnstick(GenVSI *VSI, void *PlayerData, float Time)
 //=====================================================================================
 //	Bot_Destroy
 //=====================================================================================
-geBoolean Bot_Destroy(GenVSI *VSI, void *PlayerData, void *ClassData)
+void 
+Bot_Destroy(GenVSI *VSI, void *PlayerData, void *ClassData)
 {
 	GPlayer			*Player,*Hit;
 	Bot_Var			*DBot,*HBot;
@@ -1352,7 +1353,7 @@ geBoolean Bot_Destroy(GenVSI *VSI, void *PlayerData, void *ClassData)
 	geRam_Free(Player->userData);
 	Player->userData = NULL;
 
-	return GE_TRUE;
+	return;
 }
 
 
@@ -4945,7 +4946,7 @@ geBoolean Bot_ActorStart(GenVSI *VSI, void *PlayerData, void *ClassData, char *E
 //=====================================================================================
 //	BlockActor_Trigger
 //=====================================================================================
-geBoolean BlockActor_Trigger(GenVSI *VSI, void *PlayerData, void *TargetData, void *Data)
+geBoolean BlockActor_Trigger(GenVSI *VSI, void *PlayerData, GPlayer *TargetData, void *Data)
 {
 	GPlayer *Player = (GPlayer*)PlayerData;
 

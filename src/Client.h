@@ -58,7 +58,8 @@ typedef enum
 	ClientMode_Invalid = 0,
 	ClientMode_Dumb,						// Client does nothing but what server says to do...(a local client with a server)
 	ClientMode_Proxy,						// Client predicts while waiting for server updates (a client without a server)
-} Client_Mode;
+} 
+Client_Mode;
 
 //================================================================================================
 //================================================================================================
@@ -76,7 +77,8 @@ typedef struct Client_Move
 	uint16			CurrentWeapon;
 
 	struct Client_Move	*Next;
-} Client_Move;
+} 
+Client_Move;
 
 // Info about the clients connected to the server
 typedef struct Client_ClientInfo
@@ -89,7 +91,8 @@ typedef struct Client_ClientInfo
 	int32		OldScore;
 	int32		OldHealth;
 
-} Client_ClientInfo;
+} 
+Client_ClientInfo;
 
 typedef enum
 {
@@ -97,7 +100,8 @@ typedef enum
 	STATE_Normal,
 	STATE_Selected,
 	STATE_Warning,
-} Client_StatusState;
+} 
+Client_StatusState;
 
 // 6 menu elements, with 3 states (normal/selected/inactive)
 typedef struct Client_StatusElement
@@ -110,13 +114,15 @@ typedef struct Client_StatusElement
 	int32				Low;						// Display warning, when amount gets lower than this number
 	Client_StatusState	State;
 
-} Client_StatusElement;
+} 
+Client_StatusElement;
 
 typedef struct Client_StatusBar
 {
 	Client_StatusElement	Elements[6];
 
-} Client_StatusBar;
+} 
+Client_StatusBar;
 
 #define CLIENT_MAX_DEMOS			10
 #define CLIENT_MAX_DEMO_NAME_SIZE	64
@@ -132,7 +138,8 @@ typedef struct
 	FILE		*File;							// Current demo file opened (only one at a time)
 
 	geBoolean	OriginalSpeed;					// Demo should run at original speed
-} Client_Demo;
+} 
+Client_Demo;
 
 typedef struct Client_Client
 {
@@ -203,7 +210,8 @@ typedef struct Client_Client
 	GenVSI				GenVSI;
 
 	Client_Client		*Self2;
-} Client_Client;
+} 
+Client_Client;
 
 
 //================================================================================================
@@ -243,7 +251,7 @@ geBoolean			Client_ReadServerMessages(Client_Client *Client, Buffer_Data *Buffer
 geBoolean			Client_SetupDemos(Client_Client *Client, int32 Mode, const char *DemoFile);
 void				Client_RefreshStatusBar(int32 NumPages);
 
-void				Client_DestroyTempPlayer(Client_Client *Client, GPlayer *Player);
+void				Client_DestroyTempPlayer(void *Client, void *Player);
 GPlayer				*Client_GetPlayer(Client_Client *Client, int32 Index);
 
 #ifdef __cplusplus

@@ -22,11 +22,12 @@
 #endif
 
 #include "GMain.h"
+#include "GPlayer.h"
 extern void GenVS_Error(const char *Msg, ...);
 //=====================================================================================
 //	Item_TriggerHealth
 //=====================================================================================
-static geBoolean Item_TriggerHealth(GenVSI *VSI, void *PlayerData, void *TargetData, void* data)
+static geBoolean Item_TriggerHealth(GenVSI *VSI, void *PlayerData, GPlayer *TargetData, void* data)
 {
 	GPlayer			*Player, *Target;
 
@@ -66,7 +67,8 @@ static geBoolean Item_TriggerHealth(GenVSI *VSI, void *PlayerData, void *TargetD
 //=====================================================================================
 //	Item_TriggerArmor
 //=====================================================================================
-static geBoolean Item_TriggerArmor(GenVSI *VSI, void *PlayerData, void *TargetData, void* data)
+static geBoolean 
+Item_TriggerArmor(GenVSI *VSI, void *PlayerData, GPlayer *TargetData, void* data)
 {
 	GPlayer			*Player, *Target;
 
@@ -109,7 +111,8 @@ static geBoolean Item_TriggerArmor(GenVSI *VSI, void *PlayerData, void *TargetDa
 //=====================================================================================
 //	Item_TriggerRocket
 //=====================================================================================
-static geBoolean Item_TriggerRocket(GenVSI *VSI, void *PlayerData, void *TargetData, void* data)
+static geBoolean 
+Item_TriggerRocket(GenVSI *VSI, void *PlayerData, GPlayer *TargetData, void* data)
 {
 	GPlayer	*Player, *Target;
 
@@ -155,7 +158,8 @@ static geBoolean Item_TriggerRocket(GenVSI *VSI, void *PlayerData, void *TargetD
 //=====================================================================================
 //	Item_TriggerRocketAmmo
 //=====================================================================================
-static geBoolean Item_TriggerRocketAmmo(GenVSI *VSI, void *PlayerData, void *TargetData, void* data)
+static geBoolean 
+Item_TriggerRocketAmmo(GenVSI *VSI, void *PlayerData, GPlayer *TargetData, void* data)
 {
 	GPlayer	*Player, *Target;
 
@@ -196,7 +200,8 @@ static geBoolean Item_TriggerRocketAmmo(GenVSI *VSI, void *PlayerData, void *Tar
 //=====================================================================================
 //	Item_TriggerGrenade
 //=====================================================================================
-static geBoolean Item_TriggerGrenade(GenVSI *VSI, void *PlayerData, void *TargetData, void* data)
+static geBoolean 
+Item_TriggerGrenade(GenVSI *VSI, void *PlayerData, GPlayer *TargetData, void* data)
 {
 	GPlayer	*Player, *Target;
 
@@ -291,7 +296,8 @@ static geBoolean Item_ControlShredderAmmo(GenVSI *VSI, void *PlayerData, float T
 //=====================================================================================
 //	Item_TriggerShredder
 //=====================================================================================
-static geBoolean Item_TriggerShredder(GenVSI *VSI, void *PlayerData, void *TargetData, void* data)
+static geBoolean 
+Item_TriggerShredder(GenVSI *VSI, void *PlayerData, GPlayer *TargetData, void* data)
 {
 	GPlayer			*Player, *Target;
 
@@ -334,7 +340,8 @@ static geBoolean Item_TriggerShredder(GenVSI *VSI, void *PlayerData, void *Targe
 //=====================================================================================
 //	Item_TriggerShredderAmmo
 //=====================================================================================
-static geBoolean Item_TriggerShredderAmmo(GenVSI *VSI, void *PlayerData, void *TargetData, void* data)
+static geBoolean 
+Item_TriggerShredderAmmo(GenVSI *VSI, void *PlayerData, GPlayer *TargetData, void* data)
 {
 	GPlayer	*Player, *Target;
 
@@ -375,7 +382,8 @@ static geBoolean Item_TriggerShredderAmmo(GenVSI *VSI, void *PlayerData, void *T
 //=====================================================================================
 //	Item_TriggerGrenadeAmmo
 //=====================================================================================
-static geBoolean Item_TriggerGrenadeAmmo(GenVSI *VSI, void *PlayerData, void *TargetData, void* data)
+static geBoolean 
+Item_TriggerGrenadeAmmo(GenVSI *VSI, void *PlayerData, GPlayer *TargetData, void* data)
 {
 	GPlayer	*Player, *Target;
 
@@ -625,7 +633,8 @@ geBoolean Item_HealthSpawn(GenVSI *VSI, void *PlayerData, void *ClassData, char 
 //=====================================================================================
 //	Item_ArmorSpawn
 //=====================================================================================
-geBoolean Item_ArmorSpawn(GenVSI *VSI, void *PlayerData, void *ClassData, char *EntityName)
+geBoolean 
+Item_ArmorSpawn(GenVSI *VSI, void *PlayerData, void *ClassData, char *EntityName)
 {
 	ItemArmor	*Armor;
 	GPlayer		*Player;
@@ -673,7 +682,8 @@ geBoolean Item_ArmorSpawn(GenVSI *VSI, void *PlayerData, void *ClassData, char *
 //=====================================================================================
 //	Item_RocketSpawn
 //=====================================================================================
-geBoolean Item_RocketSpawn(GenVSI *VSI, void *PlayerData, void *ClassData, char *EntityName)
+geBoolean 
+Item_RocketSpawn(GenVSI *VSI, void *PlayerData, void *ClassData, char *EntityName)
 {
 	GPlayer		*Player;
 	ItemRocket	*Rocket;
@@ -718,7 +728,8 @@ geBoolean Item_RocketSpawn(GenVSI *VSI, void *PlayerData, void *ClassData, char 
 //=====================================================================================
 //	Item_RocketAmmoSpawn
 //=====================================================================================
-geBoolean Item_RocketAmmoSpawn(GenVSI *VSI, void *PlayerData, void *ClassData, char *EntityName)
+geBoolean 
+Item_RocketAmmoSpawn(GenVSI *VSI, void *PlayerData, void *ClassData, char *EntityName)
 {
 	ItemRocketAmmo	*RocketAmmo;
 	GPlayer		*Player;
@@ -759,7 +770,8 @@ geBoolean Item_RocketAmmoSpawn(GenVSI *VSI, void *PlayerData, void *ClassData, c
 //=====================================================================================
 //	Item_GrenadeSpawn
 //=====================================================================================
-geBoolean Item_GrenadeSpawn(GenVSI *VSI, void *PlayerData, void *ClassData, char *EntityName)
+geBoolean 
+Item_GrenadeSpawn(GenVSI *VSI, void *PlayerData, void *ClassData, char *EntityName)
 {
 	ItemGrenade	*Grenade;
 	GPlayer		*Player;
@@ -849,7 +861,8 @@ geBoolean Item_GrenadeAmmoSpawn(GenVSI *VSI, void *PlayerData, void *ClassData, 
 //=====================================================================================
 //	Item_ShredderSpawn
 //=====================================================================================
-geBoolean Item_ShredderSpawn(GenVSI *VSI, void *PlayerData, void *ClassData, char *EntityName)
+geBoolean 
+Item_ShredderSpawn(GenVSI *VSI, void *PlayerData, void *ClassData, char *EntityName)
 {
 	ItemShredder	*Shredder;
 	GPlayer		*Player;

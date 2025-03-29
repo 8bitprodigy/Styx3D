@@ -2,8 +2,8 @@
 # Converted from GTest.mak (Microsoft NMAKE file)
 
 # Compiler settings
-CC = gcc
-CXX = g++
+CC = gcc-14
+CXX = g++-14
 CFLAGS = -Wall -I../Src -I../include -I./DrvMenu -I./ -I./DrvMenu -I./FX -I./Game -I./Procedurals 
 LDFLAGS = 
 
@@ -86,7 +86,7 @@ OBJS = $(GAME_SRCS:%.c=$(BUILDDIR)/%.o) \
 TARGET = ../GTest
 
 # Libraries
-LIBS = -lSDL2main -lSDL2 -lenet -L../lib/ -lgenesis -lc -lm
+LIBS = -lSDL2main -lSDL2 -lenet -L../lib -lGenesis -lc -lm
 
 # Default target
 all: $(TARGET)

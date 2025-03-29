@@ -24,7 +24,9 @@
 #include <string.h>
 #include <stdio.h>
 
+
 #include "GEAssert.h"
+#include "XPlatUtils.h"
 	   
 // See geAssert.h for details.
 
@@ -60,7 +62,7 @@ void geAssertEntryPoint( void *exp, void *file, unsigned line )
 static geAssert_CriticalShutdownCallback CriticalCallBack = NULL;
 static void * CriticalCallBackContext = NULL;
 
-void geAssert_SetCriticalShutdownCallback( geAssert_CriticalShutdownCallback CB ,void *Context)
+void geAssert_SetCriticalShutdownCallback( geAssert_CriticalShutdownCallback CB ,geEngine *Context)
 {
 	CriticalCallBack = CB;
 	CriticalCallBackContext = Context;

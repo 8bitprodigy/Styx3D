@@ -51,7 +51,8 @@ typedef enum
 	VKFRAME_LINEAR,
 	VKFRAME_HERMITE,
 	VKFRAME_HERMITE_ZERO_DERIV,
-} geVKFrame_InterpolationType;
+} 
+geVKFrame_InterpolationType;
 
 
 geTKArray *GENESISCC geVKFrame_LinearCreate(void);
@@ -61,7 +62,8 @@ geTKArray *GENESISCC geVKFrame_HermiteCreate(void);
 	// creates a frame list for hermite interpolation
 
 
-geBoolean GENESISCC geVKFrame_Insert(
+geBoolean GENESISCC 
+geVKFrame_Insert(
 	      geTKArray          **KeyList, // keyframe list to insert into
 	      geTKArray_TimeType   Time,    // time of new keyframe
 	const geVec3d             *V,       // vector at new keyframe
@@ -69,7 +71,8 @@ geBoolean GENESISCC geVKFrame_Insert(
 );					
 	// inserts a new keyframe with the given time and vector into the list.
 
-void GENESISCC geVKFrame_Query(
+void GENESISCC 
+geVKFrame_Query(
 	const geTKArray          *KeyList, // keyframe list
 	      int                 Index,   // index of frame to return
 	      geTKArray_TimeType *Time,    // time of the frame is returned
@@ -77,14 +80,16 @@ void GENESISCC geVKFrame_Query(
 );
 	// returns the vector and the time at keyframe[index] 
 
-void GENESISCC geVKFrame_Modify(
+void GENESISCC 
+geVKFrame_Modify(
 	      geTKArray *KeyList, // keyframe list
 	      int        Index,   // index of frame to change
 	const geVec3d    *V       // vector for the key
 );
 	// chganes the vector at keyframe[index] 
 
-void GENESISCC geVKFrame_LinearInterpolation(
+void GENESISCC 
+geVKFrame_LinearInterpolation(
 	const void    *KF1,   // pointer to first keyframe
 	const void    *KF2,   // pointer to second keyframe
 	      geFloat  T,     // 0 <= T <= 1   blending parameter
@@ -95,7 +100,8 @@ void GENESISCC geVKFrame_LinearInterpolation(
 		// and T==1 returns the vector for KF2
 		// interpolates linearly
 
-void GENESISCC geVKFrame_HermiteInterpolation(
+void GENESISCC 
+geVKFrame_HermiteInterpolation(
 	const void    *KF1,   // pointer to first keyframe
 	const void    *KF2,   // pointer to second keyframe
 	      geFloat  T,     // 0 <= T <= 1   blending parameter
@@ -107,7 +113,8 @@ void GENESISCC geVKFrame_HermiteInterpolation(
 		// interpolates using 'hermite' blending
 
 
-void GENESISCC geVKFrame_HermiteRecompute(
+void GENESISCC 
+geVKFrame_HermiteRecompute(
 	int        Looped,         // if keylist has the first key connected to last key
 	geBoolean  ZeroDerivative, // if each key should have a zero derivatives (good for 2 point S curves)
 	geTKArray *KeyList         // list of keys to recompute hermite values for
@@ -118,20 +125,25 @@ void GENESISCC geVKFrame_HermiteRecompute(
 geBoolean GENESISCC geVKFrame_LinearRead( geVFile* pFile, void* geVKFrame);
 geBoolean GENESISCC geVKFrame_HermiteRead(geVFile* pFile, void* geVKFrame);
 
-geBoolean GENESISCC geVKFrame_WriteToFile(
+geBoolean GENESISCC 
+geVKFrame_WriteToFile(
 	geVFile                     *pFile, 
 	geTKArray                   *geVKFrame, 
 	geVKFrame_InterpolationType  InterpolationType,
 	int                          Looping
 );
+
 geTKArray *GENESISCC geVKFrame_CreateFromFile(      geVFile *pFile, geVKFrame_InterpolationType *InterpolationType, int *Looping);
-geBoolean GENESISCC geVKFrame_WriteToBinaryFile(
+geBoolean GENESISCC 
+geVKFrame_WriteToBinaryFile(
 	geVFile                     *pFile, 
 	geTKArray                   *geVKFrame, 
 	geVKFrame_InterpolationType  InterpolationType, 
 	int                          Looping
 );
-geTKArray *GENESISCC geVKFrame_CreateFromBinaryFile(
+
+geTKArray *GENESISCC 
+geVKFrame_CreateFromBinaryFile(
 	geVFile                     *pFile, 
 	geVKFrame_InterpolationType *InterpolationType, 
 	int                         *Looping);

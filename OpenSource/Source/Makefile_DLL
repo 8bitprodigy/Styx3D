@@ -6,6 +6,8 @@ ifndef CONFIG
 CONFIG = debug
 endif
 
+TARGETDIR = ../../lib
+
 # Validate configuration
 ifeq ($(CONFIG),release)
 	OUTDIR = ReleaseDLL
@@ -20,7 +22,7 @@ else
 endif
 
 # Toolchain
-CC = gcc
+CC = gcc-14
 AR = ar
 LINK = gcc
 MKDIR = mkdir -p
@@ -32,6 +34,7 @@ OBJDIR = $(OUTDIR)
 # Include directories
 INCLUDES = \
 	-I. \
+	-I../../include \
 	-I./World \
 	-I./Engine \
 	-I./Engine/Drivers \
@@ -48,15 +51,15 @@ INCLUDES = \
 
 # Compiler flags
 CFLAGS = -Wall -fPIC $(DEBUG_FLAGS) $(OPTIMIZE_FLAGS) $(INCLUDES) \
-	-DWIN32 -D_WINDOWS -D_MBCS -DBUILDGENESIS -DGENESISDLLVERSION
+	-DBUILDGENESIS -DGENESISDLLVERSION
 
 # Linker flags
 LDFLAGS = -shared
 LIBS = -lm -lpthread -ldl
 
 # Output files
-TARGET = $(OUTDIR)/libgenesis.so
-IMPORT_LIB = $(OUTDIR)/libgenesisi.a
+TARGET = $(TARGETDIR)/libgenesis.so
+IMPORT_LIB = $(TARGETDIR)/libgenesisi.a
 
 # Object files
 OBJECTS = \
@@ -107,7 +110,7 @@ OBJECTS = \
 	$(OBJDIR)/RAM.o \
 	$(OBJDIR)/RAMDLL.o \
 	$(OBJDIR)/DirTree.o \
-	$(OBJDIR)/FSDOS.o \
+#	$(OBJDIR)/FSDOS.o \
 	$(OBJDIR)/FSMemory.o \
 	$(OBJDIR)/FSVFS.o \
 	$(OBJDIR)/VFile.o \

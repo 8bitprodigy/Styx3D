@@ -2,7 +2,7 @@
 # Converted from Genesis.mak
 
 # Configuration variables
-CC = gcc
+CC = gcc-14
 AR = ar
 RANLIB = ranlib
 
@@ -10,6 +10,7 @@ RANLIB = ranlib
 CFG ?= debug
 
 # Directories
+TARGETDIR = ../../lib
 OUTDIR_RELEASE = ./Release
 OUTDIR_DEBUG = ./Debug
 OUTDIR = $(OUTDIR_$(shell echo $(CFG) | tr '[:lower:]' '[:upper:]'))
@@ -18,7 +19,8 @@ OUTDIR = $(OUTDIR_$(shell echo $(CFG) | tr '[:lower:]' '[:upper:]'))
 CFLAGS_COMMON = -Wall -I../SDK/DXSDK/Include -I../Source \
 	-I./World -I./Engine -I./Engine/Drivers -I./Actor -I./BSP \
 	-I./Math -I./Entities -I./Support -I./Physics -I./VFile \
-	-I./Bitmap -I./Bitmap/Compression -lSDL3 -lSDL3_ttf 
+	-I./Bitmap -I./Bitmap/Compression -I../../include \
+	-lSDL3 -lSDL3_ttf 
 
 CFLAGS_RELEASE = $(CFLAGS_COMMON) -O2 -DNDEBUG
 CFLAGS_DEBUG = $(CFLAGS_COMMON) -g -O0 -D_DEBUG
@@ -27,7 +29,7 @@ CFLAGS = $(CFLAGS_$(shell echo $(CFG) | tr '[:lower:]' '[:upper:]'))
 
 # Output library
 LIB_NAME = Genesis
-LIB = $(OUTDIR)/lib$(LIB_NAME).a
+LIB = $(TARGETDIR)/lib$(LIB_NAME).a
 
 # Source files by directory
 ACTOR_SRCS = \
@@ -107,17 +109,17 @@ ROOT_SRCS = \
 	TSC.c
 
 SUPPORT_SRCS = \
-	Support/XplatUtils.c \
 	Support/ErrorLog.c \
 	Support/GEAssert.c \
 	Support/Log.c \
 	Support/MemPool.c \
 	Support/RAM.c \
-	Support/RAMDLL.c
+	Support/RAMDLL.c \
+	Support/XPlatUtils.c 
 
 VFILE_SRCS = \
 	VFile/DirTree.c \
-	VFile/FSOps.c \
+#	VFile/FSOps.c \
 	VFile/FSMemory.c \
 	VFile/FSVFS.c \
 	VFile/VFile.c

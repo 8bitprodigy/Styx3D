@@ -1,3 +1,4 @@
+
 /****************************************************************************************/
 /*  DIRTREE.C                                                                           */
 /*                                                                                      */
@@ -33,10 +34,11 @@
 	#define  _MAX_EXT 8
 #endif
 
-#include	"BaseType.h"
-#include	"RAM.h"
+#include "GETypes.h"
+#include "DirTree.h"
+#include "RAM.h"
+#include "XPlatUtils.h"
 
-#include	"DirTree.h"
 
 #ifndef	MAKEFOURCC
 #define MAKEFOURCC(ch0, ch1, ch2, ch3)                              \
@@ -54,9 +56,9 @@ typedef struct	DirTree
 	char *				Name;
 	geVFile_Time		Time;
 	geVFile_Attributes	AttributeFlags;
-	long				Size;
+	int32				Size;
 	geVFile_Hints		Hints;
-	long				Offset;
+	int32				Offset;
 	struct DirTree *	Parent;
 	struct DirTree *	Children;
 	struct DirTree *	Siblings;
@@ -119,8 +121,8 @@ void	DirTree_Destroy(DirTree *Tree)
 
 typedef	struct	DirTree_Header
 {
-	unsigned long	Signature;
-	int				Size;
+	uint32 Signature;
+	int    Size;
 	
 }	DirTree_Header;
 
@@ -196,11 +198,11 @@ static	geBoolean	WriteTree(const DirTree *Tree, geVFile *File)
 	return GE_TRUE;
 }
 
-static	geBoolean DirTree_WriteToFile1(const DirTree *Tree, geVFile *File, long *Size)
+static	geBoolean DirTree_WriteToFile1(const DirTree *Tree, geVFile *File, int32 *Size)
 {
-	DirTree_Header	Header;
-	long			StartPosition;
-	long			EndPosition;
+	DirTree_Header Header;
+	int32   		StartPosition;
+	int32           EndPosition;
 	
 	if	(geVFile_Tell(File, &StartPosition) == GE_FALSE)
 		return GE_FALSE;
@@ -226,13 +228,13 @@ static	geBoolean DirTree_WriteToFile1(const DirTree *Tree, geVFile *File, long *
 	return GE_TRUE;
 }
 
-void DirTree_SetFileSize(DirTree *Tree, long Size)
+void DirTree_SetFileSize(DirTree *Tree, int32 Size)
 {
 	assert(Tree);
 	Tree->Size = Size;
 }
 
-void DirTree_GetFileSize(DirTree *Tree, long *Size)
+void DirTree_GetFileSize(DirTree *Tree, int32 *Size)
 {
 	assert(Tree);
 	*Size = Tree->Size;
@@ -241,7 +243,7 @@ void DirTree_GetFileSize(DirTree *Tree, long *Size)
 geBoolean DirTree_WriteToFile(const DirTree *Tree, geVFile *File)
 {
 	geBoolean	Res;
-	long		Size;
+	int32		Size;
 
 	Res = DirTree_WriteToFile1(Tree, File, &Size);
 	if	(Res == GE_FALSE)
@@ -250,7 +252,7 @@ geBoolean DirTree_WriteToFile(const DirTree *Tree, geVFile *File)
 	return GE_TRUE;
 }
 
-geBoolean DirTree_GetSize(const DirTree *Tree, long *Size)
+geBoolean DirTree_GetSize(const DirTree *Tree, int32 *Size)
 {
 	geVFile *				FS;
 	geVFile_MemoryContext	Context;
@@ -374,8 +376,8 @@ DirTree *DirTree_CreateFromFile(geVFile *File)
 {
 	DirTree *		Res;
 	DirTree_Header	Header;
-	long			StartPosition;
-	long			EndPosition;
+	int32			StartPosition;
+	int32			EndPosition;
 	
 	if	(geVFile_Tell(File, &StartPosition) == GE_FALSE)
 		return GE_FALSE;
@@ -430,7 +432,7 @@ DirTree *DirTree_FindExact(const DirTree *Tree, const char *Path)
 	Siblings = Tree->Children;
 	while	(Siblings)
 	{
-		if	(!stricmp(Siblings->Name, Buff))
+		if	(!strcmp(Siblings->Name, Buff))
 		{
 			if	(!*Path)
 				return Siblings;
@@ -466,7 +468,7 @@ DirTree *DirTree_FindPartial(
 	Siblings = Tree->Children;
 	while	(Siblings)
 	{
-		if	(!stricmp(Siblings->Name, Buff))
+		if	(!strcmp(Siblings->Name, Buff))
 		{
 			*LeftOvers = Path;
 			if	(!*Path)
@@ -592,7 +594,7 @@ void DirTree_GetFileAttributes(DirTree *Tree, geVFile_Attributes *Attributes)
 	*Attributes = Tree->AttributeFlags;
 }
 
-void DirTree_SetFileOffset(DirTree *Leaf, long Offset)
+void DirTree_SetFileOffset(DirTree *Leaf, int32 Offset)
 {
 	assert(Leaf);
 	assert(!(Leaf->AttributeFlags & GE_VFILE_ATTRIB_DIRECTORY));
@@ -600,7 +602,7 @@ void DirTree_SetFileOffset(DirTree *Leaf, long Offset)
 	Leaf->Offset = Offset;
 }
 
-void DirTree_GetFileOffset(DirTree *Leaf, long *Offset)
+void DirTree_GetFileOffset(DirTree *Leaf, int32 *Offset)
 {
 	assert(Leaf);
 	assert(!(Leaf->AttributeFlags & GE_VFILE_ATTRIB_DIRECTORY));
@@ -679,7 +681,7 @@ DirTree_Finder * DirTree_CreateFinder(DirTree *Tree, const char *Path)
 	assert(Tree);
 	assert(Path);
 
-	_splitpath(Path, NULL, Directory, Name, Ext);
+	splitpath(Path, NULL, Directory, Name, Ext);
 
 	SubTree = DirTree_FindExact(Tree, Directory);
 	if	(!SubTree)
@@ -779,7 +781,7 @@ DirTree * DirTree_FinderGetNextFile(DirTree_Finder *Finder)
 
 	do
 	{
-		_splitpath(Res->Name, NULL, NULL, Name, Ext);
+		splitpath(Res->Name, NULL, NULL, Name, Ext);
 		if	(MatchPattern(Name, Finder->MatchName) == GE_TRUE &&
 			 MatchPattern(Ext,  Finder->MatchExt) == GE_TRUE)
 		{

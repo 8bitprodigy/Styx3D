@@ -23,11 +23,14 @@
 
 //#define DONT_DO_SPLASH // CB hack
 
-#define WIN32_LEAN_AND_MEAN
 
 #include <stdint.h>
 #include <stdlib.h> // _MAX_PATH
+
+#include <SDL2/SDL.h>
+
 #ifdef _WIN32
+#define WIN32_LEAN_AND_MEAN
     #include <windows.h>
 	#include <mmsystem.h> //timeGetTime
     #include <direct.h>  // Windows-specific
@@ -47,15 +50,15 @@
 #endif
 
 
-#include "Engine.h"
-
-#include "ErrorLog.h"
-#include "DCommon.h"
-#include "BitmapList.h"
 #include "Bitmap.h"
 #include "Bitmap_private.h"
-#include "World.h"
+#include "BitmapList.h"
+#include "Engine.h"
+#include "ErrorLog.h"
+#include "DCommon.h"
 #include "Log.h"
+#include "World.h"
+#include "XPlatUtils.h"
 
 //#define DO_ADDREMOVE_MESSAGES
 
@@ -77,12 +80,6 @@ static geBoolean Engine_InitDriver(
 
 static void Engine_DrawFontBuffer(geEngine *Engine);
 static void Engine_Tick(          geEngine *Engine);
-
-static void SubLarge(
-	LARGE_INTEGER *start, 
-	LARGE_INTEGER *end, 
-	LARGE_INTEGER *delta
-);
 
 #define ABS(xx)	( (xx) < 0 ? (-(xx)) : (xx) )
 
@@ -459,7 +456,7 @@ Sys_DriverInfo *DrvInfo;
 	// Shutdown the driver
 	DrvInfo->RDriver->Shutdown();
 
-	if (!FreeLibrary(DrvInfo->DriverHandle) )
+	if (!geFreeLibrary(DrvInfo->DriverHandle) )
 		return GE_FALSE;
 
 	DrvInfo->Active = GE_FALSE;
@@ -1287,7 +1284,7 @@ HINSTANCE geEngine_LoadLibrary( const char * lpLibFileName, const char *DriverDi
 		strcat(Buff,"\\");
 	}
 	strcat(Buff, lpLibFileName);
-	Library = LoadLibrary(Buff);
+	Library = geLoadLibrary(Buff);
 	if ( Library )
 		return Library;
 
@@ -1392,7 +1389,7 @@ static geBoolean Engine_InitDriver(	geEngine *Engine,
 		Hook = (DRV_Hook*)DriverHook;
 	}
 	#else
-	Hook = (DRV_Hook*)GetProcAddress(DrvInfo->DriverHandle, "DriverHook");
+	Hook = (DRV_Hook*)geGetProcAddress(DrvInfo->DriverHandle, "DriverHook");
 	#endif
 	
 	if (!Hook)
@@ -1573,7 +1570,7 @@ GENESISAPI geBoolean geEngine_BeginFrame(geEngine *Engine, geCamera *Camera, geB
 		return GE_FALSE;
 
 	// Do some timing stuff
-	QueryPerformanceCounter(&Engine->CurrentTic);
+	Engine->CurrentTic = SDL_GetPerformanceCounter();
 
 	// Clear some debug info
 	memset(&Engine->DebugInfo, 0, sizeof(Engine->DebugInfo));
@@ -1610,9 +1607,11 @@ extern int32	NumGetContents;
 //===================================================================================
 GENESISAPI geBoolean geEngine_EndFrame(geEngine *Engine)
 {
-	LARGE_INTEGER		NowTic, DeltaTic;
-	float				Fps;
-	//DRV_Debug			*Debug;
+	int64   
+	       NowTic, 
+	       DeltaTic;
+	float  Fps;
+	//DRV_Debug *Debug;
 
 	assert(Engine != NULL);
 	
@@ -1639,13 +1638,13 @@ GENESISAPI geBoolean geEngine_EndFrame(geEngine *Engine)
 		return GE_FALSE;
 	}
 
-	QueryPerformanceCounter(&NowTic);
+	NowTic = SDL_GetPerformanceCounter();
 	//CurrentFrequency = ((float)PR_EntireFrame.ElapsedCycles/200.0f)
 
-	SubLarge(&Engine->CurrentTic, &NowTic, &DeltaTic);
+	DeltaTic = Engine->CurrentTic -  NowTic;
 
-	if (DeltaTic.LowPart > 0)
-		Fps =  (float)Engine->CPUInfo.Freq / (float)DeltaTic.LowPart;
+	if (DeltaTic > 0)
+		Fps =  (float)Engine->CPUInfo.Freq / (float)DeltaTic;
 	else 
 		Fps = 100.0f;
 
@@ -1795,36 +1794,6 @@ static void Engine_DrawFontBuffer(geEngine *Engine)
 	Fi->NumStrings = 0;
 }
 
-static void SubLarge(LARGE_INTEGER *start, LARGE_INTEGER *end, LARGE_INTEGER *delta)
-{
-/*
-	_asm {
-		mov ebx,dword ptr [start]
-		mov esi,dword ptr [end]
-
-		mov eax,dword ptr [esi+0]
-		sub eax,dword ptr [ebx+0]
-
-		mov edx,dword ptr [esi+4]
-		sbb edx,dword ptr [ebx+4]
-
-		mov ebx,dword ptr [delta]
-		mov dword ptr [ebx+0],eax
-		mov dword ptr [ebx+4],edx
-	}
-*/
-	uint32_t low = end->LowPart - start->LowPart;
-    int32_t high = end->HighPart - start->HighPart;
-
-    // Handle carry (borrow)
-    if (end->LowPart < start->LowPart) {
-        high -= 1;
-    }
-
-    delta->LowPart = low;
-    delta->HighPart = high;
-}
-
 
 //===================================================================================
 // geEngine_Puts
@@ -1873,7 +1842,7 @@ geEngine_Printf(geEngine *Engine, int32 x, int32 y, const char *String, ...)
 //========================================================================================
 //========================================================================================
 static geBoolean 
-Hack_EnumCallBack(const geRDriver_PixelFormat *Format, void *Context)
+Hack_EnumCallBack(geRDriver_PixelFormat *Format, void *Context)
 {
 	geRDriver_PixelFormat ** pPixelArrayPtr;
 	pPixelArrayPtr = Context;

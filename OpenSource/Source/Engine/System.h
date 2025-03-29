@@ -45,6 +45,7 @@
 
 #include "ErrorLog.h"
 #include "Genesis.h"
+#include "GETypes.h"
 #include "DCommon.h"
 #include "Camera.h"
 #include "PtrTypes.h"
@@ -186,7 +187,7 @@ typedef struct geEngine
 	Sys_CPUInfo			CPUInfo;			// Info about the Cpu
 	Sys_DebugInfo		DebugInfo;
 
-	LARGE_INTEGER		CurrentTic;
+	int64	       	CurrentTic;
 
 	Sys_FontInfo		FontInfo;
 
@@ -217,8 +218,8 @@ typedef struct geEngine
 
 	BitmapList			*AttachedBitmaps;
 
-	geBoolean			HasPixelFormat[ENGINE_PF_COUNT];
-	geRDriver_PixelFormat PixelFormats[ENGINE_PF_COUNT];
+	geBoolean		 	HasPixelFormat[ENGINE_PF_COUNT];
+	geRDriver_PixelFormat  PixelFormats[ENGINE_PF_COUNT];
 
 	float				CurrentGamma;
 	float				BitmapGamma;
@@ -240,22 +241,22 @@ geEngine;
 //=====================================================================================
 
 //Engine
-geEngine *Sys_EngineCreate(HWND hWnd, const char *AppName, const char *DriverDirectory, uint32 Version);
+geEngine  *Sys_EngineCreate(HWND hWnd, const char *AppName, const char *DriverDirectory, uint32 Version);
 
-geBoolean	Sys_ShutdownDriver(geEngine *Engine);
+geBoolean  Sys_ShutdownDriver(geEngine *Engine);
 
-void		Sys_EngineFree(geEngine *Engine);
+void       Sys_EngineFree(geEngine *Engine);
 
 #ifdef	MESHES
 Mesh_RenderQ *Sys_WorldAddMesh(geWorld *World, Mesh_MeshDef *MeshDef, int32 Flags);
 Mesh_MeshDef *Sys_WorldCreateMesh(geWorld *World, const char *BitmapPath, const char *FileName);
-void Sys_WorldFreeMesh(geWorld *World, Mesh_MeshDef *MeshDef);
+void          Sys_WorldFreeMesh(geWorld *World, Mesh_MeshDef *MeshDef);
 #endif
 
 // Misc system
 geBoolean Sys_GetCPUFreq(Sys_CPUInfo *Info);
 geBoolean Sys_EnginePrint(geEngine *Engine, int32 x, int32 y, char *String);
-geBoolean	Sys_EngineResetDecorators(geEngine *Engine);
+geBoolean Sys_EngineResetDecorators(geEngine *Engine);
 
 #ifdef __cplusplus
 }

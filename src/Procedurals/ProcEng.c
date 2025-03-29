@@ -23,6 +23,7 @@
 
 #include "ErrorLog.h"
 #include "Genesis.h"
+#include "GETypes.h"
 #include "Procedural.h"
 #include "ProcEng.h"
 #include "RAM.h"
@@ -506,9 +507,9 @@ geBoolean ProcEng_Animate(ProcEng *PEng, float ElapsedTime)
 
 geBoolean VFile_SeekPastString(geVFile * File,const char *str)
 {
-long LastPosition;
-char Buf[1024];
-int len;
+	int32 LastPosition;
+	char Buf[1024];
+	int len;
 
 	if ( strlen(str) == 0 )
 		return GE_FALSE;
@@ -555,8 +556,8 @@ void VFile_UnGetC(geVFile * File)
 
 geBoolean VFile_SeekPastSpaces(geVFile * File)
 {
-long LastPosition;
-int Char;
+	int32 LastPosition;
+	int Char;
 
 	if ( ! geVFile_Tell(File,&LastPosition) )
 		return GE_FALSE;

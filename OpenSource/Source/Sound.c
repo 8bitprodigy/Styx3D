@@ -22,6 +22,13 @@
 #include <assert.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <string.h>
+
+#include "ErrorLog.h"
+#include "GETypes.h"
+#include "RAM.h"
+#include "Sound.h"
+#include "VFile.h"
 
 #ifdef _WIN32
 	#include	<windows.h>
@@ -35,28 +42,23 @@
 	typedef int16_t WORD;
 	typedef int32_t DWORD;
 	typedef struct {
-		WORD wFormatTag;        // Format type (e.g., PCM, IEEE float)
-		WORD nChannels;         // Number of channels (1 = mono, 2 = stereo)
-		DWORD nSamplesPerSec;   // Sampling rate (samples per second)
-		DWORD nAvgBytesPerSec;  // Average bytes per second (for buffering)
-		WORD nBlockAlign;       // Block alignment (size of a sample frame)
-		WORD wBitsPerSample;    // Bits per sample (e.g., 8, 16)
+		int16 wFormatTag;        // Format type (e.g., PCM, IEEE float)
+		int16 nChannels;         // Number of channels (1 = mono, 2 = stereo)
+		int32 nSamplesPerSec;   // Sampling rate (samples per second)
+		int32 nAvgBytesPerSec;  // Average bytes per second (for buffering)
+		int16 nBlockAlign;       // Block alignment (size of a sample frame)
+		int16 wBitsPerSample;    // Bits per sample (e.g., 8, 16)
 	}
 	WAVEFORMAT;
 	typedef struct {
 		WAVEFORMAT wfx;          // Basic wave format header
-		WORD nBlockAlign;       // Block alignment (same as in WAVEFORMAT)
-		DWORD dwChannelMask;    // Channel mask for multi-channel audio
+		int16 nBlockAlign;       // Block alignment (same as in WAVEFORMAT)
+		int32 dwChannelMask;    // Channel mask for multi-channel audio
 		void* SubFormat;         // GUID for specific audio format (e.g., for WAVE_FORMAT_EXTENSIBLE)
 	}
 	WAVEFORMATEX;
 #endif
 
-#include "BaseType.h"
-#include "ErrorLog.h"
-#include "RAM.h"
-#include "Sound.h"
-#include "VFile.h"
 
 
 typedef struct	SoundManager	SoundManager;
@@ -770,7 +772,7 @@ StopDupBuffers( Channel* channel )
 	prevChannel = channel;
 	while( dupChannel )
 	{
-		IDirectSoundBuffer_Stop(dupChannel->buffer);
+		//IDirectSoundBuffer_Stop(dupChannel->buffer);
 		dupChannel = dupChannel->nextDup;
 	}
 }
@@ -789,7 +791,7 @@ static	void ClearDupBuffers( Channel* channel )
 		if( !ChannelPlaying( dupChannel ) )
 		{
 			prevChannel->nextDup = dupChannel->nextDup;
-			IDirectSound_Release(dupChannel->buffer);
+			//IDirectSound_Release(dupChannel->buffer);
 //			free( dupChannel );
 			geRam_Free(dupChannel);
 			dupChannel = prevChannel->nextDup;

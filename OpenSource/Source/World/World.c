@@ -2367,7 +2367,7 @@ GENESISAPI geEntity_EntitySet *geWorld_GetEntitySet(geWorld *World, const char *
 	{
 		assert(WSets[i].Set);
 
-		if (!stricmp(WSets[i].ClassName, ClassName))
+		if (!strcmp(WSets[i].ClassName, ClassName))
 			return WSets[i].Set;
 	}
 

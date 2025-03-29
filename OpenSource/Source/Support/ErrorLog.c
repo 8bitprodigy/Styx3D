@@ -22,18 +22,18 @@
 #define WIN32_LEAN_AND_MEAN
 
 #include <assert.h>		// assert()	
-
-#ifdef _WIN32
-    #include <windows.h>
-#else
-    #include <string.h> 
-#endif
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>		// memmove(), strncpy() strncat()
 
-#include "ErrorLog.h"   
+#include <SDL2/SDL.h>
+
+#ifdef _WIN32
+    #include <windows.h>
+#endif
+
+#include "ErrorLog.h"
+#include "XPlatUtils.h"
 
 #define MAX_ERRORS 30  //  ...
 
@@ -151,9 +151,9 @@ GENESISAPI void geErrorLog_AddExplicit(geErrorLog_ErrorClassType Error,
 {
 	char	buff[100];
 	sprintf(buff, "ErrorLog: %d -", Error);
-	OutputDebugString(buff);
-	OutputDebugString(SDst);
-	OutputDebugString("\r\n");
+	SDL_Log(buff);
+	SDL_Log(SDst);
+	SDL_Log("\r\n");
 }
 #endif
 }

@@ -26,7 +26,7 @@
 
 
 #ifndef NDEBUG
-	static geXForm3d_MaximalAssertionMode = GE_TRUE;
+	static geBoolean geXForm3d_MaximalAssertionMode = GE_TRUE;
 	#define geXForm3d_Assert if (geXForm3d_MaximalAssertionMode) assert
 
 GENESISAPI 	void GENESISCC geXForm3d_SetMaximalAssertionMode( geBoolean Enable )

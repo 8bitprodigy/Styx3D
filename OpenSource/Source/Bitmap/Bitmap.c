@@ -4335,14 +4335,20 @@ const geBitmap_Info * pi;
 
 /*}{ ***************** Palette Functions *******************/
 
-geBoolean geBitmap_Palette_BlitData(gePixelFormat SrcFormat,const void *SrcData,const geBitmap_Palette * SrcPal,
-									gePixelFormat DstFormat,	  void *DstData,const geBitmap_Palette * DstPal,
-									int Pixels)
+geBoolean geBitmap_Palette_BlitData(
+	      gePixelFormat     SrcFormat,
+	const void             *SrcData,
+	const geBitmap_Palette *SrcPal,
+	      gePixelFormat     DstFormat,
+	      void             *DstData,
+	const geBitmap_Palette *DstPal,
+	      int               Pixels
+)
 {
-char *SrcPtr,*DstPtr;
-geBoolean SrcHasCK,DstHasCK;
-uint32 SrcCK,DstCK;
-int SrcCKi,DstCKi;
+	uint8 *SrcPtr,*DstPtr;
+	geBoolean SrcHasCK,DstHasCK;
+	uint32 SrcCK,DstCK;
+	int SrcCKi,DstCKi;
 
 	assert( SrcData && DstData );
 
@@ -4391,13 +4397,13 @@ int SrcCKi,DstCKi;
 	// CK -> CK    : assert the CKI's are the same; change color at CKI
 
 	{
-	uint32 Pixel;
-	int p,R,G,B,A;
-	const gePixelFormat_Operations *SrcOps,*DstOps;
-	gePixelFormat_Composer		ComposePixel;
-	gePixelFormat_Decomposer	DecomposePixel;
-	gePixelFormat_PixelPutter	PutPixel;
-	gePixelFormat_PixelGetter	GetPixel;
+		uint32 Pixel;
+		int p,R,G,B,A;
+		const gePixelFormat_Operations *SrcOps,*DstOps;
+		gePixelFormat_Composer		ComposePixel;
+		gePixelFormat_Decomposer	DecomposePixel;
+		gePixelFormat_PixelPutter	PutPixel;
+		gePixelFormat_PixelGetter	GetPixel;
 
 		SrcOps = gePixelFormat_GetOperations(SrcFormat);
 		DstOps = gePixelFormat_GetOperations(DstFormat);
@@ -4941,21 +4947,21 @@ GENESISAPI geBoolean GENESISCC geBitmap_Palette_SetEntry(geBitmap_Palette *P,int
 
 	if ( P->Data )
 	{
-	char *Data;
+		uint8 *Data;
 
 		if ( Color >= P->Size )
 			return GE_FALSE;
 
-		Data = (char *)(P->Data) + Color * gePixelFormat_BytesPerPel(P->Format);
+		Data = (uint8 *)(P->Data) + Color * gePixelFormat_BytesPerPel(P->Format);
 		gePixelFormat_PutPixel(P->Format,&Data,Pixel);
 	}
 	else
 	{
-	char *Data;
-	gePixelFormat Format;
-	int Size;
+		uint8 *Data;
+		gePixelFormat Format;
+		int Size;
 
-		if ( ! geBitmap_Palette_Lock(P,&Data,&Format,&Size) )
+		if ( ! geBitmap_Palette_Lock(P,(void*)&Data,&Format,&Size) )
 			return GE_FALSE;
 
 		if ( Color >= Size )
@@ -4979,23 +4985,23 @@ GENESISAPI geBoolean GENESISCC geBitmap_Palette_GetEntry(const geBitmap_Palette 
 
 	if ( P->Data )
 	{
-	char *Data;
+		uint8 *Data;
 
 		if ( Color >= P->Size )
 			return GE_FALSE;
 
-		Data = (char *)(P->Data) + Color * gePixelFormat_BytesPerPel(P->Format);
+		Data = (uint8 *)(P->Data) + Color * gePixelFormat_BytesPerPel(P->Format);
 		*Pixel = gePixelFormat_GetPixel(P->Format,&Data);
 	}
 	else
 	{
-	char *Data;
-	gePixelFormat Format;
-	int Size;
+		uint8 *Data;
+		gePixelFormat Format;
+		int Size;
 
 		// must cast away const cuz we don't have a lockforread/write on palettes
 
-		if ( ! geBitmap_Palette_Lock((geBitmap_Palette *)P,&Data,&Format,&Size) )
+		if ( ! geBitmap_Palette_Lock((geBitmap_Palette *)P, (void*)&Data, &Format, &Size) )
 			return GE_FALSE;
 
 		if ( Color >= Size )

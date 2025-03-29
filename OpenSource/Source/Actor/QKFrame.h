@@ -57,7 +57,8 @@ typedef enum
 	QKFRAME_LINEAR,
 	QKFRAME_SLERP,
 	QKFRAME_SQUAD
-} geQKFrame_InterpolationType;
+} 
+geQKFrame_InterpolationType;
 
 
 geTKArray *GENESISCC geQKFrame_LinearCreate(void);
@@ -70,7 +71,8 @@ geTKArray *GENESISCC geQKFrame_SquadCreate();
 	// creates a frame list for spherical linear interpolation	
 
 
-geBoolean GENESISCC geQKFrame_Insert(
+geBoolean GENESISCC 
+geQKFrame_Insert(
 	     geTKArray           **KeyList, // keyframe list to insert into
 	      geTKArray_TimeType   Time,    // time of new keyframe
 	const geQuaternion        *Q,       // quaternion at new keyframe
@@ -78,56 +80,68 @@ geBoolean GENESISCC geQKFrame_Insert(
 );
 	// inserts a new keyframe with the given time and vector into the list.
 
-void GENESISCC geQKFrame_Query(
+void GENESISCC 
+geQKFrame_Query(
 	const geTKArray *KeyList,		// keyframe list
 	int Index,						// index of frame to return
 	geTKArray_TimeType *Time,		// time of the frame is returned
-	geQuaternion *V);					// vector from the frame is returned
+	geQuaternion *V					// vector from the frame is returned
+);
 	// returns the vector and the time at keyframe[index] 
 
-void GENESISCC geQKFrame_Modify(
+void GENESISCC 
+geQKFrame_Modify(
 	geTKArray *KeyList,				// keyframe list
 	int Index,						// index of frame to change
-	const geQuaternion *Q);			// vector for the new key
+	const geQuaternion *Q			// vector for the new key
+);
 	// modifies a vector at keyframe[index]
 
-void GENESISCC geQKFrame_LinearInterpolation(
+void GENESISCC 
+geQKFrame_LinearInterpolation(
 	const void *KF1,		// pointer to first keyframe
 	const void *KF2,		// pointer to second keyframe
 	geFloat T,				// 0 <= T <= 1   blending parameter
-	void *Result);			// put the result in here (geQuaternion)
+	void *Result			// put the result in here (geQuaternion)
+);
 		// interpolates to get a vector between the two vectors at the two
 		// keyframes where T==0 returns the vector for KF1 
 		// and T==1 returns the vector for KF2
 		// interpolates linearly
 	
-void GENESISCC geQKFrame_SlerpInterpolation(
+void GENESISCC 
+geQKFrame_SlerpInterpolation(
 	const void *KF1,		// pointer to first keyframe
 	const void *KF2,		// pointer to second keyframe
 	geFloat T,				// 0 <= T <= 1   blending parameter
-	void *Result);			// put the result in here (geQuaternion)
+	void *Result			// put the result in here (geQuaternion)
+);
 		// interpolates to get a vector between the two vectors at the two
 		// keyframes where T==0 returns the vector for KF1 
 		// and T==1 returns the vector for KF2
 		// interpolates using spherical linear blending
 
-void GENESISCC geQKFrame_SquadInterpolation(
+void GENESISCC 
+geQKFrame_SquadInterpolation(
 	const void *KF1,		// pointer to first keyframe
 	const void *KF2,		// pointer to second keyframe
 	geFloat T,				// 0 <= T <= 1   blending parameter
-	void *Result);			// put the result in here (geQuaternion)
+	void *Result			// put the result in here (geQuaternion)
+);
 		// interpolates to get a vector between the two vectors at the two
 		// keyframes where T==0 returns the vector for KF1 
 		// and T==1 returns the vector for KF2
 		// interpolates using spherical quadratic blending
 
-void GENESISCC geQKFrame_SquadRecompute(
+void GENESISCC 
+geQKFrame_SquadRecompute(
 	int Looped,				// if keylist has the first key connected to last key
-	geTKArray *KeyList);
+	geTKArray *KeyList
+);
 	// rebuild precomputed data for keyframe list.
 
-void GENESISCC geQKFrame_SlerpRecompute(
-	geTKArray *KeyList);		// list of keys to recompute hermite values for
+void GENESISCC 
+geQKFrame_SlerpRecompute(geTKArray *KeyList);		// list of keys to recompute hermite values for
 	// rebuild precomputed data for keyframe list.
 
 
@@ -135,7 +149,8 @@ geBoolean GENESISCC geQKFrame_LinearRead(geVFile* pFile, void* geQKFrame);
 geBoolean GENESISCC geQKFrame_SlerpRead(geVFile* pFile, void* geQKFrame);
 geBoolean GENESISCC geQKFrame_SquadRead(geVFile* pFile, void* geQKFrame);
 
-geBoolean GENESISCC geQKFrame_WriteToFile(
+geBoolean GENESISCC 
+geQKFrame_WriteToFile(
 	geVFile                     *pFile, 
 	geTKArray                   *geQKFrame, 
 	geQKFrame_InterpolationType  InterpolationType, 
@@ -143,7 +158,8 @@ geBoolean GENESISCC geQKFrame_WriteToFile(
 );
 geTKArray *GENESISCC geQKFrame_CreateFromFile(geVFile *pFile, geQKFrame_InterpolationType *InterpolationType, int *Looping);
 geTKArray *GENESISCC geQKFrame_CreateFromBinaryFile(geVFile *pFile, int *InterpolationType, int *Looping);
-geBoolean GENESISCC geQKFrame_WriteToBinaryFile(
+geBoolean GENESISCC 
+geQKFrame_WriteToBinaryFile(
 	geVFile                     *pFile,
 	geTKArray                   *KeyList, 
 	geQKFrame_InterpolationType  InterpolationType,

@@ -19,21 +19,21 @@
 /*  Copyright (C) 1999 WildTangent, Inc. All Rights Reserved           */
 /*                                                                                      */
 /****************************************************************************************/
-
 #ifdef _WIN32
     #include <windows.h>
-#else
-    #include <string.h> 
 #endif
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
+#include <SDL2/SDL.h>
+
+
 void Log_Out(const char * string)
 {
 #ifdef _DEBUG
-	OutputDebugString(string);
+	SDL_Log(string);
 #endif
 	printf(string);
 }

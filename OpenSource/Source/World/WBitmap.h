@@ -24,7 +24,7 @@
 
 #include <assert.h>
 
-#include "BaseType.h"
+#include "GETypes.h"
 #include "GBSPFile.h"
 #include "Bitmap.h"
 

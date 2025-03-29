@@ -20,6 +20,7 @@
 /*                                                                                      */
 /****************************************************************************************/
 #include <assert.h>
+#include <string.h>
 
 //=====================================================================================
 //=====================================================================================
@@ -179,7 +180,7 @@ geBitmap *geWBitmap_Pool_GetBitmapByName(geWBitmap_Pool *Pool, const char *Bitma
 	pWBitmap = Pool->WBitmaps;
 	for (i=0; i< Pool->NumWBitmaps; i++, pWBitmap++)
 	{
-		if (!stricmp(pWBitmap->Name, BitmapName))
+		if (!strcmp(pWBitmap->Name, BitmapName))
 			return pWBitmap->Bitmap;				// Found it
 	}
 
@@ -193,13 +194,13 @@ geBitmap *geWBitmap_Pool_GetBitmapByName(geWBitmap_Pool *Pool, const char *Bitma
 //=====================================================================================
 geBoolean geWBitmap_Pool_CreateAllWBitmaps(geWBitmap_Pool *Pool, GBSP_BSPData *BSPData)
 {
-	int32		i;
-	geWBitmap	*pWBitmap;
-	GFX_Texture	*pGFXTexture;
-	uint8		*BitmapIsTransparent;
-	GFX_Face	*pFace;
-	geBoolean	UseColorKey;
-	uint32		ColorKey;
+	int32        i;
+	geWBitmap   *pWBitmap;
+	GFX_Texture *pGFXTexture;
+	uint8       *BitmapIsTransparent;
+	GFX_Face    *pFace;
+	geBoolean    UseColorKey;
+	uint32       ColorKey;
 
 	assert(Pool);
 	assert(BSPData);
@@ -365,11 +366,13 @@ geBoolean geWBitmap_Pool_CreateAllWBitmaps(geWBitmap_Pool *Pool, GBSP_BSPData *B
 
 		// Create the palette...
 		{
-			geBitmap_Palette		*Pal;
-			int32					PalSize,cnt;
-			gePixelFormat			Format;
-			uint32					*DstPalPtr,*DstPalData;
-			DRV_RGB					*SrcPalPtr;
+			geBitmap_Palette *Pal;
+			int32             PalSize,cnt;
+			gePixelFormat     Format;
+			uint32           
+			                 *DstPalPtr,
+			                 *DstPalData;
+			DRV_RGB          *SrcPalPtr;
 
 			//Pal = geBitmap_Palette_Create(GE_PIXELFORMAT_32BIT_ARGB, 256);
 			Pal = geBitmap_Palette_Create(GE_PIXELFORMAT_32BIT_XRGB, 256);
@@ -380,7 +383,7 @@ geBoolean geWBitmap_Pool_CreateAllWBitmaps(geWBitmap_Pool *Pool, GBSP_BSPData *B
 				return GE_FALSE;
 			}
 			
-			if (!geBitmap_Palette_Lock(Pal, &DstPalData, &Format, &PalSize))
+			if (!geBitmap_Palette_Lock(Pal, (void **)&DstPalData, &Format, &PalSize))
 			{
 				geErrorLog_AddString(-1, "geWBitmap_Pool_CreateAllWBitmaps:  geBitmap_Palette_Lock failed.", NULL);
 				return GE_FALSE;

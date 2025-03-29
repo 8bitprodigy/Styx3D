@@ -12,7 +12,7 @@
 	typedef void* HWND;
 #endif
 
-#include "BaseType.h"
+#include "GETypes.h"
 
 #ifdef __cplusplus
 extern "C" {

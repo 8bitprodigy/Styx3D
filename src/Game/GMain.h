@@ -189,7 +189,7 @@ geBoolean	ShutdownWorldCB(GenVSI *VSI);
 geBoolean	ChangeLevel_Spawn(GenVSI *VSI, void *PlayerData, void *ClassData, char *EntityName);
 
 // Attacker.c
-geBoolean Attacker_TurretSpawn(GenVSI *VSI, void *PlayerData, void *ClassData, char *EntityName);	
+geBoolean Attacker_TurretSpawn(  GenVSI *VSI, void *PlayerData, void *ClassData, char *EntityName);	
 void Attacker_TurretDestroy(GenVSI *VSI, void *PlayerData, void *ClassData);	
 void Attacker_Fire(GenVSI *VSI, GPlayer *Player, GPlayer *Target, float Time);
 

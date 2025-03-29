@@ -510,14 +510,14 @@ GENESISAPI geBoolean GENESISCC geVFile_EOF   (const geVFile *File)
 	return File->APIs->Eof(File->FSData);
 }
 
-GENESISAPI geBoolean GENESISCC geVFile_Tell  (const geVFile *File, long *Position)
+GENESISAPI geBoolean GENESISCC geVFile_Tell  (const geVFile *File, int32 *Position)
 {
 	assert(File);
 	
 	return File->APIs->Tell(File->FSData, Position);
 }
 
-GENESISAPI geBoolean GENESISCC geVFile_Size  (const geVFile *File, long *Size)
+GENESISAPI geBoolean GENESISCC geVFile_Size  (const geVFile *File, int32 *Size)
 {
 	assert(File);
 	
@@ -531,7 +531,7 @@ GENESISAPI geBoolean GENESISCC geVFile_GetProperties(const geVFile *File, geVFil
 	return File->APIs->GetProperties(File->FSData, Properties);
 }
 
-GENESISAPI geBoolean GENESISCC geVFile_SetSize(geVFile *File, long Size)
+GENESISAPI geBoolean GENESISCC geVFile_SetSize(geVFile *File, int32 Size)
 {
 	assert(File);
 	

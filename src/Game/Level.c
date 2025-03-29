@@ -30,7 +30,8 @@ extern void GenVS_Error(const char *Msg, ...);
 //	Callback function called everytime a new world is set.  This functions is passed
 //	through the setworld function...
 //=====================================================================================
-geBoolean SetupWorldCB(GenVSI *VSI, const char *WorldName, geVFile *MainFS)
+geBoolean 
+SetupWorldCB(GenVSI *VSI, const char *WorldName, geVFile *MainFS)
 {
 	// Setup the pathpoints for bots...
 	if (!PathPt_Startup(GenVSI_GetWorld(VSI), MainFS))
@@ -95,7 +96,8 @@ geBoolean SetupWorldCB(GenVSI *VSI, const char *WorldName, geVFile *MainFS)
 //=====================================================================================
 //	ShutdownWorldCB
 //=====================================================================================
-geBoolean ShutdownWorldCB(GenVSI *VSI)
+geBoolean 
+ShutdownWorldCB(GenVSI *VSI)
 {
 	// Shutdown all the path points for this world...
 	PathPt_Shutdown();
@@ -106,7 +108,8 @@ geBoolean ShutdownWorldCB(GenVSI *VSI)
 //=====================================================================================
 //	ChangeLevel_Trigger
 //=====================================================================================
-static geBoolean ChangeLevel_Trigger(GenVSI *VSI, void *PlayerData, void *TargetData, void *Context)
+static geBoolean 
+ChangeLevel_Trigger(GenVSI *VSI, void *PlayerData, GPlayer *TargetData, void *Context)
 {
 	ChangeLevel		*Cl;
 	GPlayer			*Player;
@@ -128,7 +131,8 @@ static geBoolean ChangeLevel_Trigger(GenVSI *VSI, void *PlayerData, void *Target
 //=====================================================================================
 //	ChangeLevel_Spawn
 //=====================================================================================
-geBoolean ChangeLevel_Spawn(GenVSI *VSI, void *PlayerData, void *ClassData, char *EntityName)
+geBoolean 
+ChangeLevel_Spawn(GenVSI *VSI, void *PlayerData, void *ClassData, char *EntityName)
 {
 	ChangeLevel		*Cl;
 	GPlayer			*Player;

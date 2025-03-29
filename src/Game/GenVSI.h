@@ -17,7 +17,9 @@
 
 #include "Genesis.h"	// FIXME:  Should get rid of this, and make wrapper functions
 
+
 //===========================================================================
+typedef struct GPlayer GPlayer;
 //===========================================================================
 typedef int32					GenVSI_CHandle;		// Client Handle
 typedef int32					GenVSI_PHandle;		// Player handle
@@ -87,7 +89,7 @@ typedef struct GenVSI		GenVSI;
 typedef geBoolean GenVSI_NewWorldCB(GenVSI *VSI, const char *WorldName, geVFile *MainFS);
 typedef geBoolean GenVSI_ShutdownWorldCB(GenVSI *VSI);
 
-typedef void GenVSI_SpawnFunc(GenVSI *VSI, void *Player, void *ClassData, char *EntityName);
+typedef geBoolean GenVSI_SpawnFunc(  GenVSI *VSI, void *Player, void *ClassData, char *EntityName);
 typedef void GenVSI_DestroyFunc(GenVSI *VSI, void *Player, void *ClassData);
 
 typedef void GenVSI_SetCSpawnCB(void *UData, const char *ClassName, GenVSI_SpawnFunc *Func, GenVSI_DestroyFunc *DFunc); 
@@ -123,7 +125,7 @@ typedef void GenVSI_ConsoleHeaderPrintfCB(void *Udata, int32 ClientHandle, geBoo
 typedef float GenVSI_GetTimeCB(void *UData);
 
 //#pragma message ("all this player stuff will soon be handles, not void...")
-typedef void *GenVSI_SpawnPlayerCB(void *UData, const char *ClassName);
+typedef GPlayer *GenVSI_SpawnPlayerCB(void *UData, const char *ClassName);
 typedef void GenVSI_DestroyPlayerCB(void *UData, void *PlayerData);
 
 

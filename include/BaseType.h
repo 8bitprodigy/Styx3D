@@ -59,12 +59,6 @@ extern "C" {
 
 /******** The Basic Types ****************************/
 
-/* [DEPRECATED] Use C99 `bool`, `true`, and `false` instead */
-typedef bool        geBoolean; 
-#define GE_FALSE    false
-#define GE_TRUE     true
-/* [/DEPRECATED] kept for legacy code -- replace where used. */
-
 #ifdef STYX3D_USE_DOUBLE
   typedef double geFloat;
 #else

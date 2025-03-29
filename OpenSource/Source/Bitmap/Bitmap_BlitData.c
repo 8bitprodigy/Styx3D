@@ -393,9 +393,17 @@ geBoolean geBitmap_BlitData_Sub(	const geBitmap_Info * iSrcInfo,const void *iSrc
 	//return GE_FALSE;
 }
 
-geBoolean geBitmap_BlitData(	const geBitmap_Info * iSrcInfo,const void *iSrcData, const geBitmap *iSrcBmp,
-								geBitmap_Info * iDstInfo,void *iDstData,	const geBitmap *iDstBmp,
-								int iSizeX,int iSizeY)
+geBoolean 
+geBitmap_BlitData(
+	const geBitmap_Info *iSrcInfo,
+	const void          *iSrcData, 
+	const geBitmap      *iSrcBmp,
+	      geBitmap_Info *iDstInfo,
+	      void          *iDstData,
+	const geBitmap      *iDstBmp,
+      	int            iSizeX,
+      	int            iSizeY
+)
 {
 geBoolean Ret;
 
@@ -409,18 +417,19 @@ return Ret;
 
 /*}{*********************************************************************/
 
-geBoolean BlitData_Raw(void)
+geBoolean 
+BlitData_Raw(void)
 {
-int x,y;
-char *SrcPtr,*DstPtr;
-int R,G,B,A;
-uint32 ColorKey,Pixel;
+	int x,y;
+	uint8 *SrcPtr,*DstPtr;
+	int R,G,B,A;
+	uint32 ColorKey,Pixel;
 
 	if ( ! SrcOps || ! DstOps )
 		return GE_FALSE;
 
-	SrcPtr = (char *)SrcData;
-	DstPtr = (char *)DstData;
+	SrcPtr = (uint8 *)SrcData;
+	DstPtr = (uint8 *)DstData;
 
 	// this generic converter is pretty slow.
 	// fortunately genesis uses mostly the (Pal -> UnPal) conversion
@@ -561,14 +570,15 @@ uint32 ColorKey,Pixel;
 
 /*}{*********************************************************************/
 
-geBoolean BlitData_FromSeparateAlpha(void)
+geBoolean 
+BlitData_FromSeparateAlpha(void)
 {
-geBitmap_Info AlphaInfo;
-void * AlphaData;
-uint8 *SrcPtr,*DstPtr,*AlphaPtr;
-int x,y,R,G,B,A;
-uint32 ColorKey,Pixel;
-int AlphaXtra;
+	geBitmap_Info AlphaInfo;
+	void * AlphaData;
+	uint8 *SrcPtr,*DstPtr,*AlphaPtr;
+	int x,y,R,G,B,A;
+	uint32 ColorKey,Pixel;
+	int AlphaXtra;
 
 	/*******
 	**

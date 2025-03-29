@@ -19,10 +19,12 @@
 /*  Copyright (C) 1999 WildTangent, Inc. All Rights Reserved           */
 /*                                                                                      */
 /****************************************************************************************/
-#include	<assert.h>
-#include	<stdio.h>
-#include	<stdlib.h>
-#include	<string.h>
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include <SDL2/SDL.h>
 
 #ifdef _WIN32
 	#define	WIN32_LEAN_AND_MEAN
@@ -39,13 +41,12 @@
 #endif
 
 
-#include	"BaseType.h"
+#include	"FSDOS.h"
+#include	"GETypes.h"
 #include	"RAM.h"
-
 #include	"VFile.h"
 #include	"VFile_private.h"
 
-#include	"FSDOS.h"
 
 //	"DF01"
 #define	DOSFILE_SIGNATURE	0x31304644
@@ -846,8 +847,9 @@ static	geBoolean	GENESISCC FSDos_FileExists(geVFile *FS, void *Handle, const cha
 
 	if	(BuildFileName(File, Name, Buff, NULL, sizeof(Buff)) == GE_FALSE)
 		return GE_FALSE;
-
-	if	(GetFileAttributes(Buff) == 0xffffffff)
+		
+	SDL_stat statbuf;
+	if	(SDL_stat(Buff, &statbuf) == -1)
 		return GE_FALSE;
 
 	return GE_TRUE;

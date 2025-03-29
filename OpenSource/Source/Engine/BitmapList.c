@@ -20,16 +20,13 @@
 /*                                                                                      */
 /****************************************************************************************/
 #include <assert.h>
+#include <string.h> 
 
 #ifdef _DEBUG
-
-#ifdef _WIN32
-    #include <windows.h>
-#else
-    #include <string.h> 
-#endif
-
-#include <stdio.h>
+	#ifdef _WIN32
+		#include <windows.h>
+	#endif
+	#include <stdio.h>
 #endif
 
 #include "BitmapList.h"

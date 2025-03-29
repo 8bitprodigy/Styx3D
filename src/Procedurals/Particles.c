@@ -3,11 +3,12 @@
 
 /*}{**************/
 #include <assert.h>
+#include <ctype.h>
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "BaseType.h"
+#include "GETypes.h"
 #include "ErrorLog.h"
 #include "GeBMUtil.h"
 #include "Genesis.h"

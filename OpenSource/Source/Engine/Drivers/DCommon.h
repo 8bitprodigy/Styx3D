@@ -27,10 +27,10 @@
 #include <stdlib.h>
 #include <stdint.h>
 // FIXME:  What should we do with these?
-#include "XForm3D.h"
-#include "Vec3D.h"
-#include "PixelFormat.h"
 #include "GETypes.h"		// This is a no no
+#include "PixelFormat.h"
+#include "Vec3D.h"
+#include "XForm3D.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -67,7 +67,6 @@ typedef char *PSZ;
 #endif  /* !BASETYPES */
 
 typedef int32_t     DWORD;
-typedef int8_t      geBoolean;
 typedef uint8_t     BYTE;
 typedef uint16_t    WORD;
 typedef float       FLOAT;

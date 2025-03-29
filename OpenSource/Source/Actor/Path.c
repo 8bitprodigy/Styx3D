@@ -24,14 +24,14 @@
 #include <string.h>
 #include <stdio.h>  //sscanf
 
-#include "Path.h"
-#include "Quatern.h"
 #include "ErrorLog.h"
+#include "Path.h"
+#include "QKFrame.h"
+#include "Quatern.h"
 #include "RAM.h"
 #include "TKArray.h"
-#include "VKFrame.h"
-#include "QKFrame.h"
 #include "Vec3D.h"
+#include "VKFrame.h"
 
 #define min(aa,bb)  (( (aa)>(bb) ) ? (bb) : (aa) )
 #define max(aa,bb)  (( (aa)>(bb) ) ? (aa) : (bb) )
@@ -45,13 +45,14 @@ typedef void (GENESISCC *InterpolationFunction)(
 	const void *KF1,
 	const void *KF2, 
 	gePath_TimeType T,
-	void *Result);
+	void *Result
+);
 
 
-#define FLAG_DIRTY   (0x01)
-#define FLAG_LOOPED  (0x01)
-#define FLAG_OTHER	 (0x696C6345)
-#define FLAG_EMPTY	 (0x21657370)
+#define FLAG_DIRTY  (0x01)
+#define FLAG_LOOPED (0x01)
+#define FLAG_OTHER  (0x696C6345)
+#define FLAG_EMPTY  (0x21657370)
 
 typedef struct
 {
@@ -1297,9 +1298,12 @@ gePath* GENESISCC gePath_CreateFromFile_F0_(geVFile* pFile)
 
 GENESISAPI gePath* GENESISCC gePath_CreateFromFile(geVFile* pFile)
 {
-	uint32 u, v, flag;
-	int Interp,Loop;
-	gePath* P;
+	uint32  u, v, flag;
+	int
+	        Interp,
+	        Loop;
+	gePath *P;
+	
 	#define LINE_LENGTH 256
 	char line[LINE_LENGTH];
 
@@ -1368,7 +1372,7 @@ GENESISAPI gePath* GENESISCC gePath_CreateFromFile(geVFile* pFile)
 		}
 	if (flag!=GE_FALSE)
 		{
-			P->Rotation.KeyList = geQKFrame_CreateFromFile(pFile,&Interp,&Loop);
+			P->Rotation.KeyList = geQKFrame_CreateFromFile(pFile,(geQKFrame_InterpolationType*)&Interp,&Loop);
 			if (P->Rotation.KeyList == NULL)
 				EXIT_ERROR
 			P->Rotation.InterpolationType = gePath_QKToPathInterpolation(Interp);
@@ -1399,7 +1403,7 @@ GENESISAPI gePath* GENESISCC gePath_CreateFromFile(geVFile* pFile)
 					
 	if (flag!=GE_FALSE)
 		{
-			P->Translation.KeyList = geVKFrame_CreateFromFile(pFile,&Interp,&Loop);
+			P->Translation.KeyList = geVKFrame_CreateFromFile(pFile,(geVKFrame_InterpolationType*)&Interp,&Loop);
 			if (P->Translation.KeyList == NULL)
 				EXIT_ERROR
 			P->Translation.InterpolationType = gePath_VKToPathInterpolation(Interp);
@@ -1621,7 +1625,7 @@ static gePath * GENESISCC gePath_CreateFromBinaryFile(geVFile *F,uint32 Header)
 
 	if ((Header >> 1) & 0x1)
 		{
-			P->Translation.KeyList = geVKFrame_CreateFromBinaryFile(F,&Interp,&Looping);
+			P->Translation.KeyList = geVKFrame_CreateFromBinaryFile(F,(geVKFrame_InterpolationType*)&Interp,&Looping);
 			if (P->Translation.KeyList == NULL)
 				{
 					geErrorLog_AddString( -1, "Failure to read translation keys" , NULL);

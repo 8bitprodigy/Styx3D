@@ -725,7 +725,7 @@ Track* Track_FindTrack(GenVSI *VSI, geVec3d *StartPos, geVec3d *TgtPos, int32 pl
 
 	geBoolean OneWay = GE_FALSE;
 	geBoolean found = GE_FALSE;
-	static StartTrack = 0;
+	static int StartTrack = 0;
 
 	geWorld			*World;
 

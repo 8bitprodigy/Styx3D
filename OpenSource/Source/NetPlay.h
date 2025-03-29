@@ -29,7 +29,7 @@
 	#include <stdint.h>
 	#include <uuid/uuid.h>
 	
-	typedef uint32_t  DWORD;
+	typedef uint32_t  uint32;
 	typedef char*     LPSTR;
 	typedef char*     LPTSTR;
 	typedef uint32_t  DPID;
@@ -38,7 +38,7 @@
 	typedef GUID*     LPCDPNAME;
 	typedef GUID*     LPCGUID;
 	typedef uint32_t* LPDPID;
-	typedef uint32_t* LPDWORD;
+	typedef uint32_t* LPuint32;
 	typedef int       HRESULT;
 	#define DPERR_GENERIC 0x80004005L
 	#define DPERR_PENDING 0x00040001L
@@ -89,8 +89,8 @@
 	LPDPMSG_GENERIC;
 	
 	typedef struct _DPNAME {
-		DWORD    dwSize;   // Size of this structure
-		DWORD    dwFlags;  // Flags (typically 0, reserved for future use)
+		uint32    dwSize;   // Size of this structure
+		uint32    dwFlags;  // Flags (typically 0, reserved for future use)
 		int16_t *lpszShortNameA;  // Pointer to a short name (display name)
 		int16_t *lpszLongName;   // Pointer to a long name (full descriptive name)
 	} 
@@ -115,24 +115,24 @@
 
 	typedef struct 
 	{
-		DWORD               dwSize;              // Size of this structure
-		DWORD               dwFlags;             // Flags related to the operation
+		uint32               dwSize;              // Size of this structure
+		uint32               dwFlags;             // Flags related to the operation
 		DPID                dpId;                // The DirectPlay ID of the player or group to destroy
-		DWORD               dwReserved;          // Reserved for future use
+		uint32               dwReserved;          // Reserved for future use
 	}*
 	LPDPMSG_DESTROYPLAYERORGROUP;
 	
 	typedef struct 
 	{
-		DWORD               dwSize;          // Size of this structure
-		DWORD               dwFlags;         // Flags to indicate host-specific options
+		uint32               dwSize;          // Size of this structure
+		uint32               dwFlags;         // Flags to indicate host-specific options
 		DPID                dpidHost;        // The DirectPlay ID of the host player
-		DWORD               dwReserved;      // Reserved for future use
+		uint32               dwReserved;      // Reserved for future use
 	}*
 	LPDPMSG_HOST;
 #endif
 
-#include "BaseType.h"
+#include "GETypes.h"
 
 #ifdef	__cplusplus
 extern "C" {
@@ -164,13 +164,13 @@ extern LPGUID        glpGuid;
 													
 static void      DoDPError(           HRESULT       Hr);
        geBoolean InitNetPlay(         LPGUID        lpGuid);
-       geBoolean NetPlayEnumSession(  LPSTR         IPAdress,    SESSION_DESC **SessionList,     DWORD *SessionNum);
+       geBoolean NetPlayEnumSession(  LPSTR         IPAdress,    SESSION_DESC **SessionList,     uint32 *SessionNum);
        geBoolean NetPlayJoinSession(  SESSION_DESC *SessionList);
-       geBoolean NetPlayCreateSession(LPSTR         SessionName, DWORD          MaxPlayers);
-       geBoolean NetPlayCreatePlayer( LPDPID        lppidID,     LPTSTR         lptszPlayerName, HANDLE  hEvent,  LPVOID lpData, DWORD   dwDataSize,    geBoolean ServerPlayer);
+       geBoolean NetPlayCreateSession(LPSTR         SessionName, uint32          MaxPlayers);
+       geBoolean NetPlayCreatePlayer( LPDPID        lppidID,     LPTSTR         lptszPlayerName, HANDLE  hEvent,  LPVOID lpData, uint32   dwDataSize,    geBoolean ServerPlayer);
        geBoolean NetPlayDestroyPlayer(DPID          pid);
-       HRESULT   NetPlaySend(         DPID          idFrom,      DPID           idTo,            DWORD   dwFlags, LPVOID lpData, DWORD   dwDataSize);
-       HRESULT   NetPlayReceive(      LPDPID        lpidFrom,    LPDPID         lpidTo,          DWORD   dwFlags, LPVOID lpData, LPDWORD lpdwDataSize);
+       HRESULT   NetPlaySend(         DPID          idFrom,      DPID           idTo,            uint32   dwFlags, LPVOID lpData, uint32   dwDataSize);
+       HRESULT   NetPlayReceive(      LPDPID        lpidFrom,    LPDPID         lpidTo,          uint32   dwFlags, LPVOID lpData, LPuint32 lpdwDataSize);
        geBoolean DeInitNetPlay(       void);
 
 // HACK!!!! Function is in Engine.cpp (So NetPlay.C can call it...)

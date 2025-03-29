@@ -21,6 +21,8 @@
 /****************************************************************************************/
 #include <assert.h>
 #include <string.h>
+
+#include <SDL2/SDL.h>
 //#define INITGUID
 #ifdef _WIN32
 	#include <initguid.h>
@@ -46,7 +48,7 @@
     };
 #endif
 
-#include "BaseType.h"
+#include "GETypes.h"
 #include "CSNetMgr.h"
 #include "ErrorLog.h"
 #include "NetPlay.h"
@@ -147,7 +149,7 @@ GENESISAPI geBoolean GENESISCC
 geCSNetMgr_ReceiveFromServer(geCSNetMgr *M, geCSNetMgr_NetMsgType *Type, int32 *Size, uint8 **Data)
 {
 	DPID				IdTo;
-	DWORD				BSize = BUFFER_SIZE;
+	uint32				BSize = BUFFER_SIZE;
 	HRESULT				Result;
 
 	*Size = 0;
@@ -215,7 +217,7 @@ geCSNetMgr_ReceiveFromClient(
 )
 {
 	DPID				IdTo;
-	DWORD				BSize = BUFFER_SIZE;
+	uint32				BSize = BUFFER_SIZE;
 	HRESULT				Result;
 
 	*Size = 0;
@@ -273,7 +275,7 @@ geCSNetMgr_ReceiveSystemMessage(
 )
 {
 	DPID				SystemId, IdTo;
-	DWORD				BSize = BUFFER_SIZE;
+	uint32				BSize = BUFFER_SIZE;
 	HRESULT				Result;
 
 	assert( geCSNetMgr_IsValid(M)!=GE_FALSE );
@@ -318,7 +320,7 @@ geCSNetMgr_ProcessSystemMessage(
 	geCSNetMgr_NetClient  *Client
 )
 {
-	DWORD dwSize;
+	uint32 dwSize;
 
 	assert( geCSNetMgr_IsValid(M)!=GE_FALSE );
 
@@ -403,7 +405,7 @@ geCSNetMgr_ReceiveAllMessages(
 	uint8                 **Data
 )
 {
-	DWORD				BSize = BUFFER_SIZE;
+	uint32				BSize = BUFFER_SIZE;
 	HRESULT				Result;
 
 	assert( geCSNetMgr_IsValid(M)!=GE_FALSE );
@@ -574,7 +576,7 @@ geCSNetMgr_JoinSession(geCSNetMgr *M, const char *Name, const geCSNetMgr_NetSess
 {
 
 	uint32	StartTime;
-	DWORD	BSize = BUFFER_SIZE;
+	uint32	BSize = BUFFER_SIZE;
 
 	WeAreTheServer = GE_FALSE;
 	NetSession = GE_FALSE;
@@ -599,9 +601,9 @@ geCSNetMgr_JoinSession(geCSNetMgr *M, const char *Name, const geCSNetMgr_NetSess
 	//  Create Client message.  Since Clients don't need this message
 	//  this should not be a problem.
 
-	StartTime = timeGetTime();
+	StartTime = SDL_GetTicks();
 #if 1
-	while( NET_TIMEOUT > (timeGetTime() -  StartTime) )
+	while( NET_TIMEOUT > (SDL_GetTicks() -  StartTime) )
 	{
 		DPID	IdFrom, IdTo;
 		HRESULT	Result;
@@ -675,7 +677,7 @@ geCSNetMgr_StopSession(geCSNetMgr *M)
 GENESISAPI geBoolean GENESISCC 
 geCSNetMgr_SendToServer(geCSNetMgr *M,geBoolean Guaranteed, uint8 *Data, int32 DataSize)
 {
-    DWORD           dwFlags = 0;
+    uint32           dwFlags = 0;
 
 	assert( geCSNetMgr_IsValid(M)!=GE_FALSE );
 	assert(DataSize+PACKET_HEADER_SIZE < BUFFER_SIZE);
@@ -711,7 +713,7 @@ geCSNetMgr_SendToClient(
 	int32             DataSize
 )
 {
-    DWORD           dwFlags = 0;
+    uint32           dwFlags = 0;
 
 	assert( geCSNetMgr_IsValid(M)!=GE_FALSE );
 	assert(DataSize+PACKET_HEADER_SIZE < BUFFER_SIZE);

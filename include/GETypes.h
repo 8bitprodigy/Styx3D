@@ -53,6 +53,12 @@ extern "C" {
 #define GE_MODEL_RENDER_ALWAYS			(1<<2)		// Render always, skipping all visibility tests
 #define GE_MODEL_COLLIDE				(1<<3)		// Collide when calling geWorld_Collision
 
+/* [DEPRECATED] Use C99 `bool`, `true`, and `false` instead */
+typedef bool        geBoolean; 
+#define GE_FALSE    false
+#define GE_TRUE     true
+/* [/DEPRECATED] kept for legacy code -- replace where used. */
+
 typedef struct
 {
 	float r, g, b, a;

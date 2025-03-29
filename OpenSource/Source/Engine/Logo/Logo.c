@@ -19,14 +19,16 @@
 /*  Copyright (C) 1999 WildTangent, Inc. All Rights Reserved           */
 /*                                                                                      */
 /****************************************************************************************/
-#define WIN32_LEAN_AND_MEAN
-#pragma warning(disable : 4201 4214 4115)
-
+#include	<math.h>
 #include <stdint.h>
 
+
 #ifdef _WIN32
+#define WIN32_LEAN_AND_MEAN
+#pragma warning(disable : 4201 4214 4115)
     #include <windows.h>
 	#include <mmsystem.h> //timeGetTime
+	#pragma warning(default : 4201 4214 4115)
 #else
     #include <string.h> 
     #include <time.h>
@@ -38,9 +40,7 @@
 	}
 #endif
 
-#pragma warning(default : 4201 4214 4115)
-
-#include	<math.h>
+#include <SDL2/SDL.h>
 
 #include	"Genesis.h"
 #include	"Engine.h"
@@ -174,39 +174,41 @@ static	geBitmap *	GetABitmap(void *BmpData, int BmpLength, void *AlphaData, int 
 
 geBoolean DoSplashScreen(geEngine *Engine, geDriver_Mode *DriverMode)
 {
-	geActor_Def *		ActorDef;
-	geCamera *			Camera;
-	geVFile *			MemFile;
-	geVFile_MemoryContext	Context;
-	geBoolean			Result;
-	geActor *			Actor;
-	geWorld *			World;
-	geFloat				StartTime;
-	geFloat				CurrentTime;
-	geFloat				EndTime;
-	geMotion *			Motion;
-	geXForm3d			CameraXForm;
-	geRect 				Rect;
-	geXForm3d			ActorXForm;
-	geBoolean			KeepGoing;
-	int32				Width, Height;
+	geActor_Def           *ActorDef;
+	geCamera              *Camera;
+	geVFile               *MemFile;
+	geVFile_MemoryContext  Context;
+	geBoolean              Result;
+	geActor               *Actor;
+	geWorld               *World;
+	geFloat                StartTime;
+	geFloat                CurrentTime;
+	geFloat                EndTime;
+	geMotion              *Motion;
+	geXForm3d              CameraXForm;
+	geRect                 Rect;
+	geXForm3d              ActorXForm;
+	geBoolean              KeepGoing;
+	int32
+	                       Width, 
+	                       Height;
 
-	geVec3d				LightingNormal;
-	LARGE_INTEGER		CurrentTic;
+	geVec3d                LightingNormal;
+	uint64                 CurrentTic;
 
-	_Electric_BoltEffect *Bolt;
-	geVec3d				BoltStart;
-	geVec3d				BoltEnd;
+	_Electric_BoltEffect  *Bolt;
+	geVec3d                BoltStart;
+	geVec3d                BoltEnd;
 
-	geBitmap *			Corona;
-	geBitmap *			Streak;
-	geBitmap *			WebUrl;
-	GE_LVertex 			CoronaVert;
-	GE_LVertex 			StreakVert;
-	geVec3d				CoronaVertex;
-	geLight *			CoronaLight;
+	geBitmap              *Corona;
+	geBitmap              *Streak;
+	geBitmap              *WebUrl;
+	GE_LVertex             CoronaVert;
+	GE_LVertex             StreakVert;
+	geVec3d                CoronaVertex;
+	geLight               *CoronaLight;
 
-static	geBoolean		DisplayedOnceAlready = GE_FALSE;
+    static geBoolean       DisplayedOnceAlready = GE_FALSE;
 
 	if	(DisplayedOnceAlready == GE_TRUE)
 		return GE_TRUE;
@@ -221,14 +223,15 @@ static	geBoolean		DisplayedOnceAlready = GE_FALSE;
 
 	if (Width == -1)
 	{
-		RECT	R;
-	
-		GetClientRect(Engine->hWnd, &R);
+		int 
+			width, 
+			height;
+		SDL_GetWindowSize(Engine->hWnd, &width, &height);
 		
-		Rect.Left = R.left;
-		Rect.Right = R.right;
-		Rect.Top = R.top;
-		Rect.Bottom = R.bottom;
+		Rect.Left = 0;
+		Rect.Right = width;
+		Rect.Top = 0;
+		Rect.Bottom = height;
 	}
 	else
 	{
@@ -395,15 +398,17 @@ static	geBoolean		DisplayedOnceAlready = GE_FALSE;
 	CoronaVertex.Z += 100.0f;
 	CoronaVertex.X += 30.0f;
 
-	QueryPerformanceCounter(&CurrentTic);
+	CurrentTic = SDL_GetPerformanceCounter();
 
 	KeepGoing = GE_TRUE;
 
 	while	(KeepGoing)		// Play the entire animation
 	{
-		LARGE_INTEGER		NowTic, DeltaTic;
-		geFloat				CoronaScale;
-		geFloat				StreakScale;
+		uint64		
+		        NowTic, 
+		        DeltaTic;
+		geFloat CoronaScale;
+		geFloat StreakScale;
 					 
 		if	(CurrentTime >= EndTime)
 		{
@@ -479,16 +484,16 @@ static	geBoolean		DisplayedOnceAlready = GE_FALSE;
 		if	(!geEngine_EndFrame(Engine))
 			goto fail;
 
-		QueryPerformanceCounter(&NowTic);
+		NowTic = SDL_GetPerformanceCounter();
 
-		SubLarge(&CurrentTic, &NowTic, &DeltaTic);
+		DeltaTic = CurrentTic - NowTic;
 
 //		CurrentTime += ((float)DeltaTic.LowPart / (float)Engine->CPUInfo.Freq) / 10.0f;
 //		CurrentTime += ((float)DeltaTic.LowPart / (float)Engine->CPUInfo.Freq) / 45.0f;
-		CurrentTime += ((float)DeltaTic.LowPart / (float)Engine->CPUInfo.Freq) / 75.0f;
+		CurrentTime += ((float)DeltaTic / (float)Engine->CPUInfo.Freq) / 75.0f;
 	}
 
-	Sleep(500);
+	SDL_Delay(500);
 
 	// Remove the actor from the world
 	geWorld_RemoveActor(World,Actor);

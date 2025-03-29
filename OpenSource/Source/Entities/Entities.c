@@ -21,23 +21,21 @@
 /****************************************************************************************/
 
 #include <assert.h>
+#include <string.h>
 
 #ifdef _WIN32
     #include <windows.h>
-#else
-    #include <string.h> 
 #endif
 
 
-#include "Entities.h"
 #include "BaseType.h"
+#include "Entities.h"
 #include "ErrorLog.h"
-#include "Vec3D.h"
 #include "RAM.h"
-
+#include "Vec3D.h"
 // These are temporary until we find a better way to get models pointers into the entity stuff
-#include "World.h"
 #include "GBSPFile.h"
+#include "World.h"
 
 
 //=====================================================================================
@@ -71,7 +69,7 @@ static geBoolean InsertEntityInClassList(geWorld *World, geEntity *Entity)
 		if (!WSet[i].ClassName)
 			continue;
 
-		if (!stricmp(WSet[i].ClassName, EntClassName))
+		if (!strcmp(WSet[i].ClassName, EntClassName))
 		{
 			// Add entity to this class set...
 			if (!geEntity_EntitySetAddEntity(WSet[i].Set, Entity))
@@ -236,7 +234,7 @@ geBoolean geEntity_GetModelNumForKey(geEntity *Entity, const char *Key, int32 *M
 
 	for (Epair = Entity->Epairs; Epair; Epair = Epair->Next)
 	{
-		if (!stricmp(Epair->Key, Key))
+		if (!strcmp(Epair->Key, Key))
 		{
 			if (Epair->Value[0] == '*')
 				sscanf(Epair->Value+1, "%d", &Value);
@@ -286,7 +284,7 @@ const char *geEntity_GetStringForKey(const geEntity *Entity, const char *Key)
 
 	for (Epair = Entity->Epairs; Epair; Epair = Epair->Next)
 	{
-		if (!stricmp(Epair->Key, Key))
+		if (!strcmp(Epair->Key, Key))
 		{
 			return Epair->Value;
 		}
@@ -435,7 +433,7 @@ geEntity_Field *geEntity_ClassFindFieldByName(geEntity_Class *Class, const char 
 
 	for (Field = Class->Fields; Field; Field = Field->Next)
 	{
-		if	(!stricmp(Field->Name, Name))
+		if	(!strcmp(Field->Name, Name))
 			return Field;
 		
 	}
@@ -508,7 +506,7 @@ geEntity_Class *geEntity_EntitySetFindClassByName(geEntity_EntitySet *Set, const
 
 	for (Class = Set->Classes; Class; Class = Class->Next)
 	{
-		if	(!stricmp(Class->Name, Name))
+		if	(!strcmp(Class->Name, Name))
 			return Class;
 	}
 
@@ -547,7 +545,7 @@ geEntity *geEntity_EntitySetFindEntityByName(geEntity_EntitySet *EntitySet, cons
 		if (!EntName)
 			continue;
 
-		if (!stricmp(Name, EntName))
+		if (!strcmp(Name, EntName))
 			return Set->Entity;
 	}
 	
@@ -696,7 +694,7 @@ static geBoolean BuildClassTypes(geEntity_EntitySet *EntitySet)
 		if (!Name)
 			continue;	
 
-		if (stricmp(Name, "%typedef%"))	// No %typedef% info
+		if (strcmp(Name, "%typedef%"))	// No %typedef% info
 			continue;
 
 		Name = geEntity_GetStringForKey(Entity, "%typename%");
@@ -725,7 +723,7 @@ static geBoolean BuildClassTypes(geEntity_EntitySet *EntitySet)
 		if (!Name)		// Not a class entity (Error?)
 			continue;	
 
-		if (stricmp(Name, "%typedef%"))	// Not a typedef
+		if (strcmp(Name, "%typedef%"))	// Not a typedef
 			continue;
 		
 		Name = geEntity_GetStringForKey(Entity, "%typename%");
@@ -744,12 +742,12 @@ static geBoolean BuildClassTypes(geEntity_EntitySet *EntitySet)
 			geEntity_Field	*Field;
 
 			// Skip classname and %typename%
-			if	(!stricmp(Epair->Key, "classname"))
+			if	(!strcmp(Epair->Key, "classname"))
 				continue;
-			if	(!stricmp(Epair->Key, "%typename%"))
+			if	(!strcmp(Epair->Key, "%typename%"))
 				continue;
 
-			assert(stricmp(Epair->Key, "%defaultvalue%"));
+			assert(strcmp(Epair->Key, "%defaultvalue%"));
 
 			TypeClass = geEntity_EntitySetFindClassByName(EntitySet, Epair->Value);
 
@@ -766,7 +764,7 @@ static geBoolean BuildClassTypes(geEntity_EntitySet *EntitySet)
 
 			Epair = Epair->Next;
 			assert(Epair);
-			assert(!stricmp(Epair->Key, "%defaultvalue%"));
+			assert(!strcmp(Epair->Key, "%defaultvalue%"));
 
 		}	
 	}
@@ -799,7 +797,7 @@ static geBoolean ParseClassUserData(geEntity_EntitySet *EntitySet, geEntity *Ent
 		geEntity_Field	*Field;
 
 		// Skip %name% and classname keywords in entity
-		if	(!stricmp(Epair->Key, "classname"))
+		if	(!strcmp(Epair->Key, "classname"))
 			continue;
 
 		if (Epair->Key[0] == '%')		// Skip special names
