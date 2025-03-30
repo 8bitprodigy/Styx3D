@@ -18,7 +18,7 @@ There aren't really any other engines out there that are of this vintage under p
   - Engine library currently builds in `./OpenSource/Source`
   - Now to work on `GTest` in `./src`
 
-- [ ] Port to SDL
+- [x] Port to SDL where possible
 
 - [ ] Clean up directory structure
 
