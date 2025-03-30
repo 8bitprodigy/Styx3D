@@ -8,6 +8,7 @@ There aren't really any other engines out there that are of this vintage under p
 
 - Skeletal models/animations
 - BSP 3D level format which can be modeled in a brush-based editor
+- Networked multiplayer
 - Fixed function pipeline 
 
 ## Plans
@@ -19,11 +20,13 @@ There aren't really any other engines out there that are of this vintage under p
 
 - [ ] Port to SDL
 
+- [ ] Clean up directory structure
+
 - [ ] Implement an OpenGL 1.1 rendering backend
 
-- [ ] Get it ported to DreamCast and PSP
-
 - [ ] Add support for game data being stored in a compressed format, like PK3 or WAD
+
+- [ ] Get it ported to DreamCast, GameCube, PS2, and PSP
 
 - [ ] Create command-line versions of the tools
 
