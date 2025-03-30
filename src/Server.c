@@ -12,6 +12,10 @@
 /*  or FITNESS FOR ANY PURPOSE.  Refer to LICENSE.TXT for more details.                 */
 /*                                                                                      */
 /****************************************************************************************/
+
+/*
+	TODO: Type checks for `void *` arguments
+*/
 #include <assert.h>
 #include <time.h>
 
@@ -19,60 +23,30 @@
 	#include <Windows.h>
 #endif
 
-#include "BaseType.h"
+#include "GETypes.h"
 #include "Server.h"
 
-typedef struct
-{
-	uint32_t 
-		LowPart,
-		HighPart;
-}
-LARGE_INTEGER;
-LARGE_INTEGER			sg_Freq, sg_OldTick, sg_CurTick;
+
+int64			sg_Freq, sg_OldTick, sg_CurTick;
 
 #define	NUM_AVG			10
 static float			AvgTime[NUM_AVG];
 static int32			CurAvg;
 
-static void SubLarge(LARGE_INTEGER *start, LARGE_INTEGER *end, LARGE_INTEGER *delta)
-{
-	/*_asm {
-		mov ebx,dword ptr [start]
-		mov esi,dword ptr [end]
-
-		mov eax,dword ptr [esi+0]
-		sub eax,dword ptr [ebx+0]
-
-		mov edx,dword ptr [esi+4]
-		sbb edx,dword ptr [ebx+4]
-
-		mov ebx,dword ptr [delta]
-		mov dword ptr [ebx+0],eax
-		mov dword ptr [ebx+4],edx
-	}*/
-    delta->LowPart = start->LowPart - end->LowPart;
-    delta->HighPart = start->HighPart - end->HighPart;
-    
-    // Handle borrow
-    if (delta->LowPart > start->LowPart) {
-        delta->HighPart--;
-    }
-}
 
 #define BEGIN_TIMER()		QueryPerformanceCounter(&sg_OldTick)
 				
 #define END_TIMER(g)											\
 				{												\
-					LARGE_INTEGER	DeltaTick;					\
+					int64	DeltaTick;					\
 					float			ElapsedTime, Total;			\
 					int32			i;							\
 																\
-					QueryPerformanceCounter(&sg_CurTick);		\
-					SubLarge(&sg_OldTick, &sg_CurTick, &DeltaTick);	\
+					QueryPerformanceCounter(&sg_CurTick);	\
+					DeltaTick = sg_OldTick - sg_CurTick;	\
 																\
 					if (DeltaTick.LowPart > 0)					\
-						ElapsedTime =  1.0f / (((float)sg_Freq.LowPart / (float)DeltaTick.LowPart));		\
+						ElapsedTime =  1.0f / (((float)sg_Freq / (float)DeltaTick));	\
 					else										\
 						ElapsedTime = 0.001f;					\
 																\
@@ -87,8 +61,8 @@ static void SubLarge(LARGE_INTEGER *start, LARGE_INTEGER *end, LARGE_INTEGER *de
 																\
 					geEngine_Printf(GameMgr_GetEngine(g), 1, 70, "Timer ms: %2.3f/%2.3f", ElapsedTime, Total);	\
 				}
-extern		geBoolean	ShowStats;
-static		ServerBotCount = 0;
+extern geBoolean ShowStats;
+static int       ServerBotCount = 0;
 
 void		GenVS_Error(const char *Msg, ...);
 static		geBoolean Server_ManageBots(Server_Server *Server);
@@ -123,7 +97,7 @@ static void FillBufferWithPlayerData(Server_Server *Server, Buffer_Data *Buffer,
 static geBoolean SendPlayersToClients(Server_Server *Server);
 static void ControlPlayer(Server_Server *Server, GPlayer *Player, float Time);
 static geBoolean ControlPlayers(Server_Server *Server, float Time);
-static geBoolean Server_IsClientBot(Server_Server *Server, GenVSI_CHandle ClientHandle);
+static geBoolean Server_IsClientBot(void *Server, GenVSI_CHandle ClientHandle);
 
 static void ForceServerPlayerOnLocalClient(Server_Server *Server, GPlayer *Player);
 
@@ -817,20 +791,20 @@ geBoolean Server_ClientDisconnect(Server_Server *Server, geCSNetMgr_NetID Id, co
 //=====================================================================================
 //	Server_ClientDisconnectByHandle
 //=====================================================================================
-geBoolean Server_ClientDisconnectByHandle(Server_Server *Server, GenVSI_CHandle ClientHandle)
+geBoolean Server_ClientDisconnectByHandle(void *Server, GenVSI_CHandle ClientHandle)
 {
 	Server_Client	*SClient;
 	Buffer_Data		Buffer;
 	char			Data[512];
 
 	assert(Server);
-
-	SClient = &Server->Clients[ClientHandle];
+	Server_Server *server = (Server_Server*)Server;
+	SClient = &server->Clients[ClientHandle];
 
 	assert(SClient);
 
 	if (SClient->Player)
-		Server_DestroyPlayer(Server, SClient->Player);
+		Server_DestroyPlayer(server, SClient->Player);
 	
 	SClient->Player = NULL;
 	SClient->Active =  false;
@@ -842,7 +816,7 @@ geBoolean Server_ClientDisconnectByHandle(Server_Server *Server, GenVSI_CHandle 
 	Buffer_FillByte(&Buffer, (char)ClientHandle);
 	Buffer_FillByte(&Buffer, 0);		// The client is not active anymore!!!
 
-	SendAllClientsMessage(Server, &Buffer,  true);
+	SendAllClientsMessage(server, &Buffer,  true);
 	
 	return  true;
 }
@@ -851,18 +825,20 @@ geBoolean Server_ClientDisconnectByHandle(Server_Server *Server, GenVSI_CHandle 
 //=====================================================================================
 //	Server_CreatePlayer
 //=====================================================================================
-GPlayer *Server_CreatePlayer(Server_Server *Server, const char *ClassName)
+GPlayer *
+Server_CreatePlayer(void *Server, const char *ClassName)
 {
 	int32		i, Start, End;
 
 	assert(strlen(ClassName) < MAX_CLASS_NAME_STRING);
-
+	Server_Server *server = (Server_Server*)Server;
+	
 	Start = 0;
 	End = NETMGR_MAX_PLAYERS;
 
 	for (i=Start; i< End; i++)
 	{
-		if (!Server->SvPlayers[i].Active)
+		if (!server->SvPlayers[i].Active)
 			break;
 	}
 
@@ -870,30 +846,30 @@ GPlayer *Server_CreatePlayer(Server_Server *Server, const char *ClassName)
 	{
 		GenVS_Error("Failed to add player!!!\n");
 
-		Console_Printf(GameMgr_GetConsole(Server->GMgr), "Server_CreatePlayer2:  Max players exceeded...\n");
+		Console_Printf(GameMgr_GetConsole(server->GMgr), "Server_CreatePlayer2:  Max players exceeded...\n");
 		return NULL;
 	}
 
-	assert(Server->NumTotalPlayers >= 0);
+	assert(server->NumTotalPlayers >= 0);
 
-	Server->NumTotalPlayers++;
+	server->NumTotalPlayers++;
 
-	assert(Server->NumTotalPlayers <= End);
+	assert(server->NumTotalPlayers <= End);
 	
-	memset(&Server->SvPlayers[i], 0, sizeof(GPlayer));
+	memset(&server->SvPlayers[i], 0, sizeof(GPlayer));
 
-	Server->SvPlayers[i].Active =  true;
+	server->SvPlayers[i].Active =  true;
 	// Default to no view index, and local only player
-	Server->SvPlayers[i].OldViewFlags = VIEW_TYPE_NONE | VIEW_TYPE_LOCAL;
-	Server->SvPlayers[i].ViewFlags = VIEW_TYPE_NONE | VIEW_TYPE_LOCAL;
-	Server->SvPlayers[i].OldViewIndex = 0xffff;
-	Server->SvPlayers[i].ViewIndex = 0xffff;
-	Server->SvPlayers[i].ControlIndex = 0xffff;
-	Server->SvPlayers[i].TriggerIndex = 0xffff;
-	strcpy(Server->SvPlayers[i].ClassName, ClassName);
-	Server->SvPlayers[i].ClientHandle = CLIENT_NULL_HANDLE;
+	server->SvPlayers[i].OldViewFlags = VIEW_TYPE_NONE | VIEW_TYPE_LOCAL;
+	server->SvPlayers[i].ViewFlags = VIEW_TYPE_NONE | VIEW_TYPE_LOCAL;
+	server->SvPlayers[i].OldViewIndex = 0xffff;
+	server->SvPlayers[i].ViewIndex = 0xffff;
+	server->SvPlayers[i].ControlIndex = 0xffff;
+	server->SvPlayers[i].TriggerIndex = 0xffff;
+	strcpy(server->SvPlayers[i].ClassName, ClassName);
+	server->SvPlayers[i].ClientHandle = CLIENT_NULL_HANDLE;
 
-	return &Server->SvPlayers[i];
+	return &server->SvPlayers[i];
 }
 
 //=====================================================================================
@@ -910,20 +886,21 @@ void Callback_CallDestroy(Server_Server *Server, GPlayer *Player)
 //=====================================================================================
 //	Server_DestroyPlayer
 //=====================================================================================
-void Server_DestroyPlayer(Server_Server *Server, GPlayer *Player)
+void Server_DestroyPlayer(void *Server, GPlayer *Player)
 {
 	assert(Server);
+	Server_Server *server = (Server_Server*)Server;
 	assert(Player);
 
 	assert(Player->Active);
 
-	assert(Server->NumTotalPlayers <= NETMGR_MAX_PLAYERS);
+	assert(server->NumTotalPlayers <= NETMGR_MAX_PLAYERS);
 
-	Callback_CallDestroy(Server, Player);
+	Callback_CallDestroy(server, Player);
 
-	Server->NumTotalPlayers--;
+	server->NumTotalPlayers--;
 
-	assert(Server->NumTotalPlayers >= 0);
+	assert(server->NumTotalPlayers >= 0);
 
 	memset(Player, 0, sizeof(GPlayer));
 }
@@ -2025,16 +2002,16 @@ void	DrawBoundBox(geWorld *World, const geVec3d *Pos, const geVec3d *Min, const 
 	geFloat	dx;
 	geFloat	dy;
 	geFloat	dz;
-static	geVec3d		Verts[8];
-static	geVec3d *	Faces[6][4] =
-{
-	{ &Verts[0], &Verts[1], &Verts[2], &Verts[3] },	//Top
-	{ &Verts[4], &Verts[5], &Verts[6], &Verts[7] },	//Bottom
-	{ &Verts[3], &Verts[2], &Verts[6], &Verts[7] }, //Side
-	{ &Verts[1], &Verts[0], &Verts[4], &Verts[5] }, //Side
-	{ &Verts[0], &Verts[3], &Verts[7], &Verts[4] }, //Front
-	{ &Verts[2], &Verts[1], &Verts[5], &Verts[6] }, //Back
-};
+	static geVec3d  Verts[8];
+	static const geVec3d *Faces[6][4] =
+	{
+		{ &Verts[0], &Verts[1], &Verts[2], &Verts[3] }, //Top
+		{ &Verts[4], &Verts[5], &Verts[6], &Verts[7] }, //Bottom
+		{ &Verts[3], &Verts[2], &Verts[6], &Verts[7] }, //Side
+		{ &Verts[1], &Verts[0], &Verts[4], &Verts[5] }, //Side
+		{ &Verts[0], &Verts[3], &Verts[7], &Verts[4] }, //Front
+		{ &Verts[2], &Verts[1], &Verts[5], &Verts[6] }, //Back
+	};
 	int			i;
 
 	for	(i = 0; i < 8; i++)
@@ -2403,39 +2380,41 @@ static void Server_SetClassSpawn(void *UData, const char *ClassName, GenVSI_Spaw
 //=====================================================================================
 //	Server_SetWorldRequest
 //=====================================================================================
-static void Server_SetWorldRequest(Server_Server *Server, GenVSI_NewWorldCB *NewWorldCB, GenVSI_ShutdownWorldCB *ShutdownWorldCB, const char *Name)
+static void Server_SetWorldRequest(void *Server, GenVSI_NewWorldCB *NewWorldCB, GenVSI_ShutdownWorldCB *ShutdownWorldCB, const char *Name)
 {
 	assert(Server);
+	Server_Server *server = (Server_Server*)Server;
 	assert(NewWorldCB);
 	assert(Name);
 
-	strcpy(Server->WorldName, Name);
-	Server->ChangeWorldRequest =  true;
+	strcpy(server->WorldName, Name);
+	server->ChangeWorldRequest =  true;
 
-	Server->NewWorldCB = NewWorldCB;
+	server->NewWorldCB = NewWorldCB;
 
 	// When the server gets the request, it will call ShutdownWorldCB1, then set ShutdownWorldCB1 to 
 	// ShutdownWorldCB2, then NULL out ShutdownWorldCB2...
-	Server->ShutdownWorldCB2 = ShutdownWorldCB;
+	server->ShutdownWorldCB2 = ShutdownWorldCB;
 }
 
 //=====================================================================================
 //	Server_ActorIndex
 //=====================================================================================
-static void Server_ActorIndex(Server_Server *Server, uint16 Index, const char *GFXPath, const char *ActorName)
+static void Server_ActorIndex(void *Server, uint16 Index, const char *GFXPath, const char *ActorName)
 {
 	assert(Server);
+	Server_Server *server = (Server_Server*)Server;
 	assert(GFXPath);
 	assert(ActorName);
 	assert(strlen(GFXPath) < GAMEMGR_MAX_GFX_PATH);
 	assert(strlen(ActorName) < GAMEMGR_MAX_ACTOR_NAME);
 	assert(Index < GAMEMGR_MAX_ACTOR_INDEX);
 
-	if (!GameMgr_SetActorIndex(Server->GMgr, Index, ActorName))
+	if (!GameMgr_SetActorIndex(server->GMgr, Index, ActorName))
 	{
 		// FIXME:  Either use a better error handling convention, or bubble it out to the caller, and make them handle it.
 		// This is ok, but I was trying to make it as easy as possible for them, and didn't want to make them handle errors.
-		//GameMgr_Error(Server->GMgr, "...");
+		//GameMgr_Error(server->GMgr, "...");
 		GenVS_Error("Server_ActorIndex:  GameMgr_SetActorIndex failed...");
 	}
 }
@@ -2443,35 +2422,36 @@ static void Server_ActorIndex(Server_Server *Server, uint16 Index, const char *G
 //=====================================================================================
 //	Server_MotionIndex
 //=====================================================================================
-static void Server_MotionIndex(Server_Server *Server, uint16 MotionIndex, const char *MotionName)
+static void Server_MotionIndex(void *Server, uint16 MotionIndex, const char *MotionName)
 {
 	assert(Server);
-
-	if (!GameMgr_SetMotionIndexDef(Server->GMgr, MotionIndex, MotionName))
+	Server_Server *server = (Server_Server*)Server;
+	if (!GameMgr_SetMotionIndexDef(server->GMgr, MotionIndex, MotionName))
 		GenVS_Error("Server_MotionIndex:  Could not set motion: %s.\n", MotionName);
 }
 
 //=====================================================================================
 //	Server_BoneIndex
 //=====================================================================================
-static void Server_BoneIndex(Server_Server *Server, uint16 BoneIndex, const char *BoneName)
+static void Server_BoneIndex(void *Server, uint16 BoneIndex, const char *BoneName)
 {
 	assert(Server);
-
-	if (!GameMgr_SetBoneIndex(Server->GMgr, BoneIndex, BoneName))
+	Server_Server *server = (Server_Server*)Server;
+	if (!GameMgr_SetBoneIndex(server->GMgr, BoneIndex, BoneName))
 		GenVS_Error("Server_BoneIndex:  Could not set Bone Index: %s.\n", BoneName);
 }
 
 //=====================================================================================
 //	Server_TextureIndex
 //=====================================================================================
-static void Server_TextureIndex(Server_Server *Server, uint16 Index, const char *FileName, const char *AFileName)
+static void Server_TextureIndex(void *Server, uint16 Index, const char *FileName, const char *AFileName)
 {
 	assert(Server);
+	Server_Server *server = (Server_Server*)Server;
 	assert(FileName);
 	assert(strlen(FileName) < GAMEMGR_MAX_FILENAME);
 
-	if (!GameMgr_SetTextureIndex(Server->GMgr, Index, FileName, AFileName))
+	if (!GameMgr_SetTextureIndex(server->GMgr, Index, FileName, AFileName))
 	{
 		GenVS_Error("Server_TextureIndex:  GameMgr_SetTextureIndex failed...");
 	}
@@ -2480,12 +2460,13 @@ static void Server_TextureIndex(Server_Server *Server, uint16 Index, const char 
 //=====================================================================================
 //	Server_SoundIndex
 //=====================================================================================
-static void Server_SoundIndex(Server_Server *Server, uint16 Index, const char *FileName)
+static void Server_SoundIndex(void *Server, uint16 Index, const char *FileName)
 {
 	assert(Server);
+	Server_Server *server = (Server_Server*)Server;
 	assert(FileName);
 
-	if (!GameMgr_SetSoundIndex(Server->GMgr, Index, FileName))
+	if (!GameMgr_SetSoundIndex(server->GMgr, Index, FileName))
 	{
 		GenVS_Error("Server_SoundIndex:  GameMgr_SetSoundIndex failed...");
 	}
@@ -2494,13 +2475,14 @@ static void Server_SoundIndex(Server_Server *Server, uint16 Index, const char *F
 //=====================================================================================
 //	Server_PlaySound
 //=====================================================================================
-static void Server_PlaySound(Server_Server *Server, uint16 SoundIndex, const geVec3d *Pos)
+static void Server_PlaySound(void *Server, uint16 SoundIndex, const geVec3d *Pos)
 {
 	int32			i;
 	uint8			Data[1000];
 	Buffer_Data		Buffer;
 	Server_Client	*Client;
 
+	Server_Server *server = (Server_Server*)Server;
 	Buffer_Set(&Buffer, Data, 1000);
 	
 	// Fill the buffer with the message
@@ -2508,7 +2490,7 @@ static void Server_PlaySound(Server_Server *Server, uint16 SoundIndex, const geV
 	Buffer_FillShort(&Buffer, (uint16)SoundIndex);
 	Buffer_FillPos(&Buffer, *Pos);
 
-	Client = Server->Clients;
+	Client = server->Clients;
 	
 	// Tell the host to route this message to the clients
 	for (i=0; i< NETMGR_MAX_CLIENTS; i++, Client++)
@@ -2516,9 +2498,9 @@ static void Server_PlaySound(Server_Server *Server, uint16 SoundIndex, const geV
 		if (!Client->Active)
 			continue;
 
-		if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer,  false))
+		if (!NetMgr_SendClientMessage(server->NMgr, Client->NetID, &Buffer,  false))
 		{
-			Server_ClientDisconnect(Server, Client->NetID, Client->Name);
+			Server_ClientDisconnect(server, Client->NetID, Client->Name);
 			//GenVS_Error("Server_PlaySound:  Could not sent message to client.\n");
 		}
 	}
@@ -2527,41 +2509,41 @@ static void Server_PlaySound(Server_Server *Server, uint16 SoundIndex, const geV
 //=====================================================================================
 //	Server_SpawnFx
 //=====================================================================================
-static void Server_SpawnFx(Server_Server *Server, uint8 Type, const geVec3d *Pos, uint8 Sound)
+static void Server_SpawnFx(void *Server, uint8 Type, const geVec3d *Pos, uint8 Sound)
 {
 	Buffer_Data		Buffer;
 	char			Data[128];
 
 	assert(Server);
-
+	Server_Server *server = (Server_Server*)Server;
 	Buffer_Set(&Buffer, Data, 128);
 	Buffer_FillByte(&Buffer, NETMGR_MSG_SPAWN_FX);
 	Buffer_FillPos(&Buffer, *Pos);
 	Buffer_FillByte(&Buffer, Type);
 	Buffer_FillByte(&Buffer, Sound);
 	
-	if (!SendAllClientsMessage(Server, &Buffer,  false))
+	if (!SendAllClientsMessage(server, &Buffer,  false))
 		GenVS_Error("Server_SpawnFx:  Could not send mesages to clients.\n");
 }
 
 //=====================================================================================
 //	Server_SetClientScore
 //=====================================================================================
-static void Server_SetClientScore(Server_Server *Server, GenVSI_CHandle ClientHandle, int32 Score)
+static void Server_SetClientScore(void *Server, GenVSI_CHandle ClientHandle, int32 Score)
 {
 	Buffer_Data		Buffer;
 	char			Data[128];
 	Server_Client	*Client;
 
 	assert(Server);
-
+	Server_Server *server = (Server_Server*)Server;
 	assert(ClientHandle >= 0 && ClientHandle <= 255);
 
-	Client = &Server->Clients[ClientHandle];
+	Client = &server->Clients[ClientHandle];
 	
 	if (!Client->Active)
 	{
-		Console_Printf(GameMgr_GetConsole(Server->GMgr), "Server_SetClientScore:  Client not active!\n");
+		Console_Printf(GameMgr_GetConsole(server->GMgr), "Server_SetClientScore:  Client not active!\n");
 		return;
 	}
 	
@@ -2572,23 +2554,23 @@ static void Server_SetClientScore(Server_Server *Server, GenVSI_CHandle ClientHa
 	Buffer_FillByte(&Buffer, (uint8)ClientHandle);
 	Buffer_FillSLong(&Buffer, Client->Score);
 	
-	if (!SendAllClientsMessage(Server, &Buffer,  true))
+	if (!SendAllClientsMessage(server, &Buffer,  true))
 		GenVS_Error("Server_SetClientScore:  Could not send message.\n");
 }
 
 //=====================================================================================
 //	Server_IsClientBot
 //=====================================================================================
-static geBoolean Server_IsClientBot(Server_Server *Server, GenVSI_CHandle ClientHandle)
+static geBoolean Server_IsClientBot(void *Server, GenVSI_CHandle ClientHandle)
 {
 	Server_Client	*Client;
 
 	assert(Server);
-
+	Server_Server *server = (Server_Server*)Server;
 	if (ClientHandle < 0 || ClientHandle > NETMGR_MAX_CLIENTS)
 		return  false;
 
-	Client = &Server->Clients[ClientHandle];
+	Client = &server->Clients[ClientHandle];
 	
 	assert(Client->Active);
 
@@ -2601,21 +2583,21 @@ static geBoolean Server_IsClientBot(Server_Server *Server, GenVSI_CHandle Client
 //=====================================================================================
 //	Server_SetClientHealth
 //=====================================================================================
-static void Server_SetClientHealth(Server_Server *Server, GenVSI_CHandle ClientHandle, int32 Health)
+static void Server_SetClientHealth(void *Server, GenVSI_CHandle ClientHandle, int32 Health)
 {
 	Buffer_Data		Buffer;
 	char			Data[128];
 	Server_Client	*Client;
 
 	assert(Server);
-
+	Server_Server *server = (Server_Server*)Server;
 	assert(ClientHandle >= 0 && ClientHandle <= 255);
 	
-	Client = &Server->Clients[ClientHandle];
+	Client = &server->Clients[ClientHandle];
 
 	if (!Client->Active)
 	{
-		Console_Printf(GameMgr_GetConsole(Server->GMgr), "Server_SetClientScore:  Client not active!\n");
+		Console_Printf(GameMgr_GetConsole(server->GMgr), "Server_SetClientScore:  Client not active!\n");
 		return;
 	}
 
@@ -2626,9 +2608,9 @@ static void Server_SetClientHealth(Server_Server *Server, GenVSI_CHandle ClientH
 	Buffer_FillByte(&Buffer, (uint8)ClientHandle);
 	Buffer_FillSLong(&Buffer, Client->Health);
 	
-	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer,  true))
+	if (!NetMgr_SendClientMessage(server->NMgr, Client->NetID, &Buffer,  true))
 	{
-		Server_ClientDisconnect(Server, Client->NetID, Client->Name);
+		Server_ClientDisconnect(server, Client->NetID, Client->Name);
 		//GenVS_Error("Server_SetClientHealth:  Could not send message.\n");
 	}
 }
@@ -2636,18 +2618,18 @@ static void Server_SetClientHealth(Server_Server *Server, GenVSI_CHandle ClientH
 //=====================================================================================
 //	Server_SetClientWeapon
 //=====================================================================================
-static void Server_SetClientWeapon(Server_Server *Server, GenVSI_CHandle ClientHandle, int32 Weapon)
+static void Server_SetClientWeapon(void *Server, GenVSI_CHandle ClientHandle, int32 Weapon)
 {
 	Buffer_Data		Buffer;
 	char			Data[512];
 	Server_Client	*Client;
 
 	assert(Server);
-
+	Server_Server *server = (Server_Server*)Server;
 	assert(ClientHandle >= 0 && ClientHandle <= 255);
 	assert(Weapon >= 0 && Weapon <= 255);
 
-	Client = &Server->Clients[ClientHandle];
+	Client = &server->Clients[ClientHandle];
 
 	if (!Client->Active)
 		GenVS_Error("Server_SetClientWeapon:  Client not active!\n");
@@ -2659,9 +2641,9 @@ static void Server_SetClientWeapon(Server_Server *Server, GenVSI_CHandle ClientH
 	Buffer_FillByte(&Buffer, (uint8)ClientHandle);
 	Buffer_FillShort(&Buffer, (uint16)Client->CurrentWeapon);
 	
-	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer,  false))
+	if (!NetMgr_SendClientMessage(server->NMgr, Client->NetID, &Buffer,  false))
 	{
-		Server_ClientDisconnect(Server, Client->NetID, Client->Name);
+		Server_ClientDisconnect(server, Client->NetID, Client->Name);
 		//GenVS_Error("Server_SetClientWeapon:  Could not send message.\n");
 	}
 }
@@ -2669,7 +2651,7 @@ static void Server_SetClientWeapon(Server_Server *Server, GenVSI_CHandle ClientH
 //=====================================================================================
 //	Server_SetClientInventory
 //=====================================================================================
-static void Server_SetClientInventory(Server_Server *Server, GenVSI_CHandle ClientHandle, int32 Slot, uint16 Amount, geBoolean HasItem)
+static void Server_SetClientInventory(void *Server, GenVSI_CHandle ClientHandle, int32 Slot, uint16 Amount, geBoolean HasItem)
 {
 	Buffer_Data		Buffer;
 	char			Data[128];
@@ -2677,9 +2659,10 @@ static void Server_SetClientInventory(Server_Server *Server, GenVSI_CHandle Clie
 	Server_Client	*Client;
 
 	assert(Server);
+	Server_Server *server = (Server_Server*)Server;
 	assert(ClientHandle >= 0 && ClientHandle < NETMGR_MAX_CLIENTS);
 
-	Client = &Server->Clients[ClientHandle];
+	Client = &server->Clients[ClientHandle];
 
 	if (!Client->Active)
 		GenVS_Error("Server_SetClientInventory:  Client not active.");
@@ -2702,9 +2685,9 @@ static void Server_SetClientInventory(Server_Server *Server, GenVSI_CHandle Clie
 	Buffer_FillByte(&Buffer, (uint8)Slot);
 	Buffer_FillShort(&Buffer, SendVal);
 	
-	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer,  true))
+	if (!NetMgr_SendClientMessage(server->NMgr, Client->NetID, &Buffer,  true))
 	{
-		Server_ClientDisconnect(Server, Client->NetID, Client->Name);
+		Server_ClientDisconnect(server, Client->NetID, Client->Name);
 		//GenVS_Error("Server_SetClientInventory:  Could not send message.\n");
 	}
 }
@@ -2712,13 +2695,13 @@ static void Server_SetClientInventory(Server_Server *Server, GenVSI_CHandle Clie
 //=====================================================================================
 //	Server_GetClientMove
 //=====================================================================================
-static GenVSI_CMove *Server_GetClientMove(Server_Server *Server, GenVSI_CHandle ClientHandle)
+static GenVSI_CMove *Server_GetClientMove(void *Server, GenVSI_CHandle ClientHandle)
 {
 	Server_Client	*Client;
 
 	assert(Server);
-
-	Client = &Server->Clients[ClientHandle];
+	Server_Server *server = (Server_Server*)Server;
+	Client = &server->Clients[ClientHandle];
 
 	Client->Move.MoveTime = Client->MoveTime;
 	Client->Move.ForwardSpeed = Client->ForwardSpeed;
@@ -2733,18 +2716,19 @@ static GenVSI_CMove *Server_GetClientMove(Server_Server *Server, GenVSI_CHandle 
 //=====================================================================================
 //	Server_ModelToViewIndex
 //=====================================================================================
-static uint16 Server_ModelToViewIndex(Server_Server *Server, geWorld_Model *Model)
+static uint16 Server_ModelToViewIndex(void *Server, geWorld_Model *Model)
 {
 	int32		i, NumModels;
 
 	assert(Server);
+	Server_Server *server = (Server_Server*)Server;
 	assert(GameMgr_GetWorld(Server->GMgr));
 
-	NumModels = GameMgr_GetNumModels(Server->GMgr);
+	NumModels = GameMgr_GetNumModels(server->GMgr);
 
 	for (i=0; i< NumModels; i++)
 	{
-		if (Model == GameMgr_GetModel(Server->GMgr, i))
+		if (Model == GameMgr_GetModel(server->GMgr, i))
 			break;
 	}
 
@@ -2759,53 +2743,57 @@ static uint16 Server_ModelToViewIndex(Server_Server *Server, geWorld_Model *Mode
 //=====================================================================================
 //	Server_RegisterPlayerModel
 //=====================================================================================
-static void Server_RegisterPlayerModel(Server_Server *Server, GPlayer *Player, geWorld_Model *Model)
+static void Server_RegisterPlayerModel(void *Server, void *Player, geWorld_Model *Model)
 {
 	assert(Server);
 	assert(Player);
+	GPlayer *player = (GPlayer*)Player;
 	assert(Model);
 
 	//	Attach the player to the model, and the model to the player...
-	geWorld_ModelSetUserData(Model, (void*)Player);
-	Player->Model = Model;	
+	geWorld_ModelSetUserData(Model, Player);
+	player->Model = Model;	
 }
 
 //=====================================================================================
 //	Server_GetNextPlayer
 //=====================================================================================
-static GPlayer *Server_GetNextPlayer(Server_Server *Server, GPlayer *Start, const char *ClassName)
+static GPlayer *Server_GetNextPlayer(void *Server, void *Start, const char *ClassName)
 {
-	GPlayer	*RealStart, *End;
+	GPlayer	*RealStart, *End, *start;
 
-	RealStart = &Server->SvPlayers[0];
-	End = &Server->SvPlayers[NETMGR_MAX_PLAYERS-1];
+	Server_Server *server = (Server_Server*)Server;
+	start                 = (GPlayer*)Start;
+	
+	RealStart = &server->SvPlayers[0];
+	End = &server->SvPlayers[NETMGR_MAX_PLAYERS-1];
 
-	if (Start == End)
+	if (start == End)
 		return NULL;
 
-	if (!Start)
-		Start = Server->SvPlayers;
+	if (!start)
+		start = server->SvPlayers;
 	else
-		Start++;
+		start++;
 
-	assert(Start >= RealStart && Start <= End);
+	assert(start >= RealStart && start <= End);
 
-	if (Start < RealStart || Start > End)
+	if (start < RealStart || start > End)
 	{
-		Console_Printf(GameMgr_GetConsole(Server->GMgr), "[SERVER] Server_GetNextPlayer:  Bad start.\n");
+		Console_Printf(GameMgr_GetConsole(server->GMgr), "[SERVER] Server_GetNextPlayer:  Bad start.\n");
 		return NULL;		// Bad!!!
 	}
 
-	for ( ; Start < End; Start++)
+	for ( ; start < End; start++)
 	{
-		if (!Start->Active)
+		if (!start->Active)
 			continue;
 
 		if (!ClassName)		// Just return the next one, if no classname asked for
-			return Start;
+			return start;
 
-		if (!strcmp(Start->ClassName, ClassName))	// Found it!!
-			return Start;
+		if (!strcmp(start->ClassName, ClassName))	// Found it!!
+			return start;
 	}
 
 	return NULL;
@@ -2838,7 +2826,7 @@ static GPlayer *Server_GetNextPlayerInRadius(void *Server, GPlayer *Player, GPla
 //=====================================================================================
 //	Server_SetViewPlayer
 //=====================================================================================
-static void Server_SetViewPlayer(Server_Server *Server, GenVSI_CHandle ClientHandle, GPlayer *Player)
+static void Server_SetViewPlayer(void *Server, GenVSI_CHandle ClientHandle, GPlayer *Player)
 {
 	int32			i;
 	uint8			Data[1000];
@@ -2846,10 +2834,11 @@ static void Server_SetViewPlayer(Server_Server *Server, GenVSI_CHandle ClientHan
 	Server_Client	*Client;
 
 	assert(Server);
+	Server_Server *server = (Server_Server*)Server;
 	assert(ClientHandle >= 0 && ClientHandle <= NETMGR_MAX_CLIENTS);
 	assert(Player);
 
-	Client = &Server->Clients[ClientHandle];
+	Client = &server->Clients[ClientHandle];
 
 	assert(Client->Active);
 
@@ -2858,16 +2847,16 @@ static void Server_SetViewPlayer(Server_Server *Server, GenVSI_CHandle ClientHan
 	Buffer.Pos = 0;
 
 	// Get player index number
-	i = (int32)SERVER_GPLAYER_TO_INDEX(Server, Player);
+	i = (int32)SERVER_GPLAYER_TO_INDEX(server, Player);
 	
 	Buffer_FillByte(&Buffer, NETMGR_MSG_VIEW_PLAYER);
 	Buffer_FillShort(&Buffer, (uint16)i);
 	
-	Console_Printf(GameMgr_GetConsole(Server->GMgr), "View Player sent: %i\n", i);
+	Console_Printf(GameMgr_GetConsole(server->GMgr), "View Player sent: %i\n", i);
 	
-	if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer,  true))
+	if (!NetMgr_SendClientMessage(server->NMgr, Client->NetID, &Buffer,  true))
 	{
-		Server_ClientDisconnect(Server, Client->NetID, Client->Name);
+		Server_ClientDisconnect(server, Client->NetID, Client->Name);
 		//GenVS_Error("Server_SetViewPlayer:  Could not send message.\n");
 	}
 }
@@ -2875,15 +2864,15 @@ static void Server_SetViewPlayer(Server_Server *Server, GenVSI_CHandle ClientHan
 //=====================================================================================
 //	Server_MovePlayerModel
 //=====================================================================================
-static geBoolean Server_MovePlayerModel(Server_Server *Server, GPlayer *Player, const geXForm3d *DestXForm)
+static geBoolean Server_MovePlayerModel(void *Server, GPlayer *Player, const geXForm3d *DestXForm)
 {
 	geBoolean	CanMove;
 	int32		i;
 	geWorld		*World;
 
 	assert(Server);
-
-	World = GameMgr_GetWorld(Server->GMgr);
+	Server_Server *server = (Server_Server*)Server;
+	World = GameMgr_GetWorld(server->GMgr);
 	assert(World);
 
 	CanMove =  true;
@@ -2893,7 +2882,7 @@ static geBoolean Server_MovePlayerModel(Server_Server *Server, GPlayer *Player, 
 		geVec3d		Mins, Maxs, Pos, Out;
 		GPlayer		*Target;
 
-		Target = &Server->SvPlayers[i];
+		Target = &server->SvPlayers[i];
 
 		if (!Target->Active)			// Not an active player...
 			continue;
@@ -2918,7 +2907,7 @@ static geBoolean Server_MovePlayerModel(Server_Server *Server, GPlayer *Player, 
 			// The model was blocked by player target
 			if (Player->Blocked)	// Call the blocked callback, and tell Player that Target is in the way..
 			{
-				Player->Blocked(&Server->GenVSI, Player, Target);
+				Player->Blocked(&server->GenVSI, Player, Target);
 			}
 
 		}
@@ -2933,7 +2922,7 @@ static geBoolean Server_MovePlayerModel(Server_Server *Server, GPlayer *Player, 
 		if (World)
 			geWorld_SetModelXForm(World, Player->Model, DestXForm);
 		else
-			Console_Printf(GameMgr_GetConsole(Server->GMgr), "Server_MovePlayerModel:  No world!\n");
+			Console_Printf(GameMgr_GetConsole(server->GMgr), "Server_MovePlayerModel:  No world!\n");
 	}
 
 	return CanMove;
@@ -2942,29 +2931,30 @@ static geBoolean Server_MovePlayerModel(Server_Server *Server, GPlayer *Player, 
 //=====================================================================================
 //	Server_GetPlayerTimeExtents
 //=====================================================================================
-static void Server_GetPlayerTimeExtents(Server_Server *Server, GPlayer *Player, uint16 MotionIndex, float *Start, float *End)
+static void Server_GetPlayerTimeExtents(void *Server, GPlayer *Player, uint16 MotionIndex, float *Start, float *End)
 {
 	geMotion				*Motion;
 	int32					Index;
 	GameMgr_MotionIndexDef	*pMotionIndex;
 
 	assert(Server);
+	Server_Server *server = (Server_Server*)Server;
 	assert(Player);
 	assert(Start && End);
-	assert(GameMgr_GetWorld(Server->GMgr));
+	assert(GameMgr_GetWorld(server->GMgr));
 	
-	Index = SERVER_GPLAYER_TO_INDEX(Server, Player);
+	Index = SERVER_GPLAYER_TO_INDEX(server, Player);
 
-	if (!Server->Client->Players[Index].ActorDef)
+	if (!server->Client->Players[Index].ActorDef)
 	{
 		*Start = 0.0f;
 		*End = 0.0f;
 		return;
 	}
 
-	pMotionIndex = GameMgr_GetMotionIndexDef(Server->GMgr, MotionIndex);
+	pMotionIndex = GameMgr_GetMotionIndexDef(server->GMgr, MotionIndex);
 	
-	Motion = geActor_GetMotionByName(Server->Client->Players[Index].ActorDef, pMotionIndex->MotionName);
+	Motion = geActor_GetMotionByName(server->Client->Players[Index].ActorDef, pMotionIndex->MotionName);
 
 	if (!Motion)
 		GenVS_Error("Server_GetPlayerTimeExtents:  Motion not found in actor: %s", pMotionIndex->MotionName);
@@ -2978,19 +2968,20 @@ static void Server_GetPlayerTimeExtents(Server_Server *Server, GPlayer *Player, 
 //=====================================================================================
 //	Server_ActorToPlayer
 //=====================================================================================
-static GPlayer *Server_ActorToPlayer(Server_Server *Server, geActor *Actor)
+static GPlayer *Server_ActorToPlayer(void *Server, geActor *Actor)
 {
 
 	GPlayer			*CPlayer;
 	GPlayer			*SPlayer;
 
+	Server_Server *server = (Server_Server*)Server;
 	// Convert the client player to a server player (they are the same index number so it's easy...)
 	CPlayer = (GPlayer*)geActor_GetUserData(Actor);
 
 	if (!CPlayer)
 		return NULL;
 
-	SPlayer = CLIENT_TO_SERVER_PLAYER(Server, CPlayer);
+	SPlayer = CLIENT_TO_SERVER_PLAYER(server, CPlayer);
 
 	return SPlayer;
 }
@@ -2998,30 +2989,31 @@ static GPlayer *Server_ActorToPlayer(Server_Server *Server, geActor *Actor)
 //=====================================================================================
 //	Server_GetWorld
 //=====================================================================================
-static geWorld *Server_GetWorld(Server_Server *Server)
+static geWorld *Server_GetWorld(void *Server)
 {
-	return GameMgr_GetWorld(Server->GMgr);
+	return GameMgr_GetWorld(((Server_Server*)Server)->GMgr);
 }
 
 //=====================================================================================
 //	Server_ConsolePrintf
 //=====================================================================================
-static void Server_ConsolePrintf(Server_Server *Server, const char *Str, ...)
+static void Server_ConsolePrintf(void *Server, const char *Str, ...)
 {
 	va_list		ArgPtr;
 
 	assert(Server);
+	Server_Server *server = (Server_Server*)Server;
 	assert(Str);
 
 	va_start (ArgPtr, Str);
-    Console_Printf(GameMgr_GetConsole(Server->GMgr), Str, ArgPtr);
+    Console_Printf(GameMgr_GetConsole(server->GMgr), Str, ArgPtr);
 	va_end (ArgPtr);
 }
 
 //=====================================================================================
 //	Server_ConsoleHeaderPrintf
 //=====================================================================================
-static void Server_ConsoleHeaderPrintf(Server_Server *Server, int32 ClientHandle, geBoolean AllClients, const char *Str, ...)
+static void Server_ConsoleHeaderPrintf(void *Server, int32 ClientHandle, geBoolean AllClients, const char *Str, ...)
 {
 	Buffer_Data		Buffer;
 	char			Data[1024];
@@ -3029,6 +3021,7 @@ static void Server_ConsoleHeaderPrintf(Server_Server *Server, int32 ClientHandle
 	assert(ClientHandle != CLIENT_NULL_HANDLE);
 
 	assert(Server);
+	Server_Server *server = (Server_Server*)Server;
 	assert(Str);
 
 	// Set the buffer up
@@ -3038,21 +3031,21 @@ static void Server_ConsoleHeaderPrintf(Server_Server *Server, int32 ClientHandle
 	Buffer_FillByte(&Buffer, NETMGR_MSG_HEADER_PRINTF);
 	Buffer_FillString(&Buffer, (char*)Str);
 
-	Client = &Server->Clients[ClientHandle];
+	Client = &server->Clients[ClientHandle];
 
 	assert(Client->Active);
 
 	if (AllClients)
 	{
-		SendAllClientsMessage(Server, &Buffer,  true);
+		SendAllClientsMessage(server, &Buffer,  true);
 	}
 	else if (Client->Active)
 	{
-		if (!NetMgr_SendClientMessage(Server->NMgr, Client->NetID, &Buffer,  true))
+		if (!NetMgr_SendClientMessage(server->NMgr, Client->NetID, &Buffer,  true))
 		{
 			//GenVS_Error("Could not send local client message!!!");
 
-			Server_ClientDisconnect(Server, Client->NetID, Client->Name);
+			Server_ClientDisconnect(server, Client->NetID, Client->Name);
 		}
 	}
 		
@@ -3061,23 +3054,25 @@ static void Server_ConsoleHeaderPrintf(Server_Server *Server, int32 ClientHandle
 //=====================================================================================
 //	Server_GetTime
 //=====================================================================================
-static float Server_GetTime(Server_Server *Server)
+static float Server_GetTime(void *Server)
 {
 	assert(Server);
+	Server_Server *server = (Server_Server*)Server;
 
-	return GameMgr_GetTime(Server->GMgr);
+	return GameMgr_GetTime(server->GMgr);
 }
 
 
 //=====================================================================================
 //	Server_GetPlayerClientData
 //=====================================================================================
-static void *Server_GetPlayerClientData(Server_Server *Server, GenVSI_CHandle ClientHandle)
+static void *Server_GetPlayerClientData(void *Server, GenVSI_CHandle ClientHandle)
 {
 	assert(Server);
+	Server_Server *server = (Server_Server*)Server;
 	assert(ClientHandle >=0 && ClientHandle <= 255);
 
-	return &Server->Clients[ClientHandle];
+	return &server->Clients[ClientHandle];
 }
 
 //=====================================================================================
@@ -3098,13 +3093,14 @@ static void Server_Error(Server_Server *Server, const char *ErrorStr, ...)
 //=====================================================================================
 //	Server_ProcIndex
 //=====================================================================================
-static void Server_ProcIndex(Server_Server *Server, uint16 Index, void *Proc)
+static void Server_ProcIndex(void *Server, uint16 Index, void *Proc)
 {
 	assert(Server);
+	Server_Server *server = (Server_Server*)Server;
 	assert(Index >= 0 && Index < 65535);
 	assert(Index >= 0 && Index < SERVER_MAX_PROC_INDEX);
 	
-	Server->ProcIndex[Index] = Proc;
+	server->ProcIndex[Index] = Proc;
 }
 
 //=====================================================================================

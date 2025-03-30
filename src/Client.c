@@ -27,45 +27,28 @@
 	#define LARGE_INTEGER Uint64
 #endif
 
-#include "BaseType.h"
 #include "Buffer.h"
 #include "CD.h"
 #include "Client.h"
+#include "GETypes.h"
 #include "GMenu.h"
+#include "GPlayer.h"
 
-LARGE_INTEGER  g_Freq, g_OldTick, g_CurTick;
+
+int64  g_Freq, g_OldTick, g_CurTick;
 const Uint8 *keystates[SDL_NUM_SCANCODES];
 
 #define NUM_AVG 10
 static float			AvgTime[NUM_AVG];
 static int32			CurAvg;
 
-static void SubLarge(LARGE_INTEGER *start, LARGE_INTEGER *end, LARGE_INTEGER *delta)
-{
-/*
-	_asm {
-		mov ebx,dword ptr [start]
-		mov esi,dword ptr [end]
 
-		mov eax,dword ptr [esi+0]
-		sub eax,dword ptr [ebx+0]
-
-		mov edx,dword ptr [esi+4]
-		sbb edx,dword ptr [ebx+4]
-
-		mov ebx,dword ptr [delta]
-		mov dword ptr [ebx+0],eax
-		mov dword ptr [ebx+4],edx
-	}
-*/
-    *delta = *start - *end;
-}
 
 #define BEGIN_TIMER()		(g_OldTick = SDL_GetPerformanceCounter())
 				
 #define END_TIMER(g)											\
 				{												\
-					LARGE_INTEGER	DeltaTick;					\
+					int64	DeltaTick;					\
 					float			ElapsedTime, Total;			\
 					int32			i;							\
 																\
@@ -73,7 +56,7 @@ static void SubLarge(LARGE_INTEGER *start, LARGE_INTEGER *end, LARGE_INTEGER *de
 					DeltaTick = g_OldTick - g_CurTick;	\
 																\
 					if (DeltaTick.LowPart > 0)					\
-						ElapsedTime =  1.0f / (((float)g_Freq.LowPart / (float)DeltaTick.LowPart));		\
+						ElapsedTime =  1.0f / (((float)g_Freq / (float)DeltaTick));		\
 					else										\
 						ElapsedTime = 0.001f;					\
 																\
@@ -182,7 +165,7 @@ static bool RenderWorld(Client_Client *Client, GameMgr *GMgr, float Time);
 static void SetupCamera(geCamera *Camera, GE_Rect *Rect, geXForm3d *XForm);
 static void ParsePlayerDataLocally(Client_Client *Client, Buffer_Data *Buffer, bool Fake);
 static void Client_SetupGenVSI(Client_Client *Client);
-static bool Client_MovePlayerModel(void *Client, void *Player, const geXForm3d *DestXForm);
+static bool Client_MovePlayerModel(void *Client, GPlayer *Player, const geXForm3d *DestXForm);
 static bool CheckClientPlayerChanges(Client_Client *Client, GPlayer *Player, bool TempPlayer);
 void Client_DestroyPlayer(Client_Client *Client, GPlayer *Player);
 
@@ -3309,7 +3292,7 @@ Client_ProcIndex(void *Client, uint16 Index, void *Proc)
 //	Server_MovePlayerModel
 //=====================================================================================
 static geBoolean 
-Client_MovePlayerModel(void *Client, void *Player, const geXForm3d *DestXForm)
+Client_MovePlayerModel(void *Client, GPlayer *Player, const geXForm3d *DestXForm)
 {
 	geBoolean  CanMove;
 	int32      i;
@@ -3449,21 +3432,20 @@ void Client_DestroyPlayerWorldObjects(Client_Client *Client, GPlayer *Player)
 //=====================================================================================
 //	Client_DestroyTempPlayer
 //=====================================================================================
-void Client_DestroyTempPlayer(void *Client, void *Player)
+void Client_DestroyTempPlayer(void *Client, GPlayer *Player)
 {
 	assert(Client_IsValid(Client) == GE_TRUE);
 	Client_Client *client = (Client_Client*)Client;
     assert(client != NULL && Client_IsValid(client) == GE_TRUE);
 	assert(Player);
 	assert(Player->Active);
-	GPlayer *player = (GPlayer*)Player;
 
 	//if (!Fx_PlayerSetFxFlags(GameMgr_GetFxSystem(Client->GMgr), TEMP_PLAYER_TO_FXPLAYER(Client, Player), 0))
 	//	GenVS_Error("[CLIENT] UpdatePlayers:  Could not set Fx_Player flags.\n");
 
-	Client_DestroyPlayerWorldObjects(client, player);
+	Client_DestroyPlayerWorldObjects(client, Player);
 
-	memset(player, 0, sizeof(GPlayer));
+	memset(Player, 0, sizeof(GPlayer));
 }
 
 //=====================================================================================

@@ -33,6 +33,8 @@
 	#define chdir _chdir
 #else
 	#include <limits.h>
+	#include <unistd.h>
+	
 	#define _MAX_PATH PATH_MAX
 	#define MAX_PATH PATH_MAX
 	#define CALLBACK
@@ -251,15 +253,8 @@ geVFile *			MainFS;
 static geBoolean 
 NewKeyDown(int KeyCode) 
 {
-    const bool *keyState = SDL_GetKeyboardState(NULL);
-
-    if (
-    	keyState[SDL_GetScancodeFromKey(KeyCode)]
-    ) {
-        return true;
-    }
-
-    return false;
+    const uint8 *keyState = SDL_GetKeyboardState(NULL);
+    return (bool)keyState[SDL_GetScancodeFromKey(KeyCode)];
 }
 
 static void 
@@ -532,7 +527,7 @@ main(int argc, char *argv[])
 	do 
 		{
 			SDL_Window *hWnd;
-			VidMode VidMode;
+			VidMode vidMode;
 
 			// Pick mode
 			PickMode(GameMgr_GethWnd(GMgr),ChangingDisplayMode, ManualPick, 
@@ -633,7 +628,7 @@ main(int argc, char *argv[])
 			#endif
 			
 			Running = true;
-			VidMode = GameMgr_GetVidMode(GMgr);
+			vidMode = GameMgr_GetVidMode(GMgr);
 			hWnd    = GameMgr_GethWnd(GMgr);
 
 
@@ -669,7 +664,7 @@ main(int argc, char *argv[])
 				// Get the mouse input (FIXME:  Move this into client?)
 				{
 					int Width, Height;
-					SDL_GetWindowSize(VidMode, &Width, &Height);
+					SDL_GetWindowSize(hWnd, &Width, &Height);
 					GetMouseInput(hWnd, Width, Height);
 				}
 
@@ -1330,7 +1325,7 @@ geBoolean IsAMenuActive(void)
 //=====================================================================================
 static void GetMouseInput(SDL_Window *hWnd, int Width, int Height)
 {
-	float px, py;
+	int   px, py;
 	int   wx, wy;
 	int   dx, dy;
 	int32 x,  y;
@@ -1340,7 +1335,7 @@ static void GetMouseInput(SDL_Window *hWnd, int Width, int Height)
 	SDL_GetMouseState(&px, &py);
   
 	//if (
-		SDL_GetWindowPosition(hWnd, wx, wy);
+		SDL_GetWindowPosition(hWnd, &wx, &wy);
 	/*) {
 		geErrorLog_AddString(0,"GetMouseInput: SDL_GetWindowPosition failed",NULL); 
 		return;
@@ -1400,7 +1395,7 @@ void GenVS_Error(const char *Msg, ...)
 		for (i=0; i<NumErrors; i++)
 		{
 			geErrorLog_ErrorClassType	Error;
-			char						*String;
+			const char						*String;
 
 			if (geErrorLog_Report(NumErrors-i-1, &Error, &String))
 			{

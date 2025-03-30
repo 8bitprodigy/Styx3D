@@ -21,6 +21,8 @@
 #ifndef GENESIS_H
 #define GENESIS_H
 
+#include <SDL2/SDL.h>
+
 #include "BaseType.h"
 #include "Vec3D.h"
 #include "XForm3D.h"
@@ -228,16 +230,16 @@ typedef struct
 //================================================================================
 
 
-#ifdef _INC_WINDOWS	
+//#ifdef _INC_WINDOWS	
 	// Windows.h must be included before genesis.h for this api to be exposed.
 	
 
-GENESISAPI	geEngine	*geEngine_CreateWithVersion(HWND hWnd, const char *AppName, const char *DriverDirectory, uint32 Version);
+GENESISAPI	geEngine	*geEngine_CreateWithVersion(SDL_Window *hWnd, const char *AppName, const char *DriverDirectory, uint32 Version);
 							// use geEngine_Create, rather than calling this directly.
 
 #define geEngine_Create( hWnd, AppName, DriverDirectory)   geEngine_CreateWithVersion(hWnd,AppName,DriverDirectory,GE_VERSION)
 
-#endif
+//#endif
 
 GENESISAPI void			geEngine_Free(geEngine *Engine);
 
@@ -290,10 +292,10 @@ GENESISAPI void			geEngine_EnableFrameRateCounter(geEngine *Engine, geBoolean En
 
 GENESISAPI geBoolean	geEngine_Activate(geEngine *Engine, geBoolean bActive);
 
-#ifdef _INC_WINDOWS
+//#ifdef _INC_WINDOWS
 	// Windows.h must be included before genesis.h for this api to be exposed.
 GENESISAPI geBoolean	geEngine_UpdateWindow(geEngine *Engine);
-#endif
+//#endif
 
 // geDriver
 GENESISAPI geDriver		*geDriver_SystemGetNextDriver(geDriver_System *DriverSystem, geDriver *Start);
@@ -305,10 +307,10 @@ GENESISAPI geBoolean	geDriver_ModeGetWidthHeight(geDriver_Mode *Mode, int32 *Wid
 //================================================================================
 //	Sound Management functions
 //================================================================================
-#ifdef _INC_WINDOWS
+//#ifdef _INC_WINDOWS
 	// Windows.h must be included before genesis.h for this api to be exposed.
-GENESISAPI 	geSound_System *geSound_CreateSoundSystem(HWND hWnd);
-#endif
+GENESISAPI 	geSound_System *geSound_CreateSoundSystem(SDL_Window *hWnd);
+//#endif
 
 
 GENESISAPI void			geSound_DestroySoundSystem(geSound_System *Sound);

@@ -390,7 +390,7 @@ static	geBoolean	GENESISCC FSMemory_EOF(const void *Handle)
 	return GE_FALSE;
 }
 
-static	geBoolean	GENESISCC FSMemory_Tell(const void *Handle, long *Position)
+static	geBoolean	GENESISCC FSMemory_Tell(const void *Handle, int32 *Position)
 {
 	const MemoryFile *	File;
 
@@ -403,7 +403,7 @@ static	geBoolean	GENESISCC FSMemory_Tell(const void *Handle, long *Position)
 	return GE_TRUE;
 }
 
-static	geBoolean	GENESISCC FSMemory_Size(const void *Handle, long *Size)
+static	geBoolean	GENESISCC FSMemory_Size(const void *Handle, int32 *Size)
 {
 	const MemoryFile *	File;
 
@@ -422,7 +422,7 @@ static	geBoolean	GENESISCC FSMemory_GetProperties(const void *Handle, geVFile_Pr
 	return GE_FALSE;
 }
 
-static	geBoolean	GENESISCC FSMemory_SetSize(void *Handle, long Size)
+static	geBoolean	GENESISCC FSMemory_SetSize(void *Handle, int32 Size)
 {
 	assert(!"Not implemented");
 	return GE_FALSE;

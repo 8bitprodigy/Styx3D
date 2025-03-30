@@ -18,25 +18,16 @@
 //#include <Windows.h>
 #include <stdio.h>
 
-#include "VidMode.h"
-
-#include "Genesis.h"
 #include "ErrorLog.h"
+#include "Game.h"
+#include "GameMgr.h"
+#include "Genesis.h"
+#include "GenVSI.h"
+#include "GPlayer.h"
+#include "NetMgr.h"
 #include "Quatern.h"
 #include "RAM.h"
-
-#ifdef _WIN32
-	#include "Game\Game.h"
-	#include "Game\GPlayer.h"
-	#include "Game\GenVSI.h"
-#else
-	#include "Game/Game.h"
-	#include "Game/GPlayer.h"
-	#include "Game/GenVSI.h"
-#endif
-
-#include "GameMgr.h"
-#include "NetMgr.h"
+#include "VidMode.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -251,7 +242,7 @@ geBoolean			Client_ReadServerMessages(Client_Client *Client, Buffer_Data *Buffer
 geBoolean			Client_SetupDemos(Client_Client *Client, int32 Mode, const char *DemoFile);
 void				Client_RefreshStatusBar(int32 NumPages);
 
-void				Client_DestroyTempPlayer(void *Client, void *Player);
+void				Client_DestroyTempPlayer(void *Client, GPlayer *Player);
 GPlayer				*Client_GetPlayer(Client_Client *Client, int32 Index);
 
 #ifdef __cplusplus

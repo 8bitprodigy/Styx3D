@@ -118,11 +118,12 @@ geBoolean GENESISCC	geVFile_Startup(void);
 #endif
 
 GENESISAPI geVFile * GENESISCC geVFile_OpenNewSystem(
-	geVFile *					FS,
-	geVFile_TypeIdentifier	FileSystemType,  // { DOS, MEMORY, ETC ... },
-	const char *			Name, 
-	void *					Context, 
-	unsigned int 			OpenModeFlags);
+	geVFile                *FS,
+	geVFile_TypeIdentifier  FileSystemType,  // { DOS, MEMORY, ETC ... },
+	const char             *Name, 
+	void                   *Context, 
+	unsigned int            OpenModeFlags
+);
 	// Opens a file / file system.
 
 GENESISAPI geBoolean GENESISCC geVFile_UpdateContext(geVFile *FS, void *Context, int ContextSize);
@@ -130,10 +131,12 @@ GENESISAPI geBoolean GENESISCC geVFile_UpdateContext(geVFile *FS, void *Context,
 GENESISAPI geVFile * GENESISCC geVFile_GetContext(const geVFile *File);
 	// Returns the outer context in which File was opened.
 
-GENESISAPI geVFile * GENESISCC geVFile_Open( 
-	geVFile *			FS,
-	const char *	Name, 
-	unsigned int 	OpenModeFlags);
+GENESISAPI geVFile * GENESISCC 
+geVFile_Open( 
+	geVFile      *FS,
+	const char   *Name, 
+	unsigned int  OpenModeFlags
+);
 
 /*
 typedef	enum

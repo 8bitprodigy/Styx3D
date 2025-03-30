@@ -24,6 +24,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <SDL2/SDL.h>
+
 #include "ErrorLog.h"
 #include "GETypes.h"
 #include "RAM.h"
@@ -139,7 +141,7 @@ static  HMODULE					hmodDirectSound = NULL;
 //	geSound_SystemCreate
 //=====================================================================================
 GENESISAPI geSound_System *
-geSound_CreateSoundSystem(HWND hWnd)
+geSound_CreateSoundSystem(SDL_Window *hWnd)
 {
 	geSound_System		*SoundSystem;
 

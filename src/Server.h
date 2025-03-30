@@ -178,10 +178,10 @@ geBoolean		Server_SendClientCurrentWorldData(Server_Server *Server, Server_Clien
 geBoolean		Server_ClientConnect(Server_Server *Server, const geCSNetMgr_NetClient *Client);
 Server_Client	*Server_BotConnect(Server_Server *Server, const char *BotName);
 geBoolean		Server_ClientDisconnect(Server_Server *Server, geCSNetMgr_NetID Id, const char *Name);
-geBoolean		Server_ClientDisconnectByHandle(Server_Server *Server, GenVSI_CHandle);
-GPlayer			*Server_CreatePlayer2(Server_Server *Server, const char *ClassName, int32 Mode);
-GPlayer			*Server_CreatePlayer(Server_Server *Server, const char *ClassName);
-void			Server_DestroyPlayer(Server_Server *Server, GPlayer *Player);
+geBoolean		Server_ClientDisconnectByHandle(void *Server, GenVSI_CHandle);
+GPlayer			*Server_CreatePlayer2(void *Server, const char *ClassName, int32 Mode);
+GPlayer			*Server_CreatePlayer(void *Server, const char *ClassName);
+void			Server_DestroyPlayer(void *Server, GPlayer *Player);
 geBoolean		Server_FreeWorldData(Server_Server *Server);
 geBoolean		Server_NewWorldDefaults(Server_Server *Server);
 geBoolean		Server_SpawnWorld(Server_Server *Server);

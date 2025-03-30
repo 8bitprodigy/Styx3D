@@ -16,10 +16,10 @@
 	#include	"../Procedurals/GeBMUtil.h"
 #endif
 
-#include	"Genesis.h"
-#include	"ErrorLog.h"
-
-#include	"Electric.h"
+#include "Genesis.h"
+#include "ErrorLog.h"
+#include "VFile.h"
+#include "Electric.h"
 
 extern	geFloat		EffectScale;
 

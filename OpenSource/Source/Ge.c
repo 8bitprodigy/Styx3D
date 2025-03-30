@@ -19,6 +19,10 @@
 /*  Copyright (C) 1999 WildTangent, Inc. All Rights Reserved           */
 /*                                                                                      */
 /****************************************************************************************/
+#include <assert.h>
+#include <math.h>
+
+#include <SDL2/SDL.h>
 
 #ifdef _WIN32
     #include <windows.h>
@@ -26,27 +30,24 @@
     #include <string.h> 
 #endif
 
-#include <math.h>
-#include <assert.h>
 
-#include "Genesis.h"
-#include "System.h"
-#include "RAM.h"
-
-//#include "Sound.h"
-//#include "Sound3d.h"
-
-#include "World.h"
-#include "Surface.h"
 //#include "Camera.h"
-#include "Light.h"
-#include "Plane.h"
 #include "Entities.h"
-#include "Trace.h"
-#include "User.h"
+#include "Genesis.h"
+#include "Light.h"
 //#include "Host.h"
 #include "Motion.h"
+#include "Plane.h"
+#include "RAM.h"
+//#include "Sound.h"
+//#include "Sound3d.h"
+#include "Surface.h"
+#include "System.h"
+#include "Trace.h"
+#include "User.h"
 #include "Vis.h"
+#include "World.h"
+
 
 //=====================================================================================
 //	local static globals
@@ -68,7 +69,7 @@ geEngine_SetWorld(geEngine *Engine, geWorld *World);
 //	geEngine_CreateWithVersion
 //=====================================================================================
 GENESISAPI geEngine *
-geEngine_CreateWithVersion(HWND hWnd, const char *AppName, const char *DriverDirectory, uint32 Version)
+geEngine_CreateWithVersion(SDL_Window *hWnd, const char *AppName, const char *DriverDirectory, uint32 Version)
 {
 	assert(AppName != NULL);
 

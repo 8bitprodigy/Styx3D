@@ -83,9 +83,9 @@ static	geVFile_SystemAPIs **		RegisteredAPIs;
 static	int							SystemCount;
 static	geBoolean					BuiltInAPIsRegistered = GE_FALSE;
 
-#ifndef	NDEBUG
+#ifndef NDEBUG
 static	geBoolean					SystemInitialized = GE_FALSE;
-#endif
+#endif /* NDEBUG */
 
 static	CRITICAL_SECTION			MainCriticalSection;
 
@@ -257,10 +257,12 @@ GENESISAPI geBoolean GENESISCC geVFile_UpdateContext(geVFile *FS, void *Context,
 	return FS->APIs->UpdateContext(FS, FS->FSData, Context, ContextSize);
 }
 
-GENESISAPI geVFile * GENESISCC geVFile_Open(
-	geVFile *		FS,
-	const char *	Name,
-	unsigned int 	OpenModeFlags)
+GENESISAPI geVFile * GENESISCC 
+geVFile_Open(
+	geVFile      *FS,
+	const char   *Name,
+	unsigned int  OpenModeFlags
+)
 {
 	FSSearchList *	SearchList;
 	geVFile *		StartContext;

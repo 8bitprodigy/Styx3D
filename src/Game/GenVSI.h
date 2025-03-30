@@ -111,13 +111,13 @@ typedef geBoolean GenVSI_ClientDisconnectCB(void *UData, GenVSI_CHandle ClientHa
 
 typedef uint16 GenVSI_ModelToVIndexCB(void *UData, geWorld_Model *Model);
 typedef void GenVSI_RegisterPModelCB(void *UData, void *PlayerData, geWorld_Model *Model);
-typedef void *GenVSI_GetNextPlayerCB(void *UData, void *Start, const char *ClassName);
-typedef void *GenVSI_GetNextPlayerRCB(void *UData, void *PlayerData, void *Start, const char *ClassName, float Radius);
-typedef void GenVSI_SetViewPlayerCB(void *UData, GenVSI_CHandle ClientHandle, void *PlayerData);
-typedef geBoolean GenVSI_MovePModelCB(void *UData, void *PlayerData, const geXForm3d *DestXForm);
-typedef void GenVSI_GetPlayerTExtCB(void *UData, void *PlayerData, uint16 MotionIndex, float *Start, float *End);
+typedef GPlayer *GenVSI_GetNextPlayerCB(void *UData, void *Start, const char *ClassName);
+typedef GPlayer *GenVSI_GetNextPlayerRCB(void *UData, GPlayer *PlayerData, GPlayer *Start, const char *ClassName, float Radius);
+typedef void GenVSI_SetViewPlayerCB(void *UData, GenVSI_CHandle ClientHandle, GPlayer *PlayerData);
+typedef geBoolean GenVSI_MovePModelCB(void *UData, GPlayer *PlayerData, const geXForm3d *DestXForm);
+typedef void GenVSI_GetPlayerTExtCB(void *UData, GPlayer *PlayerData, uint16 MotionIndex, float *Start, float *End);
 typedef void GenVSI_SetCInvCB(void *UData, GenVSI_CHandle ClientHandle, int32 Slot, uint16 Amount, geBoolean HasItem);
-typedef void *GenVSI_ActorToPlayerCB(void *UData, geActor *Actor);
+typedef GPlayer *GenVSI_ActorToPlayerCB(void *UData, geActor *Actor);
 
 typedef geWorld *GenVSI_GetWorldCB(void *UData);
 typedef void GenVSI_ConsolePrintfCB(void *Udata, const char *Str, ...);
@@ -126,7 +126,7 @@ typedef float GenVSI_GetTimeCB(void *UData);
 
 //#pragma message ("all this player stuff will soon be handles, not void...")
 typedef GPlayer *GenVSI_SpawnPlayerCB(void *UData, const char *ClassName);
-typedef void GenVSI_DestroyPlayerCB(void *UData, void *PlayerData);
+typedef void GenVSI_DestroyPlayerCB(void *UData, GPlayer *PlayerData);
 
 
 typedef void GenVSI_ProcIndexCB(void *UData, uint16 Index, void *Proc);
