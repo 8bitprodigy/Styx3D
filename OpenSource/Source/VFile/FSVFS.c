@@ -19,15 +19,15 @@
 /*  Copyright (C) 1999 WildTangent, Inc. All Rights Reserved           */
 /*                                                                                      */
 /****************************************************************************************/
-#include	<stdio.h>
-#include	<stdlib.h>
-#include	<string.h>
-#include	<assert.h>
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-#include	"RAM.h"
-
-#include	"FSVFS.h"
-#include	"DirTree.h"
+#include "GETypes.h"
+#include "DirTree.h"
+#include "FSVFS.h"
+#include "RAM.h"
 
 //	"VF00"
 #define	VFSFILEHEADER_SIGNATURE	0x30304656
@@ -40,58 +40,66 @@
 
 #define	HEADER_VERSION	0
 
-typedef	struct	VFSFileHeader
+typedef struct
+VFSFileHeader
 {
-	unsigned int	Signature;
-	unsigned short	Version;			// Version number
-	geBoolean		Dispersed;			// Is this VFS dispersed?
-	long			DirectoryOffset;	// File offset to directory
-	long			DataLength;			// Length of all file data, including VFS header
-	long			EndPosition;		// End Position in the RWOps file we were written to
-}	VFSFileHeader;
+	uint16    Signature;
+	uint16    Version;         // Version number
+	geBoolean Dispersed;       // Is this VFS dispersed?
+	int32     DirectoryOffset; // File offset to directory
+	int32     DataLength;      // Length of all file data, including VFS header
+	int32     EndPosition;     // End Position in the RWOps file we were written to
+}	
+VFSFileHeader;
 
 // In the above structure, EndPosition should be the same as DataLength.  We use this for
 // asserts.
 
-typedef	struct	VFSFile
+typedef struct	
+VFSFile
 {
-	unsigned int	Signature;
+	uint16          Signature;
 
-	geVFile *		RWOps;				// Parent file for read/write ops
-	struct VFSFile *System;				// If we're a child, we need a back pointer
+	geVFile        *RWOps;          // Parent file for read/write ops
+	struct VFSFile *System;         // If we're a child, we need a back pointer
 
-	DirTree *		DirEntry;			// Directory entry for this file
-	DirTree *		Directory;			// Directory information for the VFS
+	DirTree        *DirEntry;       // Directory entry for this file
+	DirTree        *Directory;      // Directory information for the VFS
 
-	long			RWOpsStartPos;		// Starting position in the RWOps file
-	long			CurrentRelPos;		// Current file pointer (relative to our start)
-	long			Length;				// Current file size
+	int32           RWOpsStartPos;  // Starting position in the RWOps file
+	int32           CurrentRelPos;  // Current file pointer (relative to our start)
+	int32           Length;         // Current file size
 
-	unsigned int	OpenModeFlags;
+	uint16          OpenModeFlags;
 
 	// Things that are specific to the Root node
-	long			EndPosition;		// End position in the RWOps file if we're a system
-	geBoolean		IsSystem;			// Am I the owner of the Directory?
-	long			DataLength;			// Current size of the aggregate including VFS header
-	geBoolean		Dispersed;			// Is this VFS dispersed?
+	int32           EndPosition;    // End position in the RWOps file if we're a system
+	geBoolean       IsSystem;       // Am I the owner of the Directory?
+	int32           DataLength;     // Current size of the aggregate including VFS header
+	geBoolean       Dispersed;      // Is this VFS dispersed?
 
-}	VFSFile;
+}
+VFSFile;
 
-typedef	struct	VFSFinder
+typedef struct
+VFSFinder
 {
-	unsigned int		Signature;
-	VFSFile *			File;
-	DirTree_Finder *	Finder;
-	DirTree *			LastFind;
-}	VFSFinder;
+	uint16          Signature;
+	VFSFile        *File;
+	DirTree_Finder *Finder;
+	DirTree        *LastFind;
+}
+VFSFinder;
 
 #define	CHECK_HANDLE(H)	assert(H);assert(H->Signature == VFSFILE_SIGNATURE);
 #define	CHECK_FINDER(F)	assert(F);assert(F->Signature == VFSFINDER_SIGNATURE);
 
-static	void *	GENESISCC FSVFS_FinderCreate(
-	geVFile *		FS,
-	void *			Handle,
-	const char *	FileSpec)
+static void *GENESISCC 
+FSVFS_FinderCreate(
+	geVFile    *FS,
+	void       *Handle,
+	const char *FileSpec
+)
 {
 	VFSFinder *		Finder;
 	VFSFile *		File;
@@ -274,14 +282,16 @@ static	void *	GENESISCC FSVFS_Open(
 	return (void *)NewFile;
 }
 
-static	void *	GENESISCC FSVFS_OpenNewSystem(
-	geVFile *		RWOps,
-	const char *	Name,
-	void *			Context,
-	unsigned int 	OpenModeFlags)
+static void *GENESISCC 
+FSVFS_OpenNewSystem(
+	geVFile      *RWOps,
+	const char   *Name,
+	void         *Context,
+	unsigned int  OpenModeFlags
+)
 {
-	VFSFile *	NewFS;
-	long		RWOpsStartPos;
+	VFSFile *NewFS;
+	int32    RWOpsStartPos;
 
 	assert(RWOps != NULL);
 	assert(Name == NULL);
@@ -297,8 +307,8 @@ static	void *	GENESISCC FSVFS_OpenNewSystem(
 	if	(!(OpenModeFlags & GE_VFILE_OPEN_CREATE))
 	{
 		VFSFileHeader	Header;
-		long			DirectoryStartPos;
-		long			DirectoryEndPos;
+		int32			DirectoryStartPos;
+		int32			DirectoryEndPos;
 
 //#pragma message  ("FSVFS_OpenNewSystem: READ/WRITE opens not supported")
 
@@ -398,8 +408,8 @@ static	void	GENESISCC FSVFS_Close(void *Handle)
 
 			if	(File->OpenModeFlags & (GE_VFILE_OPEN_CREATE | GE_VFILE_OPEN_UPDATE))
 			{
-				VFSFileHeader	Header;
-				long			EndPosition;
+				VFSFileHeader Header;
+				int32         EndPosition;
 
 				// Have to update the directory
 				if	(geVFile_Seek(File->RWOps, File->RWOpsStartPos + File->DataLength, GE_VFILE_SEEKSET) == GE_FALSE)
@@ -480,7 +490,7 @@ static	int			ClampOperationSize(const VFSFile *File, int Size)
 
 static	void		GENESISCC UpdateFilePos(VFSFile *File)
 {
-	long	RWOpsPos;
+	int32	RWOpsPos;
 
 	assert(!File->Directory);
 	assert(File->CurrentRelPos >= 0);
@@ -604,7 +614,7 @@ static	geBoolean	GENESISCC FSVFS_Seek(void *Handle, int Where, geVFile_Whence Wh
 {
 	VFSFile *	File;
 	geBoolean	Res;
-	long		AbsolutePos;
+	int32		AbsolutePos;
 
 	File = Handle;
 
@@ -664,7 +674,8 @@ static	geBoolean	GENESISCC FSVFS_EOF(const void *Handle)
 	return GE_FALSE;
 }
 
-static	geBoolean	GENESISCC FSVFS_Tell(const void *Handle, long *Position)
+static geBoolean GENESISCC 
+FSVFS_Tell(const void *Handle, int32 *Position)
 {
 	const VFSFile *	File;
 
@@ -683,7 +694,8 @@ static	geBoolean	GENESISCC FSVFS_Tell(const void *Handle, long *Position)
 	return GE_TRUE;
 }
 
-static	geBoolean	GENESISCC FSVFS_Size(const void *Handle, long *Size)
+static geBoolean GENESISCC 
+FSVFS_Size(const void *Handle, int32 *Size)
 {
 	const VFSFile *	File;
 
@@ -719,7 +731,8 @@ static	geBoolean	GENESISCC FSVFS_GetProperties(const void *Handle, geVFile_Prope
 	return DirTree_GetName(File->DirEntry, &Properties->Name[0], sizeof(Properties->Name));
 }
 
-static	geBoolean	GENESISCC FSVFS_SetSize(void *Handle, long Size)
+static geBoolean GENESISCC 
+FSVFS_SetSize(void *Handle, int32 Size)
 {
 	assert(!"Not implemented");
 	return GE_FALSE;

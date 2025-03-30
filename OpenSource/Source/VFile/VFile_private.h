@@ -63,7 +63,8 @@ typedef geBoolean  (GENESISCC *geVFile_SetAttributesFN)(void *Handle, geVFile_At
 typedef geBoolean  (GENESISCC *geVFile_SetTimeFN)(void *Handle, const geVFile_Time *Time);
 typedef geBoolean  (GENESISCC *geVFile_SetHintsFN)(void *Handle, const geVFile_Hints *Hints);
 
-typedef	struct	geVFile_SystemAPIs
+typedef	struct	
+geVFile_SystemAPIs
 {
 	geVFile_FinderCreateFN		FinderCreate;
 	geVFile_FinderGetNextFileFN	FinderGetNextFile;
@@ -93,7 +94,8 @@ typedef	struct	geVFile_SystemAPIs
 	geVFile_SetAttributesFN		SetAttributes;
 	geVFile_SetTimeFN			SetTime;
 	geVFile_SetHintsFN			SetHints;
-}	geVFile_SystemAPIs;
+}	
+geVFile_SystemAPIs;
 
 geBoolean GENESISCC VFile_RegisterFileSystem(
 	const geVFile_SystemAPIs *	APIs,

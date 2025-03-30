@@ -87,7 +87,6 @@ OBJECTS = \
 	$(OBJDIR)/Font.o \
 	$(OBJDIR)/FontBMP.o \
 	$(OBJDIR)/FSMemory.o \
-#	$(OBJDIR)/FSDOS.o \
 	$(OBJDIR)/FSVFS.o \
 	$(OBJDIR)/Frustum.o \
 	$(OBJDIR)/GBSPFile.o \

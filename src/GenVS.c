@@ -12,7 +12,6 @@
 /*  or FITNESS FOR ANY PURPOSE.  Refer to LICENSE.TXT for more details.                 */
 /*                                                                                      */
 /****************************************************************************************/
-#include <SDL2/SDL_events.h>
 #include <assert.h>
 #include <math.h>
 #include <stdint.h>
@@ -23,7 +22,6 @@
 #include <sys/time.h>
 
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_mouse.h>
 
 #ifdef _WIN32
 	#include <direct.h>	
@@ -59,7 +57,7 @@
 #endif
 
 #include "AutoSelect.h"
-#include "BaseType.h"
+#include "GETypes.h"
 #include "Bitmap.h"
 #include "Client.h"
 #include "Console.h"

@@ -52,11 +52,12 @@ extern "C" {
 //	Structure defines
 //================================================================================
 
-typedef struct	gePoly
+typedef struct	
+gePoly
 {
-#ifdef _DEBUG
+//#ifdef DEBUG
 	struct gePoly	*Self1;
-#endif
+//#endif
 
 	geWorld			*World;
 	GE_LVertex		Verts[MAX_USER_VERTS];	// Copy of user verts					
@@ -78,15 +79,18 @@ typedef struct	gePoly
 
 	struct gePoly	*AddOnceNext;
 
-#ifdef _DEBUG
+//#ifdef DEBUG
 	struct gePoly	*Self2;
-#endif
-} gePoly;
+//#endif
+} 
+gePoly;
 
-typedef struct User_Info
+typedef struct 
+User_Info
 {
 	gePoly		*AddPolyOnceList;
-} User_Info;
+} 
+User_Info;
 
 //================================================================================
 //	Function ProtoTypes

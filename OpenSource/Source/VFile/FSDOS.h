@@ -22,6 +22,8 @@
 #ifndef	FSDOS_H
 #define	FSDOS_H
 
+#include "VFile.h"
+
 const	geVFile_SystemAPIs *GENESISCC FSDos_GetAPIs(void);
 
 #endif

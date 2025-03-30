@@ -27,21 +27,21 @@
     #include <string.h> 
 #endif
 
-
+#include "GETypes.h"
+#include "Bitmap_private.h"
+#include "Camera.h"
+#include "DCommon.h"
+#include "ErrorLog.h"
+#include "Frustum.h"
+#include "Genesis.h"
+#include "Plane.h"
+#include "RAM.h"
+#include "Surface.h"
+#include "System.h"
 #include "User.h"
 #include "World.h"
-#include "RAM.h"
-#include "ErrorLog.h"
-#include "System.h"
-#include "Surface.h"
-#include "Genesis.h"
-#include "Camera.h"
-#include "Frustum.h"
-#include "Plane.h"
 
-#include "DCommon.h"
 
-#include "Bitmap_private.h"
 
 extern int32	MirrorRecursion;					// GLOBAL!!! in World.c
 
@@ -70,8 +70,9 @@ static geBoolean RenderUserPoly(geCamera *Camera, gePoly *Poly);
 static void geWorld_LinkPolyToLeaf(const geWorld *World, gePoly *Poly);
 static void geWorld_UnLinkPolyFromLeaf(gePoly *Poly);
 
-#ifdef _DEBUG
-geBoolean geWorld_PolyIsValid(gePoly *Poly)
+//#ifdef DEBUG
+geBoolean 
+geWorld_PolyIsValid(gePoly *Poly)
 {
 	if (!Poly)
 		return GE_FALSE;
@@ -84,7 +85,7 @@ geBoolean geWorld_PolyIsValid(gePoly *Poly)
 
 	return GE_TRUE;
 }
-#endif
+//#endif
 
 //=====================================================================================
 //	User_EngineInit

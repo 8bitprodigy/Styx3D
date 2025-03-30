@@ -22,20 +22,20 @@
 #ifndef GE_WORLD_H
 #define GE_WORLD_H
 
+#include "Actor.h"		
+#include "BitmapList.h"
 #include "ErrorLog.h"
-#include "PtrTypes.h"
-#include "Genesis.h"
-#include "GBSPFile.h"
-#include "Motion.h"
-#include "Surface.h"
 #include "Fog.h"
+#include "GBSPFile.h"
+#include "Genesis.h"
+#include "Light.h"
+#include "Motion.h"
+#include "PtrTypes.h"
+#include "Surface.h"
 #include "WBitmap.h"
 #include "User.h"
-#include "Light.h"
 
-#include "BitmapList.h"
-
-#include "Actor.h"			
+	
 
 #ifdef __cplusplus
 extern "C" {
@@ -52,7 +52,8 @@ extern "C" {
 //=====================================================================================
 #define MODEL_CHANGED_XFORM				(1<<0)
 
-typedef struct geWorld_Model
+typedef struct 
+geWorld_Model
 {
 	char			Name[64];							// Model's name
 	int32			GFXModelNum;						// Model number in disk tree structure
@@ -70,15 +71,18 @@ typedef struct geWorld_Model
 	uint32			Flags;								// GE_MODEL_RENDER_NORMAL, etc... (getypes.h)
 
 	uint32			ChangedFlags;
-} geWorld_Model;
+} 
+geWorld_Model;
 
-typedef struct geWorld_Leaf
+typedef struct 
+geWorld_Leaf
 {
 	int32			VisFrame;
 	int32			Parent;								// Parent nodes of all leafs
 
 	gePoly			*PolyList;							// List of poly fragments to render for this leaf (geWorld_AddPoly)
-} geWorld_Leaf;
+} 
+geWorld_Leaf;
 
 #define MAX_VISIBLE_FOG		12	// Hope to God there is not this much visible at a time!!!
 
@@ -93,7 +97,8 @@ typedef struct
 	int32			VisFrame;							// == World->CurFrameDynamic when visible
 
 	geWorld			*World;
-} geWorld_FogData;
+} 
+geWorld_FogData;
 
 typedef struct World_BSP
 {
@@ -117,7 +122,8 @@ typedef struct World_BSP
 
 	int32			*NodeParents;						// Parent nodes of all leafs
 
-} World_BSP;
+} 
+World_BSP;
 
 typedef struct
 {
@@ -132,7 +138,8 @@ typedef struct
 	
 	float			Angle;								// Current rotation angle around roation axis
 
-} World_SkyBox;
+} 
+World_SkyBox;
 
 typedef struct
 {
@@ -148,16 +155,19 @@ typedef struct
 	int32			NumTransformedVerts[6];				// Number of transformed verts/texverts
 	int32			OriginalFaces[6];					// Indexes to original bitmap
 
-} geWorld_SkyBoxTData;
+} 
+geWorld_SkyBoxTData;
 
-typedef struct World_Actor
+typedef struct 
+World_Actor
 {
 	geActor			*Actor;
 	uint32			Flags;				// GE_ACTOR_RENDER_NORMAL, GE_ACTOR_RENDER_MIRRORS, GE_ACTOR_COLLIDE
 	uint32			UserFlags;
 
 	//int32			Leaf;				// Current leaf the actor is in (currently used for PVS occlusion)
-} World_Actor;
+} 
+World_Actor;
 
 /******
 
@@ -173,7 +183,8 @@ typedef struct
 {
 	const char			*ClassName;		// NULL for main set
 	geEntity_EntitySet	*Set;
-} geWorld_EntClassSet;
+} 
+geWorld_EntClassSet;
 
 typedef struct
 {
@@ -184,7 +195,8 @@ typedef struct
 	int32		NumLeafsWithUserPolys;
 	int32		NumUserPolys;
 
-} geWorld_DebugInfo;
+} 
+geWorld_DebugInfo;
 
 typedef struct geWorld
 {
@@ -232,7 +244,8 @@ typedef struct geWorld
 
 	geBoolean			Changed;							// GE_TRUE if this world has changed
 
-} geWorld;
+} 
+geWorld;
 
 //=====================================================================================
 //	Function prototypes

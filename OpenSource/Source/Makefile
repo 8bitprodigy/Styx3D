@@ -119,10 +119,10 @@ SUPPORT_SRCS = \
 
 VFILE_SRCS = \
 	VFile/DirTree.c \
-#	VFile/FSOps.c \
 	VFile/FSMemory.c \
 	VFile/FSVFS.c \
 	VFile/VFile.c
+#	VFile/FSOps.c \
 
 WORLD_SRCS = \
 	World/Fog.c \

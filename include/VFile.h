@@ -31,10 +31,13 @@ extern "C" {
 typedef struct geVFile geVFile;
 
 //--------- Finder (Directory) --------------
-typedef struct geVFile_Finder geVFile_Finder;
+typedef struct geVFile_Finder     geVFile_Finder;
+typedef struct geVFile_SystemAPIs geVFile_SystemAPIs;
+
 
 typedef int     		geVFile_TypeIdentifier;
 typedef unsigned int    geVFile_Attributes;
+
 
 typedef struct	
 geVFile_Hints
