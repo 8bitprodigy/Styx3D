@@ -70,7 +70,7 @@ geGetCurrentDir(uint32 size, char *path)
 }
 
 char * 
-itoa(int n, char* str, int base) 
+itoa(int n, char *str, int base) 
 {
     // Check if the base is valid
     if (base < 2 || base > 36) {

@@ -47,7 +47,10 @@
 #include	"VFile.h"
 #include	"VFile_private.h"
 
-#include	"FSOps.h"
+//#include	"FSOps.h"
+#if defined(__MSDOS__) || defined(MSDOS)
+	#include	"FSDOS.h"
+#endif /* __MSDOS__ || MSDOS */
 #include	"FSMemory.h"
 #include	"FSVFS.h"
 
@@ -112,10 +115,12 @@ static	geBoolean	RegisterBuiltInAPIs(void)
 	if	(BuiltInAPIsRegistered == GE_TRUE)
 		return GE_TRUE;
 
+#if defined(__MSDOS__) || defined(MSDOS)
 	if	(geVFile_RegisterFileSystemInternal(FSDos_GetAPIs(), &Type) == GE_FALSE)
 		return GE_FALSE;
 	if	(Type != GE_VFILE_TYPE_DOS)
 		return GE_FALSE;
+#endif /* __MSDOS__ || MSDOS */
 
 	if	(geVFile_RegisterFileSystemInternal(FSMemory_GetAPIs(), &Type) == GE_FALSE)
 		return GE_FALSE;
