@@ -28,7 +28,8 @@ static char *ModeList_320WindowString="320x240 Window";
 static char *ModeList_800WindowString="800x600 Window";
 
 
-void	ModeList_Destroy(ModeList *List)
+void
+ModeList_Destroy(ModeList *List)
 {
 	assert( List );
 	geRam_Free( List );
@@ -44,7 +45,8 @@ void strupr(char *str)
     }
 }
 
-ModeList *ModeList_Create(geEngine *Engine,int *ListLength)
+ModeList *
+ModeList_Create(geEngine *Engine,int *ListLength)
 {
 	geDriver_System	*DriverSystem;
 	geDriver		*Driver;

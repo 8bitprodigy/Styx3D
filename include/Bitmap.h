@@ -74,49 +74,65 @@ GENESISAPI geBoolean 	GENESISCC	geBitmap_Destroy(geBitmap **Bmp);
 GENESISAPI geBoolean 	GENESISCC	geBitmap_GetInfo(const geBitmap *Bmp, geBitmap_Info *Info, geBitmap_Info *SecondaryInfo);
 	//LockForWrite returns data in Info's format
 
-GENESISAPI geBoolean 	GENESISCC	geBitmap_Blit(const	geBitmap *Src, int SrcPositionX, int SrcPositionY,
-										geBitmap *Dst, int DstPositionX, int DstPositionY,
-										int SizeX, int SizeY );
+GENESISAPI geBoolean GENESISCC	
+geBitmap_Blit(
+	const geBitmap *Src, 
+	      int       SrcPositionX, 
+	      int       SrcPositionY,
+	      geBitmap *Dst, 
+	      int       DstPositionX, 
+	      int       DstPositionY,
+	      int       SizeX, 
+	      int       SizeY 
+);
 
-GENESISAPI geBoolean 	GENESISCC	geBitmap_BlitMip(const geBitmap * Src, int SrcMip, geBitmap * Dst, int DstMip );
+GENESISAPI geBoolean GENESISCC geBitmap_BlitMip(const geBitmap * Src, int SrcMip, geBitmap * Dst, int DstMip );
 										// don't use this with Src == Dst, use UpdateMips instead !
 
-GENESISAPI geBoolean 	GENESISCC	geBitmap_BlitBitmap(const geBitmap * Src, geBitmap * Dst);
+GENESISAPI geBoolean GENESISCC geBitmap_BlitBitmap(const geBitmap * Src, geBitmap * Dst);
 
-GENESISAPI geBoolean 	GENESISCC	geBitmap_BlitBestMip(const geBitmap * Src, geBitmap * Dst);
+GENESISAPI geBoolean GENESISCC geBitmap_BlitBestMip(const geBitmap * Src, geBitmap * Dst);
 										// blits the largest mip from Src that fits in Dst
 
-GENESISAPI geBoolean 	GENESISCC	geBitmap_LockForRead(		// a non-exclusive lock
-	const geBitmap *	Bmp,
-	geBitmap **			Target,
-	int					MinimumMip,
-	int					MaximumMip,
-	gePixelFormat 		Format,
-	geBoolean			RespectColorKey,
-	uint32				ColorKey);
+GENESISAPI geBoolean GENESISCC
+geBitmap_LockForRead(		// a non-exclusive lock
+	const geBitmap       *Bmp,
+	      geBitmap      **Target,
+	      int             MinimumMip,
+	      int             MaximumMip,
+	      gePixelFormat   Format,
+	      geBoolean       RespectColorKey,
+	      uint32          ColorKey
+);
 									// not really const, stores lock-count, but *data* is const
 									// will do a format conversion!
 
-GENESISAPI geBoolean	GENESISCC	geBitmap_LockForReadNative(
-	const geBitmap *	Bmp,
-	geBitmap **			Target,
-	int					MinimumMip,
-	int					MaximumMip);
+GENESISAPI geBoolean GENESISCC
+geBitmap_LockForReadNative(
+	const geBitmap  *Bmp,
+	      geBitmap **Target,
+	      int        MinimumMip,
+	      int        MaximumMip
+);
 									// lock for read in a format that gaurantee no conversions
 									// then do GetInfo on the locks to see what you have!
 
-GENESISAPI geBoolean 	GENESISCC	geBitmap_LockForWrite(	// an exclusive lock
-	geBitmap *			Bmp,
-	geBitmap **			Target,
-	int					MinimumMip,
-	int					MaximumMip);
+GENESISAPI geBoolean GENESISCC
+geBitmap_LockForWrite(	// an exclusive lock
+	geBitmap  *Bmp,
+	geBitmap **Target,
+	int        MinimumMip,
+	int        MaximumMip
+);
 
-GENESISAPI geBoolean 	GENESISCC	geBitmap_LockForWriteFormat(
-	geBitmap *			Bmp,
-	geBitmap **			Target,
-	int					MinimumMip,
-	int					MaximumMip,
-	gePixelFormat 		Format);
+GENESISAPI geBoolean GENESISCC
+geBitmap_LockForWriteFormat(
+	geBitmap       *Bmp,
+	geBitmap      **Target,
+	int             MinimumMip,
+	int             MaximumMip,
+	gePixelFormat   Format
+);
 									// Format must be one of the two returned in GetInfo !!
 
 GENESISAPI geBoolean 	GENESISCC	geBitmap_UnLock(geBitmap *Bmp);	// must be done on All locked mips

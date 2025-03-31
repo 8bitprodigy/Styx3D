@@ -805,10 +805,10 @@ static	void ClearDupBuffers( Channel* channel )
 		}
 	}
 }
-/*
+
 static geBoolean 
 FreeAllChannels(SoundManager *sm)
-{
+{/*
 	int Error;
 	
 	Channel* channel, *nextChannel;
@@ -843,13 +843,13 @@ FreeAllChannels(SoundManager *sm)
 	}
 	sm->smChannels = NULL;
 	sm->smChannelCount = 0;
-
-	return GE_TRUE;
+*/
+	return true;
 }
 
 static geBoolean 
 FreeChannel(SoundManager *sm, Channel* channel)
-{
+{/*
 	int Error;
 	Channel*prevChannel = NULL, *curChannel;
 	if	( channel )
@@ -891,13 +891,13 @@ FreeChannel(SoundManager *sm, Channel* channel)
 //			free( curChannel );
 		}
 	}
-
-	return TRUE;
+*/
+	return true;
 }
 
 static Channel *
 ReloadData(void *Data)
-{
+{/*
 	DSBUFFERDESC	dsBD;
 	BYTE *			pbWaveData;
 	INT NumBytes;
@@ -925,12 +925,13 @@ ReloadData(void *Data)
 	
 //	geRam_Free(data);
 //	free( data );
-	return( channel );
+	return( channel );*/
+	return NULL;
 }
 
 static geBoolean 
 DupChannel( SoundManager *sm, Channel* channel, Channel** dupChannelPtr )
-{
+{/*
 	Channel* dupChannel;
 	HRESULT Error;
 
@@ -961,13 +962,13 @@ DupChannel( SoundManager *sm, Channel* channel, Channel** dupChannelPtr )
 //	dupChannel->name = NULL;
 	dupChannel->Data = channel->Data;
 	channel->nextDup = dupChannel;
-	*dupChannelPtr = dupChannel;
-	return( GE_TRUE );
+	*dupChannelPtr = dupChannel;*/
+	return( true );
 }
 
 static geBoolean
 StartSoundChannel( SoundManager *sm, unsigned int Handle, geSound_Cfg *cfg, int loop, unsigned int* sfx)
-{
+{/*
 	HRESULT	hres;
 	Channel* channel, *dupChannel;
 	
@@ -999,13 +1000,13 @@ StartSoundChannel( SoundManager *sm, unsigned int Handle, geSound_Cfg *cfg, int 
 		return GE_TRUE;
 	}
 	
-	geErrorLog_Add(GE_ERR_DS_ERROR, NULL);
-	return GE_FALSE;
+	geErrorLog_Add(GE_ERR_DS_ERROR, NULL);*/
+	return false;
 }
 
 static geBoolean 
 StopSoundChannel(Channel* channel)
-{
+{/*
 	HRESULT	hres;
 
 	assert(channel);
@@ -1015,12 +1016,13 @@ StopSoundChannel(Channel* channel)
 	if	(hres == DS_OK)
 		return GE_TRUE;
 
-	geErrorLog_Add(GE_ERR_DS_ERROR, NULL);
-	return GE_FALSE;
+	geErrorLog_Add(GE_ERR_DS_ERROR, NULL);*/
+	return false;
 }
 
-static	void DestroySoundManager(SoundManager *sm)
-{
+static void 
+DestroySoundManager(SoundManager *sm)
+{/*
 	if (!sm) return;
 
 	FreeAllChannels( sm );
@@ -1031,12 +1033,12 @@ static	void DestroySoundManager(SoundManager *sm)
 	if  (hmodDirectSound != NULL)
 		FreeLibrary (hmodDirectSound);
 	geRam_Free(sm);
-//	free(sm);
+//	free(sm);*/
 }
 
 static geBoolean
 ModifyChannel( Channel *channel, geSound_Cfg *cfg )
-{
+{/*
 	int Error, Vol, Pan, Freq;
 	assert(channel);
 	
@@ -1080,13 +1082,13 @@ ModifyChannel( Channel *channel, geSound_Cfg *cfg )
 		}
 		channel->cfg.Frequency = cfg->Frequency;
 	}
-
-	return GE_TRUE;
+*/
+	return true;
 }
 
 static int 
 ChannelPlaying( Channel *channel )
-{
+{/*
 	DWORD status, Error;
 
 	if(!channel)
@@ -1095,7 +1097,8 @@ ChannelPlaying( Channel *channel )
 	Error = IDirectSoundBuffer_GetStatus( channel->buffer, &status);
 	if( Error != DS_OK)
 		return 0;
-	return( status & DSBSTATUS_PLAYING  );
+	return( status & DSBSTATUS_PLAYING  );*/
+	return 0;
 }
 
 static Channel * 
@@ -1103,7 +1106,7 @@ GetChannel( SoundManager *sm, unsigned int ID )
 {
 	Channel* dupChannel;
 	Channel* channel = sm->smChannels;
-
+/*
 	while( channel )
 	{
 		if( channel->ID == ID )
@@ -1119,6 +1122,7 @@ GetChannel( SoundManager *sm, unsigned int ID )
 			return( dupChannel );
 		channel = channel->next;
 	}
+*/
 	return( channel );
 }
-*/
+

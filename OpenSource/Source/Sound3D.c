@@ -153,15 +153,17 @@ GENESISAPI	void geSound3D_GetConfig(
 //=====================================================================================
 //	geSound3D_GetConfigIgnoreObstructions()
 //=====================================================================================
-GENESISAPI	void geSound3D_GetConfigIgnoreObstructions(
-		const geWorld *World, 
+GENESISAPI void 
+geSound3D_GetConfigIgnoreObstructions(
+		const geWorld   *World, 
 		const geXForm3d *MXForm, 
-		const geVec3d *SndPos, 
-		geFloat Min, 
-		geFloat Ds,
-		geFloat *Volume,
-		geFloat *Pan,
-		geFloat *Frequency)
+		const geVec3d   *SndPos, 
+		      geFloat    Min, 
+		      geFloat    Ds,
+		      geFloat   *Volume,
+		      geFloat   *Pan,
+		      geFloat   *Frequency
+)
 {
 	geVec3d			ViewPos, LocalPos, Dist;
 	geSound3d_Cfg	Cfg;

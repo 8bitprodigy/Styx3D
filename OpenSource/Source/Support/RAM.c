@@ -64,7 +64,8 @@ static geRam_CriticalCallbackFunction geRam_CriticalCallback = NULL;
   the critical callback function (if set) is called for a failed memory allocation.
   add is added to the current counter value.  the new counter value is returned.
 */
-GENESISAPI int geRam_EnableCriticalCallback(int add)
+GENESISAPI int 
+geRam_EnableCriticalCallback(int add)
 {
 	geRam_CriticalAllocationCount += add;
 	return geRam_CriticalAllocationCount;
@@ -89,7 +90,8 @@ geRam_SetCriticalCallback(geRam_CriticalCallbackFunction critical_callback)
   If an allocation fails, this function will be called.  If the critical callback
   function is not NULL, then that function will be called.
 */
-static int geRam_DoCriticalCallback(void)
+static int 
+geRam_DoCriticalCallback(void)
 {
   if ((geRam_CriticalAllocationCount != 0) && (geRam_CriticalCallback != NULL))
   {
@@ -102,7 +104,8 @@ static int geRam_DoCriticalCallback(void)
 }
 
 
-GENESISAPI void * geRam_AllocateClear(uint32 size)
+GENESISAPI void *
+geRam_AllocateClear(uint32 size)
 {
 void * mem;
 	size = (size + 3)&(~(uint32)3);
@@ -116,149 +119,209 @@ return mem;
 
 #ifdef MINIMAL_CONFIG
 
-/*
-  Minimal configuration acts almost exactly like standard malloc, free,
-  and realloc.  The only difference is the critical allocation stuff.
-*/
+  /*
+    Minimal configuration acts almost exactly like standard malloc, free,
+    and realloc.  The only difference is the critical allocation stuff.
+  */
 
 
-/*
-  Allocate memory of the given size.  In debug mode, the memory is filled
-  with 0xA5, and we keep track of the amount of memory allocated.
-*/
-void *
-geRam_Allocate
-(
-  uint32 size
-)
-{
-    void *p;
+  /*
+    Allocate memory of the given size.  In debug mode, the memory is filled
+    with 0xA5, and we keep track of the amount of memory allocated.
+  */
+  void *
+  geRam_Allocate(uint32 size)
+  {
+      void *p;
 
-    do
-    {
-        p = malloc(size);
-    } while ((p == NULL) && (geRam_DoCriticalCallback ()));
+      do
+      {
+          p = malloc(size);
+      } while ((p == NULL) && (geRam_DoCriticalCallback ()));
 
-    return p;
-}
+      return p;
+  }
 
-// free an allocated block
-void geRam_Free_
-    (
-      void *ptr
-    )
-{
-  free (ptr);
-}
+  // free an allocated block
+  void geRam_Free_
+      (
+        void *ptr
+      )
+  {
+    free (ptr);
+  }
 
-    // reallocate a block...
-    // This acts like the standard realloc
-GENESISAPI     void *
-geRam_Realloc
-(
-  void *ptr,
-  uint32 newsize
-)
-{
-    char *p;
-    char * NewPtr;
+      // reallocate a block...
+      // This acts like the standard realloc
+  GENESISAPI void *
+  geRam_Realloc(void   *ptr, uint32  newsize)
+  {
+      char *p;
+      char * NewPtr;
 
-    if (ptr == NULL)
-    {
-        return geRam_Allocate (newsize);
-    }
+      if (ptr == NULL)
+      {
+          return geRam_Allocate (newsize);
+      }
 
-    // if newsize is NULL, then it's a free and return NULL
-    if (newsize == 0)
-    {
-        geRam_Free (ptr);
-        return NULL;
-    }
+      // if newsize is NULL, then it's a free and return NULL
+      if (newsize == 0)
+      {
+          geRam_Free (ptr);
+          return NULL;
+      }
 
-    p = ptr;
-    do
-    {
-        NewPtr = (char *)realloc (p, newsize);
-    } while ((NewPtr == NULL) && (geRam_DoCriticalCallback ()));
+      p = ptr;
+      do
+      {
+          NewPtr = (char *)realloc (p, newsize);
+      } while ((NewPtr == NULL) && (geRam_DoCriticalCallback ()));
 
-    return NewPtr;
-}
+      return NewPtr;
+  }
 
 #else  // MINIMAL_CONFIG
-     /*
-       For debugging implementations, we add a header and trailer to the
-       allocated memory blocks so that we compute memory usage, and catch
-       simple over- and under-run errors.
-     */
+      /*
+        For debugging implementations, we add a header and trailer to the
+        allocated memory blocks so that we compute memory usage, and catch
+        simple over- and under-run errors.
+      */
 
-    // yes, this will break if we use more than 2 gigabytes of RAM...
-    int32 geRam_CurrentlyUsed       = 0;  // total ram currently in use
-    int32 geRam_MaximumUsed         = 0;  // max total ram allocated at any time
-    int32 geRam_NumberOfAllocations     = 0;  // current number of blocks allocated
-    int32 geRam_MaximumNumberOfAllocations = 0;  // max number of allocations at any time
+      // yes, this will break if we use more than 2 gigabytes of RAM...
+      int32 geRam_CurrentlyUsed       = 0;  // total ram currently in use
+      int32 geRam_MaximumUsed         = 0;  // max total ram allocated at any time
+      int32 geRam_NumberOfAllocations     = 0;  // current number of blocks allocated
+      int32 geRam_MaximumNumberOfAllocations = 0;  // max number of allocations at any time
 
-    // header and trailer stuff...
-    static char MemStamp[] = {"!CHECKME!"};
-    static const int MemStampSize = sizeof (MemStamp)-1;
-    static const int SizeSize = sizeof (uint32);
-	// <> CB : pad sized to multiples of 8 !!!
-    #define HEADER_SIZE		(((SizeSize		+ MemStampSize)+7)&(~(uint32)7))
-    #define EXTRA_SIZE		(((HEADER_SIZE	+ MemStampSize)+7)&(~(uint32)7))
-    static const unsigned char AllocFillerByte = (unsigned char)0xA5;
-    static const unsigned char FreeFillerByte  = (unsigned char)0xB6;
-    /*
-      A memory block is allocated that's size + (2*MemStampSize)+SizeSize bytes.
-      It's then filled with 0xA5.  The size stamp is placed at the head of the block,
-      with the MemStamp being placed directly after the size at the front, and
-      also at the end of the block.  The layout is:
+      // header and trailer stuff...
+      static char MemStamp[] = {"!CHECKME!"};
+      static const int MemStampSize = sizeof (MemStamp)-1;
+      static const int SizeSize = sizeof (uint32);
+    // <> CB : pad sized to multiples of 8 !!!
+      #define HEADER_SIZE		(((SizeSize		+ MemStampSize)+7)&(~(uint32)7))
+      #define EXTRA_SIZE		(((HEADER_SIZE	+ MemStampSize)+7)&(~(uint32)7))
+      static const unsigned char AllocFillerByte = (unsigned char)0xA5;
+      static const unsigned char FreeFillerByte  = (unsigned char)0xB6;
+      /*
+        A memory block is allocated that's size + (2*MemStampSize)+SizeSize bytes.
+        It's then filled with 0xA5.  The size stamp is placed at the head of the block,
+        with the MemStamp being placed directly after the size at the front, and
+        also at the end of the block.  The layout is:
 
-      <size><MemStamp><<allocated memory>><MemStamp>
-    */
-    typedef enum 
-	{
-		DONT_INITIALIZE = 0, 
-		INITIALIZE_MEMORY = 1
-	} geRam_MemoryInitialization;
-
-    static void geRam_SetupBlock
-          (
-            char * p,
-            uint32 size,
-            geRam_MemoryInitialization InitMem
-          )
+        <size><MemStamp><<allocated memory>><MemStamp>
+      */
+      typedef enum 
     {
-        if (InitMem == INITIALIZE_MEMORY)
+      DONT_INITIALIZE = 0, 
+      INITIALIZE_MEMORY = 1
+    } geRam_MemoryInitialization;
+
+      static void geRam_SetupBlock
+            (
+              char * p,
+              uint32 size,
+              geRam_MemoryInitialization InitMem
+            )
+      {
+          if (InitMem == INITIALIZE_MEMORY)
+          {
+              // fill the memory block
+              memset (p+HEADER_SIZE, AllocFillerByte, size);
+          }
+
+          // add the size at the front
+          *((uint32 *)p) = size;
+
+          // copy the memstamp to the front of the block
+          memcpy (p+SizeSize, MemStamp, MemStampSize);
+
+          // and to the end of the block
+          memcpy (p+HEADER_SIZE+size, MemStamp, MemStampSize);
+      }
+
+  #ifndef NDEBUG
+    #ifdef _WIN32
+  
+    GENESISAPI 	void* 
+    _geRam_DebugAllocate(uint32 size, const char* pFile, int line)
+    {
+        char *p;
+
+        do
         {
-            // fill the memory block
-            memset (p+HEADER_SIZE, AllocFillerByte, size);
+            p = (char*)_malloc_dbg (size + EXTRA_SIZE, _NORMAL_BLOCK, pFile, line);
+        } while ((p == NULL) && geRam_DoCriticalCallback ());
+
+        if (p == NULL)
+        {
+          return NULL;
         }
 
-        // add the size at the front
-        *((uint32 *)p) = size;
+        // setup size stamps and memory overwrite checks
+        geRam_SetupBlock (p, size, INITIALIZE_MEMORY);
 
-        // copy the memstamp to the front of the block
-        memcpy (p+SizeSize, MemStamp, MemStampSize);
+        // and update the allocations stuff
+        geRam_NumberOfAllocations++;
+        geRam_CurrentlyUsed += size;
 
-        // and to the end of the block
-        memcpy (p+HEADER_SIZE+size, MemStamp, MemStampSize);
+        if (geRam_NumberOfAllocations > geRam_MaximumNumberOfAllocations)
+        {
+            geRam_MaximumNumberOfAllocations = geRam_NumberOfAllocations;
+        }
+        if (geRam_CurrentlyUsed > geRam_MaximumUsed)
+        {
+            geRam_MaximumUsed = geRam_CurrentlyUsed;
+        }
+
+        return p+HEADER_SIZE;
     }
 
-#ifndef NDEBUG
-  #ifdef _WIN32
- 
-  GENESISAPI 	void* 
-  _geRam_DebugAllocate(uint32 size, const char* pFile, int line)
-	{
+    #else /* _WIN32 */
+      // Linux version using standard malloc
+      GENESISAPI void* 
+      _geRam_DebugAllocate(uint32 size, const char* pFile, int line)
+      {
+        // Implementation that tracks file and line without _malloc_dbg
+        char *p;
+        
+        do {
+            p = (char*)malloc(size + EXTRA_SIZE);
+        } while ((p == NULL) && geRam_DoCriticalCallback());
+        
+        if (p == NULL) {
+            return NULL;
+        }
+        
+        // Setup block as in your existing code
+        geRam_SetupBlock(p, size, INITIALIZE_MEMORY);
+        geRam_NumberOfAllocations++;
+        geRam_CurrentlyUsed += size;
+        
+        // Update stats
+        if (geRam_NumberOfAllocations > geRam_MaximumNumberOfAllocations) {
+            geRam_MaximumNumberOfAllocations = geRam_NumberOfAllocations;
+        }
+        if (geRam_CurrentlyUsed > geRam_MaximumUsed) {
+            geRam_MaximumUsed = geRam_CurrentlyUsed;
+        }
+        
+        return p+HEADER_SIZE;
+      }
+    #endif
+  #else // NDEBUG
+    GENESISAPI void * 
+    geRam_Allocate (uint32 size)
+    {
       char *p;
 
       do
       {
-          p = (char*)_malloc_dbg (size + EXTRA_SIZE, _NORMAL_BLOCK, pFile, line);
+          p = (char*)malloc (size + EXTRA_SIZE);
       } while ((p == NULL) && geRam_DoCriticalCallback ());
 
       if (p == NULL)
       {
-         return NULL;
+        return NULL;
       }
 
       // setup size stamps and memory overwrite checks
@@ -278,213 +341,151 @@ geRam_Realloc
       }
 
       return p+HEADER_SIZE;
-	}
-
-  #else /* _WIN32 */
-    // Linux version using standard malloc
-    GENESISAPI void* 
-    _geRam_DebugAllocate(uint32 size, const char* pFile, int line)
-    {
-      // Implementation that tracks file and line without _malloc_dbg
-      char *p;
-      
-      do {
-          p = (char*)malloc(size + EXTRA_SIZE);
-      } while ((p == NULL) && geRam_DoCriticalCallback());
-      
-      if (p == NULL) {
-          return NULL;
-      }
-      
-      // Setup block as in your existing code
-      geRam_SetupBlock(p, size, INITIALIZE_MEMORY);
-      geRam_NumberOfAllocations++;
-      geRam_CurrentlyUsed += size;
-      
-      // Update stats
-      if (geRam_NumberOfAllocations > geRam_MaximumNumberOfAllocations) {
-          geRam_MaximumNumberOfAllocations = geRam_NumberOfAllocations;
-      }
-      if (geRam_CurrentlyUsed > geRam_MaximumUsed) {
-          geRam_MaximumUsed = geRam_CurrentlyUsed;
-      }
-      
-      return p+HEADER_SIZE;
     }
-  #endif
-#else // NDEBUG
-#endif // NDEBUG [TEMP!!] 
-GENESISAPI void * 
-geRam_Allocate (uint32 size)
-{
-  char *p;
+  #endif // NDEBUG
 
-  do
-  {
-      p = (char*)malloc (size + EXTRA_SIZE);
-  } while ((p == NULL) && geRam_DoCriticalCallback ());
+      static char * ram_verify_block
+            (
+              void * ptr
+            )
+      {
+          char * p = ptr;
+          uint32 size;
 
-  if (p == NULL)
-  {
-     return NULL;
-  }
+          if (p == NULL)
+          {
+              assert (0 && "freeing NULL");
+              return NULL;
+          }
 
-  // setup size stamps and memory overwrite checks
-  geRam_SetupBlock (p, size, INITIALIZE_MEMORY);
+          // make p point to the beginning of the block
+          p -= HEADER_SIZE;
 
-  // and update the allocations stuff
-  geRam_NumberOfAllocations++;
-  geRam_CurrentlyUsed += size;
+          // get size from block
+          size = *((uint32 *)p);
 
-  if (geRam_NumberOfAllocations > geRam_MaximumNumberOfAllocations)
-  {
-      geRam_MaximumNumberOfAllocations = geRam_NumberOfAllocations;
-  }
-  if (geRam_CurrentlyUsed > geRam_MaximumUsed)
-  {
-      geRam_MaximumUsed = geRam_CurrentlyUsed;
-  }
+          // check stamp at front
+          if (memcmp (p+SizeSize, MemStamp, MemStampSize) != 0)
+          {
+              assert (0 && "ram_verify_block:  Memory block corrupted at front");
+              return NULL;
+          }
 
-  return p+HEADER_SIZE;
-}
-//#endif // NDEBUG
+          // and at back
+          if (memcmp (p+HEADER_SIZE+size, MemStamp, MemStampSize) != 0)
+          {
+              assert (0 && "ram_verify_block:  Memory block corrupted at tail");
+              return NULL;
+          }
 
-    static char * ram_verify_block
-          (
-            void * ptr
-          )
-    {
-        char * p = ptr;
-        uint32 size;
+          return p;
+      }
 
-        if (p == NULL)
-        {
-            assert (0 && "freeing NULL");
-            return NULL;
-        }
+  GENESISAPI void 
+  geRam_Free_(void *ptr)
+      {
+          char *p;
+          uint32 size;
 
-        // make p point to the beginning of the block
-        p -= HEADER_SIZE;
+          // make sure it's a valid block...
+          p = ram_verify_block (ptr);
+          if (p == NULL)
+          {
+              return;
+          }
 
-        // get size from block
-        size = *((uint32 *)p);
+          // gotta get the size before you free it
+          size = *((uint32 *)p);
 
-        // check stamp at front
-        if (memcmp (p+SizeSize, MemStamp, MemStampSize) != 0)
-        {
-            assert (0 && "ram_verify_block:  Memory block corrupted at front");
-            return NULL;
-        }
+          // fill it with trash...
+          memset (p, FreeFillerByte, size+EXTRA_SIZE);
 
-        // and at back
-        if (memcmp (p+HEADER_SIZE+size, MemStamp, MemStampSize) != 0)
-        {
-            assert (0 && "ram_verify_block:  Memory block corrupted at tail");
-            return NULL;
-        }
+          // free the memory
+          free (p);
 
-        return p;
-    }
+          // update allocations
+          geRam_NumberOfAllocations--;
+          assert ((geRam_NumberOfAllocations >= 0) && "free()d more ram than you allocated!");
 
-GENESISAPI     void geRam_Free_ (void *ptr)
+          geRam_CurrentlyUsed -= size;
+          assert ((geRam_CurrentlyUsed >= 0) && "free()d more ram than you allocated!");
+      }
+
+  #ifndef NDEBUG
+    GENESISAPI void * 
+    _geRam_DebugRealloc(
+            void   *ptr, 
+            uint32  newsize, 
+      const char   *pFile, 
+            int     line
+    )
     {
         char *p;
+        char *NewPtr;
         uint32 size;
+        
+        // if realloc is called with NULL, just treat it like an alloc
+        if (ptr == NULL)
+        {
+            return _geRam_DebugAllocate(newsize, pFile, line);
+        }
 
-        // make sure it's a valid block...
+        // verify the block
         p = ram_verify_block (ptr);
         if (p == NULL)
         {
-            return;
+            return NULL;
         }
 
-        // gotta get the size before you free it
+        // if newsize is NULL, then it's a free and return NULL
+        if (newsize == 0)
+        {
+            geRam_Free (ptr);
+            return NULL;
+        }
+
+        // gotta get the size before I realloc it...
         size = *((uint32 *)p);
 
-        // fill it with trash...
-        memset (p, FreeFillerByte, size+EXTRA_SIZE);
+    #ifdef _WIN32
+        do
+        {
+            NewPtr = (char *)_realloc_dbg(p, newsize+EXTRA_SIZE, _NORMAL_BLOCK, pFile, line);
+        } while ((NewPtr == NULL) && geRam_DoCriticalCallback ());
+    #else
+        // Linux version - use standard realloc
+        do
+        {
+            NewPtr = (char *)realloc(p, newsize+EXTRA_SIZE);
+        } while ((NewPtr == NULL) && geRam_DoCriticalCallback ());
+    #endif
 
-        // free the memory
-        free (p);
+        // if allocation failed, return NULL...
+        if (NewPtr == NULL)
+        {
+            return NULL;
+        }
 
-        // update allocations
-        geRam_NumberOfAllocations--;
-        assert ((geRam_NumberOfAllocations >= 0) && "free()d more ram than you allocated!");
+        geRam_SetupBlock (NewPtr, newsize, DONT_INITIALIZE);
 
-        geRam_CurrentlyUsed -= size;
+        geRam_CurrentlyUsed += (newsize - size);
+        if (geRam_CurrentlyUsed > geRam_MaximumUsed)
+        {
+            geRam_MaximumUsed = geRam_CurrentlyUsed;
+        }
         assert ((geRam_CurrentlyUsed >= 0) && "free()d more ram than you allocated!");
+
+        return NewPtr + HEADER_SIZE;
     }
 
-#ifndef NDEBUG
-
-GENESISAPI void * _geRam_DebugRealloc (void *ptr, uint32 newsize, const char* pFile, int line)
-{
-    char *p;
-    char *NewPtr;
-    uint32 size;
-
-    // if realloc is called with NULL, just treat it like an alloc
-    if (ptr == NULL)
-    {
-        return _geRam_DebugAllocate(newsize, pFile, line);
-    }
-
-    // verify the block
-    p = ram_verify_block (ptr);
-    if (p == NULL)
-    {
-        return NULL;
-    }
-
-    // if newsize is NULL, then it's a free and return NULL
-    if (newsize == 0)
-    {
-        geRam_Free (ptr);
-        return NULL;
-    }
-
-    // gotta get the size before I realloc it...
-    size = *((uint32 *)p);
-
-#ifdef _WIN32
-    do
-    {
-        NewPtr = (char *)_realloc_dbg(p, newsize+EXTRA_SIZE, _NORMAL_BLOCK, pFile, line);
-    } while ((NewPtr == NULL) && geRam_DoCriticalCallback ());
-#else
-    // Linux version - use standard realloc
-    do
-    {
-        NewPtr = (char *)realloc(p, newsize+EXTRA_SIZE);
-    } while ((NewPtr == NULL) && geRam_DoCriticalCallback ());
-#endif
-
-    // if allocation failed, return NULL...
-    if (NewPtr == NULL)
-    {
-        return NULL;
-    }
-
-    geRam_SetupBlock (NewPtr, newsize, DONT_INITIALIZE);
-
-    geRam_CurrentlyUsed += (newsize - size);
-    if (geRam_CurrentlyUsed > geRam_MaximumUsed)
-    {
-        geRam_MaximumUsed = geRam_CurrentlyUsed;
-    }
-    assert ((geRam_CurrentlyUsed >= 0) && "free()d more ram than you allocated!");
-
-    return NewPtr + HEADER_SIZE;
-}
-
-#else // NDEBUG
-
-GENESISAPI     void * geRam_Realloc (void *ptr, uint32 newsize)
+  #else // NDEBUG
+    GENESISAPI void * 
+    geRam_Realloc (void *ptr, uint32 newsize)
     {
         char *p;
         char * NewPtr;
         uint32 size;
-
+        
         // if realloc is called with NULL, just treat it like an alloc
         if (ptr == NULL)
         {
@@ -530,73 +531,74 @@ GENESISAPI     void * geRam_Realloc (void *ptr, uint32 newsize)
 
         return NewPtr + HEADER_SIZE;
     }
+  #endif // NDEBUG
 
-#endif // NDEBUG
-
-#ifndef NDEBUG
-GENESISAPI void 
-geRam_ReportAllocations(void)
-{
-  #ifdef _WIN32
-    _CrtDumpMemoryLeaks();
-  #else
-    // Linux version - print your own memory stats
-    printf("Memory statistics:\n");
-    printf("\tCurrent allocations: %d\n", geRam_NumberOfAllocations);
-    printf("\tCurrent memory used: %d bytes\n", geRam_CurrentlyUsed);
-    printf("\tPeak allocations:    %d\n", geRam_MaximumNumberOfAllocations);
-    printf("\tPeak memory used:    %d bytes\n", geRam_MaximumUsed);
-  #endif
-}
+  #ifndef NDEBUG
+    GENESISAPI void 
+    geRam_ReportAllocations(void)
+    {
+      #ifdef _WIN32
+        _CrtDumpMemoryLeaks();
+      #else
+        // Linux version - print your own memory stats
+        printf("Memory statistics:\n");
+        printf("\tCurrent allocations: %d\n", geRam_NumberOfAllocations);
+        printf("\tCurrent memory used: %d bytes\n", geRam_CurrentlyUsed);
+        printf("\tPeak allocations:    %d\n", geRam_MaximumNumberOfAllocations);
+        printf("\tPeak memory used:    %d bytes\n", geRam_MaximumUsed);
+      #endif
+    }
 #endif
 
-    // for external programs that allocate memory some other way.
-    // Here they can use ram to keep track of the memory.
-GENESISAPI     void geRam_AddAllocation (int n, uint32 size)
-    {
-        // and update the allocations stuff
-        geRam_NumberOfAllocations += n;
-        geRam_CurrentlyUsed += size;
+      // for external programs that allocate memory some other way.
+      // Here they can use ram to keep track of the memory.
+  GENESISAPI void 
+  geRam_AddAllocation(int n, uint32 size)
+  {
+      // and update the allocations stuff
+      geRam_NumberOfAllocations += n;
+      geRam_CurrentlyUsed += size;
 
-        if (geRam_NumberOfAllocations > geRam_MaximumNumberOfAllocations)
-        {
-            geRam_MaximumNumberOfAllocations = geRam_NumberOfAllocations;
-        }
-        if (geRam_CurrentlyUsed > geRam_MaximumUsed)
-        {
-            geRam_MaximumUsed = geRam_CurrentlyUsed;
-        }
-    }
+      if (geRam_NumberOfAllocations > geRam_MaximumNumberOfAllocations)
+      {
+          geRam_MaximumNumberOfAllocations = geRam_NumberOfAllocations;
+      }
+      if (geRam_CurrentlyUsed > geRam_MaximumUsed)
+      {
+          geRam_MaximumUsed = geRam_CurrentlyUsed;
+      }
+  }
 
 #endif // MINIMAL_CONFIG
 
 
 #ifndef NDEBUG
-geBoolean geRam_IsValidPtr(void *ptr)
-{
-char * p = ptr;
-uint32 size;
+  geBoolean 
+  geRam_IsValidPtr(void *ptr)
+  {
+    char * p = ptr;
+    uint32 size;
 
-	if (p == NULL) return GE_FALSE;
+    if (p == NULL) return GE_FALSE;
 
-	// make p point to the beginning of the block
-	p -= HEADER_SIZE;
+    // make p point to the beginning of the block
+    p -= HEADER_SIZE;
 
-	// get size from block
-	size = *((uint32 *)p);
+    // get size from block
+    size = *((uint32 *)p);
 
-	// check stamp at front
-	if (memcmp (p+SizeSize, MemStamp, MemStampSize) != 0)
-	{
-		return GE_FALSE;
-	}
+    // check stamp at front
+    if (memcmp (p+SizeSize, MemStamp, MemStampSize) != 0)
+    {
+      return GE_FALSE;
+    }
 
-	// and at back
-	if (memcmp (p+HEADER_SIZE+size, MemStamp, MemStampSize) != 0)
-	{
-		return GE_FALSE;
-	}
+    // and at back
+    if (memcmp (p+HEADER_SIZE+size, MemStamp, MemStampSize) != 0)
+    {
+      return GE_FALSE;
+    }
 
-return GE_TRUE;
-}
+    return GE_TRUE;
+  }
 #endif

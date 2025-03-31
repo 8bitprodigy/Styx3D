@@ -86,7 +86,7 @@ OBJS = $(GAME_SRCS:%.c=$(BUILDDIR)/%.o) \
 TARGET = ../GTest
 
 # Libraries
-LIBS = -lc -lm -lSDL2main -lSDL2 -lenet -L../lib -lgenesis
+LIBS = -L../lib -lgenesis -lc -lm -lSDL2main -lSDL2 -lenet
 
 # Default target
 all: $(TARGET)

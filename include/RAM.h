@@ -84,16 +84,16 @@ GENESISAPI void geRam_Free_(void *ptr);
 */
 #ifndef NDEBUG
 
-#define geRam_Realloc(ptr, newsize) _geRam_DebugRealloc(ptr, newsize, __FILE__, __LINE__)
+    #define geRam_Realloc(ptr, newsize) _geRam_DebugRealloc(ptr, newsize, __FILE__, __LINE__)
 
-// Do not call _geRam_DebugRealloc directly.
-GENESISAPI void* _geRam_DebugRealloc(void* ptr, uint32 size, const char* pFile, int line);
+    // Do not call _geRam_DebugRealloc directly.
+    GENESISAPI void *_geRam_DebugRealloc(void* ptr, uint32 size, const char* pFile, int line);
 
 #else
 
-GENESISAPI void *geRam_Realloc(void *ptr,uint32 newsize);
+    GENESISAPI void *geRam_Realloc(void *ptr,uint32 newsize);
 
-#endif
+#endif /* NDEBUG */
 
 #ifndef NDEBUG
 
@@ -103,7 +103,7 @@ GENESISAPI void geRam_ReportAllocations(void);
 
 #define geRam_ReportAllocations() 
 
-#endif
+#endif /* NDEBUG */
 
 #ifndef NDEBUG
     extern int32 geRam_CurrentlyUsed;
@@ -114,7 +114,7 @@ GENESISAPI void geRam_ReportAllocations(void);
 GENESISAPI     void geRam_AddAllocation(int n,uint32 size);
 #else
     #define geRam_AddAllocation(n,s)
-#endif
+#endif /* NDEBUG */
 
 // allocate the ram & clear it. (calloc)
 GENESISAPI void * geRam_AllocateClear(uint32 size);
@@ -126,11 +126,11 @@ GENESISAPI void * geRam_AllocateClear(uint32 size);
 #define GE_RAM_REALLOC_ARRAY(ptr,type,count)  (type *)geRam_Realloc(  (ptr), sizeof(type) * (count) );{type *XX=(ptr);}
 #else
 #define GE_RAM_REALLOC_ARRAY(ptr,type,count)  (type *)geRam_Realloc(  (ptr), sizeof(type) * (count) )
-#endif
+#endif /* NDEBUG */
 
 #ifndef NDEBUG
 geBoolean geRam_IsValidPtr(void *ptr);
-#endif
+#endif /* NDEBUG */
 
 #ifdef __cplusplus
   }

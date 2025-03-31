@@ -11,7 +11,10 @@
 #include "XPlatUtils.h"
 
 
-geModule geLoadLibrary(const char* path) {
+/* [NOTE] Move these to the header later as inline */
+geModule 
+geLoadLibrary(const char* path) 
+{
 #ifdef _WIN32
     return LoadLibraryExA(path, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
 #else
@@ -19,7 +22,9 @@ geModule geLoadLibrary(const char* path) {
 #endif
 }
 
-void* geGetProcAddress(geModule lib, const char* symbol) {
+void * 
+geGetProcAddress(geModule lib, const char* symbol) 
+{
 #ifdef _WIN32
     return GetProcAddress((HMODULE)lib, symbol);
 #else
@@ -27,7 +32,9 @@ void* geGetProcAddress(geModule lib, const char* symbol) {
 #endif
 }
 
-int geFreeLibrary(geModule lib) {
+int 
+geFreeLibrary(geModule lib) 
+{
 #ifdef _WIN32
     return FreeLibrary((HMODULE)lib) != 0;
 #else
@@ -56,7 +63,7 @@ geGetUserName(char *player_name, uint32 *size)
     return false;
 }
 
-inline uint32
+uint32
 geGetCurrentDir(uint32 size, char *path)
 {
     if (!path || size == 0) return false;
@@ -68,6 +75,7 @@ geGetCurrentDir(uint32 size, char *path)
     return strlen(path); 
 #endif
 }
+/* [/NOTE] Move these to the header later as inline */
 
 char * 
 itoa(int n, char *str, int base) 
@@ -127,10 +135,10 @@ itoa(int n, char *str, int base)
 void 
 splitpath(
     const char *path,
-        char *drive, 
-        char *dir, 
-        char *fname, 
-        char *ext
+          char *drive, 
+          char *dir, 
+          char *fname, 
+          char *ext
 )
 {
     const char *last_slash = NULL;

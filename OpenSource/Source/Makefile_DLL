@@ -15,8 +15,8 @@ ifeq ($(CONFIG),release)
 	OPTIMIZE_FLAGS = -O2
 else ifeq ($(CONFIG),debug)
 	OUTDIR = DebugDLL
-	DEBUG_FLAGS = -g -DDEBUG
-	OPTIMIZE_FLAGS = -O0
+	DEBUG_FLAGS = -g -DDEBUG -DMINIMAL_CONFIG
+	OPTIMIZE_FLAGS = -Og
 else
 	$(error Invalid configuration "$(CONFIG)" specified. Use "make CONFIG=release" or "make CONFIG=debug")
 endif
