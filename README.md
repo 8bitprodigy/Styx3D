@@ -13,12 +13,15 @@ There aren't really any other engines out there that are of this vintage under p
 
 ## Plans
 
-- [ ] Get it compiling on Linux & other modern systems (in progress)
+- [x] Get it compiling on Linux & other modern systems (in progress)
   
-  - Engine library currently builds in `./OpenSource/Source`
-  - Now to work on `GTest` in `./src`
+  - [ ] Get a window to launch
+  
+  - [ ] Get something drawn to the screen
 
 - [x] Port to SDL where possible
+  
+  - [ ] Still gotta port software video driver to SDL
 
 - [ ] Clean up directory structure
 
