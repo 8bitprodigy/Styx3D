@@ -164,7 +164,7 @@ ProcEng *ProcEng_Create(geVFile *CfgFile, geWorld *World)
 			strcat(DLLName,"\\");
 			strcat(DLLName,Properties.Name);
 
-			TheDll = geLoadLibrary(DLLName);
+			TheDll = SDL_LoadObject(DLLName);
 			if ( ! TheDll )
 			{
 				#if 0
@@ -189,14 +189,14 @@ ProcEng *ProcEng_Create(geVFile *CfgFile, geWorld *World)
 				continue;
 			}
 
-			GetProcFunc = (GetProceduralFunc) geGetProcAddress(TheDll,"GetProceduralTable");
+			GetProcFunc = (GetProceduralFunc) SDL_LoadFunction(TheDll,"GetProceduralTable");
 			
 			if ( ! GetProcFunc )
 			{
 			//char ErrStr[_MAX_PATH+1024];
 			//	sprintf(ErrStr,"ProcEng_Create : no GetProceduralTable in DLL : %s : non-fatal",DLLName);
 			//	geErrorLog_AddString(-1,ErrStr);
-				geFreeLibrary(TheDll);
+				SDL_UnloadObject(TheDll);
 				continue;
 			}
 
@@ -206,7 +206,7 @@ ProcEng *ProcEng_Create(geVFile *CfgFile, geWorld *World)
 			//char ErrStr[1024];
 			//	sprintf(ErrStr,"ProcEng_Create : found procedural : %s : but ignored because of version mismatch",pTable == NULL ? "null!" : pTable->Name);
 			//	geErrorLog_AddString(-1,ErrStr);
-				geFreeLibrary(TheDll);
+				SDL_UnloadObject(TheDll);
 				continue;
 			}
 
@@ -363,7 +363,7 @@ void ProcEng_Destroy(ProcEng **pPEng)
 	{
 		if ( pTable->DllHandle )
 		{
-			geFreeLibrary(pTable->DllHandle);
+			SDL_UnloadObject(pTable->DllHandle);
 		}
 		memset(pTable, 0, sizeof(*pTable));
 	}
@@ -397,7 +397,7 @@ ProcEng_PTable	*pTableLast;
 		{
 			if ( pTable->DllHandle )
 			{
-				geFreeLibrary(pTable->DllHandle);
+				SDL_UnloadObject(pTable->DllHandle);
 			}
 			*pTable = *pTableLast;
 			pTableLast--;

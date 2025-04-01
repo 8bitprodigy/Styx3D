@@ -471,23 +471,23 @@ EnumSubDrivers(Sys_DriverInfo *DriverInfo, const char *DriverDirectory)
 
 		DriverInfo->CurFileName = DriverFileNames[i];
 
-		DriverHook = (DRV_Hook*)geGetProcAddress(Handle, "DriverHook");
+		DriverHook = (DRV_Hook*)SDL_LoadFunction(Handle, "DriverHook");
 
 		if (!DriverHook)
 		{
-			geFreeLibrary(Handle);
+			SDL_UnloadObject(Handle);
 			continue;
 		}
 
 		if (!DriverHook(&RDriver))
 		{
-			geFreeLibrary(Handle);
+			SDL_UnloadObject(Handle);
 			continue;
 		}
 
 		if (RDriver->VersionMajor != DRV_VERSION_MAJOR || RDriver->VersionMinor != DRV_VERSION_MINOR)
 		{
-			geFreeLibrary(Handle);
+			SDL_UnloadObject(Handle);
 			geErrorLog_AddString(-1,"EnumSubDrivers : found driver of different version; ignoring; non-fatal",DriverFileNames[i]);
 			continue;
 		}
@@ -496,11 +496,11 @@ EnumSubDrivers(Sys_DriverInfo *DriverInfo, const char *DriverDirectory)
 		
 		if (!RDriver->EnumSubDrivers(EnumSubDriversCB, (void*)DriverInfo))
 		{
-			geFreeLibrary(Handle);
+			SDL_UnloadObject(Handle);
 			continue;		// Should we return FALSE, or just continue?
 		}
 
-		geFreeLibrary(Handle);
+		SDL_UnloadObject(Handle);
 
 		if (!strcmp(DriverFileNames[i], "GlideDrv.dll"))
 			GlideFound = GE_TRUE;

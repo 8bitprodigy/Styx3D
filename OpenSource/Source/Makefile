@@ -20,7 +20,7 @@ CFLAGS_COMMON = -Wall -I../SDK/DXSDK/Include -I../Source \
 	-I./World -I./Engine -I./Engine/Drivers -I./Actor -I./BSP \
 	-I./Math -I./Entities -I./Support -I./Physics -I./VFile \
 	-I./Bitmap -I./Bitmap/Compression -I../../include \
-	-lSDL3 -lSDL3_ttf 
+	-lSDL2 -lSDL2_ttf 
 
 CFLAGS_RELEASE = $(CFLAGS_COMMON) -O2 -DNDEBUG
 CFLAGS_DEBUG = $(CFLAGS_COMMON) -g -Og -D_DEBUG 

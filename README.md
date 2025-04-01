@@ -28,6 +28,8 @@ There aren't really any other engines out there that are of this vintage under p
 
 - [ ] Get it ported to DreamCast, GameCube, PS2, and PSP
 
+- [ ] Outdoor/Terrain levels/scenes
+
 - [ ] Create command-line versions of the tools
 
 - [ ] Maybe add scripting support (Lua or Umka)

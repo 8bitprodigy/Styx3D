@@ -15,7 +15,7 @@ ifeq ($(CONFIG),release)
 	OPTIMIZE_FLAGS = -O2
 else ifeq ($(CONFIG),debug)
 	OUTDIR = DebugDLL
-	DEBUG_FLAGS = -g -DDEBUG 
+	DEBUG_FLAGS = -g -D_DEBUG 
 	OPTIMIZE_FLAGS = -Og
 else
 	$(error Invalid configuration "$(CONFIG)" specified. Use "make CONFIG=release" or "make CONFIG=debug")
@@ -55,7 +55,7 @@ CFLAGS = -Wall -fPIC $(DEBUG_FLAGS) $(OPTIMIZE_FLAGS) $(INCLUDES) \
 
 # Linker flags
 LDFLAGS = -shared
-LIBS = -lm -lpthread -ldl
+LIBS = -lm -lpthread -ldl -lSDL2 -lSDL2_ttf 
 
 # Output files
 TARGET = $(TARGETDIR)/libgenesis.so

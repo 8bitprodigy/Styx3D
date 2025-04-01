@@ -67,19 +67,23 @@ typedef struct	SoundManager	SoundManager;
 typedef struct  Channel			Channel;
 
 
-typedef struct geSound_System
+typedef struct 
+geSound_System
 {
 	geBoolean		Active;
 	SoundManager	*SoundM;
 	geFloat			GlobalVolume;
-} geSound_System;
+} 
+geSound_System;
 
-typedef struct geSound_Cfg
+typedef struct 
+geSound_Cfg
 {
 	geFloat			Volume;
 	geFloat			Pan;
 	geFloat			Frequency;
-} geSound_Cfg;
+} 
+geSound_Cfg;
 
 
 /*
@@ -96,44 +100,48 @@ typedef struct geSound_Cfg
 	Call these ones only once per application:
 */
 
-static SoundManager *CreateSoundManager( HWND hWnd);
+static SoundManager *CreateSoundManager( SDL_Window   *hWnd);
 static void          DestroySoundManager(SoundManager *sm);
 
 //static BOOL		FillSoundChannel(SoundManager *sm, char* Dir, char *Name, unsigned int* Handle );
 static geBoolean     FillSoundChannel(   SoundManager *sm, geVFile *File, unsigned int* Handle );
 //static BOOL		FillSoundChannelMemory(SoundManager *sm, const void *Buffer, unsigned int* Handle );
 static geBoolean     StartSoundChannel(  SoundManager *sm, unsigned int Handle, geSound_Cfg *cfg, int loop, unsigned int* sfx);
-static geBoolean     StopSoundChannel(   Channel *channel);
+static geBoolean     StopSoundChannel(   Channel      *channel);
 static geBoolean     FreeAllChannels(    SoundManager *sm);
 static geBoolean     FreeChannel(        SoundManager *sm, Channel *channel);
-static geBoolean     ModifyChannel(      Channel *channel, geSound_Cfg *cfg );
-static int           ChannelPlaying(     Channel *channel );
+static geBoolean     ModifyChannel(      Channel      *channel, geSound_Cfg *cfg );
+static int           ChannelPlaying(     Channel      *channel );
 static Channel      *GetChannel(         SoundManager *sm, unsigned int ID );
 
 
-typedef struct Channel
+typedef struct 
+Channel
 {
 //	char*				name;
-	LPDIRECTSOUNDBUFFER	buffer;
-	unsigned int		ID;
-	int					BaseFreq;
-	geSound_Cfg			cfg;
-	void *				Data;
-	struct Channel		*next;
-	struct Channel		*nextDup;
-} Channel;
+	SDL_AudioDeviceID  buffer;
+	unsigned int       ID;
+	int                BaseFreq;
+	geSound_Cfg        cfg;
+	void              *Data;
+	struct Channel    *next;
+	struct Channel    *nextDup;
+} 
+Channel;
 
-typedef struct	SoundManager
+typedef struct
+SoundManager
 {
-	int						smChannelCount;
-	unsigned int			smNextChannelID;
+	int                smChannelCount;
+	unsigned int       smNextChannelID;
 
-	LPDIRECTSOUNDBUFFER 	smPrimaryChannel;
-	Channel*				smChannels;
+	SDL_AudioDeviceID  smPrimaryChannel;
+	Channel           *smChannels;
     //LPDIRECTSOUNDNOTIFY *   smNotify;
-}   SoundManager;
+}
+SoundManager;
 
-static	LPDIRECTSOUND			lpDirectSound;
+static	SDL_AudioDeviceID			lpDirectSound;
 // This isn't really safe as a global.  But it's consistent with the global lpDirectSound.
 static  HMODULE					hmodDirectSound = NULL;
 
@@ -428,8 +436,8 @@ exit:
     return GE_FALSE;
 }
 
-/*
-static geBoolean 
+
+/*static geBoolean 
 DSFillSoundBuffer(IDirectSoundBuffer *pDSB, BYTE *pbWaveData, DWORD cbWaveSize)
 {
     if (pDSB && pbWaveData && cbWaveSize)
@@ -451,13 +459,22 @@ DSFillSoundBuffer(IDirectSoundBuffer *pDSB, BYTE *pbWaveData, DWORD cbWaveSize)
         }
     }
     return GE_FALSE;
+}*/
+static geBoolean
+FillSoundBuffer(SDL_AudioDeviceID device, const void *audio_data, Uint32 size)
+{
+    if (device && audio_data && size)
+    {
+        int result = SDL_QueueAudio(device, audio_data, size);
+        return (result == 0);
+    }
+    return false;
 }
 
-
-DSCAPS dsCaps;
+SDL_AudioSpec dsCaps;
 static SoundManager *	
-CreateSoundManager(HWND hWnd )
-{
+CreateSoundManager(SDL_Window *hWnd )
+{/*
 	typedef HRESULT (WINAPI *DS_CREATE_FUNC)(LPGUID, LPDIRECTSOUND *, LPUNKNOWN);
 	PCMWAVEFORMAT	pcmwf;
 	DSBUFFERDESC	dsbdesc;
@@ -541,14 +558,14 @@ CreateSoundManager(HWND hWnd )
 		FreeLibrary (hmodDirectSound);
 	}
 //	free( sm );
-	geRam_Free(sm);
+	geRam_Free(sm);*/
 	return NULL;
 }
 
 //static	BOOL CreateChannel( char* Name, DSBUFFERDESC*	dsBD, Channel** chanelPtr)
 static geBoolean 
-CreateChannel(DSBUFFERDESC*	dsBD, Channel** chanelPtr)
-{
+CreateChannel(SDL_AudioSpec*	dsBD, Channel** chanelPtr)
+{/*
 	Channel* channel;
 
 //	channel = malloc( sizeof( Channel ) );
@@ -576,15 +593,15 @@ CreateChannel(DSBUFFERDESC*	dsBD, Channel** chanelPtr)
 	channel->cfg.Frequency = 0.0f;
 //	channel->name = Name;
 
-	*chanelPtr = channel;
-	return( GE_TRUE );
+	*chanelPtr = channel;*/
+	return( true );
 }
 
-*/
+
 //static	BOOL GetSoundData( char* Name, unsigned char** dataPtr)
 static geBoolean 
 GetSoundData( geVFile *File, unsigned char** dataPtr)
-{
+{/*
 //	FILE * f;
 	int32 Size;
 	uint8 *data;
@@ -627,15 +644,15 @@ GetSoundData( geVFile *File, unsigned char** dataPtr)
 //	fread(data, Size, 1, f);
 
 //	fclose(f);
-	*dataPtr = data;
+	*dataPtr = data;*/
 	return( GE_TRUE );
 }
 
-/*
-static geBoolean 
-ParseData( const uint8* data, DSBUFFERDESC* dsBD, BYTE ** pbWaveData )
-{
 
+static geBoolean 
+ParseData(const uint8 *data, SDL_AudioSpec *dsBD, BYTE **pbWaveData )
+{
+/*
 	//Parse the Data
 	memset(dsBD, 0, sizeof(DSBUFFERDESC));
 
@@ -644,16 +661,16 @@ ParseData( const uint8* data, DSBUFFERDESC* dsBD, BYTE ** pbWaveData )
 	if	(!DSParseWaveResource(data, &dsBD->lpwfxFormat, pbWaveData, &dsBD->dwBufferBytes))
 	{
 		geErrorLog_Add(GE_ERR_INVALID_WAV, NULL);
-		return GE_FALSE;
-	}
-	return( GE_TRUE );
+		return false;
+	}*/
+	return true;
 
 }
 
 //static	BOOL FillSoundChannel(SoundManager *sm, char* Dir, char *Name, unsigned int* Handle )
 static geBoolean 
 FillSoundChannel(SoundManager *sm, geVFile *File, unsigned int* Handle )
-{
+{/*
 	DSBUFFERDESC	dsBD;
 	INT NumBytes;
 	uint8		*data = NULL;
@@ -709,16 +726,16 @@ FillSoundChannel(SoundManager *sm, geVFile *File, unsigned int* Handle )
 	sm->smChannelCount++;
 
 	//Fill the channel
-	if (!DSFillSoundBuffer(channel->buffer, pbWaveData, NumBytes))
+	if (!FillSoundBuffer(channel->buffer, pbWaveData, NumBytes))
 		return GE_FALSE;
 	
 //	free( data );
 //	geRam_Free(data);
 
-	*Handle = channel->ID;
-	return GE_TRUE;
+	*Handle = channel->ID;*/
+	return true;
 }
-*/
+
 #if 0
 static geBoolean 
 FillSoundChannelMemory(SoundManager *sm, const void *Buffer, unsigned int* Handle )
@@ -755,7 +772,7 @@ FillSoundChannelMemory(SoundManager *sm, const void *Buffer, unsigned int* Handl
 	sm->smChannelCount++;
 
 	//Fill the channel
-	if	(!DSFillSoundBuffer(channel->buffer, pbWaveData, NumBytes))
+	if	(!FillSoundBuffer(channel->buffer, pbWaveData, NumBytes))
 		return GE_FALSE;
 	
 	*Handle = channel->ID;
@@ -920,7 +937,7 @@ ReloadData(void *Data)
 		return NULL;
 
 	//Fill the channel
-	if ( !DSFillSoundBuffer(channel->buffer, pbWaveData, NumBytes))
+	if ( !FillSoundBuffer(channel->buffer, pbWaveData, NumBytes))
 		return NULL;
 	
 //	geRam_Free(data);

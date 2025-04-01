@@ -310,9 +310,9 @@ return mem;
         return p+HEADER_SIZE;
       }
     #endif /* _WIN32 */
-  #else // NDEBUG
+  #else // if NDEBUG def'd
     GENESISAPI void * 
-    geRam_Allocate (uint32 size)
+    geRam_Allocate(uint32 size)
     {
       char *p;
 
@@ -346,10 +346,8 @@ return mem;
     }
   #endif // NDEBUG
 
-      static char * ram_verify_block
-            (
-              void * ptr
-            )
+      static char * 
+      ram_verify_block(void * ptr)
       {
           char * p = ptr;
           uint32 size;

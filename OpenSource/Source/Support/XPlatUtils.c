@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include <string.h>
 
+#include <SDL2/SDL.h>
 #ifdef _WIN32
 #else
     #include <dlfcn.h>
@@ -11,7 +12,7 @@
 #include "XPlatUtils.h"
 
 
-/* [NOTE] Move these to the header later as inline */
+/* [NOTE] Move these to the header later as inline 
 geModule 
 geLoadLibrary(const char* path) 
 {
@@ -40,8 +41,8 @@ geFreeLibrary(geModule lib)
 #else
     return dlclose(lib) == 0;
 #endif
-}
-
+}*/
+/* [NOTE] Move these to the header later as inline */
 bool
 geGetUserName(char *player_name, uint32 *size)
 {

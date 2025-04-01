@@ -55,7 +55,7 @@ extern "C" {
 typedef struct	
 gePoly
 {
-//#ifdef DEBUG
+//#ifdef _DEBUG
 	struct gePoly	*Self1;
 //#endif
 
@@ -79,7 +79,7 @@ gePoly
 
 	struct gePoly	*AddOnceNext;
 
-//#ifdef DEBUG
+//#ifdef _DEBUG
 	struct gePoly	*Self2;
 //#endif
 } 

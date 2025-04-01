@@ -30,22 +30,26 @@
 extern "C" {
 #endif
 
-geBoolean palettizePlane(const	geBitmap_Info * SrcInfo,const	void * SrcBits,
-								geBitmap_Info * DstInfo,		void * DstBits,
-								int SizeX,int SizeY);
-
+geBoolean palettizePlane(
+	const geBitmap_Info *SrcInfo,
+	const void          *SrcBits,
+	      geBitmap_Info *DstInfo,
+	      void          *DstBits,
+	      int            SizeX,
+	      int            SizeY
+);
 // you can create a palette with routines in "palcreate.h"
 
 /******* if you want to do your own palettizing : ******/
 
 typedef struct palInfo palInfo;
 
-extern palInfo *	closestPalInit(uint8 * palette);
-extern void			closestPalFree(palInfo *info);
-extern int			closestPal(int R,int G,int B,palInfo *pi);
+extern palInfo *closestPalInit( uint8   *palette);
+extern void     closestPalFree( palInfo *info);
+extern int      closestPal(     int      R,        int G, int B, palInfo *pi);
 
-extern void Palettize_Start(void);
-extern void Palettize_Stop(void);
+extern void     Palettize_Start(void);
+extern void     Palettize_Stop( void);
 
 #ifdef __cplusplus
 }

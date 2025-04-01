@@ -58,22 +58,34 @@ we palettize ("inverse colormap") using an octree lookup system
 
 typedef struct palInfo palInfo;
 
-int __inline	closestPalInlineRGB(int R,int G,int B,palInfo *pi);
-int				closestPal(int R,int G,int B,palInfo *pi);
-palInfo *		closestPalInit(uint8 * palette);
-void			closestPalFree(palInfo *info);
+ int      closestPalInlineRGB(int R,int G,int B,palInfo *pi);
+       int      closestPal(int R,int G,int B,palInfo *pi);
+       palInfo *closestPalInit(uint8 * palette);
+       void     closestPalFree(palInfo *info);
 
 /******/
 
-geBoolean palettizePlane(const	geBitmap_Info * SrcInfo,const	void * SrcBits,
-								geBitmap_Info * DstInfo,		void * DstBits,
-								int SizeX,int SizeY)
+geBoolean palettizePlane(
+	const geBitmap_Info *SrcInfo,
+	const void          *SrcBits,
+	      geBitmap_Info *DstInfo,
+	      void          *DstBits,
+	      int            SizeX,
+	      int            SizeY
+)
 {
-palInfo *palInfo;
-int x,y,xtra,bpp;
-gePixelFormat Format;
-int R,G,B,A;
-uint8 palette[768],*pSrc,*pDst;
+	palInfo *palInfo;
+	int 
+		x, y,
+		xtra,
+		bpp;
+	gePixelFormat Format;
+	int 
+		R,G,B,A;
+	uint8 
+		 palette[768],
+		*pSrc,
+		*pDst;
 
 	assert( SrcInfo && SrcBits );
 	assert( DstInfo && DstBits );
@@ -449,29 +461,26 @@ int hash,d,bestD,bestP;
 
 #define doSteps()	do { node = pi->root; doStep(7); doStep(6); doStep(5); doStep(4); doStep(3); doStep(2); doStep(1); doStep(0); } while(0)
 
-int __inline closestPalInlineRGB(int R,int G,int B,palInfo *pi)
+int closestPalInlineRGB(int R,int G,int B,palInfo *pi)
 {
-octNode *node,*kid;
-
+	octNode *node,*kid;
 	doSteps();
-
-return ((int)node)-1;
+	return ((int)node)-1;
 }
 
 int closestPal(int R,int G,int B,palInfo *pi)
 {
-octNode *node,*kid;
+	octNode *node,*kid;
 
 	doSteps();
 
 	assert( ((int)node) <= 256 && ((int)node) > 0 );
 
-return ((int)node)-1;
+	return ((int)node)-1;
 }
 
 void closestPalFree(palInfo *pi)
 {
-
 	assert(pi);
 	
 	MemPool_Reset(octNodePool);

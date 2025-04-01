@@ -456,7 +456,7 @@ Sys_DriverInfo *DrvInfo;
 	// Shutdown the driver
 	DrvInfo->RDriver->Shutdown();
 
-	if (!geFreeLibrary(DrvInfo->DriverHandle) )
+	if (!(SDL_UnloadObject(DrvInfo->DriverHandle),SDL_LoadFunction) )
 		return GE_FALSE;
 
 	DrvInfo->Active = GE_FALSE;
@@ -1284,7 +1284,7 @@ HINSTANCE geEngine_LoadLibrary( const char * lpLibFileName, const char *DriverDi
 		strcat(Buff,"\\");
 	}
 	strcat(Buff, lpLibFileName);
-	Library = geLoadLibrary(Buff);
+	Library = SDL_LoadObject(Buff);
 	if ( Library )
 		return Library;
 
@@ -1301,7 +1301,7 @@ HINSTANCE geEngine_LoadLibrary( const char * lpLibFileName, const char *DriverDi
 		strcat(Buff,"\\");
 	}
 	strcat(Buff, lpLibFileName);
-	Library = LoadLibrary(Buff);
+	Library = SDL_LoadObject(Buff);
 	if ( Library )
 		return Library;
 
@@ -1314,7 +1314,7 @@ HINSTANCE geEngine_LoadLibrary( const char * lpLibFileName, const char *DriverDi
 		strcat(Buff,"\\");
 	}
 	strcat(Buff, lpLibFileName);
-	Library = LoadLibrary(Buff);
+	Library = SDL_LoadObject(Buff);
 	if ( Library )
 		return Library;
 
@@ -1327,7 +1327,7 @@ HINSTANCE geEngine_LoadLibrary( const char * lpLibFileName, const char *DriverDi
 		strcat(Buff,"\\");
 	}
 	strcat(Buff, lpLibFileName);
-	Library = LoadLibrary(Buff);
+	Library = SDL_LoadObject(Buff);
 	if ( Library )
 		return Library;
 #endif
@@ -1389,7 +1389,7 @@ static geBoolean Engine_InitDriver(	geEngine *Engine,
 		Hook = (DRV_Hook*)DriverHook;
 	}
 	#else
-	Hook = (DRV_Hook*)geGetProcAddress(DrvInfo->DriverHandle, "DriverHook");
+	Hook = (DRV_Hook*)SDL_LoadFunction(DrvInfo->DriverHandle, "DriverHook");
 	#endif
 	
 	if (!Hook)
@@ -1459,37 +1459,37 @@ static	geBoolean geEngine_Prep(geEngine *Engine)
 	assert(Engine);
 
 	// See if any of the attached worlds has changed...
-	WorldChanged = GE_FALSE;
+	WorldChanged = false;
 
 	for (i=0; i< Engine->NumWorlds; i++)
 	{
 		if (Engine->Worlds[i]->Changed)
-			WorldChanged = GE_TRUE;
+			WorldChanged = true;
 	}
 
 	// Check to see if the world has changed
 	if (!WorldChanged && !Engine->Changed)		
-		return GE_TRUE;		// Nothing to do if any of the worlds (and engine) has not changed
+		return true;		// Nothing to do if any of the worlds (and engine) has not changed
 
 	// Throw everything off the card...
 	if (!geEngine_ResetDriver(Engine))
 	{
 		geErrorLog_AddString(-1,"geEngine_Prep : geEngine_ResetDriver", NULL);
-		return GE_FALSE;
+		return false;
 	}
 	
 	// Attach all the current bitmaps to the current driver
 	if (!geEngine_AttachAll(Engine))
 	{
 		geErrorLog_AddString(-1,"geEngine_Prep : geEngine_AttachAll failed", NULL);
-		return GE_FALSE;
+		return false;
 	}
 	
 	// Reset all the changed flags
-	geEngine_SetAllWorldChangedFlag(Engine, GE_FALSE);
-	Engine->Changed = GE_FALSE;
+	geEngine_SetAllWorldChangedFlag(Engine, false);
+	Engine->Changed = false;
 	
-	return GE_TRUE;
+	return true;
 }
 
 //=====================================================================================

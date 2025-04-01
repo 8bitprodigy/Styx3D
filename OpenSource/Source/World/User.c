@@ -70,7 +70,7 @@ static geBoolean RenderUserPoly(geCamera *Camera, gePoly *Poly);
 static void geWorld_LinkPolyToLeaf(const geWorld *World, gePoly *Poly);
 static void geWorld_UnLinkPolyFromLeaf(gePoly *Poly);
 
-//#ifdef DEBUG
+//#ifdef _DEBUG
 geBoolean 
 geWorld_PolyIsValid(gePoly *Poly)
 {

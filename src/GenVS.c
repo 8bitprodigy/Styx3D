@@ -12,6 +12,7 @@
 /*  or FITNESS FOR ANY PURPOSE.  Refer to LICENSE.TXT for more details.                 */
 /*                                                                                      */
 /****************************************************************************************/
+#include <SDL3/SDL_init.h>
 #include <assert.h>
 #include <math.h>
 #include <stdint.h>
@@ -251,8 +252,8 @@ geVFile *			MainFS;
 static geBoolean 
 NewKeyDown(int KeyCode) 
 {
-    const uint8 *keyState = SDL_GetKeyboardState(NULL);
-    return (bool)keyState[SDL_GetScancodeFromKey(KeyCode)];
+    const bool *keyState = SDL_GetKeyboardState(NULL);
+    return (bool)keyState[SDL_GetScancodeFromKey(KeyCode,NULL)];
 }
 
 static void 
@@ -301,9 +302,21 @@ main(int argc, char *argv[])
     MainTime = 0.0f;
 
 	//AdjustPriority(THREAD_PRIORITY_NORMAL);
-	if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO)) {
-		return -1;
-	}
+    // Initialize SDL with detailed error checking
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
+        const char *error = SDL_GetError();
+        if (error[0] == '\0') {
+            fprintf(stderr, "SDL_Init failed with empty error message!\n");
+            fprintf(stderr, "This usually indicates:\n");
+            fprintf(stderr, "1. Permission issues\n");
+            fprintf(stderr, "2. System resource problems\n");
+            fprintf(stderr, "3. Library initialization conflicts\n");
+        } else {
+            fprintf(stderr, "SDL_Init failed: %s\n", error);
+        }
+        SDL_Quit();
+        return -1;
+    }
 	
 	for (i=0; i<255; i++) {
 		NewKeyDown(i);		// Need to flush all the keys
@@ -969,10 +982,12 @@ void ShutdownAll(void)
 		Count = geBitmap_Debug_GetCount();
 
 		sprintf(Str, "Final Bitmap count: %i\n", Count);
-		OutputDebugString(Str);
 
-		MessageBox(NULL, Str,
-			"GenVS MSG",MB_OK | MB_TASKMODAL);
+		SDL_Log(Str);
+
+		/*MessageBox(NULL, Str,
+			"GenVS MSG",MB_OK | MB_TASKMODAL);*/
+		SDL_ShowSimpleMessageBox(0,"GenVS MSG", Str, GameMgr_GethWnd(GMgr));
 
 	}
 	#endif
@@ -1323,7 +1338,7 @@ geBoolean IsAMenuActive(void)
 //=====================================================================================
 static void GetMouseInput(SDL_Window *hWnd, int Width, int Height)
 {
-	int   px, py;
+	float px, py;
 	int   wx, wy;
 	int   dx, dy;
 	int32 x,  y;

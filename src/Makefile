@@ -13,7 +13,7 @@ CONFIG ?= release
 # Output directories
 ifeq ($(CONFIG),debug)
     BUILDDIR = Debug
-    CFLAGS += -g -DDEBUG
+    CFLAGS += -g -D_DEBUG
     LDFLAGS += 
 else
     BUILDDIR = Release
@@ -86,7 +86,7 @@ OBJS = $(GAME_SRCS:%.c=$(BUILDDIR)/%.o) \
 TARGET = ../GTest
 
 # Libraries
-LIBS = -L../lib -lgenesis -lc -lm -lSDL2main -lSDL2 -lenet
+LIBS = -L../lib -lGenesis -lc -lm -lSDL2 -lenet
 
 # Default target
 all: $(TARGET)
