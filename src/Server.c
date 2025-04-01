@@ -2722,7 +2722,7 @@ static uint16 Server_ModelToViewIndex(void *Server, geWorld_Model *Model)
 
 	assert(Server);
 	Server_Server *server = (Server_Server*)Server;
-	assert(GameMgr_GetWorld(Server->GMgr));
+	assert(GameMgr_GetWorld(server->GMgr));
 
 	NumModels = GameMgr_GetNumModels(server->GMgr);
 

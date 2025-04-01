@@ -211,17 +211,19 @@ return mem;
         <size><MemStamp><<allocated memory>><MemStamp>
       */
       typedef enum 
-    {
-      DONT_INITIALIZE = 0, 
-      INITIALIZE_MEMORY = 1
-    } geRam_MemoryInitialization;
+      {
+        DONT_INITIALIZE = 0, 
+        INITIALIZE_MEMORY = 1
+      } 
+      geRam_MemoryInitialization;
 
-      static void geRam_SetupBlock
-            (
-              char * p,
-              uint32 size,
-              geRam_MemoryInitialization InitMem
-            )
+      static void 
+      geRam_SetupBlock
+      (
+        char * p,
+        uint32 size,
+        geRam_MemoryInitialization InitMem
+      )
       {
           if (InitMem == INITIALIZE_MEMORY)
           {
@@ -307,7 +309,7 @@ return mem;
         
         return p+HEADER_SIZE;
       }
-    #endif
+    #endif /* _WIN32 */
   #else // NDEBUG
     GENESISAPI void * 
     geRam_Allocate (uint32 size)

@@ -15,7 +15,7 @@ ifeq ($(CONFIG),release)
 	OPTIMIZE_FLAGS = -O2
 else ifeq ($(CONFIG),debug)
 	OUTDIR = DebugDLL
-	DEBUG_FLAGS = -g -DDEBUG -DMINIMAL_CONFIG
+	DEBUG_FLAGS = -g -DDEBUG 
 	OPTIMIZE_FLAGS = -Og
 else
 	$(error Invalid configuration "$(CONFIG)" specified. Use "make CONFIG=release" or "make CONFIG=debug")
@@ -24,7 +24,7 @@ endif
 # Toolchain
 CC = gcc-14
 AR = ar
-LINK = gcc
+LINK = gcc-14
 MKDIR = mkdir -p
 
 # Directories

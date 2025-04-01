@@ -23,7 +23,7 @@ CFLAGS_COMMON = -Wall -I../SDK/DXSDK/Include -I../Source \
 	-lSDL3 -lSDL3_ttf 
 
 CFLAGS_RELEASE = $(CFLAGS_COMMON) -O2 -DNDEBUG
-CFLAGS_DEBUG = $(CFLAGS_COMMON) -g -Og -D_DEBUG -DMINIMAL_CONFIG
+CFLAGS_DEBUG = $(CFLAGS_COMMON) -g -Og -D_DEBUG 
 
 CFLAGS = $(CFLAGS_$(shell echo $(CFG) | tr '[:lower:]' '[:upper:]'))
 
