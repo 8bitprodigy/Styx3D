@@ -12,7 +12,6 @@
 /*  or FITNESS FOR ANY PURPOSE.  Refer to LICENSE.TXT for more details.                 */
 /*                                                                                      */
 /****************************************************************************************/
-#include <SDL3/SDL_init.h>
 #include <assert.h>
 #include <math.h>
 #include <stdint.h>
@@ -23,6 +22,7 @@
 #include <sys/time.h>
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_mouse.h>
 
 #ifdef _WIN32
 	#include <direct.h>	
@@ -252,8 +252,8 @@ geVFile *			MainFS;
 static geBoolean 
 NewKeyDown(int KeyCode) 
 {
-    const bool *keyState = SDL_GetKeyboardState(NULL);
-    return (bool)keyState[SDL_GetScancodeFromKey(KeyCode,NULL)];
+    const uint8 *keyState = SDL_GetKeyboardState(NULL);
+    return (bool)keyState[SDL_GetScancodeFromKey(KeyCode)];
 }
 
 static void 
@@ -303,18 +303,17 @@ main(int argc, char *argv[])
 
 	//AdjustPriority(THREAD_PRIORITY_NORMAL);
     // Initialize SDL with detailed error checking
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
+    if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO)) {
         const char *error = SDL_GetError();
         if (error[0] == '\0') {
-            fprintf(stderr, "SDL_Init failed with empty error message!\n");
-            fprintf(stderr, "This usually indicates:\n");
-            fprintf(stderr, "1. Permission issues\n");
-            fprintf(stderr, "2. System resource problems\n");
-            fprintf(stderr, "3. Library initialization conflicts\n");
+            printf("SDL_Init failed with empty error message!\n");
+            printf("This usually indicates:\n");
+            printf("1. Permission issues\n");
+            printf("2. System resource problems\n");
+            printf("3. Library initialization conflicts\n");
         } else {
-            fprintf(stderr, "SDL_Init failed: %s\n", error);
+            printf("SDL_Init failed: %s\n", error);
         }
-        SDL_Quit();
         return -1;
     }
 	
@@ -1338,7 +1337,7 @@ geBoolean IsAMenuActive(void)
 //=====================================================================================
 static void GetMouseInput(SDL_Window *hWnd, int Width, int Height)
 {
-	float px, py;
+	int   px, py;
 	int   wx, wy;
 	int   dx, dy;
 	int32 x,  y;

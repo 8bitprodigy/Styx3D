@@ -6,11 +6,11 @@
     This code is released into the public domain or licensed under the terms of the 0BSD license
 */
 #include <assert.h>
-#include <SDL3/SDL.h>
-#include <SDL3/SDL_filesystem.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include <SDL2/SDL.h>
 
 #include "BaseType.h"
 #include "FSOps.h"

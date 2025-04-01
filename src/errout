@@ -1,0 +1,1 @@
+gcc-14 -Wall -I../Src -I../include -I./DrvMenu -I./ -I./DrvMenu -I./FX -I./Game -I./Procedurals  -g -D_DEBUG -c GenVS.c -o Debug/GenVS.o
