@@ -59,22 +59,22 @@
 typedef struct	
 DosFile
 {
-	unsigned int	Signature;
-	HANDLE			FileHandle;
-	char *			FullPath;
-	const char *	Name;
-	geBoolean		IsDirectory;
+	      uint32     Signature;
+	      SDL_RWops *FileHandle;
+	      char      *FullPath;
+	const char      *Name;
+	      geBoolean  IsDirectory;
 }	
 DosFile;
 
-typedef	struct	
+typedef struct	
 DosFinder
 {
-	unsigned int	Signature;
-	HANDLE			FindHandle;
-	WIN32_FIND_DATA	FindData;
-	geBoolean		FirstStillCached;
-	int				OffsetToName;
+	unsigned int Signature;
+	SDL_RWops *FindHandle;
+	WIN32_FIND_DATA FindData;
+	geBoolean FirstStillCached;
+	int OffsetToName;
 }	
 DosFinder;
 
@@ -177,7 +177,8 @@ static	void *	GENESISCC FSDos_FinderCreate(
 	return NULL;
 }
 
-static	geBoolean	GENESISCC FSDos_FinderGetNextFile(void *Handle)
+static geBoolean GENESISCC 
+FSDos_FinderGetNextFile(void *Handle)
 {
 	DosFinder *	Finder;
 
@@ -205,7 +206,8 @@ static	geBoolean	GENESISCC FSDos_FinderGetNextFile(void *Handle)
 	return GE_FALSE;
 }
 
-static	geBoolean	GENESISCC FSDos_FinderGetProperties(void *Handle, geVFile_Properties *Props)
+static geBoolean GENESISCC 
+FSDos_FinderGetProperties(void *Handle, geVFile_Properties *Props)
 {
 	DosFinder *			Finder;
 	geVFile_Attributes	Attribs;
@@ -259,7 +261,8 @@ FSDos_FinderDestroy(void *Handle)
 }
 
 // Terrible function.  It mutated, and now it modifies its argument.
-static	geBoolean	IsRootDirectory(char *Path)
+static geBoolean
+IsRootDirectory(char *Path)
 {
 	int		SlashCount;
 
@@ -288,18 +291,19 @@ static	geBoolean	IsRootDirectory(char *Path)
 	return GE_FALSE;
 }
 
-static	void *	GENESISCC FSDos_Open(
-	geVFile *		FS,
-	void *			Handle,
-	const char *	Name,
-	void *			Context,
-	unsigned int 	OpenModeFlags)
+static void * GENESISCC 
+FSDos_Open(
+	      geVFile *FS,
+	      void    *Handle,
+	const char    *Name,
+	      void    *Context,
+	      uint32   OpenModeFlags)
 {
-	DosFile *	DosFS;
-	DosFile *	NewFile;
-	char		Buff[PATH_MAX];
-	int			Length;
-	char *		NamePtr;
+	DosFile *DosFS;
+	DosFile *NewFile;
+	char     Buff[PATH_MAX];
+	int      Length;
+	char    *NamePtr;
 
 	DosFS = Handle;
 /*

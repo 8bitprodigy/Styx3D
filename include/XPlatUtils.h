@@ -27,11 +27,9 @@
 typedef struct DynamicLibrary DynamicLibrary;
 
 
-//inline geModule  geLoadLibrary( const char     *path);
-//inline void     *geGetProcAddress(    geModule  lib,        const char   *symbol);
-//inline int       geFreeLibrary(       geModule  lib);
-       bool      geGetUserName(       char     *player_name,      uint32 *size);
-inline uint32    geGetCurrentDir(     uint32    size,             char   *path);
+inline bool    geGetUserName(       char     *player_name,      uint32 *size);
+inline uint32  geGetCurrentDir(     uint32    size,             char   *path);
+inline char   *geGetExecutablePath();
 
 char *itoa(int value, char* str, int base);
 void splitpath(const char *path, char *drive, char *dir, char *fname, char *ext);

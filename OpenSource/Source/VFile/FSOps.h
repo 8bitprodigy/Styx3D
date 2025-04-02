@@ -11,6 +11,6 @@
 #include "VFile_private.h"
 
 
-const geVFile_SystemAPIs *GENESISCC FSDos_GetAPIs(void);
+const geVFile_SystemAPIs *GENESISCC FSOps_GetAPIs(void);
     
 #endif /* FSOPS_H */

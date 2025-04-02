@@ -303,7 +303,7 @@ main(int argc, char *argv[])
 
 	//AdjustPriority(THREAD_PRIORITY_NORMAL);
     // Initialize SDL with detailed error checking
-    if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO)) {
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO)!=0) {
         const char *error = SDL_GetError();
         if (error[0] == '\0') {
             printf("SDL_Init failed with empty error message!\n");
@@ -316,7 +316,7 @@ main(int argc, char *argv[])
         }
         return -1;
     }
-	
+	printf("SDL_Init success!\n");
 	for (i=0; i<255; i++) {
 		NewKeyDown(i);		// Need to flush all the keys
 	}
@@ -336,19 +336,24 @@ main(int argc, char *argv[])
 
 // set the currrent directory to where the exe is
 	{
+		printf("Getting base path\n");
 		int   i;
-		char *PathBuf = SDL_GetBasePath();
-
+		char *PathBuf = geGetExecutablePath();
+		
 		// get the exe's path and name
 		if (!PathBuf)
 		{
 			GenVS_Error("Could not get exe file name.");
 		}
-
+		printf("PathBuf:\t%s\n", PathBuf);
 		// strip off exe name to leave path
 		for (i=strlen(PathBuf)-1; i>0; i--)
 		{
+		#ifdef _WIN32 /* B-cuz windurz is speshul */
 			if (PathBuf[i]=='\\')
+		#else
+			if (PathBuf[i]=='/')
+		#endif /* _WIN32 */
 			{
 				PathBuf[i]=0;
 				break;
@@ -358,7 +363,7 @@ main(int argc, char *argv[])
 		{
 			GenVS_Error("Could not parse exe's path from exe name.");
 		}
-		
+		printf("PathBuf without exe:\t%s\n",PathBuf);
 		// move the current working directory to the executables directory.
 		// this is a little rude
 		if (chdir(PathBuf)==-1)
@@ -393,11 +398,13 @@ main(int argc, char *argv[])
 	HostInit.DemoFile[0] = 0;
 
 	geGetCurrentDir(sizeof(TempName), TempName);
-	MainFS = geVFile_OpenNewSystem(NULL,
-								   GE_VFILE_TYPE_DOS,
-								   TempName,
-								   NULL,
-								   GE_VFILE_OPEN_READONLY | GE_VFILE_OPEN_DIRECTORY);
+	MainFS = geVFile_OpenNewSystem(
+		NULL,
+		GE_VFILE_TYPE_DOS,
+		TempName,
+		NULL,
+		GE_VFILE_OPEN_READONLY | GE_VFILE_OPEN_DIRECTORY
+	);
 	assert(MainFS);
 	
 

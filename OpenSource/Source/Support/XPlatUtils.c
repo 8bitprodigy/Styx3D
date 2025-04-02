@@ -3,8 +3,13 @@
 
 #include <SDL2/SDL.h>
 #ifdef _WIN32
+    #include <windows.h>
+#elif defined(__APPLE__)
+    #include <mach-o/dyld.h>
+    #include <limits.h>
 #else
     #include <dlfcn.h>
+    #include <limits.h>
     #include <pwd.h>
     #include <unistd.h>
 #endif
@@ -12,37 +17,6 @@
 #include "XPlatUtils.h"
 
 
-/* [NOTE] Move these to the header later as inline 
-geModule 
-geLoadLibrary(const char* path) 
-{
-#ifdef _WIN32
-    return LoadLibraryExA(path, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
-#else
-    return dlopen(path, RTLD_LAZY);
-#endif
-}
-
-void * 
-geGetProcAddress(geModule lib, const char* symbol) 
-{
-#ifdef _WIN32
-    return GetProcAddress((HMODULE)lib, symbol);
-#else
-    return dlsym(lib, symbol);
-#endif
-}
-
-int 
-geFreeLibrary(geModule lib) 
-{
-#ifdef _WIN32
-    return FreeLibrary((HMODULE)lib) != 0;
-#else
-    return dlclose(lib) == 0;
-#endif
-}*/
-/* [NOTE] Move these to the header later as inline */
 bool
 geGetUserName(char *player_name, uint32 *size)
 {
@@ -76,7 +50,47 @@ geGetCurrentDir(uint32 size, char *path)
     return strlen(path); 
 #endif
 }
-/* [/NOTE] Move these to the header later as inline */
+
+char * 
+geGetExecutablePath() 
+{
+    char* path = NULL;
+    
+#ifdef _WIN32
+    // Windows implementation
+    path = malloc(MAX_PATH);
+    if (!path) return NULL;
+    
+    DWORD result = GetModuleFileNameA(NULL, path, MAX_PATH);
+    if (result == 0 || result == MAX_PATH) {
+        free(path);
+        return NULL;
+    }
+#elif defined(__APPLE__)
+    // macOS implementation
+    path = malloc(PATH_MAX);
+    if (!path) return NULL;
+    
+    uint32_t size = PATH_MAX;
+    if (_NSGetExecutablePath(path, &size) != 0) {
+        free(path);
+        return NULL;
+    }
+#else
+    // Linux implementation
+    path = malloc(PATH_MAX);
+    if (!path) return NULL;
+    
+    ssize_t count = readlink("/proc/self/exe", path, PATH_MAX);
+    if (count <= 0) {
+        free(path);
+        return NULL;
+    }
+    path[count] = '\0';  // readlink doesn't null-terminate
+#endif
+
+    return path;
+}
 
 char * 
 itoa(int n, char *str, int base) 

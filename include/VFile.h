@@ -61,11 +61,11 @@ geVFile_Time;
 typedef struct
 geVFile_Properties
 {
-	geVFile_Time				Time;
-	geVFile_Attributes		AttributeFlags;
-	int32					Size;
-	geVFile_Hints				Hints;
-	char					Name[1024];
+	geVFile_Time       Time;
+	geVFile_Attributes AttributeFlags;
+	int32              Size;
+	geVFile_Hints      Hints;
+	char               Name[1024];
 }
 geVFile_Properties;
 
@@ -94,22 +94,23 @@ GENESISAPI geBoolean GENESISCC geVFile_FinderGetProperties(const geVFile_Finder 
 
 //--------- File System Operations ----
 
-typedef	struct	geVFile_MemoryContext
+typedef struct
+geVFile_MemoryContext
 {
-	void *	Data;
-	int		DataLength;
-}	geVFile_MemoryContext;
+	void *Data;
+	int   DataLength;
+}
+geVFile_MemoryContext;
 
-#define GE_VFILE_TYPE_DOS	    ( (geVFile_TypeIdentifier) 1L )
-#define GE_VFILE_TYPE_MEMORY	( (geVFile_TypeIdentifier) 2L )
-#define GE_VFILE_TYPE_VIRTUAL	( (geVFile_TypeIdentifier) 3L )
+#define GE_VFILE_TYPE_DOS     ( (geVFile_TypeIdentifier) 1L )
+#define GE_VFILE_TYPE_MEMORY  ( (geVFile_TypeIdentifier) 2L )
+#define GE_VFILE_TYPE_VIRTUAL ( (geVFile_TypeIdentifier) 3L )
 
 // First three flags are mutually exclusive.  Combining them will result in failure
 // returns for both geVFile_OpenNewSystem and geVFile_Open.
-#define	GE_VFILE_OPEN_READONLY	 0x00000001
-#define	GE_VFILE_OPEN_UPDATE 	 0x00000002
-#define	GE_VFILE_OPEN_CREATE	 0x00000004
-
+#define GE_VFILE_OPEN_READONLY   0x00000001
+#define GE_VFILE_OPEN_UPDATE     0x00000002
+#define GE_VFILE_OPEN_CREATE     0x00000004
 #define GE_VFILE_OPEN_DIRECTORY  0x00000008
 
 #if 0
@@ -120,7 +121,8 @@ geBoolean GENESISCC	geVFile_Startup(void);
 	// is called once and only once.
 #endif
 
-GENESISAPI geVFile * GENESISCC geVFile_OpenNewSystem(
+GENESISAPI geVFile * GENESISCC 
+geVFile_OpenNewSystem(
 	geVFile                *FS,
 	geVFile_TypeIdentifier  FileSystemType,  // { DOS, MEMORY, ETC ... },
 	const char             *Name, 
@@ -176,12 +178,13 @@ GENESISAPI geBoolean GENESISCC geVFile_Close (geVFile *File);
 
 //---------- File Specific Operations -----------
 
-typedef	enum
+typedef enum
 {
-	GE_VFILE_SEEKCUR	= 0,
-	GE_VFILE_SEEKEND	= 1,
-	GE_VFILE_SEEKSET	= 2
-}	geVFile_Whence;
+	GE_VFILE_SEEKCUR = 0,
+	GE_VFILE_SEEKEND = 1,
+	GE_VFILE_SEEKSET = 2
+}	
+geVFile_Whence;
 
 GENESISAPI geBoolean GENESISCC geVFile_GetS  		 (		geVFile *File, void *Buff, int MaxLen);
 GENESISAPI geBoolean GENESISCC geVFile_Read  		 (		geVFile *File, void *Buff, int Count);

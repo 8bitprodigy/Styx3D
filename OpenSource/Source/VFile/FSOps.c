@@ -12,6 +12,16 @@
 
 #include <SDL2/SDL.h>
 
+#ifdef _WIN32
+	#define	WIN32_LEAN_AND_MEAN
+	#include <windows.h>
+	#define  PATH_MAX _MAX_PATH
+#else
+	#include <limits.h>
+	#include <stdint.h>
+    #include <unistd.h> 
+#endif
+
 #include "BaseType.h"
 #include "FSOps.h"
 #include "RAM.h"
@@ -26,22 +36,51 @@
 typedef struct
 FSFile
 {
-          unsigned int        Signature;
-                   void      *FileHandle;
-                   char      *FullPath;
-    const          char      *Name;
-                   geBoolean  IsDirectory;
+          uint32     Signature;
+          SDL_RWOPs *FileHandle;
+          char      *FullPath;
+    const char      *Name;
+          geBoolean  IsDirectory;
 }
 FSFile;
+
+typedef struct 
+FSFindData
+{
+    char filename[256];         // Current file name
+    char fullpath[1024];        // Full path to file
+    Uint64 fileSize;            // File size in bytes
+    
+    // Time values using SDL timestamp format
+    Uint64 creationTime;
+    Uint64 lastAccessTime;
+    Uint64 lastWriteTime;
+    
+    // File attributes as bitflags
+    Uint32 attributes;          // Use defined constants below
+    
+    // Internal data used by implementation
+    void* internalData;         // Platform-specific data, opaque to caller
+} 
+FSFindData;
+
+// File attribute constants
+#define FS_ATTR_DIRECTORY  0x0001
+#define FS_ATTR_READONLY   0x0002
+#define FS_ATTR_HIDDEN     0x0004
+#define FS_ATTR_SYSTEM     0x0008
+#define FS_ATTR_ARCHIVE    0x0010
+#define FS_ATTR_NORMAL     0x0020
+#define FS_ATTR_TEMPORARY  0x0040
 
 typedef struct
 FSFinder
 {
-    unsigned int        Signature;
-             void      *FindHandle;
-             void      *FindData;
-             geBoolean  FirstStillCached;
-             int        OffsetToName;
+    uint32       Signature;
+    SDL_RWOPs *FindHandle;
+    void      *FindData;
+    geBoolean  FirstStillCached;
+    int        OffsetToName;
 }
 FSFinder;
 

@@ -36,51 +36,53 @@
 	typedef FILETIME *LPFILETIME;
 #endif
 
-#include	<stdio.h>
-#include	<assert.h>
-#include	<stdarg.h>
-#include	<string.h>
+#include <assert.h>
+#include <stdarg.h>
+#include <stdio.h>
+#include <string.h>
 
-#include	"BaseType.h"
-#include	"RAM.h"
+#include "GETypes.h"
+#include "RAM.h"
 
-#include	"VFile.h"
-#include	"VFile_private.h"
+#include "VFile.h"
+#include "VFile_private.h"
 
 //#include	"FSOps.h"
-#if defined(__MSDOS__) || defined(MSDOS)
-	#include	"FSDOS.h"
-#endif /* __MSDOS__ || MSDOS */
-#include	"FSMemory.h"
-#include	"FSVFS.h"
+#include "FSDOS.h"
+#include "FSMemory.h"
+#include "FSVFS.h"
 
 
 
-typedef	struct	FSSearchList
+typedef struct
+FSSearchList
 {
-	geVFile *				FS;
-	struct FSSearchList *	Next;
-}	FSSearchList;
+	       geVFile      *FS;
+	struct FSSearchList *Next;
+}
+FSSearchList;
 
 
-typedef	struct	
+typedef struct	
 geVFile
 {
-	geVFile_TypeIdentifier		SystemType;
-	const geVFile_SystemAPIs *	APIs;
-	void *						FSData;
-	geVFile *					Context;
-	FSSearchList *				SearchList;
-	CRITICAL_SECTION			CriticalSection;
-	geVFile *					BaseFile;
+	      geVFile_TypeIdentifier  SystemType;
+	const geVFile_SystemAPIs     *APIs;
+	      void                   *FSData;
+	      geVFile                *Context;
+	      FSSearchList           *SearchList;
+	      CRITICAL_SECTION        CriticalSection;
+	      geVFile                *BaseFile;
 }
 geVFile;
 
-typedef struct	geVFile_Finder
+typedef struct
+geVFile_Finder
 {
-	const geVFile_SystemAPIs *	APIs;
-	void *						Data;
-}	geVFile_Finder;
+	const geVFile_SystemAPIs *APIs;
+	      void               *Data;
+}
+geVFile_Finder;
 
 static	geVFile_SystemAPIs **		RegisteredAPIs;
 static	int							SystemCount;
@@ -174,17 +176,19 @@ static	geBoolean	GENESISCC	CheckOpenFlags(unsigned int OpenModeFlags)
 	return GE_TRUE;
 }
 
-GENESISAPI geVFile * GENESISCC geVFile_OpenNewSystem(
-	geVFile *				FS,
-	geVFile_TypeIdentifier 	FileSystemType,
-	const char *			Name,
-	void *					Context,
-	unsigned int 			OpenModeFlags)
+GENESISAPI geVFile * GENESISCC 
+geVFile_OpenNewSystem(
+	      geVFile                *FS,
+	      geVFile_TypeIdentifier  FileSystemType,
+	const char                   *Name,
+	      void                   *Context,
+	      unsigned int            OpenModeFlags
+)
 {
-	const geVFile_SystemAPIs *	APIs;
-	geVFile *					File;
-	void *						FSData;
-	geVFile *					BaseFile;
+	const geVFile_SystemAPIs *APIs;
+	      geVFile            *File;
+	      void               *FSData;
+	      geVFile            *BaseFile;
 
 
 	if	(RegisterBuiltInAPIs() == GE_FALSE)
@@ -200,11 +204,13 @@ GENESISAPI geVFile * GENESISCC geVFile_OpenNewSystem(
 	if	(FS == NULL && FileSystemType == GE_VFILE_TYPE_VIRTUAL)
 	{
 		assert(Name);
-		BaseFile = geVFile_OpenNewSystem(NULL,
-										 GE_VFILE_TYPE_DOS,
-										 Name,
-										 NULL,
-										 OpenModeFlags & ~GE_VFILE_OPEN_DIRECTORY);
+		BaseFile = geVFile_OpenNewSystem(
+			NULL,
+			GE_VFILE_TYPE_DOS,
+			Name,
+			NULL,
+			OpenModeFlags & ~GE_VFILE_OPEN_DIRECTORY
+		);
 		if	(!BaseFile)
 			return NULL;
 		FS = BaseFile;
