@@ -48,7 +48,13 @@
 #include "VFile_private.h"
 
 //#include	"FSOps.h"
-#include "FSDOS.h"
+#ifdef _WIN32
+	#include "FSDOS.h"
+#else
+	#include "FSDisk.h"
+	#define FSDos_GetAPIs FSDisk_GetAPIs
+#endif /* _WIN32 */
+
 #include "FSMemory.h"
 #include "FSVFS.h"
 

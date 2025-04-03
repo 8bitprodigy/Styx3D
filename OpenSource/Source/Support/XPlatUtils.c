@@ -14,6 +14,7 @@
     #include <unistd.h>
 #endif
 
+#include "GETypes.h"
 #include "XPlatUtils.h"
 
 
@@ -57,7 +58,7 @@ geGetExecutablePath()
     char* path = NULL;
     
 #ifdef _WIN32
-    // Windows implementation
+    /* Windows implementation */
     path = malloc(MAX_PATH);
     if (!path) return NULL;
     
@@ -67,7 +68,7 @@ geGetExecutablePath()
         return NULL;
     }
 #elif defined(__APPLE__)
-    // macOS implementation
+    /* macOS implementation */
     path = malloc(PATH_MAX);
     if (!path) return NULL;
     
@@ -77,7 +78,7 @@ geGetExecutablePath()
         return NULL;
     }
 #else
-    // Linux implementation
+    /* Linux implementation */
     path = malloc(PATH_MAX);
     if (!path) return NULL;
     
@@ -86,22 +87,126 @@ geGetExecutablePath()
         free(path);
         return NULL;
     }
-    path[count] = '\0';  // readlink doesn't null-terminate
+    path[count] = '\0';  /* readlink doesn't null-terminate */
 #endif
 
     return path;
 }
 
+
+bool 
+geFindData_populate(const char *path, geFindData *data)
+ {
+    memset(data, 0, sizeof(geFindData));
+    
+    /* Get file information using SDL_RWops */
+    SDL_RWops* file = SDL_RWFromFile(path, "rb");
+    if (!file) return false;
+    
+    /* Get file size */
+    data->fileSize = SDL_RWsize(file);
+    
+    /* Get current time for timestamps */
+    Uint64 currentTime = SDL_GetTicks64();
+    data->creationTime = currentTime;
+    data->lastAccessTime = currentTime;
+    data->lastWriteTime = currentTime;
+    
+    /* Get filename from path */
+    const char *lastSlash = strrchr(path, '/');
+    if (lastSlash) {
+        strncpy(data->filename, lastSlash + 1, sizeof(data->filename) - 1);
+    } else {
+        strncpy(data->filename, path, sizeof(data->filename) - 1);
+    }
+    
+    /* Store full path */
+    strncpy(data->fullpath, path, sizeof(data->fullpath) - 1);
+    
+    /* Set basic attributes */
+    data->attributes = GE_ATTR_NORMAL;
+    
+    SDL_RWclose(file);
+    return true;
+}
+
+void * 
+geFindFirstFile(const char *file_name, geFindData *find_data) 
+{
+/*
+    geFile *file = malloc(sizeof(geFile));
+    if (!file) return NULL;
+    
+    memset(find_data, 0, sizeof(geFindData));
+    
+    SDL_RWops* dirHandle = SDL_RWFromFile(file_name, "rb");
+    if (!dirHandle) {
+        free(file);
+        return NULL;
+    }
+    
+    file->currentFile = dirHandle;
+    file->platformData = NULL;
+    
+    if (geFindData_populate(file_name, find_data)) {
+        return file;
+    }
+    
+    SDL_RWclose(dirHandle);
+    free(file);
+*/
+    return NULL;
+}
+
+bool 
+geFindNextFile(void *handle, geFindData *find_data)
+{
+/*
+    DirectorySearchState* searchState = (DirectorySearchState*)handle;
+    if (!searchState || !searchState->currentFile) return false;
+    
+    int64 fileSize = SDL_RWsize(searchState->currentFile);
+    if (fileSize < 0) return false;
+    
+    int64 currentPosition = SDL_RWtell(searchState->currentFile);
+    if (currentPosition < 0) return false;
+    
+    char filename[PATH_MAX];
+    uint64 bytesRead = SDL_RWread(searchState->currentFile, filename, 1, 256);
+    if (bytesRead <= 0) return false;
+    
+    // Populate find_data structure
+    memset(find_data, 0, sizeof(geFindData));
+    strncpy(find_data->filename, filename, sizeof(find_data->filename) - 1);
+    find_data->fileSize = (uint64)fileSize;
+*/
+    return true;
+}
+
+bool 
+geFindClose(void *handle) 
+{
+/*
+    DirectorySearchState *searchState = (DirectorySearchState*)handle;
+    if (!searchState) return false;
+    
+    if (searchState->currentFile) {
+        SDL_RWclose(searchState->currentFile);
+    }
+    free(searchState);
+*/
+    return true;
+}
+
+
 char * 
 itoa(int n, char *str, int base) 
 {
-    // Check if the base is valid
     if (base < 2 || base > 36) {
         *str = '\0';
         return str;
     }
     
-    // Handle negative numbers
     int i = 0;
     int isNegative = 0;
     
@@ -110,14 +215,12 @@ itoa(int n, char *str, int base)
         n = -n;
     }
     
-    // Special case for n = 0
     if (n == 0) {
         str[i++] = '0';
         str[i] = '\0';
         return str;
     }
     
-    // Process individual digits
     unsigned int num = (unsigned int) n;
     while (num != 0) {
         int remainder = num % base;
@@ -125,15 +228,12 @@ itoa(int n, char *str, int base)
         num = num / base;
     }
     
-    // If the number is negative, append '-'
     if (isNegative) {
         str[i++] = '-';
     }
     
-    // Null-terminate the string
     str[i] = '\0';
     
-    // Reverse the string
     int start = 0;
     int end = i - 1;
     while (start < end) {

@@ -102,7 +102,8 @@ geVFile_MemoryContext
 }
 geVFile_MemoryContext;
 
-#define GE_VFILE_TYPE_DOS     ( (geVFile_TypeIdentifier) 1L )
+#define GE_VFILE_TYPE_DOS     ( (geVFile_TypeIdentifier) 1L ) /* LEGACY -- future games should use GE_VFILE_TYPE_DISK */
+#define GE_VFILE_TYPE_DISK    ( (geVFile_TypeIdentifier) 1L )
 #define GE_VFILE_TYPE_MEMORY  ( (geVFile_TypeIdentifier) 2L )
 #define GE_VFILE_TYPE_VIRTUAL ( (geVFile_TypeIdentifier) 3L )
 

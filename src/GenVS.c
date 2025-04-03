@@ -244,7 +244,7 @@ SubLarge(LARGE_INTEGER *start, LARGE_INTEGER *end, LARGE_INTEGER *delta)
 Host_Init		HostInit;
 geBoolean		ShowStats,Mute;
 
-geVFile *			MainFS;
+geVFile         *MainFS;
 
 //=====================================================================================
 //	NewKeyDown
@@ -303,7 +303,7 @@ main(int argc, char *argv[])
 
 	//AdjustPriority(THREAD_PRIORITY_NORMAL);
     // Initialize SDL with detailed error checking
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO)!=0) {
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO)) {
         const char *error = SDL_GetError();
         if (error[0] == '\0') {
             printf("SDL_Init failed with empty error message!\n");
@@ -398,9 +398,10 @@ main(int argc, char *argv[])
 	HostInit.DemoFile[0] = 0;
 
 	geGetCurrentDir(sizeof(TempName), TempName);
+	printf("[DEBUG] Temp Name:\t%s\n", TempName);
 	MainFS = geVFile_OpenNewSystem(
 		NULL,
-		GE_VFILE_TYPE_DOS,
+		GE_VFILE_TYPE_DISK,
 		TempName,
 		NULL,
 		GE_VFILE_OPEN_READONLY | GE_VFILE_OPEN_DIRECTORY

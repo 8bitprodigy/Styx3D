@@ -86,6 +86,7 @@ OBJECTS = \
 	$(OBJDIR)/Fog.o \
 	$(OBJDIR)/Font.o \
 	$(OBJDIR)/FontBMP.o \
+	$(OBJDIR)/FSDisk.o \
 	$(OBJDIR)/FSMemory.o \
 	$(OBJDIR)/FSVFS.o \
 	$(OBJDIR)/Frustum.o \
