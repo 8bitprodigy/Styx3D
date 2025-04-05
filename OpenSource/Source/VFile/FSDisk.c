@@ -1,5 +1,5 @@
 /*
-    FSOps.C
+    FSDisk.C
     Author: Chris DeBoy
     Description: Platform-agnostic reimplementation of filesystem interface originally defined in FSDOS.h and FSDOS.c
 
@@ -16,11 +16,13 @@
 	#define	WIN32_LEAN_AND_MEAN
 	#include <windows.h>
 	#define  PATH_MAX _MAX_PATH
+    #define PLATFORM_PATH_SEPARATOR '\\'
 #else
 	#include <limits.h>
 	#include <stdint.h>
     #include <unistd.h>
     #define INVALID_HANDLE_VALUE ((void*)-1)
+    #define PLATFORM_PATH_SEPARATOR '/'
 #endif
 
 #include "GETypes.h"
@@ -42,22 +44,22 @@
 typedef struct
 DiskFile
 {
-          uint32     Signature;
-          void      *FileHandle;
-          char      *FullPath;
-    const char      *Name;
-          bool       IsDirectory;
+          uint32          Signature;
+          GE_FIND_HANDLE *FileHandle;
+          char           *FullPath;
+    const char           *Name;
+          bool            IsDirectory;
 }
 DiskFile;
 
 typedef struct
 DiskFinder
 {
-    uint32      Signature;
-    void       *FindHandle;
-    geFindData *FindData;
-    bool        FirstStillCached;
-    int         OffsetToName;
+    uint32          Signature;
+    GE_FIND_HANDLE *FindHandle;
+    GE_FIND_DATA   *FindData;
+    bool            FirstStillCached;
+    int             OffsetToName;
 }
 DiskFinder;
 
@@ -124,9 +126,9 @@ BuildFileName(
 
 static void *GENESISCC
 FSDisk_FinderCreate(
-          geVFile *FS,
-          void    *handle,
-    const char    *file_spec
+          geVFile        *Disk_FS,
+          GE_FIND_HANDLE *Handle,
+    const char           *File_Spec
 )
 {
     DiskFinder *finder;
@@ -134,9 +136,9 @@ FSDisk_FinderCreate(
     char       *name;
     char        buff[PATH_MAX];
 
-    assert(file_spec);
+    assert(File_Spec);
 
-    file = (DiskFile*)handle;
+    file = (DiskFile*)Handle;
 
     CHECK_HANDLE(file);
 
@@ -147,7 +149,7 @@ FSDisk_FinderCreate(
 
     memset(finder, 0, sizeof(*finder));
 
-    if (!BuildFileName(file, file_spec, buff, &name, sizeof(buff))) {
+    if (!BuildFileName(file, File_Spec, buff, &name, sizeof(buff))) {
         geRam_Free(finder);
         return NULL;
     }
@@ -158,7 +160,7 @@ FSDisk_FinderCreate(
     finder->Signature        = DISK_FINDER_SIGNATURE;
     
     return (void *)finder;
-} /* FS_FinderCreate */
+} /* FSDisk_FinderCreate */
 
 static bool GENESISCC
 FSDisk_FinderGetNextFile(void *handle)
@@ -169,7 +171,7 @@ FSDisk_FinderGetNextFile(void *handle)
 
     CHECK_FINDER(finder);
 
-    if (finder->FindHandle == INVALID_HANDLE_VALUE) return false;
+    if (finder->FindHandle == GE_INVALID_HANDLE_VALUE) return false;
 
     if (finder->FirstStillCached == true) {
         finder->FirstStillCached = false;
@@ -180,7 +182,7 @@ FSDisk_FinderGetNextFile(void *handle)
         if (finder->FindData->fileName[0] != '.') return true;
     
     return false;
-} /* FS_FinderGetNextFile */
+} /* FSDisk_FinderGetNextFile */
 
 static bool GENESISCC
 FSDisk_FinderGetproperties(void *Handle, geVFile_Properties *Props)
@@ -195,7 +197,7 @@ FSDisk_FinderGetproperties(void *Handle, geVFile_Properties *Props)
 
     CHECK_FINDER(finder);
 
-    if (finder->FindHandle == INVALID_HANDLE_VALUE) return false; GE_ATTR_DIRECTORY
+    if (finder->FindHandle == GE_INVALID_HANDLE_VALUE) return false; GE_ATTR_DIRECTORY
 
     if (finder->FindData.attributes & GE_ATTR_DIRECTORY) attributes |= GE_VFILE_ATTRIB_DIRECTORY;
     if (finder->FindData.attributes & GE_ATTR_READONLY)  attributes |= GE_VFILE_ATTRIB_READONLY;
@@ -213,7 +215,7 @@ FSDisk_FinderGetproperties(void *Handle, geVFile_Properties *Props)
 	memcpy(Props->Name, finder->FindData.fileName, length+1);
     
     return true;
-} /* FS_FinderGetproperties */
+} /* FSDisk_FinderGetproperties */
 
 static void GENESISCC
 FSDisk_FinderDestroy(void *Handle)
@@ -222,19 +224,57 @@ FSDisk_FinderDestroy(void *Handle)
 
     CHECK_FINDER(finder);
 
-    if (finder->FindHandle != INVALID_HANDLE_VALUE) geFindClose(finder->FindHandle);
+    if (finder->FindHandle != GE_INVALID_HANDLE_VALUE) geFindClose(finder->FindHandle);
     
     finder->Signature = 0;
     geRam_Free(finder);
-} /* FS_FinderDestroy */
+} /* FSDisk_FinderDestroy */
+
+static 
+#ifndef _WIN32
+    inline
+#endif
+bool
+IsRootDirectory(char *Path)
+{
+#ifdef _WIN32
+	int		SlashCount;
+
+	// Drive letter test
+	if	(Path[1] == ':' && Path[2] == '\\' && Path[3] == '\0')
+	{
+		Path[2] = '\0';
+		return true;
+	}
+
+	// Now UNC path test
+	SlashCount = 0;
+	if	(Path[0] == '\\' && Path[1] == '\\')
+	{
+		Path += 2;
+		while	(*Path)
+		{
+			if	(*Path++ == '\\')
+				SlashCount++;
+		}
+	}
+
+	if	(SlashCount == 1)
+		return true;
+
+	return false;
+#else 
+    return strcmp(path, "/");
+#endif
+}
 
 static void *GENESISCC
 FSDisk_Open(
-          geVFile      *FS,
-          void         *Handle,
-    const char         *Name,
-          void         *Context,
-          unsigned int  OpenModeFlags
+          geVFile *disk_fs,
+          void    *Handle,
+    const char    *Name,
+          void    *Context,
+          uint32   Open_Mode_Flags
 )
 {
     DiskFile 
@@ -264,10 +304,72 @@ FSDisk_Open(
 
     memcpy(new_file->FullPath, buff, length + 1);
 
+    if (Open_Mode_Flags & GE_VFILE_OPEN_DIRECTORY) {
+        GE_FIND_DATA   *file_info;
+        GE_FILE_HANDLE *find_handle;
+        bool            is_directory;
+
+        assert(!disk_fs || disk_fs->IsDirectory == true);
+
+        memset(&file_info, 0, sizeof(file_info));
+        find_handle = geFindFirstFile(new_file->FullPath, &file_info);
+        if (find_handle != GE_INVALID_HANDLE_VALUE
+            && file_info.attributes & GE_ATTR_DIRECTORY
+        ) {
+            is_directory = true;
+        } else {
+            is_directory = IsRootDirectory(new_file->FullPath);
+        }
+
+        geFindClose(find_handle);
+
+        if (Open_Mode_Flags & GE_VFILE_OPEN_CREATE) {
+            if (is_directory                                == true)  goto FAIL;
+            if (geCreateDirectory(new_file->fullPath, NULL) == false) goto FAIL;
+        } else if (!is_directory) goto FAIL;
+        
+        new_file->IsDirectory = true;
+        new_file->file_handle = GE_INVALID_HANDLE_VALUE;
+    } else {
+        uint32
+            share_mode,
+            creation_mode,
+            access,
+            last_error;
+
+        creation_mode = GE_OPEN_EXISTING;
+
+        switch (Open_Mode_Flags
+            & (GE_VFILE_OPEN_READONLY
+            |  GE_VFILE_OPEN_UPDATE
+            |  GE_VFILE_OPEN_CREATE
+            )
+        )
+        {
+        case GE_VFILE_OPEN_READONLY:
+            access     = GE_READ;
+            share_mode = GE_FILE_SHARE_READ | GE_FILE_SHARE_WRITE;
+            break;
+            
+        case GE_VFILE_OPEN_CREATE:
+            creation_mode = GE_CREATE_ALWAYS; /* FALLTHROUGH */
+        case GEVFILE_OPEN_UPDATE:
+            access     = GE_READ | GE_WRITE;
+            share_mode = GE_FILE_SHARE_READ;
+            break;
+
+        default:
+            assert(!"Illegal open mode flags");
+            break;
+        }
+
+        new_file->FileHandle == geCreateFile(
+    }
+
     /* FSDOS.c:332 */
     
     return NULL;
-} /* FS_Open */
+} /* FSDisk_Open */
 
 static void *GENESISCC
 FSDisk_OpenNewSystem(
@@ -278,7 +380,7 @@ FSDisk_OpenNewSystem(
 )
 {
     return FSDisk_Open(FS, NULL, Name, Context, OpenModeFlags);
-} /* FS_OpenNewSystem */
+} /* FSDisk_OpenNewSystem */
 
 static geBoolean GENESISCC
 FSDisk_UpdateContext(
@@ -298,7 +400,7 @@ FSDisk_Close(void *Handle)
         TODO
     */
     return;
-} /* FS_CLOSE */
+} /* FSDisk_CLOSE */
 
 static geBoolean GENESISCC
 FSDisk_GetS(void *Handle, void *Buff, int MaxLen)
@@ -307,7 +409,7 @@ FSDisk_GetS(void *Handle, void *Buff, int MaxLen)
         TODO
     */
     return GE_FALSE;
-} /* FS_GetS */
+} /* FSDisk_GetS */
 
 static geBoolean GENESISCC
 FSDisk_Read(void *Handle, void *Buff, int Count)
@@ -316,7 +418,7 @@ FSDisk_Read(void *Handle, void *Buff, int Count)
         TODO
     */
     return GE_TRUE;
-} /* FS_Read */
+} /* FSDisk_Read */
 
 static geBoolean GENESISCC
 FSDisk_Write(void *Handle, const void *Buff, int Count)
@@ -325,7 +427,7 @@ FSDisk_Write(void *Handle, const void *Buff, int Count)
         TODO
     */
     return GE_TRUE;
-} /* FS_Write */
+} /* FSDisk_Write */
 
 static geBoolean GENESISCC
 FSDisk_Seek(void *Handle, int Where, geVFile_Whence Whence)
@@ -334,7 +436,7 @@ FSDisk_Seek(void *Handle, int Where, geVFile_Whence Whence)
         TODO
     */
     return GE_TRUE;
-} /* FS_Seek */
+} /* FSDisk_Seek */
 
 static geBoolean GENESISCC
 FSDisk_EOF(const void *Handle)
@@ -343,7 +445,7 @@ FSDisk_EOF(const void *Handle)
         TODO
     */
     return GE_TRUE;
-} /* FS_EOF */
+} /* FSDisk_EOF */
 
 static geBoolean GENESISCC
 FSDisk_Tell(const void *Handle, int32 *Position)
@@ -352,7 +454,7 @@ FSDisk_Tell(const void *Handle, int32 *Position)
         TODO
     */
     return GE_TRUE;
-} /* FS_Tell */
+} /* FSDisk_Tell */
 
 static geBoolean GENESISCC
 FSDisk_Size(const void *Handle, int32 *Size)
@@ -361,7 +463,7 @@ FSDisk_Size(const void *Handle, int32 *Size)
         TODO
     */
     return GE_FALSE;
-} /* FS_Size */
+} /* FSDisk_Size */
 
 static geBoolean GENESISCC
 FSDisk_GetProperties(const void *Handle, geVFile_Properties *Properties)
@@ -370,7 +472,7 @@ FSDisk_GetProperties(const void *Handle, geVFile_Properties *Properties)
         TODO
     */
     return GE_TRUE;
-} /* FS_GetProperties */
+} /* FSDisk_GetProperties */
 
 static geBoolean GENESISCC
 FSDisk_SetSize(void *Handle, int32 size)
@@ -379,7 +481,7 @@ FSDisk_SetSize(void *Handle, int32 size)
         TODO
     */
     return GE_FALSE;
-} /* FS_SetSize */
+} /* FSDisk_SetSize */
 
 static geBoolean GENESISCC
 FSDisk_SetAttributes(void *Handle, geVFile_Attributes Attributes)
@@ -388,7 +490,7 @@ FSDisk_SetAttributes(void *Handle, geVFile_Attributes Attributes)
         TODO
     */
     return GE_TRUE;
-} /* FS_SetAttributes */
+} /* FSDisk_SetAttributes */
 
 static geBoolean GENESISCC
 FSDisk_SetTime(void *Handle, const geVFile_Time *Time)
@@ -397,7 +499,7 @@ FSDisk_SetTime(void *Handle, const geVFile_Time *Time)
         TODO
     */
     return GE_TRUE;
-} /* FS_SetTime */
+} /* FSDisk_SetTime */
 
 static geBoolean GENESISCC
 FSDisk_SetHints(void *Handle, const geVFile_Hints *Hints)
@@ -406,7 +508,7 @@ FSDisk_SetHints(void *Handle, const geVFile_Hints *Hints)
         TODO
     */
     return GE_FALSE;
-} /* FS_SetHints */
+} /* FSDisk_SetHints */
 
 static geBoolean GENESISCC
 FSDisk_FileExists(geVFile *FS, void *Handle, const char *Name)
@@ -415,7 +517,7 @@ FSDisk_FileExists(geVFile *FS, void *Handle, const char *Name)
         TODO
     */
     return GE_FALSE;
-} /* FS_FileExists */
+} /* FSDisk_FileExists */
 
 static geBoolean GENESISCC
 FSDisk_Disperse(
@@ -426,7 +528,7 @@ FSDisk_Disperse(
 )
 {
     return GE_FALSE;
-} /* FS_Disperse */
+} /* FSDisk_Disperse */
 
 static geBoolean GENESISCC
 FSDisk_DeleteFile(geVFile *FS, void *Handle, const char *Name)
@@ -435,7 +537,7 @@ FSDisk_DeleteFile(geVFile *FS, void *Handle, const char *Name)
         TODO
     */
     return GE_TRUE;
-} /* FS_DeleteFile */
+} /* FSDisk_DeleteFile */
 
 static geBoolean GENESISCC
 FSDisk_RenameFile(geVFile *FS, void *Handle, const char *Name, const char *NewName)
@@ -444,7 +546,7 @@ FSDisk_RenameFile(geVFile *FS, void *Handle, const char *Name, const char *NewNa
         TODO
     */
     return GE_TRUE;
-} /* FS_RenameFile */
+} /* FSDisk_RenameFile */
 
 
 static geVFile_SystemAPIs

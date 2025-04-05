@@ -22,7 +22,6 @@
 #include <sys/time.h>
 
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_mouse.h>
 
 #ifdef _WIN32
 	#include <direct.h>	
@@ -401,11 +400,12 @@ main(int argc, char *argv[])
 	printf("[DEBUG] Temp Name:\t%s\n", TempName);
 	MainFS = geVFile_OpenNewSystem(
 		NULL,
-		GE_VFILE_TYPE_DISK,
+		GE_VFILE_TYPE_DOS,
 		TempName,
 		NULL,
 		GE_VFILE_OPEN_READONLY | GE_VFILE_OPEN_DIRECTORY
 	);
+	printf("[DEBUG] MainFS:\t%p\n",&MainFS);
 	assert(MainFS);
 	
 

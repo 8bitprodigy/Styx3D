@@ -4,19 +4,39 @@
 #include <SDL2/SDL.h>
 #ifdef _WIN32
     #include <windows.h>
-#elif defined(__APPLE__)
-    #include <mach-o/dyld.h>
-    #include <limits.h>
+    #define PATH_SEPARATOR '\\'
 #else
+    #include <dirent.h>
     #include <dlfcn.h>
+    #include <errno.h>
+    #include <fcntl.h>
     #include <limits.h>
     #include <pwd.h>
+    #include <sys/stat.h>
+    #include <time.h>
     #include <unistd.h>
+    #include <utime.h>
+    #define PATH_SEPARATOR '/'
+#endif
+#if defined(__APPLE__)
+    #include <mach-o/dyld.h>
 #endif
 
 #include "GETypes.h"
 #include "XPlatUtils.h"
 
+static uint32 geLastError = GE_ERROR_SUCCESS;
+
+
+static void geNormalizePath(char *path) {
+    char *p = path;
+    while (*p) {
+        if (*p == '\\' || *p == '/') {
+            *p = PATH_SEPARATOR;
+        }
+        p++;
+    }
+}
 
 bool
 geGetUserName(char *player_name, uint32 *size)
@@ -58,7 +78,6 @@ geGetExecutablePath()
     char* path = NULL;
     
 #ifdef _WIN32
-    /* Windows implementation */
     path = malloc(MAX_PATH);
     if (!path) return NULL;
     
@@ -68,7 +87,6 @@ geGetExecutablePath()
         return NULL;
     }
 #elif defined(__APPLE__)
-    /* macOS implementation */
     path = malloc(PATH_MAX);
     if (!path) return NULL;
     
@@ -78,7 +96,6 @@ geGetExecutablePath()
         return NULL;
     }
 #else
-    /* Linux implementation */
     path = malloc(PATH_MAX);
     if (!path) return NULL;
     
@@ -93,109 +110,1141 @@ geGetExecutablePath()
     return path;
 }
 
+static bool 
+matchPattern(const char* filename, const char* pattern) 
+{
+    /* Simple pattern matching - implement more sophisticated matching as needed
+        Currently handles * as wildcard for any characters
+    */
+    
+    if (strcmp(pattern, "*") == 0) {
+        return true;
+    }
+    
+    // Exact match
+    if (strchr(pattern, '*') == NULL && strchr(pattern, '?') == NULL) {
+        return strcmp(filename, pattern) == 0;
+    }
+    
+    // Handle *.ext pattern
+    if (pattern[0] == '*' && pattern[1] == '.') {
+        const char* fileExt = strrchr(filename, '.');
+        if (fileExt == NULL) return false;
+        return strcmp(fileExt, pattern + 1) == 0;
+    }
+    
+    // For more complex patterns, consider implementing proper glob matching
+    return false;
+}
 
-bool 
-geFindData_populate(const char *path, geFindData *data)
- {
-    memset(data, 0, sizeof(geFindData));
+static void 
+extractPatternFromPath(const char* path, char* dirPath, char* pattern) 
+{
+    const char* lastSlash = strrchr(path, PATH_SEPARATOR);
     
-    /* Get file information using SDL_RWops */
-    SDL_RWops* file = SDL_RWFromFile(path, "rb");
-    if (!file) return false;
-    
-    /* Get file size */
-    data->fileSize = SDL_RWsize(file);
-    
-    /* Get current time for timestamps */
-    Uint64 currentTime = SDL_GetTicks64();
-    data->creationTime = currentTime;
-    data->lastAccessTime = currentTime;
-    data->lastWriteTime = currentTime;
-    
-    /* Get filename from path */
-    const char *lastSlash = strrchr(path, '/');
     if (lastSlash) {
-        strncpy(data->filename, lastSlash + 1, sizeof(data->filename) - 1);
+        size_t dirLen = lastSlash - path + 1;
+        strncpy(dirPath, path, dirLen);
+        dirPath[dirLen] = '\0';
+        strcpy(pattern, lastSlash + 1);
     } else {
-        strncpy(data->filename, path, sizeof(data->filename) - 1);
+        /* No directory in path */
+        dirPath[0] = '.';
+        dirPath[1] = PATH_SEPARATOR;
+        dirPath[2] = '\0';
+        strcpy(pattern, path);
     }
     
-    /* Store full path */
-    strncpy(data->fullpath, path, sizeof(data->fullpath) - 1);
-    
-    /* Set basic attributes */
-    data->attributes = GE_ATTR_NORMAL;
-    
-    SDL_RWclose(file);
-    return true;
+    if (strlen(pattern) == 0) {
+        strcpy(pattern, "*");
+    }
 }
 
-void * 
-geFindFirstFile(const char *file_name, geFindData *find_data) 
+static void 
+fillFileData(GE_FIND_DATA* lpFindFileData, const char* filePath, const char* fileName) {
+    memset(lpFindFileData, 0, sizeof(GE_FIND_DATA));
+    strncpy(lpFindFileData->cFileName, fileName, sizeof(lpFindFileData->cFileName) - 1);
+    
+#ifdef _WIN32
+    WIN32_FIND_DATA winData;
+    HANDLE tempHandle = FindFirstFile(filePath, &winData);
+    if (tempHandle != INVALID_HANDLE_VALUE) {
+        lpFindFileData->dwFileAttributes = winData.dwFileAttributes;
+        lpFindFileData->ftCreationTime[0] = winData.ftCreationTime.dwLowDateTime;
+        lpFindFileData->ftCreationTime[1] = winData.ftCreationTime.dwHighDateTime;
+        lpFindFileData->ftLastAccessTime[0] = winData.ftLastAccessTime.dwLowDateTime;
+        lpFindFileData->ftLastAccessTime[1] = winData.ftLastAccessTime.dwHighDateTime;
+        lpFindFileData->ftLastWriteTime[0] = winData.ftLastWriteTime.dwLowDateTime;
+        lpFindFileData->ftLastWriteTime[1] = winData.ftLastWriteTime.dwHighDateTime;
+        lpFindFileData->nFileSizeHigh = winData.nFileSizeHigh;
+        lpFindFileData->nFileSizeLow = winData.nFileSizeLow;
+        FindClose(tempHandle);
+    }
+#else
+    struct stat statBuf;
+    
+    if (stat(filePath, &statBuf) == 0) {
+        
+        if (S_ISDIR(statBuf.st_mode))
+            lpFindFileData->dwFileAttributes |= GE_FILE_ATTRIBUTE_DIRECTORY;
+        
+        if (!(statBuf.st_mode & S_IWUSR))
+            lpFindFileData->dwFileAttributes |= GE_FILE_ATTRIBUTE_READONLY;
+        
+        /* File times - convert Unix time to equivalent representation
+           This is a simplification; a real implementation might need to convert 
+           between time formats more precisely
+        */
+        lpFindFileData->ftCreationTime[0]   = (uint32)statBuf.st_ctime;
+        lpFindFileData->ftLastAccessTime[0] = (uint32)statBuf.st_atime;
+        lpFindFileData->ftLastWriteTime[0]  = (uint32)statBuf.st_mtime;
+        
+        /* File size */
+        lpFindFileData->nFileSizeLow = (uint32)(statBuf.st_size & 0xFFFFFFFF);
+        lpFindFileData->nFileSizeHigh = (uint32)((statBuf.st_size >> 32) & 0xFFFFFFFF);
+        
+        /* Hidden files in Unix-like systems start with '.' */
+        if (fileName[0] == '.')
+            lpFindFileData->dwFileAttributes |= GE_FILE_ATTRIBUTE_HIDDEN;
+    }
+    
+    /* Handle special cases for . and .. */
+    if (strcmp(fileName, ".") == 0 || strcmp(fileName, "..") == 0) {
+        lpFindFileData->dwFileAttributes = GE_FILE_ATTRIBUTE_DIRECTORY;
+    }
+#endif
+}
+
+#ifndef _WIN32
+static int 
+mapAccessModeToFlags(uint32 dwDesiredAccess, uint32 dwCreationDisposition)
 {
-/*
-    geFile *file = malloc(sizeof(geFile));
-    if (!file) return NULL;
+    int flags = 0;
     
-    memset(find_data, 0, sizeof(geFindData));
+    // Access mode
+    if ((dwDesiredAccess & GE_GENERIC_READ) && (dwDesiredAccess & GE_GENERIC_WRITE))
+        flags |= O_RDWR;
+    else if (dwDesiredAccess & GE_GENERIC_WRITE)
+        flags |= O_WRONLY;
+    else
+        flags |= O_RDONLY;
     
-    SDL_RWops* dirHandle = SDL_RWFromFile(file_name, "rb");
-    if (!dirHandle) {
-        free(file);
-        return NULL;
+    // Creation disposition
+    switch (dwCreationDisposition) {
+        case GE_CREATE_NEW:
+            flags |= O_CREAT | O_EXCL;
+            break;
+        case GE_CREATE_ALWAYS:
+            flags |= O_CREAT | O_TRUNC;
+            break;
+        case GE_OPEN_EXISTING:
+            // No additional flags needed
+            break;
+        case GE_OPEN_ALWAYS:
+            flags |= O_CREAT;
+            break;
+        case GE_TRUNCATE_EXISTING:
+            flags |= O_TRUNC;
+            break;
     }
     
-    file->currentFile = dirHandle;
-    file->platformData = NULL;
-    
-    if (geFindData_populate(file_name, find_data)) {
-        return file;
+    return flags;
+}
+
+// Map Windows error code to equivalent POSIX
+static uint32 mapErrnoToWinError() {
+    switch (errno) {
+        case ENOENT:          return GE_ERROR_FILE_NOT_FOUND;
+        case EACCES:          return GE_ERROR_ACCESS_DENIED;
+        case EBADF:           return GE_ERROR_INVALID_HANDLE;
+        case EINVAL:          return GE_ERROR_INVALID_PARAMETER;
+        case ENOMEM:          return GE_ERROR_INSUFFICIENT_BUFFER;
+        case EAGAIN:          return GE_ERROR_IO_PENDING;
+        default:              return errno; // Return errno as-is for unmatched errors
+    }
+}
+#endif
+
+GE_FIND_HANDLE * 
+geFindFirstFile(const char *lpFileName, GE_FIND_DATA *lpFindFileData) 
+{
+    if (!lpFileName || !lpFindFileData) {
+        return GE_INVALID_HANDLE_VALUE;
     }
     
-    SDL_RWclose(dirHandle);
-    free(file);
-*/
-    return NULL;
+    GE_FIND_HANDLE* handle = (GE_FIND_HANDLE*)malloc(sizeof(GE_FIND_HANDLE));
+    if (!handle) {
+        return GE_INVALID_HANDLE_VALUE;
+    }
+    
+    memset(handle, 0, sizeof(GE_FIND_HANDLE));
+    strncpy(handle->searchPath, lpFileName, sizeof(handle->searchPath) - 1);
+    
+    char dirPath[260];
+    char pattern[260];
+    
+    extractPatternFromPath(lpFileName, dirPath, pattern);
+    strncpy(handle->basePath, dirPath, sizeof(handle->basePath) - 1);
+    strncpy(handle->searchPattern, pattern, sizeof(handle->searchPattern) - 1);
+    
+#ifdef _WIN32
+    handle->winHandle = FindFirstFile(lpFileName, (LPWIN32_FIND_DATA)lpFindFileData);
+    if (handle->winHandle == INVALID_HANDLE_VALUE) {
+        free(handle);
+        return GE_INVALID_HANDLE_VALUE;
+    }
+    
+    /* Convert Windows attributes to our format if needed */
+    handle->valid = true;
+    memcpy(&handle->currentData, lpFindFileData, sizeof(GE_FIND_DATA));
+    
+#else
+    handle->dir = opendir(dirPath);
+    if (!handle->dir) {
+        free(handle);
+        return GE_INVALID_HANDLE_VALUE;
+    }
+    
+    /* Find the first matching file */
+    while ((handle->entry = readdir(handle->dir)) != NULL) {
+        if (matchPattern(handle->entry->d_name, pattern)) {
+            char fullPath[520];
+            snprintf(fullPath, sizeof(fullPath), "%s%s", dirPath, handle->entry->d_name);
+            
+            fillFileData(lpFindFileData, fullPath, handle->entry->d_name);
+            
+            handle->valid = true;
+            memcpy(&handle->currentData, lpFindFileData, sizeof(GE_FIND_DATA));
+            break;
+        }
+    }
+    
+    if (!handle->valid) {
+        closedir(handle->dir);
+        free(handle);
+        return GE_INVALID_HANDLE_VALUE;
+    }
+#endif
+
+    return handle;
 }
 
 bool 
-geFindNextFile(void *handle, geFindData *find_data)
+geFindNextFile(GE_FIND_HANDLE *hFindFile, GE_FIND_DATA *lpFindFileData) 
 {
-/*
-    DirectorySearchState* searchState = (DirectorySearchState*)handle;
-    if (!searchState || !searchState->currentFile) return false;
+    if (!hFindFile || !lpFindFileData || !hFindFile->valid) {
+        return false;
+    }
     
-    int64 fileSize = SDL_RWsize(searchState->currentFile);
-    if (fileSize < 0) return false;
+#ifdef _WIN32
+    bool result = FindNextFile(hFindFile->winHandle, (LPWIN32_FIND_DATA)lpFindFileData);
+    if (!result) {
+        return false;
+    }
     
-    int64 currentPosition = SDL_RWtell(searchState->currentFile);
-    if (currentPosition < 0) return false;
+    memcpy(&hFindFile->currentData, lpFindFileData, sizeof(GE_FIND_DATA));
+    return true;
+#else
+    while ((hFindFile->entry = readdir(hFindFile->dir)) != NULL) {
+        if (matchPattern(hFindFile->entry->d_name, hFindFile->searchPattern)) {
+            char fullPath[520];
+            snprintf(fullPath, sizeof(fullPath), "%s%s", hFindFile->basePath, hFindFile->entry->d_name);
+            
+            fillFileData(lpFindFileData, fullPath, hFindFile->entry->d_name);
+            
+            memcpy(&hFindFile->currentData, lpFindFileData, sizeof(GE_FIND_DATA));
+            return true;
+        }
+    }
     
-    char filename[PATH_MAX];
-    uint64 bytesRead = SDL_RWread(searchState->currentFile, filename, 1, 256);
-    if (bytesRead <= 0) return false;
+    return false;
+#endif
+}
+
+bool 
+geFindClose(GE_FIND_HANDLE* hFindFile) 
+{
+    if (!hFindFile || hFindFile == GE_INVALID_HANDLE_VALUE) return false;
+    bool result = true;
     
-    // Populate find_data structure
-    memset(find_data, 0, sizeof(geFindData));
-    strncpy(find_data->filename, filename, sizeof(find_data->filename) - 1);
-    find_data->fileSize = (uint64)fileSize;
-*/
+#ifdef _WIN32
+    result = FindClose(hFindFile->winHandle);
+#else
+    if (hFindFile->dir) {
+        closedir(hFindFile->dir);
+    }
+#endif
+    
+    free(hFindFile);
+    return result;
+}
+
+void *
+geCreateFile(
+    const char   *lpFileName, 
+          uint32  dwDesiredAccess,
+          uint32  dwShareMode, 
+          void   *lpSecurityAttributes,
+          uint32  dwCreationDisposition, 
+          uint32  dwFlagsAndAttributes,
+           void  *hTemplateFile
+)
+{
+                       
+    if (!lpFileName) {
+        geLastError = GE_ERROR_INVALID_PARAMETER;
+        return GE_INVALID_HANDLE_VALUE;
+    }
+    
+    GE_FILE_HANDLE* handle = (GE_FILE_HANDLE*)malloc(sizeof(GE_FILE_HANDLE));
+    if (!handle) {
+        geLastError = GE_ERROR_INSUFFICIENT_BUFFER;
+        return GE_INVALID_HANDLE_VALUE;
+    }
+    
+    memset(handle, 0, sizeof(GE_FILE_HANDLE));
+    
+#ifdef _WIN32
+    // Windows implementation
+    handle->winHandle = CreateFile(
+        lpFileName,
+        dwDesiredAccess,
+        dwShareMode,
+        (LPSECURITY_ATTRIBUTES)lpSecurityAttributes,
+        dwCreationDisposition,
+        dwFlagsAndAttributes,
+        (HANDLE)hTemplateFile
+    );
+    
+    if (handle->winHandle == INVALID_HANDLE_VALUE) {
+        geLastError = GetLastError();
+        free(handle);
+        return GE_INVALID_HANDLE_VALUE;
+    }
+    
+    handle->valid = true;
+#else
+    // POSIX implementation
+    int flags = mapAccessModeToFlags(dwDesiredAccess, dwCreationDisposition);
+    mode_t mode = 0666;  // Default file permissions
+    
+    int fd = open(lpFileName, flags, mode);
+    if (fd < 0) {
+        geLastError = mapErrnoToWinError();
+        free(handle);
+        return GE_INVALID_HANDLE_VALUE;
+    }
+    
+    handle->fd = fd;
+    
+    // For convenience, also open as a FILE* for some operations
+    // Determine mode string based on access flags
+    const char* mode_str = "r";  // Default to read-only
+    
+    if ((dwDesiredAccess & GE_GENERIC_READ) && (dwDesiredAccess & GE_GENERIC_WRITE)) {
+        if (dwCreationDisposition == GE_TRUNCATE_EXISTING || dwCreationDisposition == GE_CREATE_ALWAYS)
+            mode_str = "w+";
+        else
+            mode_str = "r+";
+    } else if (dwDesiredAccess & GE_GENERIC_WRITE) {
+        if (dwCreationDisposition == GE_TRUNCATE_EXISTING || dwCreationDisposition == GE_CREATE_ALWAYS)
+            mode_str = "w";
+        else
+            mode_str = "a";
+    }
+    
+    // Use fdopen to create a FILE* from the file descriptor
+    handle->fp = fdopen(fd, mode_str);
+    
+    strncpy(handle->filename, lpFileName, sizeof(handle->filename) - 1);
+    handle->valid = true;
+#endif
+
+    geLastError = GE_ERROR_SUCCESS;
+    return handle;
+}
+
+bool 
+geCloseHandle(void *hObject)
+{
+    if (!hObject || hObject == GE_INVALID_HANDLE_VALUE) {
+        geLastError = GE_ERROR_INVALID_HANDLE;
+        return false;
+    }
+    
+    GE_FILE_HANDLE* handle = (GE_FILE_HANDLE*)hObject;
+    
+    if (!handle->valid) {
+        geLastError = GE_ERROR_INVALID_HANDLE;
+        return false;
+    }
+    
+    bool result = true;
+    
+#ifdef _WIN32
+    // Windows implementation
+    result = CloseHandle(handle->winHandle);
+    if (!result) {
+        geLastError = GetLastError();
+    }
+#else
+    // POSIX implementation
+    if (handle->fp) {
+        if (fclose(handle->fp) != 0) {
+            geLastError = mapErrnoToWinError();
+            result = false;
+        }
+    } else if (handle->fd >= 0) {
+        if (close(handle->fd) != 0) {
+            geLastError = mapErrnoToWinError();
+            result = false;
+        }
+    }
+#endif
+    
+    // Free the handle structure
+    free(handle);
+    
+    if (result) {
+        geLastError = GE_ERROR_SUCCESS;
+    }
+    return result;
+}
+
+bool 
+geWriteFile(
+    void       *hFile, 
+    const void *lpBuffer, 
+    uint32      nNumberOfBytesToWrite,
+    uint32     *lpNumberOfBytesWritten, 
+    void       *lpOverlapped
+)
+{
+    if (!hFile || hFile == GE_INVALID_HANDLE_VALUE || !lpBuffer || !nNumberOfBytesToWrite) {
+        geLastError = GE_ERROR_INVALID_PARAMETER;
+        return false;
+    }
+    
+    GE_FILE_HANDLE* handle = (GE_FILE_HANDLE*)hFile;
+    
+    if (!handle->valid) {
+        geLastError = GE_ERROR_INVALID_HANDLE;
+        return false;
+    }
+    
+    // Initialize bytes written to 0
+    if (lpNumberOfBytesWritten) {
+        *lpNumberOfBytesWritten = 0;
+    }
+    
+#ifdef _WIN32
+    // Windows implementation
+    BOOL result = WriteFile(
+        handle->winHandle,
+        lpBuffer,
+        nNumberOfBytesToWrite,
+        (LPDWORD)lpNumberOfBytesWritten,
+        (LPOVERLAPPED)lpOverlapped
+    );
+    
+    if (!result) {
+        geLastError = GetLastError();
+        return false;
+    }
+#else
+    // POSIX implementation
+    ssize_t written;
+    
+    // Use the FILE* if available, otherwise use the file descriptor
+    if (handle->fp) {
+        written = fwrite(lpBuffer, 1, nNumberOfBytesToWrite, handle->fp);
+        if (written < nNumberOfBytesToWrite && ferror(handle->fp)) {
+            geLastError = mapErrnoToWinError();
+            return false;
+        }
+    } else {
+        written = write(handle->fd, lpBuffer, nNumberOfBytesToWrite);
+        if (written < 0) {
+            geLastError = mapErrnoToWinError();
+            return false;
+        }
+    }
+    
+    if (lpNumberOfBytesWritten) {
+        *lpNumberOfBytesWritten = (written > 0) ? written : 0;
+    }
+#endif
+
+    geLastError = GE_ERROR_SUCCESS;
+    return true;
+}
+
+uint32
+geSetFilePointer(
+    void   *hFile, 
+    int32   lDistanceToMove,
+    int32  *lpDistanceToMoveHigh, 
+    uint32  dwMoveMethod
+)
+{
+    if (!hFile || hFile == GE_INVALID_HANDLE_VALUE) {
+        geLastError = GE_ERROR_INVALID_HANDLE;
+        return (uint32)-1; // INVALID_SET_FILE_POINTER
+    }
+    
+    GE_FILE_HANDLE* handle = (GE_FILE_HANDLE*)hFile;
+    
+    if (!handle->valid) {
+        geLastError = GE_ERROR_INVALID_HANDLE;
+        return (uint32)-1;
+    }
+    
+#ifdef _WIN32
+    // Windows implementation
+    DWORD result = SetFilePointer(
+        handle->winHandle,
+        lDistanceToMove,
+        (PLONG)lpDistanceToMoveHigh,
+        dwMoveMethod
+    );
+    
+    if (result == INVALID_SET_FILE_POINTER) {
+        geLastError = GetLastError();
+        return (uint32)-1;
+    }
+    
+    return result;
+#else
+    // POSIX implementation
+    int whence;
+    switch (dwMoveMethod) {
+        case GE_FILE_BEGIN:
+            whence = SEEK_SET;
+            break;
+        case GE_FILE_CURRENT:
+            whence = SEEK_CUR;
+            break;
+        case GE_FILE_END:
+            whence = SEEK_END;
+            break;
+        default:
+            geLastError = GE_ERROR_INVALID_PARAMETER;
+            return (uint32)-1;
+    }
+    
+    // Use high part if provided
+    off_t distance = lDistanceToMove;
+    if (lpDistanceToMoveHigh) {
+        distance |= ((off_t)*lpDistanceToMoveHigh << 32);
+    }
+    
+    off_t newPos;
+    
+    // Use FILE* if available, otherwise use file descriptor
+    if (handle->fp) {
+        if (fseeko(handle->fp, distance, whence) != 0) {
+            geLastError = mapErrnoToWinError();
+            return (uint32)-1;
+        }
+        newPos = ftello(handle->fp);
+    } else {
+        newPos = lseek(handle->fd, distance, whence);
+        if (newPos == (off_t)-1) {
+            geLastError = mapErrnoToWinError();
+            return (uint32)-1;
+        }
+    }
+    
+    // Set high part if provided
+    if (lpDistanceToMoveHigh) {
+        *lpDistanceToMoveHigh = (int32)(newPos >> 32);
+    }
+    
+    geLastError = GE_ERROR_SUCCESS;
+    return (uint32)(newPos & 0xFFFFFFFF);
+#endif
+}
+
+uint32
+geGetLastError(void)
+{
+#ifdef _WIN32
+    // On Windows, we can use the native GetLastError()
+    return GetLastError();
+#else
+    // On other platforms, return our thread-local error code
+    return geLastError;
+#endif
+}
+
+
+bool geReadFile(void* hFile, void* lpBuffer, uint32 nNumberOfBytesToRead,
+               uint32* lpNumberOfBytesRead, void* lpOverlapped) {
+    if (!hFile || hFile == GE_INVALID_HANDLE_VALUE || !lpBuffer) {
+        geLastError = GE_ERROR_INVALID_PARAMETER;
+        return false;
+    }
+    
+    GE_FILE_HANDLE* handle = (GE_FILE_HANDLE*)hFile;
+    
+    if (!handle->valid) {
+        geLastError = GE_ERROR_INVALID_HANDLE;
+        return false;
+    }
+    
+    // Initialize bytes read to 0
+    if (lpNumberOfBytesRead) {
+        *lpNumberOfBytesRead = 0;
+    }
+    
+#ifdef _WIN32
+    // Windows implementation
+    BOOL result = ReadFile(
+        handle->winHandle,
+        lpBuffer,
+        nNumberOfBytesToRead,
+        (LPDWORD)lpNumberOfBytesRead,
+        (LPOVERLAPPED)lpOverlapped
+    );
+    
+    if (!result) {
+        geLastError = GetLastError();
+        return false;
+    }
+#else
+    // POSIX implementation
+    ssize_t bytesRead;
+    
+    // Use the FILE* if available, otherwise use the file descriptor
+    if (handle->fp) {
+        bytesRead = fread(lpBuffer, 1, nNumberOfBytesToRead, handle->fp);
+        if (bytesRead < nNumberOfBytesToRead && ferror(handle->fp)) {
+            geLastError = mapErrnoToWinError();
+            return false;
+        }
+    } else {
+        bytesRead = read(handle->fd, lpBuffer, nNumberOfBytesToRead);
+        if (bytesRead < 0) {
+            geLastError = mapErrnoToWinError();
+            return false;
+        }
+    }
+    
+    if (lpNumberOfBytesRead) {
+        *lpNumberOfBytesRead = (bytesRead > 0) ? bytesRead : 0;
+    }
+#endif
+
+    geLastError = GE_ERROR_SUCCESS;
+    return true;
+}
+
+// ---- GetFileSize Implementation ----
+
+bool geGetFileSize(void* hFile, uint32* lpFileSizeHigh) {
+    if (!hFile || hFile == GE_INVALID_HANDLE_VALUE) {
+        geLastError = GE_ERROR_INVALID_HANDLE;
+        return 0;
+    }
+    
+    GE_FILE_HANDLE* handle = (GE_FILE_HANDLE*)hFile;
+    
+    if (!handle->valid) {
+        geLastError = GE_ERROR_INVALID_HANDLE;
+        return 0;
+    }
+    
+#ifdef _WIN32
+    // Windows implementation
+    DWORD highSize = 0;
+    DWORD lowSize = GetFileSize(handle->winHandle, &highSize);
+    
+    if (lowSize == INVALID_FILE_SIZE && GetLastError() != NO_ERROR) {
+        geLastError = GetLastError();
+        return 0;
+    }
+    
+    if (lpFileSizeHigh) {
+        *lpFileSizeHigh = highSize;
+    }
+    
+    return lowSize;
+#else
+    // POSIX implementation
+    off_t currentPos = 0;
+    off_t size = 0;
+    
+    // Save current position
+    if (handle->fp) {
+        currentPos = ftello(handle->fp);
+        if (currentPos < 0) {
+            geLastError = mapErrnoToWinError();
+            return 0;
+        }
+        
+        // Seek to end to get size
+        if (fseeko(handle->fp, 0, SEEK_END) != 0) {
+            geLastError = mapErrnoToWinError();
+            return 0;
+        }
+        
+        size = ftello(handle->fp);
+        
+        // Restore original position
+        if (fseeko(handle->fp, currentPos, SEEK_SET) != 0) {
+            geLastError = mapErrnoToWinError();
+            return 0;
+        }
+    } else {
+        currentPos = lseek(handle->fd, 0, SEEK_CUR);
+        if (currentPos < 0) {
+            geLastError = mapErrnoToWinError();
+            return 0;
+        }
+        
+        // Seek to end to get size
+        size = lseek(handle->fd, 0, SEEK_END);
+        if (size < 0) {
+            geLastError = mapErrnoToWinError();
+            return 0;
+        }
+        
+        // Restore original position
+        if (lseek(handle->fd, currentPos, SEEK_SET) < 0) {
+            geLastError = mapErrnoToWinError();
+            return 0;
+        }
+    }
+    
+    if (lpFileSizeHigh) {
+        *lpFileSizeHigh = (uint32)(size >> 32);
+    }
+    
+    geLastError = GE_ERROR_SUCCESS;
+    return (uint32)(size & 0xFFFFFFFF);
+#endif
+}
+
+// ---- GetFileInformationByHandle Implementation ----
+
+bool 
+geGetFileInformationByHandle(void *hFile, GE_BY_HANDLE_FILE_INFORMATION *lpFileInformation)
+{
+    if (!hFile || hFile == GE_INVALID_HANDLE_VALUE || !lpFileInformation) {
+        geLastError = GE_ERROR_INVALID_PARAMETER;
+        return false;
+    }
+    
+    GE_FILE_HANDLE* handle = (GE_FILE_HANDLE*)hFile;
+    
+    if (!handle->valid) {
+        geLastError = GE_ERROR_INVALID_HANDLE;
+        return false;
+    }
+    
+    // Initialize structure
+    memset(lpFileInformation, 0, sizeof(GE_BY_HANDLE_FILE_INFORMATION));
+    
+#ifdef _WIN32
+    // Windows implementation
+    BY_HANDLE_FILE_INFORMATION info;
+    if (!GetFileInformationByHandle(handle->winHandle, &info)) {
+        geLastError = GetLastError();
+        return false;
+    }
+    
+    lpFileInformation->dwFileAttributes = info.dwFileAttributes;
+    lpFileInformation->ftCreationTime[GE_LOW] = info.ftCreationTime.dwLowDateTime;
+    lpFileInformation->ftCreationTime[GE_HIGH] = info.ftCreationTime.dwHighDateTime;
+    lpFileInformation->ftLastAccessTime[GE_LOW] = info.ftLastAccessTime.dwLowDateTime;
+    lpFileInformation->ftLastAccessTime[GE_HIGH] = info.ftLastAccessTime.dwHighDateTime;
+    lpFileInformation->ftLastWriteTime[GE_LOW] = info.ftLastWriteTime.dwLowDateTime;
+    lpFileInformation->ftLastWriteTime[GE_HIGH] = info.ftLastWriteTime.dwHighDateTime;
+    lpFileInformation->dwVolumeSerialNumber = info.dwVolumeSerialNumber;
+    lpFileInformation->nFileSizeHigh = info.nFileSizeHigh;
+    lpFileInformation->nFileSizeLow = info.nFileSizeLow;
+    lpFileInformation->nNumberOfLinks = info.nNumberOfLinks;
+    lpFileInformation->nFileIndexHigh = info.nFileIndexHigh;
+    lpFileInformation->nFileIndexLow = info.nFileIndexLow;
+#else
+    // POSIX implementation
+    struct stat st;
+    int result;
+    
+    if (handle->fp) {
+        result = fstat(fileno(handle->fp), &st);
+    } else {
+        result = fstat(handle->fd, &st);
+    }
+    
+    if (result != 0) {
+        geLastError = mapErrnoToWinError();
+        return false;
+    }
+    
+    // Fill in the structure with the available information
+    // File attributes
+    if (S_ISDIR(st.st_mode))
+        lpFileInformation->dwFileAttributes |= GE_FILE_ATTRIBUTE_DIRECTORY;
+    if (!(st.st_mode & S_IWUSR))
+        lpFileInformation->dwFileAttributes |= GE_FILE_ATTRIBUTE_READONLY;
+    
+    // File times
+    lpFileInformation->ftCreationTime[0] = (uint32)st.st_ctime;
+    lpFileInformation->ftLastAccessTime[0] = (uint32)st.st_atime;
+    lpFileInformation->ftLastWriteTime[0] = (uint32)st.st_mtime;
+    
+    // File size
+    lpFileInformation->nFileSizeLow = (uint32)(st.st_size & 0xFFFFFFFF);
+    lpFileInformation->nFileSizeHigh = (uint32)((st.st_size >> 32) & 0xFFFFFFFF);
+    
+    // Number of links
+    lpFileInformation->nNumberOfLinks = st.st_nlink;
+    
+    // File index (inode on POSIX)
+    lpFileInformation->nFileIndexLow = (uint32)(st.st_ino & 0xFFFFFFFF);
+    lpFileInformation->nFileIndexHigh = (uint32)((st.st_ino >> 32) & 0xFFFFFFFF);
+    
+    // Volume serial number (device ID on POSIX)
+    lpFileInformation->dwVolumeSerialNumber = st.st_dev;
+#endif
+
+    geLastError = GE_ERROR_SUCCESS;
+    return true;
+}
+
+// ---- SetEndOfFile Implementation ----
+
+bool 
+geSetEndOfFile(void* hFile)
+{
+    if (!hFile || hFile == GE_INVALID_HANDLE_VALUE) {
+        geLastError = GE_ERROR_INVALID_HANDLE;
+        return false;
+    }
+    
+    GE_FILE_HANDLE* handle = (GE_FILE_HANDLE*)hFile;
+    
+    if (!handle->valid) {
+        geLastError = GE_ERROR_INVALID_HANDLE;
+        return false;
+    }
+    
+#ifdef _WIN32
+    // Windows implementation
+    if (!SetEndOfFile(handle->winHandle)) {
+        geLastError = GetLastError();
+        return false;
+    }
+#else
+    // POSIX implementation
+    off_t currentPos;
+    
+    if (handle->fp) {
+        currentPos = ftello(handle->fp);
+        if (currentPos < 0) {
+            geLastError = mapErrnoToWinError();
+            return false;
+        }
+        
+        if (ftruncate(fileno(handle->fp), currentPos) != 0) {
+            geLastError = mapErrnoToWinError();
+            return false;
+        }
+    } else {
+        currentPos = lseek(handle->fd, 0, SEEK_CUR);
+        if (currentPos < 0) {
+            geLastError = mapErrnoToWinError();
+            return false;
+        }
+        
+        if (ftruncate(handle->fd, currentPos) != 0) {
+            geLastError = mapErrnoToWinError();
+            return false;
+        }
+    }
+#endif
+
+    geLastError = GE_ERROR_SUCCESS;
+    return true;
+}
+
+// ---- SetFileAttributes Implementation ----
+
+bool 
+geSetFileAttributes(const char *lpFileName, uint32 dwFileAttributes)
+{
+    if (!lpFileName) {
+        geLastError = GE_ERROR_INVALID_PARAMETER;
+        return false;
+    }
+    
+#ifdef _WIN32
+    // Windows implementation
+    if (!SetFileAttributes(lpFileName, dwFileAttributes)) {
+        geLastError = GetLastError();
+        return false;
+    }
+#else
+    // POSIX implementation
+    struct stat st;
+    if (stat(lpFileName, &st) != 0) {
+        geLastError = mapErrnoToWinError();
+        return false;
+    }
+    
+    mode_t mode = st.st_mode;
+    
+    // Handle read-only attribute
+    if (dwFileAttributes & GE_FILE_ATTRIBUTE_READONLY) {
+        // Remove write permissions
+        mode &= ~(S_IWUSR | S_IWGRP | S_IWOTH);
+    } else {
+        // Add write permissions (for owner only)
+        mode |= S_IWUSR;
+    }
+    
+    // Apply the new permissions
+    if (chmod(lpFileName, mode) != 0) {
+        geLastError = mapErrnoToWinError();
+        return false;
+    }
+    
+    // Note: Many Windows file attributes don't have direct POSIX equivalents
+    // (HIDDEN, SYSTEM, etc.) and are ignored in this implementation
+#endif
+
+    geLastError = GE_ERROR_SUCCESS;
+    return true;
+}
+
+// ---- SetFileTime Implementation ----
+
+bool 
+geSetFileTime(
+          void   *hFile, 
+    const uint32 *lpCreationTime,
+    const uint32 *lpLastAccessTime,
+    const uint32 *lpLastWriteTime
+) 
+{
+    if (!hFile || hFile == GE_INVALID_HANDLE_VALUE) {
+        geLastError = GE_ERROR_INVALID_HANDLE;
+        return false;
+    }
+    
+    GE_FILE_HANDLE* handle = (GE_FILE_HANDLE*)hFile;
+    
+    if (!handle->valid) {
+        geLastError = GE_ERROR_INVALID_HANDLE;
+        return false;
+    }
+    
+#ifdef _WIN32
+    // Windows implementation
+    FILETIME creationTime, lastAccessTime, lastWriteTime;
+    LPFILETIME pCreationTime = NULL, pLastAccessTime = NULL, pLastWriteTime = NULL;
+    
+    if (lpCreationTime) {
+        creationTime.dwLowDateTime = lpCreationTime[0];
+        creationTime.dwHighDateTime = lpCreationTime[1];
+        pCreationTime = &creationTime;
+    }
+    
+    if (lpLastAccessTime) {
+        lastAccessTime.dwLowDateTime = lpLastAccessTime[0];
+        lastAccessTime.dwHighDateTime = lpLastAccessTime[1];
+        pLastAccessTime = &lastAccessTime;
+    }
+    
+    if (lpLastWriteTime) {
+        lastWriteTime.dwLowDateTime = lpLastWriteTime[0];
+        lastWriteTime.dwHighDateTime = lpLastWriteTime[1];
+        pLastWriteTime = &lastWriteTime;
+    }
+    
+    if (!SetFileTime(handle->winHandle, pCreationTime, pLastAccessTime, pLastWriteTime)) {
+        geLastError = GetLastError();
+        return false;
+    }
+#else
+    // POSIX implementation
+    struct utimbuf times;
+    struct stat st;
+    int fd;
+    
+    if (handle->fp) {
+        fd = fileno(handle->fp);
+    } else {
+        fd = handle->fd;
+    }
+    
+    if (fstat(fd, &st) != 0) {
+        geLastError = mapErrnoToWinError();
+        return false;
+    }
+    
+    // Initialize with current times
+    times.actime = st.st_atime;
+    times.modtime = st.st_mtime;
+    
+    // Update access time if provided
+    if (lpLastAccessTime) {
+        times.actime = lpLastAccessTime[0];
+    }
+    
+    // Update modification time if provided
+    if (lpLastWriteTime) {
+        times.modtime = lpLastWriteTime[0];
+    }
+    
+    // Apply the new times - note that creation time is not supported in POSIX
+    if (utime(handle->filename, &times) != 0) {
+        geLastError = mapErrnoToWinError();
+        return false;
+    }
+    
+    // Note: CreationTime is ignored in POSIX as it doesn't have a direct equivalent
+#endif
+
+    geLastError = GE_ERROR_SUCCESS;
     return true;
 }
 
 bool 
-geFindClose(void *handle) 
+geDeleteFile(const char* lpFileName)
 {
-/*
-    DirectorySearchState *searchState = (DirectorySearchState*)handle;
-    if (!searchState) return false;
-    
-    if (searchState->currentFile) {
-        SDL_RWclose(searchState->currentFile);
+    if (!lpFileName) {
+        geLastError = GE_ERROR_INVALID_PARAMETER;
+        return false;
     }
-    free(searchState);
-*/
+    
+#ifdef _WIN32
+    // Windows implementation
+    if (!DeleteFile(lpFileName)) {
+        geLastError = GetLastError();
+        return false;
+    }
+#else
+    // POSIX implementation
+    if (unlink(lpFileName) != 0) {
+        geLastError = mapErrnoToWinError();
+        return false;
+    }
+#endif
+
+    geLastError = GE_ERROR_SUCCESS;
     return true;
+}
+
+bool 
+geMoveFile(const char* lpExistingFileName, const char* lpNewFileName)
+{
+    if (!lpExistingFileName || !lpNewFileName) {
+        geLastError = GE_ERROR_INVALID_PARAMETER;
+        return false;
+    }
+    
+#ifdef _WIN32
+    // Windows implementation
+    if (!MoveFile(lpExistingFileName, lpNewFileName)) {
+        geLastError = GetLastError();
+        return false;
+    }
+#else
+    // POSIX implementation
+    if (rename(lpExistingFileName, lpNewFileName) != 0) {
+        geLastError = mapErrnoToWinError();
+        return false;
+    }
+#endif
+
+    geLastError = GE_ERROR_SUCCESS;
+    return true;
+}
+
+bool 
+geCreateDirectory(const char* lpPathName, void* lpSecurityAttributes) 
+{
+    if (!lpPathName) {
+        geLastError = GE_ERROR_INVALID_PARAMETER;
+        return false;
+    }
+    
+#ifdef _WIN32
+    // Windows implementation
+    bool result = CreateDirectory(lpPathName, (LPSECURITY_ATTRIBUTES)lpSecurityAttributes);
+    
+    if (!result) {
+        geLastError = GetLastError();
+        return false;
+    }
+#else
+    // POSIX implementation
+    // Default directory permissions (rwxr-xr-x)
+    mode_t mode = S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH;
+    
+    if (mkdir(lpPathName, mode) != 0) {
+        geLastError = mapErrnoToWinError();
+        return false;
+    }
+#endif
+
+    geLastError = GE_ERROR_SUCCESS;
+    return true;
+}
+
+uint32
+geGetFileAttributes(const char *lpFileName)
+{
+    if (!lpFileName) {
+        geLastError = GE_ERROR_INVALID_PARAMETER;
+        return GE_INVALID_FILE_ATTRIBUTES;
+    }
+    
+#ifdef _WIN32
+    uint32 attrs = GetFileAttributes(lpFileName);
+    if (attrs == GE_INVALID_FILE_ATTRIBUTES) {
+        geLastError = GetLastError();
+    } else {
+        geLastError = GE_ERROR_SUCCESS;
+    }
+    return attrs;
+#else
+    struct stat statBuf;
+    
+    if (stat(lpFileName, &statBuf) != 0) {
+        geLastError = mapErrnoToWinError();
+        return GE_INVALID_FILE_ATTRIBUTES;
+    }
+    
+    uint32 attributes = 0;
+    
+    /* Map POSIX mode flags to Windows attributes */
+    if (S_ISDIR(statBuf.st_mode))
+        attributes |= GE_FILE_ATTRIBUTE_DIRECTORY;
+    
+    if (!(statBuf.st_mode & S_IWUSR))
+        attributes |= GE_FILE_ATTRIBUTE_READONLY;
+    
+    /* Hidden files in Unix-like systems start with '.' */
+    const char* filename = strrchr(lpFileName, '/');
+    if (filename) {
+        filename++; /* Skip the slash */
+    } else {
+        filename = lpFileName;
+    }
+    
+    if (filename[0] == '.')
+        attributes |= GE_FILE_ATTRIBUTE_HIDDEN;
+    
+    /* If no specific attributes, use NORMAL */
+    if (attributes == 0)
+        attributes = GE_FILE_ATTRIBUTE_NORMAL;
+    
+    geLastError = GE_ERROR_SUCCESS;
+    return attributes;
+#endif
 }
 
 

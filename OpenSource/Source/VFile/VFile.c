@@ -48,13 +48,14 @@
 #include "VFile_private.h"
 
 //#include	"FSOps.h"
+/*
 #ifdef _WIN32
 	#include "FSDOS.h"
 #else
 	#include "FSDisk.h"
 	#define FSDos_GetAPIs FSDisk_GetAPIs
 #endif /* _WIN32 */
-
+#include "FSDOS.h"
 #include "FSMemory.h"
 #include "FSVFS.h"
 
@@ -123,12 +124,10 @@ static	geBoolean	RegisterBuiltInAPIs(void)
 	if	(BuiltInAPIsRegistered == GE_TRUE)
 		return GE_TRUE;
 
-#if defined(__MSDOS__) || defined(MSDOS)
 	if	(geVFile_RegisterFileSystemInternal(FSDos_GetAPIs(), &Type) == GE_FALSE)
 		return GE_FALSE;
 	if	(Type != GE_VFILE_TYPE_DOS)
 		return GE_FALSE;
-#endif /* __MSDOS__ || MSDOS */
 
 	if	(geVFile_RegisterFileSystemInternal(FSMemory_GetAPIs(), &Type) == GE_FALSE)
 		return GE_FALSE;
@@ -196,16 +195,16 @@ geVFile_OpenNewSystem(
 	      void               *FSData;
 	      geVFile            *BaseFile;
 
-
-	if	(RegisterBuiltInAPIs() == GE_FALSE)
-		return GE_FALSE;
-
+	DBG_OUT("Entered geVFile_OpenNewSystem()");
+	if	(!RegisterBuiltInAPIs())
+		return false;
+	DBG_OUT("geVFile_OpenNewSystem()\tPassed 1st Check");
 	if	((FileSystemType == 0) || (FileSystemType > SystemCount))
 		return NULL;
-
-	if	(CheckOpenFlags(OpenModeFlags) == GE_FALSE)
+	DBG_OUT("geVFile_OpenNewSystem()\tPassed 2nd Check");
+	if	(!CheckOpenFlags(OpenModeFlags))
 		return NULL;
-
+	DBG_OUT("geVFile_OpenNewSystem()\tPassed Checks");
 	// Sugarcoating support for a taste test
 	if	(FS == NULL && FileSystemType == GE_VFILE_TYPE_VIRTUAL)
 	{
@@ -224,41 +223,39 @@ geVFile_OpenNewSystem(
 	}
 	else
 		BaseFile = NULL;
-
+	DBG_OUT("geVFile_OpenNewSystem()\tHas BaseFile");
 	APIs = RegisteredAPIs[FileSystemType - 1];
 	assert(APIs);
 	FSData = APIs->OpenNewSystem(FS, Name, Context, OpenModeFlags);
 
-	if	(!FSData)
-	{
-		if	(BaseFile)
-			geVFile_Close(BaseFile);
+	if (!FSData) {
+		if (BaseFile) geVFile_Close(BaseFile);
+		DBG_OUT("geVFile_OpenNewSystem()\tNo FSData :'(");
 		return NULL;
 	}
-
 	File = geRam_Allocate(sizeof(*File));
-	if	(!File)
-	{
-		if	(BaseFile)
-			geVFile_Close(BaseFile);
+	if (!File) {
+		if (BaseFile) geVFile_Close(BaseFile);
 		APIs->Close(FSData);
+		DBG_OUT("geVFile_OpenNewSystem()\tCouldn't allocate File :'(");
 		return NULL;
 	}
+	DBG_OUT("geVFile_OpenNewSystem()\tHas FSData and File");
+	
+	File->SystemType = FileSystemType;
+	File->APIs       =  APIs;
+	File->FSData     = FSData;
+	File->SearchList = geRam_Allocate(sizeof(*File->SearchList));
+	File->BaseFile   = BaseFile;
 
-	File->SystemType =	FileSystemType;
-	File->APIs = 		APIs;
-	File->FSData = 		FSData;
-	File->SearchList = 	geRam_Allocate(sizeof(*File->SearchList));
-	File->BaseFile = 	BaseFile;
-
-	if	(!File->SearchList)
-	{
-		if	(BaseFile)
-			geVFile_Close(BaseFile);
+	if (!File->SearchList) {
+		if (BaseFile) geVFile_Close(BaseFile);
 		geRam_Free(File);
 		APIs->Close(FSData);
+		DBG_OUT("geVFile_OpenNewSystem()\tNo File->SearchList :'(");
 		return NULL;
 	}
+	DBG_OUT("geVFile_OpenNewSystem()\tHas File->SearchList");
 
 	File->SearchList->FS 	= File;
 	File->SearchList->Next	= NULL;
@@ -370,8 +367,7 @@ static	FSSearchList *	CopySearchList(const FSSearchList *SearchList)
 	FSSearchList *	Tail;
 
 	NewList = Tail = NULL;
-	while	(SearchList)
-	{
+	while (SearchList) {
 		FSSearchList *	Temp;
 
 		Temp = geRam_Allocate(sizeof(*Tail));

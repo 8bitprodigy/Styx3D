@@ -119,7 +119,7 @@ SUPPORT_SRCS = \
 
 VFILE_SRCS = \
 	VFile/DirTree.c \
-	VFile/FSDisk.c \
+	VFile/FSDOS.c \
 	VFile/FSMemory.c \
 	VFile/FSVFS.c \
 	VFile/VFile.c
