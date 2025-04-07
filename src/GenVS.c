@@ -269,7 +269,7 @@ PickMode(
 //=====================================================================================
 //	WinMain
 //=====================================================================================
-/*
+#ifdef _WIN32
 #pragma warning (disable: 4028)
 int WINAPI 
 WinMain(
@@ -278,9 +278,10 @@ WinMain(
 	LPSTR lpszCmdParam, 
 	int nCmdShow
 )
-*/
+#else
 int 
 main(int argc, char *argv[]) 
+#endif
 {
 	//MSG              Msg;
 	SDL_Event        event;
@@ -291,6 +292,7 @@ main(int argc, char *argv[])
     char            *CmdLine = (argc > 1) ? argv[1] : NULL;
     int32           i;
     uint64          
+					SystemTime,
 	                Freq, 
 	                OldTick, 
 	                CurTick;
@@ -319,9 +321,9 @@ main(int argc, char *argv[])
 	for (i=0; i<255; i++) {
 		NewKeyDown(i);		// Need to flush all the keys
 	}
-/*
-	GetSystemTime(&SystemTime);
 
+	SystemTime = SDL_GetTicks64();
+/*
 #if 0
 	if	(SystemTime.wYear > 1999 || SystemTime.wMonth > 11)
 	{
@@ -335,7 +337,7 @@ main(int argc, char *argv[])
 
 // set the currrent directory to where the exe is
 	{
-		printf("Getting base path\n");
+		DBG_OUT("Getting base path");
 		int   i;
 		char *PathBuf = geGetExecutablePath();
 		
@@ -344,29 +346,21 @@ main(int argc, char *argv[])
 		{
 			GenVS_Error("Could not get exe file name.");
 		}
-		printf("PathBuf:\t%s\n", PathBuf);
+		DBG_OUT("PathBuf:\t%s", PathBuf);
 		// strip off exe name to leave path
-		for (i=strlen(PathBuf)-1; i>0; i--)
-		{
-		#ifdef _WIN32 /* B-cuz windurz is speshul */
-			if (PathBuf[i]=='\\')
-		#else
-			if (PathBuf[i]=='/')
-		#endif /* _WIN32 */
-			{
+		for (i=strlen(PathBuf)-1; i>0; i--) {
+			if (PathBuf[i]==PATH_SEPARATOR) {
 				PathBuf[i]=0;
 				break;
 			}
 		}
-		if (i==0)
-		{
+		if (!i) {
 			GenVS_Error("Could not parse exe's path from exe name.");
 		}
-		printf("PathBuf without exe:\t%s\n",PathBuf);
+		DBG_OUT("PathBuf without exe:\t%s",PathBuf);
 		// move the current working directory to the executables directory.
 		// this is a little rude
-		if (chdir(PathBuf)==-1)
-		{
+		if (chdir(PathBuf)==-1) {
 			GenVS_Error("Could not change current working directory to exe's path.");
 		}
 	}

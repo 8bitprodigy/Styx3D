@@ -3,3 +3,5 @@
 *.patch
 *.o
 *.a
+*.so
+GTest

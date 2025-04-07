@@ -8,6 +8,8 @@
     #include <windows.h>
     
     #define geModule HMODULE
+    #define PATH_SEPARATOR '\\'
+    #define PATH_MAX MAX_PATH
 #else
     #include <limits.h>
     #include <dirent.h>
@@ -17,6 +19,7 @@
     #include <sys/stat.h>
     #include <time.h>
     #include <unistd.h>
+    #define PATH_SEPARATOR '/'
     #ifdef _DEBUG
         #include <stdio.h>
         #include <stdlib.h>
@@ -55,26 +58,26 @@
 #define GE_FILE_SHARE_DELETE          0x00000004
 
 // Creation dispositions
-#define GE_CREATE_NEW                 1
-#define GE_CREATE_ALWAYS              2
-#define GE_OPEN_EXISTING              3
-#define GE_OPEN_ALWAYS                4
-#define GE_TRUNCATE_EXISTING          5
+#define GE_CREATE_NEW                   1
+#define GE_CREATE_ALWAYS                2
+#define GE_OPEN_EXISTING                3
+#define GE_OPEN_ALWAYS                  4
+#define GE_TRUNCATE_EXISTING            5
 
 // File attributes
 #define GE_FILE_ATTRIBUTE_NORMAL      0x00000080
 
 // Seek methods
-#define GE_FILE_BEGIN                 0
-#define GE_FILE_CURRENT               1
-#define GE_FILE_END                   2
+#define GE_FILE_BEGIN                   0
+#define GE_FILE_CURRENT                 1
+#define GE_FILE_END                     2
 
 // Error codes
-#define GE_ERROR_SUCCESS              0
-#define GE_ERROR_FILE_NOT_FOUND       2
-#define GE_ERROR_ACCESS_DENIED        5
-#define GE_ERROR_INVALID_HANDLE       6
-#define GE_ERROR_INVALID_PARAMETER    87
+#define GE_ERROR_SUCCESS                0
+#define GE_ERROR_FILE_NOT_FOUND         2
+#define GE_ERROR_ACCESS_DENIED          5
+#define GE_ERROR_INVALID_HANDLE         6
+#define GE_ERROR_INVALID_PARAMETER     87
 #define GE_ERROR_INSUFFICIENT_BUFFER  122
 #define GE_ERROR_IO_PENDING           997
 
@@ -99,36 +102,39 @@ GE_BY_HANDLE_FILE_INFORMATION
 } 
 GE_BY_HANDLE_FILE_INFORMATION;
 
-typedef struct 
-GE_FIND_DATA 
-{
-    uint32 dwFileAttributes;
-    uint32 ftCreationTime[2];
-    uint32 ftLastAccessTime[2];
-    uint32 ftLastWriteTime[2];
-    uint32 nFileSizeHigh;
-    uint32 nFileSizeLow;
-    uint32 dwReserved0;
-    uint32 dwReserved1;
-    char cFileName[260];
-    char cAlternateFileName[14];
-} 
-GE_FIND_DATA;
+#ifdef _WIN32
+    #define GE_FIND_DATA WIN32_FIND_DATA
+#else
+    typedef struct 
+    GE_FIND_DATA 
+    {
+        uint32 fileAttributes;
+        uint32 ftCreationTime[2];
+        uint32 ftLastAccessTime[2];
+        uint32 ftLastWriteTime[2];
+        uint32 fileSizeHigh;
+        uint32 fileSizeLow;
+        uint32 reserved[2];
+        char   fileName[PATH_MAX];
+        char   alternateFileName[14];
+    } 
+    GE_FIND_DATA;
+#endif
 
 typedef struct
 GE_FIND_HANDLE
 {
-    bool valid;
-    char searchPath[260];
-    char searchPattern[260];
+    bool         valid;
+    char         searchPath[260];
+    char         searchPattern[260];
     GE_FIND_DATA currentData;
     
     #ifdef _WIN32
-        HANDLE winHandle;
+               HANDLE  winHandle;
     #else
-        DIR *dir;
+               DIR    *dir;
         struct dirent *entry;
-        char basePath[260];
+               char    basePath[260];
     #endif
 } 
 GE_FIND_HANDLE;
@@ -140,26 +146,34 @@ GE_FILE_HANDLE
     #ifdef _WIN32
         HANDLE winHandle;
     #else
-        int fd;
-        FILE* fp;  // Optional stdio FILE* for convenience
-        char filename[260];
+        int   fd;
+        FILE *fp;  // Optional stdio FILE* for convenience
+        char  filename[260];
     #endif
 } 
 GE_FILE_HANDLE;
+
+typedef struct
+GE_FIND_FILE
+{
+    DIR  *dir;
+    char *filter;
+}
+GE_FIND_FILE;
 
 //#define GE_INVALID_HANDLE_VALUE ((GE_FIND_HANDLE*)NULL)
 
 typedef struct DynamicLibrary DynamicLibrary;
 typedef struct geFindData     geFindData;
 
-static void    geNormalizePath(          char     *path); 
-inline bool    geGetUserName(            char     *player_name,      uint32     *size);
-inline uint32  geGetCurrentDir(          uint32    size,             char       *path);
-inline char   *geGetExecutablePath(void);
+static void            geNormalizePath(             char           *path); 
+inline bool            geGetUserName(               char           *player_name,              uint32                        *size);
+inline uint32          geGetCurrentDir(             uint32          size,                     char                          *path);
+inline char           *geGetExecutablePath(void);
 
-       GE_FIND_HANDLE *geFindFirstFile(    const    char           *lpFileName,               GE_FIND_DATA                  *lpFindFileData);
-       bool            geFindNextFile(              GE_FIND_HANDLE *hFindFile,                GE_FIND_DATA                  *lpFindFileData);
-       bool            geFindClose(                 GE_FIND_HANDLE *hFindFile);
+       GE_FIND_FILE   *geFindFirstFile(    const    char           *lpFileName,               GE_FIND_DATA                  *lpFindFileData);
+       bool            geFindNextFile(              GE_FIND_FILE   *hFindFile,                GE_FIND_DATA                  *lpFindFileData);
+       bool            geFindClose(                 GE_FIND_FILE   *hFindFile);
        bool            geCloseHandle(               void           *hObject);
        bool            geGetFileSize(               void           *hFile,                    uint32                        *lpFileSizeHigh);
        bool            geGetFileInformationByHandle(void           *hFile,                    GE_BY_HANDLE_FILE_INFORMATION *lpFileInformation);
@@ -209,7 +223,13 @@ bool geSetFileTime(
 
 
 char *itoa(int value, char* str, int base);
-void splitpath(const char *path, char *drive, char *dir, char *fname, char *ext);
+void splitpath(
+    const char *path, 
+          char *drive, 
+          char *dir, 
+          char *fname, 
+          char *ext
+);
 
 
 #endif /* X_PLATFORM_UTILS */

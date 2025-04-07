@@ -101,47 +101,49 @@ static	geBoolean					SystemInitialized = GE_FALSE;
 
 static	CRITICAL_SECTION			MainCriticalSection;
 
-static	geBoolean GENESISCC geVFile_RegisterFileSystemInternal(const geVFile_SystemAPIs *APIs, geVFile_TypeIdentifier *Type)
+static geBoolean GENESISCC 
+geVFile_RegisterFileSystemInternal(const geVFile_SystemAPIs *APIs, geVFile_TypeIdentifier *Type)
 {
 	geVFile_SystemAPIs **	NewList;
 
 	NewList = geRam_Realloc(RegisteredAPIs, sizeof(*RegisteredAPIs) * (SystemCount + 1));
 	if	(!NewList)
-		return GE_FALSE;
+		return false;
 
 	RegisteredAPIs = NewList;
 #pragma message ("Casting away const in geVFile_RegisterFileSystem")
 	RegisteredAPIs[SystemCount++] = (geVFile_SystemAPIs *)APIs;
 	*Type = SystemCount;
 
-	return GE_TRUE;
+	return true;
 }
 
-static	geBoolean	RegisterBuiltInAPIs(void)
+static geBoolean 
+RegisterBuiltInAPIs(void)
 {
 	geVFile_TypeIdentifier 	Type;
 
-	if	(BuiltInAPIsRegistered == GE_TRUE)
-		return GE_TRUE;
+	if	(BuiltInAPIsRegistered == true)
+		return true;
 
-	if	(geVFile_RegisterFileSystemInternal(FSDos_GetAPIs(), &Type) == GE_FALSE)
-		return GE_FALSE;
+	if	(geVFile_RegisterFileSystemInternal(FSDos_GetAPIs(), &Type) == false)
+		return false;
 	if	(Type != GE_VFILE_TYPE_DOS)
-		return GE_FALSE;
+		return false;
 
-	if	(geVFile_RegisterFileSystemInternal(FSMemory_GetAPIs(), &Type) == GE_FALSE)
-		return GE_FALSE;
+	if	(geVFile_RegisterFileSystemInternal(FSMemory_GetAPIs(), &Type) == false)
+		return false;
 	if	(Type != GE_VFILE_TYPE_MEMORY)
-		return GE_FALSE;
+		return false;
 
-	if	(geVFile_RegisterFileSystemInternal(FSVFS_GetAPIs(), &Type) == GE_FALSE)
-		return GE_FALSE;
+	if	(geVFile_RegisterFileSystemInternal(FSVFS_GetAPIs(), &Type) == false)
+		return false;
 	if	(Type != GE_VFILE_TYPE_VIRTUAL)
-		return GE_FALSE;
+		return false;
 
-	BuiltInAPIsRegistered = GE_TRUE;
+	BuiltInAPIsRegistered = true;
 
-	return GE_TRUE;
+	return true;
 }
 
 GENESISAPI geBoolean GENESISCC geVFile_RegisterFileSystem(const geVFile_SystemAPIs *APIs, geVFile_TypeIdentifier *Type)
@@ -196,18 +198,15 @@ geVFile_OpenNewSystem(
 	      geVFile            *BaseFile;
 
 	DBG_OUT("Entered geVFile_OpenNewSystem()");
-	if	(!RegisterBuiltInAPIs())
-		return false;
-	DBG_OUT("geVFile_OpenNewSystem()\tPassed 1st Check");
-	if	((FileSystemType == 0) || (FileSystemType > SystemCount))
-		return NULL;
-	DBG_OUT("geVFile_OpenNewSystem()\tPassed 2nd Check");
-	if	(!CheckOpenFlags(OpenModeFlags))
-		return NULL;
-	DBG_OUT("geVFile_OpenNewSystem()\tPassed Checks");
+	
+	if (!RegisterBuiltInAPIs())                                  return NULL;
+	DBG_OUT("geVFile_OpenNewSystem()\tPassed 1st check");
+	if ((FileSystemType == 0) || (FileSystemType > SystemCount)) return NULL;
+	DBG_OUT("geVFile_OpenNewSystem()\tPassed 2nd check");
+	if (!CheckOpenFlags(OpenModeFlags))                          return NULL;
+	DBG_OUT("geVFile_OpenNewSystem()\tPassed all checks");
 	// Sugarcoating support for a taste test
-	if	(FS == NULL && FileSystemType == GE_VFILE_TYPE_VIRTUAL)
-	{
+	if (FS == NULL && FileSystemType == GE_VFILE_TYPE_VIRTUAL) {
 		assert(Name);
 		BaseFile = geVFile_OpenNewSystem(
 			NULL,
@@ -220,10 +219,12 @@ geVFile_OpenNewSystem(
 			return NULL;
 		FS = BaseFile;
 		Name = NULL;
-	}
-	else
+		DBG_OUT("geVFile_OpenNewSystem()\tHas BaseFile");
+	} else {
 		BaseFile = NULL;
-	DBG_OUT("geVFile_OpenNewSystem()\tHas BaseFile");
+		DBG_OUT("geVFile_OpenNewSystem()\tHas NULL BaseFile");
+	}
+	
 	APIs = RegisteredAPIs[FileSystemType - 1];
 	assert(APIs);
 	FSData = APIs->OpenNewSystem(FS, Name, Context, OpenModeFlags);

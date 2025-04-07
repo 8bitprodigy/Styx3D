@@ -114,7 +114,7 @@ BuildFileName(
 
 	if	(DirLength != 0)
 	{
-		Buff[DirLength] = '\\';
+		Buff[DirLength] = PATH_SEPARATOR;
 		memcpy(Buff + DirLength + 1, Name, NameLength + 1);
 		if	(NamePtr)
 			*NamePtr = Buff + DirLength + 1;
@@ -128,7 +128,7 @@ BuildFileName(
 		// Special case: no directory, no file name.  We meant something like ".\"
 		if	(!*Buff)
 		{
-			strcpy (Buff, ".\\");
+			strcpy (Buff, strcat(".",(char*)PATH_SEPARATOR));
 		}
 	}
 
@@ -191,13 +191,13 @@ FSDos_FinderGetNextFile(void *Handle)
 	{
 		Finder->FirstStillCached = false;
 
-		if	(Finder->FindData.cFileName[0] != '.')
+		if	(Finder->FindData.fileName[0] != '.')
 			return true;
 	}
 	
 	while	(geFindNextFile(Finder->FindHandle, &Finder->FindData) == true)
 	{
-		if	(Finder->FindData.cFileName[0] != '.')
+		if	(Finder->FindData.fileName[0] != '.')
 			return true;
 	}
 
@@ -221,23 +221,23 @@ FSDos_FinderGetProperties(void *Handle, geVFile_Properties *Props)
 		return false;
 
 	Attribs = 0;
-	if	(Finder->FindData.dwFileAttributes & GE_FILE_ATTRIBUTE_DIRECTORY)
+	if	(Finder->FindData.fileAttributes & GE_FILE_ATTRIBUTE_DIRECTORY)
 		Attribs |= GE_VFILE_ATTRIB_DIRECTORY;
-	if	(Finder->FindData.dwFileAttributes & GE_FILE_ATTRIBUTE_READONLY)
+	if	(Finder->FindData.fileAttributes & GE_FILE_ATTRIBUTE_READONLY)
 		Attribs |= GE_VFILE_ATTRIB_READONLY;
 
 	Props->Time.Time1 = Finder->FindData.ftLastWriteTime[GE_LOW];
 	Props->Time.Time2 = Finder->FindData.ftLastWriteTime[GE_HIGH];
 
 	Props->AttributeFlags = Attribs;
-	Props->Size = Finder->FindData.nFileSizeLow;
+	Props->Size = Finder->FindData.fileSizeLow;
 	Props->Hints.HintData = NULL;
 	Props->Hints.HintDataLength = 0;
 
-	Length = strlen(Finder->FindData.cFileName);
+	Length = strlen(Finder->FindData.fileName);
 	if	(Length > sizeof(Props->Name) - 1)
 		return false;
-	memcpy(Props->Name, Finder->FindData.cFileName, Length + 1);
+	memcpy(Props->Name, Finder->FindData.fileName, Length + 1);
 
 	return true;
 }
@@ -295,7 +295,7 @@ FSDos_Open(
 	      void    *Handle,
 	const char    *Name,
 	      void    *Context,
-	      uint32   OpenModeFlags
+	      unsigned int   OpenModeFlags
 )
 {
 	DosFile *DosFS;
@@ -305,11 +305,13 @@ FSDos_Open(
 	char    *NamePtr;
 
 	DosFS = (DosFile*)Handle;
-
+	
+/*
 	if (!(DosFS && DosFS->IsDirectory)) {
 		DBG_OUT("FSDos_Open()\tFailed due to DosFS is not a directory...");
 		return NULL;
 	}
+*/
 
 	NewFile = geRam_Allocate(sizeof(*NewFile));
 	if (!NewFile) { 
@@ -335,29 +337,41 @@ FSDos_Open(
 
 	memcpy(NewFile->FullPath, Buff, Length + 1);
 
-	if	(OpenModeFlags & GE_VFILE_OPEN_DIRECTORY) {
-		GE_FIND_DATA   *FileInfo;
-		GE_FIND_HANDLE *FindHandle;
-		bool	   	 IsDirectory;
+	if (OpenModeFlags & GE_VFILE_OPEN_DIRECTORY) {
+		GE_FIND_DATA *FileInfo;
+		GE_FIND_FILE *FindHandle;
+		bool          IsDirectory;
 
 		assert(!DosFS || DosFS->IsDirectory == true);
 
 		memset(&FileInfo, 0, sizeof(FileInfo));
-		FindHandle = geFindFirstFile(NewFile->FullPath, FileInfo);
+		FindHandle = (GE_FIND_FILE*)geFindFirstFile(NewFile->FullPath, FileInfo);
 		if (FindHandle != GE_INVALID_HANDLE_VALUE 
-			&& FileInfo->dwFileAttributes & GE_FILE_ATTRIBUTE_DIRECTORY
+			&& FileInfo->fileAttributes & GE_FILE_ATTRIBUTE_DIRECTORY
 		) {
 			IsDirectory = true;
+			DBG_OUT("IsDirectory is true");
 		} else {
 			IsDirectory = IsRootDirectory(NewFile->FullPath);
+			DBG_OUT("IsDirectory was assigned to IsRootDirectory");
 		}
+		DBG_OUT("IsDirectory:\t%b", IsDirectory);
 
 		geFindClose(FindHandle);
 
-		if	(OpenModeFlags & GE_VFILE_OPEN_CREATE) {
-			if (IsDirectory == true                        ) goto fail;
-			if (!geCreateDirectory(NewFile->FullPath, NULL)) goto fail;
-		} else if (!IsDirectory) goto fail;
+		if (OpenModeFlags & GE_VFILE_OPEN_CREATE) {
+			if (IsDirectory == true) {
+				DBG_OUT("FSDos_Open()\tFailing due to IsDirectory == false...");
+				goto fail;
+			}
+			if (!geCreateDirectory(NewFile->FullPath, NULL)) {
+				DBG_OUT("FSDos_Open()\tFailing due to not being able to create a directory for NewFile->FullPath...");
+				goto fail;
+			}
+		} else if (!IsDirectory) {
+			DBG_OUT("FSDos_Open()\tFailing due to !IsDirectory...");
+			goto fail;
+		}
 
 		NewFile->IsDirectory = true;
 		NewFile->FileHandle = GE_INVALID_HANDLE_VALUE;
@@ -377,7 +391,8 @@ FSDos_Open(
 				| GE_VFILE_OPEN_UPDATE
 				| GE_VFILE_OPEN_CREATE
 			)
-		) {
+		)
+		{
 		case	GE_VFILE_OPEN_READONLY:
 			Access    = GE_GENERIC_READ;
 			ShareMode = GE_FILE_SHARE_READ | GE_FILE_SHARE_WRITE;

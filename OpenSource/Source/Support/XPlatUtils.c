@@ -4,7 +4,6 @@
 #include <SDL2/SDL.h>
 #ifdef _WIN32
     #include <windows.h>
-    #define PATH_SEPARATOR '\\'
 #else
     #include <dirent.h>
     #include <dlfcn.h>
@@ -16,7 +15,6 @@
     #include <time.h>
     #include <unistd.h>
     #include <utime.h>
-    #define PATH_SEPARATOR '/'
 #endif
 #if defined(__APPLE__)
     #include <mach-o/dyld.h>
@@ -31,9 +29,7 @@ static uint32 geLastError = GE_ERROR_SUCCESS;
 static void geNormalizePath(char *path) {
     char *p = path;
     while (*p) {
-        if (*p == '\\' || *p == '/') {
-            *p = PATH_SEPARATOR;
-        }
+            if (*p == '\\' || *p == '/') *p = PATH_SEPARATOR;
         p++;
     }
 }
@@ -161,9 +157,10 @@ extractPatternFromPath(const char* path, char* dirPath, char* pattern)
 }
 
 static void 
-fillFileData(GE_FIND_DATA* lpFindFileData, const char* filePath, const char* fileName) {
+fillFileData(GE_FIND_DATA* lpFindFileData, const char* filePath, const char* fileName) 
+{
     memset(lpFindFileData, 0, sizeof(GE_FIND_DATA));
-    strncpy(lpFindFileData->cFileName, fileName, sizeof(lpFindFileData->cFileName) - 1);
+    strncpy(lpFindFileData->fileName, fileName, sizeof(lpFindFileData->fileName) - 1);
     
 #ifdef _WIN32
     WIN32_FIND_DATA winData;
@@ -186,10 +183,10 @@ fillFileData(GE_FIND_DATA* lpFindFileData, const char* filePath, const char* fil
     if (stat(filePath, &statBuf) == 0) {
         
         if (S_ISDIR(statBuf.st_mode))
-            lpFindFileData->dwFileAttributes |= GE_FILE_ATTRIBUTE_DIRECTORY;
+            lpFindFileData->fileAttributes |= GE_FILE_ATTRIBUTE_DIRECTORY;
         
         if (!(statBuf.st_mode & S_IWUSR))
-            lpFindFileData->dwFileAttributes |= GE_FILE_ATTRIBUTE_READONLY;
+            lpFindFileData->fileAttributes |= GE_FILE_ATTRIBUTE_READONLY;
         
         /* File times - convert Unix time to equivalent representation
            This is a simplification; a real implementation might need to convert 
@@ -200,17 +197,17 @@ fillFileData(GE_FIND_DATA* lpFindFileData, const char* filePath, const char* fil
         lpFindFileData->ftLastWriteTime[0]  = (uint32)statBuf.st_mtime;
         
         /* File size */
-        lpFindFileData->nFileSizeLow = (uint32)(statBuf.st_size & 0xFFFFFFFF);
-        lpFindFileData->nFileSizeHigh = (uint32)((statBuf.st_size >> 32) & 0xFFFFFFFF);
+        lpFindFileData->fileSizeLow = (uint32)(statBuf.st_size & 0xFFFFFFFF);
+        lpFindFileData->fileSizeHigh = (uint32)((statBuf.st_size >> 32) & 0xFFFFFFFF);
         
         /* Hidden files in Unix-like systems start with '.' */
         if (fileName[0] == '.')
-            lpFindFileData->dwFileAttributes |= GE_FILE_ATTRIBUTE_HIDDEN;
+            lpFindFileData->fileAttributes |= GE_FILE_ATTRIBUTE_HIDDEN;
     }
     
     /* Handle special cases for . and .. */
     if (strcmp(fileName, ".") == 0 || strcmp(fileName, "..") == 0) {
-        lpFindFileData->dwFileAttributes = GE_FILE_ATTRIBUTE_DIRECTORY;
+        lpFindFileData->fileAttributes = GE_FILE_ATTRIBUTE_DIRECTORY;
     }
 #endif
 }
@@ -265,96 +262,68 @@ static uint32 mapErrnoToWinError() {
 }
 #endif
 
-GE_FIND_HANDLE * 
-geFindFirstFile(const char *lpFileName, GE_FIND_DATA *lpFindFileData) 
+GE_FIND_FILE * 
+geFindFirstFile(const char *File_Name, GE_FIND_DATA *Find_File_Data) 
 {
-    if (!lpFileName || !lpFindFileData) {
-        return GE_INVALID_HANDLE_VALUE;
-    }
-    
-    GE_FIND_HANDLE* handle = (GE_FIND_HANDLE*)malloc(sizeof(GE_FIND_HANDLE));
-    if (!handle) {
-        return GE_INVALID_HANDLE_VALUE;
-    }
-    
-    memset(handle, 0, sizeof(GE_FIND_HANDLE));
-    strncpy(handle->searchPath, lpFileName, sizeof(handle->searchPath) - 1);
-    
-    char dirPath[260];
-    char pattern[260];
-    
-    extractPatternFromPath(lpFileName, dirPath, pattern);
-    strncpy(handle->basePath, dirPath, sizeof(handle->basePath) - 1);
-    strncpy(handle->searchPattern, pattern, sizeof(handle->searchPattern) - 1);
-    
 #ifdef _WIN32
-    handle->winHandle = FindFirstFile(lpFileName, (LPWIN32_FIND_DATA)lpFindFileData);
-    if (handle->winHandle == INVALID_HANDLE_VALUE) {
-        free(handle);
-        return GE_INVALID_HANDLE_VALUE;
-    }
-    
-    /* Convert Windows attributes to our format if needed */
-    handle->valid = true;
-    memcpy(&handle->currentData, lpFindFileData, sizeof(GE_FIND_DATA));
-    
+    return FindFirstFile(File_Name, Find_File_Data);
 #else
-    handle->dir = opendir(dirPath);
-    if (!handle->dir) {
-        free(handle);
+    if (!File_Name || !Find_File_Data) {
+        DBG_OUT("geFindFirstFile()\t!File_Name || !Find_File_Data");
         return GE_INVALID_HANDLE_VALUE;
     }
     
-    /* Find the first matching file */
-    while ((handle->entry = readdir(handle->dir)) != NULL) {
-        if (matchPattern(handle->entry->d_name, pattern)) {
-            char fullPath[520];
-            snprintf(fullPath, sizeof(fullPath), "%s%s", dirPath, handle->entry->d_name);
-            
-            fillFileData(lpFindFileData, fullPath, handle->entry->d_name);
-            
-            handle->valid = true;
-            memcpy(&handle->currentData, lpFindFileData, sizeof(GE_FIND_DATA));
-            break;
-        }
-    }
+    memset(Find_File_Data, 0, sizeof(GE_FIND_DATA));
     
-    if (!handle->valid) {
-        closedir(handle->dir);
-        free(handle);
+    if ('*' != *File_Name) {
+        DBG_OUT("geFindFirstFile()\tcould not opendir()");
         return GE_INVALID_HANDLE_VALUE;
     }
-#endif
+    
+    DIR *dir = opendir(".");
+    if (!dir) {
+        DBG_OUT("geFindFirstFile()\tcould not opendir()");
+        return GE_INVALID_HANDLE_VALUE;
+    }
 
-    return handle;
+    GE_FIND_FILE *find_file = (GE_FIND_FILE*)malloc(sizeof(GE_FIND_FILE));
+
+    find_file->dir = dir;
+    find_file->filter = strdup(File_Name);
+
+    if(!geFindNextFile(find_file, Find_File_Data)){
+        geFindClose(find_file);
+        return GE_INVALID_HANDLE_VALUE;
+    }
+    return (void*)find_file;
+#endif
 }
 
 bool 
-geFindNextFile(GE_FIND_HANDLE *hFindFile, GE_FIND_DATA *lpFindFileData) 
+geFindNextFile(GE_FIND_FILE *Find_File, GE_FIND_DATA *Find_File_Data) 
 {
-    if (!hFindFile || !lpFindFileData || !hFindFile->valid) {
-        return false;
-    }
-    
 #ifdef _WIN32
-    bool result = FindNextFile(hFindFile->winHandle, (LPWIN32_FIND_DATA)lpFindFileData);
-    if (!result) {
+    return FindNextFile((HANDLE)Find_File, Find_File_Data);
+#else
+    if (!Find_File || !Find_File_Data) {
         return false;
     }
+
+           int     position;
+    struct dirent *dir_ent;
     
-    memcpy(&hFindFile->currentData, lpFindFileData, sizeof(GE_FIND_DATA));
-    return true;
-#else
-    while ((hFindFile->entry = readdir(hFindFile->dir)) != NULL) {
-        if (matchPattern(hFindFile->entry->d_name, hFindFile->searchPattern)) {
-            char fullPath[520];
-            snprintf(fullPath, sizeof(fullPath), "%s%s", hFindFile->basePath, hFindFile->entry->d_name);
-            
-            fillFileData(lpFindFileData, fullPath, hFindFile->entry->d_name);
-            
-            memcpy(&hFindFile->currentData, lpFindFileData, sizeof(GE_FIND_DATA));
-            return true;
-        }
+    while (dir_ent = readdir(Find_File->dir)) {
+        if (
+               '.'    == *dir_ent->d_name
+            || DT_DIR ==  dir_ent->d_type
+        ) continue;
+
+        position = strlen(dir_ent->d_name) - strlen(Find_File->filter+1);
+
+        if (position < 0 || strcasecmp(dir_ent->d_name + position, Find_File->filter+1)) continue;
+        
+       strcpy(Find_File_Data->fileName, dir_ent->d_name);
+       return true;
     }
     
     return false;
@@ -362,21 +331,23 @@ geFindNextFile(GE_FIND_HANDLE *hFindFile, GE_FIND_DATA *lpFindFileData)
 }
 
 bool 
-geFindClose(GE_FIND_HANDLE* hFindFile) 
+geFindClose(GE_FIND_FILE *Find_File) 
 {
-    if (!hFindFile || hFindFile == GE_INVALID_HANDLE_VALUE) return false;
-    bool result = true;
-    
 #ifdef _WIN32
-    result = FindClose(hFindFile->winHandle);
+    return FindClose((HANDLE)Find_file);
 #else
-    if (hFindFile->dir) {
-        closedir(hFindFile->dir);
+    if (!Find_File || Find_File == GE_INVALID_HANDLE_VALUE) {
+        DBG_OUT("geFindClose()\t!hFindFile || hFindFile == GE_INVALID_HANDLE_VALUE");
+        return false;
     }
-#endif
     
-    free(hFindFile);
-    return result;
+    if (Find_File->dir) closedir(Find_File->dir);
+    
+    free(Find_File->filter);
+    free(Find_File);
+
+    return false;
+#endif
 }
 
 void *

@@ -100,7 +100,8 @@ typedef struct
 } 
 geWorld_FogData;
 
-typedef struct World_BSP
+typedef struct 
+World_BSP
 {
 	char			FileName[200];
 	GBSP_BSPData	BSPData;				// Info in the BSP loaded directly off disk

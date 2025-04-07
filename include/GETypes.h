@@ -29,6 +29,7 @@ extern "C" {
 #endif
 
 #ifdef _DEBUG
+	#include <stdio.h>
 	#define DBG_OUT( Text, ... ) do{printf( "[DEBUG] " Text "\n", ##__VA_ARGS__ ); fflush(stdout);} while(false)
 #else
 	#define DBG_OUT( Text, ... )
