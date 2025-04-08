@@ -7,4 +7,5 @@
 *.vsidx
 *.pch
 *.obj
+*.ipch
 GTest
