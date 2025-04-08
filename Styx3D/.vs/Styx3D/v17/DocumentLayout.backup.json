@@ -1,0 +1,84 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Chris\\Styx3D\\Styx3D\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{ECB35A25-A4DA-427A-B6EA-5B44AAEF5C27}|Styx3D.vcxproj|C:\\Users\\Chris\\Styx3D\\OpenSource\\Source\\Bitmap\\Bitmap.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B9F6078-6663-41CF-B549-D964E5762404}|Genesis3D_LIB\\Genesis3D_LIB.vcxproj|C:\\Users\\Chris\\Styx3D\\include\\Actor.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Microsoft\\VC\\v170\\Microsoft.CppBuild.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B9F6078-6663-41CF-B549-D964E5762404}|Genesis3D_LIB\\Genesis3D_LIB.vcxproj|C:\\Users\\Chris\\Styx3D\\OpenSource\\Source\\Actor\\Actor.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Bitmap.c",
+              "DocumentMoniker": "C:\\Users\\Chris\\Styx3D\\OpenSource\\Source\\Bitmap\\Bitmap.c",
+              "RelativeDocumentMoniker": "..\\OpenSource\\Source\\Bitmap\\Bitmap.c",
+              "ToolTip": "C:\\Users\\Chris\\Styx3D\\OpenSource\\Source\\Bitmap\\Bitmap.c",
+              "RelativeToolTip": "..\\OpenSource\\Source\\Bitmap\\Bitmap.c",
+              "ViewState": "AgIAAFgLAAAAAAAAAAAhwGILAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-04-08T05:54:06.917Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Actor.h",
+              "DocumentMoniker": "C:\\Users\\Chris\\Styx3D\\include\\Actor.h",
+              "RelativeDocumentMoniker": "..\\include\\Actor.h",
+              "ToolTip": "C:\\Users\\Chris\\Styx3D\\include\\Actor.h",
+              "RelativeToolTip": "..\\include\\Actor.h",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAgwF0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-04-08T05:31:45.468Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Microsoft.CppBuild.targets",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Microsoft\\VC\\v170\\Microsoft.CppBuild.targets",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Microsoft\\VC\\v170\\Microsoft.CppBuild.targets",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Microsoft\\VC\\v170\\Microsoft.CppBuild.targets",
+              "RelativeToolTip": "..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Microsoft\\VC\\v170\\Microsoft.CppBuild.targets",
+              "ViewState": "AgIAAPoBAAAAAAAAAAArwAcCAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2025-04-08T05:30:39.871Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Actor.c",
+              "DocumentMoniker": "C:\\Users\\Chris\\Styx3D\\OpenSource\\Source\\Actor\\Actor.c",
+              "RelativeDocumentMoniker": "..\\OpenSource\\Source\\Actor\\Actor.c",
+              "ToolTip": "C:\\Users\\Chris\\Styx3D\\OpenSource\\Source\\Actor\\Actor.c",
+              "RelativeToolTip": "..\\OpenSource\\Source\\Actor\\Actor.c",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-04-08T05:24:36.672Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

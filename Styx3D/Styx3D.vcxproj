@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{ecb35a25-a4da-427a-b6ea-5b44aaef5c27}</ProjectGuid>
+    <RootNamespace>Styx3D</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Genesis3D_DLL</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>..\lib</OutDir>
+    <TargetName>Genesis.dll</TargetName>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\SDL2\include\;</IncludePath>
+    <LibraryPath>C:\SDL2\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\Chris\Styx3D\OpenSource\Source;C:\Users\Chris\Styx3D\OpenSource\Source\World;C:\Users\Chris\Styx3D\OpenSource\Source\VFile;C:\Users\Chris\Styx3D\OpenSource\Source\Support;C:\Users\Chris\Styx3D\OpenSource\Source\Physics;C:\Users\Chris\Styx3D\OpenSource\Source\Math;C:\Users\Chris\Styx3D\OpenSource\Source\Font;C:\Users\Chris\Styx3D\OpenSource\Source\Entities;C:\Users\Chris\Styx3D\OpenSource\Source\Engine\Logo;C:\Users\Chris\Styx3D\OpenSource\Source\Engine\Drivers;C:\Users\Chris\Styx3D\OpenSource\Source\Engine;C:\Users\Chris\Styx3D\OpenSource\Source\Bitmap\Compression;C:\Users\Chris\Styx3D\OpenSource\Source\Bitmap;C:\Users\Chris\Styx3D\OpenSource\Source\Actor;C:\Users\Chris\Styx3D\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\Actor.h" />
+    <ClInclude Include="..\include\BaseType.h" />
+    <ClInclude Include="..\include\Bitmap.h" />
+    <ClInclude Include="..\include\Body.h" />
+    <ClInclude Include="..\include\ErrorLog.h" />
+    <ClInclude Include="..\include\ExtBox.h" />
+    <ClInclude Include="..\include\Font.h" />
+    <ClInclude Include="..\include\Genesis.h" />
+    <ClInclude Include="..\include\GETypes.h" />
+    <ClInclude Include="..\include\Matrix33.h" />
+    <ClInclude Include="..\include\Motion.h" />
+    <ClInclude Include="..\include\Path.h" />
+    <ClInclude Include="..\include\PhysicsJoint.h" />
+    <ClInclude Include="..\include\PhysicsObject.h" />
+    <ClInclude Include="..\include\PhysicsSystem.h" />
+    <ClInclude Include="..\include\PixelFormat.h" />
+    <ClInclude Include="..\include\Quatern.h" />
+    <ClInclude Include="..\include\RAM.h" />
+    <ClInclude Include="..\include\Vec3D.h" />
+    <ClInclude Include="..\include\VFile.h" />
+    <ClInclude Include="..\include\XForm3D.h" />
+    <ClInclude Include="..\include\XPlatUtils.h" />
+    <ClInclude Include="..\OpenSource\Source\Actor\BodyInst.h" />
+    <ClInclude Include="..\OpenSource\Source\Actor\Body_private.h" />
+    <ClInclude Include="..\OpenSource\Source\Actor\Pose.h" />
+    <ClInclude Include="..\OpenSource\Source\Actor\Puppet.h" />
+    <ClInclude Include="..\OpenSource\Source\Actor\QKFrame.h" />
+    <ClInclude Include="..\OpenSource\Source\Actor\StrBlock.h" />
+    <ClInclude Include="..\OpenSource\Source\Actor\TKArray.h" />
+    <ClInclude Include="..\OpenSource\Source\Actor\TKEvents.h" />
+    <ClInclude Include="..\OpenSource\Source\Actor\VKFrame.h" />
+    <ClInclude Include="..\OpenSource\Source\Actor\XFArray.h" />
+    <ClInclude Include="..\OpenSource\Source\Bitmap\Bitmap_BlitData.h" />
+    <ClInclude Include="..\OpenSource\Source\Bitmap\Bitmap_Gamma.h" />
+    <ClInclude Include="..\OpenSource\Source\Bitmap\Bitmap_private.h" />
+    <ClInclude Include="..\OpenSource\Source\Bitmap\Bitmap__private.h" />
+    <ClInclude Include="..\OpenSource\Source\Bitmap\Compression\PalCreate.h" />
+    <ClInclude Include="..\OpenSource\Source\Bitmap\Compression\Palettize.h" />
+    <ClInclude Include="..\OpenSource\Source\Bitmap\Compression\PalOptimize.h" />
+    <ClInclude Include="..\OpenSource\Source\Bitmap\Compression\Utility.h" />
+    <ClInclude Include="..\OpenSource\Source\Bitmap\Compression\YUV.h" />
+    <ClInclude Include="..\OpenSource\Source\Camera.h" />
+    <ClInclude Include="..\OpenSource\Source\CSNetMgr.h" />
+    <ClInclude Include="..\OpenSource\Source\Engine\BitmapList.h" />
+    <ClInclude Include="..\OpenSource\Source\Engine\Drivers\DCommon.h" />
+    <ClInclude Include="..\OpenSource\Source\Engine\Engine.h" />
+    <ClInclude Include="..\OpenSource\Source\Engine\Logo\Electric.h" />
+    <ClInclude Include="..\OpenSource\Source\Engine\System.h" />
+    <ClInclude Include="..\OpenSource\Source\Entities\Entities.h" />
+    <ClInclude Include="..\OpenSource\Source\Font\WgClip.h" />
+    <ClInclude Include="..\OpenSource\Source\List.h" />
+    <ClInclude Include="..\OpenSource\Source\Math\Box.h" />
+    <ClInclude Include="..\OpenSource\Source\Math\crc32.h" />
+    <ClInclude Include="..\OpenSource\Source\NetPlay.h" />
+    <ClInclude Include="..\OpenSource\Source\PtrTypes.h" />
+    <ClInclude Include="..\OpenSource\Source\Resource.h" />
+    <ClInclude Include="..\OpenSource\Source\Sound.h" />
+    <ClInclude Include="..\OpenSource\Source\Sound3D.h" />
+    <ClInclude Include="..\OpenSource\Source\Support\GEAssert.h" />
+    <ClInclude Include="..\OpenSource\Source\Support\Log.h" />
+    <ClInclude Include="..\OpenSource\Source\Support\MemPool.h" />
+    <ClInclude Include="..\OpenSource\Source\TClip.h" />
+    <ClInclude Include="..\OpenSource\Source\Timer.h" />
+    <ClInclude Include="..\OpenSource\Source\TSC.h" />
+    <ClInclude Include="..\OpenSource\Source\VFile\DirTree.h" />
+    <ClInclude Include="..\OpenSource\Source\VFile\FSDisk.h" />
+    <ClInclude Include="..\OpenSource\Source\VFile\FSDOS.h" />
+    <ClInclude Include="..\OpenSource\Source\VFile\FSMemory.h" />
+    <ClInclude Include="..\OpenSource\Source\VFile\FSVFS.h" />
+    <ClInclude Include="..\OpenSource\Source\VFile\VFile_private.h" />
+    <ClInclude Include="..\OpenSource\Source\World\Fog.h" />
+    <ClInclude Include="..\OpenSource\Source\World\Frustum.h" />
+    <ClInclude Include="..\OpenSource\Source\World\GBSPFile.h" />
+    <ClInclude Include="..\OpenSource\Source\World\Light.h" />
+    <ClInclude Include="..\OpenSource\Source\World\Plane.h" />
+    <ClInclude Include="..\OpenSource\Source\World\Surface.h" />
+    <ClInclude Include="..\OpenSource\Source\World\Trace.h" />
+    <ClInclude Include="..\OpenSource\Source\World\User.h" />
+    <ClInclude Include="..\OpenSource\Source\World\Vis.h" />
+    <ClInclude Include="..\OpenSource\Source\World\WBitmap.h" />
+    <ClInclude Include="..\OpenSource\Source\World\World.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\OpenSource\Source\Actor\Actor.c" />
+    <ClCompile Include="..\OpenSource\Source\Actor\Body.c" />
+    <ClCompile Include="..\OpenSource\Source\Actor\BodyInst.c" />
+    <ClCompile Include="..\OpenSource\Source\Actor\Motion.c" />
+    <ClCompile Include="..\OpenSource\Source\Actor\Path.c" />
+    <ClCompile Include="..\OpenSource\Source\Actor\Pose.c" />
+    <ClCompile Include="..\OpenSource\Source\Actor\Puppet.c" />
+    <ClCompile Include="..\OpenSource\Source\Actor\QKFrame.c" />
+    <ClCompile Include="..\OpenSource\Source\Actor\StrBlock.c" />
+    <ClCompile Include="..\OpenSource\Source\Actor\TKArray.c" />
+    <ClCompile Include="..\OpenSource\Source\Actor\TKEvents.c" />
+    <ClCompile Include="..\OpenSource\Source\Actor\VKFrame.c" />
+    <ClCompile Include="..\OpenSource\Source\Actor\XFArray.c" />
+    <ClCompile Include="..\OpenSource\Source\Bitmap\Bitmap.c" />
+    <ClCompile Include="..\OpenSource\Source\Bitmap\Bitmap_BlitData.c" />
+    <ClCompile Include="..\OpenSource\Source\Bitmap\Bitmap_Gamma.c" />
+    <ClCompile Include="..\OpenSource\Source\Bitmap\Compression\PalCreate.c" />
+    <ClCompile Include="..\OpenSource\Source\Bitmap\Compression\Palettize.c" />
+    <ClCompile Include="..\OpenSource\Source\Bitmap\Compression\PalOptimize.c" />
+    <ClCompile Include="..\OpenSource\Source\Bitmap\Compression\YUV.c" />
+    <ClCompile Include="..\OpenSource\Source\Bitmap\PixelFormat.c" />
+    <ClCompile Include="..\OpenSource\Source\Camera.c" />
+    <ClCompile Include="..\OpenSource\Source\CSNetMgr.c" />
+    <ClCompile Include="..\OpenSource\Source\drawbbox.c" />
+    <ClCompile Include="..\OpenSource\Source\Engine\BitmapList.c" />
+    <ClCompile Include="..\OpenSource\Source\Engine\Drivers\Bmp.c" />
+    <ClCompile Include="..\OpenSource\Source\Engine\Engine.c" />
+    <ClCompile Include="..\OpenSource\Source\Engine\FontBMP.c" />
+    <ClCompile Include="..\OpenSource\Source\Engine\Genesis3D.c" />
+    <ClCompile Include="..\OpenSource\Source\Engine\Logo\A_Corona.c" />
+    <ClCompile Include="..\OpenSource\Source\Engine\Logo\A_Streak.c" />
+    <ClCompile Include="..\OpenSource\Source\Engine\Logo\Corona.c" />
+    <ClCompile Include="..\OpenSource\Source\Engine\Logo\Electric.c" />
+    <ClCompile Include="..\OpenSource\Source\Engine\Logo\Logo.c" />
+    <ClCompile Include="..\OpenSource\Source\Engine\Logo\LogoActor.c" />
+    <ClCompile Include="..\OpenSource\Source\Engine\Logo\PoweredBy.c" />
+    <ClCompile Include="..\OpenSource\Source\Engine\Logo\Streak.c" />
+    <ClCompile Include="..\OpenSource\Source\Engine\Logo\WebURL.c" />
+    <ClCompile Include="..\OpenSource\Source\Engine\System.c" />
+    <ClCompile Include="..\OpenSource\Source\Entities\Entities.c" />
+    <ClCompile Include="..\OpenSource\Source\Font\Font.c" />
+    <ClCompile Include="..\OpenSource\Source\Font\WgClip.c" />
+    <ClCompile Include="..\OpenSource\Source\Ge.c" />
+    <ClCompile Include="..\OpenSource\Source\List.c" />
+    <ClCompile Include="..\OpenSource\Source\Math\Box.c" />
+    <ClCompile Include="..\OpenSource\Source\Math\crc32.c" />
+    <ClCompile Include="..\OpenSource\Source\Math\ExtBox.c" />
+    <ClCompile Include="..\OpenSource\Source\Math\Quatern.c" />
+    <ClCompile Include="..\OpenSource\Source\Math\Vec3D.c" />
+    <ClCompile Include="..\OpenSource\Source\Math\XForm3D.c" />
+    <ClCompile Include="..\OpenSource\Source\NetPlay.c" />
+    <ClCompile Include="..\OpenSource\Source\Physics\Matrix33.c" />
+    <ClCompile Include="..\OpenSource\Source\Physics\PhysicsJoint.c" />
+    <ClCompile Include="..\OpenSource\Source\Physics\PhysicsObject.c" />
+    <ClCompile Include="..\OpenSource\Source\Physics\PhysicsSystem.c" />
+    <ClCompile Include="..\OpenSource\Source\Sound.c" />
+    <ClCompile Include="..\OpenSource\Source\Sound3D.c" />
+    <ClCompile Include="..\OpenSource\Source\Support\ErrorLog.c" />
+    <ClCompile Include="..\OpenSource\Source\Support\GEAssert.c" />
+    <ClCompile Include="..\OpenSource\Source\Support\Log.c" />
+    <ClCompile Include="..\OpenSource\Source\Support\MemPool.c" />
+    <ClCompile Include="..\OpenSource\Source\Support\RAM.c" />
+    <ClCompile Include="..\OpenSource\Source\Support\RAMDLL.c" />
+    <ClCompile Include="..\OpenSource\Source\Support\XPlatUtils.c" />
+    <ClCompile Include="..\OpenSource\Source\TClip.c" />
+    <ClCompile Include="..\OpenSource\Source\Timer.c" />
+    <ClCompile Include="..\OpenSource\Source\TSC.c" />
+    <ClCompile Include="..\OpenSource\Source\VFile\DirTree.c" />
+    <ClCompile Include="..\OpenSource\Source\VFile\FSDisk.c" />
+    <ClCompile Include="..\OpenSource\Source\VFile\FSDOS.c" />
+    <ClCompile Include="..\OpenSource\Source\VFile\FSMemory.c" />
+    <ClCompile Include="..\OpenSource\Source\VFile\FSVFS.c" />
+    <ClCompile Include="..\OpenSource\Source\VFile\VFile.c" />
+    <ClCompile Include="..\OpenSource\Source\World\Fog.c" />
+    <ClCompile Include="..\OpenSource\Source\World\Frustum.c" />
+    <ClCompile Include="..\OpenSource\Source\World\GBSPFile.c" />
+    <ClCompile Include="..\OpenSource\Source\World\Light.c" />
+    <ClCompile Include="..\OpenSource\Source\World\Plane.c" />
+    <ClCompile Include="..\OpenSource\Source\World\Surface.c" />
+    <ClCompile Include="..\OpenSource\Source\World\Trace.c" />
+    <ClCompile Include="..\OpenSource\Source\World\User.c" />
+    <ClCompile Include="..\OpenSource\Source\World\Vis.c" />
+    <ClCompile Include="..\OpenSource\Source\World\WBitmap.c" />
+    <ClCompile Include="..\OpenSource\Source\World\World.c" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
