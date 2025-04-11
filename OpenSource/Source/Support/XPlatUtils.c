@@ -23,6 +23,10 @@
 #include "GETypes.h"
 #include "XPlatUtils.h"
 
+
+#define DBG_OUT( Text, ... ) _DBG_OUT("XPlatUtils.c:" Text, ##__VA_ARGS__ )
+
+
 static uint32 geLastError = GE_ERROR_SUCCESS;
 
 
@@ -157,24 +161,24 @@ extractPatternFromPath(const char* path, char* dirPath, char* pattern)
 }
 
 static void 
-fillFileData(GE_FIND_DATA* lpFindFileData, const char* filePath, const char* fileName) 
+fillFileData(GE_FIND_DATA *Find_File_Data, const char* filePath, const char* fileName) 
 {
-    memset(lpFindFileData, 0, sizeof(GE_FIND_DATA));
-    strncpy(lpFindFileData->fileName, fileName, sizeof(lpFindFileData->fileName) - 1);
+    memset(Find_File_Data, 0, sizeof(GE_FIND_DATA));
+    strncpy(Find_File_Data->fileName, fileName, sizeof(Find_File_Data->fileName) - 1);
     
 #ifdef _WIN32
     WIN32_FIND_DATA winData;
     HANDLE tempHandle = FindFirstFile(filePath, &winData);
     if (tempHandle != INVALID_HANDLE_VALUE) {
-        lpFindFileData->dwFileAttributes = winData.dwFileAttributes;
-        lpFindFileData->ftCreationTime[0] = winData.ftCreationTime.dwLowDateTime;
-        lpFindFileData->ftCreationTime[1] = winData.ftCreationTime.dwHighDateTime;
-        lpFindFileData->ftLastAccessTime[0] = winData.ftLastAccessTime.dwLowDateTime;
-        lpFindFileData->ftLastAccessTime[1] = winData.ftLastAccessTime.dwHighDateTime;
-        lpFindFileData->ftLastWriteTime[0] = winData.ftLastWriteTime.dwLowDateTime;
-        lpFindFileData->ftLastWriteTime[1] = winData.ftLastWriteTime.dwHighDateTime;
-        lpFindFileData->nFileSizeHigh = winData.nFileSizeHigh;
-        lpFindFileData->nFileSizeLow = winData.nFileSizeLow;
+        Find_File_Data->dwFileAttributes = winData.dwFileAttributes;
+        Find_File_Data->ftCreationTime[0] = winData.ftCreationTime.dwLowDateTime;
+        Find_File_Data->ftCreationTime[1] = winData.ftCreationTime.dwHighDateTime;
+        Find_File_Data->ftLastAccessTime[0] = winData.ftLastAccessTime.dwLowDateTime;
+        Find_File_Data->ftLastAccessTime[1] = winData.ftLastAccessTime.dwHighDateTime;
+        Find_File_Data->ftLastWriteTime[0] = winData.ftLastWriteTime.dwLowDateTime;
+        Find_File_Data->ftLastWriteTime[1] = winData.ftLastWriteTime.dwHighDateTime;
+        Find_File_Data->nFileSizeHigh = winData.nFileSizeHigh;
+        Find_File_Data->nFileSizeLow = winData.nFileSizeLow;
         FindClose(tempHandle);
     }
 #else
@@ -183,31 +187,31 @@ fillFileData(GE_FIND_DATA* lpFindFileData, const char* filePath, const char* fil
     if (stat(filePath, &statBuf) == 0) {
         
         if (S_ISDIR(statBuf.st_mode))
-            lpFindFileData->fileAttributes |= GE_FILE_ATTRIBUTE_DIRECTORY;
+            Find_File_Data->fileAttributes |= GE_FILE_ATTRIBUTE_DIRECTORY;
         
         if (!(statBuf.st_mode & S_IWUSR))
-            lpFindFileData->fileAttributes |= GE_FILE_ATTRIBUTE_READONLY;
+            Find_File_Data->fileAttributes |= GE_FILE_ATTRIBUTE_READONLY;
         
         /* File times - convert Unix time to equivalent representation
            This is a simplification; a real implementation might need to convert 
            between time formats more precisely
         */
-        lpFindFileData->ftCreationTime[0]   = (uint32)statBuf.st_ctime;
-        lpFindFileData->ftLastAccessTime[0] = (uint32)statBuf.st_atime;
-        lpFindFileData->ftLastWriteTime[0]  = (uint32)statBuf.st_mtime;
+        Find_File_Data->ftCreationTime[0]   = (uint32)statBuf.st_ctime;
+        Find_File_Data->ftLastAccessTime[0] = (uint32)statBuf.st_atime;
+        Find_File_Data->ftLastWriteTime[0]  = (uint32)statBuf.st_mtime;
         
         /* File size */
-        lpFindFileData->fileSizeLow = (uint32)(statBuf.st_size & 0xFFFFFFFF);
-        lpFindFileData->fileSizeHigh = (uint32)((statBuf.st_size >> 32) & 0xFFFFFFFF);
+        Find_File_Data->fileSizeLow = (uint32)(statBuf.st_size & 0xFFFFFFFF);
+        Find_File_Data->fileSizeHigh = (uint32)((statBuf.st_size >> 32) & 0xFFFFFFFF);
         
         /* Hidden files in Unix-like systems start with '.' */
         if (fileName[0] == '.')
-            lpFindFileData->fileAttributes |= GE_FILE_ATTRIBUTE_HIDDEN;
+            Find_File_Data->fileAttributes |= GE_FILE_ATTRIBUTE_HIDDEN;
     }
     
     /* Handle special cases for . and .. */
     if (strcmp(fileName, ".") == 0 || strcmp(fileName, "..") == 0) {
-        lpFindFileData->fileAttributes = GE_FILE_ATTRIBUTE_DIRECTORY;
+        Find_File_Data->fileAttributes = GE_FILE_ATTRIBUTE_DIRECTORY;
     }
 #endif
 }
@@ -268,11 +272,12 @@ geFindFirstFile(const char *File_Name, GE_FIND_DATA *Find_File_Data)
 #ifdef _WIN32
     return FindFirstFile(File_Name, Find_File_Data);
 #else
+
     if (!File_Name || !Find_File_Data) {
         DBG_OUT("geFindFirstFile()\t!File_Name || !Find_File_Data");
         return GE_INVALID_HANDLE_VALUE;
     }
-    
+
     memset(Find_File_Data, 0, sizeof(GE_FIND_DATA));
     
     if ('*' != *File_Name) {
@@ -323,6 +328,7 @@ geFindNextFile(GE_FIND_FILE *Find_File, GE_FIND_DATA *Find_File_Data)
         if (position < 0 || strcasecmp(dir_ent->d_name + position, Find_File->filter+1)) continue;
         
        strcpy(Find_File_Data->fileName, dir_ent->d_name);
+       DBG_OUT("geFindNextFile():\t%s", Find_File_Data->fileName);
        return true;
     }
     
@@ -341,7 +347,10 @@ geFindClose(GE_FIND_FILE *Find_File)
         return false;
     }
     
-    if (Find_File->dir) closedir(Find_File->dir);
+    if (Find_File->dir) {
+        DBG_OUT("geFindClose():\t%s",Find_File->dir);
+        closedir(Find_File->dir);
+    }
     
     free(Find_File->filter);
     free(Find_File);

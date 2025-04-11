@@ -40,6 +40,9 @@
 
 #include	"FSMemory.h"
 
+
+#define DBG_OUT( Text, ... ) _DBG_OUT("FSMemory.c:" Text, ##__VA_ARGS__ )
+
 //	"MF01"
 #define	MEMORYFILE_SIGNATURE	0x3130464D
 
@@ -51,26 +54,30 @@
 
 #define	MEMORY_FILE_GROW	0x2000
 
-typedef struct	MemoryFile
+typedef struct
+MemoryFile
 {
-	unsigned int	Signature;
-	char *			Memory;
-	int				Size;
-	int				AllocatedSize;
-	int				Position;
-	geBoolean		WeOwnMemory;
-	geBoolean		ReadOnly;
-}	MemoryFile;
+	unsigned int  Signature;
+	char         *Memory;
+	int           Size;
+	int           AllocatedSize;
+	int           Position;
+	geBoolean     WeOwnMemory;
+	geBoolean     ReadOnly;
+}
+MemoryFile;
 
-static	void *	GENESISCC FSMemory_FinderCreate(
-	geVFile *		FS,
-	void *			Handle,
-	const char *	FileSpec)
+static void *GENESISCC 
+FSMemory_FinderCreate(
+	geVFile    *FS,
+	void       *Handle,
+	const char *FileSpec)
 {
 	return NULL;
 }
 
-static	geBoolean	GENESISCC FSMemory_FinderGetNextFile(void *Handle)
+static geBoolean GENESISCC 
+FSMemory_FinderGetNextFile(void *Handle)
 {
 	assert(!Handle);
 	return GE_FALSE;
@@ -247,7 +254,8 @@ static	geBoolean	GENESISCC FSMemory_GetS(void *Handle, void *Buff, int MaxLen)
 	
 }
 
-static	geBoolean	GENESISCC FSMemory_Read(void *Handle, void *Buff, int Count)
+static geBoolean GENESISCC 
+FSMemory_Read(void *Handle, void *Buff, int Count)
 {
 	MemoryFile *	File;
 
@@ -258,8 +266,8 @@ static	geBoolean	GENESISCC FSMemory_Read(void *Handle, void *Buff, int Count)
 
 	CHECK_HANDLE(File);
 
-	if	(ClampOperationSize(File, Count) != Count)
-		return GE_FALSE;
+	if (ClampOperationSize(File, Count) != Count) return GE_FALSE;
+	DBG_OUT("FSMemory_Read()\tClampOperationSize() failed.");
 
 	memcpy(Buff, DataPtr(File), Count);
 

@@ -47,6 +47,10 @@
 #include "VFile.h"
 #include "VFile_private.h"
 
+
+#define DBG_OUT( Text, ... ) _DBG_OUT("VFile.c:" Text, ##__VA_ARGS__ )
+
+
 //#include	"FSOps.h"
 /*
 #ifdef _WIN32
@@ -475,7 +479,8 @@ GENESISAPI geBoolean GENESISCC geVFile_GetS(geVFile *File, void *Buff, int MaxLe
 	return File->APIs->GetS(File->FSData, Buff, MaxLen);
 }
 
-GENESISAPI geBoolean GENESISCC geVFile_Read(geVFile *File, void *Buff, int Count)
+GENESISAPI geBoolean GENESISCC 
+geVFile_Read(geVFile *File, void *Buff, int Count)
 {
 	assert(File);
 	assert(Buff);

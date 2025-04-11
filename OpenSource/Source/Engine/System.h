@@ -241,7 +241,7 @@ geEngine;
 //=====================================================================================
 
 //Engine
-geEngine  *Sys_EngineCreate(HWND hWnd, const char *AppName, const char *DriverDirectory, uint32 Version);
+geEngine  *Sys_EngineCreate(SDL_Window *hWnd, const char *AppName, const char *DriverDirectory, uint32 Version);
 
 geBoolean  Sys_ShutdownDriver(geEngine *Engine);
 

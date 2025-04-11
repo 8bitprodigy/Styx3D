@@ -197,9 +197,9 @@ GameMgr_Create(int32 Width, int32 Height, const char *AppName)
 		goto ExitWithError;
 	}
 
-	#ifdef _DEBUG
+#ifdef _DEBUG
 	geXForm3d_SetMaximalAssertionMode(GE_FALSE);
-	#endif
+#endif
 	
 	//
 	// Create the sound system

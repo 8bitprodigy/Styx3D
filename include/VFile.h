@@ -28,7 +28,7 @@ extern "C" {
 
 #include	"GETypes.h"
 
-typedef struct geVFile geVFile;
+typedef struct geVFile geVFile; /* Defined in VFile.c */
 
 //--------- Finder (Directory) --------------
 typedef struct geVFile_Finder     geVFile_Finder;

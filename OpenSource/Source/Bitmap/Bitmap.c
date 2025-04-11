@@ -86,6 +86,7 @@ see {} for notes/long-term-todos
 
 /*}{ ************* statics *****************/
 
+#define DBG_OUT( Text, ... ) _DBG_OUT("Bitmap.c:" Text, ##__VA_ARGS__ )
 //#define DO_TIMER
 
 //#define DONT_USE_ASM
@@ -3714,57 +3715,51 @@ typedef uint32			geBmTag_t;
 
 static geBoolean geBitmap_ReadFromBMP(geBitmap * Bmp,geVFile * F);
 
-GENESISAPI geBitmap * GENESISCC geBitmap_CreateFromFile(geVFile *F)
+GENESISAPI geBitmap * GENESISCC 
+geBitmap_CreateFromFile(geVFile *F)
 {
-geBitmap *	Bmp;
-geBmTag_t Tag;
+	geBitmap  *Bmp;
+	geBmTag_t  Tag;
 
 	assert(F);
 
-	if ( ! geVFile_Read(F, &Tag, sizeof(Tag)) )
-		return NULL;
+	if ( ! geVFile_Read(F, &Tag, sizeof(Tag)) ) return NULL;
 
 	Bmp = geBitmap_Create_Base();
-	if ( ! Bmp )
-		return NULL;
+	if ( !Bmp ) return NULL;
 
-	if ( Tag == GEBM_TAG )
-	{
-	uint8 flags;
-	uint8 Version;
-	int mip;
+	if ( Tag == GEBM_TAG ) {
+		uint8 flags;
+		uint8 Version;
+		int mip;
 
 		// see WriteToFile for comments on the file format
 
-		if ( ! geVFile_Read(F, &Version, sizeof(Version)) )
-			goto fail;
+		if ( !geVFile_Read(F, &Version, sizeof(Version)) ) goto fail;
+		DBG_OUT("geBitmap_CreateFromFile()\tgeVFile_Read() succeeded.");
 
-		if ( VERSION_MAJOR(Version) != VERSION_MAJOR(GEBM_VERSION) )
-		{
+		if ( VERSION_MAJOR(Version) != VERSION_MAJOR(GEBM_VERSION) ) {
 			geErrorLog_AddString(-1,"CreateFromFile : incompatible GeBm version", NULL);	
 			goto fail;
 		}
+		DBG_OUT("geBitmap_CreateFromFile()\tVersion mismatch.");
 
-		if ( ! geBitmap_ReadInfo(Bmp,F) )
-			goto fail;
+		if ( !geBitmap_ReadInfo(Bmp, F) ) goto fail;
+		DBG_OUT("geBitmap_CreateFromFile()\tgeBitmap_ReadInfo() succeeded.");
 
-		if ( Bmp->Info.Palette )
-		{
+		if ( Bmp->Info.Palette ) {
 			Bmp->Info.Palette = NULL;
-			if ( ! ( Bmp->Info.Palette = geBitmap_Palette_CreateFromFile(F)) )
-				goto fail;
+			if ( ! ( Bmp->Info.Palette = geBitmap_Palette_CreateFromFile(F)) ) goto fail;
 		}
+		DBG_OUT("geBitmap_CreateFromFile()\tVersion mismatch.");
 
-		if ( Bmp->Info.Format == GE_PIXELFORMAT_WAVELET )
-		{
+		if ( Bmp->Info.Format == GE_PIXELFORMAT_WAVELET ) {
 			geErrorLog_AddString(-1,"Genesis3D 1.0 does not support Wavelet Images",NULL);
-		}
-		else
-		{
-			for(;;)
-			{
-				if ( ! geVFile_Read(F, &flags, sizeof(flags)) )
-					goto fail;
+			
+		} else {
+			for(;;) {
+				if ( !geVFile_Read(F, &flags, sizeof(flags)) ) goto fail;
+				DBG_OUT("geBitmap_CreateFromFile()\tFailed to read flags.");
 
 				mip = flags & MIP_MASK;
 
@@ -3774,43 +3769,43 @@ geBmTag_t Tag;
 				assert(mip >= Bmp->Info.MinimumMip );
 				assert( Bmp->Info.Stride == Bmp->Info.Width );
 
-				if ( ! geBitmap_AllocSystemMip(Bmp,mip) )
-					goto fail;
+				if ( !geBitmap_AllocSystemMip(Bmp, mip) ) goto fail;
+				DBG_OUT("geBitmap_CreateFromFile()\tFailed to read flags.");
 
 				if ( flags & MIP_FLAG_COMPRESSED )
 				{
-			#ifdef DO_LZ
-				geVFile * LzF;
+#ifdef DO_LZ
+					geVFile * LzF;
 
-					LzF = geVFile_OpenNewSystem(F,GE_VFILE_TYPE_LZ,NULL,NULL,GE_VFILE_OPEN_READONLY);
-					if ( ! LzF )
-					{
+					LzF = geVFile_OpenNewSystem(
+						F, 
+						GE_VFILE_TYPE_LZ, 
+						NULL, 
+						NULL, 
+						GE_VFILE_OPEN_READONLY
+					);
+					if ( !LzF ) {
 						geErrorLog_AddString(-1,"Bitmap_CreateFromFile : LZ File Open failed",NULL);
 						return GE_FALSE;
 					}
 
-					if ( ! geVFile_Read(LzF, Bmp->Data[mip], geBitmap_MipBytes(Bmp,mip) ) )
-					{
+					if ( !geVFile_Read(LzF, Bmp->Data[mip], geBitmap_MipBytes(Bmp, mip) ) ) {
 						geVFile_Close(LzF);
 						geErrorLog_AddString(-1,"Bitmap_CreateFromFile : LZ File Read failed",NULL);
 						return GE_FALSE;
 					}
 
-					if ( ! geVFile_Close(LzF) )
-					{
+					if ( !geVFile_Close(LzF) ) {
 						geErrorLog_AddString(-1,"Bitmap_CreateFromFile : LZ File Close failed",NULL);
 						return GE_FALSE;
 					}
-			#endif
-				}
-				else
-				{
-					if ( ! geVFile_Read(F, Bmp->Data[mip], geBitmap_MipBytes(Bmp,mip) ) )
-						goto fail;
+#endif /* DO_LZ */
+				} else {
+					if ( !geVFile_Read(F, Bmp->Data[mip], geBitmap_MipBytes(Bmp,mip) ) ) goto fail;
+					DBG_OUT("geBitmap_CreateFromFile()\tRead bitmap data succeeded.");
 				}
 
-				if ( flags & MIP_FLAG_PAETH_FILTERED )
-				{
+				if ( flags & MIP_FLAG_PAETH_FILTERED ) {
 					geErrorLog_AddString(-1,"Bitmap_CreateFromFile : Paeth Filter not supported in this version!",NULL);
 					return GE_FALSE;
 				}
@@ -3819,25 +3814,19 @@ geBmTag_t Tag;
 			}
 		}
 
-		if( Bmp->Alpha )
-		{
-			if ( ! (Bmp->Alpha = geBitmap_CreateFromFile(F)) )
-				goto fail;
+		if( Bmp->Alpha ) {
+			if ( ! (Bmp->Alpha = geBitmap_CreateFromFile(F)) ) goto fail;
+			DBG_OUT("geBitmap_CreateFromFile()\tAlpha loaded.");
 		}
 	}	// end geBitmap reader
-	else 
-	{
-		if ( ! geVFile_Seek(F, - (int)sizeof(Tag), GE_VFILE_SEEKCUR) )
-			goto fail;
+	else  {
+		if ( !geVFile_Seek(F, - (int)sizeof(Tag), GE_VFILE_SEEKCUR) ) goto fail;
+		DBG_OUT("geBitmap_CreateFromFile()\tgeFile_Seek() successful.");
 
-		if ( (Tag&0xFFFF) == 0x4D42 )	// 'BM'
-		{
-		
-			if ( ! geBitmap_ReadFromBMP(Bmp,F) )
-				goto fail;
-		}
-		else
-		{
+		if ( (Tag & 0xFFFF) == 0x4D42 ) {	// 'BM'
+			if ( ! geBitmap_ReadFromBMP(Bmp, F) ) goto fail;
+			
+		} else {
 			// geErrorLog_AddString(-1,"CreateFromFile : unknown format", NULL);
 			goto fail;
 		}
@@ -4044,77 +4033,74 @@ typedef struct
 } RGBQUAD;
 #pragma pack()
 
-static geBoolean geBitmap_ReadFromBMP(geBitmap * Bmp,geVFile * F)
+static geBoolean 
+geBitmap_ReadFromBMP(geBitmap *Bmp, geVFile *F)
 {
-BITMAPFILEHEADER 	bmfh;
-BITMAPINFOHEADER	bmih;
-int bPad,myRowWidth,bmpRowWidth,pelBytes;
+	BITMAPFILEHEADER bmfh;
+	BITMAPINFOHEADER bmih;
+	int 
+		bPad,myRowWidth,
+		bmpRowWidth,
+		pelBytes;
 
 	// Windows Bitmap
 
-	if ( ! geVFile_Read(F, &bmfh, sizeof(bmfh)) )
-		return GE_FALSE;
+	if ( !geVFile_Read(F, &bmfh, sizeof(bmfh)) ) return GE_FALSE;
 
 	assert(bmfh.bfType == 0x4D42);
 
 	bPad = bmfh.bfOffBits;
 
-	if ( ! geVFile_Read(F, &bmih, sizeof(bmih)) )
-		return GE_FALSE;
+	if ( !geVFile_Read(F, &bmih, sizeof(bmih)) ) return GE_FALSE;
 
-	if ( bmih.biSize > sizeof(bmih) )
-	{
+	if ( sizeof(bmih) < bmih.biSize ) {
 		geVFile_Seek(F, bmih.biSize - sizeof(bmih), GE_VFILE_SEEKCUR);
-	}
-	else if ( bmih.biSize < sizeof(bmih) )
-	{
+		
+	} else if ( bmih.biSize < sizeof(bmih) ) {
 		geErrorLog_AddString(-1,"CreateFromFile : bmih size bad", NULL);	
 		return GE_FALSE;
 	}
 
-	if ( bmih.biCompression )
-	{
+	if ( bmih.biCompression ) {
 		geErrorLog_AddString(-1,"CreateFromFile : only BI_RGB BMP compression supported", NULL);
 		return GE_FALSE;
 	}
 
 	bPad -= sizeof(bmih) + sizeof(bmfh);
 
-	switch (bmih.biBitCount) 
-	{
-		case 8:			/* colormapped image */
-			if ( bmih.biClrUsed == 0 ) bmih.biClrUsed = 256;
+	switch (bmih.biBitCount)  {
+	case 8:			/* colormapped image */
+		if ( bmih.biClrUsed == 0 ) bmih.biClrUsed = 256;
 
-			if ( ! (Bmp->Info.Palette = geBitmap_Palette_Create(GE_PIXELFORMAT_32BIT_XRGB,bmih.biClrUsed)) )
-				return GE_FALSE;
-
-			if ( ! geVFile_Read(F, Bmp->Info.Palette->Data, bmih.biClrUsed * 4) )
-				return GE_FALSE;
-
-			bPad -= bmih.biClrUsed * 4;
-
-			Bmp->Info.Format = GE_PIXELFORMAT_8BIT_PAL;
-			pelBytes = 1;
-			break;
-		case 16:			
-			Bmp->Info.Format = GE_PIXELFORMAT_16BIT_555_RGB;
-			// tried 555,565_BGR & RGB, seems to have too much green
-			pelBytes = 2;
-			break;
-		case 24:			
-			Bmp->Info.Format = GE_PIXELFORMAT_24BIT_BGR;
-			pelBytes = 3;
-			break;
-		case 32:			
-			Bmp->Info.Format = GE_PIXELFORMAT_32BIT_XRGB; // surprisingly sane !?
-			pelBytes = 4;
-			break;
-		default:
+		if ( ! (Bmp->Info.Palette = geBitmap_Palette_Create(GE_PIXELFORMAT_32BIT_XRGB,bmih.biClrUsed)) )
 			return GE_FALSE;
+
+		if ( ! geVFile_Read(F, Bmp->Info.Palette->Data, bmih.biClrUsed * 4) )
+			return GE_FALSE;
+
+		bPad -= bmih.biClrUsed * 4;
+
+		Bmp->Info.Format = GE_PIXELFORMAT_8BIT_PAL;
+		pelBytes = 1;
+		break;
+	case 16:			
+		Bmp->Info.Format = GE_PIXELFORMAT_16BIT_555_RGB;
+		// tried 555,565_BGR & RGB, seems to have too much green
+		pelBytes = 2;
+		break;
+	case 24:			
+		Bmp->Info.Format = GE_PIXELFORMAT_24BIT_BGR;
+		pelBytes = 3;
+		break;
+	case 32:			
+		Bmp->Info.Format = GE_PIXELFORMAT_32BIT_XRGB; // surprisingly sane !?
+		pelBytes = 4;
+		break;
+	default:
+		return GE_FALSE;
 	}
 
-	if ( bPad < 0 )
-	{
+	if ( bPad < 0 ) {
 		geErrorLog_AddString(-1,"CreateFromFile : bPad bad", NULL);
 		return GE_FALSE;
 	}
@@ -4132,26 +4118,22 @@ int bPad,myRowWidth,bmpRowWidth,pelBytes;
 
 	assert( bmpRowWidth <= myRowWidth );
 
-	if ( ! geBitmap_AllocSystemMip(Bmp,0) )
-		return GE_FALSE;
+	if ( ! geBitmap_AllocSystemMip(Bmp,0) ) return GE_FALSE;
 
-	if ( bmih.biHeight > 0 )
-	{
-	int y;
-	char * row;
+	if ( bmih.biHeight > 0 ) {
+		int y;
+		char * row;
+		
 		row = Bmp->Data[0];
 		row += (Bmp->Info.Height - 1) * myRowWidth;
-		for(y= Bmp->Info.Height;y--;)
-		{
-			if ( ! geVFile_Read(F, row, bmpRowWidth) )
-				return GE_FALSE;				
+		for(y= Bmp->Info.Height;y--;) {
+			if ( ! geVFile_Read(F, row, bmpRowWidth) ) return GE_FALSE;				
 			row -= myRowWidth;
 		}
-	}
-	else
-	{
-	int y;
-	char * row;
+	} else {
+		int y;
+		char * row;
+		
 		row = Bmp->Data[0];
 		for(y= Bmp->Info.Height;y--;)
 		{
@@ -4161,8 +4143,8 @@ int bPad,myRowWidth,bmpRowWidth,pelBytes;
 		}
 	}
 
-return GE_TRUE;
-}	// end BMP reader
+	return GE_TRUE;
+}	/* geBitmap_ReadFromBMP */
 
 /*}{ *** Packed Info IO ***/
 

@@ -44,6 +44,8 @@
 #include "World.h"
 #include "XPlatUtils.h"
 
+
+#define DBG_OUT( Text, ... ) _DBG_OUT("System.c:" Text, ##__VA_ARGS__ )
 //#define SKY_HACK
 //extern BOOL GlobalReset;
 
@@ -177,57 +179,57 @@ const uint32 geEngine_Version_OldestSupported =
 	( (GE_VERSION_MAJOR << GE_VERSION_MAJOR_SHIFT) + GE_VERSION_MINOR_MIN );
 
 geEngine *
-Sys_EngineCreate(HWND hWnd, const char *AppName, const char *DriverDirectory, uint32 Version)
+Sys_EngineCreate(SDL_Window *hWnd, const char *AppName, const char *DriverDirectory, uint32 Version)
 {
-	int32			i;
-	geEngine		*NewEngine;
-	int				Length;
+	int32     i;
+	geEngine *NewEngine;
+	int       Length;
 
-	if ( (Version & GE_VERSION_MAJOR_MASK) != (geEngine_Version & GE_VERSION_MAJOR_MASK) )
-	{
+	if (( Version & GE_VERSION_MAJOR_MASK ) != ( geEngine_Version & GE_VERSION_MAJOR_MASK )) {
 		geErrorLog_AddString(-1,"Genesis Engine has wrong major version!", NULL);
 		return NULL;
 	}
-
-	if ( Version > geEngine_Version )
-	{
-	char str[1024];
+	DBG_OUT("Sys_EngineCreate()\tPassed Version Check 1.");
+	
+	if ( Version > geEngine_Version ) {
+		char str[1024];
 		sprintf(str,"%d - %d",Version,geEngine_Version);
 		geErrorLog_AddString(-1,"Genesis Engine is older than application; aborting!", str);
 		return NULL;
 	}
-
-	if ( Version < geEngine_Version_OldestSupported )
-	{
-	char str[1024];
+	DBG_OUT("Sys_EngineCreate()\tPassed Version Check 2.");
+	
+	if ( Version < geEngine_Version_OldestSupported ) {
+		char str[1024];
 		sprintf(str,"%d - %d",Version,geEngine_Version);
 		geErrorLog_AddString(-1,"Genesis Engine does not support the old version!", str);
 		return NULL;
 	}
+	DBG_OUT("Sys_EngineCreate()\tPassed Version Check 3.");
 
 	//	Attempt to create a new engine object
 	NewEngine = GE_RAM_ALLOCATE_STRUCT(geEngine);
 
-	if (!NewEngine)
-	{
+	if (!NewEngine) {
 		geErrorLog_Add(GE_ERR_OUT_OF_MEMORY, NULL);
 		goto ExitWithError;
 	}
+	DBG_OUT("Sys_EngineCreate()\tNew Engine allocated.");
 	
 	// Clear the engine structure...
 	memset(NewEngine, 0, sizeof(geEngine));
 
-	if ( ! List_Start() )
-	{
+	if ( ! List_Start() ) {
 		geErrorLog_Add(GE_ERR_OUT_OF_MEMORY, NULL);
+		DBG_OUT("Sys_EngineCreate()\tList_Start() failed.");
 		goto ExitWithError;
 	}	
 
 	Length = strlen(DriverDirectory) + 1;
 	NewEngine->DriverDirectory = geRam_Allocate(Length);
 
-	if (!NewEngine->DriverDirectory)
-		goto ExitWithError;
+	if (!NewEngine->DriverDirectory) goto ExitWithError;
+	DBG_OUT("Sys_EngineCreate()\tNewEngine->DriverDirectory allocated.");
 
 	memcpy(NewEngine->DriverDirectory, DriverDirectory, Length);
 	
@@ -235,27 +237,28 @@ Sys_EngineCreate(HWND hWnd, const char *AppName, const char *DriverDirectory, ui
 	strcpy(NewEngine->AppName, AppName);
 
 	// Get cpu info
-	if (!Sys_GetCPUFreq(&NewEngine->CPUInfo))
-		goto ExitWithError;
+	if (!Sys_GetCPUFreq(&NewEngine->CPUInfo)) goto ExitWithError;
+	DBG_OUT("Sys_EngineCreate()\tNewEngine->CPUInfo set.");
 	
 	// Build the wavetable
 	for (i = 0; i < 20; i++)
 		NewEngine->WaveTable[i] = ((i * 65)%200) + 50;
 
-	if (!EnumSubDrivers(&NewEngine->DriverInfo, DriverDirectory))
-		goto ExitWithError;
+	if (!EnumSubDrivers(&NewEngine->DriverInfo, DriverDirectory)) goto ExitWithError;
+	DBG_OUT("Sys_EngineCreate()\tSubDrivers Enumerated.");
 
-	if (!geEngine_BitmapListInit(NewEngine))
-		goto ExitWithError;
+	if (!geEngine_BitmapListInit(NewEngine)) goto ExitWithError;
+	DBG_OUT("Sys_EngineCreate()\tBitmapList initialized.");
 
-	if (!Light_EngineInit(NewEngine))
-		goto ExitWithError;
+	if (!Light_EngineInit(NewEngine)) goto ExitWithError;
+	DBG_OUT("Sys_EngineCreate()\tLighting initialized.");
 
-	if (!User_EngineInit(NewEngine))
-		goto ExitWithError;
+	if (!User_EngineInit(NewEngine)) goto ExitWithError;
+	DBG_OUT("Sys_EngineCreate()\tUser initialized.");
 
 	if (!geEngine_InitFonts(NewEngine))		// must be after BitmapList
 		goto ExitWithError;
+	DBG_OUT("Sys_EngineCreate()\tFonts initialized.");
 
 	NewEngine->Changed = GE_TRUE;			// Force a first time driver upload
 
@@ -267,16 +270,16 @@ Sys_EngineCreate(HWND hWnd, const char *AppName, const char *DriverDirectory, ui
 
 	//geEngine_SetFogEnable(NewEngine, GE_TRUE, 255.0f, 0.0f, 0.0f, 250.0f, 1000.0f);
 	geEngine_SetFogEnable(NewEngine, GE_FALSE, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+	DBG_OUT("Sys_EngineCreate()\tFog set.");
 
 	return NewEngine;
 
 	// Error cleanup
 	ExitWithError:
 	{
-		if (NewEngine)
-		{
-			if (NewEngine->DriverDirectory)
-				geRam_Free(NewEngine->DriverDirectory);
+		DBG_OUT("Sys_EngineCreate()\tExited with Error.");
+		if (NewEngine) {
+			if (NewEngine->DriverDirectory) geRam_Free(NewEngine->DriverDirectory);
 
 			geRam_Free(NewEngine);
 		}

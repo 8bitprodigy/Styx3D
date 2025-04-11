@@ -73,6 +73,7 @@
 #include "XPlatUtils.h"
 
 
+#define DBG_OUT( Text, ... ) _DBG_OUT("GenVS.c:" Text, ##__VA_ARGS__ )
 
 
 #define CLIP_CURSOR
@@ -138,65 +139,46 @@ static char *GetCommandText(char *CmdLine, char *Data, geBoolean Cmd)
 	int32		dp;
 	char		ch;
 
-	while (1)
-	{
+	if (!CmdLine) return NULL;
+	
+	while (1) {
 		ch = *CmdLine;
 		
 		if (ch == 0 || ch == '\n')
 			return NULL;
 
-		if (ch == ' ')				// Skip white space
-		{
+		if (ch == ' ') {				// Skip white space
 			CmdLine++;
 			continue;
 		}
 
-		if (ch == '-')
-		{
-			if (!Cmd)
-				return NULL;		// FIXME:  Return error!!!
+		if (ch == '-') {
+			if (!Cmd) return NULL;		// FIXME:  Return error!!!
 			CmdLine++;
 			break;
-		}
-		else 
-		{
-			if (Cmd)
-				return NULL;			// FIXME:  Return error!!!
+		} else {
+			if (Cmd) return NULL;			// FIXME:  Return error!!!
 			break;
 		}
-
 		CmdLine++;
 	}
 
-	if (ch == 0 || ch == '\n')
-		return NULL;
+	if (ch == 0 || ch == '\n') return NULL;
 
-	if (ch == '"')
-	{
+	if (ch == '"') {
 		Quote = true;
 		ch = *++CmdLine;
-	}
-	else
-		Quote = false;
+	} else Quote = false;
 
 	dp = 0;
 
-	while (1)
-	{
-		if (Quote)
-		{
-			if (ch == '"')
-			{
-				break;
-			}
+	while (1) {
+		if (Quote) {
+			if (ch == '"') break;
 			
-			if (ch == '\n' || ch == 0)
-				return NULL;		// Quote not found!!!
-		}
-		else
-		{
-			if (ch == ' ' || ch == '\n' || ch == 0)
-				break;
+			if (ch == '\n' || ch == 0) return NULL;		// Quote not found!!!
+		} else {
+			if (ch == ' ' || ch == '\n' || ch == 0) break;
 		}
 		
 		ch = *CmdLine++;
@@ -206,10 +188,10 @@ static char *GetCommandText(char *CmdLine, char *Data, geBoolean Cmd)
 	Data[dp-1] = 0;
 
 	return CmdLine;
-		
 }
 
-void AdjustPriority(int adjustment)
+void 
+AdjustPriority(int adjustment)
 {
 	//HANDLE thread = GetCurrentThread();
 	//SetThreadPriority(thread,adjustment);
@@ -289,7 +271,7 @@ main(int argc, char *argv[])
     geDriver_Mode   *DriverMode = NULL;
 
     //struct timeval  SystemTime;
-    char            *CmdLine = (argc > 1) ? argv[1] : NULL;
+    char            *CmdLine = (1 < argc) ? argv[1] : NULL;
     int32           i;
     uint64          
 					SystemTime,
@@ -374,12 +356,10 @@ main(int argc, char *argv[])
 
 	strcpy(IPAddress, "");							// Deafult our IP address to blank (LAN game)
 	TempNameLength = sizeof(TempName);
-	if( geGetUserName( TempName, &TempNameLength ) == 0 )
-	{
+	if( geGetUserName( TempName, &TempNameLength ) == 0 ) {
 		strcpy( PlayerName, "Player" );
-	}
-	else
-	{
+		
+	} else {
 		strncpy( PlayerName, TempName, sizeof( PlayerName ) );
 		PlayerName[ sizeof( PlayerName ) - 1 ] = '\0';
 	}
@@ -391,7 +371,7 @@ main(int argc, char *argv[])
 	HostInit.DemoFile[0] = 0;
 
 	geGetCurrentDir(sizeof(TempName), TempName);
-	printf("[DEBUG] Temp Name:\t%s\n", TempName);
+	DBG_OUT("main()\tTemp Name:\t%s", TempName);
 	MainFS = geVFile_OpenNewSystem(
 		NULL,
 		GE_VFILE_TYPE_DOS,
@@ -399,65 +379,55 @@ main(int argc, char *argv[])
 		NULL,
 		GE_VFILE_OPEN_READONLY | GE_VFILE_OPEN_DIRECTORY
 	);
-	printf("[DEBUG] MainFS:\t%p\n",&MainFS);
-	assert(MainFS);
+	DBG_OUT("main()\tMainFS:\t%p",&MainFS);
+	//assert(MainFS); 
 	
-
+	/* Handle Arguments. */
 	while (1)
 	{	
 		char			Data[MAX_PATH];
 
-		if (!(CmdLine = GetCommandText(CmdLine, Data, true)))
-			break;
+		if (!(CmdLine = GetCommandText(CmdLine, Data, true))) break;
 
-		if (!strcmp(Data, "Server"))
-		{
+		if (!strcmp(Data, "Server")) {
 			if (!HostInit.LevelHack[0])	
 				strcpy(HostInit.LevelHack, DEFAULT_LEVEL);
 
 			HostInit.Mode = HOST_MODE_SERVER_CLIENT;
-		}
-		else if (!strcmp(Data, "Dedicated"))
-		{
+			
+		} else if (!strcmp(Data, "Dedicated")) {
 			HostInit.Mode = HOST_MODE_SERVER_DEDICATED;
-		}
-		else if (!strcmp(Data, "Client"))
-		{
+			
+		} else if (!strcmp(Data, "Client")) {
 			HostInit.Mode = HOST_MODE_CLIENT;
-		}
-		else if (!strcmp(Data, "BotPathDebug"))
-		{
+			
+		} else if (!strcmp(Data, "BotPathDebug")) {
 			extern geBoolean PathLight; // hacked in
 			PathLight = true;
-		}
-		else if (!strcmp(Data, "Record"))
-		{
+			
+		} else if (!strcmp(Data, "Record")) {
 			HostInit.DemoMode = HOST_DEMO_RECORD;
 
 			if (!(CmdLine = GetCommandText(CmdLine, Data, false)))
 				GenVS_Error("No demo name specified on command line.");
 
 			strcpy(HostInit.DemoFile, Data);
-		}
-		else if (!strcmp(Data, "Play"))
-		{
+			
+		} else if (!strcmp(Data, "Play")) {
 			HostInit.DemoMode = HOST_DEMO_PLAY;
 
 			if (!(CmdLine = GetCommandText(CmdLine, Data, false)))
 				GenVS_Error("No demo name specified on command line.");
 
 			strcpy(HostInit.DemoFile, Data);
-		}
-		else if (!strcmp(Data, "Name"))
-		{
+		} else if (!strcmp(Data, "Name")) {
 			// Get name
 			if (!(CmdLine = GetCommandText(CmdLine, Data, false)))
 				GenVS_Error("No name specified on command line.");
 			
 			strcpy(PlayerName, Data);
-		}
-		else if (!strcmp(Data, "IP"))
-		{
+			
+		} else if (!strcmp(Data, "IP")) {
 			// Get name
 			if (!(CmdLine = GetCommandText(CmdLine, Data, false)))
 				GenVS_Error("No IP Address specified on command line.");
@@ -466,53 +436,46 @@ main(int argc, char *argv[])
 				GenVS_Error("MaxIP Address string on command line.\n");
 
 			strcpy(IPAddress, Data);		// User wants to override IP at command line
-		}
-		else if (!strcmp(Data, "Map"))
-		{
+			
+		} else if (!strcmp(Data, "Map")) {
 			// Get name
 			if (!(CmdLine = GetCommandText(CmdLine, Data, false)))
 				GenVS_Error("No map name specified on command line.");
 			sprintf(HostInit.LevelHack, "Levels\\%s", Data);
 			//sprintf(HostInit.UserLevel, "Levels\\%s", Data);
-		}
-		else if (!strcmp(Data, "Gamma"))
-		{
+			
+		} else if (!strcmp(Data, "Gamma")) {
 			// Get name
 			if (!(CmdLine = GetCommandText(CmdLine, Data, false)))
 				GenVS_Error("No gamma value specified on command line.");
 			
 			// <>
 			UserGamma = (float)atof(Data);
-		}
-		else if (!strcmp(Data, "ShowStats"))
-		{
+			
+		} else if (!strcmp(Data, "ShowStats")) {
 			ShowStats = true;
-		}
-		else if (!strcmp(Data, "Mute"))
-		{
+			
+		} else if (!strcmp(Data, "Mute")) {
 			Mute = true;
-		}
-		else if (!strcmp(Data, "VidMode"))
-		{
+			
+		} else if (!strcmp(Data, "VidMode")) {
 			GenVS_Error("VidMode Parameter no longer supported");
-		}
-		else if (!strcmp(Data,"PickMode"))
-		{
+			
+		} else if (!strcmp(Data,"PickMode")) {
 			ManualPick=true;
-		}
-		else if (!strcmp(Data,"Fog"))
-		{
+			
+		} else if (!strcmp(Data,"Fog")) {
 			g_FogEnable = true;
-		}
-		else if (!strcmp(Data,"FarClip"))
-		{
+			
+		} else if (!strcmp(Data,"FarClip")) {
 			g_FarClipPlaneEnable = true;
-		}
-		else
+			
+		} else {
 			GenVS_Error("Unknown Option: %s.", Data);
+		}
 	}
 
-
+	DBG_OUT("main()\tArguments handled.");
 	
 	//
 	//	Create the Game Mgr
@@ -521,6 +484,7 @@ main(int argc, char *argv[])
 	
 	if (!GMgr)
 		GenVS_Error("Could not create the game mgr.");
+	DBG_OUT("main()\tGameManager created.");
 
 	Engine = GameMgr_GetEngine(GMgr);
 	if (!Engine)
@@ -536,299 +500,303 @@ main(int argc, char *argv[])
 	geEngine_EnableFrameRateCounter(Engine, ShowStats);
 
 	
-	do 
+	do {
+		SDL_Window *hWnd;
+		VidMode vidMode;
+
+		// Pick mode
+		PickMode(
+			GameMgr_GethWnd(GMgr),
+			ChangingDisplayMode, 
+			ManualPick, 
+			DriverModeList, 
+			DriverModeListLength, 
+			&ChangeDisplaySelection
+		);
+		ChangingDisplayMode = 0;		
+
+		// Text, and Menu should go in GameMgr to make the hierarchy clean
+		// Client, and Host could then look down on Menu, and grab default items out of it...
+		if (!Text_Create( Engine ))
+			GenVS_Error("Text_Create failed.");
+
+		if (!GMenu_Create( Engine , DriverModeList, DriverModeListLength, ChangeDisplaySelection))
+			GenVS_Error("GMenu_Create failed.");
+		
+		MenusCreated = true;
+
+		// Set the text in the menus for the name/ipaddress etc...
 		{
-			SDL_Window *hWnd;
-			VidMode vidMode;
+			Menu_SetStringText( GMenu_GetMenu(GMenu_NameEntry), GMenu_NameEntry, PlayerName );
+			Menu_SetStringText( GMenu_GetMenu(GMenu_IPEntry), GMenu_IPEntry, IPAddress );
+		}
 
-			// Pick mode
-			PickMode(GameMgr_GethWnd(GMgr),ChangingDisplayMode, ManualPick, 
-					 DriverModeList, DriverModeListLength, &ChangeDisplaySelection);
-			ChangingDisplayMode = 0;		
+		// Get the sound system
+		SoundSys = GameMgr_GetSoundSystem(GMgr);
+		//assert(SoundSys);
 
-			// Text, and Menu should go in GameMgr to make the hierarchy clean
-			// Client, and Host could then look down on Menu, and grab default items out of it...
-			if (!Text_Create( Engine ))
-				GenVS_Error("Text_Create failed.");
-
-			if (!GMenu_Create( Engine , DriverModeList, DriverModeListLength, ChangeDisplaySelection))
-				GenVS_Error("GMenu_Create failed.");
-			
-			MenusCreated = true;
-
-			// Set the text in the menus for the name/ipaddress etc...
+		if (SoundSys)
 			{
-				Menu_SetStringText( GMenu_GetMenu(GMenu_NameEntry), GMenu_NameEntry, PlayerName );
-				Menu_SetStringText( GMenu_GetMenu(GMenu_IPEntry), GMenu_IPEntry, IPAddress );
+				if ( Mute )
+					geSound_SetMasterVolume(SoundSys, 0.0f );
 			}
 
-			// Get the sound system
-			SoundSys = GameMgr_GetSoundSystem(GMgr);
-			//assert(SoundSys);
+		// Get the console
+		Console = GameMgr_GetConsole(GMgr);
+		assert(Console);
+		
+		HostInit.hWnd = GameMgr_GethWnd(GMgr);
+		strcpy(HostInit.ClientName, PlayerName);
 
-			if (SoundSys)
-				{
-					if ( Mute )
-						geSound_SetMasterVolume(SoundSys, 0.0f );
-				}
+		if (!GameMgr_ClearBackground(GMgr, 0, 0, NULL))
+			GenVS_Error("GameMgr_ClearBackground failed.");
 
-			// Get the console
-			Console = GameMgr_GetConsole(GMgr);
-			assert(Console);
-			
-			HostInit.hWnd = GameMgr_GethWnd(GMgr);
-			strcpy(HostInit.ClientName, PlayerName);
+		// If a map has not been set, and not recording a demo, then play demos...
+		if (HostInit.DemoMode != HOST_DEMO_RECORD && !HostInit.LevelHack[0] && HostInit.Mode != HOST_MODE_CLIENT)
+			HostInit.DemoMode = HOST_DEMO_PLAY;
+		else
+			GMenu_SetActive(false);			// Menu should start out as non active when recording a demo...
 
-			if (!GameMgr_ClearBackground(GMgr, 0, 0, NULL))
-				GenVS_Error("GameMgr_ClearBackground failed.");
-
-			// If a map has not been set, and not recording a demo, then play demos...
-			if (HostInit.DemoMode != HOST_DEMO_RECORD && !HostInit.LevelHack[0] && HostInit.Mode != HOST_MODE_CLIENT)
-				HostInit.DemoMode = HOST_DEMO_PLAY;
-			else
-				GMenu_SetActive(false);			// Menu should start out as non active when recording a demo...
-
-			// If the user wants to load a level at the command prompt, or wants to play back a demo
-			// then load a host now, else just let them do it through the menus later...
-			if (HostInit.LevelHack[0] || HostInit.DemoMode != HOST_DEMO_NONE || HostInit.Mode == HOST_MODE_CLIENT)
-			{
-				if (!HostInit.LevelHack[0])	
-					strcpy(HostInit.LevelHack, DEFAULT_LEVEL);
-
-				Host = Host_Create(Engine, &HostInit, GMgr, GameMgr_GetVidMode(GMgr));
-
-				if (!Host)
-					GenVS_Error("Could not create the host!\n");
-			}
-			else		// Make sure a default level is set
+		// If the user wants to load a level at the command prompt, or wants to play back a demo
+		// then load a host now, else just let them do it through the menus later...
+		if (HostInit.LevelHack[0] || HostInit.DemoMode != HOST_DEMO_NONE || HostInit.Mode == HOST_MODE_CLIENT)
+		{
+			if (!HostInit.LevelHack[0])	
 				strcpy(HostInit.LevelHack, DEFAULT_LEVEL);
 
-		#if 1
-			// <>
-			geEngine_SetGamma(Engine, UserGamma);
+			Host = Host_Create(Engine, &HostInit, GMgr, GameMgr_GetVidMode(GMgr));
+
+			if (!Host)
+				GenVS_Error("Could not create the host!\n");
+		}
+		else		// Make sure a default level is set
+			strcpy(HostInit.LevelHack, DEFAULT_LEVEL);
+
+#if 1
+		// <>
+		geEngine_SetGamma(Engine, UserGamma);
+#endif
+
+		// Setup the fog (if enabled)
+		if (g_FogEnable)
+			geEngine_SetFogEnable(Engine, true, 200.0f, 10.0f, 10.0f, 200.0f, 1300.0f);
+		
+		Freq    = SDL_GetPerformanceFrequency();
+		OldTick = SDL_GetPerformanceCounter();
+
+		//SetCapture(GameMgr_GethWnd(GMgr));
+		SDL_ShowCursor(SDL_DISABLE);
+		
+		#ifdef CLIP_CURSOR	
+		{
+			SDL_Rect ClipRect;
+			int 
+				win_x, 
+				win_y, 
+				win_w, 
+				win_h;
+
+			SDL_GetWindowPosition(GameMgr_GethWnd(GMgr), &win_x, &win_y);
+			SDL_GetWindowSize(    GameMgr_GethWnd(GMgr), &win_w, &win_h);
+
+			ClipRect.x = win_x;
+			ClipRect.y = win_y;
+			ClipRect.w = win_w;
+			ClipRect.h = win_h;
+
+			SDL_SetWindowMouseRect(GameMgr_GethWnd(GMgr), &ClipRect);
+		}
 		#endif
+		
+		Running = true;
+		vidMode = GameMgr_GetVidMode(GMgr);
+		hWnd    = GameMgr_GethWnd(GMgr);
 
-			// Setup the fog (if enabled)
-			if (g_FogEnable)
-				geEngine_SetFogEnable(Engine, true, 200.0f, 10.0f, 10.0f, 200.0f, 1300.0f);
-			
-			Freq    = SDL_GetPerformanceFrequency();
-			OldTick = SDL_GetPerformanceCounter();
 
-			//SetCapture(GameMgr_GethWnd(GMgr));
+		while (Running)
+		{
+			uint64         DeltaTick;
+			float          ElapsedTime;
+			geWorld       *World;
+			geCamera      *Camera;
+
+			GameRunning =  true;
+
+			// see runtime menu options for stats and video mode changing.  (Mike)
+
 			SDL_ShowCursor(SDL_DISABLE);
-			
-			#ifdef CLIP_CURSOR	
-			{
-				SDL_Rect ClipRect;
-				int 
-					win_x, 
-					win_y, 
-					win_w, 
-					win_h;
-
-				SDL_GetWindowPosition(GameMgr_GethWnd(GMgr), &win_x, &win_y);
-				SDL_GetWindowSize(    GameMgr_GethWnd(GMgr), &win_w, &win_h);
-
-				ClipRect.x = win_x;
-				ClipRect.y = win_y;
-				ClipRect.w = win_w;
-				ClipRect.h = win_h;
-
-				SDL_SetWindowMouseRect(GameMgr_GethWnd(GMgr), &ClipRect);
-			}
+			#ifdef DO_CAPTURE
+			SDL_SetRelativeMouseMode(true);
 			#endif
-			
-			Running = true;
-			vidMode = GameMgr_GetVidMode(GMgr);
-			hWnd    = GameMgr_GethWnd(GMgr);
 
+			// Get timing info
+			uint64 CurTick = SDL_GetPerformanceCounter();
 
-			while (Running)
+			DeltaTick = CurTick - OldTick;
+			OldTick = CurTick;
+
+			if (DeltaTick > 0)
+				ElapsedTime = 1.0f / ((float)SDL_GetPerformanceFrequency() / (float)DeltaTick);
+			else
+				ElapsedTime = 0.001f;
+
+			//MainTime += ElapsedTime;
+
+			// Get the mouse input (FIXME:  Move this into client?)
 			{
-				uint64         DeltaTick;
-				float          ElapsedTime;
-				geWorld       *World;
-				geCamera      *Camera;
+				int Width, Height;
+				SDL_GetWindowSize(hWnd, &Width, &Height);
+				GetMouseInput(hWnd, Width, Height);
+			}
 
-				GameRunning =  true;
+			// Do a host frame (physics, etc)
+			if (Host)
+			{
+				if (!Host_Frame(Host, ElapsedTime))
+					GenVS_Error("Host_Frame failed...");
+			}
 
-				// see runtime menu options for stats and video mode changing.  (Mike)
+			// Get the world, and the camera from the GameMgr
+			World = GameMgr_GetWorld(GMgr);
+			Camera = GameMgr_GetCamera(GMgr);;
 
-				SDL_ShowCursor(SDL_DISABLE);
-				#ifdef DO_CAPTURE
-				SDL_SetRelativeMouseMode(true);
-				#endif
+			if (!GameMgr_Frame(GMgr, ElapsedTime))
+				GenVS_Error("GameMgr_Frame failed...");
 
-				// Get timing info
-				uint64 CurTick = SDL_GetPerformanceCounter();
+			// Begin frame
+			if (g_FarClipPlaneEnable)		// If we are using a far clip plane, then clear the screen
+			{
+				if (!GameMgr_BeginFrame(GMgr, World, true))
+					GenVS_Error("GameMgr_BeginFrame failed.\n");
+			}
+			else if (!GameMgr_BeginFrame(GMgr, World, false))
+			{
+				if (!GameMgr_BeginFrame(GMgr, World, true))
+					GenVS_Error("GameMgr_BeginFrame failed.\n");
+			}
 
-				DeltaTick = CurTick - OldTick;
-				OldTick = CurTick;
+			if (!Host || !World)
+				GameMgr_ClearBackground(GMgr, 0, 0, NULL);
 
-				if (DeltaTick > 0)
-					ElapsedTime = 1.0f / ((float)SDL_GetPerformanceFrequency() / (float)DeltaTick);
-				else
-					ElapsedTime = 0.001f;
+			if (Host)
+			{
+				if (!Host_RenderFrame(Host, ElapsedTime))
+					GenVS_Error("Host_RenderFrame failed in main game loop.\n");
+			}
 
-				//MainTime += ElapsedTime;
+			Console_Frame(Console, ElapsedTime);
 
-				// Get the mouse input (FIXME:  Move this into client?)
-				{
-					int Width, Height;
-					SDL_GetWindowSize(hWnd, &Width, &Height);
-					GetMouseInput(hWnd, Width, Height);
-				}
-
-				// Do a host frame (physics, etc)
-				if (Host)
-				{
-					if (!Host_Frame(Host, ElapsedTime))
-						GenVS_Error("Host_Frame failed...");
-				}
-
-				// Get the world, and the camera from the GameMgr
-				World = GameMgr_GetWorld(GMgr);
-				Camera = GameMgr_GetCamera(GMgr);;
-
-				if (!GameMgr_Frame(GMgr, ElapsedTime))
-					GenVS_Error("GameMgr_Frame failed...");
-
-				// Begin frame
-				if (g_FarClipPlaneEnable)		// If we are using a far clip plane, then clear the screen
-				{
-					if (!GameMgr_BeginFrame(GMgr, World, true))
-						GenVS_Error("GameMgr_BeginFrame failed.\n");
-				}
-				else if (!GameMgr_BeginFrame(GMgr, World, false))
-				{
-					if (!GameMgr_BeginFrame(GMgr, World, true))
-						GenVS_Error("GameMgr_BeginFrame failed.\n");
-				}
-
-				if (!Host || !World)
+			/*
+			if (Host)
+			{
+				if (!World)
 					GameMgr_ClearBackground(GMgr, 0, 0, NULL);
 
-				if (Host)
-				{
-					if (!Host_RenderFrame(Host, ElapsedTime))
-						GenVS_Error("Host_RenderFrame failed in main game loop.\n");
-				}
+				if (Host_RenderFrame(Host, ElapsedTime)==false)
+					GenVS_Error("Host_RenderFrame failed in main game loop.\n");
 
 				Console_Frame(Console, ElapsedTime);
+			}
+			else
+				GameMgr_ClearBackground(GMgr, 0, 0, NULL);
+			*/
 
-				/*
-				if (Host)
+			if (!ShowStats && World)
+			{
+				Console_XYPrintf(Console,0,0,0,"Driver: %s %s",
+					DriverModeList[ChangeDisplaySelection].DriverNamePtr,
+					DriverModeList[ChangeDisplaySelection].ModeNamePtr);
+				
+				if (!SoundSys)
 				{
-					if (!World)
-						GameMgr_ClearBackground(GMgr, 0, 0, NULL);
-
-					if (Host_RenderFrame(Host, ElapsedTime)==false)
-						GenVS_Error("Host_RenderFrame failed in main game loop.\n");
-
-					Console_Frame(Console, ElapsedTime);
+					Console_XYPrintf(Console,0,1,0,"(No sound device found)");
 				}
-				else
-					GameMgr_ClearBackground(GMgr, 0, 0, NULL);
-				*/
+			}
+			
+			// Draw manu
+			GMenu_Draw();
 
-				if (!ShowStats && World)
+			//	End Engine frame
+			if (!GameMgr_EndFrame(GMgr))
+			{
+				GenVS_Error("GameMgr_EndFrame failed.\n");
+			}
+
+			// Do the'ol message pump
+			/*while (PeekMessage( &Msg, NULL, 0, 0, PM_NOREMOVE))
+			{
+				if (!GetMessage(&Msg, NULL, 0, 0 ))
 				{
-					Console_XYPrintf(Console,0,0,0,"Driver: %s %s",
-						DriverModeList[ChangeDisplaySelection].DriverNamePtr,
-						DriverModeList[ChangeDisplaySelection].ModeNamePtr);
-					
-					if (!SoundSys)
+					PostQuitMessage(0);
+					Running=0;
+					break;
+				}
+
+				TranslateMessage(&Msg); 
+				DispatchMessage(&Msg);
+				if (ChangingDisplayMode)
 					{
-						Console_XYPrintf(Console,0,1,0,"(No sound device found)");
+						break;
+					}
+			} */
+			while (SDL_PollEvent(&event)) {
+				switch (event.type) {
+				case SDL_QUIT:
+					Running = 0;
+					break;
+					
+				case SDL_KEYDOWN:
+					// Handle key presses
+					break;
+					
+				case SDL_KEYUP:
+					// Handle key releases
+					break;
+					
+				case SDL_WINDOWEVENT:
+					if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
+						ChangingDisplayMode = true;
+						break;
 					}
 				}
 				
-				// Draw manu
-				GMenu_Draw();
-
-				//	End Engine frame
-				if (!GameMgr_EndFrame(GMgr))
-				{
-					GenVS_Error("GameMgr_EndFrame failed.\n");
+				if (ChangingDisplayMode) {
+					break;
 				}
+			}
+			
 
-				// Do the'ol message pump
-				/*while (PeekMessage( &Msg, NULL, 0, 0, PM_NOREMOVE))
+			if (ChangingDisplayMode)
 				{
-					if (!GetMessage(&Msg, NULL, 0, 0 ))
-					{
-						PostQuitMessage(0);
-						Running=0;
-						break;
-					}
-
-					TranslateMessage(&Msg); 
-					DispatchMessage(&Msg);
-					if (ChangingDisplayMode)
+					Running = 0;		
+					GameRunning	= false;
+				}
+		} 
+		
+			if (ChangingDisplayMode)
+				{
+					if (MenusCreated)
 						{
-							break;
+							Text_Destroy();
+							GMenu_Destroy();
+							MenusCreated = false;
 						}
-				} */
-				while (SDL_PollEvent(&event)) {
-					switch (event.type) {
-					case SDL_QUIT:
-						Running = 0;
-						break;
-						
-					case SDL_KEYDOWN:
-						// Handle key presses
-						break;
-						
-					case SDL_KEYUP:
-						// Handle key releases
-						break;
-						
-					case SDL_WINDOWEVENT:
-						if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
-							ChangingDisplayMode = true;
-							break;
+
+					if (Host)
+						{
+							Host_Destroy(Host);
+							Host = NULL;
 						}
-					}
 					
-					if (ChangingDisplayMode) {
-						break;
-					}
+					if ( SDL_GetRelativeMouseMode() )
+						{
+							SDL_SetRelativeMouseMode(false);
+						}
+					SDL_ShowCursor(SDL_ENABLE);
 				}
-				
-
-				if (ChangingDisplayMode)
-					{
-						Running = 0;		
-						GameRunning	= false;
-					}
-			} 
-			
-				if (ChangingDisplayMode)
-					{
-						if (MenusCreated)
-							{
-								Text_Destroy();
-								GMenu_Destroy();
-								MenusCreated = false;
-							}
-
-						if (Host)
-							{
-								Host_Destroy(Host);
-								Host = NULL;
-							}
-						
-						if ( SDL_GetRelativeMouseMode() )
-							{
-								SDL_SetRelativeMouseMode(false);
-							}
-						SDL_ShowCursor(SDL_ENABLE);
-					}
 
 			
-		}
-	while (ChangingDisplayMode != false);
+	} while (ChangingDisplayMode != false);
 
 	//ShutdownAll();
 	SDL_Quit();

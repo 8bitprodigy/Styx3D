@@ -44,6 +44,9 @@
 #include "XPlatUtils.h"
 
 
+#define DBG_OUT( Text, ... ) _DBG_OUT("FSDOS.c:" Text, ##__VA_ARGS__ )
+
+
 //	"DF01"
 #define	DOSFILE_SIGNATURE	0x31304644
 
@@ -84,50 +87,41 @@ BuildFileName(
 	int             MaxLen
 )
 {
-	int		DirLength;
-	int		NameLength;
+	int		
+		DirLength,
+		NameLength;
 
-	if ( ! Name )
+	if ( !Name )
 		return false;
 
-	if	(File)
-	{
-		if	(File->IsDirectory == false)
-			return false;
+	if (File) {
+		if (File->IsDirectory == false) return false;
 
 		assert(File->FullPath);
 		DirLength = strlen(File->FullPath);
 
-		if	(DirLength > MaxLen)
-			return false;
+		if (DirLength > MaxLen) return false;
 
 		memcpy(Buff, File->FullPath, DirLength);
-	}
-	else
-	{
+	} else {
 		DirLength = 0;
 	}
 
 	NameLength = strlen(Name);
-	if	(DirLength + NameLength + 2 > MaxLen || ! Buff )
-		return false;
+	if (DirLength + NameLength + 2 > MaxLen || ! Buff ) return false;
 
-	if	(DirLength != 0)
-	{
+	if (DirLength != 0) {
 		Buff[DirLength] = PATH_SEPARATOR;
 		memcpy(Buff + DirLength + 1, Name, NameLength + 1);
-		if	(NamePtr)
+		if (NamePtr)
 			*NamePtr = Buff + DirLength + 1;
-	}
-	else
-	{
+	} else {
 		memcpy(Buff, Name, NameLength + 1);
 		if	(NamePtr)
 			*NamePtr = Buff;
 
 		// Special case: no directory, no file name.  We meant something like ".\"
-		if	(!*Buff)
-		{
+		if (!*Buff) {
 			strcpy (Buff, strcat(".",(char*)PATH_SEPARATOR));
 		}
 	}
@@ -262,8 +256,9 @@ FSDos_FinderDestroy(void *Handle)
 static bool
 IsRootDirectory(char *Path)
 {
-	int		SlashCount;
+	int SlashCount = 0;
 
+#ifdef _WIN32
 	// Drive letter test
 	if	(Path[1] == ':' && Path[2] == '\\' && Path[3] == '\0')
 	{
@@ -272,19 +267,20 @@ IsRootDirectory(char *Path)
 	}
 
 	// Now UNC path test
-	SlashCount = 0;
-	if	(Path[0] == '\\' && Path[1] == '\\')
+	if	(Path[0] == PATH_SEPARATOR && Path[1] == PATH_SEPARATOR)
 	{
 		Path += 2;
+#endif
 		while	(*Path)
 		{
-			if	(*Path++ == '\\')
+			if	(*Path++ == PATH_SEPARATOR)
 				SlashCount++;
 		}
+#ifdef _WIN32
 	}
+#endif
 
-	if	(SlashCount == 1)
-		return true;
+	if (SlashCount == 1) return true;
 
 	return false;
 }
@@ -350,12 +346,12 @@ FSDos_Open(
 			&& FileInfo->fileAttributes & GE_FILE_ATTRIBUTE_DIRECTORY
 		) {
 			IsDirectory = true;
-			DBG_OUT("IsDirectory is true");
+			DBG_OUT("FSDos_Open()\tIsDirectory is true");
 		} else {
 			IsDirectory = IsRootDirectory(NewFile->FullPath);
-			DBG_OUT("IsDirectory was assigned to IsRootDirectory");
+			DBG_OUT("FSDos_Open()\tIsDirectory was assigned IsRootDirectory");
 		}
-		DBG_OUT("IsDirectory:\t%b", IsDirectory);
+		DBG_OUT("FSDos_Open()\tIsDirectory:\t%b", IsDirectory);
 
 		geFindClose(FindHandle);
 

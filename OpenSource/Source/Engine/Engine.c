@@ -61,6 +61,7 @@
 #include "XPlatUtils.h"
 
 //#define DO_ADDREMOVE_MESSAGES
+#define DBG_OUT( Text, ... ) _DBG_OUT("Engine.c:" Text, ##__VA_ARGS__ )
 
 #ifndef _DEBUG
 #undef DO_ADDREMOVE_MESSAGES
@@ -1117,7 +1118,8 @@ geBoolean geEngine_ResetDriver(geEngine *Engine)
 //===================================================================================
 //	geEngine_InitFonts
 //===================================================================================
-geBoolean geEngine_InitFonts(geEngine *Engine)
+geBoolean 
+geEngine_InitFonts(geEngine *Engine)
 {
 	Sys_FontInfo	*Fi;
 
@@ -1127,7 +1129,7 @@ geBoolean geEngine_InitFonts(geEngine *Engine)
 
 	assert(Fi->FontBitmap == NULL);
 
-	// Load the bitmap
+	/* Load the bitmap */
 	{
 		geVFile *				MemFile;
 		geVFile_MemoryContext	Context;
@@ -1139,27 +1141,29 @@ geBoolean geEngine_InitFonts(geEngine *Engine)
 			Context.Data = font_bmp;
 			Context.DataLength = font_bmp_length;
 
+			DBG_OUT("geEngine_InitFonts()\tAttempting to Acquire MemFile.");
 			MemFile = geVFile_OpenNewSystem(NULL, GE_VFILE_TYPE_MEMORY, NULL, &Context, GE_VFILE_OPEN_READONLY);
+			DBG_OUT("geEngine_InitFonts()\tMemFile acquired.");
 		}
 
-		if	(!MemFile)
-		{
+		if (!MemFile) {
 			geErrorLog_AddString(-1,"InitFonts : geVFile_OpenNewSystem Memory fontbmp failed.", NULL);
 			return GE_FALSE;
 		}
+		DBG_OUT("geEngine_InitFonts()\tMemFile valid.");
 
-		if ( ! (Fi->FontBitmap = geBitmap_CreateFromFile(MemFile)) )
-		{
+		if ( !(Fi->FontBitmap = geBitmap_CreateFromFile(MemFile)) )    {
 			geErrorLog_AddString(-1,"InitFonts : geBitmap_CreateFromFile failed.", NULL);
 			goto fail;
 		}
+		DBG_OUT("geEngine_InitFonts()\tgeBitmap_CreateFromFile succeeded.");
 
-		#if 0
-		#pragma message("Engine : fonts will have alpha once Decals do : CB");
+#if 0
+#pragma message("Engine : fonts will have alpha once Decals do : CB");
 		// <> CB : give fonts alpha so they look purty
 		//			pointless right now cuz we don't get enum'ed a _2D_ type with alpha
 		{
-		geBitmap * FontAlpha;
+			geBitmap * FontAlpha;
 			FontAlpha = geBitmap_Create( geBitmap_Width(Fi->FontBitmap), geBitmap_Height(Fi->FontBitmap), 1, GE_PIXELFORMAT_8BIT_GRAY );
 			if ( FontAlpha )
 			{
@@ -1177,35 +1181,33 @@ geBoolean geEngine_InitFonts(geEngine *Engine)
 				geBitmap_Destroy(&FontAlpha);
 			}
 		}
-		#endif
+#endif
 
-		if (!geBitmap_SetColorKey(Fi->FontBitmap, GE_TRUE, 0, GE_FALSE))
-		{
+		if (!geBitmap_SetColorKey(Fi->FontBitmap, GE_TRUE, 0, GE_FALSE)) {
 			geErrorLog_AddString(-1,"InitFonts : geBitmap_SetColorKey failed.", NULL);
 			goto fail;
 		}
+		DBG_OUT("geEngine_InitFonts()\tgeBitmap_SetColorKey succeeded.");
 
-		if ( ! geEngine_AddBitmap(Engine,Fi->FontBitmap) )
-		{
+		if ( ! geEngine_AddBitmap(Engine,Fi->FontBitmap) ) {
 			geErrorLog_AddString(-1,"InitFonts : geEngine_AddBitmap failed.", NULL);
 			goto fail;
 		}
+		DBG_OUT("geEngine_InitFonts()\tgeBitmap_AddBitmap succeeded.");
 
 		goto success;
 
-		fail:
+fail:
 
 		geVFile_Close(MemFile);
 		return GE_FALSE;
 
-		success:
+success:
 		
 		geVFile_Close(MemFile);
-	}
+	} /* /Load Bitmap */
 
-	//
-	//	Setup font lookups
-	//
+	/* Setup font lookups */
 	{
 		int PosX, PosY, Width, i;
 
@@ -1224,10 +1226,10 @@ geBoolean geEngine_InitFonts(geEngine *Engine)
 				PosX = 0;
 			}
 		}
-	}
+	} /* /Setup font lookups */
 
 	return GE_TRUE;
-}
+} /* geEngine_InitFonts */
 
 //===================================================================================
 //	geEngine_ShutdownFonts
