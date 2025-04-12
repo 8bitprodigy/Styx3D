@@ -3824,20 +3824,27 @@ geBitmap_CreateFromFile(geVFile *F)
 		DBG_OUT("geBitmap_CreateFromFile()\tgeFile_Seek() successful.");
 
 		if ( (Tag & 0xFFFF) == 0x4D42 ) {	// 'BM'
-			if ( ! geBitmap_ReadFromBMP(Bmp, F) ) goto fail;
+			DBG_OUT("geBitmap_CreateFromFile()\t(Tag & 0xFFFF) == 0x4042.");
+			if ( !geBitmap_ReadFromBMP(Bmp, F) ) {
+				DBG_OUT("geBitmap_CreateFromFile()\tgeBitmap_ReadFromBMP() failed.");
+				goto fail;
+			}
 			
 		} else {
+			DBG_OUT("geBitmap_CreateFromFile()\t(Tag & 0xFFFF) != 0x4042.");
 			// geErrorLog_AddString(-1,"CreateFromFile : unknown format", NULL);
 			goto fail;
 		}
 	}
-
+	
+	DBG_OUT("geBitmap_CreateFromFile()\tExit successfully!");
 	return Bmp;
 
 fail:
 	assert(Bmp);
 
 	geBitmap_Destroy(&Bmp);
+	DBG_OUT("geBitmap_CreateFromFile()\tFailure");
 	return NULL;
 }
 
@@ -4046,25 +4053,30 @@ geBitmap_ReadFromBMP(geBitmap *Bmp, geVFile *F)
 	// Windows Bitmap
 
 	if ( !geVFile_Read(F, &bmfh, sizeof(bmfh)) ) return GE_FALSE;
+	DBG_OUT("geBitmap_ReadFromBMP()\tgeVFile_Read() on bmfh");
 
 	assert(bmfh.bfType == 0x4D42);
 
 	bPad = bmfh.bfOffBits;
 
 	if ( !geVFile_Read(F, &bmih, sizeof(bmih)) ) return GE_FALSE;
+	DBG_OUT("geBitmap_ReadFromBMP()\tgeVFile_Read() on bmih");
 
 	if ( sizeof(bmih) < bmih.biSize ) {
 		geVFile_Seek(F, bmih.biSize - sizeof(bmih), GE_VFILE_SEEKCUR);
 		
 	} else if ( bmih.biSize < sizeof(bmih) ) {
 		geErrorLog_AddString(-1,"CreateFromFile : bmih size bad", NULL);	
-		return GE_FALSE;
+		/* Commenting this out is probably a bad idea, but we'll see... */
+		return GE_FALSE; 
 	}
+	DBG_OUT("geBitmap_ReadFromBMP()\tsizeof(bmih) < bmih.biSize");
 
 	if ( bmih.biCompression ) {
 		geErrorLog_AddString(-1,"CreateFromFile : only BI_RGB BMP compression supported", NULL);
 		return GE_FALSE;
 	}
+	DBG_OUT("geBitmap_ReadFromBMP()\t!bmih.biCompression");
 
 	bPad -= sizeof(bmih) + sizeof(bmfh);
 

@@ -193,7 +193,8 @@ static	void	GENESISCC FSMemory_Close(void *Handle)
 	geRam_Free(File);
 }
 
-static int GENESISCC ClampOperationSize(const MemoryFile *File, int Size)
+static int GENESISCC 
+ClampOperationSize(const MemoryFile *File, int Size)
 {
 	return min(File->Size - File->Position, Size);
 }
@@ -267,7 +268,7 @@ FSMemory_Read(void *Handle, void *Buff, int Count)
 	CHECK_HANDLE(File);
 
 	if (ClampOperationSize(File, Count) != Count) return GE_FALSE;
-	DBG_OUT("FSMemory_Read()\tClampOperationSize() failed.");
+	DBG_OUT("FSMemory_Read()\tClampOperationSize() == Count.");
 
 	memcpy(Buff, DataPtr(File), Count);
 
@@ -275,6 +276,7 @@ FSMemory_Read(void *Handle, void *Buff, int Count)
 	assert(File->Position <= File->Size);
 	assert(File->Size <= File->AllocatedSize);
 
+	DBG_OUT("FSMemory_Read()\tExiting Successfully!");
 	return GE_TRUE;
 }
 
