@@ -4068,7 +4068,7 @@ geBitmap_ReadFromBMP(geBitmap *Bmp, geVFile *F)
 	} else if ( bmih.biSize < sizeof(bmih) ) {
 		geErrorLog_AddString(-1,"CreateFromFile : bmih size bad", NULL);	
 		/* Commenting this out is probably a bad idea, but we'll see... */
-		return GE_FALSE; 
+		//return GE_FALSE; 
 	}
 	DBG_OUT("geBitmap_ReadFromBMP()\tsizeof(bmih) < bmih.biSize");
 
@@ -4084,11 +4084,15 @@ geBitmap_ReadFromBMP(geBitmap *Bmp, geVFile *F)
 	case 8:			/* colormapped image */
 		if ( bmih.biClrUsed == 0 ) bmih.biClrUsed = 256;
 
-		if ( ! (Bmp->Info.Palette = geBitmap_Palette_Create(GE_PIXELFORMAT_32BIT_XRGB,bmih.biClrUsed)) )
+		if ( !(Bmp->Info.Palette = geBitmap_Palette_Create(GE_PIXELFORMAT_32BIT_XRGB,bmih.biClrUsed)) ) {
+			DBG_OUT("geBitmap_ReadFromBMP()\tFAILURE: Could not create Bitmap Palette.");
 			return GE_FALSE;
+		}
 
-		if ( ! geVFile_Read(F, Bmp->Info.Palette->Data, bmih.biClrUsed * 4) )
+		if ( !geVFile_Read(F, Bmp->Info.Palette->Data, bmih.biClrUsed * 4) ) {
+			DBG_OUT("geBitmap_ReadFromBMP()\tFAILURE: Could not read Bitmap.");
 			return GE_FALSE;
+		}
 
 		bPad -= bmih.biClrUsed * 4;
 
@@ -4109,6 +4113,7 @@ geBitmap_ReadFromBMP(geBitmap *Bmp, geVFile *F)
 		pelBytes = 4;
 		break;
 	default:
+		DBG_OUT("geBitmap_ReadFromBMP()\tFAILURE: Invalid bmih.biBitCount value.");
 		return GE_FALSE;
 	}
 
@@ -4130,7 +4135,10 @@ geBitmap_ReadFromBMP(geBitmap *Bmp, geVFile *F)
 
 	assert( bmpRowWidth <= myRowWidth );
 
-	if ( ! geBitmap_AllocSystemMip(Bmp,0) ) return GE_FALSE;
+	if ( !geBitmap_AllocSystemMip(Bmp,0) ) {
+		DBG_OUT("geBitmap_ReadFromBMP()\tFAILURE: Could not allocate System Mip.");
+		return GE_FALSE;
+	}
 
 	if ( bmih.biHeight > 0 ) {
 		int y;
@@ -4139,7 +4147,9 @@ geBitmap_ReadFromBMP(geBitmap *Bmp, geVFile *F)
 		row = Bmp->Data[0];
 		row += (Bmp->Info.Height - 1) * myRowWidth;
 		for(y= Bmp->Info.Height;y--;) {
-			if ( ! geVFile_Read(F, row, bmpRowWidth) ) return GE_FALSE;				
+			if ( !geVFile_Read(F, row, bmpRowWidth) ) {
+				return GE_FALSE;
+			}
 			row -= myRowWidth;
 		}
 	} else {
@@ -4149,8 +4159,9 @@ geBitmap_ReadFromBMP(geBitmap *Bmp, geVFile *F)
 		row = Bmp->Data[0];
 		for(y= Bmp->Info.Height;y--;)
 		{
-			if ( ! geVFile_Read(F, row, bmpRowWidth) )
-				return GE_FALSE;				
+			if ( !geVFile_Read(F, row, bmpRowWidth) ) {
+				return GE_FALSE;
+			}
 			row += myRowWidth;
 		}
 	}
