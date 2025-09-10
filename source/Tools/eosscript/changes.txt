@@ -1,0 +1,21 @@
+beta 1.1 changes
+
+- bug report optmized (++)
+  - more precise error report
+  - now reports stack errors
+
+- parents structure optimized..
+
+- added get_parent(name)
+  - changes in eosobject::create (all cparents now in extra list)
+  - changes in eosobject::inherit (copy cparents list)
+
+- added get_scrobj()
+  - returns instance of class in the script (for accessing functions declared in the script from a ported class)
+  - objects now store an object which is the base objects used internally (for that instance)
+
+- fixed bug when using variable names in strings
+
+- added eosobject::doline(str) function
+  - compiles and executes simple statement strings (not very fast because its compiled at runtime)
+

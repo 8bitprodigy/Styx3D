@@ -1,0 +1,42 @@
+// gwe.odl : type library source for gwe.exe
+
+// This file will be processed by the MIDL compiler to produce the
+// type library (gwe.tlb).
+
+[ uuid(37F4562A-C0E1-11D2-8B41-00104B70D76D), version(1.0) ]
+library Gwe
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+
+	//  Primary dispatch interface for CGweDoc
+	
+	[ uuid(37F4562B-C0E1-11D2-8B41-00104B70D76D) ]
+	dispinterface IGwe
+	{
+		properties:
+			// NOTE - ClassWizard will maintain property information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_PROP(CGweDoc)
+			//}}AFX_ODL_PROP
+			
+		methods:
+			// NOTE - ClassWizard will maintain method information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_METHOD(CGweDoc)
+			//}}AFX_ODL_METHOD
+
+	};
+
+	//  Class information for CGweDoc
+	
+	[ uuid(37F45629-C0E1-11D2-8B41-00104B70D76D) ]
+	coclass Document
+	{
+		[default] dispinterface IGwe;
+	};
+
+	//{{AFX_APPEND_ODL}}
+	//}}AFX_APPEND_ODL}}
+};

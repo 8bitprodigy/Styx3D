@@ -1,0 +1,157 @@
+/****************************************************************************************/
+/*  BODY._H                                                                             */
+/*                                                                                      */
+/*  Author: Mike Sandige	                                                            */
+/*  Description:  Exports private BODY data structures for "friends".					*/
+/*                                                                                      */
+/*  The contents of this file are subject to the Jet3D Public License                   */
+/*  Version 1.02 (the "License"); you may not use this file except in                   */
+/*  compliance with the License. You may obtain a copy of the License at                */
+/*  http://www.jet3d.com                                                                */
+/*                                                                                      */
+/*  Software distributed under the License is distributed on an "AS IS"                 */
+/*  basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.  See                */
+/*  the License for the specific language governing rights and limitations              */
+/*  under the License.                                                                  */
+/*                                                                                      */
+/*  The Original Code is Jet3D, released December 12, 1999.                             */
+/*  Copyright (C) 1996-1999 Eclipse Entertainment, L.L.C. All Rights Reserved           */
+/*                                                                                      */
+/****************************************************************************************/
+#ifndef JE_BODY__H
+#define JE_BODY__H 
+
+
+#include "BaseType.h"
+#include "Xform3d.h"
+#include "Body.h"
+#include "StrBlock.h"
+#include "Bitmap.h"
+#include "UVMap.h"
+#include "jeMaterial.h"
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#define JE_BODY_INDEX_MAX (0xEFFF)
+
+#define JE_BODY_REALLY_BIG_NUMBER (9e9f)		// bigger than any skin point
+
+#define JE_BODY_HIGHEST_LOD_MASK	( 1 << JE_BODY_HIGHEST_LOD )
+#define JE_BODY_BBOX_LOD_MASK		( 1 << JE_BODY_NUMBER_OF_LOD ) // bounding box mask
+
+
+typedef int16 jeBody_Index;
+
+typedef struct jeBody_BlendData
+{
+	jeVec3d			XPoint;
+	jeVec3d			Normal;
+	jeFloat			weight;
+	jeBody_Index	boneIndex;
+
+}jeBody_BlendData;
+
+typedef struct jeBody_XSkinVertex
+{
+	jeVec3d			XPoint;
+	jeFloat			XU,XV;
+	int8			LevelOfDetailMask;
+	jeBody_Index	BoneIndex;
+
+	int16			nBlends; // = 0 if vertex isn't blended
+	jeBody_Index	bdaOffset; // offset into body's blend data array
+
+} jeBody_XSkinVertex;
+
+typedef struct jeBody_Normal
+{
+	jeVec3d			Normal;
+	int8			LevelOfDetailMask;
+	jeBody_Index	BoneIndex;
+
+	int16			nBlends; // = 0 if vertex isn't blended
+	jeBody_Index	bdaOffset; // offset into body's blend data array
+
+} jeBody_Normal;
+
+typedef struct jeBody_Bone
+{
+	jeVec3d			BoundingBoxMin;
+	jeVec3d			BoundingBoxMax;
+	jeXForm3d       AttachmentMatrix;
+	jeBody_Index	ParentBoneIndex;
+} jeBody_Bone;
+		
+typedef struct jeBody_Triangle
+{
+	jeBody_Index	VtxIndex[3];
+	jeBody_Index	NormalIndex[3];
+	jeBody_Index	MaterialIndex;
+	//jeBody_Index    FaceNormal;
+} jeBody_Triangle;
+			
+typedef struct jeBody_TriangleList
+{
+	jeBody_Index	  FaceCount;
+	jeBody_Triangle  *FaceArray;		// Sorted by MaterialIndex
+} jeBody_TriangleList;
+
+typedef struct jeBody_Material
+{
+	jeMaterialSpec *MatSpec;
+	jeFloat Red,Green,Blue;
+	jeUVMapper Mapper;
+} jeBody_Material;
+
+/*
+typedef struct jeBody_Weight
+{
+	jeBody_Index	BoneIndex;
+	jeFloat			Weight;
+} jeBody_Weight;
+*/
+
+typedef struct jeBody
+{
+	jeVec3d				  BoundingBoxMin;
+	jeVec3d				  BoundingBoxMax;
+
+	jeBody_Index		  XSkinVertexCount;
+	jeBody_XSkinVertex	 *XSkinVertexArray;		// Sorted by BoneIndex
+
+	jeBody_Index		  SkinNormalCount;
+	jeBody_Normal		 *SkinNormalArray;
+
+	int16				blendDataCount;
+	jeBody_BlendData	*blendDataArray;
+
+	jeBody_Index		  BoneCount;
+	jeBody_Bone			 *BoneArray;
+	jeStrBlock			 *BoneNames;
+
+	jeBody_Index		  MaterialCount;
+	jeBody_Material		 *MaterialArray;
+	jeStrBlock			 *MaterialNames;		
+
+	int					  LevelsOfDetail;
+	jeBody_TriangleList	  SkinFaces[JE_BODY_NUMBER_OF_LOD];
+
+	uint32 optFlags;
+	
+	jeBody				 *IsValid;
+} jeBody;
+
+#if defined(DEBUG) || !defined(NDEBUG)
+JETAPI jeBoolean JETCC jeBody_SanityCheck(const jeBody *B);
+#endif
+
+
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

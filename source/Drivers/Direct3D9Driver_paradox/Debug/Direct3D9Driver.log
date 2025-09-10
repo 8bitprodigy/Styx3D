@@ -1,0 +1,18 @@
+﻿  cl : Command line warning D9035 : option 'Gm' has been deprecated and will be removed in a future release
+  VertexCacheManager.cpp
+  RenderStateManagercpp.cpp
+  PolyCache.cpp
+  jeVertexBuffer.cpp
+  Direct3D9Driver.cpp
+  D3D9TextureMgr.cpp
+  D3D9Log.cpp
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC10_2019\source\Drivers\Direct3D9Driver\D3D9Log.cpp(23,1): warning C4996:  'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdio.h(208): message :  see declaration of 'fopen'
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC10_2019\source\Drivers\Direct3D9Driver\D3D9Log.cpp(51,1): warning C4996:  'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdio.h(1469): message :  see declaration of 'vsprintf'
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC10_2019\source\Drivers\Direct3D9Driver\D3D9Log.cpp(54,1): warning C4996:  'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  Generating Code...
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdio.h(208): message :  see declaration of 'fopen'
+D3D9Log.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+     Creating library D:\Genesis and Jet3d\JSTUDIO_CLASSIC10_2019\lib\Direct3D9Driver.lib and object D:\Genesis and Jet3d\JSTUDIO_CLASSIC10_2019\lib\Direct3D9Driver.exp
+  Direct3D9Driver.vcxproj -> D:\Genesis and Jet3d\JSTUDIO_CLASSIC10_2019\bin\Direct3D9Driver.dll

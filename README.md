@@ -1,6 +1,6 @@
 # Styx3D
 
-Tryna rework Genesis3D to work on modern systems, port it to some homebrew consoles, like DreamCast and PSP, and maybe add some features that will improve QOL, like perhaps scripting.
+Tryna rework Jet3D to work on modern systems, port it to some homebrew consoles, like DreamCast and PSP, and maybe add some features that will improve QOL, like perhaps scripting.
 
 ## Rationale
 
@@ -10,6 +10,7 @@ There aren't really any other engines out there that are of this vintage under p
 - BSP 3D level format which can be modeled in a brush-based editor
 - Networked multiplayer
 - Fixed function pipeline 
+- Tools
 
 ## Plans
 
@@ -19,7 +20,7 @@ There aren't really any other engines out there that are of this vintage under p
   
   - [ ] Get something drawn to the screen
 
-- [x] Port to SDL where possible
+- [x] Port to SDL3 where possible
   
   - [ ] Still gotta port software video driver to SDL
 
@@ -31,9 +32,9 @@ There aren't really any other engines out there that are of this vintage under p
 
 - [ ] Get it ported to DreamCast, GameCube, PS2, and PSP
 
-- [ ] Outdoor/Terrain levels/scenes
-
 - [ ] Create command-line versions of the tools
+
+- [ ] Port the tools to Linux as well, making use of the libAgar toolkit
 
 - [ ] Maybe add scripting support (Lua or [Umka](https://github.com/vtereshkov/umka-lang))
 
@@ -47,7 +48,7 @@ Contributions should follow the [Suckless coding style](https://suckless.org/cod
 
 ## License
 
-Genesis3D was originally distributed under the Genesis3D public license, however, according to the [Genesis3D website](https://www.genesis3d.com/), the terms of this license have been waived:
+Genesis3D was originally distributed under the Genesis3D public license, however, according to the [Jet3D website](https://www.jet3d.com/licensing.html), the terms of this license have been waived:
 
 > If you care to develop with Genesis3D 1.1, you may do so, free of licensing obligations as the engine is abandonware and the stakeholders are long gone.
 

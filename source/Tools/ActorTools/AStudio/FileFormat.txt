@@ -1,0 +1,41 @@
+Need INI file setting for Actor viewer path.
+Other INI file settings?
+
+
+
+Actor Studio Project (.asp) file format
+
+Version Info
+
+Path Settings
+	Enforce relative paths flag
+	Body search path
+	Materials search path
+	Motions search path
+
+Output file section
+	Output filename
+	Output format (text or binary)
+
+Body section
+	Body filename (may be .max, .nfo, .bdy, .act)
+	Body type (max, nfo, bdy, act)  (perhaps not saved, but returned)
+
+Materials section
+	Number of materials
+	(one entry for each material)
+		Name		Material name
+		filename	May be "", in which case we use the default (MaterialName.bmp)
+		color flag	1 if a color (in which case filename is ignored)
+		color		R,G,B color value
+
+Motion section
+	Number of motions
+	(one entry for each motion)
+		Name		Name of the motion
+		Filename	File containing motion (may be .key, .mot, .mop)
+		Optimization	0-9.  If input is .mop, this is ignored.
+		Bone		Default is root.  Parent bone for animation.
+
+
+	

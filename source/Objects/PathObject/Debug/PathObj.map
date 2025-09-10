@@ -1,0 +1,1044 @@
+ PathObj
+
+ Timestamp is 643b68d4 (Sat Apr 15 20:17:40 2023)
+
+ Preferred load address is 10000000
+
+ Start         Length     Name                   Class
+ 0001:00000000 0000f7caH .text$mn                CODE
+ 0002:00000000 00000104H .CRT$XCA                DATA
+ 0002:00000104 00000104H .CRT$XCZ                DATA
+ 0002:00000208 00000104H .CRT$XIA                DATA
+ 0002:0000030c 00000104H .CRT$XIZ                DATA
+ 0002:00000410 00000104H .CRT$XPA                DATA
+ 0002:00000514 00000104H .CRT$XPZ                DATA
+ 0002:00000618 00000104H .CRT$XTA                DATA
+ 0002:0000071c 00000104H .CRT$XTZ                DATA
+ 0002:00000820 000017a0H .rdata                  DATA
+ 0002:00001fc0 00000180H .rdata$CastGuardVftablesA DATA
+ 0002:00002140 0000014cH .rdata$CastGuardVftablesC DATA
+ 0002:0000228c 0000010cH .rdata$sxdata           DATA
+ 0002:00002398 000001a0H .rdata$zzzdbg           DATA
+ 0002:00002538 00000104H .rtc$IAA                DATA
+ 0002:0000263c 00000110H .rtc$IMZ                DATA
+ 0002:0000274c 00000104H .rtc$IZZ                DATA
+ 0002:00002850 00000104H .rtc$TAA                DATA
+ 0002:00002954 00000110H .rtc$TMZ                DATA
+ 0002:00002a64 00000104H .rtc$TZZ                DATA
+ 0002:00002b68 000001c8H .xdata$x                DATA
+ 0002:00002d30 00000161H .edata                  DATA
+ 0003:00000000 000002b0H .data                   DATA
+ 0003:000002b0 00000484H .bss                    DATA
+ 0004:00000000 000002ccH .idata$5                DATA
+ 0004:000002cc 00000050H .idata$2                DATA
+ 0004:0000031c 00000014H .idata$3                DATA
+ 0004:00000330 000002ccH .idata$4                DATA
+ 0004:000005fc 00000c23H .idata$6                DATA
+ 0005:00000000 0000010eH .00cfg                  DATA
+ 0006:00000000 00000220H .rsrc$01                DATA
+ 0006:00000220 00000460H .rsrc$02                DATA
+
+  Address         Publics by Value              Rva+Base       Lib:Object
+
+ 0000:00000000       ___AbsoluteZero            00000000     <absolute>
+ 0000:00000000       ___arm64x_extra_rfe_table  00000000     <absolute>
+ 0000:00000000       ___arm64x_extra_rfe_table_size 00000000     <absolute>
+ 0000:00000000       ___arm64x_native_entrypoint 00000000     <absolute>
+ 0000:00000000       ___arm64x_redirection_metadata 00000000     <absolute>
+ 0000:00000000       ___arm64x_redirection_metadata_count 00000000     <absolute>
+ 0000:00000000       ___dynamic_value_reloc_table 00000000     <absolute>
+ 0000:00000000       ___enclave_config          00000000     <absolute>
+ 0000:00000000       ___guard_check_icall_a64n_fptr 00000000     <absolute>
+ 0000:00000000       ___guard_eh_cont_count     00000000     <absolute>
+ 0000:00000000       ___guard_eh_cont_table     00000000     <absolute>
+ 0000:00000000       ___guard_fids_count        00000000     <absolute>
+ 0000:00000000       ___guard_fids_table        00000000     <absolute>
+ 0000:00000000       ___guard_iat_count         00000000     <absolute>
+ 0000:00000000       ___guard_iat_table         00000000     <absolute>
+ 0000:00000000       ___guard_longjmp_count     00000000     <absolute>
+ 0000:00000000       ___guard_longjmp_table     00000000     <absolute>
+ 0000:00000000       ___hybrid_auxiliary_iat    00000000     <absolute>
+ 0000:00000000       ___hybrid_auxiliary_iat_copy 00000000     <absolute>
+ 0000:00000000       ___hybrid_code_map         00000000     <absolute>
+ 0000:00000000       ___hybrid_code_map_count   00000000     <absolute>
+ 0000:00000000       ___volatile_metadata       00000000     <absolute>
+ 0000:00000000       ___x64_code_ranges_to_entry_points 00000000     <absolute>
+ 0000:00000000       ___x64_code_ranges_to_entry_points_count 00000000     <absolute>
+ 0000:00000002       ___safe_se_handler_count   00000002     <absolute>
+ 0000:00000100       ___guard_flags             00000100     <absolute>
+ 0000:00000000       ___ImageBase               10000000     <linker-defined>
+ 0001:00000620       _DllMain@12                10001620 f   ObjectDef.obj
+ 0001:00000690       _Object_RegisterDef        10001690 f   ObjectDef.obj
+ 0001:000006e0       _AddChild@8                100016e0 f   PathObj.obj
+ 0001:00000700       _AttachEngine@8            10001700 f   PathObj.obj
+ 0001:000007c0       _AttachSoundSystem@8       100017c0 f   PathObj.obj
+ 0001:00000840       _AttachWorld@8             10001840 f   PathObj.obj
+ 0001:000008d0       _ChangeBoxCollision@24     100018d0 f   PathObj.obj
+ 0001:000008f0       _Collision@24              100018f0 f   PathObj.obj
+ 0001:00000910       _CreateFromFile@8          10001910 f   PathObj.obj
+ 0001:000010b0       _CreateInstance@0          100020b0 f   PathObj.obj
+ 0001:00001180       _CreateRef@4               10002180 f   PathObj.obj
+ 0001:00001220       _Destroy@4                 10002220 f   PathObj.obj
+ 0001:00001370       _Destroy_Class             10002370 f   PathObj.obj
+ 0001:00001390       _DettachEngine@8           10002390 f   PathObj.obj
+ 0001:00001410       _DettachSoundSystem@8      10002410 f   PathObj.obj
+ 0001:00001490       _DettachWorld@8            10002490 f   PathObj.obj
+ 0001:00001530       _EditDialog@8              10002530 f   PathObj.obj
+ 0001:00001550       _GetChildren@12            10002550 f   PathObj.obj
+ 0001:00001570       _GetExtBox@8               10002570 f   PathObj.obj
+ 0001:00001590       _GetMaterial@12            10002590 f   PathObj.obj
+ 0001:000015b0       _GetPropertyList@8         100025b0 f   PathObj.obj
+ 0001:00001780       _GetXForm@8                10002780 f   PathObj.obj
+ 0001:00001830       _GetXFormModFlags@4        10002830 f   PathObj.obj
+ 0001:00001850       _Init_Class                10002850 f   PathObj.obj
+ 0001:00001880       _MessageFunction@12        10002880 f   PathObj.obj
+ 0001:00001ee0       _ObjUtil_ReadString        10002ee0 f   PathObj.obj
+ 0001:00002070       _ObjUtil_WriteString       10003070 f   PathObj.obj
+ 0001:00002280       _PathObject_BuildMotion    10003280 f   PathObj.obj
+ 0001:00004cd0       _PathObject_EnableTimeLine 10005cd0 f   PathObj.obj
+ 0001:00004f20       _PathObject_FreeTimeLine@8 10005f20 f   PathObj.obj
+ 0001:000057b0       _PathObject_InitAddTimeLine 100067b0 f   PathObj.obj
+ 0001:00005a60       _PathObject_IsLooped       10006a60 f   PathObj.obj
+ 0001:00007260       _RemoveChild@8             10008260 f   PathObj.obj
+ 0001:00007280       _Render@24                 10008280 f   PathObj.obj
+ 0001:000073b0       _SetMaterial@12            100083b0 f   PathObj.obj
+ 0001:000073d0       _SetProperty@16            100083d0 f   PathObj.obj
+ 0001:00008b90       _SetXForm@8                10009b90 f   PathObj.obj
+ 0001:00008c40       _TimeEdit_FillDetails      10009c40 f   PathObj.obj
+ 0001:00009280       _TimeEdit_FillTimeLineProperties 1000a280 f   PathObj.obj
+ 0001:00009700       _UpdateTimeDelta@8         1000a700 f   PathObj.obj
+ 0001:000098a0       _Util_StrDupManagePtr      1000a8a0 f   PathObj.obj
+ 0001:00009a80       _Util_StripChar            1000aa80 f   PathObj.obj
+ 0001:00009b80       _WriteToFile@12            1000ab80 f   PathObj.obj
+ 0001:0000a090       ___local_stdio_printf_options 1000b090 f i PathObj.obj
+ 0001:0000a0b0       ___local_stdio_scanf_options 1000b0b0 f i PathObj.obj
+ 0001:0000a0d0       __vfprintf_l               1000b0d0 f i PathObj.obj
+ 0001:0000a140       __vsnprintf_l              1000b140 f i PathObj.obj
+ 0001:0000a1f0       __vsprintf_l               1000b1f0 f i PathObj.obj
+ 0001:0000a250       __vsscanf_l                1000b250 f i PathObj.obj
+ 0001:0000a2d0       _printf                    1000b2d0 f i PathObj.obj
+ 0001:0000a360       _sprintf                   1000b360 f i PathObj.obj
+ 0001:0000a3d0       _sscanf                    1000b3d0 f i PathObj.obj
+ 0001:0000a440       _Trigger_ParseEvent        1000b440 f   Trigger.obj
+ 0001:0000a7a0       _Trigger_ProcessEvents     1000b7a0 f   Trigger.obj
+ 0001:0000a950       _Trigger_Set               1000b950 f   Trigger.obj
+ 0001:0000a96e       _jeObject_RegisterGlobalObjectDef@4 1000b96e f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000a974       _jeErrorLog_AddExplicit@24 1000b974 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000a97a       _jeVFile_Read@12           1000b97a f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000a980       _jeVFile_Write@12          1000b980 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000a986       _jeVFile_Seek@12           1000b986 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000a98c       _jeXForm3d_SetIdentity@4   1000b98c f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000a992       _jeProperty_ListCreate@4   1000b992 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000a998       _jeProperty_ListDestroy@4  1000b998 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000a99e       _jeProperty_FillGroup@12   1000b99e f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000a9a4       _jeProperty_FillButton@12  1000b9a4 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000a9aa       _jeProperty_FillCheck@16   1000b9aa f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000a9b0       _jeProperty_FillRadio@16   1000b9b0 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000a9b6       _jeProperty_FillVec3dGroup@16 1000b9b6 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000a9bc       _jeProperty_FillTimeGroup@12 1000b9bc f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000a9c2       _jeProperty_FillFloat@28   1000b9c2 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000a9c8       _jeProperty_FillInt@28     1000b9c8 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000a9ce       _jeProperty_FillGroupEnd@8 1000b9ce f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000a9d4       _jeProperty_FillCombo@24   1000b9d4 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000a9da       _jeObject_Destroy@4        1000b9da f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000a9e0       _jeObject_GetName@4        1000b9e0 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000a9e6       _jeObject_WriteToFile@12   1000b9e6 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000a9ec       _jeObject_CreateFromFile@8 1000b9ec f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000a9f2       _jeObject_GetTypeName@4    1000b9f2 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000a9f8       _jeObject_GetPropertyList@8 1000b9f8 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000a9fe       _jeObject_SetProperty@16   1000b9fe f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000aa04       _jeObject_CreateRef@4      1000ba04 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000aa0a       _jeObject_SetXForm@8       1000ba0a f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000aa10       _jeObject_GetXForm@8       1000ba10 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000aa16       _jeObject_GetXFormModFlags@4 1000ba16 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000aa1c       _jeObject_SendMessage@12   1000ba1c f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000aa22       _jeWorld_GetNextObject@8   1000ba22 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000aa28       __jeRam_DebugAllocate@12   1000ba28 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000aa2e       _jeRam_Free_@4             1000ba2e f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000aa34       __jeRam_DebugRealloc@16    1000ba34 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000aa3a       _jePath_Create@12          1000ba3a f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000aa40       _jePath_Destroy@4          1000ba40 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000aa46       _jePath_SetCutMode@8       1000ba46 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000aa4c       _jePath_InsertKeyframe@16  1000ba4c f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000aa52       _jePath_GetKeyframe@20     1000ba52 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000aa58       _jePath_GetKeyframeCount@8 1000ba58 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000aa5e       _jePath_Sample@12          1000ba5e f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000aa64       _jeMotion_Create@4         1000ba64 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000aa6a       _jeMotion_Destroy@4        1000ba6a f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000aa70       _jeMotion_AddPath@16       1000ba70 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000aa76       _jeMotion_GetPath@8        1000ba76 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000aa7c       _jeMotion_InsertEvent@12   1000ba7c f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000aa82       _jeMotion_SetupEventIterator@12 1000ba82 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000aa88       _jeMotion_GetNextEvent@12  1000ba88 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000aa8e       _OutputDebugStringA@4      1000ba8e f   kernel32:KERNEL32.dll
+ 0001:0000aaa0       @_RTC_AllocaHelper@12      1000baa0 f   MSVCRTD:stack.obj
+ 0001:0000aae0       @_RTC_CheckStackVars2@12   1000bae0 f   MSVCRTD:stack.obj
+ 0001:0000abf0       @_RTC_CheckStackVars@8     1000bbf0 f   MSVCRTD:stack.obj
+ 0001:0000ac60       __RTC_CheckEsp             1000bc60 f   MSVCRTD:stack.obj
+ 0001:0000ac90       __CRT_RTC_INIT             1000bc90 f   MSVCRTD:init.obj
+ 0001:0000aca0       __CRT_RTC_INITW            1000bca0 f   MSVCRTD:init.obj
+ 0001:0000acb0       __RTC_InitBase             1000bcb0 f   MSVCRTD:init.obj
+ 0001:0000acf0       __RTC_Shutdown             1000bcf0 f   MSVCRTD:init.obj
+ 0001:0000ad10       @__security_check_cookie@4 1000bd10 f   MSVCRTD:secchk.obj
+ 0001:0000ade0       ?_RTC_AllocaFailure@@YAXPAXPAU_RTC_ALLOCA_NODE@@H@Z 1000bde0 f   MSVCRTD:error.obj
+ 0001:0000af00       ?_RTC_Failure@@YAXPAXH@Z   1000bf00 f   MSVCRTD:error.obj
+ 0001:0000af70       ?_RTC_StackFailure@@YAXPAXPBD@Z 1000bf70 f   MSVCRTD:error.obj
+ 0001:0000b420       __RTC_UninitUse            1000c420 f   MSVCRTD:error.obj
+ 0001:0000b500       __vsprintf_s_l             1000c500 f i MSVCRTD:error.obj
+ 0001:0000b540       _sprintf_s                 1000c540 f i MSVCRTD:error.obj
+ 0001:0000bb70       __CRT_INIT@12              1000cb70 f   MSVCRTD:dll_dllmain.obj
+ 0001:0000bb90       __DllMainCRTStartup@12     1000cb90 f   MSVCRTD:dll_dllmain.obj
+ 0001:0000bbc0       ?_RTC_GetErrorFunc@@YAP6AHHPBDH00ZZPBX@Z 1000cbc0 f   MSVCRTD:userapi.obj
+ 0001:0000bbd0       ?_RTC_GetErrorFuncW@@YAP6AHHPB_WH00ZZPBX@Z 1000cbd0 f   MSVCRTD:userapi.obj
+ 0001:0000bbe0       __RTC_GetErrDesc           1000cbe0 f   MSVCRTD:userapi.obj
+ 0001:0000bc00       __RTC_NumErrors            1000cc00 f   MSVCRTD:userapi.obj
+ 0001:0000bc10       __RTC_SetErrorFunc         1000cc10 f   MSVCRTD:userapi.obj
+ 0001:0000bc40       __RTC_SetErrorFuncW        1000cc40 f   MSVCRTD:userapi.obj
+ 0001:0000bc70       __RTC_SetErrorType         1000cc70 f   MSVCRTD:userapi.obj
+ 0001:0000bca0       ___raise_securityfailure   1000cca0 f   MSVCRTD:gs_report.obj
+ 0001:0000bce0       ___report_gsfailure        1000cce0 f   MSVCRTD:gs_report.obj
+ 0001:0000be30       ___report_rangecheckfailure 1000ce30 f   MSVCRTD:gs_report.obj
+ 0001:0000be40       ___report_securityfailure  1000ce40 f   MSVCRTD:gs_report.obj
+ 0001:0000bf50       ___report_securityfailureEx 1000cf50 f   MSVCRTD:gs_report.obj
+ 0001:0000c660       ?_RTC_GetSrcLine@@YAHPAEPA_WKPAH1K@Z 1000d660 f   MSVCRTD:pdblkup.obj
+ 0001:0000cac0       __except_handler4_noexcept 1000dac0 f   MSVCRTD:chandler4_noexcept.obj
+ 0001:0000cb40       @_guard_check_icall_nop@4  1000db40 f i MSVCRTD:guard_support.obj
+ 0001:0000cb50       _ReadNoFence               1000db50 f i MSVCRTD:guard_support.obj
+ 0001:0000cb70       _ReadPointerNoFence        1000db70 f i MSVCRTD:guard_support.obj
+ 0001:0000cb90       ___castguard_check_failure_debugbreak 1000db90 f i MSVCRTD:guard_support.obj
+ 0001:0000cbb0       ___castguard_check_failure_fastfail 1000dbb0 f i MSVCRTD:guard_support.obj
+ 0001:0000cbe0       ___castguard_check_failure_nop 1000dbe0 f i MSVCRTD:guard_support.obj
+ 0001:0000cbf0       ___castguard_check_failure_os_handled 1000dbf0 f i MSVCRTD:guard_support.obj
+ 0001:0000cca0       ___castguard_slow_path_check_debugbreak 1000dca0 f i MSVCRTD:guard_support.obj
+ 0001:0000cce0       ___castguard_slow_path_check_fastfail 1000dce0 f i MSVCRTD:guard_support.obj
+ 0001:0000cd30       ___castguard_slow_path_check_nop 1000dd30 f i MSVCRTD:guard_support.obj
+ 0001:0000cd40       ___castguard_slow_path_check_os_handled 1000dd40 f i MSVCRTD:guard_support.obj
+ 0001:0000cde0       __guard_icall_checks_enforced 1000dde0 f i MSVCRTD:guard_support.obj
+ 0001:0000ceb0       ___security_init_cookie    1000deb0 f   MSVCRTD:gs_support.obj
+ 0001:0000cf50       ?__scrt_initialize_type_info@@YAXXZ 1000df50 f   MSVCRTD:tncleanup.obj
+ 0001:0000cf70       ?__scrt_uninitialize_type_info@@YAXXZ 1000df70 f   MSVCRTD:tncleanup.obj
+ 0001:0000cf90       ___scrt_initialize_default_local_stdio_options 1000df90 f   MSVCRTD:default_local_stdio_options.obj
+ 0001:0000cfe0       ?configure_argv@__scrt_narrow_argv_policy@@SAHXZ 1000dfe0 f i MSVCRTD:utility.obj
+ 0001:0000d0b0       ?initialize_environment@__scrt_narrow_environment_policy@@SAHXZ 1000e0b0 f i MSVCRTD:utility.obj
+ 0001:0000d150       _NtCurrentTeb              1000e150 f i MSVCRTD:utility.obj
+ 0001:0000d160       ___scrt_acquire_startup_lock 1000e160 f   MSVCRTD:utility.obj
+ 0001:0000d1c0       ___scrt_dllmain_after_initialize_c 1000e1c0 f   MSVCRTD:utility.obj
+ 0001:0000d200       ___scrt_dllmain_before_initialize_c 1000e200 f   MSVCRTD:utility.obj
+ 0001:0000d230       ___scrt_dllmain_crt_thread_attach 1000e230 f   MSVCRTD:utility.obj
+ 0001:0000d270       ___scrt_dllmain_crt_thread_detach 1000e270 f   MSVCRTD:utility.obj
+ 0001:0000d290       ___scrt_dllmain_exception_filter 1000e290 f   MSVCRTD:utility.obj
+ 0001:0000d2f0       ___scrt_dllmain_uninitialize_c 1000e2f0 f   MSVCRTD:utility.obj
+ 0001:0000d330       ___scrt_dllmain_uninitialize_critical 1000e330 f   MSVCRTD:utility.obj
+ 0001:0000d350       ___scrt_initialize_crt     1000e350 f   MSVCRTD:utility.obj
+ 0001:0000d3b0       ___scrt_initialize_onexit_tables 1000e3b0 f   MSVCRTD:utility.obj
+ 0001:0000d4c0       ___scrt_is_nonwritable_in_current_image 1000e4c0 f   MSVCRTD:utility.obj
+ 0001:0000d640       ___scrt_release_startup_lock 1000e640 f   MSVCRTD:utility.obj
+ 0001:0000d670       ___scrt_uninitialize_crt   1000e670 f   MSVCRTD:utility.obj
+ 0001:0000d6c0       __onexit                   1000e6c0 f   MSVCRTD:utility.obj
+ 0001:0000d740       _at_quick_exit             1000e740 f   MSVCRTD:utility.obj
+ 0001:0000d790       _atexit                    1000e790 f   MSVCRTD:utility.obj
+ 0001:0000d7d0       ___scrt_get_dyn_tls_init_callback 1000e7d0 f   MSVCRTD:dyn_tls_init.obj
+ 0001:0000d7e0       ___scrt_fastfail           1000e7e0 f   MSVCRTD:utility_desktop.obj
+ 0001:0000d970       ___scrt_get_show_window_mode 1000e970 f   MSVCRTD:utility_desktop.obj
+ 0001:0000d9c0       ___scrt_initialize_mta     1000e9c0 f   MSVCRTD:utility_desktop.obj
+ 0001:0000d9d0       ___scrt_initialize_winrt   1000e9d0 f   MSVCRTD:utility_desktop.obj
+ 0001:0000d9e0       ___scrt_is_managed_app     1000e9e0 f   MSVCRTD:utility_desktop.obj
+ 0001:0000da90       ___scrt_set_unhandled_exception_filter 1000ea90 f   MSVCRTD:utility_desktop.obj
+ 0001:0000dab0       ___scrt_exe_initialize_mta 1000eab0 f   MSVCRTD:utility_desktop.obj
+ 0001:0000dab0       ___scrt_stub_for_initialize_mta 1000eab0 f   MSVCRTD:utility_desktop.obj
+ 0001:0000dac0       ___scrt_unhandled_exception_filter@4 1000eac0 f   MSVCRTD:utility_desktop.obj
+ 0001:0000db60       __crt_debugger_hook        1000eb60 f   MSVCRTD:utility_desktop.obj
+ 0001:0000db80       __RTC_Initialize           1000eb80 f   MSVCRTD:initsect.obj
+ 0001:0000dbc0       __RTC_Terminate            1000ebc0 f   MSVCRTD:initsect.obj
+ 0001:0000dc00       __except_handler4          1000ec00 f   MSVCRTD:chandler4gs.obj
+ 0001:0000dc50       ___isa_available_init      1000ec50 f   MSVCRTD:cpu_disp.obj
+ 0001:0000e050       __get_startup_argv_mode    1000f050 f   MSVCRTD:argv_mode.obj
+ 0001:0000e060       ___scrt_is_ucrt_dll_in_use 1000f060 f   MSVCRTD:ucrt_detection.obj
+ 0001:0000e08d       _memcmp                    1000f08d f   vcruntimed:VCRUNTIME140D.dll
+ 0001:0000e093       _memcpy                    1000f093 f   vcruntimed:VCRUNTIME140D.dll
+ 0001:0000e099       _memmove                   1000f099 f   vcruntimed:VCRUNTIME140D.dll
+ 0001:0000e09f       _memset                    1000f09f f   vcruntimed:VCRUNTIME140D.dll
+ 0001:0000e0a5       _strstr                    1000f0a5 f   vcruntimed:VCRUNTIME140D.dll
+ 0001:0000e0ab       ___vcrt_GetModuleFileNameW 1000f0ab f   vcruntimed:VCRUNTIME140D.dll
+ 0001:0000e0b1       ___vcrt_GetModuleHandleW   1000f0b1 f   vcruntimed:VCRUNTIME140D.dll
+ 0001:0000e0b7       ___vcrt_LoadLibraryExW     1000f0b7 f   vcruntimed:VCRUNTIME140D.dll
+ 0001:0000e0bd       ___current_exception       1000f0bd f   vcruntimed:VCRUNTIME140D.dll
+ 0001:0000e0c3       ___current_exception_context 1000f0c3 f   vcruntimed:VCRUNTIME140D.dll
+ 0001:0000e0c9       ___std_type_info_destroy_list 1000f0c9 f   vcruntimed:VCRUNTIME140D.dll
+ 0001:0000e0cf       __except_handler4_common   1000f0cf f   vcruntimed:VCRUNTIME140D.dll
+ 0001:0000e0d5       _strcmp                    1000f0d5 f   ucrtd:ucrtbased.dll
+ 0001:0000e0db       _strcpy                    1000f0db f   ucrtd:ucrtbased.dll
+ 0001:0000e0e1       _strlen                    1000f0e1 f   ucrtd:ucrtbased.dll
+ 0001:0000e0e7       __wassert                  1000f0e7 f   ucrtd:ucrtbased.dll
+ 0001:0000e0ed       _fmod                      1000f0ed f   ucrtd:ucrtbased.dll
+ 0001:0000e0f3       ___acrt_iob_func           1000f0f3 f   ucrtd:ucrtbased.dll
+ 0001:0000e0f9       ___stdio_common_vfprintf   1000f0f9 f   ucrtd:ucrtbased.dll
+ 0001:0000e0ff       ___stdio_common_vsprintf   1000f0ff f   ucrtd:ucrtbased.dll
+ 0001:0000e105       ___stdio_common_vsscanf    1000f105 f   ucrtd:ucrtbased.dll
+ 0001:0000e10b       __CrtDbgReport             1000f10b f   ucrtd:ucrtbased.dll
+ 0001:0000e111       __CrtDbgReportW            1000f111 f   ucrtd:ucrtbased.dll
+ 0001:0000e117       _strcpy_s                  1000f117 f   ucrtd:ucrtbased.dll
+ 0001:0000e11d       _strcat_s                  1000f11d f   ucrtd:ucrtbased.dll
+ 0001:0000e123       ___stdio_common_vsprintf_s 1000f123 f   ucrtd:ucrtbased.dll
+ 0001:0000e129       __initterm                 1000f129 f   ucrtd:ucrtbased.dll
+ 0001:0000e12f       __initterm_e               1000f12f f   ucrtd:ucrtbased.dll
+ 0001:0000e135       __wmakepath_s              1000f135 f   ucrtd:ucrtbased.dll
+ 0001:0000e13b       __wsplitpath_s             1000f13b f   ucrtd:ucrtbased.dll
+ 0001:0000e141       _wcscpy_s                  1000f141 f   ucrtd:ucrtbased.dll
+ 0001:0000e147       _terminate                 1000f147 f   ucrtd:ucrtbased.dll
+ 0001:0000e14d       __seh_filter_dll           1000f14d f   ucrtd:ucrtbased.dll
+ 0001:0000e153       __configure_narrow_argv    1000f153 f   ucrtd:ucrtbased.dll
+ 0001:0000e159       __initialize_narrow_environment 1000f159 f   ucrtd:ucrtbased.dll
+ 0001:0000e15f       __initialize_onexit_table  1000f15f f   ucrtd:ucrtbased.dll
+ 0001:0000e165       __register_onexit_function 1000f165 f   ucrtd:ucrtbased.dll
+ 0001:0000e16b       __execute_onexit_table     1000f16b f   ucrtd:ucrtbased.dll
+ 0001:0000e171       __crt_atexit               1000f171 f   ucrtd:ucrtbased.dll
+ 0001:0000e177       __crt_at_quick_exit        1000f177 f   ucrtd:ucrtbased.dll
+ 0001:0000e17d       __cexit                    1000f17d f   ucrtd:ucrtbased.dll
+ 0001:0000e183       __stricmp                  1000f183 f   ucrtd:ucrtbased.dll
+ 0001:0000e189       _IsDebuggerPresent@0       1000f189 f   kernel32:KERNEL32.dll
+ 0001:0000e18f       _RaiseException@16         1000f18f f   kernel32:KERNEL32.dll
+ 0001:0000e195       _MultiByteToWideChar@24    1000f195 f   kernel32:KERNEL32.dll
+ 0001:0000e19b       _WideCharToMultiByte@32    1000f19b f   kernel32:KERNEL32.dll
+ 0001:0000e1a1       _UnhandledExceptionFilter@4 1000f1a1 f   kernel32:KERNEL32.dll
+ 0001:0000e1a7       _SetUnhandledExceptionFilter@4 1000f1a7 f   kernel32:KERNEL32.dll
+ 0001:0000e1ad       _GetCurrentProcess@0       1000f1ad f   kernel32:KERNEL32.dll
+ 0001:0000e1b3       _TerminateProcess@8        1000f1b3 f   kernel32:KERNEL32.dll
+ 0001:0000e1b9       _IsProcessorFeaturePresent@4 1000f1b9 f   kernel32:KERNEL32.dll
+ 0001:0000e1bf       _GetLastError@0            1000f1bf f   kernel32:KERNEL32.dll
+ 0001:0000e1c5       _HeapAlloc@12              1000f1c5 f   kernel32:KERNEL32.dll
+ 0001:0000e1cb       _HeapFree@12               1000f1cb f   kernel32:KERNEL32.dll
+ 0001:0000e1d1       _GetProcessHeap@0          1000f1d1 f   kernel32:KERNEL32.dll
+ 0001:0000e1d7       _VirtualQuery@12           1000f1d7 f   kernel32:KERNEL32.dll
+ 0001:0000e1dd       _FreeLibrary@4             1000f1dd f   kernel32:KERNEL32.dll
+ 0001:0000e1e3       _GetProcAddress@8          1000f1e3 f   kernel32:KERNEL32.dll
+ 0001:0000e1e9       _QueryPerformanceCounter@4 1000f1e9 f   kernel32:KERNEL32.dll
+ 0001:0000e1ef       _GetCurrentProcessId@0     1000f1ef f   kernel32:KERNEL32.dll
+ 0001:0000e1f5       _GetCurrentThreadId@0      1000f1f5 f   kernel32:KERNEL32.dll
+ 0001:0000e1fb       _GetSystemTimeAsFileTime@4 1000f1fb f   kernel32:KERNEL32.dll
+ 0001:0000e201       _InitializeSListHead@4     1000f201 f   kernel32:KERNEL32.dll
+ 0001:0000e207       _GetStartupInfoW@4         1000f207 f   kernel32:KERNEL32.dll
+ 0001:0000e20d       _GetModuleHandleW@4        1000f20d f   kernel32:KERNEL32.dll
+ 0001:0000e220       ___acrt_initialize         1000f220 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000e220       ___scrt_stub_for_acrt_initialize 1000f220 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000e220       ___vcrt_initialize         1000f220 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000e230       ___acrt_thread_attach      1000f230 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000e230       ___scrt_stub_for_acrt_thread_attach 1000f230 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000e230       ___vcrt_thread_attach      1000f230 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000e240       ___acrt_thread_detach      1000f240 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000e240       ___scrt_stub_for_acrt_thread_detach 1000f240 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000e240       ___vcrt_thread_detach      1000f240 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000e250       ___acrt_uninitialize       1000f250 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000e250       ___scrt_stub_for_acrt_uninitialize 1000f250 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000e250       ___vcrt_uninitialize       1000f250 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000e260       ___acrt_uninitialize_critical 1000f260 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000e260       ___scrt_stub_for_acrt_uninitialize_critical 1000f260 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000e260       ___vcrt_uninitialize_critical 1000f260 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000e270       ___scrt_stub_for_is_c_termination_complete 1000f270 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000e270       __is_c_termination_complete 1000f270 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000e280       __filter_x86_sse2_floating_point_exception 1000f280 f   MSVCRTD:x86_exception_filter.obj
+ 0001:0000e280       __filter_x86_sse2_floating_point_exception_default 1000f280 f   MSVCRTD:x86_exception_filter.obj
+ 0002:00000000       ___xc_a                    10011000     MSVCRTD:initializers.obj
+ 0002:00000104       ___xc_z                    10011104     MSVCRTD:initializers.obj
+ 0002:00000208       ___xi_a                    10011208     MSVCRTD:initializers.obj
+ 0002:0000030c       ___xi_z                    1001130c     MSVCRTD:initializers.obj
+ 0002:00000410       ___xp_a                    10011410     MSVCRTD:initializers.obj
+ 0002:00000514       ___xp_z                    10011514     MSVCRTD:initializers.obj
+ 0002:00000618       ___xt_a                    10011618     MSVCRTD:initializers.obj
+ 0002:0000071c       ___xt_z                    1001171c     MSVCRTD:initializers.obj
+ 0002:00000820       ??_C@_0L@FFGFNPDJ@PathObject@ 10011820     ObjectDef.obj
+ 0002:00000830       ??_C@_08FJNMKDHG@?$DM?5none?5?$DO@ 10011830     PathObj.obj
+ 0002:00000840       ??_C@_1KA@DKHBACAG@?$AAD?$AA?3?$AA?2?$AAG?$AAe?$AAn?$AAe?$AAs?$AAi?$AAs?$AA?5?$AAa?$AAn?$AAd?$AA?5@ 10011840     PathObj.obj
+ 0002:00000900       ??_C@_17OJIHJBCF@?$AAs?$AAt?$AAr@ 10011900     PathObj.obj
+ 0002:0000090c       ??_C@_1M@ICONCHJF@?$AAs?$AAt?$AAr?$AAi?$AAp@ 1001190c     PathObj.obj
+ 0002:0000091c       ??_C@_19DFJJNFPI@?$AAd?$AAe?$AAs?$AAt@ 1001191c     PathObj.obj
+ 0002:00000928       ??_C@_17NHHLECMC@?$AAs?$AAr?$AAc@ 10011928     PathObj.obj
+ 0002:00000938       ??_C@_0FA@MDKADMJE@D?3?2Genesis?5and?5Jet3d?2JSTUDIO_CL@ 10011938     PathObj.obj
+ 0002:00000998       ??_C@_00CNPNBAHC@@         10011998     PathObj.obj
+ 0002:0000099c       ??_C@_0BH@KIBLNGDK@JE_ERR_MEMORY_RESOURCE@ 1001199c     PathObj.obj
+ 0002:000009b8       ??_C@_1BC@IMGBJFLJ@?$AAp?$AAP?$AAa?$AAt?$AAh?$AAO?$AAb?$AAj@ 100119b8     PathObj.obj
+ 0002:000009d0       ??_C@_19DOLMIDJD@?$AAL?$AAi?$AAs?$AAt@ 100119d0     PathObj.obj
+ 0002:000009dc       ??_C@_1BA@BFBMICPH@?$AAL?$AAi?$AAs?$AAt?$AAN?$AAd?$AAx@ 100119dc     PathObj.obj
+ 0002:000009f0       ??_C@_0P@NMGPAEGM@Controlling?5?$CFs@ 100119f0     PathObj.obj
+ 0002:00000a04       ??_C@_07NJJEDOBB@Details@  10011a04     PathObj.obj
+ 0002:00000a10       ??_C@_0L@CJDFNLAO@Loop?5Time?3@ 10011a10     PathObj.obj
+ 0002:00000a20       ??_C@_0BE@FKKCPMKK@Prop?5Interp?5Linear?3@ 10011a20     PathObj.obj
+ 0002:00000a38       ??_C@_0BF@CHGFHLHH@Prop?5Interp?5Hermite?3@ 10011a38     PathObj.obj
+ 0002:00000a54       ??_C@_0BO@FIOLBIHP@Prop?5Interp?5Hermite?5Zero?5Div?3@ 10011a54     PathObj.obj
+ 0002:00000a78       ??_C@_0BD@FLOLIOBK@Pos?5Interp?5Linear?3@ 10011a78     PathObj.obj
+ 0002:00000a90       ??_C@_0BE@OMAFIBIJ@Pos?5Interp?5Hermite?3@ 10011a90     PathObj.obj
+ 0002:00000aa8       ??_C@_0BN@JIONKKGH@Pos?5Interp?5Hermite?5Zero?5Div?3@ 10011aa8     PathObj.obj
+ 0002:00000acc       ??_C@_0BD@PMNPEKA@Rot?5Interp?5Linear?3@ 10011acc     PathObj.obj
+ 0002:00000ae4       ??_C@_0BC@FFAAGCBC@Rot?5Interp?5Slerp?3@ 10011ae4     PathObj.obj
+ 0002:00000afc       ??_C@_0BC@NDCLBHAI@Rot?5Interp?5Squad?3@ 10011afc     PathObj.obj
+ 0002:00000b14       ??_C@_1M@FEOFBOBD@?$AA?$CK?$AAL?$AAi?$AAs?$AAt@ 10011b14     PathObj.obj
+ 0002:00000b24       ??_C@_1BM@PPNPLNPK@?$AAP?$AAr?$AAo?$AAp?$AAe?$AAr?$AAt?$AAy?$AAC?$AAo?$AAu?$AAn?$AAt@ 10011b24     PathObj.obj
+ 0002:00000b48       ??_C@_0BH@GOJKNNKA@Add?5Position?5Time?5Line@ 10011b48     PathObj.obj
+ 0002:00000b64       ??_C@_0BH@PFNKNBBD@Add?5Property?5Time?5Line@ 10011b64     PathObj.obj
+ 0002:00000b80       ??_C@_07NBDGDPAC@Object?3@ 10011b80     PathObj.obj
+ 0002:00000b8c       ??_C@_09BKHOEFBM@Position?3@ 10011b8c     PathObj.obj
+ 0002:00000b98       ??_C@_02EHLIIHJM@X?3@      10011b98     PathObj.obj
+ 0002:00000b9c       ??_C@_02EGHKONKL@Y?3@      10011b9c     PathObj.obj
+ 0002:00000ba0       ??_C@_02EEDMFDPC@Z?3@      10011ba0     PathObj.obj
+ 0002:00000ba4       ??_C@_0BG@GHOBOCOE@Delete?5This?5Time?5Line@ 10011ba4     PathObj.obj
+ 0002:00000bc0       ??_C@_05DNIIFBMG@?$CFs?5?$CFs@ 10011bc0     PathObj.obj
+ 0002:00000bc8       ??_C@_07IFMLPBAP@?$CFs?5?$CI?$CFs?$CJ@ 10011bc8     PathObj.obj
+ 0002:00000bd4       ??_C@_09NPGIAPIF@Property?3@ 10011bd4     PathObj.obj
+ 0002:00000be0       ??_C@_06IKKIDNKD@Value?3@  10011be0     PathObj.obj
+ 0002:00000be8       ??_C@_04ONEOJOLI@Vec?3@    10011be8     PathObj.obj
+ 0002:00000bf0       ??_C@_06KDIJONLE@Color?3@  10011bf0     PathObj.obj
+ 0002:00000bf8       ??_C@_04BNIBCOPN@Red?3@    10011bf8     PathObj.obj
+ 0002:00000c00       ??_C@_06JPBPAAOD@Green?3@  10011c00     PathObj.obj
+ 0002:00000c08       ??_C@_05GHDLOIGL@Blue?3@   10011c08     PathObj.obj
+ 0002:00000c10       ??_C@_1M@MJCCOMHG@?$AAW?$AAo?$AAr?$AAl?$AAd@ 10011c10     PathObj.obj
+ 0002:00000c20       ??_C@_1BG@PFOKPINP@?$AAN?$AAa?$AAm?$AAe?$AAT?$AAo?$AAF?$AAi?$AAn?$AAd@ 10011c20     PathObj.obj
+ 0002:00000c3c       ??_C@_17HLMHEJOB@?$AAO?$AAb?$AAj@ 10011c3c     PathObj.obj
+ 0002:00000c48       ??_C@_1BG@GLKDDDLG@?$AAP?$AAr?$AAo?$AAp?$AAD?$AAa?$AAt?$AAa?$AAI?$AAd@ 10011c48     PathObj.obj
+ 0002:00000c64       ??_C@_06GBJBIDMM@?$CFs?9?$DO?$CFs@ 10011c64     PathObj.obj
+ 0002:00000c6c       ??_C@_1BE@LJMECDMA@?$AAN?$AAa?$AAm?$AAe?$AAC?$AAo?$AAu?$AAn?$AAt@ 10011c6c     PathObj.obj
+ 0002:00000c88       ??_C@_1EC@DFMPBIJO@?$AAt?$AAd?$AA?9?$AA?$DO?$AAP?$AAr?$AAo?$AAp?$AAe?$AAr?$AAt?$AAy?$AAN?$AAa?$AAm@ 10011c88     PathObj.obj
+ 0002:00000cd8       ??_C@_1BM@DFOPOOLE@?$AAH?$AAa?$AAs?$AAP?$AAr?$AAo?$AAp?$AAe?$AAr?$AAt?$AAi?$AAe?$AAs@ 10011cd8     PathObj.obj
+ 0002:00000cfc       ??_C@_1DO@PJBGPHBO@?$AAt?$AAd?$AA?9?$AA?$DO?$AAO?$AAb?$AAj?$AAe?$AAc?$AAt?$AAN?$AAa?$AAm?$AAe?$AAL@ 10011cfc     PathObj.obj
+ 0002:00000d48       ??_C@_1BC@LDHKIAE@?$AAI?$AAn?$AAs?$AAt?$AAa?$AAn?$AAc?$AAe@ 10011d48     PathObj.obj
+ 0002:00000d60       ??_C@_01ICJEACDI@?$DL@     10011d60     PathObj.obj
+ 0002:00000d64       ??_C@_05DIALNFFA@?$CFs?5?$CFd@ 10011d64     PathObj.obj
+ 0002:00000d6c       ??_C@_1CC@DPNEFNAE@?$AAT?$AAi?$AAm?$AAe?$AAL?$AAi?$AAn?$AAe?$AAN?$AAd?$AAx?$AA?5?$AA?$DO?$AA?$DN?$AA?5@ 10011d6c     PathObj.obj
+ 0002:00000d94       ??_C@_1BE@KMDLKHPM@?$AAp?$AAI?$AAn?$AAs?$AAt?$AAa?$AAn?$AAc?$AAe@ 10011d94     PathObj.obj
+ 0002:00000dac       ??_C@_1CK@EFKNLMGL@?$AAp?$AAP?$AAa?$AAt?$AAh?$AAO?$AAb?$AAj?$AA?9?$AA?$DO?$AAR?$AAe?$AAf?$AAC?$AAn@ 10011dac     PathObj.obj
+ 0002:00000de0       ??_C@_1O@IJCDOAJL@?$AAp?$AAW?$AAo?$AAr?$AAl?$AAd@ 10011de0     PathObj.obj
+ 0002:00000df0       ??_C@_1O@OIKEGNDA@?$AAE?$AAn?$AAg?$AAi?$AAn?$AAe@ 10011df0     PathObj.obj
+ 0002:00000e00       ??_C@_1O@NJAJGJMG@?$AAC?$AAa?$AAm?$AAe?$AAr?$AAa@ 10011e00     PathObj.obj
+ 0002:00000e10       ??_C@_1BK@FHGJNIOH@?$AAF?$AAi?$AAl?$AAe?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 10011e10     PathObj.obj
+ 0002:00000e30       ??_C@_1BO@HJMILEGM@?$AAS?$AAt?$AAr?$AAi?$AAn?$AAg?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 10011e30     PathObj.obj
+ 0002:00000e54       ??_C@_1BC@KCECIPDP@?$AAS?$AAi?$AAz?$AAe?$AA?5?$AA?$DO?$AA?5?$AA0@ 10011e54     PathObj.obj
+ 0002:00000e6c       ??_C@_0M@KFLPAFFN@PathObject?6@ 10011e6c     PathObj.obj
+ 0002:00000e7c       ??_C@_1BO@MPJOMIKL@?$AAP?$AAt?$AAr?$AAM?$AAg?$AAr?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 10011e7c     PathObj.obj
+ 0002:00000ea0       ??_C@_0BO@IFPDKGAG@PathObject_CreateFromFile?3Tag@ 10011ea0     PathObj.obj
+ 0002:00000ec4       ??_C@_0BD@ENGKCHBG@JE_ERR_FILEIO_READ@ 10011ec4     PathObj.obj
+ 0002:00000edc       ??_C@_0CC@PPAFODDL@PathObject_CreateFromFile?3Versi@ 10011edc     PathObj.obj
+ 0002:00000f04       ??_C@_0CO@INFKDDEG@Error?5occured?5in?5CreateFromFile@ 10011f04     PathObj.obj
+ 0002:00000f3c       ??_C@_1CC@CAMJEFBK@?$AAI?$AAn?$AAs?$AAt?$AAa?$AAn?$AAc?$AAe?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL@ 10011f3c     PathObj.obj
+ 0002:00000f64       ??_C@_0BH@PHGBOLAL@JE_ERR_SYSTEM_RESOURCE@ 10011f64     PathObj.obj
+ 0002:00000f80       ??_C@_1JK@NHNMOCPD@?$AAC?$AAh?$AAa?$AAn?$AAn?$AAe?$AAl?$AAT?$AAy?$AAp?$AAe?$AA?5?$AA?$DN?$AA?$DN?$AA?5@ 10011f80     PathObj.obj
+ 0002:00001038       ??_C@_1EM@EBIFIBKF@?$AAT?$AAi?$AAm?$AAe?$AAL?$AAi?$AAn?$AAe?$AAN?$AAd?$AAx?$AA?5?$AA?$DO?$AA?$DN?$AA?5@ 10012038     PathObj.obj
+ 0002:00001094       ??_C@_19NHABCBNP@?$AAP?$AAa?$AAt?$AAh@ 10012094     PathObj.obj
+ 0002:000010a0       ??_C@_1BE@DENADGKH@?$AAS?$AAt?$AAa?$AAr?$AAt?$AAT?$AAi?$AAm?$AAe@ 100120a0     PathObj.obj
+ 0002:000010b8       ??_C@_1BA@OMLIJEIP@?$AAE?$AAn?$AAd?$AAT?$AAi?$AAm?$AAe@ 100120b8     PathObj.obj
+ 0002:000010d0       ??_C@_1EK@GGMBJINE@?$AAT?$AAi?$AAm?$AAe?$AAL?$AAi?$AAn?$AAe?$AAN?$AAd?$AAx?$AA?5?$AA?$DO?$AA?$DN?$AA?5@ 100120d0     PathObj.obj
+ 0002:00001128       ??_C@_1FE@DFCAKIFA@?$AAD?$AAa?$AAt?$AAa?$AAT?$AAy?$AAp?$AAe?$AA?5?$AA?$DO?$AA?$DN?$AA?5?$AA0?$AA?5?$AA?$CG@ 10012128     PathObj.obj
+ 0002:0000118c       ??_C@_1M@DIFJGACK@?$AAp?$AAD?$AAa?$AAt?$AAa@ 1001218c     PathObj.obj
+ 0002:0000119c       ??_C@_15BAJPNDCH@?$AAX?$AAF@ 1001219c     PathObj.obj
+ 0002:000011a4       ??_C@_19IEEMEPMH@?$AAD?$AAa?$AAt?$AAa@ 100121a4     PathObj.obj
+ 0002:000011b0       ??_C@_1CC@LGBPNPON@?$AAp?$AAP?$AAa?$AAt?$AAh?$AAO?$AAb?$AAj?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL@ 100121b0     PathObj.obj
+ 0002:000011d8       __real@00000000            100121d8     PathObj.obj
+ 0002:000011dc       __real@3f800000            100121dc     PathObj.obj
+ 0002:000011e0       __real@4b18967f            100121e0     PathObj.obj
+ 0002:000011e4       __real@4b189680            100121e4     PathObj.obj
+ 0002:000011e8       __real@4f000000            100121e8     PathObj.obj
+ 0002:000011ec       __real@7f7fffff            100121ec     PathObj.obj
+ 0002:000011f0       __real@bf800000            100121f0     PathObj.obj
+ 0002:000011f4       __real@cf000000            100121f4     PathObj.obj
+ 0002:000011f8       __real@ff7fffff            100121f8     PathObj.obj
+ 0002:00001200       ??_C@_1KA@FKPPDMPF@?$AAD?$AA?3?$AA?2?$AAG?$AAe?$AAn?$AAe?$AAs?$AAi?$AAs?$AA?5?$AAa?$AAn?$AAd?$AA?5@ 10012200     Trigger.obj
+ 0002:000012c0       ??_C@_1BI@CPBIILPK@?$AAE?$AAv?$AAe?$AAn?$AAt?$AAS?$AAt?$AAr?$AAi?$AAn?$AAg@ 100122c0     Trigger.obj
+ 0002:000012dc       ??_C@_0BC@GBMFKGMC@?$CFs?5?$CFs?5?$CFs?5?$CFs?5?$CFs?5?$CFs@ 100122dc     Trigger.obj
+ 0002:000012f4       ??_C@_07LIABELBC@ambient@  100122f4     Trigger.obj
+ 0002:00001300       ??_C@_06GGBHJAPK@spout1@   10012300     Trigger.obj
+ 0002:00001308       ??_C@_05NJNGEDKM@morph@    10012308     Trigger.obj
+ 0002:00001310       ??_C@_03FMNFMMCM@ink@      10012310     Trigger.obj
+ 0002:00001314       ??_C@_1O@JAJMFBCG@?$AAM?$AAo?$AAt?$AAi?$AAo?$AAn@ 10012314     Trigger.obj
+ 0002:00001324       ??_C@_1CK@DOFGCCDD@?$AAS?$AAt?$AAa?$AAr?$AAt?$AAT?$AAi?$AAm?$AAe?$AA?5?$AA?$DM?$AA?$DN?$AA?5?$AAE?$AAn@ 10012324     Trigger.obj
+ 0002:00001418       ??_C@_0NN@JMPELKLB@The?5value?5of?5ESP?5was?5not?5proper@ 10012418     MSVCRTD:error.obj
+ 0002:00001528       ??_C@_0BBN@ELNNILBE@A?5cast?5to?5a?5smaller?5data?5type?5h@ 10012528     MSVCRTD:error.obj
+ 0002:00001680       ??_C@_0BN@BPOGFMJL@Stack?5memory?5was?5corrupted?$AN?6@ 10012680     MSVCRTD:error.obj
+ 0002:000016a4       ??_C@_0DG@DAJCDLPN@A?5local?5variable?5was?5used?5befor@ 100126a4     MSVCRTD:error.obj
+ 0002:000016e4       ??_C@_0CM@JMIDGKLA@Stack?5memory?5around?5_alloca?5was@ 100126e4     MSVCRTD:error.obj
+ 0002:00001718       ??_C@_0BO@CHIONIOI@Unknown?5Runtime?5Check?5Error?$AN?6@ 10012718     MSVCRTD:error.obj
+ 0002:00001740       ??_C@_1GM@CNOOJIHC@?$AAR?$AAu?$AAn?$AAt?$AAi?$AAm?$AAe?$AA?5?$AAC?$AAh?$AAe?$AAc?$AAk?$AA?5?$AAE@ 10012740     MSVCRTD:error.obj
+ 0002:000017c8       ??_C@_1EA@NFKNIFJP@?$AAR?$AAu?$AAn?$AA?9?$AAT?$AAi?$AAm?$AAe?$AA?5?$AAC?$AAh?$AAe?$AAc?$AAk?$AA?5@ 100127c8     MSVCRTD:error.obj
+ 0002:00001814       ??_C@_0BB@PFFGGCJP@Unknown?5Filename@ 10012814     MSVCRTD:error.obj
+ 0002:00001828       ??_C@_0BE@GNBOBNCK@Unknown?5Module?5Name@ 10012828     MSVCRTD:error.obj
+ 0002:00001840       ??_C@_0CA@IODNCDPG@Run?9Time?5Check?5Failure?5?$CD?$CFd?5?9?5?$CFs@ 10012840     MSVCRTD:error.obj
+ 0002:00001868       ??_C@_0CG@IAFNJNEE@Stack?5corrupted?5near?5unknown?5va@ 10012868     MSVCRTD:error.obj
+ 0002:00001898       ??_C@_05MKKEDADM@?$CF?42X?5@ 10012898     MSVCRTD:error.obj
+ 0002:000018a0       ??_C@_0EJ@LJKNEOLN@Stack?5area?5around?5_alloca?5memor@ 100128a0     MSVCRTD:error.obj
+ 0002:000018f8       ??_C@_01EEMJAFIK@?6@       100128f8     MSVCRTD:error.obj
+ 0002:000018fc       ??_C@_02LLMPMKNF@?$DO?5@   100128fc     MSVCRTD:error.obj
+ 0002:00001900       ??_C@_08OMAHNMHJ@?6Data?3?5?$DM@ 10012900     MSVCRTD:error.obj
+ 0002:0000190c       ??_C@_0CK@DKGBICFE@?6Allocation?5number?5within?5this?5@ 1001290c     MSVCRTD:error.obj
+ 0002:00001940       ??_C@_07DFDJCKFN@?6Size?3?5@ 10012940     MSVCRTD:error.obj
+ 0002:0000194c       ??_C@_0N@MHFFIMFG@?6Address?3?50x@ 1001294c     MSVCRTD:error.obj
+ 0002:00001960       ??_C@_0EI@CLEPFNGI@Stack?5area?5around?5_alloca?5memor@ 10012960     MSVCRTD:error.obj
+ 0002:000019b8       ??_C@_0BK@ODNDAGKB@?$CFs?$CFs?$CFp?$CFs?$CFzd?$CFs?$CFd?$CFs?$CFs?$CFs?$CFs?$CFs@ 100129b8     MSVCRTD:error.obj
+ 0002:000019d8       ??_C@_0DE@OHJBPMBP@A?5variable?5is?5being?5used?5withou@ 100129d8     MSVCRTD:error.obj
+ 0002:00001a18       __pDefaultRawDllMain       10012a18     MSVCRTD:dll_dllmain.obj
+ 0002:00001a18       __pRawDllMain              10012a18     MSVCRTD:dll_dllmain.obj
+ 0002:00001a34       ??_C@_0BJ@HEGAHDFO@Stack?5pointer?5corruption@ 10012a34     MSVCRTD:userapi.obj
+ 0002:00001a54       ??_C@_0CK@FEGOIOPB@Cast?5to?5smaller?5type?5causing?5lo@ 10012a54     MSVCRTD:userapi.obj
+ 0002:00001a88       ??_C@_0BI@CIGMDCBH@Stack?5memory?5corruption@ 10012a88     MSVCRTD:userapi.obj
+ 0002:00001aa4       ??_C@_0CK@CNLNOEPB@Local?5variable?5used?5before?5init@ 10012aa4     MSVCRTD:userapi.obj
+ 0002:00001ad8       ??_C@_0BP@OGBCLIBO@Stack?5around?5_alloca?5corrupted@ 10012ad8     MSVCRTD:userapi.obj
+ 0002:00001b68       ??_C@_1EI@MLPKHBGE@?$AAa?$AAp?$AAi?$AA?9?$AAm?$AAs?$AA?9?$AAw?$AAi?$AAn?$AA?9?$AAc?$AAo?$AAr?$AAe@ 10012b68     MSVCRTD:pdblkup.obj
+ 0002:00001bc0       ??_C@_1BK@JHLNAEJL@?$AAa?$AAd?$AAv?$AAa?$AAp?$AAi?$AA3?$AA2?$AA?4?$AAd?$AAl?$AAl@ 10012bc0     MSVCRTD:pdblkup.obj
+ 0002:00001be0       ??_C@_0O@COHOBMLB@RegOpenKeyExW@ 10012be0     MSVCRTD:pdblkup.obj
+ 0002:00001bf0       ??_C@_0BB@GLNAEDBD@RegQueryValueExW@ 10012bf0     MSVCRTD:pdblkup.obj
+ 0002:00001c04       ??_C@_0M@HLOHPNFA@RegCloseKey@ 10012c04     MSVCRTD:pdblkup.obj
+ 0002:00001c18       ??_C@_1HE@EBEAGLFB@?$AAS?$AAO?$AAF?$AAT?$AAW?$AAA?$AAR?$AAE?$AA?2?$AAW?$AAo?$AAw?$AA6?$AA4?$AA3@ 10012c18     MSVCRTD:pdblkup.obj
+ 0002:00001ca4       ??_C@_1BG@EABPBLLF@?$AAP?$AAr?$AAo?$AAd?$AAu?$AAc?$AAt?$AAD?$AAi?$AAr@ 10012ca4     MSVCRTD:pdblkup.obj
+ 0002:00001ce4       ??_C@_1BC@JINFINNJ@?$AAM?$AAS?$AAP?$AAD?$AAB?$AA1?$AA4?$AA0@ 10012ce4     MSVCRTD:pdblkup.obj
+ 0002:00001cfc       ??_C@_0BB@KCIACLNC@PDBOpenValidate5@ 10012cfc     MSVCRTD:pdblkup.obj
+ 0002:00001d10       ??_C@_01KDCPPGHE@r@        10012d10     MSVCRTD:pdblkup.obj
+ 0002:00001d18       __load_config_used         10012d18     MSVCRTD:loadcfg.obj
+ 0002:00001fc0       ___CastGuardVftablesStart  10012fc0     MSVCRTD:guard_support.obj
+ 0002:00002140       ___CastGuardVftablesEnd    10013140     MSVCRTD:guard_support.obj
+ 0002:0000228c       ___safe_se_handler_table   1001328c     <linker-defined>
+ 0002:00002538       ___rtc_iaa                 10013538     MSVCRTD:initsect.obj
+ 0002:0000274c       ___rtc_izz                 1001374c     MSVCRTD:initsect.obj
+ 0002:00002850       ___rtc_taa                 10013850     MSVCRTD:initsect.obj
+ 0002:00002a64       ___rtc_tzz                 10013a64     MSVCRTD:initsect.obj
+ 0003:00000000       _ObjectDef                 10014000     ObjectDef.obj
+ 0003:000000a8       ?__LINE__Var@?0??Util_StripChar@@9@9 100140a8     PathObj.obj
+ 0003:000000ac       ?__LINE__Var@?0??Util_StrDupManagePtr@@9@9 100140ac     PathObj.obj
+ 0003:000000b0       ?__LINE__Var@?0??TimeEdit_FillTimeLineProperties@@9@9 100140b0     PathObj.obj
+ 0003:000000b4       ?__LINE__Var@?0??TimeEdit_FillDetails@@9@9 100140b4     PathObj.obj
+ 0003:000000b8       ?__LINE__Var@?0??PathObject_BuildPropertyList@@9@9 100140b8     PathObj.obj
+ 0003:000000bc       ?__LINE__Var@?0??PathObject_FindObjectFromName@@9@9 100140bc     PathObj.obj
+ 0003:000000c0       ?__LINE__Var@?0??PathObject_GetPropertyDataIdFromName@@9@9 100140c0     PathObj.obj
+ 0003:000000c4       ?__LINE__Var@?0??PathObject_BuildPropertyNameList@@9@9 100140c4     PathObj.obj
+ 0003:000000c8       ?__LINE__Var@?0??PathObject_ObjectHasProperties@@9@9 100140c8     PathObj.obj
+ 0003:000000cc       ?__LINE__Var@?0??PathObject_GetPropertyInfoFromDataId@@9@9 100140cc     PathObj.obj
+ 0003:000000d0       ?__LINE__Var@?0??PathObject_ValidateObject@@9@9 100140d0     PathObj.obj
+ 0003:000000d4       ?__LINE__Var@?0??PathObject_BuildObjectNameList@@9@9 100140d4     PathObj.obj
+ 0003:000000d8       ?__LINE__Var@?0??CreateInstance@@9@9 100140d8     PathObj.obj
+ 0003:000000dc       ?__LINE__Var@?0??CreateRef@@9@9 100140dc     PathObj.obj
+ 0003:000000e0       ?__LINE__Var@?0??PathObject_FreeTimeLine@@9@9 100140e0     PathObj.obj
+ 0003:000000e4       ?__LINE__Var@?0??Destroy@@9@9 100140e4     PathObj.obj
+ 0003:000000e8       ?__LINE__Var@?0??Render@@9@9 100140e8     PathObj.obj
+ 0003:000000ec       ?__LINE__Var@?0??AttachWorld@@9@9 100140ec     PathObj.obj
+ 0003:000000f0       ?__LINE__Var@?0??DettachWorld@@9@9 100140f0     PathObj.obj
+ 0003:000000f4       ?__LINE__Var@?0??AttachEngine@@9@9 100140f4     PathObj.obj
+ 0003:000000f8       ?__LINE__Var@?0??DettachEngine@@9@9 100140f8     PathObj.obj
+ 0003:000000fc       ?__LINE__Var@?0??AttachSoundSystem@@9@9 100140fc     PathObj.obj
+ 0003:00000100       ?__LINE__Var@?0??DettachSoundSystem@@9@9 10014100     PathObj.obj
+ 0003:00000104       ?__LINE__Var@?0??ObjUtil_ReadString@@9@9 10014104     PathObj.obj
+ 0003:00000108       ?__LINE__Var@?0??ObjUtil_WriteString@@9@9 10014108     PathObj.obj
+ 0003:0000010c       ?__LINE__Var@?0??CreateFromFile@@9@9 1001410c     PathObj.obj
+ 0003:00000110       ?__LINE__Var@?0??WriteToFile@@9@9 10014110     PathObj.obj
+ 0003:00000114       ?__LINE__Var@?0??PathObject_InitAddTimeLine@@9@9 10014114     PathObj.obj
+ 0003:00000118       ?__LINE__Var@?0??PathObject_EnableTimeLine@@9@9 10014118     PathObj.obj
+ 0003:0000011c       ?__LINE__Var@?0??GetPropertyList@@9@9 1001411c     PathObj.obj
+ 0003:00000120       ?__LINE__Var@?0??PathObject_BuildMotion@@9@9 10014120     PathObj.obj
+ 0003:00000124       ?__LINE__Var@?0??PathObject_SafeGetTimeExtents@@9@9 10014124     PathObj.obj
+ 0003:00000128       ?__LINE__Var@?0??PathObject_SampleMotion@@9@9 10014128     PathObj.obj
+ 0003:0000012c       ?__LINE__Var@?0??PathObject_SampleXFormAtTime@@9@9 1001412c     PathObj.obj
+ 0003:00000130       ?__LINE__Var@?0??PathObject_DeleteTimeLine@@9@9 10014130     PathObj.obj
+ 0003:00000134       ?__LINE__Var@?0??SetProperty@@9@9 10014134     PathObj.obj
+ 0003:00000138       ?__LINE__Var@?0??SetXForm@@9@9 10014138     PathObj.obj
+ 0003:0000013c       ?__LINE__Var@?0??GetXForm@@9@9 1001413c     PathObj.obj
+ 0003:00000140       ?__LINE__Var@?0??PathObject_PutDataIntoChannelObject@@9@9 10014140     PathObj.obj
+ 0003:00000144       ?__LINE__Var@?0??MessageFunction@@9@9 10014144     PathObj.obj
+ 0003:00000148       ?__LINE__Var@?0??UpdateTimeDelta@@9@9 10014148     PathObj.obj
+ 0003:0000014c       ?__LINE__Var@?0??Trigger_ParseEvent@@9@9 1001414c     Trigger.obj
+ 0003:00000150       ?__LINE__Var@?0??Trigger_ProcessEvents@@9@9 10014150     Trigger.obj
+ 0003:00000154       ?_RTC_ErrorLevels@@3PAHA   10014154     MSVCRTD:error.obj
+ 0003:0000016c       ___security_cookie         1001416c     MSVCRTD:gs_cookie.obj
+ 0003:00000170       ___security_cookie_complement 10014170     MSVCRTD:gs_cookie.obj
+ 0003:00000178       __fltused                  10014178     MSVCRTD:fltused.obj
+ 0003:0000017c       ___scrt_native_dllmain_reason 1001417c     MSVCRTD:utility.obj
+ 0003:00000180       ___isa_enabled             10014180     MSVCRTD:cpu_disp.obj
+ 0003:00000184       ___scrt_ucrt_dll_is_in_use 10014184     MSVCRTD:ucrt_stubs.obj
+ 0003:000002b8       ?_OptionsStorage@?1??__local_stdio_printf_options@@9@4_KA 100142b8     MSVCRTD:error.obj
+ 0003:000006a0       ?__type_info_root_node@@3U__type_info_node@@A 100146a0     MSVCRTD:tncleanup.obj
+ 0003:000006b0       ?_OptionsStorage@?1??__local_stdio_scanf_options@@9@4_KA 100146b0     MSVCRTD:default_local_stdio_options.obj
+ 0003:000006bc       ___scrt_current_native_startup_state 100146bc     MSVCRTD:utility.obj
+ 0003:000006c0       ___scrt_native_startup_lock 100146c0     MSVCRTD:utility.obj
+ 0003:000006e8       ___scrt_debugger_hook_flag 100146e8     MSVCRTD:utility_desktop.obj
+ 0003:000006ec       ___isa_available           100146ec     MSVCRTD:cpu_disp.obj
+ 0003:000006f0       ___favor                   100146f0     MSVCRTD:cpu_disp.obj
+ 0003:000006f8       _TriggerData               100146f8     <common>
+ 0003:00000708       ?_OptionsStorage@?1??__local_stdio_scanf_options@@9@9 10014708     <common>
+ 0003:00000720       ?_OptionsStorage@?1??__local_stdio_printf_options@@9@9 10014720     <common>
+ 0003:00000728       ___dyn_tls_init_callback   10014728     <common>
+ 0004:00000000       __imp__jeObject_RegisterGlobalObjectDef@4 10015000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000004       __imp__jeErrorLog_AddExplicit@24 10015004     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000008       __imp__jeVFile_Read@12     10015008     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000000c       __imp__jeVFile_Write@12    1001500c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000010       __imp__jeVFile_Seek@12     10015010     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000014       __imp__jeXForm3d_SetIdentity@4 10015014     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000018       __imp__jeProperty_ListCreate@4 10015018     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000001c       __imp__jeProperty_ListDestroy@4 1001501c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000020       __imp__jeProperty_FillGroup@12 10015020     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000024       __imp__jeProperty_FillButton@12 10015024     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000028       __imp__jeProperty_FillCheck@16 10015028     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000002c       __imp__jeProperty_FillRadio@16 1001502c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000030       __imp__jeProperty_FillVec3dGroup@16 10015030     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000034       __imp__jeProperty_FillTimeGroup@12 10015034     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000038       __imp__jeProperty_FillFloat@28 10015038     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000003c       __imp__jeProperty_FillInt@28 1001503c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000040       __imp__jeProperty_FillGroupEnd@8 10015040     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000044       __imp__jeProperty_FillCombo@24 10015044     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000048       __imp__jeObject_Destroy@4  10015048     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000004c       __imp__jeObject_GetName@4  1001504c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000050       __imp__jeObject_WriteToFile@12 10015050     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000054       __imp__jeObject_CreateFromFile@8 10015054     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000058       __imp__jeObject_GetTypeName@4 10015058     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000005c       __imp__jeObject_GetPropertyList@8 1001505c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000060       __imp__jeObject_SetProperty@16 10015060     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000064       __imp__jeObject_CreateRef@4 10015064     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000068       __imp__jeObject_SetXForm@8 10015068     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000006c       __imp__jeObject_GetXForm@8 1001506c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000070       __imp__jeObject_GetXFormModFlags@4 10015070     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000074       __imp__jeObject_SendMessage@12 10015074     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000078       __imp__jeWorld_GetNextObject@8 10015078     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000007c       __imp___jeRam_DebugAllocate@12 1001507c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000080       __imp__jeRam_Free_@4       10015080     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000084       __imp___jeRam_DebugRealloc@16 10015084     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000088       __imp__jePath_Create@12    10015088     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000008c       __imp__jePath_Destroy@4    1001508c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000090       __imp__jePath_SetCutMode@8 10015090     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000094       __imp__jePath_InsertKeyframe@16 10015094     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000098       __imp__jePath_GetKeyframe@20 10015098     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000009c       __imp__jePath_GetKeyframeCount@8 1001509c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000a0       __imp__jePath_Sample@12    100150a0     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000a4       __imp__jeMotion_Create@4   100150a4     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000a8       __imp__jeMotion_Destroy@4  100150a8     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000ac       __imp__jeMotion_AddPath@16 100150ac     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000b0       __imp__jeMotion_GetPath@8  100150b0     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000b4       __imp__jeMotion_InsertEvent@12 100150b4     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000b8       __imp__jeMotion_SetupEventIterator@12 100150b8     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000bc       __imp__jeMotion_GetNextEvent@12 100150bc     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000c0       \177Jet3DClassic11d_NULL_THUNK_DATA 100150c0     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000110       __imp__OutputDebugStringA@4 10015110     kernel32:KERNEL32.dll
+ 0004:00000114       __imp__GetStartupInfoW@4   10015114     kernel32:KERNEL32.dll
+ 0004:00000118       __imp__InitializeSListHead@4 10015118     kernel32:KERNEL32.dll
+ 0004:0000011c       __imp__GetSystemTimeAsFileTime@4 1001511c     kernel32:KERNEL32.dll
+ 0004:00000120       __imp__GetCurrentThreadId@0 10015120     kernel32:KERNEL32.dll
+ 0004:00000124       __imp__GetCurrentProcessId@0 10015124     kernel32:KERNEL32.dll
+ 0004:00000128       __imp__QueryPerformanceCounter@4 10015128     kernel32:KERNEL32.dll
+ 0004:0000012c       __imp__GetProcAddress@8    1001512c     kernel32:KERNEL32.dll
+ 0004:00000130       __imp__FreeLibrary@4       10015130     kernel32:KERNEL32.dll
+ 0004:00000134       __imp__VirtualQuery@12     10015134     kernel32:KERNEL32.dll
+ 0004:00000138       __imp__GetModuleHandleW@4  10015138     kernel32:KERNEL32.dll
+ 0004:0000013c       __imp__GetProcessHeap@0    1001513c     kernel32:KERNEL32.dll
+ 0004:00000140       __imp__HeapFree@12         10015140     kernel32:KERNEL32.dll
+ 0004:00000144       __imp__HeapAlloc@12        10015144     kernel32:KERNEL32.dll
+ 0004:00000148       __imp__GetLastError@0      10015148     kernel32:KERNEL32.dll
+ 0004:0000014c       __imp__IsProcessorFeaturePresent@4 1001514c     kernel32:KERNEL32.dll
+ 0004:00000150       __imp__TerminateProcess@8  10015150     kernel32:KERNEL32.dll
+ 0004:00000154       __imp__GetCurrentProcess@0 10015154     kernel32:KERNEL32.dll
+ 0004:00000158       __imp__SetUnhandledExceptionFilter@4 10015158     kernel32:KERNEL32.dll
+ 0004:0000015c       __imp__UnhandledExceptionFilter@4 1001515c     kernel32:KERNEL32.dll
+ 0004:00000160       __imp__WideCharToMultiByte@32 10015160     kernel32:KERNEL32.dll
+ 0004:00000164       __imp__MultiByteToWideChar@24 10015164     kernel32:KERNEL32.dll
+ 0004:00000168       __imp__RaiseException@16   10015168     kernel32:KERNEL32.dll
+ 0004:0000016c       __imp__IsDebuggerPresent@0 1001516c     kernel32:KERNEL32.dll
+ 0004:00000170       \177KERNEL32_NULL_THUNK_DATA 10015170     kernel32:KERNEL32.dll
+ 0004:000001ac       __imp__memcpy              100151ac     vcruntimed:VCRUNTIME140D.dll
+ 0004:000001b0       __imp__memmove             100151b0     vcruntimed:VCRUNTIME140D.dll
+ 0004:000001b4       __imp__memset              100151b4     vcruntimed:VCRUNTIME140D.dll
+ 0004:000001b8       __imp__strstr              100151b8     vcruntimed:VCRUNTIME140D.dll
+ 0004:000001bc       __imp____vcrt_GetModuleFileNameW 100151bc     vcruntimed:VCRUNTIME140D.dll
+ 0004:000001c0       __imp____vcrt_GetModuleHandleW 100151c0     vcruntimed:VCRUNTIME140D.dll
+ 0004:000001c4       __imp____vcrt_LoadLibraryExW 100151c4     vcruntimed:VCRUNTIME140D.dll
+ 0004:000001c8       __imp____current_exception_context 100151c8     vcruntimed:VCRUNTIME140D.dll
+ 0004:000001cc       __imp____std_type_info_destroy_list 100151cc     vcruntimed:VCRUNTIME140D.dll
+ 0004:000001d0       __imp___except_handler4_common 100151d0     vcruntimed:VCRUNTIME140D.dll
+ 0004:000001d4       __imp____current_exception 100151d4     vcruntimed:VCRUNTIME140D.dll
+ 0004:000001d8       __imp__memcmp              100151d8     vcruntimed:VCRUNTIME140D.dll
+ 0004:000001dc       \177VCRUNTIME140D_NULL_THUNK_DATA 100151dc     vcruntimed:VCRUNTIME140D.dll
+ 0004:00000210       __imp___initialize_onexit_table 10015210     ucrtd:ucrtbased.dll
+ 0004:00000214       __imp___register_onexit_function 10015214     ucrtd:ucrtbased.dll
+ 0004:00000218       __imp___execute_onexit_table 10015218     ucrtd:ucrtbased.dll
+ 0004:0000021c       __imp___crt_atexit         1001521c     ucrtd:ucrtbased.dll
+ 0004:00000220       __imp___crt_at_quick_exit  10015220     ucrtd:ucrtbased.dll
+ 0004:00000224       __imp___cexit              10015224     ucrtd:ucrtbased.dll
+ 0004:00000228       __imp___stricmp            10015228     ucrtd:ucrtbased.dll
+ 0004:00000228       __imp__stricmp             10015228     ucrtd:ucrtbased.dll
+ 0004:0000022c       __imp___seh_filter_dll     1001522c     ucrtd:ucrtbased.dll
+ 0004:00000230       __imp___initialize_narrow_environment 10015230     ucrtd:ucrtbased.dll
+ 0004:00000234       __imp____stdio_common_vsprintf 10015234     ucrtd:ucrtbased.dll
+ 0004:00000238       __imp____stdio_common_vfprintf 10015238     ucrtd:ucrtbased.dll
+ 0004:0000023c       __imp____acrt_iob_func     1001523c     ucrtd:ucrtbased.dll
+ 0004:00000240       __imp__fmod                10015240     ucrtd:ucrtbased.dll
+ 0004:00000244       __imp___wassert            10015244     ucrtd:ucrtbased.dll
+ 0004:00000248       __imp__strlen              10015248     ucrtd:ucrtbased.dll
+ 0004:0000024c       __imp__strcpy              1001524c     ucrtd:ucrtbased.dll
+ 0004:00000250       __imp__strcmp              10015250     ucrtd:ucrtbased.dll
+ 0004:00000254       __imp____stdio_common_vsscanf 10015254     ucrtd:ucrtbased.dll
+ 0004:00000258       __imp__terminate           10015258     ucrtd:ucrtbased.dll
+ 0004:0000025c       __imp__wcscpy_s            1001525c     ucrtd:ucrtbased.dll
+ 0004:00000260       __imp___wsplitpath_s       10015260     ucrtd:ucrtbased.dll
+ 0004:00000264       __imp___wmakepath_s        10015264     ucrtd:ucrtbased.dll
+ 0004:00000268       __imp___initterm_e         10015268     ucrtd:ucrtbased.dll
+ 0004:0000026c       __imp___initterm           1001526c     ucrtd:ucrtbased.dll
+ 0004:00000270       __imp____stdio_common_vsprintf_s 10015270     ucrtd:ucrtbased.dll
+ 0004:00000274       __imp__strcat_s            10015274     ucrtd:ucrtbased.dll
+ 0004:00000278       __imp__strcpy_s            10015278     ucrtd:ucrtbased.dll
+ 0004:0000027c       __imp___CrtDbgReportW      1001527c     ucrtd:ucrtbased.dll
+ 0004:00000280       __imp___configure_narrow_argv 10015280     ucrtd:ucrtbased.dll
+ 0004:00000284       __imp___CrtDbgReport       10015284     ucrtd:ucrtbased.dll
+ 0004:00000288       \177ucrtbased_NULL_THUNK_DATA 10015288     ucrtd:ucrtbased.dll
+ 0004:000002cc       __IMPORT_DESCRIPTOR_Jet3DClassic11d 100152cc     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000002e0       __IMPORT_DESCRIPTOR_KERNEL32 100152e0     kernel32:KERNEL32.dll
+ 0004:000002f4       __IMPORT_DESCRIPTOR_VCRUNTIME140D 100152f4     vcruntimed:VCRUNTIME140D.dll
+ 0004:00000308       __IMPORT_DESCRIPTOR_ucrtbased 10015308     ucrtd:ucrtbased.dll
+ 0004:0000031c       __NULL_IMPORT_DESCRIPTOR   1001531c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0005:00000000       ___guard_check_icall_fptr  10017000     MSVCRTD:guard_support.obj
+ 0005:00000004       ___guard_xfg_check_icall_fptr 10017004     MSVCRTD:guard_support.obj
+ 0005:00000008       ___castguard_check_failure_os_handled_fptr 10017008     MSVCRTD:guard_support.obj
+
+ entry point at        0001:000002bc
+
+ Static symbols
+
+ 0000:fffe6000       .debug$S                   10000000     PathObj.exp
+ 0000:00000000       _volmd                     10000000     PathObj.obj
+ 0000:00000000       _volmd                     10000000     PathObj.obj
+ 0000:00000000       _volmd                     10000000     PathObj.obj
+ 0000:00000000       _volmd                     10000000     PathObj.obj
+ 0000:00000000       _volmd                     10000000     PathObj.obj
+ 0000:00000000       _volmd                     10000000     PathObj.obj
+ 0000:00000000       _volmd                     10000000     PathObj.obj
+ 0000:00000000       _volmd                     10000000     PathObj.obj
+ 0000:00000000       _volmd                     10000000     PathObj.obj
+ 0000:00000000       _volmd                     10000000     PathObj.obj
+ 0000:00000000       _volmd                     10000000     PathObj.obj
+ 0000:00000000       _volmd                     10000000     Trigger.obj
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe9000       __guard_fids___except_handler4 10000000     MSVCRTD:chandler4gs.obj
+ 0000:00000000       _volmd                     10000000     MSVCRTD:cpu_disp.obj
+ 0000:fffe9000       __guard_fids_?dllmain_dispatch@@YAHQAUHINSTANCE__@@KQAX@Z 10000000     MSVCRTD:dll_dllmain.obj
+ 0000:00000000       _volmd                     10000000     MSVCRTD:gs_report.obj
+ 0000:fffe9000       __guard_fids__             10000000     MSVCRTD:guard_support.obj
+ 0000:fffe9000       __guard_fids__             10000000     MSVCRTD:guard_support.obj
+ 0000:fffe9000       __guard_fids___guard_icall_checks_enforced 10000000     MSVCRTD:guard_support.obj
+ 0000:00000000       _volmd                     10000000     MSVCRTD:guard_support.obj
+ 0000:00000000       _volmd                     10000000     MSVCRTD:guard_support.obj
+ 0000:fffe9000       __guard_fids___CRT_RTC_INIT 10000000     MSVCRTD:init.obj
+ 0000:fffe9000       __guard_fids___CRT_RTC_INITW 10000000     MSVCRTD:init.obj
+ 0000:fffe9000       __guard_fids____scrt_set_unhandled_exception_filter 10000000     MSVCRTD:utility_desktop.obj
+ 0000:fffe6000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffe6000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffe6000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffe6000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffe6000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffe6000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffe6000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffe6000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffe6000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffe6000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffe6000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffe6000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0001:00000ec0       $LN43                      10001ec0     PathObj.obj
+ 0001:00000ec8       $LN42                      10001ec8     PathObj.obj
+ 0001:00000f04       $LN41                      10001f04     PathObj.obj
+ 0001:00000f09       $LN40                      10001f09     PathObj.obj
+ 0001:00000f0d       $LN39                      10001f0d     PathObj.obj
+ 0001:00000f15       $LN38                      10001f15     PathObj.obj
+ 0001:00000f19       $LN37                      10001f19     PathObj.obj
+ 0001:00000f20       $LN36                      10001f20     PathObj.obj
+ 0001:000016e8       $LN9                       100026e8     PathObj.obj
+ 0001:000016f0       $LN8                       100026f0     PathObj.obj
+ 0001:00001708       $LN7                       10002708     PathObj.obj
+ 0001:00001712       $LN6                       10002712     PathObj.obj
+ 0001:00001d24       $LN49                      10002d24     PathObj.obj
+ 0001:00001d2c       $LN48                      10002d2c     PathObj.obj
+ 0001:00001d38       $LN47                      10002d38     PathObj.obj
+ 0001:00001d44       $LN45                      10002d44     PathObj.obj
+ 0001:00001d64       $LN44                      10002d64     PathObj.obj
+ 0001:00001d74       $LN46                      10002d74     PathObj.obj
+ 0001:00002000       $LN9                       10003000     PathObj.obj
+ 0001:00002008       $LN8                       10003008     PathObj.obj
+ 0001:00002014       $LN7                       10003014     PathObj.obj
+ 0001:00002190       $LN8                       10003190     PathObj.obj
+ 0001:00002198       $LN7                       10003198     PathObj.obj
+ 0001:000021a4       $LN6                       100031a4     PathObj.obj
+ 0001:00002200       _PathObject_BuildAllMotions 10003200 f   PathObj.obj
+ 0001:00002670       $LN26                      10003670     PathObj.obj
+ 0001:00002678       $LN25                      10003678     PathObj.obj
+ 0001:000026b4       $LN24                      100036b4     PathObj.obj
+ 0001:000026c0       $LN23                      100036c0     PathObj.obj
+ 0001:000026c5       $LN22                      100036c5     PathObj.obj
+ 0001:000026d1       $LN21                      100036d1     PathObj.obj
+ 0001:000026d7       $LN20                      100036d7     PathObj.obj
+ 0001:00002800       _PathObject_BuildObjectNameList 10003800 f   PathObj.obj
+ 0001:00002a6c       $LN26                      10003a6c     PathObj.obj
+ 0001:00002a74       $LN25                      10003a74     PathObj.obj
+ 0001:00002a80       $LN24                      10003a80     PathObj.obj
+ 0001:00002b40       _PathObject_BuildPropertyList 10003b40 f   PathObj.obj
+ 0001:00004038       $LN62                      10005038     PathObj.obj
+ 0001:00004040       $LN61                      10005040     PathObj.obj
+ 0001:00004100       $LN60                      10005100     PathObj.obj
+ 0001:00004110       $LN59                      10005110     PathObj.obj
+ 0001:00004122       $LN58                      10005122     PathObj.obj
+ 0001:0000412c       $LN57                      1000512c     PathObj.obj
+ 0001:00004130       $LN56                      10005130     PathObj.obj
+ 0001:00004136       $LN55                      10005136     PathObj.obj
+ 0001:00004139       $LN54                      10005139     PathObj.obj
+ 0001:0000413d       $LN53                      1000513d     PathObj.obj
+ 0001:00004141       $LN52                      10005141     PathObj.obj
+ 0001:00004147       $LN51                      10005147     PathObj.obj
+ 0001:0000414a       $LN50                      1000514a     PathObj.obj
+ 0001:0000414d       $LN49                      1000514d     PathObj.obj
+ 0001:00004150       $LN48                      10005150     PathObj.obj
+ 0001:00004155       $LN47                      10005155     PathObj.obj
+ 0001:00004159       $LN46                      10005159     PathObj.obj
+ 0001:0000416b       $LN45                      1000516b     PathObj.obj
+ 0001:00004178       $LN44                      10005178     PathObj.obj
+ 0001:00004730       _PathObject_BuildPropertyNameList 10005730 f   PathObj.obj
+ 0001:00004a24       $LN27                      10005a24     PathObj.obj
+ 0001:00004a2c       $LN26                      10005a2c     PathObj.obj
+ 0001:00004a44       $LN25                      10005a44     PathObj.obj
+ 0001:00004a48       $LN24                      10005a48     PathObj.obj
+ 0001:00004a50       $LN23                      10005a50     PathObj.obj
+ 0001:00004b40       _PathObject_DeleteTimeLine 10005b40 f   PathObj.obj
+ 0001:00004de0       _PathObject_FindObjectFromName 10005de0 f   PathObj.obj
+ 0001:00005220       _PathObject_GetPropertyDataIdFromName 10006220 f   PathObj.obj
+ 0001:000054bc       $LN26                      100064bc     PathObj.obj
+ 0001:000054c4       $LN25                      100064c4     PathObj.obj
+ 0001:000054dc       $LN24                      100064dc     PathObj.obj
+ 0001:000054e0       $LN23                      100064e0     PathObj.obj
+ 0001:000054e8       $LN22                      100064e8     PathObj.obj
+ 0001:000055d0       _PathObject_GetPropertyInfoFromDataId 100065d0 f   PathObj.obj
+ 0001:00005734       $LN14                      10006734     PathObj.obj
+ 0001:0000573c       $LN13                      1000673c     PathObj.obj
+ 0001:00005748       $LN12                      10006748     PathObj.obj
+ 0001:00005e20       _PathObject_ObjectHasProperties 10006e20 f   PathObj.obj
+ 0001:00005f64       $LN19                      10006f64     PathObj.obj
+ 0001:00005f6c       $LN18                      10006f6c     PathObj.obj
+ 0001:00005f78       $LN17                      10006f78     PathObj.obj
+ 0001:00005f80       $LN16                      10006f80     PathObj.obj
+ 0001:00006000       _PathObject_ProcessEvents  10007000 f   PathObj.obj
+ 0001:00006190       $LN15                      10007190     PathObj.obj
+ 0001:00006198       $LN14                      10007198     PathObj.obj
+ 0001:000061d4       $LN13                      100071d4     PathObj.obj
+ 0001:000061dc       $LN12                      100071dc     PathObj.obj
+ 0001:000061df       $LN11                      100071df     PathObj.obj
+ 0001:000061e9       $LN10                      100071e9     PathObj.obj
+ 0001:000061f5       $LN9                       100071f5     PathObj.obj
+ 0001:00006280       _PathObject_PutDataIntoChannelObject 10007280 f   PathObj.obj
+ 0001:000064a0       $LN20                      100074a0     PathObj.obj
+ 0001:000064a8       $LN19                      100074a8     PathObj.obj
+ 0001:000064b4       $LN18                      100074b4     PathObj.obj
+ 0001:000064bc       $LN17                      100074bc     PathObj.obj
+ 0001:00006570       _PathObject_SafeGetTimeExtents 10007570 f   PathObj.obj
+ 0001:0000680c       $LN23                      1000780c     PathObj.obj
+ 0001:00006814       $LN22                      10007814     PathObj.obj
+ 0001:0000685c       $LN21                      1000785c     PathObj.obj
+ 0001:00006866       $LN20                      10007866     PathObj.obj
+ 0001:00006871       $LN19                      10007871     PathObj.obj
+ 0001:0000687d       $LN18                      1000787d     PathObj.obj
+ 0001:00006889       $LN17                      10007889     PathObj.obj
+ 0001:00006896       $LN16                      10007896     PathObj.obj
+ 0001:00006970       _PathObject_SampleMotion   10007970 f   PathObj.obj
+ 0001:00006d50       $LN22                      10007d50     PathObj.obj
+ 0001:00006d58       $LN21                      10007d58     PathObj.obj
+ 0001:00006d7c       $LN20                      10007d7c     PathObj.obj
+ 0001:00006d80       $LN19                      10007d80     PathObj.obj
+ 0001:00006d86       $LN18                      10007d86     PathObj.obj
+ 0001:00006ea0       _PathObject_SampleXFormAtTime 10007ea0 f   PathObj.obj
+ 0001:00007034       $LN14                      10008034     PathObj.obj
+ 0001:0000703c       $LN13                      1000803c     PathObj.obj
+ 0001:00007054       $LN12                      10008054     PathObj.obj
+ 0001:00007058       $LN11                      10008058     PathObj.obj
+ 0001:000070d0       _PathObject_ValidateObject 100080d0 f   PathObj.obj
+ 0001:000085e4       $LN122                     100095e4     PathObj.obj
+ 0001:000085ec       $LN121                     100095ec     PathObj.obj
+ 0001:00008634       $LN120                     10009634     PathObj.obj
+ 0001:00008637       $LN119                     10009637     PathObj.obj
+ 0001:0000863a       $LN118                     1000963a     PathObj.obj
+ 0001:0000863d       $LN117                     1000963d     PathObj.obj
+ 0001:00008640       $LN116                     10009640     PathObj.obj
+ 0001:00008644       $LN115                     10009644     PathObj.obj
+ 0001:00008648       $LN111                     10009648     PathObj.obj
+ 0001:00008688       $LN113                     10009688     PathObj.obj
+ 0001:000086a4       $LN112                     100096a4     PathObj.obj
+ 0001:000086b4       $LN114                     100096b4     PathObj.obj
+ 0001:000095f8       $LN8                       1000a5f8     PathObj.obj
+ 0001:00009600       $LN7                       1000a600     PathObj.obj
+ 0001:0000960c       $LN6                       1000a60c     PathObj.obj
+ 0001:00009f40       $LN34                      1000af40     PathObj.obj
+ 0001:00009f48       $LN33                      1000af48     PathObj.obj
+ 0001:00009f6c       $LN32                      1000af6c     PathObj.obj
+ 0001:00009f75       $LN31                      1000af75     PathObj.obj
+ 0001:00009f79       $LN30                      1000af79     PathObj.obj
+ 0001:0000a6d4       $LN28                      1000b6d4     Trigger.obj
+ 0001:0000a6dc       $LN27                      1000b6dc     Trigger.obj
+ 0001:0000a6e8       $LN26                      1000b6e8     Trigger.obj
+ 0001:0000a8c8       $LN11                      1000b8c8     Trigger.obj
+ 0001:0000a8d0       $LN10                      1000b8d0     Trigger.obj
+ 0001:0000a8e8       $LN9                       1000b8e8     Trigger.obj
+ 0001:0000a8f4       $LN8                       1000b8f4     Trigger.obj
+ 0001:0000ad30       ?DebuggerProbe@@YA_NK@Z    1000bd30 f   MSVCRTD:error.obj
+ 0001:0000ad80       ?DebuggerRuntime@@YA_NKHPAXPB_W@Z 1000bd80 f   MSVCRTD:error.obj
+ 0001:0000b050       ?_getMemBlockDataString@@YAXPAD0PBDI@Z 1000c050 f   MSVCRTD:error.obj
+ 0001:0000b0e0       ?_strlen_priv@@YAIPBD@Z    1000c0e0 f   MSVCRTD:error.obj
+ 0001:0000b100       ?failwithmessage@@YAXPAXHHPBD@Z 1000c100 f   MSVCRTD:error.obj
+ 0001:0000b380       ?notify_debugger@@YAXABUtagEXCEPTION_VISUALCPP_DEBUG_INFO@@@Z 1000c380 f   MSVCRTD:error.obj
+ 0001:0000b570       ?dllmain_crt_dispatch@@YGHQAUHINSTANCE__@@KQAX@Z 1000c570 f   MSVCRTD:dll_dllmain.obj
+ 0001:0000b5dc       $LN11                      1000c5dc     MSVCRTD:dll_dllmain.obj
+ 0001:0000b610       ?dllmain_crt_process_attach@@YAHQAUHINSTANCE__@@QAX@Z 1000c610 f   MSVCRTD:dll_dllmain.obj
+ 0001:0000b7e0       ?dllmain_crt_process_detach@@YAH_N@Z 1000c7e0 f   MSVCRTD:dll_dllmain.obj
+ 0001:0000b920       ?dllmain_dispatch@@YAHQAUHINSTANCE__@@KQAX@Z 1000c920 f   MSVCRTD:dll_dllmain.obj
+ 0001:0000bb10       ?dllmain_raw@@YGHQAUHINSTANCE__@@KQAX@Z 1000cb10 f   MSVCRTD:dll_dllmain.obj
+ 0001:0000c0c0       ?GetPdbDll@@YAPAUHINSTANCE__@@XZ 1000d0c0 f   MSVCRTD:pdblkup.obj
+ 0001:0000c260       ?GetPdbDllFromInstallPath@@YAPAUHINSTANCE__@@XZ 1000d260 f   MSVCRTD:pdblkup.obj
+ 0001:0000c550       ?GetPdbDllPathFromFilePath@@YAHPB_WPA_WI@Z 1000d550 f   MSVCRTD:pdblkup.obj
+ 0001:0000cc20       ___castguard_check_failure_os_handled_wrapper 1000dc20 f   MSVCRTD:guard_support.obj
+ 0001:0000cc50       ___castguard_compat_check  1000dc50 f   MSVCRTD:guard_support.obj
+ 0001:0000cd90       ___castguard_slow_path_compat_check 1000dd90 f   MSVCRTD:guard_support.obj
+ 0001:0000ce20       ___get_entropy             1000de20 f   MSVCRTD:gs_support.obj
+ 0001:0000d000       ?find_pe_section@@YAPAU_IMAGE_SECTION_HEADER@@QAEI@Z 1000e000 f   MSVCRTD:utility.obj
+ 0001:0000d0c0       ?is_potentially_valid_image_base@@YA_NQAX@Z 1000e0c0 f   MSVCRTD:utility.obj
+ 0002:00001358       ?_RTC_ErrorMessages@@3QBQBDB 10012358     MSVCRTD:error.obj
+ 0002:00001370       ?_RTC_NoFalsePositives@@3QBHB 10012370     MSVCRTD:error.obj
+ 0002:00001388       ?stack_premsg@@3QBDB       10012388     MSVCRTD:error.obj
+ 0002:000013a4       ?stack_postmsg@@3QBDB      100123a4     MSVCRTD:error.obj
+ 0002:000013b8       ?uninit_premsg@@3QBDB      100123b8     MSVCRTD:error.obj
+ 0002:000013c8       ?uninit_postmsg@@3QBDB     100123c8     MSVCRTD:error.obj
+ 0002:00001a1c       ?_RTC_errlist@@3QBQBDB     10012a1c     MSVCRTD:userapi.obj
+ 0002:00001b00       _GS_ExceptionPointers      10012b00     MSVCRTD:gs_report.obj
+ 0002:00001b0c       ?mspdbName@@3QB_WB         10012b0c     MSVCRTD:pdblkup.obj
+ 0002:00001b30       ?debugCrtFileName@@3QB_WB  10012b30     MSVCRTD:pdblkup.obj
+ 0002:00001cc0       ?dllExt@?1??GetPdbDllPathFromFilePath@@YAHPB_WPA_WI@Z@4QB_WB 10012cc0     MSVCRTD:pdblkup.obj
+ 0002:00001ccc       ?mspdbFilename@?1??GetPdbDllPathFromFilePath@@YAHPB_WPA_WI@Z@4QB_WB 10012ccc     MSVCRTD:pdblkup.obj
+ 0002:0000263c       __RTC_InitBase.rtc$IMZ     1001363c     ObjectDef.obj
+ 0002:00002640       __RTC_InitBase.rtc$IMZ     10013640     PathObj.obj
+ 0002:00002644       __RTC_InitBase.rtc$IMZ     10013644     Trigger.obj
+ 0002:00002954       __RTC_Shutdown.rtc$TMZ     10013954     ObjectDef.obj
+ 0002:00002958       __RTC_Shutdown.rtc$TMZ     10013958     PathObj.obj
+ 0002:0000295c       __RTC_Shutdown.rtc$TMZ     1001395c     Trigger.obj
+ 0002:00002b68       __sehtable$?notify_debugger@@YAXABUtagEXCEPTION_VISUALCPP_DEBUG_INFO@@@Z 10013b68     MSVCRTD:error.obj
+ 0002:00002b88       __sehtable$?dllmain_crt_process_attach@@YAHQAUHINSTANCE__@@QAX@Z 10013b88     MSVCRTD:dll_dllmain.obj
+ 0002:00002ba8       __sehtable$?dllmain_crt_process_detach@@YAH_N@Z 10013ba8     MSVCRTD:dll_dllmain.obj
+ 0002:00002bd8       __sehtable$?dllmain_dispatch@@YAHQAUHINSTANCE__@@KQAX@Z 10013bd8     MSVCRTD:dll_dllmain.obj
+ 0002:00002bf8       __sehtable$___scrt_is_nonwritable_in_current_image 10013bf8     MSVCRTD:utility.obj
+ 0002:00002d30       .edata                     10013d30     PathObj.exp
+ 0002:00002d58       rgpv                       10013d58     PathObj.exp
+ 0002:00002d5c       rgszName                   10013d5c     PathObj.exp
+ 0002:00002d60       rgwOrd                     10013d60     PathObj.exp
+ 0002:00002d62       szName                     10013d62     PathObj.exp
+ 0002:00002d6e       $N00001                    10013d6e     PathObj.exp
+ 0003:000000a4       _NoSelection               100140a4     PathObj.obj
+ 0003:000002b0       _hInstance                 100142b0     PathObj.obj
+ 0003:000002b4       ?init@?1??_RTC_InitBase@@9@4_NA 100142b4     MSVCRTD:init.obj
+ 0003:000002c4       ?__proc_attached@@3HA      100142c4     MSVCRTD:dll_dllmain.obj
+ 0003:000002c8       ?_RTC_ErrorReportFunc@@3P6AHHPBDH00ZZA 100142c8     MSVCRTD:userapi.obj
+ 0003:000002cc       ?_RTC_ErrorReportFuncW@@3P6AHHPB_WH00ZZA 100142cc     MSVCRTD:userapi.obj
+ 0003:000002d8       _GS_ExceptionRecord        100142d8     MSVCRTD:gs_report.obj
+ 0003:00000328       _GS_ContextRecord          10014328     MSVCRTD:gs_report.obj
+ 0003:00000694       ?mspdb@@3PAUHINSTANCE__@@A 10014694     MSVCRTD:pdblkup.obj
+ 0003:00000698       ?alreadyTried@?1??GetPdbDll@@YAPAUHINSTANCE__@@XZ@4_NA 10014698     MSVCRTD:pdblkup.obj
+ 0003:00000699       ?PDBOK@?1??_RTC_GetSrcLine@@YAHPAEPA_WKPAH1K@Z@4_NA 10014699     MSVCRTD:pdblkup.obj
+ 0003:000006c4       ?is_initialized_as_dll@@3_NA 100146c4     MSVCRTD:utility.obj
+ 0003:000006c5       ?module_local_atexit_table_initialized@@3_NA 100146c5     MSVCRTD:utility.obj
+ 0003:000006c8       ?module_local_atexit_table@@3U_onexit_table_t@@A 100146c8     MSVCRTD:utility.obj
+ 0003:000006d4       ?module_local_at_quick_exit_table@@3U_onexit_table_t@@A 100146d4     MSVCRTD:utility.obj
+ 0004:00000aee       .idata$6                   10015aee     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000b18       .idata$6                   10015b18     kernel32:KERNEL32.dll
+ 0004:00000c14       .idata$6                   10015c14     vcruntimed:VCRUNTIME140D.dll
+ 0004:00000e38       .idata$6                   10015e38     ucrtd:ucrtbased.dll
+ 0006:00000220       $R000000                   10018220     PathObj.res
+ 0006:00000358       $R000138                   10018358     PathObj.res
+ 0006:00000370       $R000150                   10018370     PathObj.res

@@ -1,0 +1,213 @@
+
+ Volume in drive C is unlabeled      Serial number is 07CF:041D
+ Directory of  C:\Jet3d\MaxExport\Max2SDK\*.*
+
+11/24/99  16:26         <DIR>    . 
+11/24/99  16:26         <DIR>    ..
+11/24/99  16:26         <DIR>    INCLUDE
+11/24/99  16:26         <DIR>    LIB
+             0 bytes in 0 files and 4 dirs
+
+ Directory of  C:\Jet3d\MaxExport\Max2SDK\INCLUDE\*.*
+
+11/24/99  16:26         <DIR>    . 
+11/24/99  16:26         <DIR>    ..
+12/09/97  14:06           5,482  ACOLOR.H
+12/09/97  14:06             557  ALERTS.H
+ 1/19/98  13:58          36,964  ANIMTBL.H
+12/09/97  14:06           4,435  APPIO.H
+12/09/97  14:06             962  ARCDLG.H
+12/09/97  14:06             467  ASSERT1.H
+12/09/97  14:06           5,579  BEZFONT.H
+12/09/97  14:06           2,240  BITARRAY.H
+12/09/97  14:06          81,867  BITMAP.H
+12/09/97  14:06             113  BMMLIB.H
+12/09/97  14:06           1,994  BOX2.H
+12/09/97  14:06           2,142  BOX3.H
+ 4/14/98  17:32           1,050  BUILDVER.H
+12/09/97  14:06           7,722  CAPTYPES.H
+12/09/97  14:06           1,651  CHANNELS.H
+12/09/97  14:06           4,793  CLIENT.H
+12/09/97  14:06           3,813  CMDMODE.H
+12/09/97  14:06           5,949  COLOR.H
+12/09/97  14:06          30,767  CONTROL.H
+12/09/97  14:06             477  COREEXP.H
+12/09/97  14:06             522  COREGEN.H
+12/09/97  14:06          22,675  CUSTCONT.H
+12/09/97  14:06             457  DBGPRINT.H
+12/09/97  14:06             757  DECOMP.H
+12/09/97  14:06           3,513  DPOINT3.H
+12/09/97  14:06           2,731  DUMMY.H
+12/09/97  14:06           1,085  EULER.H
+12/09/97  14:06             933  EVROUTER.H
+12/09/97  14:06           1,271  EVUSER.H
+12/09/97  14:06             167  EXPORT.H
+12/09/97  14:06           3,704  EXPR.H
+12/09/97  14:06             127  EXPRLIB.H
+12/09/97  14:06           2,749  FBWIN.H
+12/09/97  14:06          26,767  FILTERS.H
+12/09/97  14:06             790  FLTAPI.H
+12/09/97  14:06             162  FLTLIB.H
+12/09/97  14:06           8,003  FRONTEND.H
+12/09/97  14:06           3,808  GAMMA.H
+12/09/97  14:06           7,742  GCOMM.H
+12/09/97  14:06             114  GCOMMLIB.H
+12/09/97  14:06           1,665  GENCAM.H
+12/09/97  14:06           2,222  GENHIER.H
+12/09/97  14:06           4,684  GENLIGHT.H
+12/09/97  14:06             463  GENSHAPE.H
+12/09/97  14:06             461  GEOM.H
+12/09/97  14:06             127  GEOMLIB.H
+12/09/97  14:06           1,510  GFLOAT.H
+ 2/26/98   0:05          16,540  GFX.H
+12/09/97  14:06             123  GFXLIB.H
+12/09/97  14:06           2,560  GIZMO.H
+12/09/97  14:06           3,933  GIZMOIMP.H
+12/09/97  14:06           3,822  GPORT.H
+12/09/97  14:06           2,090  GUTIL.H
+12/09/97  14:06             467  HITDATA.H
+12/09/97  14:06           2,401  HOLD.H
+12/09/97  14:06             679  HOTCHECK.H
+12/09/97  14:06           2,205  HSV.H
+ 1/20/98   8:40           1,039  ICMDLINE.H
+12/09/97  14:06           1,330  IKCTRL.H
+12/09/97  14:06           5,200  IMPAPI.H
+12/09/97  14:06           2,910  IMPEXP.H
+12/09/97  14:06          40,103  IMTL.H
+ 4/03/98  14:03          20,978  INODE.H
+12/09/97  14:06           6,971  INTERPIK.H
+12/09/97  14:06           2,016  INTERVAL.H
+12/09/97  14:06           4,393  IOAPI.H
+12/09/97  14:06           8,279  IPARAMB.H
+12/09/97  14:06           5,111  IPARAMM.H
+12/09/97  14:06           3,174  IPOINT2.H
+12/09/97  14:06           2,670  IPOINT3.H
+12/09/97  14:06          23,785  ISTDPLUG.H
+12/09/97  14:06           1,482  KEYREDUC.H
+12/09/97  14:06           1,805  LINKLIST.H
+12/09/97  14:06           5,188  LINSHAPE.H
+12/09/97  14:06             113  LOCKID.H
+12/09/97  14:06           3,139  LOG.H
+12/09/97  14:06           3,070  MATRIX2.H
+12/09/97  14:06           5,982  MATRIX3.H
+12/09/97  14:06           1,505  MAX.H
+ 3/30/98   8:26          49,364  MAXAPI.H
+ 3/09/98  11:36           7,381  MAXCOM.H
+ 1/01/98  18:00           1,233  MAXTESS.H
+12/09/97  14:06           2,556  MAXTYPES.H
+12/09/97  14:06           2,549  MCAPDEV.H
+ 3/12/98  22:53          24,703  MESH.H
+12/09/97  14:06             748  MESHACC.H
+12/09/97  14:06           2,224  MESHADJ.H
+12/09/97  14:06             127  MESHLIB.H
+12/09/97  14:06           2,179  MIDIMAN.H
+ 4/08/98   9:08           1,047  MNBIGMAT.H
+12/09/97  14:06           2,008  MNCOMMON.H
+12/09/97  14:06             182  MNMATH.H
+ 4/08/98   9:25          18,820  MNMESH.H
+12/09/97  14:06           2,308  MODSTACK.H
+12/09/97  14:06           3,276  MOUSEMAN.H
+12/09/97  14:06             360  MSTSHAPE.H
+12/09/97  14:06           1,070  MTL.H
+12/09/97  14:06           1,019  NAMETAB.H
+12/09/97  14:06           4,552  NOTETRCK.H
+ 3/13/98  12:26           2,066  NOTIFY.H
+12/09/97  14:06           2,113  NSCLIP.H
+12/09/97  14:06          52,205  OBJECT.H
+12/09/97  14:06          20,302  OBJMODE.H
+12/09/97  14:06           1,330  OMANAPI.H
+12/09/97  14:06           3,999  OSNAP.H
+12/09/97  14:06             510  OSNAPAPI.H
+12/09/97  14:06           1,621  OSNAPDLG.H
+12/09/97  14:06           4,144  OSNAPHIT.H
+12/09/97  14:06             930  OSNAPMK.H
+12/09/97  14:06           1,827  PALUTIL.H
+12/09/97  14:06             145  PARTCLIB.H
+12/09/97  14:06           2,145  PARTICLE.H
+12/09/97  14:06          19,940  PATCH.H
+12/09/97  14:07           1,088  PATCHCAP.H
+12/09/97  14:07             131  PATCHLIB.H
+12/09/97  14:07           5,763  PATCHOBJ.H
+11/18/98  11:06          16,078  PHYEXP.H
+12/09/97  14:07           1,633  PIXELBUF.H
+ 3/02/98  14:38          14,731  PLUGAPI.H
+12/09/97  14:07           5,744  PLUGIN.H
+12/09/97  14:07           3,229  POINT2.H
+12/09/97  14:07           4,173  POINT3.H
+12/09/97  14:07           3,338  POINT4.H
+12/09/97  14:07           9,901  POLYSHP.H
+12/09/97  14:07             491  PROPS.H
+12/09/97  14:07           2,033  PTRVEC.H
+12/09/97  14:07           4,277  QUAT.H
+12/09/97  14:07          22,704  REF.H
+12/09/97  14:07          20,031  RENDER.H
+12/09/97  14:07           1,408  RTCLICK.H
+ 3/06/98  14:22           1,831  SBMTLAPI.H
+12/09/97  14:07             999  SCENEAPI.H
+ 2/27/98  18:26          10,748  SHAPE.H
+12/09/97  14:07           1,045  SHPHIER.H
+12/09/97  14:07           3,202  SHPSELS.H
+12/09/97  14:07           7,399  SIMPMOD.H
+12/09/97  14:07          10,920  SIMPOBJ.H
+12/09/97  14:07           5,714  SIMPSHP.H
+ 1/12/98  14:01           6,474  SIMPSPL.H
+12/09/97  14:07           1,941  SNAP.H
+12/09/97  14:07             985  SOUNDOBJ.H
+ 4/22/98  20:27          10,555  SPLINE3D.H
+ 2/22/98  17:26          31,575  SPLSHAPE.H
+12/09/97  14:07           1,176  STACK.H
+12/09/97  14:07             899  STACK3.H
+12/09/97  14:07          11,291  STDMAT.H
+ 1/11/98  17:59           2,161  STRBASIC.H
+12/09/97  14:07           6,323  STRCLASS.H
+ 3/05/98  14:15          47,249  SURF_API.H
+12/09/97  14:07           5,512  TAB.H
+12/09/97  14:07             784  TCBGRAPH.H
+12/09/97  14:07           8,233  TCP.H
+12/09/97  14:07           1,268  TEMPLT.H
+ 4/08/98  17:05           1,979  TESSINT.H
+12/09/97  14:07           3,375  TEXUTIL.H
+12/09/97  14:07             873  TOOLMAP.H
+12/09/97  14:07             683  TRIG.H
+12/09/97  14:07           5,429  TRIOBJ.H
+12/09/97  14:07           2,462  TVNODE.H
+12/09/97  14:07           1,971  TVUTIL.H
+12/12/97  14:18           4,227  UNITS.H
+12/09/97  14:07             842  UTILAPI.H
+12/09/97  14:07             477  UTILEXP.H
+12/09/97  14:07             470  UTILLIB.H
+12/09/97  14:07             626  VEDGE.H
+12/09/97  14:07           1,654  VIEWFILE.H
+11/24/99  16:27           2,704  vssver.scc
+12/09/97  14:07           3,163  WINUTIL.H
+     1,050,251 bytes in 168 files and 2 dirs    5,734,400 bytes allocated
+
+ Directory of  C:\Jet3d\MaxExport\Max2SDK\LIB\*.*
+
+11/24/99  16:26         <DIR>    . 
+11/24/99  16:26         <DIR>    ..
+ 5/15/98   0:18           9,260  ACAP.LIB
+ 5/15/98   0:36         206,568  BMM.LIB
+ 5/15/98   1:54           7,008  CLIENT.LIB
+ 5/15/98   0:29       2,200,156  CORE.LIB
+ 5/15/98   0:41         541,286  EDMODEL.LIB
+ 5/15/98   0:22          24,936  EXPR.LIB
+ 1/02/98  17:14         612,494  FLILIBD.LIB
+ 1/02/98  17:16         612,628  FLILIBH.LIB
+ 1/02/98  17:18         213,918  FLILIBR.LIB
+ 5/15/98   0:45          65,026  FLT.LIB
+ 5/15/98   0:18          49,276  GCOMM.LIB
+ 5/15/98   0:19         199,860  GEOM.LIB
+ 5/15/98   0:20          14,680  GFX.LIB
+ 5/15/98   0:21          84,134  MESH.LIB
+ 5/15/98   0:31         117,892  MNMATH.LIB
+ 5/15/98   0:22           6,558  PARTICLE.LIB
+ 5/15/98   0:22          70,244  PATCH.LIB
+ 5/15/98   0:19          87,100  UTIL.LIB
+ 5/15/98   0:47           4,968  VIEWFILE.LIB
+11/24/99  16:27             336  vssver.scc
+     5,128,328 bytes in 20 files and 2 dirs    5,505,024 bytes allocated
+
+    Total for:  C:\Jet3d\MaxExport\Max2SDK\*.*
+     6,178,579 bytes in 188 files and 8 dirs    11,304,960 bytes allocated
+ 2,147,155,968 bytes free

@@ -1,0 +1,4 @@
+^D:\GENESIS AND JET3D\JSTUDIO_CLASSIC10_2019\SOURCE\ENGINE\JETENGINE\BITMAP\COMPRESSION\CACHE3DN.ASM
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\bin\Hostx86\x86\ml.exe" -c -coff  /Fo "Release\cache3dn.obj" "D:\Genesis and Jet3d\JSTUDIO_CLASSIC10_2019\source\Engine\JetEngine\bitmap\compression\cache3dn.asm"
+^D:\GENESIS AND JET3D\JSTUDIO_CLASSIC10_2019\SOURCE\ENGINE\JETENGINE\BITMAP\COMPRESSION\RUNGASM.ASM
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\bin\Hostx86\x86\ml.exe" -Zi -c -coff  /Fo "Release\rungasm.obj" "D:\Genesis and Jet3d\JSTUDIO_CLASSIC10_2019\source\Engine\JetEngine\Bitmap\Compression\rungasm.asm"

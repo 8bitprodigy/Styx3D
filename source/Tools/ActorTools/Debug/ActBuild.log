@@ -1,0 +1,94 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (jActBuildClassic10.vcxproj, jAStudioClassic10.vcxproj, jAStudioClassic11.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+ActBuild.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+LINK : warning LNK4098: defaultlib 'MSVCRTD' conflicts with use of other libs; use /NODEFAULTLIB:library
+LINK : warning LNK4286: symbol '__wassert' defined in 'libucrtd.lib(assert.obj)' is imported by 'TDBody.obj'
+LINK : warning LNK4286: symbol '__wassert' defined in 'libucrtd.lib(assert.obj)' is imported by 'Util.obj'
+LINK : warning LNK4286: symbol '__wassert' defined in 'libucrtd.lib(assert.obj)' is imported by 'Vph.obj'
+LINK : warning LNK4217: symbol '__wassert' defined in 'libucrtd.lib(assert.obj)' is imported by 'Mkmotion.obj' in function '_MkMotion_ParseOptionString'
+LINK : warning LNK4217: symbol '__wassert' defined in 'libucrtd.lib(assert.obj)' is imported by 'Mopshell.obj' in function '_MopShell_DoMake'
+LINK : warning LNK4217: symbol '__wassert' defined in 'libucrtd.lib(assert.obj)' is imported by 'Mxscript.obj' in function '_MXScript_RunScript'
+LINK : warning LNK4286: symbol '__wassert' defined in 'libucrtd.lib(assert.obj)' is imported by 'Pop.obj'
+LINK : warning LNK4217: symbol '__wassert' defined in 'libucrtd.lib(assert.obj)' is imported by 'Log.obj' in function '_Log_NotepadReset'
+LINK : warning LNK4286: symbol '__wassert' defined in 'libucrtd.lib(assert.obj)' is imported by 'Make.obj'
+LINK : warning LNK4286: symbol '__wassert' defined in 'libucrtd.lib(assert.obj)' is imported by 'Maxmath.obj'
+LINK : warning LNK4217: symbol '__wassert' defined in 'libucrtd.lib(assert.obj)' is imported by 'Mkactor.obj' in function '_MkActor_DoMake'
+LINK : warning LNK4217: symbol '__wassert' defined in 'libucrtd.lib(assert.obj)' is imported by 'AOptions.obj' in function '_AOptions_SetMotionOptimizationLevel'
+LINK : warning LNK4286: symbol '__wassert' defined in 'libucrtd.lib(assert.obj)' is imported by 'AProject.obj'
+LINK : warning LNK4217: symbol '__wassert' defined in 'libucrtd.lib(assert.obj)' is imported by 'Array.obj' in function '_Array_DeleteAt'
+LINK : warning LNK4217: symbol '__wassert' defined in 'libucrtd.lib(assert.obj)' is imported by 'FilePath.obj' in function '_FilePath_SearchForFile'
+LINK : warning LNK4286: symbol '___stdio_common_vsprintf' defined in 'libucrtd.lib(output.obj)' is imported by 'Vph.obj'
+LINK : warning LNK4217: symbol '___stdio_common_vsprintf' defined in 'libucrtd.lib(output.obj)' is imported by 'AProject.obj' in function '__vsnprintf_l'
+LINK : warning LNK4286: symbol '___stdio_common_vsprintf' defined in 'libucrtd.lib(output.obj)' is imported by 'Log.obj'
+LINK : warning LNK4217: symbol '___stdio_common_vsprintf' defined in 'libucrtd.lib(output.obj)' is imported by 'Make.obj' in function '_Make_SourceOutOfDateFromBDY'
+LINK : warning LNK4286: symbol '___stdio_common_vsprintf' defined in 'libucrtd.lib(output.obj)' is imported by 'Mxscript.obj'
+LINK : warning LNK4217: symbol '___stdio_common_vsscanf' defined in 'libucrtd.lib(input.obj)' is imported by 'AProject.obj' in function '__vsscanf_l'
+LINK : warning LNK4286: symbol '___stdio_common_vsscanf' defined in 'libucrtd.lib(input.obj)' is imported by 'Mkmotion.obj'
+LINK : warning LNK4217: symbol '_isdigit' defined in 'libucrtd.lib(_ctype.obj)' is imported by 'AProject.obj' in function '_AProject_ParseMotion'
+LINK : warning LNK4286: symbol '_isdigit' defined in 'libucrtd.lib(_ctype.obj)' is imported by 'Util.obj'
+LINK : warning LNK4217: symbol '_isspace' defined in 'libucrtd.lib(_ctype.obj)' is imported by 'AProject.obj' in function '_AProject_GetNonBlankLine'
+LINK : warning LNK4217: symbol '__strnicmp' defined in 'libucrtd.lib(strnicmp.obj)' is imported by 'AProject.obj' in function '_AProject_LoadPathsInfo'
+LINK : warning LNK4217: symbol '_stricmp' defined in 'libucrtd.lib(stricmp.obj)' is imported by 'AProject.obj' in function '_AProject_GetBodyFormatFromFilename'
+LINK : warning LNK4286: symbol '_stricmp' defined in 'libucrtd.lib(stricmp.obj)' is imported by 'OLDNAMES.lib(stricmp.obi)'
+LINK : warning LNK4217: symbol '_atof' defined in 'libucrtd.lib(atof.obj)' is imported by 'AProject.obj' in function '_AProject_ParseMaterial'
+LINK : warning LNK4217: symbol '_atof' defined in 'libucrtd.lib(atof.obj)' is imported by 'Mkmotion.obj' in function '_MkMotion_ParseOptionString'
+LINK : warning LNK4217: symbol '_atoi' defined in 'libucrtd.lib(atox.obj)' is imported by 'AProject.obj' in function '_AProject_LoadMaterialsInfo'
+LINK : warning LNK4217: symbol '_atoi' defined in 'libucrtd.lib(atox.obj)' is imported by 'Mkmotion.obj' in function '_MkMotion_DoMake'
+LINK : warning LNK4217: symbol '_strncpy' defined in 'libucrtd.lib(strncpy.obj)' is imported by 'FilePath.obj' in function '_FilePath_SearchForFile'
+LINK : warning LNK4217: symbol '__makepath' defined in 'libucrtd.lib(makepath.obj)' is imported by 'FilePath.obj' in function '_FilePath_GetDriveAndDir'
+LINK : warning LNK4286: symbol '__makepath' defined in 'libucrtd.lib(makepath.obj)' is imported by 'Make.obj'
+LINK : warning LNK4286: symbol '__makepath' defined in 'libucrtd.lib(makepath.obj)' is imported by 'Mxscript.obj'
+LINK : warning LNK4217: symbol '__splitpath' defined in 'libucrtd.lib(splitpath.obj)' is imported by 'FilePath.obj' in function '_FilePath_GetDir'
+LINK : warning LNK4286: symbol '__splitpath' defined in 'libucrtd.lib(splitpath.obj)' is imported by 'Make.obj'
+LINK : warning LNK4217: symbol '__splitpath' defined in 'libucrtd.lib(splitpath.obj)' is imported by 'Mxscript.obj' in function '_MXScript_Destroy'
+LINK : warning LNK4286: symbol '_fclose' defined in 'libucrtd.lib(fclose.obj)' is imported by 'Vph.obj'
+LINK : warning LNK4217: symbol '_fclose' defined in 'libucrtd.lib(fclose.obj)' is imported by 'Log.obj' in function '_Log_FileReset'
+LINK : warning LNK4286: symbol '_fclose' defined in 'libucrtd.lib(fclose.obj)' is imported by 'Make.obj'
+LINK : warning LNK4217: symbol '_fclose' defined in 'libucrtd.lib(fclose.obj)' is imported by 'Mkmotion.obj' in function '_MkMotion_DoMake'
+LINK : warning LNK4286: symbol '_fclose' defined in 'libucrtd.lib(fclose.obj)' is imported by 'Mxscript.obj'
+LINK : warning LNK4217: symbol '_fflush' defined in 'libucrtd.lib(fflush.obj)' is imported by 'Log.obj' in function '_Log_FileWrite'
+LINK : warning LNK4286: symbol '_fflush' defined in 'libucrtd.lib(fflush.obj)' is imported by 'Vph.obj'
+LINK : warning LNK4286: symbol '_fopen' defined in 'libucrtd.lib(fopen.obj)' is imported by 'Vph.obj'
+LINK : warning LNK4217: symbol '_fopen' defined in 'libucrtd.lib(fopen.obj)' is imported by 'Log.obj' in function '_Log_FileReset'
+LINK : warning LNK4286: symbol '_fopen' defined in 'libucrtd.lib(fopen.obj)' is imported by 'Make.obj'
+LINK : warning LNK4217: symbol '_fopen' defined in 'libucrtd.lib(fopen.obj)' is imported by 'Mkmotion.obj' in function '_MkMotion_DoMake'
+LINK : warning LNK4286: symbol '_fopen' defined in 'libucrtd.lib(fopen.obj)' is imported by 'Mxscript.obj'
+LINK : warning LNK4286: symbol '_unlink' defined in 'libucrtd.lib(unlink.obj)' is imported by 'OLDNAMES.lib(unlink.obi)'
+LINK : warning LNK4217: symbol '_unlink' defined in 'libucrtd.lib(unlink.obj)' is imported by 'Make.obj' in function '_Make_Actor'
+LINK : warning LNK4217: symbol '_unlink' defined in 'libucrtd.lib(unlink.obj)' is imported by 'Mkactor.obj' in function '_MkActor_OutputUsage'
+LINK : warning LNK4286: symbol '_unlink' defined in 'libucrtd.lib(unlink.obj)' is imported by 'Mkmotion.obj'
+LINK : warning LNK4286: symbol '_unlink' defined in 'libucrtd.lib(unlink.obj)' is imported by 'Mopshell.obj'
+LINK : warning LNK4217: symbol '_remove' defined in 'libucrtd.lib(unlink.obj)' is imported by 'Mkactor.obj' in function '_MkActor_DoMake'
+LINK : warning LNK4217: symbol '_rename' defined in 'libucrtd.lib(rename.obj)' is imported by 'Mkactor.obj' in function '_MkActor_DoMake'
+LINK : warning LNK4217: symbol '_fgets' defined in 'libucrtd.lib(fgets.obj)' is imported by 'Mkmotion.obj' in function '_MkMotion_DoMake'
+LINK : warning LNK4286: symbol '_fgets' defined in 'libucrtd.lib(fgets.obj)' is imported by 'Mxscript.obj'
+LINK : warning LNK4217: symbol '_strncmp' defined in 'libucrtd.lib(strncmp.obj)' is imported by 'Mkmotion.obj' in function '_MkMotion_DoMake'
+LINK : warning LNK4286: symbol '_strncmp' defined in 'libucrtd.lib(strncmp.obj)' is imported by 'Mxscript.obj'
+LINK : warning LNK4217: symbol '_strupr' defined in 'libucrtd.lib(strupr.obj)' is imported by 'Mkmotion.obj' in function '_MkMotion_DoMake'
+LINK : warning LNK4286: symbol '_strupr' defined in 'libucrtd.lib(strupr.obj)' is imported by 'OLDNAMES.lib(strupr.obi)'
+LINK : warning LNK4217: symbol '__flushall' defined in 'libucrtd.lib(fflush.obj)' is imported by 'Mxscript.obj' in function '_MXScript_RunScript'
+LINK : warning LNK4217: symbol '___stdio_common_vfprintf' defined in 'libucrtd.lib(output.obj)' is imported by 'Mxscript.obj' in function '__vfprintf_l'
+LINK : warning LNK4286: symbol '___stdio_common_vfprintf' defined in 'libucrtd.lib(output.obj)' is imported by 'Vph.obj'
+LINK : warning LNK4217: symbol '__errno' defined in 'libucrtd.lib(errno.obj)' is imported by 'Mxscript.obj' in function '_MXScript_RunScript'
+LINK : warning LNK4217: symbol '_isxdigit' defined in 'libucrtd.lib(_ctype.obj)' is imported by 'Util.obj' in function '_Util_htoi'
+LINK : warning LNK4217: symbol '___acrt_iob_func' defined in 'libucrtd.lib(_file.obj)' is imported by 'Vph.obj' in function '_printf'
+LINK : warning LNK4286: symbol '__stricmp' defined in 'libucrtd.lib(stricmp.obj)' is imported by 'OLDNAMES.lib(stricmp.obi)'
+LINK : warning LNK4286: symbol '__unlink' defined in 'libucrtd.lib(unlink.obj)' is imported by 'OLDNAMES.lib(unlink.obi)'
+LINK : warning LNK4286: symbol '__strupr' defined in 'libucrtd.lib(strupr.obj)' is imported by 'OLDNAMES.lib(strupr.obi)'
+AProject.obj : error LNK2019: unresolved external symbol __imp__strtok referenced in function _AProject_ParseMaterial
+FilePath.obj : error LNK2019: unresolved external symbol __imp___access referenced in function _FilePath_SearchForFile
+Util.obj : error LNK2001: unresolved external symbol __imp___access
+Log.obj : error LNK2019: unresolved external symbol __imp__fseek referenced in function _Log_FileWrite
+Vph.obj : error LNK2001: unresolved external symbol __imp__fseek
+Log.obj : error LNK2019: unresolved external symbol __imp__fwrite referenced in function _Log_FileWrite
+Vph.obj : error LNK2001: unresolved external symbol __imp__fwrite
+Make.obj : error LNK2019: unresolved external symbol __imp___findclose referenced in function _Make_Actor
+Mxscript.obj : error LNK2001: unresolved external symbol __imp___findclose
+Make.obj : error LNK2019: unresolved external symbol __imp___findfirst64i32 referenced in function _Make_Actor
+Mxscript.obj : error LNK2001: unresolved external symbol __imp___findfirst64i32
+Make.obj : error LNK2019: unresolved external symbol __imp___findnext64i32 referenced in function _Make_Clean
+Make.obj : error LNK2019: unresolved external symbol __imp___mkdir referenced in function _Make_Actor
+Mkmotion.obj : error LNK2019: unresolved external symbol __imp__strtod referenced in function _MkMotion_ParseOptionString
+Mxscript.obj : error LNK2019: unresolved external symbol __imp__system referenced in function _MXScript_RunScript
+Vph.obj : error LNK2019: unresolved external symbol __imp__fread referenced in function _vph_read_float
+MSVCRTD.lib(chandler4gs.obj) : error LNK2019: unresolved external symbol __except_handler4_common referenced in function __except_handler4
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\bin\jActBuildClassic11d.exe : fatal error LNK1120: 12 unresolved externals

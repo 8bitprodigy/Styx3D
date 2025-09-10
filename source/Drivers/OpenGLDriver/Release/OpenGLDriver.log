@@ -1,0 +1,18 @@
+﻿  OGLDrv.cpp
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC10_2019\source\Drivers\OpenGLDriver\OGLDrv.cpp(67,1): warning C4996:  'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdio.h(1774): message :  see declaration of 'sprintf'
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC10_2019\source\Drivers\OpenGLDriver\OGLDrv.cpp(658,39): warning C4996:  'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\string.h(133): message :  see declaration of 'strcpy'
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC10_2019\source\Drivers\OpenGLDriver\OGLDrv.cpp(652,1): warning C4996:  'strdup': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _strdup. See online help for details.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\string.h(536): message :  see declaration of 'strdup'
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC10_2019\source\Drivers\OpenGLDriver\OGLDrv.cpp(661,1): warning C4996:  'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdio.h(208): message :  see declaration of 'fopen'
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC10_2019\source\Drivers\OpenGLDriver\OGLDrv.cpp(1130,40): warning C4996:  'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\string.h(133): message :  see declaration of 'strcpy'
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC10_2019\source\Drivers\OpenGLDriver\OGLDrv.cpp(1114,1): warning C4996:  'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  OglTextures.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdio.h(208): message :  see declaration of 'fopen'
+  Generating Code...
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC10_2019\source\Drivers\OpenGLDriver\OglTextures.cpp(340,12): warning C4101:  'baseLog2': unreferenced local variable
+     Creating library D:\Genesis and Jet3d\JSTUDIO_CLASSIC10_2019\lib\OpenGLDriver.lib and object D:\Genesis and Jet3d\JSTUDIO_CLASSIC10_2019\lib\OpenGLDriver.exp
+  OpenGLDriver.vcxproj -> D:\Genesis and Jet3d\JSTUDIO_CLASSIC10_2019\bin\OpenGLDriver.dll

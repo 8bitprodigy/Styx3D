@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Template|Win32">
+      <Configuration>Template</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A284CC55-5933-4E4F-80D3-12968118B544}</ProjectGuid>
+    <ProjectName>jAStudioClassic11</ProjectName>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Static</UseOfMfc>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Static</UseOfMfc>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Release\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Debug\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" />
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectName)d</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>AStudio\Util;common;fmtactor;mkactor;mkbody;mkmotion;mop;..\..\..\Include;..\..\Engine\JetEngine\Actor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_AFXDLL;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/MACHINE:I386 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>jet3DClassic11.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(SolutionDir)bin\$(TargetName)$(TargetExt)</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>..\..\..\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\..\..\..\build\AStudio\Release/AStudio.tlb</TypeLibraryName>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>AStudio\Util;common;fmtactor;mkactor;mkbody;mkmotion;mop;..\..\..\Include;..\..\Engine\JetEngine\Actor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_AFXDLL;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+      <BrowseInformation>true</BrowseInformation>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/MACHINE:I386 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>jet3DClassic11d.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(SolutionDir)bin\$(TargetName)$(TargetExt)</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>..\..\..\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\..\..\..\build\AStudio\Debug/AStudio.tlb</TypeLibraryName>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="AStudio\AOptions.c" />
+    <ClCompile Include="AStudio\AProject.c" />
+    <ClCompile Include="AStudio\Util\Array.c" />
+    <ClCompile Include="AStudio\AStudio.cpp" />
+    <ClCompile Include="AStudio\BodyDlg.cpp" />
+    <ClCompile Include="AStudio\Util\FilePath.c" />
+    <ClCompile Include="AStudio\LogoPage.cpp" />
+    <ClCompile Include="AStudio\make.c" />
+    <ClCompile Include="AStudio\MakeHelp.cpp" />
+    <ClCompile Include="AStudio\MaterialsDlg.cpp" />
+    <ClCompile Include="AStudio\MotionsDlg.cpp" />
+    <ClCompile Include="AStudio\mxscript.c" />
+    <ClCompile Include="AStudio\MyFileDlg.cpp" />
+    <ClCompile Include="AStudio\NewPrjDlg.cpp" />
+    <ClCompile Include="AStudio\PathsDlg.cpp" />
+    <ClCompile Include="AStudio\PropPage.cpp" />
+    <ClCompile Include="AStudio\PropSheet.cpp" />
+    <ClCompile Include="AStudio\Util\Rcstring.c" />
+    <ClCompile Include="AStudio\SettingsDlg.cpp" />
+    <ClCompile Include="AStudio\StdAfx.cpp" />
+    <ClCompile Include="AStudio\TargetDlg.cpp" />
+    <ClCompile Include="AStudio\TextInputDlg.cpp" />
+    <ClCompile Include="AStudio\Util\Util.c" />
+    <ClCompile Include="mop\Log.c" />
+    <ClCompile Include="common\maxmath.c" />
+    <ClCompile Include="mkactor\mkactor.c" />
+    <ClCompile Include="mkbody\mkbody.cpp" />
+    <ClCompile Include="mkmotion\mkmotion.c" />
+    <ClCompile Include="mop\mopshell.c" />
+    <ClCompile Include="mop\pop.c" />
+    <ClCompile Include="common\TDBody.c" />
+    <ClCompile Include="mkbody\vph.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="AStudio\AStudio.rc">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AStudio;..\..\msdev60\include;..\..\msdev60\mfc\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AStudio;..\..\msdev60\include;..\..\msdev60\mfc\include</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="mop\Log.h" />
+    <ClInclude Include="common\maxmath.h" />
+    <ClInclude Include="mkactor\mkactor.h" />
+    <ClInclude Include="mkbody\mkbody.h" />
+    <ClInclude Include="mkmotion\mkmotion.h" />
+    <ClInclude Include="mop\mopshell.h" />
+    <ClInclude Include="mop\pop.h" />
+    <ClInclude Include="mkbody\vph.h" />
+    <ClInclude Include="AStudio\AOptions.h" />
+    <ClInclude Include="AStudio\AProject.h" />
+    <ClInclude Include="AStudio\Util\Array.h" />
+    <ClInclude Include="AStudio\AStudio.h" />
+    <ClInclude Include="AStudio\BodyDlg.h" />
+    <ClInclude Include="AStudio\Util\FilePath.h" />
+    <ClInclude Include="AStudio\LogoPage.h" />
+    <ClInclude Include="AStudio\make.h" />
+    <ClInclude Include="AStudio\MakeHelp.h" />
+    <ClInclude Include="AStudio\MaterialsDlg.h" />
+    <ClInclude Include="AStudio\MotionsDlg.h" />
+    <ClInclude Include="AStudio\mxscript.h" />
+    <ClInclude Include="AStudio\MyFileDlg.h" />
+    <ClInclude Include="AStudio\NewPrjDlg.h" />
+    <ClInclude Include="AStudio\PathsDlg.h" />
+    <ClInclude Include="AStudio\PropPage.h" />
+    <ClInclude Include="AStudio\PropSheet.h" />
+    <ClInclude Include="AStudio\Util\Rcstring.h" />
+    <ClInclude Include="AStudio\resource.h" />
+    <ClInclude Include="AStudio\SettingsDlg.h" />
+    <ClInclude Include="AStudio\StdAfx.h" />
+    <ClInclude Include="AStudio\TargetDlg.h" />
+    <ClInclude Include="AStudio\TextInputDlg.h" />
+    <ClInclude Include="AStudio\Util\Util.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AStudio\Res\Actview.bmp" />
+    <None Include="AStudio\Res\AStudio.ico" />
+    <None Include="AStudio\Res\AStudio.rc2" />
+    <None Include="AStudio\Hlp\AfxDlg.rtf" />
+    <None Include="AStudio\Hlp\AStudio.cnt" />
+    <None Include="AStudio\MakeHelp.bat" />
+    <None Include="AStudio.dep" />
+    <None Include="AStudio.mak" />
+    <None Include="AStudio\FileFormat.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="AStudio\Astudio.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

@@ -1,0 +1,20 @@
+[Version]
+Signature="$CHICAGO$"
+SetupClass=BASE
+
+[DefaultInstall]
+AddReg=add.reg
+
+[add.reg]
+HKLM,"Software\Microsoft\DirectPlay","Compat1",65537,01,00,00,00
+
+HKLM,"Software\Microsoft\DirectPlay\Applications\DirectPlay Voice Chat (Retrofit)","Guid" ,0,"{d08922ef-59c1-48c8-90da-e6bc275d5c8d}"
+HKLM,"Software\Microsoft\DirectPlay\Applications\DirectPlay Voice Chat (Retrofit)","File" ,0,"dpvhelp.exe"
+HKLM,"Software\Microsoft\DirectPlay\Applications\DirectPlay Voice Chat (Retrofit)","CommandLine" ,0,"/L /S /SC03"
+HKLM,"Software\Microsoft\DirectPlay\Applications\DirectPlay Voice Chat (Retrofit)","Path" ,0,"%11%"
+HKLM,"Software\Microsoft\DirectPlay\Applications\DirectPlay Voice Chat (Retrofit)","CurrentDirectory" ,0,"%11%"
+HKLM,"Software\Microsoft\DirectPlay\Applications\DirectPlay Voice Chat (Retrofit)","DescriptionA" ,0,"DirectPlay Voice Chat (Retrofit)"
+HKLM,"Software\Microsoft\DirectPlay\Applications\DirectPlay Voice Chat (Retrofit)","DescriptionW" ,0,"DirectPlay Voice Chat (Retrofit)"
+HKLM,"Software\Microsoft\DirectPlay\Applications\DirectPlay Voice Chat (Retrofit)","dwFlags",65537,02,00,00,80
+
+[Strings]

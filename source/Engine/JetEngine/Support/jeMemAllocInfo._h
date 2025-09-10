@@ -1,0 +1,152 @@
+/****************************************************************************************/
+/*  jeMemAllocInfo._h                                                                   */
+/*                                                                                      */
+/*  Author: David Eisele                                                                */
+/*  Description: Extended memoryleak debugging module                                   */
+/*                                                                                      */
+/*  The contents of this file are subject to the Jet3D Public License                   */
+/*  Version 1.02 (the "License"); you may not use this file except in                   */
+/*  compliance with the License. You may obtain a copy of the License at                */
+/*  http://www.jet3d.com                                                                */
+/*                                                                                      */
+/*  Software distributed under the License is distributed on an "AS IS"                 */
+/*  basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.  See                */
+/*  the License for the specific language governing rights and limitations              */
+/*  under the License.                                                                  */
+/*                                                                                      */
+/*  This file was not part of the original Jet3D, released December 12, 1999.           */
+/*                                                                                      */
+/****************************************************************************************/
+
+#ifndef JEJMAI__H
+#define JEJMAI__H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <stdio.h>
+#include "jeMemAllocInfo.h"
+
+#define jMAI_RPT0(fp,S)				do{_RPT0(_CRT_WARN,S);			  fprintf(fp,S);			}while(0)
+#define jMAI_RPT1(fp,S,a1)			do{_RPT1(_CRT_WARN,S,a1);		  fprintf(fp,S,a1);			}while(0)
+#define jMAI_RPT2(fp,S,a1,a2)		do{_RPT2(_CRT_WARN,S,a1,a2);	  fprintf(fp,S,a1,a2);		}while(0)
+#define jMAI_RPT3(fp,S,a1,a2,a3)	do{_RPT3(_CRT_WARN,S,a1,a2,a3);	  fprintf(fp,S,a1,a2,a3);	}while(0)
+#define jMAI_RPT4(fp,S,a1,a2,a3,a4)	do{_RPT4(_CRT_WARN,S,a1,a2,a3,a4);fprintf(fp,S,a1,a2,a3,a4);}while(0)
+
+#define jMAI_INCLUDE				(1<<0)		// Add this file
+#define jMAI_EXCLUDE				(1<<1)		// Exclude this file
+
+typedef struct jeMemAllocInfoBPCallChain jeMemAllocInfoBPCallChain;
+typedef struct jeMemAllocInfoDataChain	jeMemAllocInfoDataChain;
+typedef struct jeMemAllocInfoChain		jeMemAllocInfoChain;
+typedef struct jeMemAllocInfoBreakPoint jeMemAllocInfoBreakPoint;
+typedef struct jeMemAllocInfoFileChain	jeMemAllocInfoFileChain;
+
+
+
+typedef struct jeMemAllocInfoPtr
+{
+	char						*NamePtr;
+	uint32						LNr;
+	jeMemAllocInfoChain			*Data;
+	uint32						Pad;
+} jeMemAllocInfoPtr;
+
+typedef struct jeMemAllocInfoChain
+{
+	char						*AllocFileName;
+	int							AllocLineNr;
+	uint32						CurrCallNr;
+	jeBoolean					GlobalBreak;
+	jeBoolean					IsActive;
+	jeMemAllocInfoBPCallChain   *BreakPoints;
+	jeMemAllocInfoDataChain		*DataChain;
+	jeMemAllocInfoDataChain		*FreedChain;
+	jeMemAllocInfoChain			*Next;
+} jeMemAllocInfoChain;
+
+typedef struct jeMemAllocInfoBPCallChain
+{
+	uint32						CallNr;
+	jeMemAllocInfoBPCallChain	*Next;
+} jeMemAllocInfoBPCallChain;
+
+typedef struct jeMemAllocInfoDataChain
+{
+	uint32						CallNr;
+	int32						AllocSize;
+	
+	int							ReAllocLineNr;
+	int32						ReAllocSize;
+	char						*ReAllocFileName;
+
+	int							FreeLineNr;
+	char						*FreeFileName;
+
+	void						*CurrentPointer;
+	jeMemAllocInfoDataChain		*Prev;
+	jeMemAllocInfoDataChain		*Next;
+	jeMemAllocInfoChain			*Root;
+} jeMemAllocInfoDataChain;
+
+
+typedef struct jeMemAllocInfoBreakPoint
+{
+	char						*AllocFileName;
+	int							AllocLineNr;
+	uint32						CallNr;
+	jeMemAllocInfoBreakPoint	*Next;
+	jeMemAllocInfoBreakPoint	*Prev;
+} jeMemAllocInfoBreakPoint;
+
+typedef struct jeMemAllocInfoFileChain
+{
+	char						*FileName;
+	uint32						Flags;
+	jeMemAllocInfoFileChain		*Next;
+	jeMemAllocInfoFileChain		*Prev;
+} jeMemAllocInfoFileChain;
+
+// private functions
+
+// Query
+static jeMemAllocInfoChain* JETCC jeMemAllocInfo_GetInfoChain(const char *FName, int LNr);
+static jeMemAllocInfoChain* jeMemAllocInfo_GetChain(const char *FName, int LNr, jeBoolean FreedChain);
+
+// Destroy
+static void JETCC jeMemAllocInfo_KillDataChain(jeMemAllocInfoDataChain **DataChain);
+static void JETCC jeMemAllocInfo_KillInfoChain(jeMemAllocInfoChain **InfoChain);
+static void JETCC jeMemAllocInfo_KillPtrArray(jeMemAllocInfoPtr **PtrChain);
+static void JETCC jeMemAllocInfo_KillBPCallChain(jeMemAllocInfoBPCallChain **CallChain);
+static void JETCC jeMemAllocInfo_KillFileChain(jeMemAllocInfoFileChain **FChain);
+static void JETCC jeMemAllocInfo_KillBreakPoints(jeMemAllocInfoBreakPoint **BChain);
+
+// Breakpoints
+static void JETCC jeMemAllocInfo_AddBreakpoint(const char *FileName, int LineNr, uint32 CallNr);
+static void JETCC jeMemAllocInfo_LoadBreakpoints();
+static void JETCC jeMemAllocInfo_UpdateAllBreakPoints();
+static void JETCC jeMemAllocInfo_UpdateBreakPoints(jeMemAllocInfoChain *InfoChain);
+
+// Include/Exclude-Files
+static void JETCC jeMemAllocInfo_AddFile(const char *FileName, uint32 Flags);
+static void JETCC jeMemAllocInfo_LoadActiveFileFlags();
+static void JETCC jeMemAllocInfo_UpdateAllActiveFlags();
+static void JETCC jeMemAllocInfo_UpdateFileFlags(jeMemAllocInfoChain *InfoChain);
+
+// Report
+static void JETCC jeMemAllocInfo_Report(jeBoolean FreedMemoryReport);
+static void JETCC jeMemAllocInfo_InfoReport_(FILE *fp, jeMemAllocInfoChain *InfoChain, jeBoolean ShowFreed,
+											 uint32 *PtrNum, uint32 *PtrMem);
+
+// Misc
+static void JETCC jeMemAllocInfo_LoadFlags();
+static void JETCC jeMemAllocInfo_LoadFileNames();
+static jeMemAllocInfoPtr *jMAI_pushPtrChain_x86(uint32 MoveNum);
+static jeMemAllocInfoPtr *jMAI_pushPtrChain_mmx(uint32 MoveNum);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

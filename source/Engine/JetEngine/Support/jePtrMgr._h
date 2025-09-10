@@ -1,0 +1,85 @@
+/****************************************************************************************/
+/*  JEPTRMGR.H                                                                          */
+/*                                                                                      */
+/*  Author:  John Pollard                                                               */
+/*  Description:                                                                        */
+/*                                                                                      */
+/*  The contents of this file are subject to the Jet3D Public License                   */
+/*  Version 1.02 (the "License"); you may not use this file except in                   */
+/*  compliance with the License. You may obtain a copy of the License at                */
+/*  http://www.jet3d.com                                                                */
+/*                                                                                      */
+/*  Software distributed under the License is distributed on an "AS IS"                 */
+/*  basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.  See                */
+/*  the License for the specific language governing rights and limitations              */
+/*  under the License.                                                                  */
+/*                                                                                      */
+/*  The Original Code is Jet3D, released December 12, 1999.                             */
+/*  Copyright (C) 1996-1999 Eclipse Entertainment, L.L.C. All Rights Reserved           */
+/*                                                                                      */
+/****************************************************************************************/
+
+#ifndef JE_CONTEXTPTRMGR_H
+#define JE_CONTEXTPTRMGR_H
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+// Krouer : create a world context info
+typedef struct jeWorld		jeWorld;
+typedef struct jeResourceMgr	jeResourceMgr;
+
+// PtrMgr definition - moved from .c file
+typedef uint32						jePtrMgr_Index;
+#define JE_PTRMGR_NULL_INDEX		(0xFFFFFFFF)
+#define JE_PTRMGR_MAX_STACK_SIZE	(0xFFFFFFFF)
+#define JE_PTRMGR_MAX_REF_COUNTS	(0xFFFFFFFF>>1)		// can't use top bit, because it is signed
+
+#define JE_PTRMGR_START_SIZE		256
+#define JE_PTRMGR_EXTEND_AMOUNT		512
+
+typedef struct
+{
+	void			*Ptr;
+	int32			RefCount;
+
+} jePtrMgr_SEntry;					// Stack entry
+
+typedef struct jePtrMgr
+{
+#ifdef _DEBUG
+	jePtrMgr		*Signature1;
+#endif
+
+	int32			RefCount;
+
+	uint32			StackSize;
+	uint32			StackLoc;
+	jePtrMgr_SEntry	*PtrStack;
+
+	int32			TotalPtrRefs;
+
+	// Krouer add few new elements
+	jeWorld*		pWorld;
+	jeResourceMgr*	pResMgr;
+	int32			lData;
+
+#ifdef _DEBUG
+	jePtrMgr		*Signature2;
+#endif
+} jePrtMgr;
+
+typedef struct
+{
+	jePtrMgr_Index	Index;
+} jePtrMgr_Header;
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
+
+

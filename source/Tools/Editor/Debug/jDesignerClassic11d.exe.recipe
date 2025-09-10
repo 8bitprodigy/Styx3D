@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Objects\ActorObj\Debug\ActorObj.ddl</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Objects\AmbObject\Debug\AmbientObj.ddl</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Objects\BoxObject\Debug\BoxObj.ddl</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Objects\CamObject\Debug\CameraObj.ddl</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Objects\Corona\Debug\CoronaObj.ddl</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Objects\DynamicLight\Debug\DynLightObj.ddl</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Objects\ModelObject\Debug\ModelObj.ddl</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Objects\PathObject\Debug\PathObj.ddl</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Objects\Portals\Debug\PortalObj.ddl</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Objects\PulsingLight\Debug\PulsingLightObj.ddl</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Objects\Spout\Debug\SpoutObj.ddl</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Objects\Terrain\Debug\terrainobj.ddl</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\bin\jDesignerClassic11d.exe</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles />
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>

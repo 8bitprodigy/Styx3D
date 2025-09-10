@@ -1,0 +1,28 @@
+Microsoft (R) Help Compiler
+HCRTF 4.03.0002
+Copyright (c) Microsoft Corp 1990 - 1995. All rights reserved.
+jwe.hpj
+    HC1002: Note: 
+	Using existing phrase table: JWE.ph.
+    HC3025: Warning: topic #1 of d:\jStudio3D\Editor\hlp\.\afxcore.rtf : 
+	Jump to undefined Topic ID: "menu_record".
+    HC3025: Warning: topic #3 of d:\jStudio3D\Editor\hlp\.\afxcore.rtf : 
+	Jump to undefined Topic ID: "HID_OLE_EDIT_LINKS".
+    HC3025: Warning: topic #3 of d:\jStudio3D\Editor\hlp\.\afxcore.rtf : 
+	Jump to undefined Topic ID: "HID_EDIT_PASTE_LINK".
+    HC3025: Warning: topic #3 of d:\jStudio3D\Editor\hlp\.\afxcore.rtf : 
+	Jump to undefined Topic ID: "HID_OLE_INSERT_NEW".
+    HC1010: Note: 
+	The following mapped Topic IDs were not used in any topic:
+	HIDP_OLE_INIT_FAILED
+72	Topics
+48	Jumps
+16	Keywords
+21	Bitmaps
+
+
+Created d:\jStudio3D\Editor\hlp\JWE.HLP, 37,946 bytes
+Bitmaps: 5,348 bytes
+Phrase+Zeck compression decreased help file by 13,866 bytes.
+Compile time: 0 minutes, 0 seconds
+2 notes, 4 warnings

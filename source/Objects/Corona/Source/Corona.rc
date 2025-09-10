@@ -1,0 +1,39 @@
+#include "resource.h"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+
+	IDS_ERROR_CreateInstance_AllocateObject		"Failed to allocate memory for object"
+	IDS_ERROR_CreateFromFile_CreateObject		"Failed to create object"
+	IDS_ERROR_AttachWorld_CreateBitmapList		"Failed to create bitmap list"
+	IDS_ERROR_GetString							"Failed to get resource string"
+	IDS_ERROR_Render_AddPoly					"Failed to add poly"
+	IDS_ERROR_CreateFromFile_ReadData			"Failed to read data"
+	IDS_ERROR_CreateFromFile_WrongVersion		"Unsupported version"
+	
+	IDS_ERROR_AttachWorld_Failure				"AttachWorld() failed for Corona object"
+	IDS_ERROR_CreateInstance_Failure			"CreateInstance() failed for Corona object"
+	IDS_ERROR_InitClass							"InitClass() failed for Corona object"
+	IDS_ERROR_GetPropertyList					"GetPropertyList() failed for Corona object"
+	IDS_ERROR_SetProperty						"SetProperty() failed for Corona object"
+	IDS_ERROR_WriteToFile						"WriteToFile() failed for Corona object"
+	IDS_ERROR_AttachEngine						"AttachEngine() failed for Corona object"
+
+	IDS_ARTGROUP								"Texture"
+	IDS_ARTSIZE									"Size:"
+	IDS_ARTBITMAP								"Bitmap:"
+	IDS_ARTALPHA								"Alpha:"
+	IDS_FADETIME								"Fade time:"
+	IDS_MAXVISIBLEDISTANCE						"MVD:"
+	IDS_MINRADIUS								"MinR:"
+	IDS_MAXRADIUS								"MaxR:"
+	IDS_MINRADIUSDISTANCE						"MRD:"
+	IDS_MAXRADIUSDISTANCE						"MRD:"
+
+END

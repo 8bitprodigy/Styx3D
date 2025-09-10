@@ -1,0 +1,101 @@
+/****************************************************************************************/
+/*  jeModel._H                                                                          */
+/*                                                                                      */
+/*  Author: John Pollard                                                                */
+/*  Description:                                                                        */
+/*                                                                                      */
+/*  The contents of this file are subject to the Jet3D Public License                   */
+/*  Version 1.02 (the "License"); you may not use this file except in                   */
+/*  compliance with the License. You may obtain a copy of the License at                */
+/*  http://www.jet3d.com                                                                */
+/*                                                                                      */
+/*  Software distributed under the License is distributed on an "AS IS"                 */
+/*  basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.  See                */
+/*  the License for the specific language governing rights and limitations              */
+/*  under the License.                                                                  */
+/*                                                                                      */
+/*  The Original Code is Jet3D, released December 12, 1999.                             */
+/*  Copyright (C) 1996-1999 Eclipse Entertainment, L.L.C. All Rights Reserved           */
+/*                                                                                      */
+/****************************************************************************************/
+
+#ifndef JEMODELPRIV_H
+#define JEMODELPRIV_H
+
+#include "jeBrush.h"
+#include "BaseType.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#if 0
+// Clean engine.h up for Jet3D 2.0 so we can inlcude engine.h here in the public eye
+//	and QUIT doing this:
+typedef struct		jeEngine		jeEngine;
+typedef struct		jeCamera		jeCamera;
+typedef struct		jeFrustum		jeFrustum;
+
+typedef struct		jeModel			jeModel;
+
+jeModel		*jeModel_Create(void);
+jeBoolean	jeModel_CreateRef(jeModel *Model);
+void		jeModel_Destroy(jeModel **Model);
+jeBoolean	jeModel_AddBrush(jeModel *Model, jeBrush *Brush, jeBoolean Update);
+jeBoolean	jeModel_RemoveBrush(jeModel *Model, jeBrush *Brush, jeBoolean Update);
+jeBoolean	jeModel_HasBrush(const jeModel *Model, const jeBrush *Brush);
+jeBoolean	jeModel_Reset(jeModel *Model);
+jeBoolean	jeModel_RebuildAll(jeModel *Model);
+jeBoolean	jeModel_RebuildBSPFaces(jeModel *Model);
+jeBoolean	jeModel_SetEngine(jeModel *Model, jeEngine *Engine);
+jeBoolean	jeModel_Render(jeModel *Model, jeCamera *Camera, jeFrustum *Frustum);
+#endif
+
+/* Krouer: add BSP proxy structure to handle different kind of BSP implementation */
+typedef struct BSP_Proxy
+{
+	jeBSP* (*Create)();
+	void  (*Destroy)(jeBSP **BSPTree);
+	jeBSP* (*RebuildGeometry)(jeBSP *BSP, jeChain *BrushChain, jeBSP_Options Options, jeBSP_Logic Logic, jeBSP_LogicBalance LogicBalance);
+	jeBoolean (*SetArrays)(jeBSP *BSP, jeFaceInfo_Array *FArray, jeMaterial_Array *MArray, jeChain *LChain, jeChain *DLChain);
+	jeBoolean (*AddBrush)(jeBSP *BSPTree, jeBrush *Brush, jeBoolean AutoLight);
+	jeBoolean (*HasBrush)(jeBSP *BSPTree, jeBrush *Brush);
+	jeBoolean (*RemoveBrush)(jeBSP *BSPTree, jeBrush *Brush);
+	jeBoolean (*MakeVisAreas)(jeBSP *BSPTree);
+	jeBoolean (*DestroyVisAreas)(jeBSP *BSP);
+	jeBoolean (*AddObject)(jeBSP *BSP, jeObject *Object);
+	jeBoolean (*RemoveObject)(jeBSP *BSP, jeObject *Object);
+	jeBoolean (*HasObject)(jeBSP *BSP, jeObject *Object);
+	jeBoolean (*VisFrame)(jeBSP *BSPTree, const jeCamera *Camera, const jeFrustum *ModelSpaceFrustum);
+	jeBoolean (*RenderFrontToBack)(jeBSP *Tree, jeCamera *Camera, jeFrustum *CameraSpaceFrustum, jeFrustum *ModelSpaceFrustum, jeXForm3d *ModelToCameraXForm);
+	jeBoolean (*RenderAndVis)(jeBSP *Tree, jeCamera *Camera, jeFrustum *Frustum);
+	jeBoolean (*RenderAreas)(jeBSP *Tree, jeCamera *Camera, jeFrustum *CameraSpaceFrustum, jeFrustum *ModelSpaceFrustum, jeXForm3d *ModelToCameraXForm);
+	jeBoolean (*UpdateBrush)(jeBSP *BSPTree, jeBrush *Brush, jeBoolean AutoLight);
+	jeBoolean (*UpdateBrushFace)(jeBSP *BSP, const jeBrush_Face *Face, jeBoolean AutoLight);
+	jeBoolean (*PatchLighting)(jeBSP *Tree);
+	jeBoolean (*RebuildLights)(jeBSP *Tree);
+	jeBoolean (*RebuildLightsFromPoint)(jeBSP *Tree, const jeVec3d *Pos, jeFloat Radius);
+	jeBoolean (*UpdateAll)(jeBSP *BSP);
+	jeBoolean (*RebuildFaces)(jeBSP *BSPTree);
+	jeBoolean (*SetBrushFaceCB)(jeBSP *BSP, jeBSPNode_DrawFaceCB *CB, void *Context);
+	jeBoolean (*SetBrushFaceCBOnOff)(jeBSP *BSP, const jeBrush_Face *Face, jeBoolean OnOff);
+	jeBoolean (*SetXForm)(jeBSP *BSP, const jeXForm3d *XForm);
+	jeBoolean (*SetEngine)(jeBSP *Tree, jeEngine *Engine);
+	jeBoolean (*SetWorld)(jeBSP *Tree, jeWorld *World);
+	jeBoolean (*SetRenderMode)(jeBSP *BSP, jeBSP_RenderMode RenderMode);
+	jeBoolean (*SetDefaultContents)(jeBSP *BSP, jeBrush_Contents DefaultContents);
+	jeBSPNode_Area* (*FindArea)(jeBSP * BSP, const jeVec3d *Pos);
+	jeBoolean (*DoAllAreasInBox)(jeBSP *BSP,jeExtBox *BBox,jeBSP_DoAreaFunc CB,void * Context);
+	jeBoolean (*GetModelSpaceBox)(const jeBSP *BSP, jeExtBox *Box);
+	jeBoolean (*GetWorldSpaceBox)(const jeBSP *BSP, jeExtBox *Box);
+	jeBoolean (*Collision)(const jeBSP *BSP, const jeExtBox *Box, const jeVec3d *Front, const jeVec3d *Back, jeVec3d *Impact, jePlane *Plane);
+	jeBoolean (*ChangeBoxCollision)(const jeBSP *BSP, const jeVec3d *Pos, const jeExtBox *FrontBox, const jeExtBox *BackBox, jeExtBox *ImpactBox, jePlane *Plane);
+	jeBoolean (*RayIntersectsBrushes)(const jeBSP *BSP, const jeVec3d *Front, const jeVec3d *Back, jeBrushRayInfo *Info);
+	const jeBSP_DebugInfo* (*GetDebugInfo)(const jeBSP *BSPTree);
+} BSP_Proxy;
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

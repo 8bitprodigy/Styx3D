@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{ba263523-5238-4141-af49-aafa021f0079}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Makers">
+      <UniqueIdentifier>{2476dd0c-5bfa-4f67-8350-f4ff4d9ed55b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{d329e17a-3569-4d59-8d70-94091cd29894}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{23a68549-bd89-4216-aa22-3fbadcc4f068}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;cnt;rtf;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="Help Files">
+      <UniqueIdentifier>{8cfa0c5d-32d3-4813-b74c-8c13570a1164}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AStudio\AOptions.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\AProject.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\Util\Array.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\AStudio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\BodyDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\Util\FilePath.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\LogoPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\make.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\MakeHelp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\MaterialsDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\MotionsDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\mxscript.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\MyFileDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\NewPrjDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\PathsDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\PropPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\PropSheet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\Util\Rcstring.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\SettingsDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\StdAfx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\TargetDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\TextInputDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\Util\Util.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mop\Log.c">
+      <Filter>Source Files\Makers</Filter>
+    </ClCompile>
+    <ClCompile Include="common\maxmath.c">
+      <Filter>Source Files\Makers</Filter>
+    </ClCompile>
+    <ClCompile Include="mkactor\mkactor.c">
+      <Filter>Source Files\Makers</Filter>
+    </ClCompile>
+    <ClCompile Include="mkbody\mkbody.cpp">
+      <Filter>Source Files\Makers</Filter>
+    </ClCompile>
+    <ClCompile Include="mkmotion\mkmotion.c">
+      <Filter>Source Files\Makers</Filter>
+    </ClCompile>
+    <ClCompile Include="mop\mopshell.c">
+      <Filter>Source Files\Makers</Filter>
+    </ClCompile>
+    <ClCompile Include="mop\pop.c">
+      <Filter>Source Files\Makers</Filter>
+    </ClCompile>
+    <ClCompile Include="common\TDBody.c">
+      <Filter>Source Files\Makers</Filter>
+    </ClCompile>
+    <ClCompile Include="mkbody\vph.c">
+      <Filter>Source Files\Makers</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="AStudio\AStudio.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="mop\Log.h">
+      <Filter>Source Files\Makers</Filter>
+    </ClInclude>
+    <ClInclude Include="common\maxmath.h">
+      <Filter>Source Files\Makers</Filter>
+    </ClInclude>
+    <ClInclude Include="mkactor\mkactor.h">
+      <Filter>Source Files\Makers</Filter>
+    </ClInclude>
+    <ClInclude Include="mkbody\mkbody.h">
+      <Filter>Source Files\Makers</Filter>
+    </ClInclude>
+    <ClInclude Include="mkmotion\mkmotion.h">
+      <Filter>Source Files\Makers</Filter>
+    </ClInclude>
+    <ClInclude Include="mop\mopshell.h">
+      <Filter>Source Files\Makers</Filter>
+    </ClInclude>
+    <ClInclude Include="mop\pop.h">
+      <Filter>Source Files\Makers</Filter>
+    </ClInclude>
+    <ClInclude Include="mkbody\vph.h">
+      <Filter>Source Files\Makers</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\AOptions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\AProject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\Util\Array.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\AStudio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\BodyDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\Util\FilePath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\LogoPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\make.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\MakeHelp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\MaterialsDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\MotionsDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\mxscript.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\MyFileDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\NewPrjDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\PathsDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\PropPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\PropSheet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\Util\Rcstring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\SettingsDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\StdAfx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\TargetDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\TextInputDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\Util\Util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AStudio\Res\Actview.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="AStudio\Res\AStudio.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="AStudio\Res\AStudio.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="AStudio\Hlp\AfxDlg.rtf">
+      <Filter>Help Files</Filter>
+    </None>
+    <None Include="AStudio\Hlp\AStudio.cnt">
+      <Filter>Help Files</Filter>
+    </None>
+    <None Include="AStudio\MakeHelp.bat">
+      <Filter>Help Files</Filter>
+    </None>
+    <None Include="AStudio.dep" />
+    <None Include="AStudio.mak" />
+    <None Include="AStudio\FileFormat.txt" />
+  </ItemGroup>
+</Project>

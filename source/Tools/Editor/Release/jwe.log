@@ -1,0 +1,266 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8028: The intermediate directory (Release\) contains files shared from another project (jDesignerClassic10.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Copying contents file...
+          1 file(s) copied.
+  Brush.c
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\Brush.c(53,2): warning C4091: 'typedef ': ignored on left of '<unnamed-enum-BRUSH_GLOBAL_UPDATEGROUP_ID>' when no variable is declared
+  BrushList.c
+  BrushTemplate.c
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\BrushTemplate.c(1565,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  CameraList.c
+  CamObj.c
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\EditMsg.h(38,2): warning C4091: 'typedef ': ignored on left of '<unnamed-enum-JETEDITOR_GET_JEBRUSH>' when no variable is declared
+  Class.c
+  Descriptor.c
+  Draw.c
+  Draw3d.c
+  What does this UID do?
+  Facelist.c
+  Group.c
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\Group.c(435,6): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\Group.c(436,6): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  GroupList.c
+  Light.c
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\Light.c(59,2): warning C4091: 'typedef ': ignored on left of '<unnamed-enum-LIGHT_GLOBAL_UPDATEGROUP_ID>' when no variable is declared
+  Temporary Add and Remove from world to update lights.
+  LightList.c
+  MaterialIdentList.c
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\MaterialIdentList.c(63,7): warning C4996: 'stricmp': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _stricmp. See online help for details.
+  MaterialList.c
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\MaterialList.c(124,2): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  MaterialList2.c
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\MaterialList2.c(95,7): warning C4996: 'strnicmp': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _strnicmp. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\MaterialList2.c(151,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\MaterialList2.c(174,3): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\MaterialList2.c(175,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\MaterialList2.c(176,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\MaterialList2.c(190,3): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\MaterialList2.c(362,4): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  Materials.c
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\Materials.c(93,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\Materials.c(94,2): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\Materials.c(95,2): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\Materials.c(176,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\Materials.c(177,2): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\Materials.c(178,2): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\Materials.c(189,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\Materials.c(285,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\Materials.c(286,2): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\Materials.c(287,2): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  MatrArray.c
+  MatrIdx.c
+  Generating Code...
+  Compiling...
+  Model.c
+  modellist.c
+  Object.c
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\Object.c(258,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\Object.c(260,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\Object.c(254,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  ObjectList.c
+  Ortho.c
+  Select.c
+  Jet3D will give face * here
+  Later add selection size and maybe rotation here
+  TernList.c
+  TerrnObj.c
+  Transform.c
+  Undo.c
+  UserObj.c
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\EditMsg.h(38,2): warning C4091: 'typedef ': ignored on left of '<unnamed-enum-JETEDITOR_GET_JEBRUSH>' when no variable is declared
+  Vertlist.c
+  Bmp.c
+  Dlist.c
+  DrawTool.c
+  Drvlist.c
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Util\Drvlist.c(151,10): warning C4996: 'strnicmp': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _strnicmp. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Util\Drvlist.c(262,5): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Util\Drvlist.c(281,6): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Util\Drvlist.c(284,11): warning C4996: 'stricmp': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _stricmp. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Util\Drvlist.c(375,18): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Util\Drvlist.c(386,16): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  jeList.c
+  Rect.c
+  Spawn.c
+  Util.c
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Util\Util.c(92,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Util\Util.c(182,3): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Util\Util.c(422,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Util\Util.c(423,2): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Util\Util.c(421,2): warning C4996: '_splitpath': This function or variable may be unsafe. Consider using _splitpath_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Util\Util.c(432,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Util\Util.c(433,2): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Util\Util.c(431,2): warning C4996: '_splitpath': This function or variable may be unsafe. Consider using _splitpath_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Util\Util.c(453,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Util\Util.c(454,2): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Util\Util.c(455,2): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Util\Util.c(452,2): warning C4996: '_splitpath': This function or variable may be unsafe. Consider using _splitpath_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  Generating Code...
+  Level.cpp
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\Level.cpp(570,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\Level.cpp(571,2): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\Level.cpp(576,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\Level.cpp(577,2): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\Level.cpp(582,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\Level.cpp(583,2): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\Level.cpp(589,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Core\Level.cpp(590,2): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  Need to make Rotate Snap size save also
+  Need to make should snap verts save also
+  should the current selection be loaded
+  We need to save the groups!
+  J3DApp.cpp
+  J3DDoc.cpp
+  J3DMainFrm.cpp
+  J3DView.cpp
+  AddModel.cpp
+  builderbutton.cpp
+  buildercombo.cpp
+  builderedit.cpp
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\builderedit.cpp(160,3): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\builderedit.cpp(140,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  buildspin.cpp
+  DialogBuilderDlg.cpp
+  Hack to eliminate arrow problems. Still don't know what causes thsis (REMOVED JH 26.3.2000)
+  disclaimer.cpp
+  DlgAutorecover.cpp
+  Empty.cpp
+  globalmaterials.cpp
+  Groups.cpp
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Groups.cpp(770,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Groups.cpp(776,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Groups.cpp(778,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Groups.cpp(926,7): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Groups.cpp(902,13): warning C4996: 'stricmp': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _stricmp. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Groups.cpp(985,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Groups.cpp(991,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Groups.cpp(993,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  Jeterr.cpp
+  Lists.cpp
+  materialstatic.cpp
+  Models.cpp
+  [Small bug - 7.3.2000 JH] When adding a model, animation is turned off, but the state of the toolbar-anim-button is unchanged....[EOFBUG]
+  Generating Code...
+  Compiling...
+  Paredit.cpp
+  Preferences.cpp
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Preferences.cpp(87,7): warning C4838: conversion from 'int' to 'UINT' requires a narrowing conversion
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Preferences.cpp(434,65): warning C4996: '_itoa': This function or variable may be unsafe. Consider using _itoa_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Preferences.cpp(505,48): warning C4996: '_itoa': This function or variable may be unsafe. Consider using _itoa_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Preferences.cpp(1072,4): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Preferences.cpp(1075,4): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Preferences.cpp(1132,11): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Preferences.cpp(1166,11): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Preferences.cpp(1182,14): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Preferences.cpp(1190,13): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  PressKey.cpp
+  Properties.cpp
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Properties.cpp(292,35): warning C4996: '_itoa': This function or variable may be unsafe. Consider using _itoa_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Properties.cpp(542,36): warning C4996: '_itoa': This function or variable may be unsafe. Consider using _itoa_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  Rebuild.cpp
+  Render.cpp
+  Stats.cpp
+  TexturesDlg.cpp
+  Timeline.cpp
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Timeline.cpp(116,2): warning C4091: 'typedef ': ignored on left of 'ChannelDef' when no variable is declared
+  Validate Time line properties here
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Timeline.cpp(622,4): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Timeline.cpp(704,5): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Timeline.cpp(2910,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Timeline.cpp(3102,5): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Timeline.cpp(3068,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Timeline.cpp(3090,4): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Timeline.cpp(3129,4): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Timeline.cpp(3144,4): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Timeline.cpp(3160,4): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Timeline.cpp(3219,7): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Timeline.cpp(3221,7): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Timeline.cpp(3223,7): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Timeline.cpp(3225,7): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Timeline.cpp(3230,8): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Timeline.cpp(3966,6): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Timeline.cpp(3974,6): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Timeline.cpp(4010,3): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Timeline.cpp(4042,4): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Timeline.cpp(4018,5): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Dialogs\Timeline.cpp(4019,8): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  BitmapResize.cpp
+  ColorButton.cpp
+  ColorPopup.cpp
+  DropFileArray.cpp
+  MyBar.cpp
+  MyDropTarget.cpp
+  scbarcf.cpp
+  scbarg.cpp
+  sizecbar.cpp
+  TextureListControl.cpp
+  TextureTreeControl.cpp
+  Generating Code...
+  Compiling...
+  Thin3DSplitterWnd.cpp
+  Mtl9937.cpp
+  Noise.cpp
+  Generating Code...
+  AppData.cpp
+  BtnST.cpp
+  ChildFrm.cpp
+  CIconTabCtrl.cpp
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\CIconTabCtrl.cpp(111,5): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  CMaterial.cpp
+  CTextToolBar.cpp
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\CTextToolBar.cpp(75,21): warning C4996: '_tcstok': This function or variable may be unsafe. Consider using _tcstok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\CTextToolBar.cpp(80,22): warning C4996: '_tcstok': This function or variable may be unsafe. Consider using _tcstok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  Doc.cpp
+  log and deal with err
+  Make new brush snap to grid
+  bCopy NZ means undo create at new location
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Doc.cpp(2960,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Doc.cpp(2965,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Doc.cpp(3169,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Doc.cpp(3461,3): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Doc.cpp(3463,2): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Doc.cpp(4500,3): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Doc.cpp(4620,16): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  Docbars.cpp
+  DocManagerEx.cpp
+  DragTree.cpp
+  ExtFileDialog.cpp
+  GroupBar.cpp
+  grouptreectrl.cpp
+  jetdialog.cpp
+  JetView.cpp
+  what happens when GetCamera fails?
+  Jwe.cpp
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Jwe.cpp(306,5): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Jwe.cpp(307,5): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Jwe.cpp(308,5): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Jwe.cpp(732,9): warning C4996: 'stricmp': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _stricmp. See online help for details.
+  label.cpp
+  MainFrm.cpp
+  MfcUtil.cpp
+  MsgLog.cpp
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\MsgLog.cpp(111,18): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\MsgLog.cpp(203,6): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\MsgLog.cpp(209,6): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\MsgLog.cpp(214,6): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\MsgLog.cpp(220,6): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\MsgLog.cpp(226,6): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\MsgLog.cpp(232,6): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\MsgLog.cpp(237,6): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\MsgLog.cpp(256,2): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\MsgLog.cpp(286,18): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  Settings.cpp
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Settings.cpp(613,2): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Settings.cpp(675,2): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Settings.cpp(681,2): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Settings.cpp(686,2): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Settings.cpp(694,2): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Settings.cpp(700,2): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Settings.cpp(708,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Settings.cpp(717,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\Settings.cpp(765,2): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  StdAfx.cpp
+  TreeCtrlEx.cpp
+  View.cpp
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\Editor\View.cpp(438,5): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  WndReg.cpp
+  jwe.vcxproj -> D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\bin\jDesignerClassic11.exe

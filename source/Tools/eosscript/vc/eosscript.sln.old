@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "eosscript", "eosscript.vcproj", "{3479A4D7-1C5B-479C-93D9-218D8A178551}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{3479A4D7-1C5B-479C-93D9-218D8A178551}.Debug.ActiveCfg = Debug|Win32
+		{3479A4D7-1C5B-479C-93D9-218D8A178551}.Debug.Build.0 = Debug|Win32
+		{3479A4D7-1C5B-479C-93D9-218D8A178551}.Release.ActiveCfg = Release|Win32
+		{3479A4D7-1C5B-479C-93D9-218D8A178551}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

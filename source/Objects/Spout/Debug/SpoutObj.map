@@ -1,0 +1,931 @@
+ SpoutObj
+
+ Timestamp is 643b68d4 (Sat Apr 15 20:17:40 2023)
+
+ Preferred load address is 10000000
+
+ Start         Length     Name                   Class
+ 0001:00000000 0000d201H .text$mn                CODE
+ 0002:00000000 00000104H .CRT$XCA                DATA
+ 0002:00000104 00000104H .CRT$XCZ                DATA
+ 0002:00000208 00000104H .CRT$XIA                DATA
+ 0002:0000030c 00000104H .CRT$XIZ                DATA
+ 0002:00000410 00000104H .CRT$XPA                DATA
+ 0002:00000514 00000104H .CRT$XPZ                DATA
+ 0002:00000618 00000104H .CRT$XTA                DATA
+ 0002:0000071c 00000104H .CRT$XTZ                DATA
+ 0002:00000820 000019e0H .rdata                  DATA
+ 0002:00002200 00000180H .rdata$CastGuardVftablesA DATA
+ 0002:00002380 0000014cH .rdata$CastGuardVftablesC DATA
+ 0002:000024cc 0000010cH .rdata$sxdata           DATA
+ 0002:000025d8 0000019cH .rdata$zzzdbg           DATA
+ 0002:00002774 00000104H .rtc$IAA                DATA
+ 0002:00002878 0000010cH .rtc$IMZ                DATA
+ 0002:00002984 00000104H .rtc$IZZ                DATA
+ 0002:00002a88 00000104H .rtc$TAA                DATA
+ 0002:00002b8c 0000010cH .rtc$TMZ                DATA
+ 0002:00002c98 00000108H .rtc$TZZ                DATA
+ 0002:00002da0 000001d0H .xdata$x                DATA
+ 0002:00002f70 00000162H .edata                  DATA
+ 0003:00000000 00000290H .data                   DATA
+ 0003:00000290 00000d54H .bss                    DATA
+ 0004:00000000 00000304H .idata$5                DATA
+ 0004:00000304 00000064H .idata$2                DATA
+ 0004:00000368 00000014H .idata$3                DATA
+ 0004:0000037c 00000304H .idata$4                DATA
+ 0004:00000680 00000cd1H .idata$6                DATA
+ 0005:00000000 0000010eH .00cfg                  DATA
+ 0006:00000000 00000240H .rsrc$01                DATA
+ 0006:00000240 00000533H .rsrc$02                DATA
+
+  Address         Publics by Value              Rva+Base       Lib:Object
+
+ 0000:00000000       ___AbsoluteZero            00000000     <absolute>
+ 0000:00000000       ___arm64x_extra_rfe_table  00000000     <absolute>
+ 0000:00000000       ___arm64x_extra_rfe_table_size 00000000     <absolute>
+ 0000:00000000       ___arm64x_native_entrypoint 00000000     <absolute>
+ 0000:00000000       ___arm64x_redirection_metadata 00000000     <absolute>
+ 0000:00000000       ___arm64x_redirection_metadata_count 00000000     <absolute>
+ 0000:00000000       ___dynamic_value_reloc_table 00000000     <absolute>
+ 0000:00000000       ___enclave_config          00000000     <absolute>
+ 0000:00000000       ___guard_check_icall_a64n_fptr 00000000     <absolute>
+ 0000:00000000       ___guard_eh_cont_count     00000000     <absolute>
+ 0000:00000000       ___guard_eh_cont_table     00000000     <absolute>
+ 0000:00000000       ___guard_fids_count        00000000     <absolute>
+ 0000:00000000       ___guard_fids_table        00000000     <absolute>
+ 0000:00000000       ___guard_iat_count         00000000     <absolute>
+ 0000:00000000       ___guard_iat_table         00000000     <absolute>
+ 0000:00000000       ___guard_longjmp_count     00000000     <absolute>
+ 0000:00000000       ___guard_longjmp_table     00000000     <absolute>
+ 0000:00000000       ___hybrid_auxiliary_iat    00000000     <absolute>
+ 0000:00000000       ___hybrid_auxiliary_iat_copy 00000000     <absolute>
+ 0000:00000000       ___hybrid_code_map         00000000     <absolute>
+ 0000:00000000       ___hybrid_code_map_count   00000000     <absolute>
+ 0000:00000000       ___volatile_metadata       00000000     <absolute>
+ 0000:00000000       ___x64_code_ranges_to_entry_points 00000000     <absolute>
+ 0000:00000000       ___x64_code_ranges_to_entry_points_count 00000000     <absolute>
+ 0000:00000002       ___safe_se_handler_count   00000002     <absolute>
+ 0000:00000100       ___guard_flags             00000100     <absolute>
+ 0000:00000000       ___ImageBase               10000000     <linker-defined>
+ 0001:00000540       _DllMain@12                10001540 f   ObjectDef.obj
+ 0001:000005d0       _Object_RegisterDef        100015d0 f   ObjectDef.obj
+ 0001:00000650       _AddChild@8                10001650 f   Spout.obj
+ 0001:00000670       _AttachEngine@8            10001670 f   Spout.obj
+ 0001:000008a0       _AttachSoundSystem@8       100018a0 f   Spout.obj
+ 0001:00000950       _AttachWorld@8             10001950 f   Spout.obj
+ 0001:00000b20       _ChangeBoxCollision@24     10001b20 f   Spout.obj
+ 0001:00000b40       _Collision@24              10001b40 f   Spout.obj
+ 0001:00000c20       _CreateFromFile@8          10001c20 f   Spout.obj
+ 0001:00001450       _CreateInstance@0          10002450 f   Spout.obj
+ 0001:000018f0       _CreateRef@4               100028f0 f   Spout.obj
+ 0001:00001980       _DeInit_Class              10002980 f   Spout.obj
+ 0001:00001a90       _Destroy@4                 10002a90 f   Spout.obj
+ 0001:00001d80       _DettachEngine@8           10002d80 f   Spout.obj
+ 0001:00001f50       _DettachSoundSystem@8      10002f50 f   Spout.obj
+ 0001:00002000       _DettachWorld@8            10003000 f   Spout.obj
+ 0001:00002150       _EditDialog@8              10003150 f   Spout.obj
+ 0001:00002170       _Frame@8                   10003170 f   Spout.obj
+ 0001:00002740       _GetChildren@12            10003740 f   Spout.obj
+ 0001:00002760       _GetExtBox@8               10003760 f   Spout.obj
+ 0001:00002880       _GetPropertyList@8         10003880 f   Spout.obj
+ 0001:00002e60       _GetXForm@8                10003e60 f   Spout.obj
+ 0001:00002f30       _GetXFormModFlags@4        10003f30 f   Spout.obj
+ 0001:00002f50       _Init_Class                10003f50 f   Spout.obj
+ 0001:00003e20       _RemoveChild@8             10004e20 f   Spout.obj
+ 0001:00003e40       _Render@24                 10004e40 f   Spout.obj
+ 0001:00003ff0       _SendAMessage@12           10004ff0 f   Spout.obj
+ 0001:00004010       _SetProperty@16            10005010 f   Spout.obj
+ 0001:000052a0       _SetXForm@8                100062a0 f   Spout.obj
+ 0001:00007ad0       _Util_SetArtSize           10008ad0 f   Spout.obj
+ 0001:00007f60       _WriteToFile@12            10008f60 f   Spout.obj
+ 0001:000083d0       _jeObject_RegisterGlobalObjectDef@4 100093d0 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000083d6       _jeVFile_CreateFinder@8    100093d6 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000083dc       _jeVFile_DestroyFinder@4   100093dc f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000083e2       _jeVFile_FinderGetNextFile@4 100093e2 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000083e8       _jeVFile_FinderGetProperties@8 100093e8 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000083ee       _jeVFile_OpenNewSystem@20  100093ee f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000083f4       _jeVFile_Open@12           100093f4 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000083fa       _jeVFile_Close@4           100093fa f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00008400       _jeVFile_Read@12           10009400 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00008406       _jeVFile_Write@12          10009406 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000840c       _jeVFile_Seek@12           1000940c f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00008412       _jeVec3d_Set@16            10009412 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00008418       _jeVec3d_Normalize@4       10009418 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000841e       _jeVec3d_Scale@12          1000941e f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00008424       _jeProperty_ListCopy@4     10009424 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000842a       _jeProperty_FillGroup@12   1000942a f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00008430       _jeProperty_FillCheck@16   10009430 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00008436       _jeProperty_FillColorGroup@16 10009436 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000843c       _jeProperty_FillFloat@28   1000943c f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00008442       _jeProperty_FillGroupEnd@8 10009442 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00008448       _jeProperty_FillColorPicker@16 10009448 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000844e       _jeProperty_FillCombo@24   1000944e f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00008454       __jeRam_DebugAllocate@12   10009454 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000845a       _jeRam_AllocateClear@4     1000945a f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00008460       _jeRam_Free_@4             10009460 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00008466       _jeResource_MgrDestroy@4   10009466 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000846c       _jeResource_GetVFile@8     1000946c f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00008472       _jeResource_DeleteVFile@8  10009472 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00008478       _jeBitmap_CreateFromFile@4 10009478 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000847e       _jeBitmap_Destroy@4        1000947e f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00008484       _jeBitmap_SetColorKey@16   10009484 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000848a       _jeBitmap_SetAlpha@8       1000948a f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00008490       _jeBitmap_Width@4          10009490 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00008496       _jeBitmap_Height@4         10009496 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000849c       _jeXForm3d_Copy@8          1000949c f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000084a2       _jeXForm3d_SetIdentity@4   100094a2 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000084a8       _jeXForm3d_RotateX@8       100094a8 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000084ae       _jeXForm3d_RotateZ@8       100094ae f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000084b4       _jeXForm3d_GetUp@8         100094b4 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000084ba       _jeEngine_AddBitmap@12     100094ba f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000084c0       _jeEngine_RemoveBitmap@8   100094c0 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000084c6       _jeMaterialSpec_Create@8   100094c6 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000084cc       _jeMaterialSpec_Destroy@4  100094cc f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000084d2       _jeMaterialSpec_AddLayerFromBitmap@16 100094d2 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000084d8       _jeMaterialSpec_GetLayerBitmap@8 100094d8 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000084de       _jeExtBox_IsValid@4        100094de f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000084e4       _jeExtBox_Translate@16     100094e4 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000084ea       _jeUserPoly_CreateQuad@24  100094ea f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000084f0       _jeUserPoly_Destroy@4      100094f0 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000084f6       _jeWorld_AddUserPoly@12    100094f6 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000084fc       _jeWorld_GetResourceMgr@4  100094fc f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00008502       _jeParticle_SystemAddParticle@36 10009502 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00008508       _jeParticle_SystemFrame@8  10009508 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000850e       _jeParticle_SystemCreate@8 1000950e f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00008514       _jeParticle_SystemDestroy@4 10009514 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000851a       _jeParticle_SystemRemoveAll@4 1000951a f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00008520       _jeErrorLog_AddExplicit@24 10009520 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00008526       _OutputDebugStringA@4      10009526 f   kernel32:KERNEL32.dll
+ 0001:0000852c       _LoadStringA@16            1000952c f   user32:USER32.dll
+ 0001:00008540       @_RTC_AllocaHelper@12      10009540 f   MSVCRTD:stack.obj
+ 0001:00008580       @_RTC_CheckStackVars2@12   10009580 f   MSVCRTD:stack.obj
+ 0001:00008690       @_RTC_CheckStackVars@8     10009690 f   MSVCRTD:stack.obj
+ 0001:00008700       __RTC_CheckEsp             10009700 f   MSVCRTD:stack.obj
+ 0001:00008730       __CRT_RTC_INIT             10009730 f   MSVCRTD:init.obj
+ 0001:00008740       __CRT_RTC_INITW            10009740 f   MSVCRTD:init.obj
+ 0001:00008750       __RTC_InitBase             10009750 f   MSVCRTD:init.obj
+ 0001:00008790       __RTC_Shutdown             10009790 f   MSVCRTD:init.obj
+ 0001:000087b0       @__security_check_cookie@4 100097b0 f   MSVCRTD:secchk.obj
+ 0001:00008dd0       __CRT_INIT@12              10009dd0 f   MSVCRTD:dll_dllmain.obj
+ 0001:00008df0       __DllMainCRTStartup@12     10009df0 f   MSVCRTD:dll_dllmain.obj
+ 0001:00008ed0       ?_RTC_AllocaFailure@@YAXPAXPAU_RTC_ALLOCA_NODE@@H@Z 10009ed0 f   MSVCRTD:error.obj
+ 0001:00008ff0       ?_RTC_Failure@@YAXPAXH@Z   10009ff0 f   MSVCRTD:error.obj
+ 0001:00009060       ?_RTC_StackFailure@@YAXPAXPBD@Z 1000a060 f   MSVCRTD:error.obj
+ 0001:00009510       __RTC_UninitUse            1000a510 f   MSVCRTD:error.obj
+ 0001:000095f0       ___local_stdio_printf_options 1000a5f0 f i MSVCRTD:error.obj
+ 0001:00009600       __vsprintf_s_l             1000a600 f i MSVCRTD:error.obj
+ 0001:00009640       _sprintf_s                 1000a640 f i MSVCRTD:error.obj
+ 0001:00009670       ?_RTC_GetErrorFunc@@YAP6AHHPBDH00ZZPBX@Z 1000a670 f   MSVCRTD:userapi.obj
+ 0001:00009680       ?_RTC_GetErrorFuncW@@YAP6AHHPB_WH00ZZPBX@Z 1000a680 f   MSVCRTD:userapi.obj
+ 0001:00009690       __RTC_GetErrDesc           1000a690 f   MSVCRTD:userapi.obj
+ 0001:000096b0       __RTC_NumErrors            1000a6b0 f   MSVCRTD:userapi.obj
+ 0001:000096c0       __RTC_SetErrorFunc         1000a6c0 f   MSVCRTD:userapi.obj
+ 0001:000096f0       __RTC_SetErrorFuncW        1000a6f0 f   MSVCRTD:userapi.obj
+ 0001:00009720       __RTC_SetErrorType         1000a720 f   MSVCRTD:userapi.obj
+ 0001:00009750       ___raise_securityfailure   1000a750 f   MSVCRTD:gs_report.obj
+ 0001:00009790       ___report_gsfailure        1000a790 f   MSVCRTD:gs_report.obj
+ 0001:000098e0       ___report_rangecheckfailure 1000a8e0 f   MSVCRTD:gs_report.obj
+ 0001:000098f0       ___report_securityfailure  1000a8f0 f   MSVCRTD:gs_report.obj
+ 0001:00009a00       ___report_securityfailureEx 1000aa00 f   MSVCRTD:gs_report.obj
+ 0001:00009c00       ___security_init_cookie    1000ac00 f   MSVCRTD:gs_support.obj
+ 0001:00009ca0       ?__scrt_initialize_type_info@@YAXXZ 1000aca0 f   MSVCRTD:tncleanup.obj
+ 0001:00009cc0       ?__scrt_uninitialize_type_info@@YAXXZ 1000acc0 f   MSVCRTD:tncleanup.obj
+ 0001:00009ce0       ___local_stdio_scanf_options 1000ace0 f i MSVCRTD:default_local_stdio_options.obj
+ 0001:00009cf0       ___scrt_initialize_default_local_stdio_options 1000acf0 f   MSVCRTD:default_local_stdio_options.obj
+ 0001:00009d40       ?configure_argv@__scrt_narrow_argv_policy@@SAHXZ 1000ad40 f i MSVCRTD:utility.obj
+ 0001:00009e10       ?initialize_environment@__scrt_narrow_environment_policy@@SAHXZ 1000ae10 f i MSVCRTD:utility.obj
+ 0001:00009eb0       _NtCurrentTeb              1000aeb0 f i MSVCRTD:utility.obj
+ 0001:00009ec0       ___scrt_acquire_startup_lock 1000aec0 f   MSVCRTD:utility.obj
+ 0001:00009f20       ___scrt_dllmain_after_initialize_c 1000af20 f   MSVCRTD:utility.obj
+ 0001:00009f60       ___scrt_dllmain_before_initialize_c 1000af60 f   MSVCRTD:utility.obj
+ 0001:00009f90       ___scrt_dllmain_crt_thread_attach 1000af90 f   MSVCRTD:utility.obj
+ 0001:00009fd0       ___scrt_dllmain_crt_thread_detach 1000afd0 f   MSVCRTD:utility.obj
+ 0001:00009ff0       ___scrt_dllmain_exception_filter 1000aff0 f   MSVCRTD:utility.obj
+ 0001:0000a050       ___scrt_dllmain_uninitialize_c 1000b050 f   MSVCRTD:utility.obj
+ 0001:0000a090       ___scrt_dllmain_uninitialize_critical 1000b090 f   MSVCRTD:utility.obj
+ 0001:0000a0b0       ___scrt_initialize_crt     1000b0b0 f   MSVCRTD:utility.obj
+ 0001:0000a110       ___scrt_initialize_onexit_tables 1000b110 f   MSVCRTD:utility.obj
+ 0001:0000a220       ___scrt_is_nonwritable_in_current_image 1000b220 f   MSVCRTD:utility.obj
+ 0001:0000a3a0       ___scrt_release_startup_lock 1000b3a0 f   MSVCRTD:utility.obj
+ 0001:0000a3d0       ___scrt_uninitialize_crt   1000b3d0 f   MSVCRTD:utility.obj
+ 0001:0000a420       __onexit                   1000b420 f   MSVCRTD:utility.obj
+ 0001:0000a4a0       _at_quick_exit             1000b4a0 f   MSVCRTD:utility.obj
+ 0001:0000a4f0       _atexit                    1000b4f0 f   MSVCRTD:utility.obj
+ 0001:0000a530       ___scrt_get_dyn_tls_init_callback 1000b530 f   MSVCRTD:dyn_tls_init.obj
+ 0001:0000a540       ___scrt_fastfail           1000b540 f   MSVCRTD:utility_desktop.obj
+ 0001:0000a6d0       ___scrt_get_show_window_mode 1000b6d0 f   MSVCRTD:utility_desktop.obj
+ 0001:0000a720       ___scrt_initialize_mta     1000b720 f   MSVCRTD:utility_desktop.obj
+ 0001:0000a730       ___scrt_initialize_winrt   1000b730 f   MSVCRTD:utility_desktop.obj
+ 0001:0000a740       ___scrt_is_managed_app     1000b740 f   MSVCRTD:utility_desktop.obj
+ 0001:0000a7f0       ___scrt_set_unhandled_exception_filter 1000b7f0 f   MSVCRTD:utility_desktop.obj
+ 0001:0000a810       ___scrt_exe_initialize_mta 1000b810 f   MSVCRTD:utility_desktop.obj
+ 0001:0000a810       ___scrt_stub_for_initialize_mta 1000b810 f   MSVCRTD:utility_desktop.obj
+ 0001:0000a820       ___scrt_unhandled_exception_filter@4 1000b820 f   MSVCRTD:utility_desktop.obj
+ 0001:0000a8c0       __crt_debugger_hook        1000b8c0 f   MSVCRTD:utility_desktop.obj
+ 0001:0000a8e0       __RTC_Initialize           1000b8e0 f   MSVCRTD:initsect.obj
+ 0001:0000a920       __RTC_Terminate            1000b920 f   MSVCRTD:initsect.obj
+ 0001:0000a960       __except_handler4          1000b960 f   MSVCRTD:chandler4gs.obj
+ 0001:0000a9b0       @_guard_check_icall_nop@4  1000b9b0 f i MSVCRTD:guard_support.obj
+ 0001:0000a9c0       _ReadNoFence               1000b9c0 f i MSVCRTD:guard_support.obj
+ 0001:0000a9e0       _ReadPointerNoFence        1000b9e0 f i MSVCRTD:guard_support.obj
+ 0001:0000aa00       ___castguard_check_failure_debugbreak 1000ba00 f i MSVCRTD:guard_support.obj
+ 0001:0000aa20       ___castguard_check_failure_fastfail 1000ba20 f i MSVCRTD:guard_support.obj
+ 0001:0000aa50       ___castguard_check_failure_nop 1000ba50 f i MSVCRTD:guard_support.obj
+ 0001:0000aa60       ___castguard_check_failure_os_handled 1000ba60 f i MSVCRTD:guard_support.obj
+ 0001:0000ab10       ___castguard_slow_path_check_debugbreak 1000bb10 f i MSVCRTD:guard_support.obj
+ 0001:0000ab50       ___castguard_slow_path_check_fastfail 1000bb50 f i MSVCRTD:guard_support.obj
+ 0001:0000aba0       ___castguard_slow_path_check_nop 1000bba0 f i MSVCRTD:guard_support.obj
+ 0001:0000abb0       ___castguard_slow_path_check_os_handled 1000bbb0 f i MSVCRTD:guard_support.obj
+ 0001:0000ac50       __guard_icall_checks_enforced 1000bc50 f i MSVCRTD:guard_support.obj
+ 0001:0000b230       ?_RTC_GetSrcLine@@YAHPAEPA_WKPAH1K@Z 1000c230 f   MSVCRTD:pdblkup.obj
+ 0001:0000b690       __except_handler4_noexcept 1000c690 f   MSVCRTD:chandler4_noexcept.obj
+ 0001:0000b710       ___isa_available_init      1000c710 f   MSVCRTD:cpu_disp.obj
+ 0001:0000bb10       __get_startup_argv_mode    1000cb10 f   MSVCRTD:argv_mode.obj
+ 0001:0000bb20       ___scrt_is_ucrt_dll_in_use 1000cb20 f   MSVCRTD:ucrt_detection.obj
+ 0001:0000bb4d       ___std_type_info_destroy_list 1000cb4d f   vcruntimed:VCRUNTIME140D.dll
+ 0001:0000bb53       ___current_exception       1000cb53 f   vcruntimed:VCRUNTIME140D.dll
+ 0001:0000bb59       ___current_exception_context 1000cb59 f   vcruntimed:VCRUNTIME140D.dll
+ 0001:0000bb5f       _memset                    1000cb5f f   vcruntimed:VCRUNTIME140D.dll
+ 0001:0000bb65       __except_handler4_common   1000cb65 f   vcruntimed:VCRUNTIME140D.dll
+ 0001:0000bb6b       ___vcrt_GetModuleFileNameW 1000cb6b f   vcruntimed:VCRUNTIME140D.dll
+ 0001:0000bb71       ___vcrt_GetModuleHandleW   1000cb71 f   vcruntimed:VCRUNTIME140D.dll
+ 0001:0000bb77       ___vcrt_LoadLibraryExW     1000cb77 f   vcruntimed:VCRUNTIME140D.dll
+ 0001:0000bb7d       _strcat                    1000cb7d f   ucrtd:ucrtbased.dll
+ 0001:0000bb83       _strcpy                    1000cb83 f   ucrtd:ucrtbased.dll
+ 0001:0000bb89       _strlen                    1000cb89 f   ucrtd:ucrtbased.dll
+ 0001:0000bb8f       _rand                      1000cb8f f   ucrtd:ucrtbased.dll
+ 0001:0000bb95       __wassert                  1000cb95 f   ucrtd:ucrtbased.dll
+ 0001:0000bb9b       __CrtDbgReport             1000cb9b f   ucrtd:ucrtbased.dll
+ 0001:0000bba1       __CrtDbgReportW            1000cba1 f   ucrtd:ucrtbased.dll
+ 0001:0000bba7       __initterm                 1000cba7 f   ucrtd:ucrtbased.dll
+ 0001:0000bbad       __initterm_e               1000cbad f   ucrtd:ucrtbased.dll
+ 0001:0000bbb3       _strcpy_s                  1000cbb3 f   ucrtd:ucrtbased.dll
+ 0001:0000bbb9       _strcat_s                  1000cbb9 f   ucrtd:ucrtbased.dll
+ 0001:0000bbbf       ___stdio_common_vsprintf_s 1000cbbf f   ucrtd:ucrtbased.dll
+ 0001:0000bbc5       __seh_filter_dll           1000cbc5 f   ucrtd:ucrtbased.dll
+ 0001:0000bbcb       __configure_narrow_argv    1000cbcb f   ucrtd:ucrtbased.dll
+ 0001:0000bbd1       __initialize_narrow_environment 1000cbd1 f   ucrtd:ucrtbased.dll
+ 0001:0000bbd7       __initialize_onexit_table  1000cbd7 f   ucrtd:ucrtbased.dll
+ 0001:0000bbdd       __register_onexit_function 1000cbdd f   ucrtd:ucrtbased.dll
+ 0001:0000bbe3       __execute_onexit_table     1000cbe3 f   ucrtd:ucrtbased.dll
+ 0001:0000bbe9       __crt_atexit               1000cbe9 f   ucrtd:ucrtbased.dll
+ 0001:0000bbef       __crt_at_quick_exit        1000cbef f   ucrtd:ucrtbased.dll
+ 0001:0000bbf5       __cexit                    1000cbf5 f   ucrtd:ucrtbased.dll
+ 0001:0000bbfb       _terminate                 1000cbfb f   ucrtd:ucrtbased.dll
+ 0001:0000bc01       __wmakepath_s              1000cc01 f   ucrtd:ucrtbased.dll
+ 0001:0000bc07       __wsplitpath_s             1000cc07 f   ucrtd:ucrtbased.dll
+ 0001:0000bc0d       _wcscpy_s                  1000cc0d f   ucrtd:ucrtbased.dll
+ 0001:0000bc13       __stricmp                  1000cc13 f   ucrtd:ucrtbased.dll
+ 0001:0000bc19       __itoa                     1000cc19 f   ucrtd:ucrtbased.dll
+ 0001:0000bc1f       _IsDebuggerPresent@0       1000cc1f f   kernel32:KERNEL32.dll
+ 0001:0000bc25       _RaiseException@16         1000cc25 f   kernel32:KERNEL32.dll
+ 0001:0000bc2b       _MultiByteToWideChar@24    1000cc2b f   kernel32:KERNEL32.dll
+ 0001:0000bc31       _WideCharToMultiByte@32    1000cc31 f   kernel32:KERNEL32.dll
+ 0001:0000bc37       _UnhandledExceptionFilter@4 1000cc37 f   kernel32:KERNEL32.dll
+ 0001:0000bc3d       _SetUnhandledExceptionFilter@4 1000cc3d f   kernel32:KERNEL32.dll
+ 0001:0000bc43       _GetCurrentProcess@0       1000cc43 f   kernel32:KERNEL32.dll
+ 0001:0000bc49       _TerminateProcess@8        1000cc49 f   kernel32:KERNEL32.dll
+ 0001:0000bc4f       _IsProcessorFeaturePresent@4 1000cc4f f   kernel32:KERNEL32.dll
+ 0001:0000bc55       _QueryPerformanceCounter@4 1000cc55 f   kernel32:KERNEL32.dll
+ 0001:0000bc5b       _GetCurrentProcessId@0     1000cc5b f   kernel32:KERNEL32.dll
+ 0001:0000bc61       _GetCurrentThreadId@0      1000cc61 f   kernel32:KERNEL32.dll
+ 0001:0000bc67       _GetSystemTimeAsFileTime@4 1000cc67 f   kernel32:KERNEL32.dll
+ 0001:0000bc6d       _InitializeSListHead@4     1000cc6d f   kernel32:KERNEL32.dll
+ 0001:0000bc73       _GetStartupInfoW@4         1000cc73 f   kernel32:KERNEL32.dll
+ 0001:0000bc79       _GetModuleHandleW@4        1000cc79 f   kernel32:KERNEL32.dll
+ 0001:0000bc7f       _GetLastError@0            1000cc7f f   kernel32:KERNEL32.dll
+ 0001:0000bc85       _HeapAlloc@12              1000cc85 f   kernel32:KERNEL32.dll
+ 0001:0000bc8b       _HeapFree@12               1000cc8b f   kernel32:KERNEL32.dll
+ 0001:0000bc91       _GetProcessHeap@0          1000cc91 f   kernel32:KERNEL32.dll
+ 0001:0000bc97       _VirtualQuery@12           1000cc97 f   kernel32:KERNEL32.dll
+ 0001:0000bc9d       _FreeLibrary@4             1000cc9d f   kernel32:KERNEL32.dll
+ 0001:0000bca3       _GetProcAddress@8          1000cca3 f   kernel32:KERNEL32.dll
+ 0001:0000bcb0       ___acrt_initialize         1000ccb0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000bcb0       ___scrt_stub_for_acrt_initialize 1000ccb0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000bcb0       ___vcrt_initialize         1000ccb0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000bcc0       ___acrt_thread_attach      1000ccc0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000bcc0       ___scrt_stub_for_acrt_thread_attach 1000ccc0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000bcc0       ___vcrt_thread_attach      1000ccc0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000bcd0       ___acrt_thread_detach      1000ccd0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000bcd0       ___scrt_stub_for_acrt_thread_detach 1000ccd0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000bcd0       ___vcrt_thread_detach      1000ccd0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000bce0       ___acrt_uninitialize       1000cce0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000bce0       ___scrt_stub_for_acrt_uninitialize 1000cce0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000bce0       ___vcrt_uninitialize       1000cce0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000bcf0       ___acrt_uninitialize_critical 1000ccf0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000bcf0       ___scrt_stub_for_acrt_uninitialize_critical 1000ccf0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000bcf0       ___vcrt_uninitialize_critical 1000ccf0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000bd00       ___scrt_stub_for_is_c_termination_complete 1000cd00 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000bd00       __is_c_termination_complete 1000cd00 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000bd10       __filter_x86_sse2_floating_point_exception 1000cd10 f   MSVCRTD:x86_exception_filter.obj
+ 0001:0000bd10       __filter_x86_sse2_floating_point_exception_default 1000cd10 f   MSVCRTD:x86_exception_filter.obj
+ 0002:00000000       ___xc_a                    1000f000     MSVCRTD:initializers.obj
+ 0002:00000104       ___xc_z                    1000f104     MSVCRTD:initializers.obj
+ 0002:00000208       ___xi_a                    1000f208     MSVCRTD:initializers.obj
+ 0002:0000030c       ___xi_z                    1000f30c     MSVCRTD:initializers.obj
+ 0002:00000410       ___xp_a                    1000f410     MSVCRTD:initializers.obj
+ 0002:00000514       ___xp_z                    1000f514     MSVCRTD:initializers.obj
+ 0002:00000618       ___xt_a                    1000f618     MSVCRTD:initializers.obj
+ 0002:0000071c       ___xt_z                    1000f71c     MSVCRTD:initializers.obj
+ 0002:00000820       ??_C@_05EHNJDFNG@Spout@    1000f820     ObjectDef.obj
+ 0002:00000828       __real@3f051eb8            1000f828     ObjectDef.obj
+ 0002:0000082c       __real@3f800000            1000f82c     ObjectDef.obj
+ 0002:00000830       ??_C@_08FJNMKDHG@?$DM?5none?5?$DO@ 1000f830     Spout.obj
+ 0002:00000840       ??_C@_0FA@LPGDKHBL@D?3?2Genesis?5and?5Jet3d?2JSTUDIO_CL@ 1000f840     Spout.obj
+ 0002:000008a0       ??_C@_00CNPNBAHC@@         1000f8a0     Spout.obj
+ 0002:000008a4       ??_C@_0BH@KIBLNGDK@JE_ERR_MEMORY_RESOURCE@ 1000f8a4     Spout.obj
+ 0002:000008c0       ??_C@_1KA@ECJIPEGI@?$AAD?$AA?3?$AA?2?$AAG?$AAe?$AAn?$AAe?$AAs?$AAi?$AAs?$AA?5?$AAa?$AAn?$AAd?$AA?5@ 1000f8c0     Spout.obj
+ 0002:00000980       ??_C@_1BO@CHOHCGNL@?$AAO?$AAb?$AAj?$AAe?$AAc?$AAt?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000f980     Spout.obj
+ 0002:000009a4       ??_C@_1BM@KHCCJOII@?$AAW?$AAo?$AAr?$AAl?$AAd?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000f9a4     Spout.obj
+ 0002:000009c8       ??_C@_1BG@NCCOHJJ@?$AAV?$AA1?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000f9c8     Spout.obj
+ 0002:000009e4       ??_C@_1BG@KCILKKFD@?$AAV?$AA2?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000f9e4     Spout.obj
+ 0002:00000a00       ??_C@_1BG@MHOMJBBF@?$AAV?$AA3?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000fa00     Spout.obj
+ 0002:00000a1c       ??_C@_1BG@CGKIDHIG@?$AAV?$AA4?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000fa1c     Spout.obj
+ 0002:00000a38       ??_C@_1BM@PKGMDBEP@?$AAC?$AAo?$AAl?$AAo?$AAr?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000fa38     Spout.obj
+ 0002:00000a5c       ??_C@_1BO@ELHENHFL@?$AAE?$AAx?$AAt?$AAB?$AAo?$AAx?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000fa5c     Spout.obj
+ 0002:00000a80       ??_C@_1CO@IMMIBIBA@?$AAO?$AAb?$AAj?$AAe?$AAc?$AAt?$AA?9?$AA?$DO?$AAE?$AAn?$AAg?$AAi?$AAn?$AAe?$AA?5@ 1000fa80     Spout.obj
+ 0002:00000ab8       ??_C@_1DI@DEKAOJCJ@?$AAO?$AAb?$AAj?$AAe?$AAc?$AAt?$AA?9?$AA?$DO?$AAR?$AAe?$AAs?$AAo?$AAu?$AAr?$AAc@ 1000fab8     Spout.obj
+ 0002:00000afc       ??_C@_1BK@FHGJNIOH@?$AAF?$AAi?$AAl?$AAe?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000fafc     Spout.obj
+ 0002:00000b1c       ??_C@_1BO@HJMILEGM@?$AAS?$AAt?$AAr?$AAi?$AAn?$AAg?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000fb1c     Spout.obj
+ 0002:00000b40       ??_C@_1BC@KCECIPDP@?$AAS?$AAi?$AAz?$AAe?$AA?5?$AA?$DO?$AA?5?$AA0@ 1000fb40     Spout.obj
+ 0002:00000b58       ??_C@_1BK@MHGFKNCF@?$AAN?$AAa?$AAm?$AAe?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000fb58     Spout.obj
+ 0002:00000b78       ??_C@_0BD@EPDLJDNO@JE_ERR_FILEIO_OPEN@ 1000fb78     Spout.obj
+ 0002:00000b90       ??_C@_0BJ@EGNAMMON@JE_ERR_SUBSYSTEM_FAILURE@ 1000fb90     Spout.obj
+ 0002:00000bb0       ??_C@_0BF@NJDEBKOM@JE_ERR_BAD_PARAMETER@ 1000fbb0     Spout.obj
+ 0002:00000bcc       ??_C@_1O@DKHFMLJF@?$AAR?$AAe?$AAs?$AAu?$AAl?$AAt@ 1000fbcc     Spout.obj
+ 0002:00000bdc       ??_C@_1CC@FKGDIIDN@?$AAD?$AAe?$AAa?$AAd?$AAL?$AAi?$AAs?$AAt?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL@ 1000fbdc     Spout.obj
+ 0002:00000c04       ??_C@_1CE@OJGHIKHO@?$AA?$CK?$AAD?$AAe?$AAa?$AAd?$AAL?$AAi?$AAs?$AAt?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU@ 1000fc04     Spout.obj
+ 0002:00000c30       ??_C@_1CA@MOIMHKED@?$AAL?$AAi?$AAs?$AAt?$AA?9?$AA?$DO?$AAT?$AAo?$AAt?$AAa?$AAl?$AA?5?$AA?$DO?$AA?5?$AA0@ 1000fc30     Spout.obj
+ 0002:00000c58       ??_C@_1DK@JKLENKLG@?$AAL?$AAi?$AAs?$AAt?$AA?9?$AA?$DO?$AAS?$AAt?$AAr?$AAi?$AAn?$AAg?$AAS?$AAi?$AAz@ 1000fc58     Spout.obj
+ 0002:00000ca0       ??_C@_1CI@LLIOFGGH@?$AAR?$AAe?$AAs?$AAo?$AAu?$AAr?$AAc?$AAe?$AAM?$AAg?$AAr?$AA?5?$AA?$CB?$AA?$DN?$AA?5@ 1000fca0     Spout.obj
+ 0002:00000cd0       ??_C@_1CK@FCMFDAID@?$AAR?$AAe?$AAs?$AAo?$AAu?$AAr?$AAc?$AAe?$AAN?$AAa?$AAm?$AAe?$AA?5?$AA?$CB?$AA?$DN@ 1000fcd0     Spout.obj
+ 0002:00000d04       ??_C@_1CG@BDCKJDPJ@?$AAF?$AAi?$AAl?$AAe?$AAF?$AAi?$AAl?$AAt?$AAe?$AAr?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN@ 1000fd04     Spout.obj
+ 0002:00000d34       ??_C@_1CM@BPKJLDLL@?$AAC?$AAu?$AAr?$AAF?$AAi?$AAl?$AAe?$AA?5?$AA?$DM?$AA?5?$AAB?$AAm?$AAp?$AAs?$AA?9@ 1000fd34     Spout.obj
+ 0002:00000d68       ??_C@_1CE@JOMNIOGM@?$AAA?$AAd?$AAd?$AAI?$AAt?$AA?5?$AA?$DN?$AA?$DN?$AA?5?$AAJ?$AAE?$AA_?$AAF?$AAA?$AAL@ 1000fd68     Spout.obj
+ 0002:00000d94       ??_C@_1BK@DMALBJNH@?$AAB?$AAm?$AAp?$AAs?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000fd94     Spout.obj
+ 0002:00000db4       ??_C@_1CE@FBLKGNMA@?$AAh?$AAI?$AAn?$AAs?$AAt?$AAa?$AAn?$AAc?$AAe?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU@ 1000fdb4     Spout.obj
+ 0002:00000de0       ??_C@_1BA@DPBAOGCM@?$AAI?$AAD?$AA?5?$AA?$DO?$AA?$DN?$AA?5?$AA0@ 1000fde0     Spout.obj
+ 0002:00000df4       ??_C@_0BJ@MPKGEGGM@JE_ERR_INTERNAL_RESOURCE@ 1000fdf4     Spout.obj
+ 0002:00000e18       ??_C@_1HA@JHMMBGNH@?$AAB?$AAi?$AAt?$AAm?$AAa?$AAp?$AAs?$AA?9?$AA?$DO?$AAW?$AAi?$AAd?$AAt?$AAh?$AA?$FL@ 1000fe18     Spout.obj
+ 0002:00000ea0       ??_C@_1BI@LJFOJMLJ@?$AAH?$AAi?$AAg?$AAh?$AA?5?$AA?$DO?$AA?$DN?$AA?5?$AAL?$AAo?$AAw@ 1000fea0     Spout.obj
+ 0002:00000ebc       ??_C@_1CC@CAMJEFBK@?$AAI?$AAn?$AAs?$AAt?$AAa?$AAn?$AAc?$AAe?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL@ 1000febc     Spout.obj
+ 0002:00000ee4       ??_C@_1CK@BJNCGFOF@?$AAO?$AAb?$AAj?$AAe?$AAc?$AAt?$AA?9?$AA?$DO?$AAR?$AAe?$AAf?$AAC?$AAo?$AAu?$AAn@ 1000fee4     Spout.obj
+ 0002:00000f18       ??_C@_1CM@OILLBNGE@?$AAO?$AAb?$AAj?$AAe?$AAc?$AAt?$AA?9?$AA?$DO?$AAW?$AAo?$AAr?$AAl?$AAd?$AA?5?$AA?$DN@ 1000ff18     Spout.obj
+ 0002:00000f4c       ??_C@_1CO@MNMNPFEG@?$AAO?$AAb?$AAj?$AAe?$AAc?$AAt?$AA?9?$AA?$DO?$AAE?$AAn?$AAg?$AAi?$AAn?$AAe?$AA?5@ 1000ff4c     Spout.obj
+ 0002:00000f84       ??_C@_1DI@HFKFAEHP@?$AAO?$AAb?$AAj?$AAe?$AAc?$AAt?$AA?9?$AA?$DO?$AAR?$AAe?$AAs?$AAo?$AAu?$AAr?$AAc@ 1000ff84     Spout.obj
+ 0002:00000fc8       ??_C@_1CG@JLIJKNHG@?$AAO?$AAb?$AAj?$AAe?$AAc?$AAt?$AA?9?$AA?$DO?$AAP?$AAs?$AA?5?$AA?$DN?$AA?$DN?$AA?5?$AAN@ 1000ffc8     Spout.obj
+ 0002:00000ff8       ??_C@_1CI@DOMNDFE@?$AAO?$AAb?$AAj?$AAe?$AAc?$AAt?$AA?9?$AA?$DO?$AAA?$AAr?$AAt?$AA?5?$AA?$DN?$AA?$DN?$AA?5@ 1000fff8     Spout.obj
+ 0002:00001028       ??_C@_1DA@JIPAADM@?$AAO?$AAb?$AAj?$AAe?$AAc?$AAt?$AA?9?$AA?$DO?$AAA?$AAr?$AAt?$AAN?$AAa?$AAm?$AAe@ 10010028     Spout.obj
+ 0002:00001064       ??_C@_1DG@ODJCPLPD@?$AAO?$AAb?$AAj?$AAe?$AAc?$AAt?$AA?9?$AA?$DO?$AAB?$AAi?$AAt?$AAm?$AAa?$AAp?$AAN@ 10010064     Spout.obj
+ 0002:000010a4       ??_C@_1DE@NFMMJHLA@?$AAO?$AAb?$AAj?$AAe?$AAc?$AAt?$AA?9?$AA?$DO?$AAA?$AAl?$AAp?$AAh?$AAa?$AAN?$AAa@ 100100a4     Spout.obj
+ 0002:000010e4       ??_C@_05GIOEPHGE@?$CK?4bmp@ 100100e4     Spout.obj
+ 0002:000010ec       ??_C@_0BA@FPJCPCEO@GlobalMaterials@ 100100ec     Spout.obj
+ 0002:00001100       ??_C@_1CO@KPFIMLHA@?$AAO?$AAb?$AAj?$AAe?$AAc?$AAt?$AA?9?$AA?$DO?$AAW?$AAo?$AAr?$AAl?$AAd?$AA?5?$AA?$DN@ 10010100     Spout.obj
+ 0002:00001138       ??_C@_1BO@DIOIBMOB@?$AAE?$AAn?$AAg?$AAi?$AAn?$AAe?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 10010138     Spout.obj
+ 0002:0000115c       ??_C@_1DC@IEFPPFDN@?$AAO?$AAb?$AAj?$AAe?$AAc?$AAt?$AA?9?$AA?$DO?$AAE?$AAn?$AAg?$AAi?$AAn?$AAe?$AA?5@ 1001015c     Spout.obj
+ 0002:00001198       ??_C@_1CI@FPDJBKCH@?$AAS?$AAo?$AAu?$AAn?$AAd?$AAS?$AAy?$AAs?$AAt?$AAe?$AAm?$AA?5?$AA?$CB?$AA?$DN?$AA?5@ 10010198     Spout.obj
+ 0002:000011c8       ??_C@_1BM@EOJCOJG@?$AAF?$AAr?$AAo?$AAn?$AAt?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 100101c8     Spout.obj
+ 0002:000011ec       ??_C@_1BK@GKJCCBKA@?$AAB?$AAa?$AAc?$AAk?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 100101ec     Spout.obj
+ 0002:0000120c       ??_C@_1BK@GGNHCFBN@?$AAB?$AAB?$AAo?$AAx?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1001020c     Spout.obj
+ 0002:0000122c       ??_C@_0N@IKCPPEKK@SpoutObject?6@ 1001022c     Spout.obj
+ 0002:0000123c       ??_C@_0BP@DMNHDOBK@SpoutObject_CreateFromFile?3Tag@ 1001023c     Spout.obj
+ 0002:00001264       ??_C@_0BD@ENGKCHBG@JE_ERR_FILEIO_READ@ 10010264     Spout.obj
+ 0002:0000127c       ??_C@_0CD@FFJPAINK@SpoutObject_CreateFromFile?3Vers@ 1001027c     Spout.obj
+ 0002:000012a8       ??_C@_0BE@CCAIDFII@JE_ERR_FILEIO_WRITE@ 100102a8     Spout.obj
+ 0002:000012c0       ??_C@_1BK@OHMGHMFG@?$AAL?$AAi?$AAs?$AAt?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 100102c0     Spout.obj
+ 0002:000012e0       ??_C@_1BM@KBHENEMF@?$AAp?$AAD?$AAa?$AAt?$AAa?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 100102e0     Spout.obj
+ 0002:00001308       ??_C@_1EA@GNMOCPKM@?$AAD?$AAa?$AAt?$AAa?$AAT?$AAy?$AAp?$AAe?$AA?5?$AA?$DN?$AA?$DN?$AA?5?$AAP?$AAR?$AAO@ 10010308     Spout.obj
+ 0002:00001358       ??_C@_1EO@HPMEMKIA@?$AAD?$AAa?$AAt?$AAa?$AAT?$AAy?$AAp?$AAe?$AA?5?$AA?$DN?$AA?$DN?$AA?5?$AAP?$AAR?$AAO@ 10010358     Spout.obj
+ 0002:000013b8       ??_C@_1EA@MNKJFLED@?$AAD?$AAa?$AAt?$AAa?$AAT?$AAy?$AAp?$AAe?$AA?5?$AA?$DN?$AA?$DN?$AA?5?$AAP?$AAR?$AAO@ 100103b8     Spout.obj
+ 0002:00001408       ??_C@_1EA@IMHIENFG@?$AAD?$AAa?$AAt?$AAa?$AAT?$AAy?$AAp?$AAe?$AA?5?$AA?$DN?$AA?$DN?$AA?5?$AAP?$AAR?$AAO@ 10010408     Spout.obj
+ 0002:00001454       ??_C@_1CO@BABBOLHC@?$AAO?$AAb?$AAj?$AAe?$AAc?$AAt?$AA?9?$AA?$DO?$AAC?$AAu?$AAr?$AAW?$AAi?$AAd?$AAt@ 10010454     Spout.obj
+ 0002:0000148c       ??_C@_1CM@HCDPOPLB@?$AAp?$AAD?$AAa?$AAt?$AAa?$AA?9?$AA?$DO?$AAS?$AAt?$AAr?$AAi?$AAn?$AAg?$AA?5?$AA?$CB@ 1001048c     Spout.obj
+ 0002:000014c0       ??_C@_13COJANIEC@?$AA0@    100104c0     Spout.obj
+ 0002:000014c4       ??_C@_1BG@PCOKDGLJ@?$AAX?$AAf?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 100104c4     Spout.obj
+ 0002:000014e0       ??_C@_1CM@KJLOPADC@?$AAO?$AAb?$AAj?$AAe?$AAc?$AAt?$AA?9?$AA?$DO?$AAW?$AAo?$AAr?$AAl?$AAd?$AA?5?$AA?$CB@ 100104e0     Spout.obj
+ 0002:00001514       ??_C@_1CG@NKIMEACA@?$AAO?$AAb?$AAj?$AAe?$AAc?$AAt?$AA?9?$AA?$DO?$AAP?$AAs?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN@ 10010514     Spout.obj
+ 0002:00001544       __real@00000000            10010544     Spout.obj
+ 0002:00001548       __real@3c23d70a            10010548     Spout.obj
+ 0002:0000154c       __real@3dcccccd            1001054c     Spout.obj
+ 0002:00001550       __real@3e800000            10010550     Spout.obj
+ 0002:00001554       __real@3f000000            10010554     Spout.obj
+ 0002:00001558       __real@40000000            10010558     Spout.obj
+ 0002:0000155c       __real@4048f5c3            1001055c     Spout.obj
+ 0002:00001560       __real@40800000            10010560     Spout.obj
+ 0002:00001564       __real@41000000            10010564     Spout.obj
+ 0002:00001568       __real@41200000            10010568     Spout.obj
+ 0002:0000156c       __real@41800000            1001056c     Spout.obj
+ 0002:00001570       __real@41a00000            10010570     Spout.obj
+ 0002:00001574       __real@42800000            10010574     Spout.obj
+ 0002:00001578       __real@437f0000            10010578     Spout.obj
+ 0002:0000157c       __real@447a0000            1001057c     Spout.obj
+ 0002:00001580       __real@7f7fffff            10010580     Spout.obj
+ 0002:00001584       __real@c1800000            10010584     Spout.obj
+ 0002:00001588       __real@ff7fffff            10010588     Spout.obj
+ 0002:00001590       __xmm@80000000800000008000000080000000 10010590     Spout.obj
+ 0002:000015a4       __pDefaultRawDllMain       100105a4     MSVCRTD:dll_dllmain.obj
+ 0002:000015a4       __pRawDllMain              100105a4     MSVCRTD:dll_dllmain.obj
+ 0002:00001668       ??_C@_0NN@JMPELKLB@The?5value?5of?5ESP?5was?5not?5proper@ 10010668     MSVCRTD:error.obj
+ 0002:00001778       ??_C@_0BBN@ELNNILBE@A?5cast?5to?5a?5smaller?5data?5type?5h@ 10010778     MSVCRTD:error.obj
+ 0002:000018d0       ??_C@_0BN@BPOGFMJL@Stack?5memory?5was?5corrupted?$AN?6@ 100108d0     MSVCRTD:error.obj
+ 0002:000018f4       ??_C@_0DG@DAJCDLPN@A?5local?5variable?5was?5used?5befor@ 100108f4     MSVCRTD:error.obj
+ 0002:00001934       ??_C@_0CM@JMIDGKLA@Stack?5memory?5around?5_alloca?5was@ 10010934     MSVCRTD:error.obj
+ 0002:00001968       ??_C@_0BO@CHIONIOI@Unknown?5Runtime?5Check?5Error?$AN?6@ 10010968     MSVCRTD:error.obj
+ 0002:00001990       ??_C@_1GM@CNOOJIHC@?$AAR?$AAu?$AAn?$AAt?$AAi?$AAm?$AAe?$AA?5?$AAC?$AAh?$AAe?$AAc?$AAk?$AA?5?$AAE@ 10010990     MSVCRTD:error.obj
+ 0002:00001a18       ??_C@_1EA@NFKNIFJP@?$AAR?$AAu?$AAn?$AA?9?$AAT?$AAi?$AAm?$AAe?$AA?5?$AAC?$AAh?$AAe?$AAc?$AAk?$AA?5@ 10010a18     MSVCRTD:error.obj
+ 0002:00001a64       ??_C@_0BB@PFFGGCJP@Unknown?5Filename@ 10010a64     MSVCRTD:error.obj
+ 0002:00001a78       ??_C@_0BE@GNBOBNCK@Unknown?5Module?5Name@ 10010a78     MSVCRTD:error.obj
+ 0002:00001a90       ??_C@_0CA@IODNCDPG@Run?9Time?5Check?5Failure?5?$CD?$CFd?5?9?5?$CFs@ 10010a90     MSVCRTD:error.obj
+ 0002:00001ab8       ??_C@_0CG@IAFNJNEE@Stack?5corrupted?5near?5unknown?5va@ 10010ab8     MSVCRTD:error.obj
+ 0002:00001ae8       ??_C@_05MKKEDADM@?$CF?42X?5@ 10010ae8     MSVCRTD:error.obj
+ 0002:00001af0       ??_C@_0EJ@LJKNEOLN@Stack?5area?5around?5_alloca?5memor@ 10010af0     MSVCRTD:error.obj
+ 0002:00001b48       ??_C@_01EEMJAFIK@?6@       10010b48     MSVCRTD:error.obj
+ 0002:00001b4c       ??_C@_02LLMPMKNF@?$DO?5@   10010b4c     MSVCRTD:error.obj
+ 0002:00001b50       ??_C@_08OMAHNMHJ@?6Data?3?5?$DM@ 10010b50     MSVCRTD:error.obj
+ 0002:00001b5c       ??_C@_0CK@DKGBICFE@?6Allocation?5number?5within?5this?5@ 10010b5c     MSVCRTD:error.obj
+ 0002:00001b90       ??_C@_07DFDJCKFN@?6Size?3?5@ 10010b90     MSVCRTD:error.obj
+ 0002:00001b9c       ??_C@_0N@MHFFIMFG@?6Address?3?50x@ 10010b9c     MSVCRTD:error.obj
+ 0002:00001bb0       ??_C@_0EI@CLEPFNGI@Stack?5area?5around?5_alloca?5memor@ 10010bb0     MSVCRTD:error.obj
+ 0002:00001c08       ??_C@_0BK@ODNDAGKB@?$CFs?$CFs?$CFp?$CFs?$CFzd?$CFs?$CFd?$CFs?$CFs?$CFs?$CFs?$CFs@ 10010c08     MSVCRTD:error.obj
+ 0002:00001c28       ??_C@_0DE@OHJBPMBP@A?5variable?5is?5being?5used?5withou@ 10010c28     MSVCRTD:error.obj
+ 0002:00001c80       ??_C@_0BJ@HEGAHDFO@Stack?5pointer?5corruption@ 10010c80     MSVCRTD:userapi.obj
+ 0002:00001ca0       ??_C@_0CK@FEGOIOPB@Cast?5to?5smaller?5type?5causing?5lo@ 10010ca0     MSVCRTD:userapi.obj
+ 0002:00001cd4       ??_C@_0BI@CIGMDCBH@Stack?5memory?5corruption@ 10010cd4     MSVCRTD:userapi.obj
+ 0002:00001cf0       ??_C@_0CK@CNLNOEPB@Local?5variable?5used?5before?5init@ 10010cf0     MSVCRTD:userapi.obj
+ 0002:00001d24       ??_C@_0BP@OGBCLIBO@Stack?5around?5_alloca?5corrupted@ 10010d24     MSVCRTD:userapi.obj
+ 0002:00001db0       ??_C@_1EI@MLPKHBGE@?$AAa?$AAp?$AAi?$AA?9?$AAm?$AAs?$AA?9?$AAw?$AAi?$AAn?$AA?9?$AAc?$AAo?$AAr?$AAe@ 10010db0     MSVCRTD:pdblkup.obj
+ 0002:00001e08       ??_C@_1BK@JHLNAEJL@?$AAa?$AAd?$AAv?$AAa?$AAp?$AAi?$AA3?$AA2?$AA?4?$AAd?$AAl?$AAl@ 10010e08     MSVCRTD:pdblkup.obj
+ 0002:00001e28       ??_C@_0O@COHOBMLB@RegOpenKeyExW@ 10010e28     MSVCRTD:pdblkup.obj
+ 0002:00001e38       ??_C@_0BB@GLNAEDBD@RegQueryValueExW@ 10010e38     MSVCRTD:pdblkup.obj
+ 0002:00001e4c       ??_C@_0M@HLOHPNFA@RegCloseKey@ 10010e4c     MSVCRTD:pdblkup.obj
+ 0002:00001e60       ??_C@_1HE@EBEAGLFB@?$AAS?$AAO?$AAF?$AAT?$AAW?$AAA?$AAR?$AAE?$AA?2?$AAW?$AAo?$AAw?$AA6?$AA4?$AA3@ 10010e60     MSVCRTD:pdblkup.obj
+ 0002:00001eec       ??_C@_1BG@EABPBLLF@?$AAP?$AAr?$AAo?$AAd?$AAu?$AAc?$AAt?$AAD?$AAi?$AAr@ 10010eec     MSVCRTD:pdblkup.obj
+ 0002:00001f2c       ??_C@_1BC@JINFINNJ@?$AAM?$AAS?$AAP?$AAD?$AAB?$AA1?$AA4?$AA0@ 10010f2c     MSVCRTD:pdblkup.obj
+ 0002:00001f44       ??_C@_0BB@KCIACLNC@PDBOpenValidate5@ 10010f44     MSVCRTD:pdblkup.obj
+ 0002:00001f58       ??_C@_01KDCPPGHE@r@        10010f58     MSVCRTD:pdblkup.obj
+ 0002:00001f60       __load_config_used         10010f60     MSVCRTD:loadcfg.obj
+ 0002:00002200       ___CastGuardVftablesStart  10011200     MSVCRTD:guard_support.obj
+ 0002:00002380       ___CastGuardVftablesEnd    10011380     MSVCRTD:guard_support.obj
+ 0002:000024cc       ___safe_se_handler_table   100114cc     <linker-defined>
+ 0002:00002774       ___rtc_iaa                 10011774     MSVCRTD:initsect.obj
+ 0002:00002984       ___rtc_izz                 10011984     MSVCRTD:initsect.obj
+ 0002:00002a88       ___rtc_taa                 10011a88     MSVCRTD:initsect.obj
+ 0002:00002c98       ___rtc_tzz                 10011c98     MSVCRTD:initsect.obj
+ 0003:00000000       _ObjectDef                 10013000     ObjectDef.obj
+ 0003:000000b8       ?__LINE__Var@?0??Util_StrDup@@9@9 100130b8     Spout.obj
+ 0003:000000bc       ?__LINE__Var@?0??Util_RecreateCurBitmapsList@@9@9 100130bc     Spout.obj
+ 0003:000000c0       ?__LINE__Var@?0??Util_DrawPoly@@9@9 100130c0     Spout.obj
+ 0003:000000c4       ?__LINE__Var@?0??Util_DrawExtBox@@9@9 100130c4     Spout.obj
+ 0003:000000c8       ?__LINE__Var@?0??Spout_DestroyArt@@9@9 100130c8     Spout.obj
+ 0003:000000cc       ?__LINE__Var@?0??Util_WriteString@@9@9 100130cc     Spout.obj
+ 0003:000000d0       ?__LINE__Var@?0??Util_CreateBitmapFromFileName@@9@9 100130d0     Spout.obj
+ 0003:000000d4       ?__LINE__Var@?0??Util_DestroyBitmapList@@9@9 100130d4     Spout.obj
+ 0003:000000d8       ?__LINE__Var@?0??Util_CreateBitmapList@@9@9 100130d8     Spout.obj
+ 0003:000000dc       ?__LINE__Var@?0??Util_LoadLibraryString@@9@9 100130dc     Spout.obj
+ 0003:000000e0       ?__LINE__Var@?0??Util_SetArtSize@@9@9 100130e0     Spout.obj
+ 0003:000000e4       ?__LINE__Var@?0??Util_Frand@@9@9 100130e4     Spout.obj
+ 0003:000000e8       ?__LINE__Var@?0??Init_Class@@9@9 100130e8     Spout.obj
+ 0003:000000ec       ?__LINE__Var@?0??CreateInstance@@9@9 100130ec     Spout.obj
+ 0003:000000f0       ?__LINE__Var@?0??CreateRef@@9@9 100130f0     Spout.obj
+ 0003:000000f4       ?__LINE__Var@?0??Destroy@@9@9 100130f4     Spout.obj
+ 0003:000000f8       ?__LINE__Var@?0??Render@@9@9 100130f8     Spout.obj
+ 0003:000000fc       ?__LINE__Var@?0??AttachWorld@@9@9 100130fc     Spout.obj
+ 0003:00000100       ?__LINE__Var@?0??DettachWorld@@9@9 10013100     Spout.obj
+ 0003:00000104       ?__LINE__Var@?0??AttachEngine@@9@9 10013104     Spout.obj
+ 0003:00000108       ?__LINE__Var@?0??DettachEngine@@9@9 10013108     Spout.obj
+ 0003:0000010c       ?__LINE__Var@?0??AttachSoundSystem@@9@9 1001310c     Spout.obj
+ 0003:00000110       ?__LINE__Var@?0??DettachSoundSystem@@9@9 10013110     Spout.obj
+ 0003:00000114       ?__LINE__Var@?0??Collision@@9@9 10013114     Spout.obj
+ 0003:00000118       ?__LINE__Var@?0??GetExtBox@@9@9 10013118     Spout.obj
+ 0003:0000011c       ?__LINE__Var@?0??CreateFromFile@@9@9 1001311c     Spout.obj
+ 0003:00000120       ?__LINE__Var@?0??WriteToFile@@9@9 10013120     Spout.obj
+ 0003:00000124       ?__LINE__Var@?0??GetPropertyList@@9@9 10013124     Spout.obj
+ 0003:00000128       ?__LINE__Var@?0??SetProperty@@9@9 10013128     Spout.obj
+ 0003:0000012c       ?__LINE__Var@?0??SetXForm@@9@9 1001312c     Spout.obj
+ 0003:00000130       ?__LINE__Var@?0??GetXForm@@9@9 10013130     Spout.obj
+ 0003:00000134       ?__LINE__Var@?0??Frame@@9@9 10013134     Spout.obj
+ 0003:00000138       __fltused                  10013138     MSVCRTD:fltused.obj
+ 0003:0000013c       ___security_cookie         1001313c     MSVCRTD:gs_cookie.obj
+ 0003:00000140       ___security_cookie_complement 10013140     MSVCRTD:gs_cookie.obj
+ 0003:00000148       ?_RTC_ErrorLevels@@3PAHA   10013148     MSVCRTD:error.obj
+ 0003:00000160       ___scrt_native_dllmain_reason 10013160     MSVCRTD:utility.obj
+ 0003:00000164       ___isa_enabled             10013164     MSVCRTD:cpu_disp.obj
+ 0003:00000168       ___scrt_ucrt_dll_is_in_use 10013168     MSVCRTD:ucrt_stubs.obj
+ 0003:00000ba0       ?_OptionsStorage@?1??__local_stdio_printf_options@@9@4_KA 10013ba0     MSVCRTD:error.obj
+ 0003:00000f78       ?__type_info_root_node@@3U__type_info_node@@A 10013f78     MSVCRTD:tncleanup.obj
+ 0003:00000f88       ?_OptionsStorage@?1??__local_stdio_scanf_options@@9@4_KA 10013f88     MSVCRTD:default_local_stdio_options.obj
+ 0003:00000f94       ___scrt_current_native_startup_state 10013f94     MSVCRTD:utility.obj
+ 0003:00000f98       ___scrt_native_startup_lock 10013f98     MSVCRTD:utility.obj
+ 0003:00000fc0       ___scrt_debugger_hook_flag 10013fc0     MSVCRTD:utility_desktop.obj
+ 0003:00000fcc       ___isa_available           10013fcc     MSVCRTD:cpu_disp.obj
+ 0003:00000fd0       ___favor                   10013fd0     MSVCRTD:cpu_disp.obj
+ 0003:00000fd8       ___dyn_tls_init_callback   10013fd8     <common>
+ 0004:00000000       __imp__jeObject_RegisterGlobalObjectDef@4 10014000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000004       __imp__jeVFile_CreateFinder@8 10014004     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000008       __imp__jeVFile_DestroyFinder@4 10014008     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000000c       __imp__jeVFile_FinderGetNextFile@4 1001400c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000010       __imp__jeVFile_FinderGetProperties@8 10014010     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000014       __imp__jeVFile_OpenNewSystem@20 10014014     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000018       __imp__jeVFile_Open@12     10014018     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000001c       __imp__jeVFile_Close@4     1001401c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000020       __imp__jeVFile_Read@12     10014020     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000024       __imp__jeVFile_Write@12    10014024     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000028       __imp__jeVFile_Seek@12     10014028     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000002c       __imp__jeVec3d_Set@16      1001402c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000030       __imp__jeVec3d_Normalize@4 10014030     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000034       __imp__jeVec3d_Scale@12    10014034     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000038       __imp__jeProperty_ListCopy@4 10014038     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000003c       __imp__jeProperty_FillGroup@12 1001403c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000040       __imp__jeProperty_FillCheck@16 10014040     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000044       __imp__jeProperty_FillColorGroup@16 10014044     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000048       __imp__jeProperty_FillFloat@28 10014048     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000004c       __imp__jeProperty_FillGroupEnd@8 1001404c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000050       __imp__jeProperty_FillColorPicker@16 10014050     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000054       __imp__jeProperty_FillCombo@24 10014054     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000058       __imp___jeRam_DebugAllocate@12 10014058     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000005c       __imp__jeRam_AllocateClear@4 1001405c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000060       __imp__jeRam_Free_@4       10014060     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000064       __imp__jeResource_MgrDestroy@4 10014064     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000068       __imp__jeResource_GetVFile@8 10014068     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000006c       __imp__jeResource_DeleteVFile@8 1001406c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000070       __imp__jeBitmap_CreateFromFile@4 10014070     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000074       __imp__jeBitmap_Destroy@4  10014074     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000078       __imp__jeBitmap_SetColorKey@16 10014078     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000007c       __imp__jeBitmap_SetAlpha@8 1001407c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000080       __imp__jeBitmap_Width@4    10014080     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000084       __imp__jeBitmap_Height@4   10014084     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000088       __imp__jeXForm3d_Copy@8    10014088     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000008c       __imp__jeXForm3d_SetIdentity@4 1001408c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000090       __imp__jeXForm3d_RotateX@8 10014090     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000094       __imp__jeXForm3d_RotateZ@8 10014094     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000098       __imp__jeXForm3d_GetUp@8   10014098     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000009c       __imp__jeEngine_AddBitmap@12 1001409c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000a0       __imp__jeEngine_RemoveBitmap@8 100140a0     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000a4       __imp__jeMaterialSpec_Create@8 100140a4     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000a8       __imp__jeMaterialSpec_Destroy@4 100140a8     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000ac       __imp__jeMaterialSpec_AddLayerFromBitmap@16 100140ac     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000b0       __imp__jeMaterialSpec_GetLayerBitmap@8 100140b0     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000b4       __imp__jeExtBox_IsValid@4  100140b4     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000b8       __imp__jeExtBox_Translate@16 100140b8     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000bc       __imp__jeUserPoly_CreateQuad@24 100140bc     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000c0       __imp__jeUserPoly_Destroy@4 100140c0     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000c4       __imp__jeWorld_AddUserPoly@12 100140c4     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000c8       __imp__jeWorld_GetResourceMgr@4 100140c8     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000cc       __imp__jeParticle_SystemAddParticle@36 100140cc     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000d0       __imp__jeParticle_SystemFrame@8 100140d0     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000d4       __imp__jeParticle_SystemCreate@8 100140d4     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000d8       __imp__jeParticle_SystemDestroy@4 100140d8     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000dc       __imp__jeParticle_SystemRemoveAll@4 100140dc     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000e0       __imp__jeErrorLog_AddExplicit@24 100140e0     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000e4       \177Jet3DClassic11d_NULL_THUNK_DATA 100140e4     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000013c       __imp__OutputDebugStringA@4 1001413c     kernel32:KERNEL32.dll
+ 0004:00000140       __imp__FreeLibrary@4       10014140     kernel32:KERNEL32.dll
+ 0004:00000144       __imp__VirtualQuery@12     10014144     kernel32:KERNEL32.dll
+ 0004:00000148       __imp__GetProcAddress@8    10014148     kernel32:KERNEL32.dll
+ 0004:0000014c       __imp__GetProcessHeap@0    1001414c     kernel32:KERNEL32.dll
+ 0004:00000150       __imp__HeapFree@12         10014150     kernel32:KERNEL32.dll
+ 0004:00000154       __imp__HeapAlloc@12        10014154     kernel32:KERNEL32.dll
+ 0004:00000158       __imp__GetLastError@0      10014158     kernel32:KERNEL32.dll
+ 0004:0000015c       __imp__GetModuleHandleW@4  1001415c     kernel32:KERNEL32.dll
+ 0004:00000160       __imp__GetStartupInfoW@4   10014160     kernel32:KERNEL32.dll
+ 0004:00000164       __imp__InitializeSListHead@4 10014164     kernel32:KERNEL32.dll
+ 0004:00000168       __imp__GetSystemTimeAsFileTime@4 10014168     kernel32:KERNEL32.dll
+ 0004:0000016c       __imp__GetCurrentThreadId@0 1001416c     kernel32:KERNEL32.dll
+ 0004:00000170       __imp__GetCurrentProcessId@0 10014170     kernel32:KERNEL32.dll
+ 0004:00000174       __imp__QueryPerformanceCounter@4 10014174     kernel32:KERNEL32.dll
+ 0004:00000178       __imp__IsProcessorFeaturePresent@4 10014178     kernel32:KERNEL32.dll
+ 0004:0000017c       __imp__TerminateProcess@8  1001417c     kernel32:KERNEL32.dll
+ 0004:00000180       __imp__GetCurrentProcess@0 10014180     kernel32:KERNEL32.dll
+ 0004:00000184       __imp__SetUnhandledExceptionFilter@4 10014184     kernel32:KERNEL32.dll
+ 0004:00000188       __imp__UnhandledExceptionFilter@4 10014188     kernel32:KERNEL32.dll
+ 0004:0000018c       __imp__WideCharToMultiByte@32 1001418c     kernel32:KERNEL32.dll
+ 0004:00000190       __imp__MultiByteToWideChar@24 10014190     kernel32:KERNEL32.dll
+ 0004:00000194       __imp__RaiseException@16   10014194     kernel32:KERNEL32.dll
+ 0004:00000198       __imp__IsDebuggerPresent@0 10014198     kernel32:KERNEL32.dll
+ 0004:0000019c       \177KERNEL32_NULL_THUNK_DATA 1001419c     kernel32:KERNEL32.dll
+ 0004:000001d8       __imp__LoadStringA@16      100141d8     user32:USER32.dll
+ 0004:000001dc       \177USER32_NULL_THUNK_DATA 100141dc     user32:USER32.dll
+ 0004:00000208       __imp____std_type_info_destroy_list 10014208     vcruntimed:VCRUNTIME140D.dll
+ 0004:0000020c       __imp____current_exception_context 1001420c     vcruntimed:VCRUNTIME140D.dll
+ 0004:00000210       __imp__memset              10014210     vcruntimed:VCRUNTIME140D.dll
+ 0004:00000214       __imp___except_handler4_common 10014214     vcruntimed:VCRUNTIME140D.dll
+ 0004:00000218       __imp____vcrt_GetModuleFileNameW 10014218     vcruntimed:VCRUNTIME140D.dll
+ 0004:0000021c       __imp____vcrt_GetModuleHandleW 1001421c     vcruntimed:VCRUNTIME140D.dll
+ 0004:00000220       __imp____vcrt_LoadLibraryExW 10014220     vcruntimed:VCRUNTIME140D.dll
+ 0004:00000224       __imp____current_exception 10014224     vcruntimed:VCRUNTIME140D.dll
+ 0004:00000228       \177VCRUNTIME140D_NULL_THUNK_DATA 10014228     vcruntimed:VCRUNTIME140D.dll
+ 0004:00000258       __imp___wsplitpath_s       10014258     ucrtd:ucrtbased.dll
+ 0004:0000025c       __imp__wcscpy_s            1001425c     ucrtd:ucrtbased.dll
+ 0004:00000260       __imp___stricmp            10014260     ucrtd:ucrtbased.dll
+ 0004:00000260       __imp__stricmp             10014260     ucrtd:ucrtbased.dll
+ 0004:00000264       __imp___itoa               10014264     ucrtd:ucrtbased.dll
+ 0004:00000264       __imp__itoa                10014264     ucrtd:ucrtbased.dll
+ 0004:00000268       __imp___configure_narrow_argv 10014268     ucrtd:ucrtbased.dll
+ 0004:0000026c       __imp__strcat_s            1001426c     ucrtd:ucrtbased.dll
+ 0004:00000270       __imp__strcpy_s            10014270     ucrtd:ucrtbased.dll
+ 0004:00000274       __imp__terminate           10014274     ucrtd:ucrtbased.dll
+ 0004:00000278       __imp___initterm           10014278     ucrtd:ucrtbased.dll
+ 0004:0000027c       __imp___CrtDbgReportW      1001427c     ucrtd:ucrtbased.dll
+ 0004:00000280       __imp___CrtDbgReport       10014280     ucrtd:ucrtbased.dll
+ 0004:00000284       __imp___wassert            10014284     ucrtd:ucrtbased.dll
+ 0004:00000288       __imp__rand                10014288     ucrtd:ucrtbased.dll
+ 0004:0000028c       __imp__strlen              1001428c     ucrtd:ucrtbased.dll
+ 0004:00000290       __imp__strcpy              10014290     ucrtd:ucrtbased.dll
+ 0004:00000294       __imp__strcat              10014294     ucrtd:ucrtbased.dll
+ 0004:00000298       __imp___wmakepath_s        10014298     ucrtd:ucrtbased.dll
+ 0004:0000029c       __imp___cexit              1001429c     ucrtd:ucrtbased.dll
+ 0004:000002a0       __imp___crt_at_quick_exit  100142a0     ucrtd:ucrtbased.dll
+ 0004:000002a4       __imp___crt_atexit         100142a4     ucrtd:ucrtbased.dll
+ 0004:000002a8       __imp___execute_onexit_table 100142a8     ucrtd:ucrtbased.dll
+ 0004:000002ac       __imp___register_onexit_function 100142ac     ucrtd:ucrtbased.dll
+ 0004:000002b0       __imp___initialize_onexit_table 100142b0     ucrtd:ucrtbased.dll
+ 0004:000002b4       __imp___seh_filter_dll     100142b4     ucrtd:ucrtbased.dll
+ 0004:000002b8       __imp___initialize_narrow_environment 100142b8     ucrtd:ucrtbased.dll
+ 0004:000002bc       __imp___initterm_e         100142bc     ucrtd:ucrtbased.dll
+ 0004:000002c0       __imp____stdio_common_vsprintf_s 100142c0     ucrtd:ucrtbased.dll
+ 0004:000002c4       \177ucrtbased_NULL_THUNK_DATA 100142c4     ucrtd:ucrtbased.dll
+ 0004:00000304       __IMPORT_DESCRIPTOR_Jet3DClassic11d 10014304     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000318       __IMPORT_DESCRIPTOR_KERNEL32 10014318     kernel32:KERNEL32.dll
+ 0004:0000032c       __IMPORT_DESCRIPTOR_USER32 1001432c     user32:USER32.dll
+ 0004:00000340       __IMPORT_DESCRIPTOR_VCRUNTIME140D 10014340     vcruntimed:VCRUNTIME140D.dll
+ 0004:00000354       __IMPORT_DESCRIPTOR_ucrtbased 10014354     ucrtd:ucrtbased.dll
+ 0004:00000368       __NULL_IMPORT_DESCRIPTOR   10014368     jet3DClassic11d:Jet3DClassic11d.dll
+ 0005:00000000       ___guard_check_icall_fptr  10016000     MSVCRTD:guard_support.obj
+ 0005:00000004       ___guard_xfg_check_icall_fptr 10016004     MSVCRTD:guard_support.obj
+ 0005:00000008       ___castguard_check_failure_os_handled_fptr 10016008     MSVCRTD:guard_support.obj
+
+ entry point at        0001:00000267
+
+ Static symbols
+
+ 0000:00000000       _volmd                     10000000     Spout.obj
+ 0000:00000000       _volmd                     10000000     Spout.obj
+ 0000:00000000       _volmd                     10000000     Spout.obj
+ 0000:00000000       _volmd                     10000000     Spout.obj
+ 0000:00000000       _volmd                     10000000     Spout.obj
+ 0000:00000000       _volmd                     10000000     Spout.obj
+ 0000:fffe6000       .debug$S                   10000000     SpoutObj.exp
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe6000       .debug$S                   10000000     user32:USER32.dll
+ 0000:fffea000       __guard_fids___except_handler4 10000000     MSVCRTD:chandler4gs.obj
+ 0000:00000000       _volmd                     10000000     MSVCRTD:cpu_disp.obj
+ 0000:fffea000       __guard_fids_?dllmain_dispatch@@YAHQAUHINSTANCE__@@KQAX@Z 10000000     MSVCRTD:dll_dllmain.obj
+ 0000:00000000       _volmd                     10000000     MSVCRTD:gs_report.obj
+ 0000:fffea000       __guard_fids__             10000000     MSVCRTD:guard_support.obj
+ 0000:fffea000       __guard_fids__             10000000     MSVCRTD:guard_support.obj
+ 0000:fffea000       __guard_fids___guard_icall_checks_enforced 10000000     MSVCRTD:guard_support.obj
+ 0000:00000000       _volmd                     10000000     MSVCRTD:guard_support.obj
+ 0000:00000000       _volmd                     10000000     MSVCRTD:guard_support.obj
+ 0000:fffea000       __guard_fids___CRT_RTC_INIT 10000000     MSVCRTD:init.obj
+ 0000:fffea000       __guard_fids___CRT_RTC_INITW 10000000     MSVCRTD:init.obj
+ 0000:fffea000       __guard_fids____scrt_set_unhandled_exception_filter 10000000     MSVCRTD:utility_desktop.obj
+ 0000:fffe6000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffe6000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffe6000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffe6000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffe6000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffe6000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffe6000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffe6000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0001:000007fc       $LN11                      100017fc     Spout.obj
+ 0001:00000804       $LN10                      10001804     Spout.obj
+ 0001:0000081c       $LN9                       1000181c     Spout.obj
+ 0001:00000821       $LN8                       10001821     Spout.obj
+ 0001:00001264       $LN24                      10002264     Spout.obj
+ 0001:0000126c       $LN23                      1000226c     Spout.obj
+ 0001:00001290       $LN22                      10002290     Spout.obj
+ 0001:00001294       $LN21                      10002294     Spout.obj
+ 0001:0000129c       $LN20                      1000229c     Spout.obj
+ 0001:000025d0       $LN16                      100035d0     Spout.obj
+ 0001:000025d8       $LN15                      100035d8     Spout.obj
+ 0001:000025fc       $LN14                      100035fc     Spout.obj
+ 0001:000025ff       $LN13                      100035ff     Spout.obj
+ 0001:00002608       $LN12                      10003608     Spout.obj
+ 0001:00003ad4       $LN9                       10004ad4     Spout.obj
+ 0001:00003adc       $LN8                       10004adc     Spout.obj
+ 0001:00003b0c       $LN7                       10004b0c     Spout.obj
+ 0001:00003b12       $LN6                       10004b12     Spout.obj
+ 0001:00003b18       $LN5                       10004b18     Spout.obj
+ 0001:00003b1e       $LN4                       10004b1e     Spout.obj
+ 0001:00003f6c       $LN8                       10004f6c     Spout.obj
+ 0001:00003f74       $LN7                       10004f74     Spout.obj
+ 0001:00003f8c       $LN6                       10004f8c     Spout.obj
+ 0001:00003f93       $LN5                       10004f93     Spout.obj
+ 0001:00004e64       $LN97                      10005e64     Spout.obj
+ 0001:00005370       _Spout_DestroyArt          10006370 f   Spout.obj
+ 0001:000054d0       _Util_CreateBitmapFromFileName 100064d0 f   Spout.obj
+ 0001:000058a8       $LN21                      100068a8     Spout.obj
+ 0001:000058b0       $LN20                      100068b0     Spout.obj
+ 0001:000058c8       $LN19                      100068c8     Spout.obj
+ 0001:000058d1       $LN18                      100068d1     Spout.obj
+ 0001:000059e0       _Util_CreateBitmapList     100069e0 f   Spout.obj
+ 0001:000062c8       $LN51                      100072c8     Spout.obj
+ 0001:000062d0       $LN50                      100072d0     Spout.obj
+ 0001:00006300       $LN49                      10007300     Spout.obj
+ 0001:00006304       $LN48                      10007304     Spout.obj
+ 0001:0000630b       $LN47                      1000730b     Spout.obj
+ 0001:00006316       $LN46                      10007316     Spout.obj
+ 0001:00006570       _Util_DestroyBitmapList    10007570 f   Spout.obj
+ 0001:00006880       _Util_DrawExtBox           10007880 f   Spout.obj
+ 0001:00007214       $LN11                      10008214     Spout.obj
+ 0001:0000721c       $LN10                      1000821c     Spout.obj
+ 0001:00007228       $LN9                       10008228     Spout.obj
+ 0001:000074a0       _Util_DrawPoly             100084a0 f   Spout.obj
+ 0001:0000760c       $LN10                      1000860c     Spout.obj
+ 0001:00007614       $LN9                       10008614     Spout.obj
+ 0001:00007620       $LN8                       10008620     Spout.obj
+ 0001:00007690       _Util_Frand                10008690 f   Spout.obj
+ 0001:00007780       _Util_LoadLibraryString    10008780 f   Spout.obj
+ 0001:00007930       _Util_RecreateCurBitmapsList 10008930 f   Spout.obj
+ 0001:00007d00       _Util_StrDup               10008d00 f   Spout.obj
+ 0001:00007dd0       _Util_WriteString          10008dd0 f   Spout.obj
+ 0001:00007ef0       $LN8                       10008ef0     Spout.obj
+ 0001:00007ef8       $LN7                       10008ef8     Spout.obj
+ 0001:00007f04       $LN6                       10008f04     Spout.obj
+ 0001:000082d4       $LN14                      100092d4     Spout.obj
+ 0001:000082dc       $LN13                      100092dc     Spout.obj
+ 0001:000082e8       $LN12                      100092e8     Spout.obj
+ 0001:000087d0       ?dllmain_crt_dispatch@@YGHQAUHINSTANCE__@@KQAX@Z 100097d0 f   MSVCRTD:dll_dllmain.obj
+ 0001:0000883c       $LN11                      1000983c     MSVCRTD:dll_dllmain.obj
+ 0001:00008870       ?dllmain_crt_process_attach@@YAHQAUHINSTANCE__@@QAX@Z 10009870 f   MSVCRTD:dll_dllmain.obj
+ 0001:00008a40       ?dllmain_crt_process_detach@@YAH_N@Z 10009a40 f   MSVCRTD:dll_dllmain.obj
+ 0001:00008b80       ?dllmain_dispatch@@YAHQAUHINSTANCE__@@KQAX@Z 10009b80 f   MSVCRTD:dll_dllmain.obj
+ 0001:00008d70       ?dllmain_raw@@YGHQAUHINSTANCE__@@KQAX@Z 10009d70 f   MSVCRTD:dll_dllmain.obj
+ 0001:00008e20       ?DebuggerProbe@@YA_NK@Z    10009e20 f   MSVCRTD:error.obj
+ 0001:00008e70       ?DebuggerRuntime@@YA_NKHPAXPB_W@Z 10009e70 f   MSVCRTD:error.obj
+ 0001:00009140       ?_getMemBlockDataString@@YAXPAD0PBDI@Z 1000a140 f   MSVCRTD:error.obj
+ 0001:000091d0       ?_strlen_priv@@YAIPBD@Z    1000a1d0 f   MSVCRTD:error.obj
+ 0001:000091f0       ?failwithmessage@@YAXPAXHHPBD@Z 1000a1f0 f   MSVCRTD:error.obj
+ 0001:00009470       ?notify_debugger@@YAXABUtagEXCEPTION_VISUALCPP_DEBUG_INFO@@@Z 1000a470 f   MSVCRTD:error.obj
+ 0001:00009b70       ___get_entropy             1000ab70 f   MSVCRTD:gs_support.obj
+ 0001:00009d60       ?find_pe_section@@YAPAU_IMAGE_SECTION_HEADER@@QAEI@Z 1000ad60 f   MSVCRTD:utility.obj
+ 0001:00009e20       ?is_potentially_valid_image_base@@YA_NQAX@Z 1000ae20 f   MSVCRTD:utility.obj
+ 0001:0000aa90       ___castguard_check_failure_os_handled_wrapper 1000ba90 f   MSVCRTD:guard_support.obj
+ 0001:0000aac0       ___castguard_compat_check  1000bac0 f   MSVCRTD:guard_support.obj
+ 0001:0000ac00       ___castguard_slow_path_compat_check 1000bc00 f   MSVCRTD:guard_support.obj
+ 0001:0000ac90       ?GetPdbDll@@YAPAUHINSTANCE__@@XZ 1000bc90 f   MSVCRTD:pdblkup.obj
+ 0001:0000ae30       ?GetPdbDllFromInstallPath@@YAPAUHINSTANCE__@@XZ 1000be30 f   MSVCRTD:pdblkup.obj
+ 0001:0000b120       ?GetPdbDllPathFromFilePath@@YAHPB_WPA_WI@Z 1000c120 f   MSVCRTD:pdblkup.obj
+ 0002:000015a8       ?_RTC_ErrorMessages@@3QBQBDB 100105a8     MSVCRTD:error.obj
+ 0002:000015c0       ?_RTC_NoFalsePositives@@3QBHB 100105c0     MSVCRTD:error.obj
+ 0002:000015d8       ?stack_premsg@@3QBDB       100105d8     MSVCRTD:error.obj
+ 0002:000015f4       ?stack_postmsg@@3QBDB      100105f4     MSVCRTD:error.obj
+ 0002:00001608       ?uninit_premsg@@3QBDB      10010608     MSVCRTD:error.obj
+ 0002:00001618       ?uninit_postmsg@@3QBDB     10010618     MSVCRTD:error.obj
+ 0002:00001c68       ?_RTC_errlist@@3QBQBDB     10010c68     MSVCRTD:userapi.obj
+ 0002:00001d4c       _GS_ExceptionPointers      10010d4c     MSVCRTD:gs_report.obj
+ 0002:00001d58       ?mspdbName@@3QB_WB         10010d58     MSVCRTD:pdblkup.obj
+ 0002:00001d7c       ?debugCrtFileName@@3QB_WB  10010d7c     MSVCRTD:pdblkup.obj
+ 0002:00001f08       ?dllExt@?1??GetPdbDllPathFromFilePath@@YAHPB_WPA_WI@Z@4QB_WB 10010f08     MSVCRTD:pdblkup.obj
+ 0002:00001f14       ?mspdbFilename@?1??GetPdbDllPathFromFilePath@@YAHPB_WPA_WI@Z@4QB_WB 10010f14     MSVCRTD:pdblkup.obj
+ 0002:00002878       __RTC_InitBase.rtc$IMZ     10011878     ObjectDef.obj
+ 0002:0000287c       __RTC_InitBase.rtc$IMZ     1001187c     Spout.obj
+ 0002:00002b8c       __RTC_Shutdown.rtc$TMZ     10011b8c     ObjectDef.obj
+ 0002:00002b90       __RTC_Shutdown.rtc$TMZ     10011b90     Spout.obj
+ 0002:00002da0       __sehtable$?dllmain_crt_process_attach@@YAHQAUHINSTANCE__@@QAX@Z 10011da0     MSVCRTD:dll_dllmain.obj
+ 0002:00002dc0       __sehtable$?dllmain_crt_process_detach@@YAH_N@Z 10011dc0     MSVCRTD:dll_dllmain.obj
+ 0002:00002df0       __sehtable$?dllmain_dispatch@@YAHQAUHINSTANCE__@@KQAX@Z 10011df0     MSVCRTD:dll_dllmain.obj
+ 0002:00002e10       __sehtable$?notify_debugger@@YAXABUtagEXCEPTION_VISUALCPP_DEBUG_INFO@@@Z 10011e10     MSVCRTD:error.obj
+ 0002:00002e30       __sehtable$___scrt_is_nonwritable_in_current_image 10011e30     MSVCRTD:utility.obj
+ 0002:00002f70       .edata                     10011f70     SpoutObj.exp
+ 0002:00002f98       rgpv                       10011f98     SpoutObj.exp
+ 0002:00002f9c       rgszName                   10011f9c     SpoutObj.exp
+ 0002:00002fa0       rgwOrd                     10011fa0     SpoutObj.exp
+ 0002:00002fa2       szName                     10011fa2     SpoutObj.exp
+ 0002:00002faf       $N00001                    10011faf     SpoutObj.exp
+ 0003:000000a4       _SpoutPropertyList         100130a4     Spout.obj
+ 0003:000000b0       _NoSelection               100130b0     Spout.obj
+ 0003:00000290       _SpoutProperties           10013290     Spout.obj
+ 0003:000008f0       _hClassInstance            100138f0     Spout.obj
+ 0003:000008f4       _Bitmaps                   100138f4     Spout.obj
+ 0003:000008f8       _CurBitmaps                100138f8     Spout.obj
+ 0003:00000918       ?StringBuf@?1??Util_LoadLibraryString@@9@9 10013918     Spout.obj
+ 0003:00000b98       ?init@?1??_RTC_InitBase@@9@4_NA 10013b98     MSVCRTD:init.obj
+ 0003:00000b9c       ?__proc_attached@@3HA      10013b9c     MSVCRTD:dll_dllmain.obj
+ 0003:00000bac       ?_RTC_ErrorReportFunc@@3P6AHHPBDH00ZZA 10013bac     MSVCRTD:userapi.obj
+ 0003:00000bb0       ?_RTC_ErrorReportFuncW@@3P6AHHPB_WH00ZZA 10013bb0     MSVCRTD:userapi.obj
+ 0003:00000bb8       _GS_ExceptionRecord        10013bb8     MSVCRTD:gs_report.obj
+ 0003:00000c08       _GS_ContextRecord          10013c08     MSVCRTD:gs_report.obj
+ 0003:00000f9c       ?is_initialized_as_dll@@3_NA 10013f9c     MSVCRTD:utility.obj
+ 0003:00000f9d       ?module_local_atexit_table_initialized@@3_NA 10013f9d     MSVCRTD:utility.obj
+ 0003:00000fa0       ?module_local_atexit_table@@3U_onexit_table_t@@A 10013fa0     MSVCRTD:utility.obj
+ 0003:00000fac       ?module_local_at_quick_exit_table@@3U_onexit_table_t@@A 10013fac     MSVCRTD:utility.obj
+ 0003:00000fc4       ?mspdb@@3PAUHINSTANCE__@@A 10013fc4     MSVCRTD:pdblkup.obj
+ 0003:00000fc8       ?alreadyTried@?1??GetPdbDll@@YAPAUHINSTANCE__@@XZ@4_NA 10013fc8     MSVCRTD:pdblkup.obj
+ 0003:00000fc9       ?PDBOK@?1??_RTC_GetSrcLine@@YAHPAEPA_WKPAH1K@Z@4_NA 10013fc9     MSVCRTD:pdblkup.obj
+ 0004:00000c76       .idata$6                   10014c76     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000ca0       .idata$6                   10014ca0     kernel32:KERNEL32.dll
+ 0004:00000cbc       .idata$6                   10014cbc     user32:USER32.dll
+ 0004:00000d8e       .idata$6                   10014d8e     vcruntimed:VCRUNTIME140D.dll
+ 0004:00000f5a       .idata$6                   10014f5a     ucrtd:ucrtbased.dll
+ 0006:00000240       $R000000                   10017240     Spout.res
+ 0006:00000330       $R0000F0                   10017330     Spout.res
+ 0006:00000410       $R0001D0                   10017410     Spout.res
+ 0006:00000440       $R000200                   10017440     Spout.res

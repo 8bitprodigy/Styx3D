@@ -1,0 +1,930 @@
+ CoronaObj
+
+ Timestamp is 643b68d4 (Sat Apr 15 20:17:40 2023)
+
+ Preferred load address is 10000000
+
+ Start         Length     Name                   Class
+ 0001:00000000 0000b83eH .text$mn                CODE
+ 0002:00000000 00000104H .CRT$XCA                DATA
+ 0002:00000104 00000104H .CRT$XCZ                DATA
+ 0002:00000208 00000104H .CRT$XIA                DATA
+ 0002:0000030c 00000104H .CRT$XIZ                DATA
+ 0002:00000410 00000104H .CRT$XPA                DATA
+ 0002:00000514 00000104H .CRT$XPZ                DATA
+ 0002:00000618 00000104H .CRT$XTA                DATA
+ 0002:0000071c 00000104H .CRT$XTZ                DATA
+ 0002:00000820 00001ee0H .rdata                  DATA
+ 0002:00002700 00000180H .rdata$CastGuardVftablesA DATA
+ 0002:00002880 0000014cH .rdata$CastGuardVftablesC DATA
+ 0002:000029cc 0000010cH .rdata$sxdata           DATA
+ 0002:00002ad8 000001a0H .rdata$zzzdbg           DATA
+ 0002:00002c78 00000104H .rtc$IAA                DATA
+ 0002:00002d7c 00000110H .rtc$IMZ                DATA
+ 0002:00002e8c 00000104H .rtc$IZZ                DATA
+ 0002:00002f90 00000104H .rtc$TAA                DATA
+ 0002:00003094 00000110H .rtc$TMZ                DATA
+ 0002:000031a4 00000104H .rtc$TZZ                DATA
+ 0002:000032a8 000001c8H .xdata$x                DATA
+ 0002:00003470 00000163H .edata                  DATA
+ 0003:00000000 00000298H .data                   DATA
+ 0003:00000298 00000804H .bss                    DATA
+ 0004:00000000 000002ecH .idata$5                DATA
+ 0004:000002ec 00000064H .idata$2                DATA
+ 0004:00000350 00000014H .idata$3                DATA
+ 0004:00000364 000002ecH .idata$4                DATA
+ 0004:00000650 00000c11H .idata$6                DATA
+ 0005:00000000 0000010eH .00cfg                  DATA
+ 0006:00000000 00000200H .rsrc$01                DATA
+ 0006:00000200 000007d3H .rsrc$02                DATA
+
+  Address         Publics by Value              Rva+Base       Lib:Object
+
+ 0000:00000000       ___AbsoluteZero            00000000     <absolute>
+ 0000:00000000       ___arm64x_extra_rfe_table  00000000     <absolute>
+ 0000:00000000       ___arm64x_extra_rfe_table_size 00000000     <absolute>
+ 0000:00000000       ___arm64x_native_entrypoint 00000000     <absolute>
+ 0000:00000000       ___arm64x_redirection_metadata 00000000     <absolute>
+ 0000:00000000       ___arm64x_redirection_metadata_count 00000000     <absolute>
+ 0000:00000000       ___dynamic_value_reloc_table 00000000     <absolute>
+ 0000:00000000       ___enclave_config          00000000     <absolute>
+ 0000:00000000       ___guard_check_icall_a64n_fptr 00000000     <absolute>
+ 0000:00000000       ___guard_eh_cont_count     00000000     <absolute>
+ 0000:00000000       ___guard_eh_cont_table     00000000     <absolute>
+ 0000:00000000       ___guard_fids_count        00000000     <absolute>
+ 0000:00000000       ___guard_fids_table        00000000     <absolute>
+ 0000:00000000       ___guard_iat_count         00000000     <absolute>
+ 0000:00000000       ___guard_iat_table         00000000     <absolute>
+ 0000:00000000       ___guard_longjmp_count     00000000     <absolute>
+ 0000:00000000       ___guard_longjmp_table     00000000     <absolute>
+ 0000:00000000       ___hybrid_auxiliary_iat    00000000     <absolute>
+ 0000:00000000       ___hybrid_auxiliary_iat_copy 00000000     <absolute>
+ 0000:00000000       ___hybrid_code_map         00000000     <absolute>
+ 0000:00000000       ___hybrid_code_map_count   00000000     <absolute>
+ 0000:00000000       ___volatile_metadata       00000000     <absolute>
+ 0000:00000000       ___x64_code_ranges_to_entry_points 00000000     <absolute>
+ 0000:00000000       ___x64_code_ranges_to_entry_points_count 00000000     <absolute>
+ 0000:00000002       ___safe_se_handler_count   00000002     <absolute>
+ 0000:00000100       ___guard_flags             00000100     <absolute>
+ 0000:00000000       ___ImageBase               10000000     <linker-defined>
+ 0001:000005a0       _AddChild@8                100015a0 f   Corona.obj
+ 0001:000005c0       _AttachEngine@8            100015c0 f   Corona.obj
+ 0001:00000860       _AttachSoundSystem@8       10001860 f   Corona.obj
+ 0001:00000910       _AttachWorld@8             10001910 f   Corona.obj
+ 0001:00000b30       _ChangeBoxCollision@24     10001b30 f   Corona.obj
+ 0001:00000b50       _Collision@24              10001b50 f   Corona.obj
+ 0001:00000b70       _CreateFromFile@8          10001b70 f   Corona.obj
+ 0001:00001050       _CreateInstance@0          10002050 f   Corona.obj
+ 0001:000011d0       _CreateRef@4               100021d0 f   Corona.obj
+ 0001:00001260       _DeInitClass               10002260 f   Corona.obj
+ 0001:000012d0       _Destroy@4                 100022d0 f   Corona.obj
+ 0001:000014d0       _DettachEngine@8           100024d0 f   Corona.obj
+ 0001:000015d0       _DettachSoundSystem@8      100025d0 f   Corona.obj
+ 0001:00001680       _DettachWorld@8            10002680 f   Corona.obj
+ 0001:000017a0       _DuplicateInstance@4       100027a0 f   Corona.obj
+ 0001:00001cf0       _EditDialog@8              10002cf0 f   Corona.obj
+ 0001:00001d10       _Frame@8                   10002d10 f   Corona.obj
+ 0001:00002000       _GetChildren@12            10003000 f   Corona.obj
+ 0001:00002020       _GetExtBox@8               10003020 f   Corona.obj
+ 0001:000021f0       _GetPropertyList@8         100031f0 f   Corona.obj
+ 0001:00002540       _GetXForm@8                10003540 f   Corona.obj
+ 0001:00002610       _GetXFormModFlags@4        10003610 f   Corona.obj
+ 0001:00002630       _InitClass                 10003630 f   Corona.obj
+ 0001:00002bb0       _RemoveChild@8             10003bb0 f   Corona.obj
+ 0001:00002bd0       _Render@24                 10003bd0 f   Corona.obj
+ 0001:00003230       _SendAMessage@12           10004230 f   Corona.obj
+ 0001:00003330       _SetProperty@16            10004330 f   Corona.obj
+ 0001:000038a0       _SetXForm@8                100048a0 f   Corona.obj
+ 0001:00003a20       _WriteToFile@12            10004a20 f   Corona.obj
+ 0001:00003d80       _DllMain@12                10004d80 f   ObjectDef.obj
+ 0001:00003e90       _Object_RegisterDef        10004e90 f   ObjectDef.obj
+ 0001:00003fa0       _ObjUtil_CreateBitmapFromFileName 10004fa0 f   ObjUtil.obj
+ 0001:000044b0       _ObjUtil_CreateBitmapList  100054b0 f   ObjUtil.obj
+ 0001:000050c0       _ObjUtil_DestroyBitmapList 100060c0 f   ObjUtil.obj
+ 0001:00005400       _ObjUtil_LoadLibraryString 10006400 f   ObjUtil.obj
+ 0001:000055b0       _ObjUtil_LogError          100065b0 f   ObjUtil.obj
+ 0001:000057e0       _ObjUtil_ReadString        100067e0 f   ObjUtil.obj
+ 0001:00005970       _ObjUtil_StrDup            10006970 f   ObjUtil.obj
+ 0001:00005d60       _ObjUtil_TextureGroupSetArt 10006d60 f   ObjUtil.obj
+ 0001:000064a0       _ObjUtil_TextureGroupSetSize 100074a0 f   ObjUtil.obj
+ 0001:00006880       _ObjUtil_WriteString       10007880 f   ObjUtil.obj
+ 0001:00006a07       _jeVFile_OpenNewSystem@20  10007a07 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006a0d       _jeVFile_Open@12           10007a0d f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006a13       _jeVFile_Close@4           10007a13 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006a19       _jeVFile_Read@12           10007a19 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006a1f       _jeVFile_Write@12          10007a1f f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006a25       _jeVFile_Seek@12           10007a25 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006a2b       _jeVFile_Rewind@4          10007a2b f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006a31       _jeVec3d_Scale@12          10007a31 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006a37       _jeVec3d_Length@4          10007a37 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006a3d       _jeVec3d_Subtract@12       10007a3d f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006a43       _jeVec3d_Add@12            10007a43 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006a49       _jeVec3d_Copy@8            10007a49 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006a4f       _jeProperty_ListCopy@4     10007a4f f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006a55       _jeProperty_FillGroup@12   10007a55 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006a5b       _jeProperty_FillFloat@28   10007a5b f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006a61       _jeProperty_FillGroupEnd@8 10007a61 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006a67       _jeProperty_FillCombo@24   10007a67 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006a6d       __jeRam_DebugAllocate@12   10007a6d f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006a73       _jeRam_AllocateClear@4     10007a73 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006a79       _jeRam_Free_@4             10007a79 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006a7f       _jeResource_MgrDestroy@4   10007a7f f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006a85       _jeResourceMgr_GetEngine@4 10007a85 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006a8b       _jeResourceMgr_GetSingleton@0 10007a8b f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006a91       _jePtrMgr_Create@0         10007a91 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006a97       _jeXForm3d_Orthonormalize@4 10007a97 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006a9d       _jeXForm3d_SetIdentity@4   10007a9d f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006aa3       _jeCamera_GetXForm@8       10007aa3 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006aa9       _jeMaterialSpec_Create@8   10007aa9 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006aaf       _jeMaterialSpec_AddLayerFromBitmap@16 10007aaf f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006ab5       _jeExtBox_Set@28           10007ab5 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006abb       _jeUserPoly_CreateSprite@16 10007abb f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006ac1       _jeUserPoly_Destroy@4      10007ac1 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006ac7       _jeWorld_AddUserPoly@12    10007ac7 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006acd       _jeWorld_Collision@20      10007acd f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006ad3       _jeWorld_GetResourceMgr@4  10007ad3 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006ad9       _jeErrorLog_AddExplicit@24 10007ad9 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006adf       _jeObject_RegisterGlobalObjectDef@4 10007adf f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006ae5       _jeVFile_CreateFinder@8    10007ae5 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006aeb       _jeVFile_DestroyFinder@4   10007aeb f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006af1       _jeVFile_FinderGetNextFile@4 10007af1 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006af7       _jeVFile_FinderGetProperties@8 10007af7 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006afd       _jeBitmap_CreateFromFile@4 10007afd f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006b03       _jeBitmap_Destroy@4        10007b03 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006b09       _jeBitmap_SetColorKey@16   10007b09 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006b0f       _jeBitmap_SetAlpha@8       10007b0f f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006b15       _jeBitmap_Width@4          10007b15 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006b1b       _jeBitmap_Height@4         10007b1b f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006b21       _jeResource_Add@16         10007b21 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006b27       _jeResource_Get@8          10007b27 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006b2d       _jeResource_Delete@8       10007b2d f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006b33       _jeResource_GetVFile@8     10007b33 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006b39       _jeResource_DeleteVFile@8  10007b39 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006b3f       _jeEngine_AddBitmap@12     10007b3f f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006b45       _jeEngine_RemoveBitmap@8   10007b45 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00006b4b       _LoadStringA@16            10007b4b f   user32:USER32.dll
+ 0001:00006b60       @_RTC_AllocaHelper@12      10007b60 f   MSVCRTD:stack.obj
+ 0001:00006ba0       @_RTC_CheckStackVars2@12   10007ba0 f   MSVCRTD:stack.obj
+ 0001:00006cb0       @_RTC_CheckStackVars@8     10007cb0 f   MSVCRTD:stack.obj
+ 0001:00006d20       __RTC_CheckEsp             10007d20 f   MSVCRTD:stack.obj
+ 0001:00006d50       @__security_check_cookie@4 10007d50 f   MSVCRTD:secchk.obj
+ 0001:00006d70       __CRT_RTC_INIT             10007d70 f   MSVCRTD:init.obj
+ 0001:00006d80       __CRT_RTC_INITW            10007d80 f   MSVCRTD:init.obj
+ 0001:00006d90       __RTC_InitBase             10007d90 f   MSVCRTD:init.obj
+ 0001:00006dd0       __RTC_Shutdown             10007dd0 f   MSVCRTD:init.obj
+ 0001:000073f0       __CRT_INIT@12              100083f0 f   MSVCRTD:dll_dllmain.obj
+ 0001:00007410       __DllMainCRTStartup@12     10008410 f   MSVCRTD:dll_dllmain.obj
+ 0001:000074f0       ?_RTC_AllocaFailure@@YAXPAXPAU_RTC_ALLOCA_NODE@@H@Z 100084f0 f   MSVCRTD:error.obj
+ 0001:00007610       ?_RTC_Failure@@YAXPAXH@Z   10008610 f   MSVCRTD:error.obj
+ 0001:00007680       ?_RTC_StackFailure@@YAXPAXPBD@Z 10008680 f   MSVCRTD:error.obj
+ 0001:00007b30       __RTC_UninitUse            10008b30 f   MSVCRTD:error.obj
+ 0001:00007c10       ___local_stdio_printf_options 10008c10 f i MSVCRTD:error.obj
+ 0001:00007c20       __vsprintf_s_l             10008c20 f i MSVCRTD:error.obj
+ 0001:00007c60       _sprintf_s                 10008c60 f i MSVCRTD:error.obj
+ 0001:00007c90       ___raise_securityfailure   10008c90 f   MSVCRTD:gs_report.obj
+ 0001:00007cd0       ___report_gsfailure        10008cd0 f   MSVCRTD:gs_report.obj
+ 0001:00007e20       ___report_rangecheckfailure 10008e20 f   MSVCRTD:gs_report.obj
+ 0001:00007e30       ___report_securityfailure  10008e30 f   MSVCRTD:gs_report.obj
+ 0001:00007f40       ___report_securityfailureEx 10008f40 f   MSVCRTD:gs_report.obj
+ 0001:000080b0       ?_RTC_GetErrorFunc@@YAP6AHHPBDH00ZZPBX@Z 100090b0 f   MSVCRTD:userapi.obj
+ 0001:000080c0       ?_RTC_GetErrorFuncW@@YAP6AHHPB_WH00ZZPBX@Z 100090c0 f   MSVCRTD:userapi.obj
+ 0001:000080d0       __RTC_GetErrDesc           100090d0 f   MSVCRTD:userapi.obj
+ 0001:000080f0       __RTC_NumErrors            100090f0 f   MSVCRTD:userapi.obj
+ 0001:00008100       __RTC_SetErrorFunc         10009100 f   MSVCRTD:userapi.obj
+ 0001:00008130       __RTC_SetErrorFuncW        10009130 f   MSVCRTD:userapi.obj
+ 0001:00008160       __RTC_SetErrorType         10009160 f   MSVCRTD:userapi.obj
+ 0001:00008220       ___security_init_cookie    10009220 f   MSVCRTD:gs_support.obj
+ 0001:000082c0       ?__scrt_initialize_type_info@@YAXXZ 100092c0 f   MSVCRTD:tncleanup.obj
+ 0001:000082e0       ?__scrt_uninitialize_type_info@@YAXXZ 100092e0 f   MSVCRTD:tncleanup.obj
+ 0001:00008300       ___local_stdio_scanf_options 10009300 f i MSVCRTD:default_local_stdio_options.obj
+ 0001:00008310       ___scrt_initialize_default_local_stdio_options 10009310 f   MSVCRTD:default_local_stdio_options.obj
+ 0001:00008360       ?configure_argv@__scrt_narrow_argv_policy@@SAHXZ 10009360 f i MSVCRTD:utility.obj
+ 0001:00008430       ?initialize_environment@__scrt_narrow_environment_policy@@SAHXZ 10009430 f i MSVCRTD:utility.obj
+ 0001:000084d0       _NtCurrentTeb              100094d0 f i MSVCRTD:utility.obj
+ 0001:000084e0       ___scrt_acquire_startup_lock 100094e0 f   MSVCRTD:utility.obj
+ 0001:00008540       ___scrt_dllmain_after_initialize_c 10009540 f   MSVCRTD:utility.obj
+ 0001:00008580       ___scrt_dllmain_before_initialize_c 10009580 f   MSVCRTD:utility.obj
+ 0001:000085b0       ___scrt_dllmain_crt_thread_attach 100095b0 f   MSVCRTD:utility.obj
+ 0001:000085f0       ___scrt_dllmain_crt_thread_detach 100095f0 f   MSVCRTD:utility.obj
+ 0001:00008610       ___scrt_dllmain_exception_filter 10009610 f   MSVCRTD:utility.obj
+ 0001:00008670       ___scrt_dllmain_uninitialize_c 10009670 f   MSVCRTD:utility.obj
+ 0001:000086b0       ___scrt_dllmain_uninitialize_critical 100096b0 f   MSVCRTD:utility.obj
+ 0001:000086d0       ___scrt_initialize_crt     100096d0 f   MSVCRTD:utility.obj
+ 0001:00008730       ___scrt_initialize_onexit_tables 10009730 f   MSVCRTD:utility.obj
+ 0001:00008840       ___scrt_is_nonwritable_in_current_image 10009840 f   MSVCRTD:utility.obj
+ 0001:000089c0       ___scrt_release_startup_lock 100099c0 f   MSVCRTD:utility.obj
+ 0001:000089f0       ___scrt_uninitialize_crt   100099f0 f   MSVCRTD:utility.obj
+ 0001:00008a40       __onexit                   10009a40 f   MSVCRTD:utility.obj
+ 0001:00008ac0       _at_quick_exit             10009ac0 f   MSVCRTD:utility.obj
+ 0001:00008b10       _atexit                    10009b10 f   MSVCRTD:utility.obj
+ 0001:00008b50       ___scrt_get_dyn_tls_init_callback 10009b50 f   MSVCRTD:dyn_tls_init.obj
+ 0001:00008b60       ___scrt_fastfail           10009b60 f   MSVCRTD:utility_desktop.obj
+ 0001:00008cf0       ___scrt_get_show_window_mode 10009cf0 f   MSVCRTD:utility_desktop.obj
+ 0001:00008d40       ___scrt_initialize_mta     10009d40 f   MSVCRTD:utility_desktop.obj
+ 0001:00008d50       ___scrt_initialize_winrt   10009d50 f   MSVCRTD:utility_desktop.obj
+ 0001:00008d60       ___scrt_is_managed_app     10009d60 f   MSVCRTD:utility_desktop.obj
+ 0001:00008e10       ___scrt_set_unhandled_exception_filter 10009e10 f   MSVCRTD:utility_desktop.obj
+ 0001:00008e30       ___scrt_exe_initialize_mta 10009e30 f   MSVCRTD:utility_desktop.obj
+ 0001:00008e30       ___scrt_stub_for_initialize_mta 10009e30 f   MSVCRTD:utility_desktop.obj
+ 0001:00008e40       ___scrt_unhandled_exception_filter@4 10009e40 f   MSVCRTD:utility_desktop.obj
+ 0001:00008ee0       __crt_debugger_hook        10009ee0 f   MSVCRTD:utility_desktop.obj
+ 0001:00008f00       __RTC_Initialize           10009f00 f   MSVCRTD:initsect.obj
+ 0001:00008f40       __RTC_Terminate            10009f40 f   MSVCRTD:initsect.obj
+ 0001:00008f80       __except_handler4          10009f80 f   MSVCRTD:chandler4gs.obj
+ 0001:00008fd0       @_guard_check_icall_nop@4  10009fd0 f i MSVCRTD:guard_support.obj
+ 0001:00008fe0       _ReadNoFence               10009fe0 f i MSVCRTD:guard_support.obj
+ 0001:00009000       _ReadPointerNoFence        1000a000 f i MSVCRTD:guard_support.obj
+ 0001:00009020       ___castguard_check_failure_debugbreak 1000a020 f i MSVCRTD:guard_support.obj
+ 0001:00009040       ___castguard_check_failure_fastfail 1000a040 f i MSVCRTD:guard_support.obj
+ 0001:00009070       ___castguard_check_failure_nop 1000a070 f i MSVCRTD:guard_support.obj
+ 0001:00009080       ___castguard_check_failure_os_handled 1000a080 f i MSVCRTD:guard_support.obj
+ 0001:00009130       ___castguard_slow_path_check_debugbreak 1000a130 f i MSVCRTD:guard_support.obj
+ 0001:00009170       ___castguard_slow_path_check_fastfail 1000a170 f i MSVCRTD:guard_support.obj
+ 0001:000091c0       ___castguard_slow_path_check_nop 1000a1c0 f i MSVCRTD:guard_support.obj
+ 0001:000091d0       ___castguard_slow_path_check_os_handled 1000a1d0 f i MSVCRTD:guard_support.obj
+ 0001:00009270       __guard_icall_checks_enforced 1000a270 f i MSVCRTD:guard_support.obj
+ 0001:00009850       ?_RTC_GetSrcLine@@YAHPAEPA_WKPAH1K@Z 1000a850 f   MSVCRTD:pdblkup.obj
+ 0001:00009cb0       __except_handler4_noexcept 1000acb0 f   MSVCRTD:chandler4_noexcept.obj
+ 0001:00009d30       ___isa_available_init      1000ad30 f   MSVCRTD:cpu_disp.obj
+ 0001:0000a130       __get_startup_argv_mode    1000b130 f   MSVCRTD:argv_mode.obj
+ 0001:0000a140       ___scrt_is_ucrt_dll_in_use 1000b140 f   MSVCRTD:ucrt_detection.obj
+ 0001:0000a16d       ___std_type_info_destroy_list 1000b16d f   vcruntimed:VCRUNTIME140D.dll
+ 0001:0000a173       ___current_exception       1000b173 f   vcruntimed:VCRUNTIME140D.dll
+ 0001:0000a179       ___current_exception_context 1000b179 f   vcruntimed:VCRUNTIME140D.dll
+ 0001:0000a17f       _memset                    1000b17f f   vcruntimed:VCRUNTIME140D.dll
+ 0001:0000a185       __except_handler4_common   1000b185 f   vcruntimed:VCRUNTIME140D.dll
+ 0001:0000a18b       ___vcrt_GetModuleFileNameW 1000b18b f   vcruntimed:VCRUNTIME140D.dll
+ 0001:0000a191       ___vcrt_GetModuleHandleW   1000b191 f   vcruntimed:VCRUNTIME140D.dll
+ 0001:0000a197       ___vcrt_LoadLibraryExW     1000b197 f   vcruntimed:VCRUNTIME140D.dll
+ 0001:0000a19d       __wassert                  1000b19d f   ucrtd:ucrtbased.dll
+ 0001:0000a1a3       _strcat                    1000b1a3 f   ucrtd:ucrtbased.dll
+ 0001:0000a1a9       _strcpy                    1000b1a9 f   ucrtd:ucrtbased.dll
+ 0001:0000a1af       _strlen                    1000b1af f   ucrtd:ucrtbased.dll
+ 0001:0000a1b5       __CrtDbgReport             1000b1b5 f   ucrtd:ucrtbased.dll
+ 0001:0000a1bb       __CrtDbgReportW            1000b1bb f   ucrtd:ucrtbased.dll
+ 0001:0000a1c1       __initterm                 1000b1c1 f   ucrtd:ucrtbased.dll
+ 0001:0000a1c7       __initterm_e               1000b1c7 f   ucrtd:ucrtbased.dll
+ 0001:0000a1cd       _strcpy_s                  1000b1cd f   ucrtd:ucrtbased.dll
+ 0001:0000a1d3       _strcat_s                  1000b1d3 f   ucrtd:ucrtbased.dll
+ 0001:0000a1d9       ___stdio_common_vsprintf_s 1000b1d9 f   ucrtd:ucrtbased.dll
+ 0001:0000a1df       __seh_filter_dll           1000b1df f   ucrtd:ucrtbased.dll
+ 0001:0000a1e5       __configure_narrow_argv    1000b1e5 f   ucrtd:ucrtbased.dll
+ 0001:0000a1eb       __initialize_narrow_environment 1000b1eb f   ucrtd:ucrtbased.dll
+ 0001:0000a1f1       __initialize_onexit_table  1000b1f1 f   ucrtd:ucrtbased.dll
+ 0001:0000a1f7       __register_onexit_function 1000b1f7 f   ucrtd:ucrtbased.dll
+ 0001:0000a1fd       __execute_onexit_table     1000b1fd f   ucrtd:ucrtbased.dll
+ 0001:0000a203       __crt_atexit               1000b203 f   ucrtd:ucrtbased.dll
+ 0001:0000a209       __crt_at_quick_exit        1000b209 f   ucrtd:ucrtbased.dll
+ 0001:0000a20f       __cexit                    1000b20f f   ucrtd:ucrtbased.dll
+ 0001:0000a215       _terminate                 1000b215 f   ucrtd:ucrtbased.dll
+ 0001:0000a21b       __wmakepath_s              1000b21b f   ucrtd:ucrtbased.dll
+ 0001:0000a221       __wsplitpath_s             1000b221 f   ucrtd:ucrtbased.dll
+ 0001:0000a227       _wcscpy_s                  1000b227 f   ucrtd:ucrtbased.dll
+ 0001:0000a22d       __itoa                     1000b22d f   ucrtd:ucrtbased.dll
+ 0001:0000a233       __stricmp                  1000b233 f   ucrtd:ucrtbased.dll
+ 0001:0000a239       _IsDebuggerPresent@0       1000b239 f   kernel32:KERNEL32.dll
+ 0001:0000a23f       _RaiseException@16         1000b23f f   kernel32:KERNEL32.dll
+ 0001:0000a245       _MultiByteToWideChar@24    1000b245 f   kernel32:KERNEL32.dll
+ 0001:0000a24b       _WideCharToMultiByte@32    1000b24b f   kernel32:KERNEL32.dll
+ 0001:0000a251       _UnhandledExceptionFilter@4 1000b251 f   kernel32:KERNEL32.dll
+ 0001:0000a257       _SetUnhandledExceptionFilter@4 1000b257 f   kernel32:KERNEL32.dll
+ 0001:0000a25d       _GetCurrentProcess@0       1000b25d f   kernel32:KERNEL32.dll
+ 0001:0000a263       _TerminateProcess@8        1000b263 f   kernel32:KERNEL32.dll
+ 0001:0000a269       _IsProcessorFeaturePresent@4 1000b269 f   kernel32:KERNEL32.dll
+ 0001:0000a26f       _QueryPerformanceCounter@4 1000b26f f   kernel32:KERNEL32.dll
+ 0001:0000a275       _GetCurrentProcessId@0     1000b275 f   kernel32:KERNEL32.dll
+ 0001:0000a27b       _GetCurrentThreadId@0      1000b27b f   kernel32:KERNEL32.dll
+ 0001:0000a281       _GetSystemTimeAsFileTime@4 1000b281 f   kernel32:KERNEL32.dll
+ 0001:0000a287       _InitializeSListHead@4     1000b287 f   kernel32:KERNEL32.dll
+ 0001:0000a28d       _GetStartupInfoW@4         1000b28d f   kernel32:KERNEL32.dll
+ 0001:0000a293       _GetModuleHandleW@4        1000b293 f   kernel32:KERNEL32.dll
+ 0001:0000a299       _GetLastError@0            1000b299 f   kernel32:KERNEL32.dll
+ 0001:0000a29f       _HeapAlloc@12              1000b29f f   kernel32:KERNEL32.dll
+ 0001:0000a2a5       _HeapFree@12               1000b2a5 f   kernel32:KERNEL32.dll
+ 0001:0000a2ab       _GetProcessHeap@0          1000b2ab f   kernel32:KERNEL32.dll
+ 0001:0000a2b1       _VirtualQuery@12           1000b2b1 f   kernel32:KERNEL32.dll
+ 0001:0000a2b7       _FreeLibrary@4             1000b2b7 f   kernel32:KERNEL32.dll
+ 0001:0000a2bd       _GetProcAddress@8          1000b2bd f   kernel32:KERNEL32.dll
+ 0001:0000a2d0       ___acrt_initialize         1000b2d0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000a2d0       ___scrt_stub_for_acrt_initialize 1000b2d0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000a2d0       ___vcrt_initialize         1000b2d0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000a2e0       ___acrt_thread_attach      1000b2e0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000a2e0       ___scrt_stub_for_acrt_thread_attach 1000b2e0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000a2e0       ___vcrt_thread_attach      1000b2e0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000a2f0       ___acrt_thread_detach      1000b2f0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000a2f0       ___scrt_stub_for_acrt_thread_detach 1000b2f0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000a2f0       ___vcrt_thread_detach      1000b2f0 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000a300       ___acrt_uninitialize       1000b300 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000a300       ___scrt_stub_for_acrt_uninitialize 1000b300 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000a300       ___vcrt_uninitialize       1000b300 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000a310       ___acrt_uninitialize_critical 1000b310 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000a310       ___scrt_stub_for_acrt_uninitialize_critical 1000b310 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000a310       ___vcrt_uninitialize_critical 1000b310 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000a320       ___scrt_stub_for_is_c_termination_complete 1000b320 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000a320       __is_c_termination_complete 1000b320 f   MSVCRTD:ucrt_stubs.obj
+ 0001:0000a330       __filter_x86_sse2_floating_point_exception 1000b330 f   MSVCRTD:x86_exception_filter.obj
+ 0001:0000a330       __filter_x86_sse2_floating_point_exception_default 1000b330 f   MSVCRTD:x86_exception_filter.obj
+ 0002:00000000       ___xc_a                    1000d000     MSVCRTD:initializers.obj
+ 0002:00000104       ___xc_z                    1000d104     MSVCRTD:initializers.obj
+ 0002:00000208       ___xi_a                    1000d208     MSVCRTD:initializers.obj
+ 0002:0000030c       ___xi_z                    1000d30c     MSVCRTD:initializers.obj
+ 0002:00000410       ___xp_a                    1000d410     MSVCRTD:initializers.obj
+ 0002:00000514       ___xp_z                    1000d514     MSVCRTD:initializers.obj
+ 0002:00000618       ___xt_a                    1000d618     MSVCRTD:initializers.obj
+ 0002:0000071c       ___xt_z                    1000d71c     MSVCRTD:initializers.obj
+ 0002:00000820       ??_C@_08FJNMKDHG@?$DM?5none?5?$DO@ 1000d820     Corona.obj
+ 0002:00000830       ??_C@_1KE@BHBHHMDH@?$AAD?$AA?3?$AA?2?$AAG?$AAe?$AAn?$AAe?$AAs?$AAi?$AAs?$AA?5?$AAa?$AAn?$AAd?$AA?5@ 1000d830     Corona.obj
+ 0002:000008f4       ??_C@_1CE@FBLKGNMA@?$AAh?$AAI?$AAn?$AAs?$AAt?$AAa?$AAn?$AAc?$AAe?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU@ 1000d8f4     Corona.obj
+ 0002:00000920       ??_C@_1BO@CHOHCGNL@?$AAO?$AAb?$AAj?$AAe?$AAc?$AAt?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000d920     Corona.obj
+ 0002:00000944       ??_C@_1CC@CAMJEFBK@?$AAI?$AAn?$AAs?$AAt?$AAa?$AAn?$AAc?$AAe?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL@ 1000d944     Corona.obj
+ 0002:0000096c       ??_C@_1CK@BJNCGFOF@?$AAO?$AAb?$AAj?$AAe?$AAc?$AAt?$AA?9?$AA?$DO?$AAR?$AAe?$AAf?$AAC?$AAo?$AAu?$AAn@ 1000d96c     Corona.obj
+ 0002:000009a0       ??_C@_1CM@OILLBNGE@?$AAO?$AAb?$AAj?$AAe?$AAc?$AAt?$AA?9?$AA?$DO?$AAW?$AAo?$AAr?$AAl?$AAd?$AA?5?$AA?$DN@ 1000d9a0     Corona.obj
+ 0002:000009d4       ??_C@_1CO@MNMNPFEG@?$AAO?$AAb?$AAj?$AAe?$AAc?$AAt?$AA?9?$AA?$DO?$AAE?$AAn?$AAg?$AAi?$AAn?$AAe?$AA?5@ 1000d9d4     Corona.obj
+ 0002:00000a0c       ??_C@_1DI@HFKFAEHP@?$AAO?$AAb?$AAj?$AAe?$AAc?$AAt?$AA?9?$AA?$DO?$AAR?$AAe?$AAs?$AAo?$AAu?$AAr?$AAc@ 1000da0c     Corona.obj
+ 0002:00000a50       ??_C@_1BM@KHCCJOII@?$AAW?$AAo?$AAr?$AAl?$AAd?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000da50     Corona.obj
+ 0002:00000a74       ??_C@_1BO@DIOIBMOB@?$AAE?$AAn?$AAg?$AAi?$AAn?$AAe?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000da74     Corona.obj
+ 0002:00000a98       ??_C@_1BO@EBJMJNEA@?$AAC?$AAa?$AAm?$AAe?$AAr?$AAa?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000da98     Corona.obj
+ 0002:00000abc       ??_C@_1DG@CJHFIGAD@?$AAC?$AAa?$AAm?$AAe?$AAr?$AAa?$AAS?$AAp?$AAa?$AAc?$AAe?$AAF?$AAr?$AAu?$AAs@ 1000dabc     Corona.obj
+ 0002:00000afc       ??_C@_1DI@DEKAOJCJ@?$AAO?$AAb?$AAj?$AAe?$AAc?$AAt?$AA?9?$AA?$DO?$AAR?$AAe?$AAs?$AAo?$AAu?$AAr?$AAc@ 1000dafc     Corona.obj
+ 0002:00000b40       ??_C@_05GIOEPHGE@?$CK?4bmp@ 1000db40     Corona.obj
+ 0002:00000b48       ??_C@_0BA@FPJCPCEO@GlobalMaterials@ 1000db48     Corona.obj
+ 0002:00000b5c       ??_C@_1CO@KPFIMLHA@?$AAO?$AAb?$AAj?$AAe?$AAc?$AAt?$AA?9?$AA?$DO?$AAW?$AAo?$AAr?$AAl?$AAd?$AA?5?$AA?$DN@ 1000db5c     Corona.obj
+ 0002:00000b94       ??_C@_1DC@IEFPPFDN@?$AAO?$AAb?$AAj?$AAe?$AAc?$AAt?$AA?9?$AA?$DO?$AAE?$AAn?$AAg?$AAi?$AAn?$AAe?$AA?5@ 1000db94     Corona.obj
+ 0002:00000bd0       ??_C@_1CI@FPDJBKCH@?$AAS?$AAo?$AAu?$AAn?$AAd?$AAS?$AAy?$AAs?$AAt?$AAe?$AAm?$AA?5?$AA?$CB?$AA?$DN?$AA?5@ 1000dbd0     Corona.obj
+ 0002:00000c00       ??_C@_1BK@GGNHCFBN@?$AAB?$AAB?$AAo?$AAx?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000dc00     Corona.obj
+ 0002:00000c20       ??_C@_1BK@FHGJNIOH@?$AAF?$AAi?$AAl?$AAe?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000dc20     Corona.obj
+ 0002:00000c40       ??_C@_1BO@MPJOMIKL@?$AAP?$AAt?$AAr?$AAM?$AAg?$AAr?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000dc40     Corona.obj
+ 0002:00000c64       ??_C@_1BK@OHMGHMFG@?$AAL?$AAi?$AAs?$AAt?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000dc64     Corona.obj
+ 0002:00000c84       ??_C@_1BM@KBHENEMF@?$AAp?$AAD?$AAa?$AAt?$AAa?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000dc84     Corona.obj
+ 0002:00000ca8       ??_C@_1EA@GNMOCPKM@?$AAD?$AAa?$AAt?$AAa?$AAT?$AAy?$AAp?$AAe?$AA?5?$AA?$DN?$AA?$DN?$AA?5?$AAP?$AAR?$AAO@ 1000dca8     Corona.obj
+ 0002:00000cf8       ??_C@_1EA@IMHIENFG@?$AAD?$AAa?$AAt?$AAa?$AAT?$AAy?$AAp?$AAe?$AA?5?$AA?$DN?$AA?$DN?$AA?5?$AAP?$AAR?$AAO@ 1000dcf8     Corona.obj
+ 0002:00000d44       ??_C@_1CM@HCDPOPLB@?$AAp?$AAD?$AAa?$AAt?$AAa?$AA?9?$AA?$DO?$AAS?$AAt?$AAr?$AAi?$AAn?$AAg?$AA?5?$AA?$CB@ 1000dd44     Corona.obj
+ 0002:00000d78       ??_C@_1BG@PCOKDGLJ@?$AAX?$AAf?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000dd78     Corona.obj
+ 0002:00000d94       ??_C@_1CE@ELBDNEH@?$AAT?$AAi?$AAm?$AAe?$AAD?$AAe?$AAl?$AAt?$AAa?$AA?5?$AA?$DO?$AA?$DN?$AA?5?$AA0?$AA?4@ 1000dd94     Corona.obj
+ 0002:00000dc0       ??_C@_1BK@MOHHCICO@?$AAD?$AAa?$AAt?$AAa?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000ddc0     Corona.obj
+ 0002:00000de0       ??_C@_0FC@OIAPOAKH@D?3?2Genesis?5and?5Jet3d?2JSTUDIO_CL@ 1000dde0     Corona.obj
+ 0002:00000e44       ??_C@_0DH@PNPJMBGI@Unable?5to?5allocate?5enough?5RAM?5t@ 1000de44     Corona.obj
+ 0002:00000e88       ??_C@_0BJ@EGNAMMON@JE_ERR_SUBSYSTEM_FAILURE@ 1000de88     Corona.obj
+ 0002:00000ea8       ??_C@_06LEBJIAPJ@Memory@   1000dea8     Corona.obj
+ 0002:00000eb0       ??_C@_0CK@JADIPFJF@Unable?5to?5create?5a?5VFile?5Memory@ 1000deb0     Corona.obj
+ 0002:00000ee4       ??_C@_0L@MFPGFNKC@tempObject@ 1000dee4     Corona.obj
+ 0002:00000ef4       ??_C@_0CF@CKCDKBOB@Unable?5to?5create?5a?5VFile?5Memory@ 1000def4     Corona.obj
+ 0002:00000f20       ??_C@_0CD@EPHHKCKF@Unable?5to?5create?5a?5Pointer?5Mana@ 1000df20     Corona.obj
+ 0002:00000f4c       ??_C@_0DH@BKNJBHHF@Unable?5to?5write?5the?5object?5to?5a@ 1000df4c     Corona.obj
+ 0002:00000f90       ??_C@_0CM@GHPDDNHJ@Unable?5to?5rewind?5the?5temp?5VFile@ 1000df90     Corona.obj
+ 0002:00000fc4       ??_C@_0DO@EDLKNMAJ@Unable?5to?5reade?5the?5object?5back@ 1000dfc4     Corona.obj
+ 0002:00001010       __real@00000000            1000e010     Corona.obj
+ 0002:00001014       __real@3dcccccd            1000e014     Corona.obj
+ 0002:00001018       __real@3f800000            1000e018     Corona.obj
+ 0002:0000101c       __real@40000000            1000e01c     Corona.obj
+ 0002:00001020       __real@40800000            1000e020     Corona.obj
+ 0002:00001024       __real@41c80000            1000e024     Corona.obj
+ 0002:00001028       __real@42c80000            1000e028     Corona.obj
+ 0002:0000102c       __real@437f0000            1000e02c     Corona.obj
+ 0002:00001030       __real@447a0000            1000e030     Corona.obj
+ 0002:00001034       __real@7f7fffff            1000e034     Corona.obj
+ 0002:00001038       __real@bf800000            1000e038     Corona.obj
+ 0002:0000103c       ??_C@_06DACKBKNM@Corona@   1000e03c     ObjectDef.obj
+ 0002:00001044       ??_C@_0BF@GIHLCFOH@Failed?5to?5init?5class@ 1000e044     ObjectDef.obj
+ 0002:0000105d       ??_C@_00CNPNBAHC@@         1000e05d     ObjectDef.obj
+ 0002:00001060       ??_C@_0FF@JHLNGKAB@D?3?2Genesis?5and?5Jet3d?2JSTUDIO_CL@ 1000e060     ObjectDef.obj
+ 0002:000010c8       ??_C@_0BH@NMCAFMFF@Failed?5to?5deinit?5class@ 1000e0c8     ObjectDef.obj
+ 0002:000010e4       ??_C@_0BM@FFNOHNDF@Version?5numbers?5don?8t?5match@ 1000e0e4     ObjectDef.obj
+ 0002:00001108       ??_C@_0BD@NBOLINIG@JE_ERR_DATA_FORMAT@ 1000e108     ObjectDef.obj
+ 0002:00001120       ??_C@_0CF@IIOFFNDJ@Failed?5to?5register?5global?5objec@ 1000e120     ObjectDef.obj
+ 0002:0000114c       __real@3f051eb8            1000e14c     ObjectDef.obj
+ 0002:00001150       ??_C@_0FD@JFNGDCIN@D?3?2Genesis?5and?5Jet3d?2JSTUDIO_CL@ 1000e150     ObjUtil.obj
+ 0002:000011b4       ??_C@_0BH@KIBLNGDK@JE_ERR_MEMORY_RESOURCE@ 1000e1b4     ObjUtil.obj
+ 0002:000011d0       ??_C@_1KG@BOJIGGM@?$AAD?$AA?3?$AA?2?$AAG?$AAe?$AAn?$AAe?$AAs?$AAi?$AAs?$AA?5?$AAa?$AAn?$AAd?$AA?5@ 1000e1d0     ObjUtil.obj
+ 0002:00001298       ??_C@_1BA@DPBAOGCM@?$AAI?$AAD?$AA?5?$AA?$DO?$AA?$DN?$AA?5?$AA0@ 1000e298     ObjUtil.obj
+ 0002:000012ac       ??_C@_0BO@OMJFKDE@Failed?5to?5get?5resource?5string@ 1000e2ac     ObjUtil.obj
+ 0002:000012d0       ??_C@_0BL@JJOGLEIA@JE_ERR_WINDOWS_API_FAILURE@ 1000e2d0     ObjUtil.obj
+ 0002:000012f0       ??_C@_0CB@IMHMDOAK@Failed?5to?5allocate?5string?5memor@ 1000e2f0     ObjUtil.obj
+ 0002:00001318       ??_C@_1BE@KMOIIKI@?$AAT?$AAy?$AAp?$AAe?$AA?5?$AA?$DO?$AA?$DN?$AA?5?$AA0@ 1000e318     ObjUtil.obj
+ 0002:00001330       ??_C@_1BK@MNGOLMBE@?$AAM?$AAe?$AAs?$AAs?$AAa?$AAg?$AAe?$AA?5?$AA?$DO?$AA?$DN?$AA?5?$AA0@ 1000e330     ObjUtil.obj
+ 0002:00001350       ??_C@_0BA@FEIHONMC@No?5class?5handle@ 1000e350     ObjUtil.obj
+ 0002:00001364       ??_C@_0CD@MAFCGHEK@Could?5not?5get?5error?5message?5str@ 1000e364     ObjUtil.obj
+ 0002:00001390       ??_C@_04KOACHJEN@Type@     1000e390     ObjUtil.obj
+ 0002:00001398       ??_C@_1BO@HJMILEGM@?$AAS?$AAt?$AAr?$AAi?$AAn?$AAg?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000e398     ObjUtil.obj
+ 0002:000013bc       ??_C@_1BC@KCECIPDP@?$AAS?$AAi?$AAz?$AAe?$AA?5?$AA?$DO?$AA?5?$AA0@ 1000e3bc     ObjUtil.obj
+ 0002:000013d4       ??_C@_1BK@MHGFKNCF@?$AAN?$AAa?$AAm?$AAe?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000e3d4     ObjUtil.obj
+ 0002:000013f4       ??_C@_0BD@EPDLJDNO@JE_ERR_FILEIO_OPEN@ 1000e3f4     ObjUtil.obj
+ 0002:0000140c       ??_C@_0BF@NJDEBKOM@JE_ERR_BAD_PARAMETER@ 1000e40c     ObjUtil.obj
+ 0002:00001428       ??_C@_1O@DKHFMLJF@?$AAR?$AAe?$AAs?$AAu?$AAl?$AAt@ 1000e428     ObjUtil.obj
+ 0002:00001438       ??_C@_1CC@FKGDIIDN@?$AAD?$AAe?$AAa?$AAd?$AAL?$AAi?$AAs?$AAt?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL@ 1000e438     ObjUtil.obj
+ 0002:00001460       ??_C@_1CE@OJGHIKHO@?$AA?$CK?$AAD?$AAe?$AAa?$AAd?$AAL?$AAi?$AAs?$AAt?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU@ 1000e460     ObjUtil.obj
+ 0002:0000148c       ??_C@_1CA@MOIMHKED@?$AAL?$AAi?$AAs?$AAt?$AA?9?$AA?$DO?$AAT?$AAo?$AAt?$AAa?$AAl?$AA?5?$AA?$DO?$AA?5?$AA0@ 1000e48c     ObjUtil.obj
+ 0002:000014b4       ??_C@_1DK@JKLENKLG@?$AAL?$AAi?$AAs?$AAt?$AA?9?$AA?$DO?$AAS?$AAt?$AAr?$AAi?$AAn?$AAg?$AAS?$AAi?$AAz@ 1000e4b4     ObjUtil.obj
+ 0002:000014fc       ??_C@_1CK@CHFLIDNO@?$AAA?$AAv?$AAa?$AAi?$AAl?$AAa?$AAb?$AAl?$AAe?$AAA?$AAr?$AAt?$AA?5?$AA?$CB?$AA?$DN@ 1000e4fc     ObjUtil.obj
+ 0002:00001530       ??_C@_1CM@JFHDDCCJ@?$AAN?$AAe?$AAw?$AAA?$AAc?$AAt?$AAi?$AAv?$AAe?$AAC?$AAu?$AAr?$AAS?$AAi?$AAz@ 1000e530     ObjUtil.obj
+ 0002:00001568       ??_C@_1FO@FJGLEGFO@?$AAN?$AAe?$AAw?$AAA?$AAc?$AAt?$AAi?$AAv?$AAe?$AAC?$AAu?$AAr?$AAS?$AAi?$AAz@ 1000e568     ObjUtil.obj
+ 0002:000015d8       ??_C@_1CI@LLIOFGGH@?$AAR?$AAe?$AAs?$AAo?$AAu?$AAr?$AAc?$AAe?$AAM?$AAg?$AAr?$AA?5?$AA?$CB?$AA?$DN?$AA?5@ 1000e5d8     ObjUtil.obj
+ 0002:00001608       ??_C@_1CK@FCMFDAID@?$AAR?$AAe?$AAs?$AAo?$AAu?$AAr?$AAc?$AAe?$AAN?$AAa?$AAm?$AAe?$AA?5?$AA?$CB?$AA?$DN@ 1000e608     ObjUtil.obj
+ 0002:0000163c       ??_C@_1CG@BDCKJDPJ@?$AAF?$AAi?$AAl?$AAe?$AAF?$AAi?$AAl?$AAt?$AAe?$AAr?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN@ 1000e63c     ObjUtil.obj
+ 0002:0000166c       ??_C@_1CM@BPKJLDLL@?$AAC?$AAu?$AAr?$AAF?$AAi?$AAl?$AAe?$AA?5?$AA?$DM?$AA?5?$AAB?$AAm?$AAp?$AAs?$AA?9@ 1000e66c     ObjUtil.obj
+ 0002:000016a0       ??_C@_1CE@JOMNIOGM@?$AAA?$AAd?$AAd?$AAI?$AAt?$AA?5?$AA?$DN?$AA?$DN?$AA?5?$AAJ?$AAE?$AA_?$AAF?$AAA?$AAL@ 1000e6a0     ObjUtil.obj
+ 0002:000016cc       ??_C@_1BK@DMALBJNH@?$AAB?$AAm?$AAp?$AAs?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000e6cc     ObjUtil.obj
+ 0002:000016ec       ??_C@_1CM@JBDMMIPK@?$AAC?$AAo?$AAm?$AAp?$AAa?$AAr?$AAe?$AAS?$AAt?$AAr?$AAi?$AAn?$AAg?$AA?5?$AA?$CB@ 1000e6ec     ObjUtil.obj
+ 0002:00001720       ??_C@_1DM@CHNPKGKN@?$AAA?$AAv?$AAa?$AAi?$AAl?$AAa?$AAb?$AAl?$AAe?$AAA?$AAr?$AAt?$AA?9?$AA?$DO?$AAN@ 1000e720     ObjUtil.obj
+ 0002:00001768       ??_C@_1CO@OFGCMCFO@?$AAC?$AAh?$AAo?$AAs?$AAe?$AAn?$AAS?$AAi?$AAz?$AAe?$AAN?$AAa?$AAm?$AAe?$AA?5@ 1000e768     ObjUtil.obj
+ 0002:000017a0       ??_C@_1CO@OBLOFLBC@?$AAS?$AAa?$AAv?$AAe?$AAB?$AAi?$AAt?$AAm?$AAa?$AAp?$AAN?$AAa?$AAm?$AAe?$AA?5@ 1000e7a0     ObjUtil.obj
+ 0002:000017d8       ??_C@_1CM@OPBPHEAM@?$AAS?$AAa?$AAv?$AAe?$AAA?$AAl?$AAp?$AAh?$AAa?$AAN?$AAa?$AAm?$AAe?$AA?5?$AA?$CB@ 1000e7d8     ObjUtil.obj
+ 0002:0000180c       ??_C@_1CA@HGELIBJO@?$AAS?$AAa?$AAv?$AAe?$AAA?$AAr?$AAt?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000e80c     ObjUtil.obj
+ 0002:00001834       ??_C@_1CI@OGONNNDO@?$AAS?$AAa?$AAv?$AAe?$AAA?$AAr?$AAt?$AAN?$AAa?$AAm?$AAe?$AA?5?$AA?$CB?$AA?$DN?$AA?5@ 1000e834     ObjUtil.obj
+ 0002:00001864       ??_C@_1DK@IKNHJFLG@?$AAS?$AAi?$AAz?$AAe?$AAC?$AAh?$AAa?$AAn?$AAg?$AAe?$AAF?$AAa?$AAi?$AAl?$AAe@ 1000e864     ObjUtil.obj
+ 0002:000018ac       ??_C@_1CK@FNJLCBIC@?$AA?$CK?$AAS?$AAa?$AAv?$AAe?$AAA?$AAr?$AAt?$AAN?$AAa?$AAm?$AAe?$AA?5?$AA?$CB?$AA?$DN@ 1000e8ac     ObjUtil.obj
+ 0002:000018e0       ??_C@_1JI@LJKNPNAL@?$AA?$CI?$AA?5?$AA?$CI?$AA?5?$AAC?$AAh?$AAo?$AAs?$AAe?$AAn?$AAB?$AAi?$AAt?$AAm?$AAa@ 1000e8e0     ObjUtil.obj
+ 0002:00001998       ??_C@_1DA@IGCNNLPB@?$AA?$CK?$AAS?$AAa?$AAv?$AAe?$AAB?$AAi?$AAt?$AAm?$AAa?$AAp?$AAN?$AAa?$AAm?$AAe@ 1000e998     ObjUtil.obj
+ 0002:000019d4       ??_C@_1CO@CBLDLLOO@?$AA?$CK?$AAS?$AAa?$AAv?$AAe?$AAA?$AAl?$AAp?$AAh?$AAa?$AAN?$AAa?$AAm?$AAe?$AA?5@ 1000e9d4     ObjUtil.obj
+ 0002:00001a0c       ??_C@_0CB@DIEOGLDN@Failed?5to?5allocate?5full?5art?5nam@ 1000ea0c     ObjUtil.obj
+ 0002:00001a34       ??_C@_0BP@MLPGGJFI@Failed?5to?5get?5a?5vfile?5resource@ 1000ea34     ObjUtil.obj
+ 0002:00001a5c       ??_C@_0BJ@DKNICPIP@Failed?5to?5create?5new?5art@ 1000ea5c     ObjUtil.obj
+ 0002:00001a7c       __pDefaultRawDllMain       1000ea7c     MSVCRTD:dll_dllmain.obj
+ 0002:00001a7c       __pRawDllMain              1000ea7c     MSVCRTD:dll_dllmain.obj
+ 0002:00001b40       ??_C@_0NN@JMPELKLB@The?5value?5of?5ESP?5was?5not?5proper@ 1000eb40     MSVCRTD:error.obj
+ 0002:00001c50       ??_C@_0BBN@ELNNILBE@A?5cast?5to?5a?5smaller?5data?5type?5h@ 1000ec50     MSVCRTD:error.obj
+ 0002:00001da8       ??_C@_0BN@BPOGFMJL@Stack?5memory?5was?5corrupted?$AN?6@ 1000eda8     MSVCRTD:error.obj
+ 0002:00001dcc       ??_C@_0DG@DAJCDLPN@A?5local?5variable?5was?5used?5befor@ 1000edcc     MSVCRTD:error.obj
+ 0002:00001e0c       ??_C@_0CM@JMIDGKLA@Stack?5memory?5around?5_alloca?5was@ 1000ee0c     MSVCRTD:error.obj
+ 0002:00001e40       ??_C@_0BO@CHIONIOI@Unknown?5Runtime?5Check?5Error?$AN?6@ 1000ee40     MSVCRTD:error.obj
+ 0002:00001e68       ??_C@_1GM@CNOOJIHC@?$AAR?$AAu?$AAn?$AAt?$AAi?$AAm?$AAe?$AA?5?$AAC?$AAh?$AAe?$AAc?$AAk?$AA?5?$AAE@ 1000ee68     MSVCRTD:error.obj
+ 0002:00001ef0       ??_C@_1EA@NFKNIFJP@?$AAR?$AAu?$AAn?$AA?9?$AAT?$AAi?$AAm?$AAe?$AA?5?$AAC?$AAh?$AAe?$AAc?$AAk?$AA?5@ 1000eef0     MSVCRTD:error.obj
+ 0002:00001f3c       ??_C@_0BB@PFFGGCJP@Unknown?5Filename@ 1000ef3c     MSVCRTD:error.obj
+ 0002:00001f50       ??_C@_0BE@GNBOBNCK@Unknown?5Module?5Name@ 1000ef50     MSVCRTD:error.obj
+ 0002:00001f68       ??_C@_0CA@IODNCDPG@Run?9Time?5Check?5Failure?5?$CD?$CFd?5?9?5?$CFs@ 1000ef68     MSVCRTD:error.obj
+ 0002:00001f90       ??_C@_0CG@IAFNJNEE@Stack?5corrupted?5near?5unknown?5va@ 1000ef90     MSVCRTD:error.obj
+ 0002:00001fc0       ??_C@_05MKKEDADM@?$CF?42X?5@ 1000efc0     MSVCRTD:error.obj
+ 0002:00001fc8       ??_C@_0EJ@LJKNEOLN@Stack?5area?5around?5_alloca?5memor@ 1000efc8     MSVCRTD:error.obj
+ 0002:00002020       ??_C@_01EEMJAFIK@?6@       1000f020     MSVCRTD:error.obj
+ 0002:00002024       ??_C@_02LLMPMKNF@?$DO?5@   1000f024     MSVCRTD:error.obj
+ 0002:00002028       ??_C@_08OMAHNMHJ@?6Data?3?5?$DM@ 1000f028     MSVCRTD:error.obj
+ 0002:00002034       ??_C@_0CK@DKGBICFE@?6Allocation?5number?5within?5this?5@ 1000f034     MSVCRTD:error.obj
+ 0002:00002068       ??_C@_07DFDJCKFN@?6Size?3?5@ 1000f068     MSVCRTD:error.obj
+ 0002:00002074       ??_C@_0N@MHFFIMFG@?6Address?3?50x@ 1000f074     MSVCRTD:error.obj
+ 0002:00002088       ??_C@_0EI@CLEPFNGI@Stack?5area?5around?5_alloca?5memor@ 1000f088     MSVCRTD:error.obj
+ 0002:000020e0       ??_C@_0BK@ODNDAGKB@?$CFs?$CFs?$CFp?$CFs?$CFzd?$CFs?$CFd?$CFs?$CFs?$CFs?$CFs?$CFs@ 1000f0e0     MSVCRTD:error.obj
+ 0002:00002100       ??_C@_0DE@OHJBPMBP@A?5variable?5is?5being?5used?5withou@ 1000f100     MSVCRTD:error.obj
+ 0002:00002164       ??_C@_0BJ@HEGAHDFO@Stack?5pointer?5corruption@ 1000f164     MSVCRTD:userapi.obj
+ 0002:00002184       ??_C@_0CK@FEGOIOPB@Cast?5to?5smaller?5type?5causing?5lo@ 1000f184     MSVCRTD:userapi.obj
+ 0002:000021b8       ??_C@_0BI@CIGMDCBH@Stack?5memory?5corruption@ 1000f1b8     MSVCRTD:userapi.obj
+ 0002:000021d4       ??_C@_0CK@CNLNOEPB@Local?5variable?5used?5before?5init@ 1000f1d4     MSVCRTD:userapi.obj
+ 0002:00002208       ??_C@_0BP@OGBCLIBO@Stack?5around?5_alloca?5corrupted@ 1000f208     MSVCRTD:userapi.obj
+ 0002:00002288       ??_C@_1EI@MLPKHBGE@?$AAa?$AAp?$AAi?$AA?9?$AAm?$AAs?$AA?9?$AAw?$AAi?$AAn?$AA?9?$AAc?$AAo?$AAr?$AAe@ 1000f288     MSVCRTD:pdblkup.obj
+ 0002:000022e0       ??_C@_1BK@JHLNAEJL@?$AAa?$AAd?$AAv?$AAa?$AAp?$AAi?$AA3?$AA2?$AA?4?$AAd?$AAl?$AAl@ 1000f2e0     MSVCRTD:pdblkup.obj
+ 0002:00002300       ??_C@_0O@COHOBMLB@RegOpenKeyExW@ 1000f300     MSVCRTD:pdblkup.obj
+ 0002:00002310       ??_C@_0BB@GLNAEDBD@RegQueryValueExW@ 1000f310     MSVCRTD:pdblkup.obj
+ 0002:00002324       ??_C@_0M@HLOHPNFA@RegCloseKey@ 1000f324     MSVCRTD:pdblkup.obj
+ 0002:00002338       ??_C@_1HE@EBEAGLFB@?$AAS?$AAO?$AAF?$AAT?$AAW?$AAA?$AAR?$AAE?$AA?2?$AAW?$AAo?$AAw?$AA6?$AA4?$AA3@ 1000f338     MSVCRTD:pdblkup.obj
+ 0002:000023c4       ??_C@_1BG@EABPBLLF@?$AAP?$AAr?$AAo?$AAd?$AAu?$AAc?$AAt?$AAD?$AAi?$AAr@ 1000f3c4     MSVCRTD:pdblkup.obj
+ 0002:00002404       ??_C@_1BC@JINFINNJ@?$AAM?$AAS?$AAP?$AAD?$AAB?$AA1?$AA4?$AA0@ 1000f404     MSVCRTD:pdblkup.obj
+ 0002:0000241c       ??_C@_0BB@KCIACLNC@PDBOpenValidate5@ 1000f41c     MSVCRTD:pdblkup.obj
+ 0002:00002430       ??_C@_01KDCPPGHE@r@        1000f430     MSVCRTD:pdblkup.obj
+ 0002:00002438       __load_config_used         1000f438     MSVCRTD:loadcfg.obj
+ 0002:00002700       ___CastGuardVftablesStart  1000f700     MSVCRTD:guard_support.obj
+ 0002:00002880       ___CastGuardVftablesEnd    1000f880     MSVCRTD:guard_support.obj
+ 0002:000029cc       ___safe_se_handler_table   1000f9cc     <linker-defined>
+ 0002:00002c78       ___rtc_iaa                 1000fc78     MSVCRTD:initsect.obj
+ 0002:00002e8c       ___rtc_izz                 1000fe8c     MSVCRTD:initsect.obj
+ 0002:00002f90       ___rtc_taa                 1000ff90     MSVCRTD:initsect.obj
+ 0002:000031a4       ___rtc_tzz                 100101a4     MSVCRTD:initsect.obj
+ 0003:00000010       ?__LINE__Var@?0??InitClass@@9@9 10011010     Corona.obj
+ 0003:00000014       ?__LINE__Var@?0??CreateRef@@9@9 10011014     Corona.obj
+ 0003:00000018       ?__LINE__Var@?0??Destroy@@9@9 10011018     Corona.obj
+ 0003:0000001c       ?__LINE__Var@?0??Render@@9@9 1001101c     Corona.obj
+ 0003:00000020       ?__LINE__Var@?0??AttachWorld@@9@9 10011020     Corona.obj
+ 0003:00000024       ?__LINE__Var@?0??DettachWorld@@9@9 10011024     Corona.obj
+ 0003:00000028       ?__LINE__Var@?0??AttachEngine@@9@9 10011028     Corona.obj
+ 0003:0000002c       ?__LINE__Var@?0??DettachEngine@@9@9 1001102c     Corona.obj
+ 0003:00000030       ?__LINE__Var@?0??AttachSoundSystem@@9@9 10011030     Corona.obj
+ 0003:00000034       ?__LINE__Var@?0??DettachSoundSystem@@9@9 10011034     Corona.obj
+ 0003:00000038       ?__LINE__Var@?0??GetExtBox@@9@9 10011038     Corona.obj
+ 0003:0000003c       ?__LINE__Var@?0??CreateFromFile@@9@9 1001103c     Corona.obj
+ 0003:00000040       ?__LINE__Var@?0??WriteToFile@@9@9 10011040     Corona.obj
+ 0003:00000044       ?__LINE__Var@?0??GetPropertyList@@9@9 10011044     Corona.obj
+ 0003:00000048       ?__LINE__Var@?0??SetProperty@@9@9 10011048     Corona.obj
+ 0003:0000004c       ?__LINE__Var@?0??SetXForm@@9@9 1001104c     Corona.obj
+ 0003:00000050       ?__LINE__Var@?0??GetXForm@@9@9 10011050     Corona.obj
+ 0003:00000054       ?__LINE__Var@?0??Frame@@9@9 10011054     Corona.obj
+ 0003:00000058       ?__LINE__Var@?0??SendAMessage@@9@9 10011058     Corona.obj
+ 0003:0000005c       ?__LINE__Var@?0??DuplicateInstance@@9@9 1001105c     Corona.obj
+ 0003:00000060       _ObjectDef                 10011060     ObjectDef.obj
+ 0003:00000104       ?__LINE__Var@?0??DllMain@@9@9 10011104     ObjectDef.obj
+ 0003:00000108       ?__LINE__Var@?0??Object_RegisterDef@@9@9 10011108     ObjectDef.obj
+ 0003:00000110       ?__LINE__Var@?0??ObjUtil_StrDup@@9@9 10011110     ObjUtil.obj
+ 0003:00000114       ?__LINE__Var@?0??ObjUtil_LoadLibraryString@@9@9 10011114     ObjUtil.obj
+ 0003:00000118       ?__LINE__Var@?0??ObjUtil_LogError@@9@9 10011118     ObjUtil.obj
+ 0003:0000011c       ?__LINE__Var@?0??ObjUtil_WriteString@@9@9 1001111c     ObjUtil.obj
+ 0003:00000120       ?__LINE__Var@?0??ObjUtil_ReadString@@9@9 10011120     ObjUtil.obj
+ 0003:00000124       ?__LINE__Var@?0??ObjUtil_CreateBitmapFromFileName@@9@9 10011124     ObjUtil.obj
+ 0003:00000128       ?__LINE__Var@?0??ObjUtil_DestroyBitmapList@@9@9 10011128     ObjUtil.obj
+ 0003:0000012c       ?__LINE__Var@?0??ObjUtil_TextureGroupSetActiveList@@9@9 1001112c     ObjUtil.obj
+ 0003:00000130       ?__LINE__Var@?0??ObjUtil_CreateBitmapList@@9@9 10011130     ObjUtil.obj
+ 0003:00000134       ?__LINE__Var@?0??ObjUtil_TextureGroupGetStringFromList@@9@9 10011134     ObjUtil.obj
+ 0003:00000138       ?__LINE__Var@?0??ObjUtil_TextureGroupSetSize@@9@9 10011138     ObjUtil.obj
+ 0003:0000013c       ?__LINE__Var@?0??ObjUtil_TextureGroupSetArt@@9@9 1001113c     ObjUtil.obj
+ 0003:00000140       ___security_cookie         10011140     MSVCRTD:gs_cookie.obj
+ 0003:00000144       ___security_cookie_complement 10011144     MSVCRTD:gs_cookie.obj
+ 0003:0000014c       __fltused                  1001114c     MSVCRTD:fltused.obj
+ 0003:00000150       ?_RTC_ErrorLevels@@3PAHA   10011150     MSVCRTD:error.obj
+ 0003:00000168       ___scrt_native_dllmain_reason 10011168     MSVCRTD:utility.obj
+ 0003:0000016c       ___isa_enabled             1001116c     MSVCRTD:cpu_disp.obj
+ 0003:00000170       ___scrt_ucrt_dll_is_in_use 10011170     MSVCRTD:ucrt_stubs.obj
+ 0003:00000658       ?_OptionsStorage@?1??__local_stdio_printf_options@@9@4_KA 10011658     MSVCRTD:error.obj
+ 0003:00000a30       ?__type_info_root_node@@3U__type_info_node@@A 10011a30     MSVCRTD:tncleanup.obj
+ 0003:00000a40       ?_OptionsStorage@?1??__local_stdio_scanf_options@@9@4_KA 10011a40     MSVCRTD:default_local_stdio_options.obj
+ 0003:00000a4c       ___scrt_current_native_startup_state 10011a4c     MSVCRTD:utility.obj
+ 0003:00000a50       ___scrt_native_startup_lock 10011a50     MSVCRTD:utility.obj
+ 0003:00000a78       ___scrt_debugger_hook_flag 10011a78     MSVCRTD:utility_desktop.obj
+ 0003:00000a84       ___isa_available           10011a84     MSVCRTD:cpu_disp.obj
+ 0003:00000a88       ___favor                   10011a88     MSVCRTD:cpu_disp.obj
+ 0003:00000a90       ___dyn_tls_init_callback   10011a90     <common>
+ 0004:00000000       __imp__jeVFile_OpenNewSystem@20 10012000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000004       __imp__jeVFile_Open@12     10012004     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000008       __imp__jeVFile_Close@4     10012008     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000000c       __imp__jeVFile_Read@12     1001200c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000010       __imp__jeVFile_Write@12    10012010     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000014       __imp__jeVFile_Seek@12     10012014     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000018       __imp__jeVFile_Rewind@4    10012018     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000001c       __imp__jeVec3d_Scale@12    1001201c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000020       __imp__jeVec3d_Length@4    10012020     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000024       __imp__jeVec3d_Subtract@12 10012024     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000028       __imp__jeVec3d_Add@12      10012028     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000002c       __imp__jeVec3d_Copy@8      1001202c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000030       __imp__jeProperty_ListCopy@4 10012030     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000034       __imp__jeProperty_FillGroup@12 10012034     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000038       __imp__jeProperty_FillFloat@28 10012038     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000003c       __imp__jeProperty_FillGroupEnd@8 1001203c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000040       __imp__jeProperty_FillCombo@24 10012040     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000044       __imp___jeRam_DebugAllocate@12 10012044     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000048       __imp__jeRam_AllocateClear@4 10012048     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000004c       __imp__jeRam_Free_@4       1001204c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000050       __imp__jeResource_MgrDestroy@4 10012050     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000054       __imp__jeResourceMgr_GetEngine@4 10012054     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000058       __imp__jeResourceMgr_GetSingleton@0 10012058     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000005c       __imp__jePtrMgr_Create@0   1001205c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000060       __imp__jeXForm3d_Orthonormalize@4 10012060     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000064       __imp__jeXForm3d_SetIdentity@4 10012064     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000068       __imp__jeCamera_GetXForm@8 10012068     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000006c       __imp__jeMaterialSpec_Create@8 1001206c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000070       __imp__jeMaterialSpec_AddLayerFromBitmap@16 10012070     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000074       __imp__jeExtBox_Set@28     10012074     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000078       __imp__jeUserPoly_CreateSprite@16 10012078     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000007c       __imp__jeUserPoly_Destroy@4 1001207c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000080       __imp__jeWorld_AddUserPoly@12 10012080     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000084       __imp__jeWorld_Collision@20 10012084     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000088       __imp__jeWorld_GetResourceMgr@4 10012088     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000008c       __imp__jeErrorLog_AddExplicit@24 1001208c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000090       __imp__jeObject_RegisterGlobalObjectDef@4 10012090     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000094       __imp__jeVFile_CreateFinder@8 10012094     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000098       __imp__jeVFile_DestroyFinder@4 10012098     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000009c       __imp__jeVFile_FinderGetNextFile@4 1001209c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000a0       __imp__jeVFile_FinderGetProperties@8 100120a0     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000a4       __imp__jeBitmap_CreateFromFile@4 100120a4     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000a8       __imp__jeBitmap_Destroy@4  100120a8     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000ac       __imp__jeBitmap_SetColorKey@16 100120ac     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000b0       __imp__jeBitmap_SetAlpha@8 100120b0     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000b4       __imp__jeBitmap_Width@4    100120b4     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000b8       __imp__jeBitmap_Height@4   100120b8     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000bc       __imp__jeResource_Add@16   100120bc     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000c0       __imp__jeResource_Get@8    100120c0     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000c4       __imp__jeResource_Delete@8 100120c4     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000c8       __imp__jeResource_GetVFile@8 100120c8     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000cc       __imp__jeResource_DeleteVFile@8 100120cc     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000d0       __imp__jeEngine_AddBitmap@12 100120d0     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000d4       __imp__jeEngine_RemoveBitmap@8 100120d4     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000d8       \177Jet3DClassic11d_NULL_THUNK_DATA 100120d8     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000012c       __imp__GetProcAddress@8    1001212c     kernel32:KERNEL32.dll
+ 0004:00000130       __imp__FreeLibrary@4       10012130     kernel32:KERNEL32.dll
+ 0004:00000134       __imp__VirtualQuery@12     10012134     kernel32:KERNEL32.dll
+ 0004:00000138       __imp__RaiseException@16   10012138     kernel32:KERNEL32.dll
+ 0004:0000013c       __imp__GetProcessHeap@0    1001213c     kernel32:KERNEL32.dll
+ 0004:00000140       __imp__HeapFree@12         10012140     kernel32:KERNEL32.dll
+ 0004:00000144       __imp__HeapAlloc@12        10012144     kernel32:KERNEL32.dll
+ 0004:00000148       __imp__GetLastError@0      10012148     kernel32:KERNEL32.dll
+ 0004:0000014c       __imp__GetModuleHandleW@4  1001214c     kernel32:KERNEL32.dll
+ 0004:00000150       __imp__GetStartupInfoW@4   10012150     kernel32:KERNEL32.dll
+ 0004:00000154       __imp__InitializeSListHead@4 10012154     kernel32:KERNEL32.dll
+ 0004:00000158       __imp__GetSystemTimeAsFileTime@4 10012158     kernel32:KERNEL32.dll
+ 0004:0000015c       __imp__GetCurrentThreadId@0 1001215c     kernel32:KERNEL32.dll
+ 0004:00000160       __imp__GetCurrentProcessId@0 10012160     kernel32:KERNEL32.dll
+ 0004:00000164       __imp__QueryPerformanceCounter@4 10012164     kernel32:KERNEL32.dll
+ 0004:00000168       __imp__IsProcessorFeaturePresent@4 10012168     kernel32:KERNEL32.dll
+ 0004:0000016c       __imp__TerminateProcess@8  1001216c     kernel32:KERNEL32.dll
+ 0004:00000170       __imp__GetCurrentProcess@0 10012170     kernel32:KERNEL32.dll
+ 0004:00000174       __imp__SetUnhandledExceptionFilter@4 10012174     kernel32:KERNEL32.dll
+ 0004:00000178       __imp__UnhandledExceptionFilter@4 10012178     kernel32:KERNEL32.dll
+ 0004:0000017c       __imp__WideCharToMultiByte@32 1001217c     kernel32:KERNEL32.dll
+ 0004:00000180       __imp__MultiByteToWideChar@24 10012180     kernel32:KERNEL32.dll
+ 0004:00000184       __imp__IsDebuggerPresent@0 10012184     kernel32:KERNEL32.dll
+ 0004:00000188       \177KERNEL32_NULL_THUNK_DATA 10012188     kernel32:KERNEL32.dll
+ 0004:000001c4       __imp__LoadStringA@16      100121c4     user32:USER32.dll
+ 0004:000001c8       \177USER32_NULL_THUNK_DATA 100121c8     user32:USER32.dll
+ 0004:000001f4       __imp__memset              100121f4     vcruntimed:VCRUNTIME140D.dll
+ 0004:000001f8       __imp___except_handler4_common 100121f8     vcruntimed:VCRUNTIME140D.dll
+ 0004:000001fc       __imp____std_type_info_destroy_list 100121fc     vcruntimed:VCRUNTIME140D.dll
+ 0004:00000200       __imp____vcrt_GetModuleHandleW 10012200     vcruntimed:VCRUNTIME140D.dll
+ 0004:00000204       __imp____vcrt_LoadLibraryExW 10012204     vcruntimed:VCRUNTIME140D.dll
+ 0004:00000208       __imp____current_exception 10012208     vcruntimed:VCRUNTIME140D.dll
+ 0004:0000020c       __imp____vcrt_GetModuleFileNameW 1001220c     vcruntimed:VCRUNTIME140D.dll
+ 0004:00000210       __imp____current_exception_context 10012210     vcruntimed:VCRUNTIME140D.dll
+ 0004:00000214       \177VCRUNTIME140D_NULL_THUNK_DATA 10012214     vcruntimed:VCRUNTIME140D.dll
+ 0004:00000244       __imp___itoa               10012244     ucrtd:ucrtbased.dll
+ 0004:00000244       __imp__itoa                10012244     ucrtd:ucrtbased.dll
+ 0004:00000248       __imp___stricmp            10012248     ucrtd:ucrtbased.dll
+ 0004:00000248       __imp__stricmp             10012248     ucrtd:ucrtbased.dll
+ 0004:0000024c       __imp___wsplitpath_s       1001224c     ucrtd:ucrtbased.dll
+ 0004:00000250       __imp___configure_narrow_argv 10012250     ucrtd:ucrtbased.dll
+ 0004:00000254       __imp___seh_filter_dll     10012254     ucrtd:ucrtbased.dll
+ 0004:00000258       __imp____stdio_common_vsprintf_s 10012258     ucrtd:ucrtbased.dll
+ 0004:0000025c       __imp__strcat_s            1001225c     ucrtd:ucrtbased.dll
+ 0004:00000260       __imp___wmakepath_s        10012260     ucrtd:ucrtbased.dll
+ 0004:00000264       __imp___initterm_e         10012264     ucrtd:ucrtbased.dll
+ 0004:00000268       __imp___initterm           10012268     ucrtd:ucrtbased.dll
+ 0004:0000026c       __imp___CrtDbgReportW      1001226c     ucrtd:ucrtbased.dll
+ 0004:00000270       __imp___CrtDbgReport       10012270     ucrtd:ucrtbased.dll
+ 0004:00000274       __imp__strlen              10012274     ucrtd:ucrtbased.dll
+ 0004:00000278       __imp__strcpy              10012278     ucrtd:ucrtbased.dll
+ 0004:0000027c       __imp__strcat              1001227c     ucrtd:ucrtbased.dll
+ 0004:00000280       __imp___wassert            10012280     ucrtd:ucrtbased.dll
+ 0004:00000284       __imp__wcscpy_s            10012284     ucrtd:ucrtbased.dll
+ 0004:00000288       __imp__terminate           10012288     ucrtd:ucrtbased.dll
+ 0004:0000028c       __imp___cexit              1001228c     ucrtd:ucrtbased.dll
+ 0004:00000290       __imp___crt_at_quick_exit  10012290     ucrtd:ucrtbased.dll
+ 0004:00000294       __imp___crt_atexit         10012294     ucrtd:ucrtbased.dll
+ 0004:00000298       __imp___execute_onexit_table 10012298     ucrtd:ucrtbased.dll
+ 0004:0000029c       __imp___register_onexit_function 1001229c     ucrtd:ucrtbased.dll
+ 0004:000002a0       __imp___initialize_onexit_table 100122a0     ucrtd:ucrtbased.dll
+ 0004:000002a4       __imp__strcpy_s            100122a4     ucrtd:ucrtbased.dll
+ 0004:000002a8       __imp___initialize_narrow_environment 100122a8     ucrtd:ucrtbased.dll
+ 0004:000002ac       \177ucrtbased_NULL_THUNK_DATA 100122ac     ucrtd:ucrtbased.dll
+ 0004:000002ec       __IMPORT_DESCRIPTOR_Jet3DClassic11d 100122ec     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000300       __IMPORT_DESCRIPTOR_USER32 10012300     user32:USER32.dll
+ 0004:00000314       __IMPORT_DESCRIPTOR_VCRUNTIME140D 10012314     vcruntimed:VCRUNTIME140D.dll
+ 0004:00000328       __IMPORT_DESCRIPTOR_ucrtbased 10012328     ucrtd:ucrtbased.dll
+ 0004:0000033c       __IMPORT_DESCRIPTOR_KERNEL32 1001233c     kernel32:KERNEL32.dll
+ 0004:00000350       __NULL_IMPORT_DESCRIPTOR   10012350     jet3DClassic11d:Jet3DClassic11d.dll
+ 0005:00000000       ___guard_check_icall_fptr  10014000     MSVCRTD:guard_support.obj
+ 0005:00000004       ___guard_xfg_check_icall_fptr 10014004     MSVCRTD:guard_support.obj
+ 0005:00000008       ___castguard_check_failure_os_handled_fptr 10014008     MSVCRTD:guard_support.obj
+
+ entry point at        0001:0000028f
+
+ Static symbols
+
+ 0000:00000000       _volmd                     10000000     Corona.obj
+ 0000:00000000       _volmd                     10000000     Corona.obj
+ 0000:00000000       _volmd                     10000000     Corona.obj
+ 0000:fffe9000       .debug$S                   10000000     CoronaObj.exp
+ 0000:00000000       _volmd                     10000000     ObjUtil.obj
+ 0000:00000000       _volmd                     10000000     ObjUtil.obj
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffe9000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe9000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe9000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe9000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe9000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe9000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe9000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe9000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe9000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe9000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe9000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe9000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe9000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe9000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe9000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe9000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe9000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe9000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe9000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe9000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe9000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe9000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe9000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe9000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe9000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe9000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffe9000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe9000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe9000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe9000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe9000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe9000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe9000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe9000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe9000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe9000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe9000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe9000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe9000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe9000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe9000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe9000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe9000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe9000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe9000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe9000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe9000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe9000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe9000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffe9000       .debug$S                   10000000     user32:USER32.dll
+ 0000:fffec000       __guard_fids___except_handler4 10000000     MSVCRTD:chandler4gs.obj
+ 0000:00000000       _volmd                     10000000     MSVCRTD:cpu_disp.obj
+ 0000:fffec000       __guard_fids_?dllmain_dispatch@@YAHQAUHINSTANCE__@@KQAX@Z 10000000     MSVCRTD:dll_dllmain.obj
+ 0000:00000000       _volmd                     10000000     MSVCRTD:gs_report.obj
+ 0000:fffec000       __guard_fids__             10000000     MSVCRTD:guard_support.obj
+ 0000:fffec000       __guard_fids__             10000000     MSVCRTD:guard_support.obj
+ 0000:fffec000       __guard_fids___guard_icall_checks_enforced 10000000     MSVCRTD:guard_support.obj
+ 0000:00000000       _volmd                     10000000     MSVCRTD:guard_support.obj
+ 0000:00000000       _volmd                     10000000     MSVCRTD:guard_support.obj
+ 0000:fffec000       __guard_fids___CRT_RTC_INIT 10000000     MSVCRTD:init.obj
+ 0000:fffec000       __guard_fids___CRT_RTC_INITW 10000000     MSVCRTD:init.obj
+ 0000:fffec000       __guard_fids____scrt_set_unhandled_exception_filter 10000000     MSVCRTD:utility_desktop.obj
+ 0000:fffe9000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffe9000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffe9000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffe9000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffe9000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffe9000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffe9000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffe9000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0001:00000f14       $LN21                      10001f14     Corona.obj
+ 0001:00000f1c       $LN20                      10001f1c     Corona.obj
+ 0001:00000f40       $LN19                      10001f40     Corona.obj
+ 0001:00000f44       $LN18                      10001f44     Corona.obj
+ 0001:00000f4c       $LN17                      10001f4c     Corona.obj
+ 0001:00001bb8       $LN12                      10002bb8     Corona.obj
+ 0001:00001bc0       $LN11                      10002bc0     Corona.obj
+ 0001:00001bcc       $LN10                      10002bcc     Corona.obj
+ 0001:00002174       $LN7                       10003174     Corona.obj
+ 0001:0000217c       $LN6                       1000317c     Corona.obj
+ 0001:00002188       $LN5                       10003188     Corona.obj
+ 0001:00003050       $LN25                      10004050     Corona.obj
+ 0001:00003058       $LN24                      10004058     Corona.obj
+ 0001:000030ac       $LN23                      100040ac     Corona.obj
+ 0001:000030b5       $LN22                      100040b5     Corona.obj
+ 0001:000030bc       $LN21                      100040bc     Corona.obj
+ 0001:000030c1       $LN20                      100040c1     Corona.obj
+ 0001:000030c8       $LN19                      100040c8     Corona.obj
+ 0001:000030d6       $LN18                      100040d6     Corona.obj
+ 0001:000030df       $LN17                      100040df     Corona.obj
+ 0001:0000375c       $LN34                      1000475c     Corona.obj
+ 0001:000039b4       $LN7                       100049b4     Corona.obj
+ 0001:000039bc       $LN6                       100049bc     Corona.obj
+ 0001:000039c8       $LN5                       100049c8     Corona.obj
+ 0001:00003ca0       $LN10                      10004ca0     Corona.obj
+ 0001:00003ca8       $LN9                       10004ca8     Corona.obj
+ 0001:00003cc0       $LN8                       10004cc0     Corona.obj
+ 0001:00003cc4       $LN7                       10004cc4     Corona.obj
+ 0001:00004378       $LN21                      10005378     ObjUtil.obj
+ 0001:00004380       $LN20                      10005380     ObjUtil.obj
+ 0001:00004398       $LN19                      10005398     ObjUtil.obj
+ 0001:000043a1       $LN18                      100053a1     ObjUtil.obj
+ 0001:00004df8       $LN52                      10005df8     ObjUtil.obj
+ 0001:00004e00       $LN51                      10005e00     ObjUtil.obj
+ 0001:00004e30       $LN50                      10005e30     ObjUtil.obj
+ 0001:00004e34       $LN49                      10005e34     ObjUtil.obj
+ 0001:00004e3b       $LN48                      10005e3b     ObjUtil.obj
+ 0001:00004e46       $LN47                      10005e46     ObjUtil.obj
+ 0001:0000574c       $LN10                      1000674c     ObjUtil.obj
+ 0001:00005754       $LN9                       10006754     ObjUtil.obj
+ 0001:00005760       $LN8                       10006760     ObjUtil.obj
+ 0001:00005900       $LN9                       10006900     ObjUtil.obj
+ 0001:00005908       $LN8                       10006908     ObjUtil.obj
+ 0001:00005914       $LN7                       10006914     ObjUtil.obj
+ 0001:00005a40       _ObjUtil_TextureGroupGetStringFromList 10006a40 f   ObjUtil.obj
+ 0001:00005ba0       _ObjUtil_TextureGroupSetActiveList 10006ba0 f   ObjUtil.obj
+ 0001:000069a0       $LN8                       100079a0     ObjUtil.obj
+ 0001:000069a8       $LN7                       100079a8     ObjUtil.obj
+ 0001:000069b4       $LN6                       100079b4     ObjUtil.obj
+ 0001:00006df0       ?dllmain_crt_dispatch@@YGHQAUHINSTANCE__@@KQAX@Z 10007df0 f   MSVCRTD:dll_dllmain.obj
+ 0001:00006e5c       $LN11                      10007e5c     MSVCRTD:dll_dllmain.obj
+ 0001:00006e90       ?dllmain_crt_process_attach@@YAHQAUHINSTANCE__@@QAX@Z 10007e90 f   MSVCRTD:dll_dllmain.obj
+ 0001:00007060       ?dllmain_crt_process_detach@@YAH_N@Z 10008060 f   MSVCRTD:dll_dllmain.obj
+ 0001:000071a0       ?dllmain_dispatch@@YAHQAUHINSTANCE__@@KQAX@Z 100081a0 f   MSVCRTD:dll_dllmain.obj
+ 0001:00007390       ?dllmain_raw@@YGHQAUHINSTANCE__@@KQAX@Z 10008390 f   MSVCRTD:dll_dllmain.obj
+ 0001:00007440       ?DebuggerProbe@@YA_NK@Z    10008440 f   MSVCRTD:error.obj
+ 0001:00007490       ?DebuggerRuntime@@YA_NKHPAXPB_W@Z 10008490 f   MSVCRTD:error.obj
+ 0001:00007760       ?_getMemBlockDataString@@YAXPAD0PBDI@Z 10008760 f   MSVCRTD:error.obj
+ 0001:000077f0       ?_strlen_priv@@YAIPBD@Z    100087f0 f   MSVCRTD:error.obj
+ 0001:00007810       ?failwithmessage@@YAXPAXHHPBD@Z 10008810 f   MSVCRTD:error.obj
+ 0001:00007a90       ?notify_debugger@@YAXABUtagEXCEPTION_VISUALCPP_DEBUG_INFO@@@Z 10008a90 f   MSVCRTD:error.obj
+ 0001:00008190       ___get_entropy             10009190 f   MSVCRTD:gs_support.obj
+ 0001:00008380       ?find_pe_section@@YAPAU_IMAGE_SECTION_HEADER@@QAEI@Z 10009380 f   MSVCRTD:utility.obj
+ 0001:00008440       ?is_potentially_valid_image_base@@YA_NQAX@Z 10009440 f   MSVCRTD:utility.obj
+ 0001:000090b0       ___castguard_check_failure_os_handled_wrapper 1000a0b0 f   MSVCRTD:guard_support.obj
+ 0001:000090e0       ___castguard_compat_check  1000a0e0 f   MSVCRTD:guard_support.obj
+ 0001:00009220       ___castguard_slow_path_compat_check 1000a220 f   MSVCRTD:guard_support.obj
+ 0001:000092b0       ?GetPdbDll@@YAPAUHINSTANCE__@@XZ 1000a2b0 f   MSVCRTD:pdblkup.obj
+ 0001:00009450       ?GetPdbDllFromInstallPath@@YAPAUHINSTANCE__@@XZ 1000a450 f   MSVCRTD:pdblkup.obj
+ 0001:00009740       ?GetPdbDllPathFromFilePath@@YAHPB_WPA_WI@Z 1000a740 f   MSVCRTD:pdblkup.obj
+ 0002:00001a80       ?_RTC_ErrorMessages@@3QBQBDB 1000ea80     MSVCRTD:error.obj
+ 0002:00001a98       ?_RTC_NoFalsePositives@@3QBHB 1000ea98     MSVCRTD:error.obj
+ 0002:00001ab0       ?stack_premsg@@3QBDB       1000eab0     MSVCRTD:error.obj
+ 0002:00001acc       ?stack_postmsg@@3QBDB      1000eacc     MSVCRTD:error.obj
+ 0002:00001ae0       ?uninit_premsg@@3QBDB      1000eae0     MSVCRTD:error.obj
+ 0002:00001af0       ?uninit_postmsg@@3QBDB     1000eaf0     MSVCRTD:error.obj
+ 0002:00002140       _GS_ExceptionPointers      1000f140     MSVCRTD:gs_report.obj
+ 0002:0000214c       ?_RTC_errlist@@3QBQBDB     1000f14c     MSVCRTD:userapi.obj
+ 0002:00002230       ?mspdbName@@3QB_WB         1000f230     MSVCRTD:pdblkup.obj
+ 0002:00002254       ?debugCrtFileName@@3QB_WB  1000f254     MSVCRTD:pdblkup.obj
+ 0002:000023e0       ?dllExt@?1??GetPdbDllPathFromFilePath@@YAHPB_WPA_WI@Z@4QB_WB 1000f3e0     MSVCRTD:pdblkup.obj
+ 0002:000023ec       ?mspdbFilename@?1??GetPdbDllPathFromFilePath@@YAHPB_WPA_WI@Z@4QB_WB 1000f3ec     MSVCRTD:pdblkup.obj
+ 0002:00002d7c       __RTC_InitBase.rtc$IMZ     1000fd7c     Corona.obj
+ 0002:00002d80       __RTC_InitBase.rtc$IMZ     1000fd80     ObjectDef.obj
+ 0002:00002d84       __RTC_InitBase.rtc$IMZ     1000fd84     ObjUtil.obj
+ 0002:00003094       __RTC_Shutdown.rtc$TMZ     10010094     Corona.obj
+ 0002:00003098       __RTC_Shutdown.rtc$TMZ     10010098     ObjectDef.obj
+ 0002:0000309c       __RTC_Shutdown.rtc$TMZ     1001009c     ObjUtil.obj
+ 0002:000032a8       __sehtable$?dllmain_crt_process_attach@@YAHQAUHINSTANCE__@@QAX@Z 100102a8     MSVCRTD:dll_dllmain.obj
+ 0002:000032c8       __sehtable$?dllmain_crt_process_detach@@YAH_N@Z 100102c8     MSVCRTD:dll_dllmain.obj
+ 0002:000032f8       __sehtable$?dllmain_dispatch@@YAHQAUHINSTANCE__@@KQAX@Z 100102f8     MSVCRTD:dll_dllmain.obj
+ 0002:00003318       __sehtable$?notify_debugger@@YAXABUtagEXCEPTION_VISUALCPP_DEBUG_INFO@@@Z 10010318     MSVCRTD:error.obj
+ 0002:00003338       __sehtable$___scrt_is_nonwritable_in_current_image 10010338     MSVCRTD:utility.obj
+ 0002:00003470       .edata                     10010470     CoronaObj.exp
+ 0002:00003498       rgpv                       10010498     CoronaObj.exp
+ 0002:0000349c       rgszName                   1001049c     CoronaObj.exp
+ 0002:000034a0       rgwOrd                     100104a0     CoronaObj.exp
+ 0002:000034a2       szName                     100104a2     CoronaObj.exp
+ 0002:000034b0       $N00001                    100104b0     CoronaObj.exp
+ 0003:00000000       _CoronaPropertyList        10011000     Corona.obj
+ 0003:0000010c       _NoSelection               1001110c     ObjUtil.obj
+ 0003:00000298       _CoronaProperties          10011298     Corona.obj
+ 0003:000004a8       _hClassInstance            100114a8     Corona.obj
+ 0003:000004ac       _AvailableArt              100114ac     Corona.obj
+ 0003:000004b0       _MatSpec                   100114b0     Corona.obj
+ 0003:00000520       ?StringBuf@?1??ObjUtil_LoadLibraryString@@9@9 10011520     ObjUtil.obj
+ 0003:00000653       ?init@?1??_RTC_InitBase@@9@4_NA 10011653     MSVCRTD:init.obj
+ 0003:00000654       ?__proc_attached@@3HA      10011654     MSVCRTD:dll_dllmain.obj
+ 0003:00000668       _GS_ExceptionRecord        10011668     MSVCRTD:gs_report.obj
+ 0003:000006b8       _GS_ContextRecord          100116b8     MSVCRTD:gs_report.obj
+ 0003:00000a24       ?_RTC_ErrorReportFunc@@3P6AHHPBDH00ZZA 10011a24     MSVCRTD:userapi.obj
+ 0003:00000a28       ?_RTC_ErrorReportFuncW@@3P6AHHPB_WH00ZZA 10011a28     MSVCRTD:userapi.obj
+ 0003:00000a54       ?is_initialized_as_dll@@3_NA 10011a54     MSVCRTD:utility.obj
+ 0003:00000a55       ?module_local_atexit_table_initialized@@3_NA 10011a55     MSVCRTD:utility.obj
+ 0003:00000a58       ?module_local_atexit_table@@3U_onexit_table_t@@A 10011a58     MSVCRTD:utility.obj
+ 0003:00000a64       ?module_local_at_quick_exit_table@@3U_onexit_table_t@@A 10011a64     MSVCRTD:utility.obj
+ 0003:00000a7c       ?mspdb@@3PAUHINSTANCE__@@A 10011a7c     MSVCRTD:pdblkup.obj
+ 0003:00000a80       ?alreadyTried@?1??GetPdbDll@@YAPAUHINSTANCE__@@XZ@4_NA 10011a80     MSVCRTD:pdblkup.obj
+ 0003:00000a81       ?PDBOK@?1??_RTC_GetSrcLine@@YAHPAEPA_WKPAH1K@Z@4_NA 10011a81     MSVCRTD:pdblkup.obj
+ 0004:00000bb6       .idata$6                   10012bb6     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000bd8       .idata$6                   10012bd8     user32:USER32.dll
+ 0004:00000caa       .idata$6                   10012caa     vcruntimed:VCRUNTIME140D.dll
+ 0004:00000e6e       .idata$6                   10012e6e     ucrtd:ucrtbased.dll
+ 0004:00001052       .idata$6                   10013052     kernel32:KERNEL32.dll
+ 0006:00000200       $R000000                   10015200     Corona.res
+ 0006:000004b8       $R0002B8                   100154b8     Corona.res
+ 0006:00000630       $R000430                   10015630     Corona.res

@@ -1,0 +1,4 @@
+﻿  cl : Command line warning D9035 : option 'Gm' has been deprecated and will be removed in a future release
+  OglTextures.cpp
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC10_2019\source\Drivers\OpenGLDriver\OglTextures.cpp(340,12): warning C4101:  'baseLog2': unreferenced local variable
+  OpenGLDriver.vcxproj -> D:\Genesis and Jet3d\JSTUDIO_CLASSIC10_2019\bin\OpenGLDriver.dll

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{662a35ea-ab9f-4a4f-a194-dd83e714a2d1}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AmbObject.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectDef.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Snd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AmbObject.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectDef.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Snd.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound3d.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="AmbObject.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ambient.bmp" />
+    <None Include="AmbObject.dep" />
+    <None Include="AmbObject.dsp" />
+    <None Include="AmbObject.mak" />
+  </ItemGroup>
+</Project>

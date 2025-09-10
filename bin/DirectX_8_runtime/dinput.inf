@@ -1,0 +1,448 @@
+[version]
+signature="$CHICAGO$"
+
+[Win98RegInstall]
+AddReg=add.reg,add.win9xreg
+
+[WinMERegInstall]
+AddReg=add.win9xreg
+
+[Win2KRegInstall]
+
+[add.reg]
+HKCR,CLSID\{EEC6993A-B3FD-11D2-A916-00C04FB98638}\,,,%PIDOBJECT%
+HKCR,CLSID\{EEC6993A-B3FD-11D2-A916-00C04FB98638}\InProcServer32,,,"%11%\pid.dll"
+HKCR,CLSID\{EEC6993A-B3FD-11D2-A916-00C04FB98638}\InProcServer32,ThreadingModel,,"Both"
+
+
+HKCR,CLSID\{92187326-72B4-11d0-A1AC-0000F8026977}\,,,%GCCPL_DEFAULT%
+HKCR,CLSID\{92187326-72B4-11d0-A1AC-0000F8026977}\ProgID,,,%GCCPL_HANDLER%
+HKCR,CLSID\{92187326-72B4-11d0-A1AC-0000F8026977}\InProcHandler32,,,"%11%\gchand.dll"
+HKCR,CLSID\{92187326-72B4-11d0-A1AC-0000F8026977}\InProcServer32,,,"%11%\gcdef.dll"
+HKCR,CLSID\{92187326-72B4-11d0-A1AC-0000F8026977}\InProcServer32,ThreadingModel,,"Apartment"
+
+HKLM, "SOFTWARE\Microsoft\Windows\CurrentVersion\Controls Folder",,,
+HKLM, "SOFTWARE\Microsoft\Windows\CurrentVersion\Controls Folder\Joystick",,,
+HKLM, "SOFTWARE\Microsoft\Windows\CurrentVersion\Controls Folder\Joystick\shellex",,,
+HKLM, "SOFTWARE\Microsoft\Windows\CurrentVersion\Controls Folder\Joystick\shellex\PropertySheetHandlers",,,
+HKLM, "SOFTWARE\Microsoft\Windows\CurrentVersion\Controls Folder\Joystick\shellex\PropertySheetHandlers\Default Extension",,,"{92187326-72B4-11d0-A1AC-0000F8026977}"
+
+HKLM, "System\CurrentControlSet\control\MediaProperties\PrivateProperties\Joystick\OEM\Standard Gameport",OEMName,,%STD_GAMEPORT%
+HKLM, "System\CurrentControlSet\control\MediaProperties\PrivateProperties\Joystick\OEM\Standard Gameport",OEMCallout,,"msanalog.vxd"
+HKLM, "System\CurrentControlSet\control\MediaProperties\PrivateProperties\Joystick\OEM\Standard Gameport",OEMData,1,00,00,00,0c,00,00,00,00
+HKLM, "System\CurrentControlSet\control\MediaProperties\PrivateProperties\Joystick\OEM\Standard Gameport",PollFlags,3,01,00,00,00
+
+; JOY_HWS_ISCARCTRL | JOY_HWS_YISJ2X, four buttons
+; The wheel is reported in X and the pedals in Y
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\T1T2WithoutAdapter",OEMData,1,40,8,0,0,4,0,0,0
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\T1T2WithoutAdapter",OEMName,0,%TMT1_NOADAPT%
+; JOY_HWS_ISCARCTRL | JOY_HWS_YISJ1X
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\T1T2WithAdapter",OEMData,1,40,0,0,0,4,0,0,0
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\T1T2WithAdapter",OEMName,0,%TMT1_ADAPT%
+
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\LogitechThunderPad",OEMName,,"%V_JOY_LOGITECH_1%"
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\LogitechThunderPad",OEMData,1, 20, 0, 0, 0, 4, 0, 0, 0
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\LogitechWingMan",OEMName,,"%V_JOY_LOGITECH_2%"
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\LogitechWingMan",OEMData,1, 1, 0, 0, 0, 2, 0, 0, 0
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\LogitechWingManExtreme",OEMName,,"%V_JOY_LOGITECH_3%"
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\LogitechWingManExtreme",OEMData,1, a, 0, 0, 0, 4, 0, 0, 0
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\LogitechWingManLight",OEMName,,"%V_JOY_LOGITECH_4%"
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\LogitechWingManLight",OEMData,1, 0, 0, 0, 0, 2, 0, 0, 0
+
+[add.win9xreg]
+; Application compatibility flags
+HKLM,Software\Microsoft\DirectInput\Compatibility\CLIENT.EXE36DFF4810008E200,"MaxDeviceNameLength",1,06,00,00,00
+HKLM,Software\Microsoft\DirectInput\Compatibility\CLIENT.EXE35FEFABD00088200,"MaxDeviceNameLength",1,06,00,00,00
+HKLM,Software\Microsoft\DirectInput\Compatibility\CLIENT.EXE35FEFABD00088200,"ReAcquire",1,01,00,00,00
+HKLM,Software\Microsoft\DirectInput\Compatibility\UA.EXE35A5BA4600111400,"ReAcquire",1,01,00,00,00
+HKLM,Software\Microsoft\DirectInput\Compatibility\MCM.EXE35B406BB000FD200,"NoSubClass",1,01,00,00,00
+
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_045E&PID_0007","Flags1",1,04,00,00,00
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_045E&PID_0008","Flags1",1,04,00,00,00
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_045E&PID_0008","OEMData",1,03,00,08,10,0A,00,00,00
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_045E&PID_000E","Flags1",1,04,00,00,00
+; Pre-populate device keys that would otherwise get incorrect caps
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_045E&PID_001A","OEMData",1,00,00,08,10,08,00,00,00
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_045E&PID_001B","OEMData",1,03,00,08,10,08,00,00,00
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_045E&PID_0026","OEMData",1,20,00,00,10,09,00,00,00
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_045E&PID_0034","OEMData",1,00,00,08,10,08,00,00,00
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_045E&PID_0038","OEMData",1,03,00,08,10,08,00,00,00
+; Devices which used to have specific matches in joystick.inf
+; ThrustMaster Top Gun USB Joystick
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_044F&PID_A0A0",OEMName,2,%VID_044F&PID_A0A0.Desc%
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_044F&PID_A0A0",OEMData,3,02,00,00,10,04,00,00,00
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_044F&PID_A0A0",OEMCallout,2,"joyhid.vxd"
+; ThrustMaster Top Gun USB Joystick (rev2)
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_044F&PID_A0A1",OEMName,2,%VID_044F&PID_A0A1.Desc%
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_044F&PID_A0A1",OEMData,3,02,00,00,10,04,00,00,00
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_044F&PID_A0A1",OEMCallout,2,"joyhid.vxd"
+; NEC PK-GP201 PlayStick
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_044F&PID_A201",OEMName,2,%VID_044F&PID_A201.Desc%
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_044F&PID_A201",OEMData,3,02,00,00,10,04,00,00,00
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_044F&PID_A201",OEMCallout,2,"joyhid.vxd"
+; NEC PK-GP301 Driving Wheel
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_044F&PID_A01B",OEMName,2,%VID_044F&PID_A01B.Desc%
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_044F&PID_A01B",OEMData,3,40,00,00,10,04,00,00,00
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_044F&PID_A01B",OEMCallout,2,"joyhid.vxd"
+; Genius USB Joystick
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_0458&PID_1001",OEMName,2,%VID_0458&PID_1001.Desc%
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_0458&PID_1001",OEMData,3,03,00,08,10,08,00,00,00
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_0458&PID_1001",OEMCallout,2,"joyhid.vxd"
+; Genius USB Game Pad
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_0458&PID_1002",OEMName,2,%VID_0458&PID_1002.Desc%
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_0458&PID_1002",OEMData,3,20,00,00,10,08,00,00,00
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_0458&PID_1002",OEMCallout,2,"joyhid.vxd"
+; Genius USB Joystick (another)
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_0458&PID_1004",OEMName,2,%VID_0458&PID_1004.Desc%
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_0458&PID_1004",OEMData,3,03,00,08,10,08,00,00,00
+HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_0458&PID_1004",OEMCallout,2,"joyhid.vxd"
+; Guillemot Jet Leader USB Joystick
+;HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_06F8&PID_0002",OEMName,2,%VID_06F8&PID_0002.Desc%
+;HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_06F8&PID_0002",OEMData,3,02,00,00,10,08,00,00,00
+;HKLM,"System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM\VID_06F8&PID_0002",OEMCallout,2,"joyhid.vxd"
+
+
+[Strings.brz]
+PIDOBJECT       = "Driver de classe USB PID da Microsoft"
+GCCPL_DEFAULT   = "Folhas de propriedades padr„o da extens„o shell do painel de controle de controladores de jogo"
+GCCPL_HANDLER   = "Manipulador do painel de controle de controladores de jogo"
+STD_GAMEPORT    = "Porta de jogo padr„o"
+TMT1_NOADAPT    = "Thrustmaster Formula T1/T2 sem adaptador"
+TMT1_ADAPT      = "Thrustmaster Formula T1/T2 com adaptador"
+V_JOY_LOGITECH_1 = "Logitech ThunderPad"
+V_JOY_LOGITECH_2 = "Logitech WingMan"
+V_JOY_LOGITECH_3 = "Logitech WingMan Extreme"
+V_JOY_LOGITECH_4 = "Logitech WingMan Light"
+VID_044F&PID_A0A0.Desc="ThrustMaster Top Gun USB Joystick"
+VID_044F&PID_A0A1.Desc="ThrustMaster Top Gun USB Joystick (rev2)"
+VID_044F&PID_A201.Desc="NEC PK-GP201 PlayStick"
+VID_044F&PID_A01B.Desc="NEC PK-GP301 Driving Wheel"
+VID_044F&PID_A003.Desc="ThrustMaster Rage 3D USB Game Pad"
+VID_0458&PID_1001.Desc="Genius USB Joystick"
+VID_0458&PID_1002.Desc="Genius USB Game Pad"
+VID_0458&PID_1004.Desc="Genius USB Joystick"
+VID_06F8&PID_0002.Desc="Guillemot Jet Leader USB Joystick"
+
+
+
+[Strings.chs]
+PIDOBJECT       = "Microsoft USB PID Class Driver"
+GCCPL_DEFAULT   = "Game Controllers CPL Shell Extension Default Property Sheets"
+GCCPL_HANDLER   = "Game Controllers CPL Handler"
+STD_GAMEPORT    = "Standard Gameport"
+TMT1_NOADAPT    = "Thrustmaster Formula T1/T2 without adapter"
+TMT1_ADAPT      = "Thrustmaster Formula T1/T2 with adapter"
+V_JOY_LOGITECH_1 = "Logitech ThunderPad"
+V_JOY_LOGITECH_2 = "Logitech WingMan"
+V_JOY_LOGITECH_3 = "Logitech WingMan Extreme"
+V_JOY_LOGITECH_4 = "Logitech WingMan Light"
+VID_044F&PID_A0A0.Desc="ThrustMaster Top Gun USB Joystick"
+VID_044F&PID_A0A1.Desc="ThrustMaster Top Gun USB Joystick (rev2)"
+VID_044F&PID_A201.Desc="NEC PK-GP201 PlayStick"
+VID_044F&PID_A01B.Desc="NEC PK-GP301 Driving Wheel"
+VID_044F&PID_A003.Desc="ThrustMaster Rage 3D USB Game Pad"
+VID_0458&PID_1001.Desc="Genius USB Joystick"
+VID_0458&PID_1002.Desc="Genius USB Game Pad"
+VID_0458&PID_1004.Desc="Genius USB Joystick"
+VID_06F8&PID_0002.Desc="Guillemot Jet Leader USB Joystick"
+
+
+
+[Strings.cht]
+PIDOBJECT       = "Microsoft USB PID Class Driver"
+GCCPL_DEFAULT   = "Game Controllers CPL Shell Extension Default Property Sheets"
+GCCPL_HANDLER   = "Game Controllers CPL Handler"
+STD_GAMEPORT    = "º–∑«πC¿∏≥s±µ∞"
+TMT1_NOADAPT    = "Thrustmaster Formula T1/T2 (®S¶≥§∂≠±•d)"
+TMT1_ADAPT      = "Thrustmaster Formula T1/T2 (®S¶≥§∂≠±•d)"
+V_JOY_LOGITECH_1 = "Logitech ThunderPad"
+V_JOY_LOGITECH_2 = "Logitech WingMan"
+V_JOY_LOGITECH_3 = "Logitech WingMan Extreme"
+V_JOY_LOGITECH_4 = "Logitech WingMan Light"
+VID_044F&PID_A0A0.Desc="ThrustMaster Top Gun USB Joystick"
+VID_044F&PID_A0A1.Desc="ThrustMaster Top Gun USB Joystick (rev2)"
+VID_044F&PID_A201.Desc="NEC PK-GP201 PlayStick"
+VID_044F&PID_A01B.Desc="NEC PK-GP301 Driving Wheel"
+VID_044F&PID_A003.Desc="ThrustMaster Rage 3D USB Game Pad"
+VID_0458&PID_1001.Desc="Genius USB Joystick"
+VID_0458&PID_1002.Desc="Genius USB Game Pad"
+VID_0458&PID_1004.Desc="Genius USB Joystick"
+VID_06F8&PID_0002.Desc="Guillemot Jet Leader USB Joystick"
+
+
+
+[Strings.cze]
+PIDOBJECT       = "Microsoft USB PID Class Driver"
+GCCPL_DEFAULT   = "Game Controllers CPL Shell Extension Default Property Sheets"
+GCCPL_HANDLER   = "Game Controllers CPL Handler"
+STD_GAMEPORT    = "StandardnÌ gameport"
+TMT1_NOADAPT    = "Thrustmaster Formula T1/T2 bez adaptÈru"
+TMT1_ADAPT      = "Thrustmaster Formula T1/T2 s adaptÈrem"
+V_JOY_LOGITECH_1 = "Logitech ThunderPad"
+V_JOY_LOGITECH_2 = "Logitech WingMan"
+V_JOY_LOGITECH_3 = "Logitech WingMan Extreme"
+V_JOY_LOGITECH_4 = "Logitech WingMan Light"
+VID_044F&PID_A0A0.Desc="P·kov˝ ovladaË Thrustmaster TopGun USB"
+VID_044F&PID_A0A1.Desc="P·kov˝ ovladaË ThrustMaster Top Gun USB (rev2)"
+VID_044F&PID_A201.Desc="HracÌ ovladaË NEC PK-GP201"
+VID_044F&PID_A01B.Desc="Volant NEC PK-GP301"
+VID_044F&PID_A003.Desc="Gamepad ThrustMaster Rage 3D USB"
+VID_0458&PID_1001.Desc="P·kov˝ ovladaË Genius USB"
+VID_0458&PID_1002.Desc="Gamepad Genius USB"
+VID_0458&PID_1004.Desc="P·kov˝ ovladaË Genius USB"
+VID_06F8&PID_0002.Desc="Guillemot Jet Leader USB Joystick"
+
+
+
+[Strings.dut]
+PIDOBJECT       = "Microsoft USB PID-klassenbesturingsprogramma"
+GCCPL_DEFAULT   = "Standaardeigenschappenbladen voor CPL-shellextensie van spelletjesbesturingen"
+GCCPL_HANDLER   = "CPL-handler van spelletjesbesturingen"
+STD_GAMEPORT    = "Standaardspelpoort"
+TMT1_NOADAPT    = "Thrustmaster Formula T1/T2 zonder adapter"
+TMT1_ADAPT      = "Thrustmaster Formula T1/T2 met adapter"
+V_JOY_LOGITECH_1 = "Logitech ThunderPad"
+V_JOY_LOGITECH_2 = "Logitech WingMan"
+V_JOY_LOGITECH_3 = "Logitech WingMan Extreme"
+V_JOY_LOGITECH_4 = "Logitech WingMan Light"
+VID_044F&PID_A0A0.Desc="Thrustmaster Top Gun-joystick (USB)"
+VID_044F&PID_A0A1.Desc="ThrustMaster Top Gun USB-joystick (rev2)"
+VID_044F&PID_A201.Desc="NEC PK-GP201 PlayStick"
+VID_044F&PID_A01B.Desc="NEC PK-GP301-stuur"
+VID_044F&PID_A003.Desc="ThrustMaster Rage 3D USB-gamepad"
+VID_0458&PID_1001.Desc="Genius USB-joystick"
+VID_0458&PID_1002.Desc="Genius USB-gamepad"
+VID_0458&PID_1004.Desc="Genius USB-joystick"
+VID_06F8&PID_0002.Desc="Guillemot Jet Leader USB-joystick"
+
+
+
+[Strings.frn]
+PIDOBJECT       = "Pilote de classe PID USB Microsoft"
+GCCPL_DEFAULT   = "Feuille des propriÈtÈs par dÈfaut du shell d'extension du panneau de configuration du contrÙleur de jeu"
+GCCPL_HANDLER   = "Gestionnaire du panneau de configuration du contrÙleur de jeu"
+STD_GAMEPORT    = "Port jeu standard"
+TMT1_NOADAPT    = "Thrustmaster Formula T1/T2 sans adaptateur"
+TMT1_ADAPT      = "Thrustmaster Formula T1/T2 avec adaptateur"
+V_JOY_LOGITECH_1 = "Logitech ThunderPad"
+V_JOY_LOGITECH_2 = "Logitech WingMan"
+V_JOY_LOGITECH_3 = "Logitech WingMan Extreme"
+V_JOY_LOGITECH_4 = "Logitech WingMan Light"
+VID_044F&PID_A0A0.Desc="Manette de jeu ThrustMaster Top Gun USB"
+VID_044F&PID_A0A1.Desc="Manette de jeu ThrustMaster Top Gun USB Joystick (2)"
+VID_044F&PID_A201.Desc="Manette de jeu NEC PK-GP20"
+VID_044F&PID_A01B.Desc="Volant NEC PK-GP301"
+VID_044F&PID_A003.Desc="BoÓtier de commande ThrustMaster Rage 3D USB"
+VID_0458&PID_1001.Desc="Manette de jeu USB Genius"
+VID_0458&PID_1002.Desc="BoÓtier de commande USB Genius"
+VID_0458&PID_1004.Desc="Manette de jeu USB Genius"
+VID_06F8&PID_0002.Desc="Manette de jeu USB Jet Leader de Guillemot"
+
+
+
+[Strings.ger]
+PIDOBJECT       = "Microsoft USB-PID-Klassentreiber"
+GCCPL_DEFAULT   = "Standard-Eigenschaftenseiten f¸r CPL-Shell-Erweiterungen von Gamecontrollern"
+GCCPL_HANDLER   = "CPL-Handler f¸r Gamecontroller"
+STD_GAMEPORT    = "Standardgameport"
+TMT1_NOADAPT    = "Thrustmaster Formula T1/T2 ohne Adapter"
+TMT1_ADAPT      = "Thrustmaster Formula T1/T2 mit Adapter"
+V_JOY_LOGITECH_1 = "Logitech ThunderPad"
+V_JOY_LOGITECH_2 = "Logitech WingMan"
+V_JOY_LOGITECH_3 = "Logitech WingMan Extreme"
+V_JOY_LOGITECH_4 = "Logitech WingMan Light"
+VID_044F&PID_A0A0.Desc="ThrustMaster Top Gun USB-Joystick"
+VID_044F&PID_A0A1.Desc="ThrustMaster Top Gun USB-Joystick (rev2)"
+VID_044F&PID_A201.Desc="NEC PK-GP201 PlayStick"
+VID_044F&PID_A01B.Desc="NEC PK-GP301 Lenkrad"
+VID_044F&PID_A003.Desc="ThrustMaster Rage 3D USB-Gamepad"
+VID_0458&PID_1001.Desc="Genius USB-Joystick"
+VID_0458&PID_1002.Desc="Genius USB-Gamepad"
+VID_0458&PID_1004.Desc="Genius USB-Joystick"
+VID_06F8&PID_0002.Desc="Guillemot Jet Leader USB-Joystick"
+
+
+
+[Strings.itn]
+PIDOBJECT       = "Driver Microsoft USB PID Class"
+GCCPL_DEFAULT   = "Propriet‡ predefinite estensione shell CPL periferiche di gioco"
+GCCPL_HANDLER   = "Gestore CPL periferiche di gioco"
+STD_GAMEPORT    = "Porta giochi standard"
+TMT1_NOADAPT    = "Thrustmaster Formula T1/T2 senza scheda"
+TMT1_ADAPT      = "Thrustmaster Formula T1/T2 con scheda"
+V_JOY_LOGITECH_1 = "Logitech ThunderPad"
+V_JOY_LOGITECH_2 = "Logitech WingMan"
+V_JOY_LOGITECH_3 = "Logitech WingMan Extreme"
+V_JOY_LOGITECH_4 = "Logitech WingMan Light"
+VID_044F&PID_A0A0.Desc="Joystick USB Thrustmaster Top Gun"
+VID_044F&PID_A0A1.Desc="Joystick ThrustMaster Top Gun USB (rev2)"
+VID_044F&PID_A201.Desc="PlayStick NEC PK-GP201"
+VID_044F&PID_A01B.Desc="Timone NEC PK-GP301"
+VID_044F&PID_A003.Desc="Game pad USB ThrustMaster Rage 3D"
+VID_0458&PID_1001.Desc="Joystick USB Genius"
+VID_0458&PID_1002.Desc="Game pad USB Genius"
+VID_0458&PID_1004.Desc="Joystick USB Genius"
+VID_06F8&PID_0002.Desc="Joystick Guillemot Jet Leader USB"
+
+
+
+[Strings.jpn]
+PIDOBJECT       = "Microsoft USB PID Class Driver"
+GCCPL_DEFAULT   = "Game Controllers CPL Shell Extension Default Property Sheets"
+GCCPL_HANDLER   = "πﬁ∞— ∫›ƒ€∞◊ CPL  ›ƒﬁ◊"
+STD_GAMEPORT    = "ïWèÄπﬁ∞—Œﬂ∞ƒ"
+TMT1_NOADAPT    = "Thrustmaster Formula T1/T2 ±¿ﬁÃﬂ¿Ç»Çµ"
+TMT1_ADAPT      = "Thrustmaster Formula T1/T2 ±¿ﬁÃﬂ¿ïtÇ´"
+V_JOY_LOGITECH_1 = "Logitech ThunderPad"
+V_JOY_LOGITECH_2 = "Logitech WingMan"
+V_JOY_LOGITECH_3 = "Logitech WingMan Extreme"
+V_JOY_LOGITECH_4 = "Logitech WingMan Light"
+VID_044F&PID_A0A0.Desc="ThrustMaster Top Gun USB Joystick"
+VID_044F&PID_A0A1.Desc="ThrustMaster Top Gun USB Joystick (rev2)"
+VID_044F&PID_A201.Desc="NEC PK-GP201 PlayStick"
+VID_044F&PID_A01B.Desc="NEC PK-GP301 Driving Wheel"
+VID_044F&PID_A003.Desc="ThrustMaster Rage 3D USB Game Pad"
+VID_0458&PID_1001.Desc="Genius USB Joystick"
+VID_0458&PID_1002.Desc="Genius USB Game Pad"
+VID_0458&PID_1004.Desc="Genius USB Joystick"
+VID_06F8&PID_0002.Desc="Guillemot Jet Leader USB Joystick"
+
+
+
+[Strings.kor]
+PIDOBJECT       = "Microsoft USB PID Class Driver"
+GCCPL_DEFAULT   = "∞‘¿” ƒ¡∆Æ∑—∑Ø CPL º– »Æ¿Â ±‚∫ª µÓ∑œ ¡§∫∏ Ω√∆Æ"
+GCCPL_HANDLER   = "∞‘¿” ƒ¡∆Æ∑—∑Ø CPL √≥∏Æ±‚"
+STD_GAMEPORT    = "«•¡ÿ ∞‘¿” ∆˜∆Æ"
+TMT1_NOADAPT    = "Thrustmaster Formula T1/T2 without adapter"
+TMT1_ADAPT      = "Thrustmaster Formula T1/T2 with adapter"
+V_JOY_LOGITECH_1 = "Logitech ThunderPad"
+V_JOY_LOGITECH_2 = "Logitech WingMan"
+V_JOY_LOGITECH_3 = "Logitech WingMan Extreme"
+V_JOY_LOGITECH_4 = "Logitech WingMan Light"
+VID_044F&PID_A0A0.Desc="ThrustMaster Top Gun USB Joystick"
+VID_044F&PID_A0A1.Desc="ThrustMaster Top Gun USB Joystick (rev2)"
+VID_044F&PID_A201.Desc="NEC PK-GP201 PlayStick"
+VID_044F&PID_A01B.Desc="NEC PK-GP301 Driving Wheel"
+VID_044F&PID_A003.Desc="ThrustMaster Rage 3D USB Game Pad"
+VID_0458&PID_1001.Desc="Genius USB Joystick"
+VID_0458&PID_1002.Desc="Genius USB Game Pad"
+VID_0458&PID_1004.Desc="Genius USB Joystick"
+VID_06F8&PID_0002.Desc="Guillemot Jet Leader USB Joystick"
+
+
+
+[Strings.pol]
+PIDOBJECT       = "Sterownik Microsoft USB klasy PID"
+GCCPL_DEFAULT   = "Domyúlne arkusze w≥aúciwoúci rozszerzeÒ pow≥oki kontrolerÛw gier CPL"
+GCCPL_HANDLER   = "Obs≥uga kontrolerÛw gier CPL"
+STD_GAMEPORT    = "Standardowy port gier"
+TMT1_NOADAPT    = "Thrustmaster Formula T1/T2 bez karty"
+TMT1_ADAPT      = "Thrustmaster Formula T1/T2 z kartπ"
+V_JOY_LOGITECH_1 = "Logitech ThunderPad"
+V_JOY_LOGITECH_2 = "Logitech WingMan"
+V_JOY_LOGITECH_3 = "Logitech WingMan Extreme"
+V_JOY_LOGITECH_4 = "Logitech WingMan Light"
+VID_044F&PID_A0A0.Desc="Joystick ThrustMaster USB TopGun"
+VID_044F&PID_A0A1.Desc="Joystick (rev2) ThrustMaster Top Gun USB"
+VID_044F&PID_A201.Desc="PlayStick NEC PK-GP201"
+VID_044F&PID_A01B.Desc="Kierownica NEC PK-GP301"
+VID_044F&PID_A003.Desc="Konsola do gier ThrustMaster Rage 3D USB"
+VID_0458&PID_1001.Desc="Joystick Genius USB"
+VID_0458&PID_1002.Desc="Konsola do gier Genius USB"
+VID_0458&PID_1004.Desc="Joystick Genius USB"
+VID_06F8&PID_0002.Desc="Joystick Guillemot Jet Leader USB"
+
+
+
+[Strings.rus]
+PIDOBJECT       = "Microsoft USB PID Class Driver"
+GCCPL_DEFAULT   = "ŒÍÌÓ Ò‚ÓÈÒÚ‚ ÔÓ ÛÏÓÎ˜‡ÌË˛ ‡Ò¯ËÂÌËˇ Ó·ÓÎÓ˜ÍË Ë„Ó‚˚ı ÛÒÚÓÈÒÚ‚ CPL"
+GCCPL_HANDLER   = "Œ·‡·ÓÚ˜ËÍ Ë„Ó‚˚ı ÛÒÚÓÈÒÚ‚ CPL"
+STD_GAMEPORT    = "—Ú‡Ì‰‡ÚÌ˚È Ë„Ó‚ÓÈ ÔÓÚ"
+TMT1_NOADAPT    = "Thrustmaster Formula T1/T2 ·ÂÁ ‡‰‡ÔÚÂ‡"
+TMT1_ADAPT      = "Thrustmaster Formula T1/T2 Ò ‡‰‡ÔÚÂÓÏ"
+V_JOY_LOGITECH_1 = "Logitech ThunderPad"
+V_JOY_LOGITECH_2 = "Logitech WingMan"
+V_JOY_LOGITECH_3 = "Logitech WingMan Extreme"
+V_JOY_LOGITECH_4 = "Logitech WingMan Light"
+VID_044F&PID_A0A0.Desc="ƒÊÓÈÒÚËÍ ThrustMaster USB TopGun"
+VID_044F&PID_A0A1.Desc="ƒÊÓÈÒÚËÍ ThrustMaster Top Gun USB (rev2)"
+VID_044F&PID_A201.Desc="ƒÊÓÈÒÚËÍ NEC PK-GP201 PlayStick"
+VID_044F&PID_A01B.Desc="–ÛÎ¸ NEC PK-GP301"
+VID_044F&PID_A003.Desc="»„Ó‚ÓÈ ÔÎ‡Ì¯ÂÚ ThrustMaster Rage 3D USB"
+VID_0458&PID_1001.Desc="ƒÊÓÈÒÚËÍ Genius USB"
+VID_0458&PID_1002.Desc="»„Ó‚ÓÈ ÔÎ‡Ì¯ÂÚ Genius USB"
+VID_0458&PID_1004.Desc="ƒÊÓÈÒÚËÍ Genius USB"
+VID_06F8&PID_0002.Desc="ƒÊÓÈÒÚËÍ Guillemot Jet Leader USB"
+
+
+
+[Strings.spa]
+PIDOBJECT       = "Controlador de clase PID USB de Microsoft"
+GCCPL_DEFAULT   = "Hojas de propiedades predeterminadas de extensiÛn Shell CPL de dispositivos de juego"
+GCCPL_HANDLER   = "Controlador CPL de dispositivos de juego"
+STD_GAMEPORT    = "Puerto de juegos est·ndar"
+TMT1_NOADAPT    = "Thrustmaster Formula T1/T2 sin adaptador"
+TMT1_ADAPT      = "Thrustmaster Formula T1/T2 con adaptador"
+V_JOY_LOGITECH_1 = "Logitech ThunderPad"
+V_JOY_LOGITECH_2 = "Logitech WingMan"
+V_JOY_LOGITECH_3 = "Logitech WingMan Extreme"
+V_JOY_LOGITECH_4 = "Logitech WingMan Light"
+VID_044F&PID_A0A0.Desc="Joystick ThrustMaster Top Gun USB"
+VID_044F&PID_A0A1.Desc="ThrustMaster Top Gun USB Joystick (rev2)"
+VID_044F&PID_A201.Desc="NEC PK-GP201 PlayStick"
+VID_044F&PID_A01B.Desc="Volante NEC PK-GP301"
+VID_044F&PID_A003.Desc="Controlador de juegos ThrustMaster Rage 3D USB"
+VID_0458&PID_1001.Desc="Joystick Genius USB"
+VID_0458&PID_1002.Desc="Controlador de juegos Genius USB"
+VID_0458&PID_1004.Desc="Joystick Genius USB"
+VID_06F8&PID_0002.Desc="Joystick USB Guillemot Jet Leader"
+
+
+
+[Strings.swe]
+PIDOBJECT       = "Microsoft USB PID-klassdrivrutin"
+GCCPL_DEFAULT   = "Standardegenskapslistor fˆr Spelenheter pÂ Kontrollpanelen"
+GCCPL_HANDLER   = "Spelenheter pÂ Kontrollpanelen"
+STD_GAMEPORT    = "Standardspelport"
+TMT1_NOADAPT    = "Thrustmaster Formula T1/T2 utan adapter"
+TMT1_ADAPT      = "Thrustmaster Formula T1/T2 med adapter"
+V_JOY_LOGITECH_1 = "Logitech ThunderPad"
+V_JOY_LOGITECH_2 = "Logitech WingMan"
+V_JOY_LOGITECH_3 = "Logitech WingMan Extreme"
+V_JOY_LOGITECH_4 = "Logitech WingMan Light"
+VID_044F&PID_A0A0.Desc="Thrustmaster USB TopGun Joystick"
+VID_044F&PID_A0A1.Desc="ThrustMaster Top Gun USB Joystick (rev2)"
+VID_044F&PID_A201.Desc="NEC PK-GP201 PlayStick"
+VID_044F&PID_A01B.Desc="NEC PK-GP301 Driving Wheel"
+VID_044F&PID_A003.Desc="ThrustMaster Rage 3D USB Game Pad"
+VID_0458&PID_1001.Desc="Genius USB Joystick"
+VID_0458&PID_1002.Desc="Genius USB Game Pad"
+VID_0458&PID_1004.Desc="Genius USB Joystick"
+VID_06F8&PID_0002.Desc="Guillemot Jet Leader USB Joystick"
+
+
+
+[Strings.eng]
+PIDOBJECT       = "Microsoft USB PID Class Driver"
+GCCPL_DEFAULT   = "Game Controllers CPL Shell Extension Default Property Sheets"
+GCCPL_HANDLER   = "Game Controllers CPL Handler"
+STD_GAMEPORT    = "Standard Gameport"
+TMT1_NOADAPT    = "Thrustmaster Formula T1/T2 without adapter"
+TMT1_ADAPT      = "Thrustmaster Formula T1/T2 with adapter"
+V_JOY_LOGITECH_1 = "Logitech ThunderPad"
+V_JOY_LOGITECH_2 = "Logitech WingMan"
+V_JOY_LOGITECH_3 = "Logitech WingMan Extreme"
+V_JOY_LOGITECH_4 = "Logitech WingMan Light"
+VID_044F&PID_A0A0.Desc="Thrustmaster USB TopGun Joystick"
+VID_044F&PID_A0A1.Desc="ThrustMaster Top Gun USB Joystick (rev2)"
+VID_044F&PID_A201.Desc="NEC PK-GP201 PlayStick"
+VID_044F&PID_A01B.Desc="NEC PK-GP301 Driving Wheel"
+VID_044F&PID_A003.Desc="ThrustMaster Rage 3D USB Game Pad"
+VID_0458&PID_1001.Desc="Genius USB Joystick"
+VID_0458&PID_1002.Desc="Genius USB Game Pad"
+VID_0458&PID_1004.Desc="Genius USB Joystick"
+VID_06F8&PID_0002.Desc="Guillemot Jet Leader USB Joystick"
+
+

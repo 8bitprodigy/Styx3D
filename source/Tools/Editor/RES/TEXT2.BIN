@@ -1,0 +1,34 @@
+Jet3DClassic7 2.7.0
+
+Welcome to jStudioClassic7, the original Jet3D 2.7.0 world editor.  
+This editor and the whole Jet3D enterprise continues to evolve and improve.
+We hope that you find the latest enhancements exciting.  
+
+We suggest that you take some time and go through the simple tutorials provided.
+Tutorial 1 provides a basic introduction to many of the world construction 
+features of jDesignerClassic7.
+Tutorial 2 provides an overview for some of the more advanced features.
+
+Features include editing and placement for: 
+  Actors
+  Models (movable world geometry)
+  Sounds
+  Portal Cameras (Skies & Sky Boxes) 
+  and Dynamic lights
+  Controllers to animate other objects - animating their positions, or animating 
+    any of their properties.
+  Terrain
+  Poly spouts
+  D3D support while editing.
+  Full-screen viewing mode.
+  Weighted vertex support for actors.
+  Optimized D3D texture caching.
+  Full-Bright editing mode.
+  User defined objects.
+  Vertex Editing.
+
+Please direct your comments, suggestions for improvement, and bug reports to our 
+forum accessible via jet3d.com.
+
+We hope you find Jet3D to be useful and productive.
+

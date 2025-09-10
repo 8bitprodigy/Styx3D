@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ActBuild\ActBuild.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\AOptions.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\AProject.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\Util\Array.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\Util\FilePath.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mop\Log.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\Make.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Maxmath.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mkactor\Mkactor.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mkbody\Mkbody.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mkmotion\Mkmotion.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Mkutil.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mop\Mopshell.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\Mxscript.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mop\Pop.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\Util\Rcstring.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\TDBody.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStudio\Util\Util.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mkbody\Vph.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ActBuild\ActBuild.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\AOptions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\AProject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\Util\Array.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\Util\FilePath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mop\Log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\Make.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Maxmath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mkactor\Mkactor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mkbody\Mkbody.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mkmotion\Mkmotion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Mkutil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mop\Mopshell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\Mxscript.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mop\Pop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\Util\Rcstring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\TDBody.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStudio\Util\Util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mkbody\Vph.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

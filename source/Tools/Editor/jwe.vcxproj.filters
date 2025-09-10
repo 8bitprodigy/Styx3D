@@ -1,0 +1,1135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Core">
+      <UniqueIdentifier>{563e3ae7-3997-45f5-8c66-0632ee8d5094}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{e184e079-a5fa-4f65-a7bf-f575c376f6d5}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="Help Files">
+      <UniqueIdentifier>{7c6c9881-ea8c-4c42-b4b6-c16f7b14fc5c}</UniqueIdentifier>
+      <Extensions>cnt;rtf</Extensions>
+    </Filter>
+    <Filter Include="J3DMFC Files">
+      <UniqueIdentifier>{38475b48-e293-4920-9c90-f85218961581}</UniqueIdentifier>
+      <Extensions>.cpp .c .h</Extensions>
+    </Filter>
+    <Filter Include="Dialogs">
+      <UniqueIdentifier>{419e0d01-3e92-4a4e-85c5-b3ea3522f108}</UniqueIdentifier>
+      <Extensions>.cpp .c .h</Extensions>
+    </Filter>
+    <Filter Include="Dialogs\DialogHelpers">
+      <UniqueIdentifier>{fbd477d6-f38a-478f-b149-a9b1c0e32207}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{02cdd81f-855a-44b1-b594-16efe34b287f}</UniqueIdentifier>
+      <Extensions>*.cpp, *.c, *.h</Extensions>
+    </Filter>
+    <Filter Include="MFC Files">
+      <UniqueIdentifier>{0af107f4-a757-47f2-bca2-70c663306748}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;h;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Core\Brush.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\BrushList.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\BrushTemplate.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CameraList.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CamObj.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Class.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Descriptor.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Draw.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Draw3d.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Facelist.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Group.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GroupList.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Level.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Light.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\LightList.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\MaterialIdentList.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\MaterialList.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\MaterialList2.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Materials.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\MatrArray.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\MatrIdx.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Model.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\modellist.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Object.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\ObjectList.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Ortho.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Select.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\TernList.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\TerrnObj.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Transform.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Undo.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\UserObj.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Vertlist.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="J3dmfc\J3DApp.cpp">
+      <Filter>J3DMFC Files</Filter>
+    </ClCompile>
+    <ClCompile Include="J3dmfc\J3DDoc.cpp">
+      <Filter>J3DMFC Files</Filter>
+    </ClCompile>
+    <ClCompile Include="J3dmfc\J3DMainFrm.cpp">
+      <Filter>J3DMFC Files</Filter>
+    </ClCompile>
+    <ClCompile Include="J3dmfc\J3DView.cpp">
+      <Filter>J3DMFC Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\AddModel.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\builderbutton.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\buildercombo.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\builderedit.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\buildspin.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\DialogBuilderDlg.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\disclaimer.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\DlgAutorecover.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\Empty.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\globalmaterials.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\Groups.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\Jeterr.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\Lists.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\materialstatic.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\Models.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\Paredit.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\Preferences.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\PressKey.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\Properties.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\Rebuild.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\Render.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\Stats.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\TexturesDlg.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\Timeline.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\DialogHelpers\BitmapResize.cpp">
+      <Filter>Dialogs\DialogHelpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\DialogHelpers\ColorButton.cpp">
+      <Filter>Dialogs\DialogHelpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\DialogHelpers\ColorPopup.cpp">
+      <Filter>Dialogs\DialogHelpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\DialogHelpers\DropFileArray.cpp">
+      <Filter>Dialogs\DialogHelpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\DialogHelpers\MyBar.cpp">
+      <Filter>Dialogs\DialogHelpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\DialogHelpers\MyDropTarget.cpp">
+      <Filter>Dialogs\DialogHelpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\DialogHelpers\scbarcf.cpp">
+      <Filter>Dialogs\DialogHelpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\DialogHelpers\scbarg.cpp">
+      <Filter>Dialogs\DialogHelpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\DialogHelpers\sizecbar.cpp">
+      <Filter>Dialogs\DialogHelpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\DialogHelpers\TextureListControl.cpp">
+      <Filter>Dialogs\DialogHelpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\DialogHelpers\TextureTreeControl.cpp">
+      <Filter>Dialogs\DialogHelpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\DialogHelpers\Thin3DSplitterWnd.cpp">
+      <Filter>Dialogs\DialogHelpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Bmp.c">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Dlist.c">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\DrawTool.c">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Drvlist.c">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\jeList.c">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Mtl9937.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Noise.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Rect.c">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Spawn.c">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Util.c">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="AppData.cpp">
+      <Filter>MFC Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BtnST.cpp">
+      <Filter>MFC Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ChildFrm.cpp">
+      <Filter>MFC Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CIconTabCtrl.cpp">
+      <Filter>MFC Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CMaterial.cpp">
+      <Filter>MFC Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CTextToolBar.cpp">
+      <Filter>MFC Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Doc.cpp">
+      <Filter>MFC Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Docbars.cpp">
+      <Filter>MFC Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DocManagerEx.cpp">
+      <Filter>MFC Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DragTree.cpp">
+      <Filter>MFC Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ExtFileDialog.cpp">
+      <Filter>MFC Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GroupBar.cpp">
+      <Filter>MFC Files</Filter>
+    </ClCompile>
+    <ClCompile Include="grouptreectrl.cpp">
+      <Filter>MFC Files</Filter>
+    </ClCompile>
+    <ClCompile Include="jetdialog.cpp">
+      <Filter>MFC Files</Filter>
+    </ClCompile>
+    <ClCompile Include="JetView.cpp">
+      <Filter>MFC Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Jwe.cpp">
+      <Filter>MFC Files</Filter>
+    </ClCompile>
+    <ClCompile Include="label.cpp">
+      <Filter>MFC Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>MFC Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MfcUtil.cpp">
+      <Filter>MFC Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MsgLog.cpp">
+      <Filter>MFC Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Settings.cpp">
+      <Filter>MFC Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StdAfx.cpp">
+      <Filter>MFC Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeCtrlEx.cpp">
+      <Filter>MFC Files</Filter>
+    </ClCompile>
+    <ClCompile Include="View.cpp">
+      <Filter>MFC Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WndReg.cpp">
+      <Filter>MFC Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Core\Brush.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\BrushList.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\BrushTemplate.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\CameraList.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\CamObj.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Class.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Descriptor.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Draw.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Draw3d.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Facelist.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Group.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GroupList.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\jwObject.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Level.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Light.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\LightList.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\MaterialIdentList.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\MaterialList.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\MaterialList2.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Materials.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\MatrArray.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\MatrIdx.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Model.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\ModelInstance.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\modellist.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\ObjectDef.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\ObjectList.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Ortho.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Select.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\TernList.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\TerrnObj.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Transform.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Undo.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\UserObj.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\VertList.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="J3dmfc\J3DApp.h">
+      <Filter>J3DMFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="J3dmfc\J3DDoc.h">
+      <Filter>J3DMFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="J3dmfc\J3DMainFrm.h">
+      <Filter>J3DMFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="J3dmfc\J3DView.h">
+      <Filter>J3DMFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\AddModel.h">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\builderbutton.h">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\buildercombo.h">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\builderedit.h">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\buildspin.h">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\DialogBuilderDlg.h">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\disclaimer.h">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgAutorecover.h">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\Empty.h">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\globalmaterials.h">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\Groups.h">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\Jeterr.h">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\Lists.h">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\materialstatic.h">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\Models.h">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\Paredit.h">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\Preferences.h">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\PressKey.h">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\Properties.h">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\Rebuild.h">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\Render.h">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\ReportErr.h">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\Stats.h">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\TexturesDlg.h">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\Timeline.h">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\DialogHelpers\BitmapResize.h">
+      <Filter>Dialogs\DialogHelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\DialogHelpers\ColorButton.h">
+      <Filter>Dialogs\DialogHelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\DialogHelpers\ColorPopup.h">
+      <Filter>Dialogs\DialogHelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\DialogHelpers\DropFileArray.h">
+      <Filter>Dialogs\DialogHelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\DialogHelpers\MyBar.h">
+      <Filter>Dialogs\DialogHelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\DialogHelpers\MyDropTarget.h">
+      <Filter>Dialogs\DialogHelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\DialogHelpers\scbarcf.h">
+      <Filter>Dialogs\DialogHelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\DialogHelpers\scbarg.h">
+      <Filter>Dialogs\DialogHelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\DialogHelpers\sizecbar.h">
+      <Filter>Dialogs\DialogHelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\DialogHelpers\TextureListControl.h">
+      <Filter>Dialogs\DialogHelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\DialogHelpers\TextureTreeControl.h">
+      <Filter>Dialogs\DialogHelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\DialogHelpers\Thin3DSplitterWnd.h">
+      <Filter>Dialogs\DialogHelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Bmp.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Dlist.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\DrawTool.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Drvlist.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\jeList.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Mtl9937.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Noise.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Point.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Rect.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Spawn.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Units.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Util.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="AppData.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BtnST.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildNumber.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildType.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CamFieldID.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CDocManagerEx.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ChildFrm.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CIconTabCtrl.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CMaterial.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CTextToolBar.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Defs.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Doc.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dockbars.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DocManagerEx.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DragTree.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EditMsg.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ExtFileDialog.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GroupBar.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="grouptreectrl.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="jetdialog.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="JetView.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Jwe.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="label.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Memdc.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MfcUtil.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MsgLog.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectMsg.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Settings.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StdAfx.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeCtrlEx.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="View.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WndReg.h">
+      <Filter>MFC Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\Addtocur.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Arch.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\arr_no.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\arr_nw.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\arr_so.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\arr_sw.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Bitmap1.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Camera.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\cameracur.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Cone.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\content.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Cube.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Cube.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Cube1.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Cur00001.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Cur00002.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Cur00003.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\cursor1.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Cursor2.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\CursorPlus.CUR">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\cut.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Cylinder.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\descript.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\dialog_f.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\dialog_t.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\Dlight.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Doc.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\down.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Dragcopy.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Dragmove.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\edit.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Entity.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\fullscre.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\global.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\globe.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\hand.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\hand_ope.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Handleco.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\handleedge.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\idr_jmat.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\idr_prefab.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Imagelis.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\info.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\jedit.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\jet3d_logo_small.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Jwe.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Jwe.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\left.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Light.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Light.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\lock.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Mainfram.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Mode.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Move4way.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\play.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\playing.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\possize.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\prefs_ed.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\prefs_gr.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Prefs_ke.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\prefs_ke.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\prefs_mo.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\prefs_pa.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\prefs_vi.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\properti.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Removefr.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\reset.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\right.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Rotate.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Rotatebl.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Rotatebr.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Rotatetl.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Rotatetr.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\RotationCenter.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Shearlr.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ShearLR.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Sheartb.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ShearTB.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Showall.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Showallb.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Showcurr.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Showvisi.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Speciale.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Speciale.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Sphere.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Stairs.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Svertex.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Terrain.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Terrain.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Text1.bin">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Text2.bin">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Tile128.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Tile32.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Tile64.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\time.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\time_sms.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\timecol.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Toolbar.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Toolbar1.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\unlock.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\up.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Vertex.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\view.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\zoomin.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\zoomout.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="hlp\AfxCore.rtf">
+      <Filter>Help Files</Filter>
+    </None>
+    <None Include="hlp\AfxPrint.rtf">
+      <Filter>Help Files</Filter>
+    </None>
+    <None Include="hlp\AppExit.bmp">
+      <Filter>Help Files</Filter>
+    </None>
+    <None Include="hlp\Bullet.bmp">
+      <Filter>Help Files</Filter>
+    </None>
+    <None Include="hlp\CurArw2.bmp">
+      <Filter>Help Files</Filter>
+    </None>
+    <None Include="hlp\CurArw4.bmp">
+      <Filter>Help Files</Filter>
+    </None>
+    <None Include="hlp\CurHelp.bmp">
+      <Filter>Help Files</Filter>
+    </None>
+    <None Include="hlp\EditCopy.bmp">
+      <Filter>Help Files</Filter>
+    </None>
+    <None Include="hlp\EditCut.bmp">
+      <Filter>Help Files</Filter>
+    </None>
+    <None Include="hlp\EditPast.bmp">
+      <Filter>Help Files</Filter>
+    </None>
+    <None Include="hlp\EditUndo.bmp">
+      <Filter>Help Files</Filter>
+    </None>
+    <None Include="hlp\FileNew.bmp">
+      <Filter>Help Files</Filter>
+    </None>
+    <None Include="hlp\FileOpen.bmp">
+      <Filter>Help Files</Filter>
+    </None>
+    <None Include="hlp\FilePrnt.bmp">
+      <Filter>Help Files</Filter>
+    </None>
+    <None Include="hlp\FileSave.bmp">
+      <Filter>Help Files</Filter>
+    </None>
+    <None Include="hlp\HlpSBar.bmp">
+      <Filter>Help Files</Filter>
+    </None>
+    <None Include="hlp\HlpTBar.bmp">
+      <Filter>Help Files</Filter>
+    </None>
+    <None Include="hlp\RecFirst.bmp">
+      <Filter>Help Files</Filter>
+    </None>
+    <None Include="hlp\RecLast.bmp">
+      <Filter>Help Files</Filter>
+    </None>
+    <None Include="hlp\RecNext.bmp">
+      <Filter>Help Files</Filter>
+    </None>
+    <None Include="hlp\RecPrev.bmp">
+      <Filter>Help Files</Filter>
+    </None>
+    <None Include="hlp\Scmax.bmp">
+      <Filter>Help Files</Filter>
+    </None>
+    <None Include="hlp\ScMenu.bmp">
+      <Filter>Help Files</Filter>
+    </None>
+    <None Include="hlp\Scmin.bmp">
+      <Filter>Help Files</Filter>
+    </None>
+    <None Include="Jwe.hlp">
+      <Filter>MFC Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="jwe.rc">
+      <Filter>MFC Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="res\Jet3D.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="hlp\jwe.cnt">
+      <Filter>Help Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

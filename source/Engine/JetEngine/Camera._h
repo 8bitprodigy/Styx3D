@@ -1,0 +1,87 @@
+/****************************************************************************************/
+/*  CAMERA.H                                                                            */
+/*                                                                                      */
+/*  Author:                                                                             */
+/*  Description:                                                                        */
+/*                                                                                      */
+/*  The contents of this file are subject to the Jet3D Public License                   */
+/*  Version 1.02 (the "License"); you may not use this file except in                   */
+/*  compliance with the License. You may obtain a copy of the License at                */
+/*  http://www.jet3d.com                                                                */
+/*                                                                                      */
+/*  Software distributed under the License is distributed on an "AS IS"                 */
+/*  basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.  See                */
+/*  the License for the specific language governing rights and limitations              */
+/*  under the License.                                                                  */
+/*                                                                                      */
+/*  The Original Code is Jet3D, released December 12, 1999.                             */
+/*  Copyright (C) 1996-1999 Eclipse Entertainment, L.L.C. All Rights Reserved           */
+/*                                                                                      */
+/****************************************************************************************/
+#ifndef JECAMERA_INTERNAL_H
+#define JECAMERA_INTERNAL_H
+
+#include "BaseType.h"
+#include "Vec3d.h"
+#include "Xform3d.h"
+#include "jeTypes.h"
+
+#include "List.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+typedef struct jeCamera 
+{
+	jeFloat		FovRadians;					// Field of View for Camera
+	jeFloat		Width;						// Width of viewport
+	jeFloat		Height;						// Height of viewport
+	jeFloat		Left,Right,Top,Bottom;		// Clipping rect
+
+	jeFloat		Scale;						// X and Y Scale based on Fov
+	jeFloat		XCenter;					// Screen Width/2
+	jeFloat		YCenter;					// Screen Height/2
+
+	jeXForm3d	XForm;						// View transform
+
+	jeXForm3d	TransposeXForm;				// Original World xform...
+	
+	jeVec3d		Pov;						// Un rotated Pov in XForm
+
+	// the camera points along Z in camera space,
+	// these trigs define the viewing pyramid frustum
+	jeFloat		SinViewAngleX;				
+	jeFloat		CosViewAngleX;				
+	jeFloat		SinViewAngleY;				
+	jeFloat		CosViewAngleY;				
+	
+	Stack		*XFormStack;
+
+	jeFloat		ZScale;						// Z Project scalar
+	
+	// BEGIN - Far clip plane - paradoxnj 2/9/2005
+	jeBoolean	ZFarEnable;
+	jeFloat		ZFar;
+	// END - Far clip plane - paradoxnj 2/9/2005
+} jeCamera;
+
+// foward definition
+void	JETCF jeCamera_GetWidthHeight(const jeCamera *Camera,jeFloat *Width,jeFloat *Height);
+float	JETCF jeCamera_GetScale(const jeCamera *Camera);
+
+const jeXForm3d *		JETCF jeCamera_XForm( const jeCamera *Camera);
+const jeXForm3d *		JETCF jeCamera_WorldXForm( const jeCamera *Camera);
+const jeVec3d *		JETCF jeCamera_GetPov(const jeCamera *Camera);
+void  jeCamera_FillDriverInfo(jeCamera *Camera);
+
+void JETCF jeCamera_GetViewAngleXSinCos( const jeCamera *Camera, jeFloat *SinAngle, jeFloat *CosAngle );
+void JETCF jeCamera_GetViewAngleYSinCos( const jeCamera *Camera, jeFloat *SinAngle, jeFloat *CosAngle );
+
+//-----------------------------------------------------
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

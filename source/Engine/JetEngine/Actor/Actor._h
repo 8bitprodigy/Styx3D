@@ -1,0 +1,148 @@
+/****************************************************************************************/
+/*  Bitmap._h                                                                           */
+/*                                                                                      */
+/*  Author:                                                                             */
+/*  Description:								                                        */
+/*                                                                                      */
+/*  The contents of this file are subject to the Jet3D Public License                   */
+/*  Version 1.02 (the "License"); you may not use this file except in                   */
+/*  compliance with the License. You may obtain a copy of the License at                */
+/*  http://www.jet3d.com                                                                */
+/*                                                                                      */
+/*  Software distributed under the License is distributed on an "AS IS"                 */
+/*  basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.  See                */
+/*  the License for the specific language governing rights and limitations              */
+/*  under the License.                                                                  */
+/*                                                                                      */
+/*  The Original Code is Jet3D, released December 12, 1999.                             */
+/*  Copyright (C) 1996-1999 Eclipse Entertainment, L.L.C. All Rights Reserved           */
+/*                                                                                      */
+/****************************************************************************************/
+#ifndef ACTOR_PRIVATE_H
+#define ACTOR_PRIVATE_H
+
+#include "windows.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
+typedef struct ActorObj
+{
+	jeWorld			*World;
+	jeResourceMgr	*ResourceMgr;
+	jeEngine		*Engine;
+	//jeXForm3d		Xf;
+	char			*ActorDefName;	
+	int				RefCount;
+	jeBoolean		FillNormalActorRelative;
+	jeBoolean		CollisionExtBoxDisplay, RenderExtBoxDisplay;
+	jeExtBox		CollisionExtBox, RenderHintExtBox;
+	float			ScaleX, ScaleY, ScaleZ;
+	jeBoolean		UseFillLight;
+	jeVec3d			FillLightNormal;
+	jeFloat			FillLightRed;
+	jeFloat			FillLightGreen;
+	jeFloat			FillLightBlue;
+	jeFloat			AmbientLightRed;
+	jeFloat			AmbientLightGreen;
+	jeFloat			AmbientLightBlue;
+	jeBoolean		UseAmbientLightFromFloor;
+	int				MaximumDynamicLightsToUse;
+	int				MaximumStaticLightsToUse;
+	jeBoolean		PerBoneLighting;
+	jeMotion		*Motion;
+	char			**MotionList;
+	int				MotionListSize;
+	float			MotionTime;
+	char			*MotionName;
+	float			MotionTimeScale;
+	char			**BoneList;
+	int				BoneListSize;
+	char			**MaterialList;
+	char			**MaterialOverideList;
+	char			**MaterialMapperList;
+	int				MaterialListSize;
+	jeMaterialSpec	**MaterialOverideBitmap;
+	int				MaterialCurrent;
+	char			**LoadMaterialOverideList;
+	int				LoadMaterialListSize;
+	char			*LightReferenceBoneName;
+	jeBoolean		LoadedFromDisk;
+
+	//Editor Brush support
+	jeLVertex	Vertex[8];
+
+} ActorObj;
+
+// Icestorm Begin: bone-extbox&name-structure for BoneCollisionChain
+typedef struct jeCollisionBone
+{
+	char		*BoneName;
+	int			BoneIndex;
+	jeExtBox	*CurrExtBox;
+	jeExtBox	*PrevExtBox;
+} jeCollisionBone;
+// Icestorm End
+
+typedef struct jeActor
+{
+	ActorObj *Object;		
+	jeXForm3d Xf;
+	jeBoolean CanFree;
+
+	int32				 RefCount;				// this is the number of owners.
+	jePuppet			*Puppet;
+	jePose				*Pose;
+	jeActor_BlendingType BlendingType;
+	jeActor_Def			*ActorDefinition;		// actor definition this is an instance of
+	
+	jeMotion			*CueMotion;
+	jeExtBox			CollisionExtBox;	
+	int					BoundingBoxCenterBoneIndex;
+	int					StepBoneIndex;			// used for single-bone motion optimization.
+	void *				UserData;
+
+	jeExtBox			RenderHintExtBox;
+	int					RenderHintExtBoxCenterBoneIndex;
+	jeBoolean			RenderHintExtBoxEnabled;
+	
+	// Incarnadine Begin
+	jeChain				*BoneCollisionChain;  // Added to allow for bone level collisions
+	// Icestorm Begin : Faster linear coll.bone search
+	char*				LastUsedCollisionBoneName;
+	jeChain_Link		*LastUsedCollisionBone;
+	// Icestorm End
+	uint32				CollisionFlags;  // Added to further control collisions
+	char				*CollidedBone;
+	// Incarnadine End
+
+// @@
+	jeBoolean			needsRelighting; // flag indicating whether static lighting needs to be recomputed
+
+	jeBoolean			RenderNextTime;  //<! Next render pass flag
+
+	CRITICAL_SECTION	RenderLock;
+
+} jeActor;
+
+
+typedef struct jeActor_Def
+{
+	jeBody				*Body;
+	jeVFile *			 TextureFileContext;
+	
+	int32				 MotionCount;
+	jeMotion		   **MotionArray;
+
+	int32				 RefCount;				// this is the number of owners.
+
+	jeActor_Def			*ValidityCheck;
+} jeActor_Def;
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

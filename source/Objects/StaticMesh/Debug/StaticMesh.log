@@ -1,0 +1,8 @@
+﻿  ObjectDef.c
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2022\source\Objects\StaticMesh\ObjectDef.c(28,25): warning C4113: 'void *(__stdcall *)()' differs in parameter lists from 'void *(__stdcall *)(void)'
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2022\source\Objects\StaticMesh\ObjectDef.c(101,1): warning C4276: 'CreateInstance': no prototype provided; assumed no parameters
+  StaticMeshObj.c
+D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2022\source\Objects\StaticMesh\StaticMeshObj.c(389,36): warning C4133: 'function': incompatible types - from 'StaticMeshObject *' to 'jeStaticMesh *'
+  Generating Code...
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(1374,5): warning MSB8012: TargetPath(D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2022\source\Objects\StaticMesh\Debug\StaticMeshObj.ddl) does not match the Linker's OutputFile property value (D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2022\bin\objects\StaticMeshObj.ddl). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
+LINK : fatal error LNK1104: cannot open file 'jet3DClassic11d.lib'

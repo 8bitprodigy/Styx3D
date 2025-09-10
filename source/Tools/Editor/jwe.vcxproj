@@ -1,0 +1,671 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Template|Win32">
+      <Configuration>Template</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>jDesignerClassic11</ProjectName>
+    <ProjectGuid>{C9D22404-B2F5-4775-B35D-264E0D8AE53E}</ProjectGuid>
+    <RootNamespace>jDesigner3D</RootNamespace>
+    <Keyword>MFCProj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Static</UseOfMfc>
+    <UseOfAtl>Static</UseOfAtl>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Static</UseOfMfc>
+    <UseOfAtl>Static</UseOfAtl>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Debug\</IntDir>
+    <PostBuildEventUseInBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</PostBuildEventUseInBuild>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Release\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <PostBuildEventUseInBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</PostBuildEventUseInBuild>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" />
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectName)d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)bin\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include;.\;Core;Dialogs;Dialogs/DialogHelpers;j3dmfc;jet;Util;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>Nafxcwd.lib;Libcmtd.lib;jet3DClassic11d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>..\..\..\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateMapFile>true</GenerateMapFile>
+      <SubSystem>Windows</SubSystem>
+      <IgnoreSpecificDefaultLibraries>Nafxcwd.lib;Libcmtd.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <OutputFile>$(SolutionDir)bin\$(TargetName)$(TargetExt)</OutputFile>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <MapFileName>$(OutDir)$(ProjectName).map</MapFileName>
+    </Link>
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\../../../build/editor/Debug/jwe.tlb</TypeLibraryName>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\include;.\;Core;Dialogs;Dialogs/DialogHelpers;j3dmfc;jet;Util;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <StructMemberAlignment>16Bytes</StructMemberAlignment>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <BrowseInformation>true</BrowseInformation>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/MACHINE:I386 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>nafxcw.lib;winmm.lib;Jet3dClassic11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>..\..\..\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateMapFile>false</GenerateMapFile>
+      <MapFileName>
+      </MapFileName>
+      <SubSystem>Windows</SubSystem>
+      <OutputFile>$(SolutionDir)bin\$(TargetName)$(TargetExt)</OutputFile>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
+    </Link>
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>Release/jwe.tlb</TypeLibraryName>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Core\Brush.c" />
+    <ClCompile Include="Core\BrushList.c" />
+    <ClCompile Include="Core\BrushTemplate.c" />
+    <ClCompile Include="Core\CameraList.c" />
+    <ClCompile Include="Core\CamObj.c" />
+    <ClCompile Include="Core\Class.c" />
+    <ClCompile Include="Core\Descriptor.c" />
+    <ClCompile Include="Core\Draw.c" />
+    <ClCompile Include="Core\Draw3d.c" />
+    <ClCompile Include="Core\Facelist.c" />
+    <ClCompile Include="Core\Group.c" />
+    <ClCompile Include="Core\GroupList.c" />
+    <ClCompile Include="Core\Level.cpp" />
+    <ClCompile Include="Core\Light.c" />
+    <ClCompile Include="Core\LightList.c" />
+    <ClCompile Include="Core\MaterialIdentList.c" />
+    <ClCompile Include="Core\MaterialList.c" />
+    <ClCompile Include="Core\MaterialList2.c" />
+    <ClCompile Include="Core\Materials.c" />
+    <ClCompile Include="Core\MatrArray.c" />
+    <ClCompile Include="Core\MatrIdx.c" />
+    <ClCompile Include="Core\Model.c" />
+    <ClCompile Include="Core\modellist.c" />
+    <ClCompile Include="Core\Object.c" />
+    <ClCompile Include="Core\ObjectList.c" />
+    <ClCompile Include="Core\Ortho.c" />
+    <ClCompile Include="Core\Select.c" />
+    <ClCompile Include="Core\TernList.c" />
+    <ClCompile Include="Core\TerrnObj.c" />
+    <ClCompile Include="Core\Transform.c" />
+    <ClCompile Include="Core\Undo.c" />
+    <ClCompile Include="Core\UserObj.c" />
+    <ClCompile Include="Core\Vertlist.c" />
+    <ClCompile Include="J3dmfc\J3DApp.cpp" />
+    <ClCompile Include="J3dmfc\J3DDoc.cpp" />
+    <ClCompile Include="J3dmfc\J3DMainFrm.cpp" />
+    <ClCompile Include="J3dmfc\J3DView.cpp" />
+    <ClCompile Include="Dialogs\AddModel.cpp" />
+    <ClCompile Include="Dialogs\builderbutton.cpp" />
+    <ClCompile Include="Dialogs\buildercombo.cpp" />
+    <ClCompile Include="Dialogs\builderedit.cpp" />
+    <ClCompile Include="Dialogs\buildspin.cpp" />
+    <ClCompile Include="Dialogs\DialogBuilderDlg.cpp" />
+    <ClCompile Include="Dialogs\disclaimer.cpp" />
+    <ClCompile Include="Dialogs\DlgAutorecover.cpp" />
+    <ClCompile Include="Dialogs\Empty.cpp" />
+    <ClCompile Include="Dialogs\globalmaterials.cpp" />
+    <ClCompile Include="Dialogs\Groups.cpp" />
+    <ClCompile Include="Dialogs\Jeterr.cpp" />
+    <ClCompile Include="Dialogs\Lists.cpp" />
+    <ClCompile Include="Dialogs\materialstatic.cpp" />
+    <ClCompile Include="Dialogs\Models.cpp" />
+    <ClCompile Include="Dialogs\Paredit.cpp" />
+    <ClCompile Include="Dialogs\Preferences.cpp" />
+    <ClCompile Include="Dialogs\PressKey.cpp" />
+    <ClCompile Include="Dialogs\Properties.cpp" />
+    <ClCompile Include="Dialogs\Rebuild.cpp" />
+    <ClCompile Include="Dialogs\Render.cpp" />
+    <ClCompile Include="Dialogs\Stats.cpp" />
+    <ClCompile Include="Dialogs\TexturesDlg.cpp" />
+    <ClCompile Include="Dialogs\Timeline.cpp" />
+    <ClCompile Include="Dialogs\DialogHelpers\BitmapResize.cpp" />
+    <ClCompile Include="Dialogs\DialogHelpers\ColorButton.cpp" />
+    <ClCompile Include="Dialogs\DialogHelpers\ColorPopup.cpp" />
+    <ClCompile Include="Dialogs\DialogHelpers\DropFileArray.cpp" />
+    <ClCompile Include="Dialogs\DialogHelpers\MyBar.cpp" />
+    <ClCompile Include="Dialogs\DialogHelpers\MyDropTarget.cpp" />
+    <ClCompile Include="Dialogs\DialogHelpers\scbarcf.cpp" />
+    <ClCompile Include="Dialogs\DialogHelpers\scbarg.cpp" />
+    <ClCompile Include="Dialogs\DialogHelpers\sizecbar.cpp" />
+    <ClCompile Include="Dialogs\DialogHelpers\TextureListControl.cpp" />
+    <ClCompile Include="Dialogs\DialogHelpers\TextureTreeControl.cpp" />
+    <ClCompile Include="Dialogs\DialogHelpers\Thin3DSplitterWnd.cpp" />
+    <ClCompile Include="Util\Bmp.c" />
+    <ClCompile Include="Util\Dlist.c" />
+    <ClCompile Include="Util\DrawTool.c" />
+    <ClCompile Include="Util\Drvlist.c" />
+    <ClCompile Include="Util\jeList.c" />
+    <ClCompile Include="Util\Mtl9937.cpp" />
+    <ClCompile Include="Util\Noise.cpp" />
+    <ClCompile Include="Util\Rect.c" />
+    <ClCompile Include="Util\Spawn.c" />
+    <ClCompile Include="Util\Util.c" />
+    <ClCompile Include="AppData.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="BtnST.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="ChildFrm.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="CIconTabCtrl.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="CMaterial.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="CTextToolBar.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="Doc.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="Docbars.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="DocManagerEx.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="DragTree.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="ExtFileDialog.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="GroupBar.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="grouptreectrl.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="jetdialog.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="JetView.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="Jwe.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="label.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="MfcUtil.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="MsgLog.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="Settings.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="StdAfx.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="TreeCtrlEx.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="View.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="WndReg.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Core\Brush.h" />
+    <ClInclude Include="Core\BrushList.h" />
+    <ClInclude Include="Core\BrushTemplate.h" />
+    <ClInclude Include="Core\CameraList.h" />
+    <ClInclude Include="Core\CamObj.h" />
+    <ClInclude Include="Core\Class.h" />
+    <ClInclude Include="Core\Descriptor.h" />
+    <ClInclude Include="Core\Draw.h" />
+    <ClInclude Include="Core\Draw3d.h" />
+    <ClInclude Include="Core\Facelist.h" />
+    <ClInclude Include="Core\Group.h" />
+    <ClInclude Include="Core\GroupList.h" />
+    <ClInclude Include="Core\jwObject.h" />
+    <ClInclude Include="Core\Level.h" />
+    <ClInclude Include="Core\Light.h" />
+    <ClInclude Include="Core\LightList.h" />
+    <ClInclude Include="Core\MaterialIdentList.h" />
+    <ClInclude Include="Core\MaterialList.h" />
+    <ClInclude Include="Core\MaterialList2.h" />
+    <ClInclude Include="Core\Materials.h" />
+    <ClInclude Include="Core\MatrArray.h" />
+    <ClInclude Include="Core\MatrIdx.h" />
+    <ClInclude Include="Core\Model.h" />
+    <ClInclude Include="Core\ModelInstance.h" />
+    <ClInclude Include="Core\modellist.h" />
+    <ClInclude Include="Core\ObjectDef.h" />
+    <ClInclude Include="Core\ObjectList.h" />
+    <ClInclude Include="Core\Ortho.h" />
+    <ClInclude Include="Core\Select.h" />
+    <ClInclude Include="Core\TernList.h" />
+    <ClInclude Include="Core\TerrnObj.h" />
+    <ClInclude Include="Core\Transform.h" />
+    <ClInclude Include="Core\Undo.h" />
+    <ClInclude Include="Core\UserObj.h" />
+    <ClInclude Include="Core\VertList.h" />
+    <ClInclude Include="J3dmfc\J3DApp.h" />
+    <ClInclude Include="J3dmfc\J3DDoc.h" />
+    <ClInclude Include="J3dmfc\J3DMainFrm.h" />
+    <ClInclude Include="J3dmfc\J3DView.h" />
+    <ClInclude Include="Dialogs\AddModel.h" />
+    <ClInclude Include="Dialogs\builderbutton.h" />
+    <ClInclude Include="Dialogs\buildercombo.h" />
+    <ClInclude Include="Dialogs\builderedit.h" />
+    <ClInclude Include="Dialogs\buildspin.h" />
+    <ClInclude Include="Dialogs\DialogBuilderDlg.h" />
+    <ClInclude Include="Dialogs\disclaimer.h" />
+    <ClInclude Include="DlgAutorecover.h" />
+    <ClInclude Include="Dialogs\Empty.h" />
+    <ClInclude Include="Dialogs\globalmaterials.h" />
+    <ClInclude Include="Dialogs\Groups.h" />
+    <ClInclude Include="Dialogs\Jeterr.h" />
+    <ClInclude Include="Dialogs\Lists.h" />
+    <ClInclude Include="Dialogs\materialstatic.h" />
+    <ClInclude Include="Dialogs\Models.h" />
+    <ClInclude Include="Dialogs\Paredit.h" />
+    <ClInclude Include="Dialogs\Preferences.h" />
+    <ClInclude Include="Dialogs\PressKey.h" />
+    <ClInclude Include="Dialogs\Properties.h" />
+    <ClInclude Include="Dialogs\Rebuild.h" />
+    <ClInclude Include="Dialogs\Render.h" />
+    <ClInclude Include="Dialogs\ReportErr.h" />
+    <ClInclude Include="Dialogs\Stats.h" />
+    <ClInclude Include="Dialogs\TexturesDlg.h" />
+    <ClInclude Include="Dialogs\Timeline.h" />
+    <ClInclude Include="Dialogs\DialogHelpers\BitmapResize.h" />
+    <ClInclude Include="Dialogs\DialogHelpers\ColorButton.h" />
+    <ClInclude Include="Dialogs\DialogHelpers\ColorPopup.h" />
+    <ClInclude Include="Dialogs\DialogHelpers\DropFileArray.h" />
+    <ClInclude Include="Dialogs\DialogHelpers\MyBar.h" />
+    <ClInclude Include="Dialogs\DialogHelpers\MyDropTarget.h" />
+    <ClInclude Include="Dialogs\DialogHelpers\scbarcf.h" />
+    <ClInclude Include="Dialogs\DialogHelpers\scbarg.h" />
+    <ClInclude Include="Dialogs\DialogHelpers\sizecbar.h" />
+    <ClInclude Include="Dialogs\DialogHelpers\TextureListControl.h" />
+    <ClInclude Include="Dialogs\DialogHelpers\TextureTreeControl.h" />
+    <ClInclude Include="Dialogs\DialogHelpers\Thin3DSplitterWnd.h" />
+    <ClInclude Include="Util\Bmp.h" />
+    <ClInclude Include="Util\Dlist.h" />
+    <ClInclude Include="Util\DrawTool.h" />
+    <ClInclude Include="Util\Drvlist.h" />
+    <ClInclude Include="Util\jeList.h" />
+    <ClInclude Include="Util\Mtl9937.h" />
+    <ClInclude Include="Util\Noise.h" />
+    <ClInclude Include="Util\Point.h" />
+    <ClInclude Include="Util\Rect.h" />
+    <ClInclude Include="Util\Spawn.h" />
+    <ClInclude Include="Util\Units.h" />
+    <ClInclude Include="Util\Util.h" />
+    <ClInclude Include="AppData.h" />
+    <ClInclude Include="BtnST.h" />
+    <ClInclude Include="BuildNumber.h" />
+    <ClInclude Include="BuildType.h" />
+    <ClInclude Include="CamFieldID.h" />
+    <ClInclude Include="CDocManagerEx.h" />
+    <ClInclude Include="ChildFrm.h" />
+    <ClInclude Include="CIconTabCtrl.h" />
+    <ClInclude Include="CMaterial.h" />
+    <ClInclude Include="CTextToolBar.h" />
+    <ClInclude Include="Defs.h" />
+    <ClInclude Include="Doc.h" />
+    <ClInclude Include="Dockbars.h" />
+    <ClInclude Include="DocManagerEx.h" />
+    <ClInclude Include="DragTree.h" />
+    <ClInclude Include="EditMsg.h" />
+    <ClInclude Include="ExtFileDialog.h" />
+    <ClInclude Include="GroupBar.h" />
+    <ClInclude Include="grouptreectrl.h" />
+    <ClInclude Include="jetdialog.h" />
+    <ClInclude Include="JetView.h" />
+    <ClInclude Include="Jwe.h" />
+    <ClInclude Include="label.h" />
+    <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="Memdc.h" />
+    <ClInclude Include="MfcUtil.h" />
+    <ClInclude Include="MsgLog.h" />
+    <ClInclude Include="ObjectMsg.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Settings.h" />
+    <ClInclude Include="StdAfx.h" />
+    <ClInclude Include="TreeCtrlEx.h" />
+    <ClInclude Include="View.h" />
+    <ClInclude Include="WndReg.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\Addtocur.bmp" />
+    <None Include="res\Arch.ico" />
+    <None Include="res\arr_no.ico" />
+    <None Include="res\arr_nw.ico" />
+    <None Include="res\arr_so.ico" />
+    <None Include="res\arr_sw.ico" />
+    <None Include="res\Bitmap1.bmp" />
+    <None Include="res\Camera.ico" />
+    <None Include="res\cameracur.cur" />
+    <None Include="res\Cone.ico" />
+    <None Include="res\content.ico" />
+    <None Include="res\Cube.cur" />
+    <None Include="res\Cube.ico" />
+    <None Include="res\Cube1.ico" />
+    <None Include="res\Cur00001.cur" />
+    <None Include="res\Cur00002.cur" />
+    <None Include="res\Cur00003.cur" />
+    <None Include="Res\cursor1.cur" />
+    <None Include="res\Cursor2.cur" />
+    <None Include="res\CursorPlus.CUR" />
+    <None Include="res\cut.ico" />
+    <None Include="res\Cylinder.ico" />
+    <None Include="res\descript.ico" />
+    <None Include="res\dialog_f.ico" />
+    <None Include="res\dialog_t.ico" />
+    <None Include="Res\Dlight.bmp" />
+    <None Include="res\Doc.ico" />
+    <None Include="res\down.ico" />
+    <None Include="res\Dragcopy.cur" />
+    <None Include="res\Dragmove.cur" />
+    <None Include="res\edit.bmp" />
+    <None Include="res\Entity.ico" />
+    <None Include="res\fullscre.bmp" />
+    <None Include="res\global.ico" />
+    <None Include="res\globe.ico" />
+    <None Include="res\hand.cur" />
+    <None Include="res\hand_ope.cur" />
+    <None Include="res\Handleco.bmp" />
+    <None Include="res\handleedge.bmp" />
+    <None Include="Res\idr_jmat.ico" />
+    <None Include="Res\idr_prefab.ico" />
+    <None Include="res\Imagelis.bmp" />
+    <None Include="res\info.ico" />
+    <None Include="res\jedit.bmp" />
+    <None Include="Res\jet3d_logo_small.bmp" />
+    <None Include="res\Jwe.ico" />
+    <None Include="res\Jwe.rc2" />
+    <None Include="res\left.ico" />
+    <None Include="res\Light.bmp" />
+    <None Include="res\Light.ico" />
+    <None Include="res\lock.ico" />
+    <None Include="res\Mainfram.bmp" />
+    <None Include="res\Mode.bmp" />
+    <None Include="res\Move4way.cur" />
+    <None Include="res\play.ico" />
+    <None Include="res\playing.ico" />
+    <None Include="res\possize.bmp" />
+    <None Include="res\prefs_ed.ico" />
+    <None Include="res\prefs_gr.ico" />
+    <None Include="res\Prefs_ke.bmp" />
+    <None Include="res\prefs_ke.ico" />
+    <None Include="res\prefs_mo.ico" />
+    <None Include="res\prefs_pa.ico" />
+    <None Include="res\prefs_vi.ico" />
+    <None Include="res\properti.ico" />
+    <None Include="res\Removefr.bmp" />
+    <None Include="res\reset.ico" />
+    <None Include="res\right.ico" />
+    <None Include="res\Rotate.cur" />
+    <None Include="res\Rotatebl.bmp" />
+    <None Include="res\Rotatebr.bmp" />
+    <None Include="res\Rotatetl.bmp" />
+    <None Include="res\Rotatetr.bmp" />
+    <None Include="res\RotationCenter.cur" />
+    <None Include="res\Shearlr.bmp" />
+    <None Include="res\ShearLR.cur" />
+    <None Include="res\Sheartb.bmp" />
+    <None Include="res\ShearTB.cur" />
+    <None Include="res\Showall.ico" />
+    <None Include="res\Showallb.bmp" />
+    <None Include="res\Showcurr.bmp" />
+    <None Include="res\Showvisi.bmp" />
+    <None Include="res\Speciale.cur" />
+    <None Include="res\Speciale.ico" />
+    <None Include="res\Sphere.ico" />
+    <None Include="res\Stairs.ico" />
+    <None Include="res\Svertex.bmp" />
+    <None Include="res\Terrain.bmp" />
+    <None Include="res\Terrain.ico" />
+    <None Include="res\Text1.bin" />
+    <None Include="res\Text2.bin" />
+    <None Include="res\Tile128.ico" />
+    <None Include="res\Tile32.ico" />
+    <None Include="res\Tile64.ico" />
+    <None Include="res\time.ico" />
+    <None Include="res\time_sms.ico" />
+    <None Include="res\timecol.ico" />
+    <None Include="res\Toolbar.bmp" />
+    <None Include="res\Toolbar1.bmp" />
+    <None Include="res\unlock.ico" />
+    <None Include="res\up.ico" />
+    <None Include="res\Vertex.bmp" />
+    <None Include="res\view.ico" />
+    <None Include="res\zoomin.ico" />
+    <None Include="res\zoomout.ico" />
+    <None Include="hlp\AfxCore.rtf" />
+    <None Include="hlp\AfxPrint.rtf" />
+    <None Include="hlp\AppExit.bmp" />
+    <None Include="hlp\Bullet.bmp" />
+    <None Include="hlp\CurArw2.bmp" />
+    <None Include="hlp\CurArw4.bmp" />
+    <None Include="hlp\CurHelp.bmp" />
+    <None Include="hlp\EditCopy.bmp" />
+    <None Include="hlp\EditCut.bmp" />
+    <None Include="hlp\EditPast.bmp" />
+    <None Include="hlp\EditUndo.bmp" />
+    <None Include="hlp\FileNew.bmp" />
+    <None Include="hlp\FileOpen.bmp" />
+    <None Include="hlp\FilePrnt.bmp" />
+    <None Include="hlp\FileSave.bmp" />
+    <None Include="hlp\HlpSBar.bmp" />
+    <None Include="hlp\HlpTBar.bmp" />
+    <CustomBuild Include="hlp\jwe.cnt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying contents file...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">copy "hlp\%(Filename).cnt" ..\..\..\bin
+</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\bin\%(Filename).cnt;%(Outputs)</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying contents file...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">copy "hlp\%(Filename).cnt" "$(OutDir)"
+</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)%(Filename).cnt;%(Outputs)</Outputs>
+    </CustomBuild>
+    <None Include="hlp\RecFirst.bmp" />
+    <None Include="hlp\RecLast.bmp" />
+    <None Include="hlp\RecNext.bmp" />
+    <None Include="hlp\RecPrev.bmp" />
+    <None Include="hlp\Scmax.bmp" />
+    <None Include="hlp\ScMenu.bmp" />
+    <None Include="hlp\Scmin.bmp" />
+    <None Include="Jwe.hlp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="jwe.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="res\Jet3D.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Objects\ActorObj\ActorObj.vcxproj">
+      <Project>{f92f9d20-ca3d-4422-b515-97ad9fc6354f}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Objects\AmbObject\AmbObject.vcxproj">
+      <Project>{ae59ef06-2e3c-436b-a16c-aba548989fea}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Objects\BoxObject\BoxObject.vcxproj">
+      <Project>{57c26655-1b0c-4600-a88d-134578f3c672}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Objects\CamObject\CamObject.vcxproj">
+      <Project>{58c53d8c-a3b9-4f31-9852-7e282620af52}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Objects\Corona\Corona.vcxproj">
+      <Project>{abb7668e-bea1-44ba-8c89-530944cca449}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Objects\DynamicLight\DynamicLight.vcxproj">
+      <Project>{5dce2830-6591-4a0d-85bc-767f3c29d358}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Objects\ModelObject\ModelObject.vcxproj">
+      <Project>{4ea438ed-671b-4866-b14a-a8b1d9e98ab7}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Objects\PathObject\PathObject.vcxproj">
+      <Project>{61fa4dba-7534-44d8-9457-d43b2ef8a67b}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Objects\Portals\Portals.vcxproj">
+      <Project>{e045df11-6343-48d8-8820-944166e2fcdf}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Objects\PulsingLight\PulsingLight.vcxproj">
+      <Project>{35ee686d-c977-4a78-a9d4-a508fffc4fe6}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Objects\Spout\Spout.vcxproj">
+      <Project>{4e7834c6-88f6-47a4-ac22-7e976915ed93}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Objects\Terrain\terrainobj.vcxproj">
+      <Project>{9eeffc03-e0cf-4f05-a4b9-ca0b692f0195}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="Jwe.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

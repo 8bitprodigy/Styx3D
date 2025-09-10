@@ -1,0 +1,54 @@
+/****************************************************************************************/
+/*  WAVELET._H                                                                          */
+/*                                                                                      */
+/*  Author:                                                                             */
+/*  Description:                                                                        */
+/*                                                                                      */
+/*  The contents of this file are subject to the Jet3D Public License                   */
+/*  Version 1.02 (the "License"); you may not use this file except in                   */
+/*  compliance with the License. You may obtain a copy of the License at                */
+/*  http://www.jet3d.com                                                                */
+/*                                                                                      */
+/*  Software distributed under the License is distributed on an "AS IS"                 */
+/*  basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.  See                */
+/*  the License for the specific language governing rights and limitations              */
+/*  under the License.                                                                  */
+/*                                                                                      */
+/*  The Original Code is Jet3D, released December 12, 1999.                             */
+/*  Copyright (C) 1996-1999 Eclipse Entertainment, L.L.C. All Rights Reserved           */
+/*                                                                                      */
+/****************************************************************************************/
+#ifndef WAVELET_INTERNAL_H
+#define WAVELET_INTERNAL_H
+
+#include "BaseType.h"
+#include "VFile.h"
+#include "ThreadQueue.h"
+#include "Tsc.h"
+
+struct jeWavelet
+{
+	uint32 tag;
+	int RefCount;
+	int width,height,planes,levels;
+	int coderN,transformN,bps;
+	int alphaMask;	// 0 for none, 1 for full alpha, (-1) for transparency (binary)
+
+	uint32 compLen,compLenLL,stopLen;
+	uint8 * comp;
+
+	jeBoolean transposeLHs,tblock;
+	tsc_type DecompressTSC;
+
+	jeVFile * StreamingFile;
+	jeThreadQueue_Semaphore * StreamingLock;
+	jeThreadQueue_Job *	StreamingJob;
+	uint streamDecoded,streamGot;
+};
+
+#define Wavelet_AlphaIsTransparency(w) ( (w)->alphaMask < 0 ? JE_TRUE : JE_FALSE )
+
+#define WAVELET_TAG ((uint32)0x65566157)	// 'WaVe'
+
+#endif
+

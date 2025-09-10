@@ -1,0 +1,4 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(1374,5): warning MSB8012: TargetPath(D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Objects\DynamicLight\Debug\DynLightObj.ddl) does not match the Linker's OutputFile property value (D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\bin\objects\DynLightObj.ddl). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
+DynamicLight.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
+     Creating library Debug\DynLightObj.lib and object Debug\DynLightObj.exp
+  DynamicLight.vcxproj -> D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Objects\DynamicLight\Debug\DynLightObj.ddl

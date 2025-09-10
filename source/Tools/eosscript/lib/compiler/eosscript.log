@@ -1,0 +1,14 @@
+﻿  eosanalyse.cpp
+  eosbase.cpp
+  eosfunction.cpp
+  eosinstr.cpp
+  eoslog.cpp
+  eosobject.cpp
+  eosparser.cpp
+  eosutil.cpp
+  eosutillib.cpp
+  eosvalue.cpp
+  eosvariable.cpp
+  eosvm.cpp
+  Generating Code...
+  eosscript.vcxproj -> D:\Genesis and Jet3d\JSTUDIO_CLASSIC11_2023\source\Tools\GameShell\lib\eosscript.lib

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Jet3D_Rendering">
+      <UniqueIdentifier>{9fd190a6-64ac-436a-a75c-632af1738181}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="App Mgmt Files">
+      <UniqueIdentifier>{bcc2b3ca-cd2e-498c-baeb-bf9dc12633d8}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{2a490f62-f91e-4b56-9d99-16eb97d56e59}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;jpg;jpeg;jpe;manifest</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="JetView.cpp">
+      <Filter>Jet3D_Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="jMinApp.cpp">
+      <Filter>App Mgmt Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>App Mgmt Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>App Mgmt Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="JetView.h">
+      <Filter>Jet3D_Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="jMinApp.h">
+      <Filter>App Mgmt Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>App Mgmt Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>App Mgmt Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>App Mgmt Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\jMinApp.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\jMinApp.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="jMinApp.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

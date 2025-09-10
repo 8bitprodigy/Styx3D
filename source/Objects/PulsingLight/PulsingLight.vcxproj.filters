@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{de041c8f-8fad-4363-b951-f22b935c1220}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\ObjectDef.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PulsingLight.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\ObjectDef.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PulsingLight.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source\jebitmap.bin" />
+    <None Include="Source\pulsing_light.bmp" />
+    <None Include="Source\pulsinglight.bmp" />
+    <None Include="PulsingLight.dep" />
+    <None Include="PulsingLight.dsp" />
+    <None Include="PulsingLight.mak" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Source\PulsingLight.rc" />
+  </ItemGroup>
+</Project>

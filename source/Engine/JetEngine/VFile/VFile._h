@@ -1,0 +1,115 @@
+/****************************************************************************************/
+/*  VFILE._H                                                                             */
+/*                                                                                      */
+/*  Author: Eli Boling                                                                  */
+/*  Description: Systems internal interfaces for vfiles                                 */
+/*                                                                                      */
+/*  The contents of this file are subject to the Jet3D Public License                   */
+/*  Version 1.02 (the "License"); you may not use this file except in                   */
+/*  compliance with the License. You may obtain a copy of the License at                */
+/*  http://www.jet3d.com                                                                */
+/*                                                                                      */
+/*  Software distributed under the License is distributed on an "AS IS"                 */
+/*  basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.  See                */
+/*  the License for the specific language governing rights and limitations              */
+/*  under the License.                                                                  */
+/*                                                                                      */
+/*  The Original Code is Jet3D, released December 12, 1999.                             */
+/*  Copyright (C) 1996-1999 Eclipse Entertainment, L.L.C. All Rights Reserved           */
+/*                                                                                      */
+/****************************************************************************************/
+#ifndef	VFILE__H
+#define VFILE__H
+
+#include	"BaseType.h"
+#include	"VFile.h"
+
+#define	JE_VFILE_HINTSFILEHEADER_SIGNATURE	(0x48484656)	// "VFHH"
+
+typedef	struct	jeVFile_HintsFileHeader
+{
+	unsigned long	Signature;
+	unsigned int	HintDataLength;
+}	jeVFile_HintsFileHeader;
+
+
+typedef void * 		(JETCC *jeVFile_FinderCreateFN)(jeVFile *FileSystem, void *Handle, const char *FileSpec);
+typedef jeBoolean 	(JETCC *jeVFile_FinderGetNextFileFN)(void *Handle);
+typedef jeBoolean 	(JETCC *jeVFile_FinderGetPropertiesFN)(void *Handle, jeVFile_Properties *Properties);
+typedef void 		(JETCC *jeVFile_FinderDestroyFN)(void *Handle);
+
+typedef	void * 	(JETCC *jeVFile_OpenNewSystemFN)(jeVFile *FS,
+					 const char *Name,
+					 void *	Context,
+					 unsigned int OpenModeFlags);
+
+typedef jeBoolean (JETCC *jeVFile_UpdateContextFN)(jeVFile *FS, void *Handle, void *Context, int ContextSize);
+
+typedef	void * 	(JETCC *jeVFile_OpenFN)(jeVFile *FS,
+					 void *Handle,
+					 const char *Name,
+					 void *	Context,
+					 unsigned int OpenModeFlags);
+
+typedef	jeBoolean  (JETCC *jeVFile_DeleteFileFN)(jeVFile *FS, void *Handle, const char *FileName);
+typedef	jeBoolean  (JETCC *jeVFile_RenameFileFN)(jeVFile *FS, void *Handle, const char *FileName, const char *NewFileName);
+typedef	jeBoolean  (JETCC *jeVFile_FileExistsFN)(jeVFile *FS, void *Handle, const char *FileName);
+typedef	jeBoolean  (JETCC *jeVFile_DisperseFN)(jeVFile *FS, void *Handle, const char *Directory);
+typedef	jeBoolean  (JETCC *jeVFile_CloseFN)(void *Handle);
+
+typedef	jeBoolean  (JETCC *jeVFile_GetSFN)(void *Handle, void *Buff, int MaxSize);
+typedef	jeBoolean  (JETCC *jeVFile_BytesAvailableFN)(void *Handle, long *Count);
+typedef	jeBoolean  (JETCC *jeVFile_ReadFN)(void *Handle, void *Buff, uint32 Count);
+typedef	jeBoolean  (JETCC *jeVFile_WriteFN)(void *Handle, const void *Buff, int Count);
+typedef	jeBoolean  (JETCC *jeVFile_SeekFN)(void *Handle, int Where, jeVFile_Whence Whence);
+typedef	jeBoolean  (JETCC *jeVFile_EOFFN)(const void *Handle);
+typedef	jeBoolean  (JETCC *jeVFile_TellFN)(const void *Handle, long *Position);
+typedef	jeBoolean  (JETCC *jeVFile_GetPropertiesFN)(const void *Handle, jeVFile_Properties *Properties);
+
+typedef	jeBoolean  (JETCC *jeVFile_SizeFN)(const void *Handle, long *Size);
+typedef jeBoolean  (JETCC *jeVFile_SetSizeFN)(void *Handle, long Size);
+typedef jeBoolean  (JETCC *jeVFile_SetAttributesFN)(void *Handle, jeVFile_Attributes Attributes);
+typedef jeBoolean  (JETCC *jeVFile_SetTimeFN)(void *Handle, const jeVFile_Time *Time);
+
+typedef jeVFile *  (JETCC *jeVFile_GetHintsFileFN)(void *Handle);
+
+typedef	struct	jeVFile_SystemAPIs
+{
+	jeVFile_FinderCreateFN		FinderCreate;
+	jeVFile_FinderGetNextFileFN	FinderGetNextFile;
+	jeVFile_FinderGetPropertiesFN	FinderGetProperties;
+	jeVFile_FinderDestroyFN		FinderDestroy;
+
+	jeVFile_OpenNewSystemFN		OpenNewSystem;
+	jeVFile_UpdateContextFN		UpdateContext;
+	jeVFile_OpenFN				Open;
+	jeVFile_DeleteFileFN		DeleteFile;
+	jeVFile_RenameFileFN		RenameFile;
+	jeVFile_FileExistsFN		FileExists;
+	jeVFile_DisperseFN			Disperse;
+	jeVFile_CloseFN				Close;
+
+	jeVFile_GetSFN				GetS;
+	jeVFile_BytesAvailableFN	BytesAvailable;
+	jeVFile_ReadFN				Read;
+	jeVFile_WriteFN				Write;
+	jeVFile_SeekFN				Seek;
+	jeVFile_EOFFN				Eof;
+	jeVFile_TellFN				Tell;
+	jeVFile_SizeFN				Size;
+
+	jeVFile_GetPropertiesFN		GetProperties;
+
+	jeVFile_SetSizeFN			SetSize;
+	jeVFile_SetAttributesFN		SetAttributes;
+	jeVFile_SetTimeFN			SetTime;
+
+	jeVFile_GetHintsFileFN		GetHintsFile;
+
+}	jeVFile_SystemAPIs;
+
+jeBoolean JETCC VFile_RegisterFileSystem(
+	const jeVFile_SystemAPIs *	APIs,
+	jeVFile_TypeIdentifier *		Type);
+
+#endif

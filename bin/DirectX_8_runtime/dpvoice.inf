@@ -1,0 +1,10 @@
+[Version]
+Signature="$CHICAGO$"
+SetupClass=BASE
+
+[DefaultInstall]
+AddReg=add.reg
+
+[add.reg]
+
+[Strings]

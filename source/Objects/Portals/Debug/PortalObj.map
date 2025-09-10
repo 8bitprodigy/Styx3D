@@ -1,0 +1,783 @@
+ PortalObj
+
+ Timestamp is 643b68d3 (Sat Apr 15 20:17:39 2023)
+
+ Preferred load address is 10000000
+
+ Start         Length     Name                   Class
+ 0001:00000000 0000921fH .text$mn                CODE
+ 0002:00000000 00000104H .CRT$XCA                DATA
+ 0002:00000104 00000104H .CRT$XCZ                DATA
+ 0002:00000208 00000104H .CRT$XIA                DATA
+ 0002:0000030c 00000104H .CRT$XIZ                DATA
+ 0002:00000410 00000104H .CRT$XPA                DATA
+ 0002:00000514 00000104H .CRT$XPZ                DATA
+ 0002:00000618 00000104H .CRT$XTA                DATA
+ 0002:0000071c 00000104H .CRT$XTZ                DATA
+ 0002:00000820 00001220H .rdata                  DATA
+ 0002:00001a40 00000180H .rdata$CastGuardVftablesA DATA
+ 0002:00001bc0 0000014cH .rdata$CastGuardVftablesC DATA
+ 0002:00001d0c 0000010cH .rdata$sxdata           DATA
+ 0002:00001e18 000001a0H .rdata$zzzdbg           DATA
+ 0002:00001fb8 00000104H .rtc$IAA                DATA
+ 0002:000020bc 0000010cH .rtc$IMZ                DATA
+ 0002:000021c8 00000104H .rtc$IZZ                DATA
+ 0002:000022cc 00000104H .rtc$TAA                DATA
+ 0002:000023d0 0000010cH .rtc$TMZ                DATA
+ 0002:000024dc 00000104H .rtc$TZZ                DATA
+ 0002:000025e0 000001d0H .xdata$x                DATA
+ 0002:000027b0 00000163H .edata                  DATA
+ 0003:00000000 00000260H .data                   DATA
+ 0003:00000260 000005d0H .bss                    DATA
+ 0004:00000000 00000288H .idata$5                DATA
+ 0004:00000288 00000050H .idata$2                DATA
+ 0004:000002d8 00000014H .idata$3                DATA
+ 0004:000002ec 00000288H .idata$4                DATA
+ 0004:00000574 00000b10H .idata$6                DATA
+ 0005:00000000 0000010eH .00cfg                  DATA
+ 0006:00000000 00000170H .rsrc$01                DATA
+ 0006:00000170 000002ccH .rsrc$02                DATA
+
+  Address         Publics by Value              Rva+Base       Lib:Object
+
+ 0000:00000000       ___AbsoluteZero            00000000     <absolute>
+ 0000:00000000       ___arm64x_extra_rfe_table  00000000     <absolute>
+ 0000:00000000       ___arm64x_extra_rfe_table_size 00000000     <absolute>
+ 0000:00000000       ___arm64x_native_entrypoint 00000000     <absolute>
+ 0000:00000000       ___arm64x_redirection_metadata 00000000     <absolute>
+ 0000:00000000       ___arm64x_redirection_metadata_count 00000000     <absolute>
+ 0000:00000000       ___dynamic_value_reloc_table 00000000     <absolute>
+ 0000:00000000       ___enclave_config          00000000     <absolute>
+ 0000:00000000       ___guard_check_icall_a64n_fptr 00000000     <absolute>
+ 0000:00000000       ___guard_eh_cont_count     00000000     <absolute>
+ 0000:00000000       ___guard_eh_cont_table     00000000     <absolute>
+ 0000:00000000       ___guard_fids_count        00000000     <absolute>
+ 0000:00000000       ___guard_fids_table        00000000     <absolute>
+ 0000:00000000       ___guard_iat_count         00000000     <absolute>
+ 0000:00000000       ___guard_iat_table         00000000     <absolute>
+ 0000:00000000       ___guard_longjmp_count     00000000     <absolute>
+ 0000:00000000       ___guard_longjmp_table     00000000     <absolute>
+ 0000:00000000       ___hybrid_auxiliary_iat    00000000     <absolute>
+ 0000:00000000       ___hybrid_auxiliary_iat_copy 00000000     <absolute>
+ 0000:00000000       ___hybrid_code_map         00000000     <absolute>
+ 0000:00000000       ___hybrid_code_map_count   00000000     <absolute>
+ 0000:00000000       ___volatile_metadata       00000000     <absolute>
+ 0000:00000000       ___x64_code_ranges_to_entry_points 00000000     <absolute>
+ 0000:00000000       ___x64_code_ranges_to_entry_points_count 00000000     <absolute>
+ 0000:00000002       ___safe_se_handler_count   00000002     <absolute>
+ 0000:00000100       ___guard_flags             00000100     <absolute>
+ 0000:00000000       ___ImageBase               10000000     <linker-defined>
+ 0001:00000550       _DllMain@12                10001550 f   ObjectDef.obj
+ 0001:000005c0       _Object_RegisterDef        100015c0 f   ObjectDef.obj
+ 0001:00000650       _AddChild@8                10001650 f   PortalObject.obj
+ 0001:00000670       _AttachEngine@8            10001670 f   PortalObject.obj
+ 0001:00000690       _AttachSoundSystem@8       10001690 f   PortalObject.obj
+ 0001:000006b0       _AttachWorld@8             100016b0 f   PortalObject.obj
+ 0001:00000a40       _ChangeBoxCollision@24     10001a40 f   PortalObject.obj
+ 0001:00000a60       _Collision@24              10001a60 f   PortalObject.obj
+ 0001:00000a80       _CreateFromFile@8          10001a80 f   PortalObject.obj
+ 0001:00000e20       _CreateGlobalBrush         10001e20 f   PortalObject.obj
+ 0001:00002910       _CreateInstance@0          10003910 f   PortalObject.obj
+ 0001:00002a50       _CreateRef@4               10003a50 f   PortalObject.obj
+ 0001:00002ae0       _Destroy@4                 10003ae0 f   PortalObject.obj
+ 0001:00002c10       _DettachEngine@8           10003c10 f   PortalObject.obj
+ 0001:00002c30       _DettachSoundSystem@8      10003c30 f   PortalObject.obj
+ 0001:00002c50       _DettachWorld@8            10003c50 f   PortalObject.obj
+ 0001:00002cd0       _DuplicateInstance@4       10003cd0 f   PortalObject.obj
+ 0001:00002df0       _EditDialog@8              10003df0 f   PortalObject.obj
+ 0001:00002e10       _GetChildren@12            10003e10 f   PortalObject.obj
+ 0001:00002e30       _GetExtBox@8               10003e30 f   PortalObject.obj
+ 0001:00002f00       _GetProperty@16            10003f00 f   PortalObject.obj
+ 0001:00002fa0       _GetPropertyList@8         10003fa0 f   PortalObject.obj
+ 0001:00003190       _GetXForm@8                10004190 f   PortalObject.obj
+ 0001:00003240       _GetXFormModFlags@4        10004240 f   PortalObject.obj
+ 0001:00003260       _Init_Class                10004260 f   PortalObject.obj
+ 0001:00003480       _PortalFrame@8             10004480 f   PortalObject.obj
+ 0001:00003650       _RemoveChild@8             10004650 f   PortalObject.obj
+ 0001:00003670       _Render@24                 10004670 f   PortalObject.obj
+ 0001:00003c70       _SendMsg@12                10004c70 f   PortalObject.obj
+ 0001:00003e10       _SetProperty@16            10004e10 f   PortalObject.obj
+ 0001:000040a0       _SetRenderNextFlag@8       100050a0 f   PortalObject.obj
+ 0001:000040d0       _SetXForm@8                100050d0 f   PortalObject.obj
+ 0001:000041b0       _WriteToFile@12            100051b0 f   PortalObject.obj
+ 0001:0000448f       _jeObject_RegisterGlobalObjectDef@4 1000548f f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00004495       _jeVec3d_Set@16            10005495 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000449b       _jeVec3d_Clear@4           1000549b f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000044a1       _jeVFile_Read@12           100054a1 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000044a7       _jeVFile_Write@12          100054a7 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000044ad       _jeVFile_Seek@12           100054ad f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000044b3       _jeXForm3d_Copy@8          100054b3 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000044b9       _jeXForm3d_Orthonormalize@4 100054b9 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000044bf       _jeXForm3d_RotateX@8       100054bf f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000044c5       _jeXForm3d_RotateY@8       100054c5 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000044cb       _jeXForm3d_RotateZ@8       100054cb f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000044d1       _jeXForm3d_Multiply@12     100054d1 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000044d7       _jeXForm3d_Transform@12    100054d7 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000044dd       _jeXForm3d_GetTranspose@8  100054dd f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000044e3       _jeCamera_SetXForm@8       100054e3 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000044e9       _jeCamera_GetXForm@8       100054e9 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000044ef       _jeCamera_GetTransposeXForm@8 100054ef f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000044f5       _jeCamera_GetAttributes@12 100054f5 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000044fb       _jeCamera_SetAttributes@12 100054fb f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00004501       _jeCamera_SetZScale@8      10005501 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00004507       _jeCamera_GetZScale@4      10005507 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000450d       _jeExtBox_IsValid@4        1000550d f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00004513       _jeExtBox_SetToPoint@8     10005513 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00004519       _jeExtBox_ExtendToEnclose@8 10005519 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000451f       _jePlane_Transform@12      1000551f f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00004525       _jeFrustum_AddPlane@12     10005525 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000452b       _jeProperty_ListCopy@4     1000552b f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00004531       _jeProperty_FillCheck@16   10005531 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00004537       _jeProperty_FillRadio@16   10005537 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000453d       _jeProperty_FillFloat@28   1000553d f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00004543       _jePortal_Create@0         10005543 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00004549       _jePortal_Destroy@4        10005549 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000454f       _jeFaceInfo_SetDefaults@4  1000554f f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00004555       _jeBrush_Create@4          10005555 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000455b       _jeBrush_Destroy@4         1000555b f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00004561       _jeBrush_SetXForm@12       10005561 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00004567       _jeBrush_GetXForm@4        10005567 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000456d       _jeBrush_CreateFace@8      1000556d f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00004573       _jeBrush_GetNextFace@8     10005573 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00004579       _jeBrush_FaceGetVertCount@4 10005579 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000457f       _jeBrush_FaceSetVertByIndex@12 1000557f f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00004585       _jeBrush_FaceGetVertByIndex@8 10005585 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000458b       _jeBrush_FaceSetFaceInfo@8 1000558b f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00004591       _jeWorld_Render@12         10005591 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:00004597       __jeRam_DebugAllocate@12   10005597 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:0000459d       _jeRam_AllocateClear@4     1000559d f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000045a3       _jeRam_Free_@4             100055a3 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000045a9       _jeErrorLog_AddExplicit@24 100055a9 f   jet3DClassic11d:Jet3DClassic11d.dll
+ 0001:000045b0       @_RTC_AllocaHelper@12      100055b0 f   MSVCRTD:stack.obj
+ 0001:000045f0       @_RTC_CheckStackVars2@12   100055f0 f   MSVCRTD:stack.obj
+ 0001:00004700       @_RTC_CheckStackVars@8     10005700 f   MSVCRTD:stack.obj
+ 0001:00004770       __RTC_CheckEsp             10005770 f   MSVCRTD:stack.obj
+ 0001:000047a0       __CRT_RTC_INIT             100057a0 f   MSVCRTD:init.obj
+ 0001:000047b0       __CRT_RTC_INITW            100057b0 f   MSVCRTD:init.obj
+ 0001:000047c0       __RTC_InitBase             100057c0 f   MSVCRTD:init.obj
+ 0001:00004800       __RTC_Shutdown             10005800 f   MSVCRTD:init.obj
+ 0001:00004820       @__security_check_cookie@4 10005820 f   MSVCRTD:secchk.obj
+ 0001:000048f0       ?_RTC_AllocaFailure@@YAXPAXPAU_RTC_ALLOCA_NODE@@H@Z 100058f0 f   MSVCRTD:error.obj
+ 0001:00004a10       ?_RTC_Failure@@YAXPAXH@Z   10005a10 f   MSVCRTD:error.obj
+ 0001:00004a80       ?_RTC_StackFailure@@YAXPAXPBD@Z 10005a80 f   MSVCRTD:error.obj
+ 0001:00004f30       __RTC_UninitUse            10005f30 f   MSVCRTD:error.obj
+ 0001:00005010       ___local_stdio_printf_options 10006010 f i MSVCRTD:error.obj
+ 0001:00005020       __vsprintf_s_l             10006020 f i MSVCRTD:error.obj
+ 0001:00005060       _sprintf_s                 10006060 f i MSVCRTD:error.obj
+ 0001:00005690       __CRT_INIT@12              10006690 f   MSVCRTD:dll_dllmain.obj
+ 0001:000056b0       __DllMainCRTStartup@12     100066b0 f   MSVCRTD:dll_dllmain.obj
+ 0001:000056e0       ?_RTC_GetErrorFunc@@YAP6AHHPBDH00ZZPBX@Z 100066e0 f   MSVCRTD:userapi.obj
+ 0001:000056f0       ?_RTC_GetErrorFuncW@@YAP6AHHPB_WH00ZZPBX@Z 100066f0 f   MSVCRTD:userapi.obj
+ 0001:00005700       __RTC_GetErrDesc           10006700 f   MSVCRTD:userapi.obj
+ 0001:00005720       __RTC_NumErrors            10006720 f   MSVCRTD:userapi.obj
+ 0001:00005730       __RTC_SetErrorFunc         10006730 f   MSVCRTD:userapi.obj
+ 0001:00005760       __RTC_SetErrorFuncW        10006760 f   MSVCRTD:userapi.obj
+ 0001:00005790       __RTC_SetErrorType         10006790 f   MSVCRTD:userapi.obj
+ 0001:000057c0       ___raise_securityfailure   100067c0 f   MSVCRTD:gs_report.obj
+ 0001:00005800       ___report_gsfailure        10006800 f   MSVCRTD:gs_report.obj
+ 0001:00005950       ___report_rangecheckfailure 10006950 f   MSVCRTD:gs_report.obj
+ 0001:00005960       ___report_securityfailure  10006960 f   MSVCRTD:gs_report.obj
+ 0001:00005a70       ___report_securityfailureEx 10006a70 f   MSVCRTD:gs_report.obj
+ 0001:00006180       ?_RTC_GetSrcLine@@YAHPAEPA_WKPAH1K@Z 10007180 f   MSVCRTD:pdblkup.obj
+ 0001:000065e0       __except_handler4_noexcept 100075e0 f   MSVCRTD:chandler4_noexcept.obj
+ 0001:00006660       @_guard_check_icall_nop@4  10007660 f i MSVCRTD:guard_support.obj
+ 0001:00006670       _ReadNoFence               10007670 f i MSVCRTD:guard_support.obj
+ 0001:00006690       _ReadPointerNoFence        10007690 f i MSVCRTD:guard_support.obj
+ 0001:000066b0       ___castguard_check_failure_debugbreak 100076b0 f i MSVCRTD:guard_support.obj
+ 0001:000066d0       ___castguard_check_failure_fastfail 100076d0 f i MSVCRTD:guard_support.obj
+ 0001:00006700       ___castguard_check_failure_nop 10007700 f i MSVCRTD:guard_support.obj
+ 0001:00006710       ___castguard_check_failure_os_handled 10007710 f i MSVCRTD:guard_support.obj
+ 0001:000067c0       ___castguard_slow_path_check_debugbreak 100077c0 f i MSVCRTD:guard_support.obj
+ 0001:00006800       ___castguard_slow_path_check_fastfail 10007800 f i MSVCRTD:guard_support.obj
+ 0001:00006850       ___castguard_slow_path_check_nop 10007850 f i MSVCRTD:guard_support.obj
+ 0001:00006860       ___castguard_slow_path_check_os_handled 10007860 f i MSVCRTD:guard_support.obj
+ 0001:00006900       __guard_icall_checks_enforced 10007900 f i MSVCRTD:guard_support.obj
+ 0001:000069d0       ___security_init_cookie    100079d0 f   MSVCRTD:gs_support.obj
+ 0001:00006a70       ?__scrt_initialize_type_info@@YAXXZ 10007a70 f   MSVCRTD:tncleanup.obj
+ 0001:00006a90       ?__scrt_uninitialize_type_info@@YAXXZ 10007a90 f   MSVCRTD:tncleanup.obj
+ 0001:00006ab0       ___local_stdio_scanf_options 10007ab0 f i MSVCRTD:default_local_stdio_options.obj
+ 0001:00006ac0       ___scrt_initialize_default_local_stdio_options 10007ac0 f   MSVCRTD:default_local_stdio_options.obj
+ 0001:00006b10       ?configure_argv@__scrt_narrow_argv_policy@@SAHXZ 10007b10 f i MSVCRTD:utility.obj
+ 0001:00006be0       ?initialize_environment@__scrt_narrow_environment_policy@@SAHXZ 10007be0 f i MSVCRTD:utility.obj
+ 0001:00006c80       _NtCurrentTeb              10007c80 f i MSVCRTD:utility.obj
+ 0001:00006c90       ___scrt_acquire_startup_lock 10007c90 f   MSVCRTD:utility.obj
+ 0001:00006cf0       ___scrt_dllmain_after_initialize_c 10007cf0 f   MSVCRTD:utility.obj
+ 0001:00006d30       ___scrt_dllmain_before_initialize_c 10007d30 f   MSVCRTD:utility.obj
+ 0001:00006d60       ___scrt_dllmain_crt_thread_attach 10007d60 f   MSVCRTD:utility.obj
+ 0001:00006da0       ___scrt_dllmain_crt_thread_detach 10007da0 f   MSVCRTD:utility.obj
+ 0001:00006dc0       ___scrt_dllmain_exception_filter 10007dc0 f   MSVCRTD:utility.obj
+ 0001:00006e20       ___scrt_dllmain_uninitialize_c 10007e20 f   MSVCRTD:utility.obj
+ 0001:00006e60       ___scrt_dllmain_uninitialize_critical 10007e60 f   MSVCRTD:utility.obj
+ 0001:00006e80       ___scrt_initialize_crt     10007e80 f   MSVCRTD:utility.obj
+ 0001:00006ee0       ___scrt_initialize_onexit_tables 10007ee0 f   MSVCRTD:utility.obj
+ 0001:00006ff0       ___scrt_is_nonwritable_in_current_image 10007ff0 f   MSVCRTD:utility.obj
+ 0001:00007170       ___scrt_release_startup_lock 10008170 f   MSVCRTD:utility.obj
+ 0001:000071a0       ___scrt_uninitialize_crt   100081a0 f   MSVCRTD:utility.obj
+ 0001:000071f0       __onexit                   100081f0 f   MSVCRTD:utility.obj
+ 0001:00007270       _at_quick_exit             10008270 f   MSVCRTD:utility.obj
+ 0001:000072c0       _atexit                    100082c0 f   MSVCRTD:utility.obj
+ 0001:00007300       ___scrt_get_dyn_tls_init_callback 10008300 f   MSVCRTD:dyn_tls_init.obj
+ 0001:00007310       ___scrt_fastfail           10008310 f   MSVCRTD:utility_desktop.obj
+ 0001:000074a0       ___scrt_get_show_window_mode 100084a0 f   MSVCRTD:utility_desktop.obj
+ 0001:000074f0       ___scrt_initialize_mta     100084f0 f   MSVCRTD:utility_desktop.obj
+ 0001:00007500       ___scrt_initialize_winrt   10008500 f   MSVCRTD:utility_desktop.obj
+ 0001:00007510       ___scrt_is_managed_app     10008510 f   MSVCRTD:utility_desktop.obj
+ 0001:000075c0       ___scrt_set_unhandled_exception_filter 100085c0 f   MSVCRTD:utility_desktop.obj
+ 0001:000075e0       ___scrt_exe_initialize_mta 100085e0 f   MSVCRTD:utility_desktop.obj
+ 0001:000075e0       ___scrt_stub_for_initialize_mta 100085e0 f   MSVCRTD:utility_desktop.obj
+ 0001:000075f0       ___scrt_unhandled_exception_filter@4 100085f0 f   MSVCRTD:utility_desktop.obj
+ 0001:00007690       __crt_debugger_hook        10008690 f   MSVCRTD:utility_desktop.obj
+ 0001:000076b0       __RTC_Initialize           100086b0 f   MSVCRTD:initsect.obj
+ 0001:000076f0       __RTC_Terminate            100086f0 f   MSVCRTD:initsect.obj
+ 0001:00007730       __except_handler4          10008730 f   MSVCRTD:chandler4gs.obj
+ 0001:00007780       ___isa_available_init      10008780 f   MSVCRTD:cpu_disp.obj
+ 0001:00007b80       __get_startup_argv_mode    10008b80 f   MSVCRTD:argv_mode.obj
+ 0001:00007b90       ___scrt_is_ucrt_dll_in_use 10008b90 f   MSVCRTD:ucrt_detection.obj
+ 0001:00007bbd       ___vcrt_GetModuleFileNameW 10008bbd f   vcruntimed:VCRUNTIME140D.dll
+ 0001:00007bc3       ___vcrt_GetModuleHandleW   10008bc3 f   vcruntimed:VCRUNTIME140D.dll
+ 0001:00007bc9       ___vcrt_LoadLibraryExW     10008bc9 f   vcruntimed:VCRUNTIME140D.dll
+ 0001:00007bcf       ___current_exception       10008bcf f   vcruntimed:VCRUNTIME140D.dll
+ 0001:00007bd5       ___current_exception_context 10008bd5 f   vcruntimed:VCRUNTIME140D.dll
+ 0001:00007bdb       ___std_type_info_destroy_list 10008bdb f   vcruntimed:VCRUNTIME140D.dll
+ 0001:00007be1       _memset                    10008be1 f   vcruntimed:VCRUNTIME140D.dll
+ 0001:00007be7       __except_handler4_common   10008be7 f   vcruntimed:VCRUNTIME140D.dll
+ 0001:00007bed       __wassert                  10008bed f   ucrtd:ucrtbased.dll
+ 0001:00007bf3       __CrtDbgReport             10008bf3 f   ucrtd:ucrtbased.dll
+ 0001:00007bf9       __CrtDbgReportW            10008bf9 f   ucrtd:ucrtbased.dll
+ 0001:00007bff       _strcpy_s                  10008bff f   ucrtd:ucrtbased.dll
+ 0001:00007c05       _strcat_s                  10008c05 f   ucrtd:ucrtbased.dll
+ 0001:00007c0b       ___stdio_common_vsprintf_s 10008c0b f   ucrtd:ucrtbased.dll
+ 0001:00007c11       __initterm                 10008c11 f   ucrtd:ucrtbased.dll
+ 0001:00007c17       __initterm_e               10008c17 f   ucrtd:ucrtbased.dll
+ 0001:00007c1d       __wmakepath_s              10008c1d f   ucrtd:ucrtbased.dll
+ 0001:00007c23       __wsplitpath_s             10008c23 f   ucrtd:ucrtbased.dll
+ 0001:00007c29       _wcscpy_s                  10008c29 f   ucrtd:ucrtbased.dll
+ 0001:00007c2f       _terminate                 10008c2f f   ucrtd:ucrtbased.dll
+ 0001:00007c35       __seh_filter_dll           10008c35 f   ucrtd:ucrtbased.dll
+ 0001:00007c3b       __configure_narrow_argv    10008c3b f   ucrtd:ucrtbased.dll
+ 0001:00007c41       __initialize_narrow_environment 10008c41 f   ucrtd:ucrtbased.dll
+ 0001:00007c47       __initialize_onexit_table  10008c47 f   ucrtd:ucrtbased.dll
+ 0001:00007c4d       __register_onexit_function 10008c4d f   ucrtd:ucrtbased.dll
+ 0001:00007c53       __execute_onexit_table     10008c53 f   ucrtd:ucrtbased.dll
+ 0001:00007c59       __crt_atexit               10008c59 f   ucrtd:ucrtbased.dll
+ 0001:00007c5f       __crt_at_quick_exit        10008c5f f   ucrtd:ucrtbased.dll
+ 0001:00007c65       __cexit                    10008c65 f   ucrtd:ucrtbased.dll
+ 0001:00007c6b       _IsDebuggerPresent@0       10008c6b f   kernel32:KERNEL32.dll
+ 0001:00007c71       _RaiseException@16         10008c71 f   kernel32:KERNEL32.dll
+ 0001:00007c77       _MultiByteToWideChar@24    10008c77 f   kernel32:KERNEL32.dll
+ 0001:00007c7d       _WideCharToMultiByte@32    10008c7d f   kernel32:KERNEL32.dll
+ 0001:00007c83       _UnhandledExceptionFilter@4 10008c83 f   kernel32:KERNEL32.dll
+ 0001:00007c89       _SetUnhandledExceptionFilter@4 10008c89 f   kernel32:KERNEL32.dll
+ 0001:00007c8f       _GetCurrentProcess@0       10008c8f f   kernel32:KERNEL32.dll
+ 0001:00007c95       _TerminateProcess@8        10008c95 f   kernel32:KERNEL32.dll
+ 0001:00007c9b       _IsProcessorFeaturePresent@4 10008c9b f   kernel32:KERNEL32.dll
+ 0001:00007ca1       _GetLastError@0            10008ca1 f   kernel32:KERNEL32.dll
+ 0001:00007ca7       _HeapAlloc@12              10008ca7 f   kernel32:KERNEL32.dll
+ 0001:00007cad       _HeapFree@12               10008cad f   kernel32:KERNEL32.dll
+ 0001:00007cb3       _GetProcessHeap@0          10008cb3 f   kernel32:KERNEL32.dll
+ 0001:00007cb9       _VirtualQuery@12           10008cb9 f   kernel32:KERNEL32.dll
+ 0001:00007cbf       _FreeLibrary@4             10008cbf f   kernel32:KERNEL32.dll
+ 0001:00007cc5       _GetProcAddress@8          10008cc5 f   kernel32:KERNEL32.dll
+ 0001:00007ccb       _QueryPerformanceCounter@4 10008ccb f   kernel32:KERNEL32.dll
+ 0001:00007cd1       _GetCurrentProcessId@0     10008cd1 f   kernel32:KERNEL32.dll
+ 0001:00007cd7       _GetCurrentThreadId@0      10008cd7 f   kernel32:KERNEL32.dll
+ 0001:00007cdd       _GetSystemTimeAsFileTime@4 10008cdd f   kernel32:KERNEL32.dll
+ 0001:00007ce3       _InitializeSListHead@4     10008ce3 f   kernel32:KERNEL32.dll
+ 0001:00007ce9       _GetStartupInfoW@4         10008ce9 f   kernel32:KERNEL32.dll
+ 0001:00007cef       _GetModuleHandleW@4        10008cef f   kernel32:KERNEL32.dll
+ 0001:00007d00       ___acrt_initialize         10008d00 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00007d00       ___scrt_stub_for_acrt_initialize 10008d00 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00007d00       ___vcrt_initialize         10008d00 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00007d10       ___acrt_thread_attach      10008d10 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00007d10       ___scrt_stub_for_acrt_thread_attach 10008d10 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00007d10       ___vcrt_thread_attach      10008d10 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00007d20       ___acrt_thread_detach      10008d20 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00007d20       ___scrt_stub_for_acrt_thread_detach 10008d20 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00007d20       ___vcrt_thread_detach      10008d20 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00007d30       ___acrt_uninitialize       10008d30 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00007d30       ___scrt_stub_for_acrt_uninitialize 10008d30 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00007d30       ___vcrt_uninitialize       10008d30 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00007d40       ___acrt_uninitialize_critical 10008d40 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00007d40       ___scrt_stub_for_acrt_uninitialize_critical 10008d40 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00007d40       ___vcrt_uninitialize_critical 10008d40 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00007d50       ___scrt_stub_for_is_c_termination_complete 10008d50 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00007d50       __is_c_termination_complete 10008d50 f   MSVCRTD:ucrt_stubs.obj
+ 0001:00007d60       __filter_x86_sse2_floating_point_exception 10008d60 f   MSVCRTD:x86_exception_filter.obj
+ 0001:00007d60       __filter_x86_sse2_floating_point_exception_default 10008d60 f   MSVCRTD:x86_exception_filter.obj
+ 0002:00000000       ___xc_a                    1000b000     MSVCRTD:initializers.obj
+ 0002:00000104       ___xc_z                    1000b104     MSVCRTD:initializers.obj
+ 0002:00000208       ___xi_a                    1000b208     MSVCRTD:initializers.obj
+ 0002:0000030c       ___xi_z                    1000b30c     MSVCRTD:initializers.obj
+ 0002:00000410       ___xp_a                    1000b410     MSVCRTD:initializers.obj
+ 0002:00000514       ___xp_z                    1000b514     MSVCRTD:initializers.obj
+ 0002:00000618       ___xt_a                    1000b618     MSVCRTD:initializers.obj
+ 0002:0000071c       ___xt_z                    1000b71c     MSVCRTD:initializers.obj
+ 0002:00000820       ??_C@_06FPPGHFGB@Portal@   1000b820     ObjectDef.obj
+ 0002:00000828       __real@3f051eb8            1000b828     ObjectDef.obj
+ 0002:0000082c       __real@3f800000            1000b82c     ObjectDef.obj
+ 0002:00000830       ??_C@_1KE@EEFJAAJD@?$AAD?$AA?3?$AA?2?$AAG?$AAe?$AAn?$AAe?$AAs?$AAi?$AAs?$AA?5?$AAa?$AAn?$AAd?$AA?5@ 1000b830     PortalObject.obj
+ 0002:000008f4       ??_C@_1BO@BHCPKDDC@?$AAp?$AAB?$AAr?$AAu?$AAs?$AAh?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000b8f4     PortalObject.obj
+ 0002:00000918       ??_C@_1CA@PELENM@?$AAp?$AAE?$AAx?$AAt?$AAB?$AAo?$AAx?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL@ 1000b918     PortalObject.obj
+ 0002:00000940       ??_C@_1M@DNFKHKCN@?$AAB?$AAr?$AAu?$AAs?$AAh@ 1000b940     PortalObject.obj
+ 0002:00000950       ??_C@_1M@GHOONPAA@?$AAV?$AAe?$AAr?$AAt?$AAs@ 1000b950     PortalObject.obj
+ 0002:00000960       ??_C@_0BN@GDFMPLEL@Unable?5to?5create?5brush?5face?4@ 1000b960     PortalObject.obj
+ 0002:00000982       ??_C@_00CNPNBAHC@@         1000b982     PortalObject.obj
+ 0002:00000988       ??_C@_0FC@BPFFNP@D?3?2Genesis?5and?5Jet3d?2JSTUDIO_CL@ 1000b988     PortalObject.obj
+ 0002:000009ec       ??_C@_0BJ@MPKGEGGM@JE_ERR_INTERNAL_RESOURCE@ 1000b9ec     PortalObject.obj
+ 0002:00000a0c       ??_C@_0BJ@KJDMIJO@Unable?5to?5create?5jeBrush@ 1000ba0c     PortalObject.obj
+ 0002:00000a2c       ??_C@_05ILLBNNOP@Trace@    1000ba2c     PortalObject.obj
+ 0002:00000a34       ??_C@_0BH@KIBLNGDK@JE_ERR_MEMORY_RESOURCE@ 1000ba34     PortalObject.obj
+ 0002:00000a50       ??_C@_06HDCPEBNJ@SkyBox@   1000ba50     PortalObject.obj
+ 0002:00000a58       ??_C@_05HOIAGEJD@Speed@    1000ba58     PortalObject.obj
+ 0002:00000a60       ??_C@_06PNAJKBHH@X?5Axis@  1000ba60     PortalObject.obj
+ 0002:00000a68       ??_C@_06FLHOKKMD@Y?5Axis@  1000ba68     PortalObject.obj
+ 0002:00000a70       ??_C@_06GKJGLAFO@Z?5Axis@  1000ba70     PortalObject.obj
+ 0002:00000a78       ??_C@_03PHODBHCN@FOV@      1000ba78     PortalObject.obj
+ 0002:00000a7c       ??_C@_0P@PGGGILHJ@CreateInstance@ 1000ba7c     PortalObject.obj
+ 0002:00000a90       ??_C@_0CB@MCEGMGLP@DuplicateInstance?3CreateInstanc@ 1000ba90     PortalObject.obj
+ 0002:00000ab8       ??_C@_0BJ@EGNAMMON@JE_ERR_SUBSYSTEM_FAILURE@ 1000bab8     PortalObject.obj
+ 0002:00000ad8       ??_C@_1BC@LDHKIAE@?$AAI?$AAn?$AAs?$AAt?$AAa?$AAn?$AAc?$AAe@ 1000bad8     PortalObject.obj
+ 0002:00000af0       ??_C@_1BE@KMDLKHPM@?$AAp?$AAI?$AAn?$AAs?$AAt?$AAa?$AAn?$AAc?$AAe@ 1000baf0     PortalObject.obj
+ 0002:00000b08       ??_C@_1CO@GGDJPGHJ@?$AAp?$AAP?$AAo?$AAr?$AAt?$AAa?$AAl?$AAO?$AAb?$AAj?$AA?9?$AA?$DO?$AAR?$AAe?$AAf@ 1000bb08     PortalObject.obj
+ 0002:00000b40       ??_C@_0CK@OIKACFJ@PortalObject_CreateFromFile?3Ver@ 1000bb40     PortalObject.obj
+ 0002:00000b74       ??_C@_0BD@ENGKCHBG@JE_ERR_FILEIO_READ@ 1000bb74     PortalObject.obj
+ 0002:00000b8c       ??_C@_0CE@CEAJBKKF@PortalObject_CreateFromFile?3Ver@ 1000bb8c     PortalObject.obj
+ 0002:00000bb8       ??_C@_0BD@BFMPAIGK@CreateFromFile?3FOV@ 1000bbb8     PortalObject.obj
+ 0002:00000bd0       ??_C@_0BF@KPAAABLF@CreateFromFile?3XForm@ 1000bbd0     PortalObject.obj
+ 0002:00000bec       ??_C@_0BG@PJHILIAD@CreateFromFile?3SkyBox@ 1000bbec     PortalObject.obj
+ 0002:00000c08       ??_C@_0BN@NDBFEPEG@PortalObject_WriteToFile?3Tag@ 1000bc08     PortalObject.obj
+ 0002:00000c2c       ??_C@_0BE@CCAIDFII@JE_ERR_FILEIO_WRITE@ 1000bc2c     PortalObject.obj
+ 0002:00000c44       ??_C@_0CB@EIAOPAIC@PortalObject_WriteToFile?3Versio@ 1000bc44     PortalObject.obj
+ 0002:00000c6c       ??_C@_0CG@CMJJIFFM@Unable?5to?5create?5portal?5propert@ 1000bc6c     PortalObject.obj
+ 0002:00000ca0       ??_C@_1EA@MNKJFLED@?$AAD?$AAa?$AAt?$AAa?$AAT?$AAy?$AAp?$AAe?$AA?5?$AA?$DN?$AA?$DN?$AA?5?$AAP?$AAR?$AAO@ 1000bca0     PortalObject.obj
+ 0002:00000cf0       ??_C@_1EA@GNMOCPKM@?$AAD?$AAa?$AAt?$AAa?$AAT?$AAy?$AAp?$AAe?$AA?5?$AA?$DN?$AA?$DN?$AA?5?$AAP?$AAR?$AAO@ 1000bcf0     PortalObject.obj
+ 0002:00000d40       ??_C@_1EA@IJIHBLOA@?$AAD?$AAa?$AAt?$AAa?$AAT?$AAy?$AAp?$AAe?$AA?5?$AA?$DN?$AA?$DN?$AA?5?$AAP?$AAR?$AAO@ 1000bd40     PortalObject.obj
+ 0002:00000d8c       __real@00000000            1000bd8c     PortalObject.obj
+ 0002:00000d90       __real@3c23d70a            1000bd90     PortalObject.obj
+ 0002:00000d94       __real@3dcccccd            1000bd94     PortalObject.obj
+ 0002:00000d98       __real@3ec28f5c            1000bd98     PortalObject.obj
+ 0002:00000d9c       __real@3f400000            1000bd9c     PortalObject.obj
+ 0002:00000da0       __real@40000000            1000bda0     PortalObject.obj
+ 0002:00000da4       __real@40490fdb            1000bda4     PortalObject.obj
+ 0002:00000da8       __real@41a00000            1000bda8     PortalObject.obj
+ 0002:00000dac       __real@42c80000            1000bdac     PortalObject.obj
+ 0002:00000db0       __real@bf800000            1000bdb0     PortalObject.obj
+ 0002:00000db4       __real@c0490fdb            1000bdb4     PortalObject.obj
+ 0002:00000dc0       __xmm@80000000800000008000000080000000 1000bdc0     PortalObject.obj
+ 0002:00000e90       ??_C@_0NN@JMPELKLB@The?5value?5of?5ESP?5was?5not?5proper@ 1000be90     MSVCRTD:error.obj
+ 0002:00000fa0       ??_C@_0BBN@ELNNILBE@A?5cast?5to?5a?5smaller?5data?5type?5h@ 1000bfa0     MSVCRTD:error.obj
+ 0002:000010f8       ??_C@_0BN@BPOGFMJL@Stack?5memory?5was?5corrupted?$AN?6@ 1000c0f8     MSVCRTD:error.obj
+ 0002:0000111c       ??_C@_0DG@DAJCDLPN@A?5local?5variable?5was?5used?5befor@ 1000c11c     MSVCRTD:error.obj
+ 0002:0000115c       ??_C@_0CM@JMIDGKLA@Stack?5memory?5around?5_alloca?5was@ 1000c15c     MSVCRTD:error.obj
+ 0002:00001190       ??_C@_0BO@CHIONIOI@Unknown?5Runtime?5Check?5Error?$AN?6@ 1000c190     MSVCRTD:error.obj
+ 0002:000011b8       ??_C@_1GM@CNOOJIHC@?$AAR?$AAu?$AAn?$AAt?$AAi?$AAm?$AAe?$AA?5?$AAC?$AAh?$AAe?$AAc?$AAk?$AA?5?$AAE@ 1000c1b8     MSVCRTD:error.obj
+ 0002:00001240       ??_C@_1EA@NFKNIFJP@?$AAR?$AAu?$AAn?$AA?9?$AAT?$AAi?$AAm?$AAe?$AA?5?$AAC?$AAh?$AAe?$AAc?$AAk?$AA?5@ 1000c240     MSVCRTD:error.obj
+ 0002:0000128c       ??_C@_0BB@PFFGGCJP@Unknown?5Filename@ 1000c28c     MSVCRTD:error.obj
+ 0002:000012a0       ??_C@_0BE@GNBOBNCK@Unknown?5Module?5Name@ 1000c2a0     MSVCRTD:error.obj
+ 0002:000012b8       ??_C@_0CA@IODNCDPG@Run?9Time?5Check?5Failure?5?$CD?$CFd?5?9?5?$CFs@ 1000c2b8     MSVCRTD:error.obj
+ 0002:000012e0       ??_C@_0CG@IAFNJNEE@Stack?5corrupted?5near?5unknown?5va@ 1000c2e0     MSVCRTD:error.obj
+ 0002:00001310       ??_C@_05MKKEDADM@?$CF?42X?5@ 1000c310     MSVCRTD:error.obj
+ 0002:00001318       ??_C@_0EJ@LJKNEOLN@Stack?5area?5around?5_alloca?5memor@ 1000c318     MSVCRTD:error.obj
+ 0002:00001370       ??_C@_01EEMJAFIK@?6@       1000c370     MSVCRTD:error.obj
+ 0002:00001374       ??_C@_02LLMPMKNF@?$DO?5@   1000c374     MSVCRTD:error.obj
+ 0002:00001378       ??_C@_08OMAHNMHJ@?6Data?3?5?$DM@ 1000c378     MSVCRTD:error.obj
+ 0002:00001384       ??_C@_0CK@DKGBICFE@?6Allocation?5number?5within?5this?5@ 1000c384     MSVCRTD:error.obj
+ 0002:000013b8       ??_C@_07DFDJCKFN@?6Size?3?5@ 1000c3b8     MSVCRTD:error.obj
+ 0002:000013c4       ??_C@_0N@MHFFIMFG@?6Address?3?50x@ 1000c3c4     MSVCRTD:error.obj
+ 0002:000013d8       ??_C@_0EI@CLEPFNGI@Stack?5area?5around?5_alloca?5memor@ 1000c3d8     MSVCRTD:error.obj
+ 0002:00001430       ??_C@_0BK@ODNDAGKB@?$CFs?$CFs?$CFp?$CFs?$CFzd?$CFs?$CFd?$CFs?$CFs?$CFs?$CFs?$CFs@ 1000c430     MSVCRTD:error.obj
+ 0002:00001450       ??_C@_0DE@OHJBPMBP@A?5variable?5is?5being?5used?5withou@ 1000c450     MSVCRTD:error.obj
+ 0002:00001490       __pDefaultRawDllMain       1000c490     MSVCRTD:dll_dllmain.obj
+ 0002:00001490       __pRawDllMain              1000c490     MSVCRTD:dll_dllmain.obj
+ 0002:000014ac       ??_C@_0BJ@HEGAHDFO@Stack?5pointer?5corruption@ 1000c4ac     MSVCRTD:userapi.obj
+ 0002:000014cc       ??_C@_0CK@FEGOIOPB@Cast?5to?5smaller?5type?5causing?5lo@ 1000c4cc     MSVCRTD:userapi.obj
+ 0002:00001500       ??_C@_0BI@CIGMDCBH@Stack?5memory?5corruption@ 1000c500     MSVCRTD:userapi.obj
+ 0002:0000151c       ??_C@_0CK@CNLNOEPB@Local?5variable?5used?5before?5init@ 1000c51c     MSVCRTD:userapi.obj
+ 0002:00001550       ??_C@_0BP@OGBCLIBO@Stack?5around?5_alloca?5corrupted@ 1000c550     MSVCRTD:userapi.obj
+ 0002:000015e0       ??_C@_1EI@MLPKHBGE@?$AAa?$AAp?$AAi?$AA?9?$AAm?$AAs?$AA?9?$AAw?$AAi?$AAn?$AA?9?$AAc?$AAo?$AAr?$AAe@ 1000c5e0     MSVCRTD:pdblkup.obj
+ 0002:00001638       ??_C@_1BK@JHLNAEJL@?$AAa?$AAd?$AAv?$AAa?$AAp?$AAi?$AA3?$AA2?$AA?4?$AAd?$AAl?$AAl@ 1000c638     MSVCRTD:pdblkup.obj
+ 0002:00001658       ??_C@_0O@COHOBMLB@RegOpenKeyExW@ 1000c658     MSVCRTD:pdblkup.obj
+ 0002:00001668       ??_C@_0BB@GLNAEDBD@RegQueryValueExW@ 1000c668     MSVCRTD:pdblkup.obj
+ 0002:0000167c       ??_C@_0M@HLOHPNFA@RegCloseKey@ 1000c67c     MSVCRTD:pdblkup.obj
+ 0002:00001690       ??_C@_1HE@EBEAGLFB@?$AAS?$AAO?$AAF?$AAT?$AAW?$AAA?$AAR?$AAE?$AA?2?$AAW?$AAo?$AAw?$AA6?$AA4?$AA3@ 1000c690     MSVCRTD:pdblkup.obj
+ 0002:0000171c       ??_C@_1BG@EABPBLLF@?$AAP?$AAr?$AAo?$AAd?$AAu?$AAc?$AAt?$AAD?$AAi?$AAr@ 1000c71c     MSVCRTD:pdblkup.obj
+ 0002:0000175c       ??_C@_1BC@JINFINNJ@?$AAM?$AAS?$AAP?$AAD?$AAB?$AA1?$AA4?$AA0@ 1000c75c     MSVCRTD:pdblkup.obj
+ 0002:00001774       ??_C@_0BB@KCIACLNC@PDBOpenValidate5@ 1000c774     MSVCRTD:pdblkup.obj
+ 0002:00001788       ??_C@_01KDCPPGHE@r@        1000c788     MSVCRTD:pdblkup.obj
+ 0002:00001790       __load_config_used         1000c790     MSVCRTD:loadcfg.obj
+ 0002:00001a40       ___CastGuardVftablesStart  1000ca40     MSVCRTD:guard_support.obj
+ 0002:00001bc0       ___CastGuardVftablesEnd    1000cbc0     MSVCRTD:guard_support.obj
+ 0002:00001d0c       ___safe_se_handler_table   1000cd0c     <linker-defined>
+ 0002:00001fb8       ___rtc_iaa                 1000cfb8     MSVCRTD:initsect.obj
+ 0002:000021c8       ___rtc_izz                 1000d1c8     MSVCRTD:initsect.obj
+ 0002:000022cc       ___rtc_taa                 1000d2cc     MSVCRTD:initsect.obj
+ 0002:000024dc       ___rtc_tzz                 1000d4dc     MSVCRTD:initsect.obj
+ 0003:00000000       _ObjectDef                 1000e000     ObjectDef.obj
+ 0003:000000a4       _PortalPropertyList        1000e0a4     PortalObject.obj
+ 0003:000000b4       ?__LINE__Var@?0??BrushExtBox@@9@9 1000e0b4     PortalObject.obj
+ 0003:000000b8       ?__LINE__Var@?0??Portal_CreateFace@@9@9 1000e0b8     PortalObject.obj
+ 0003:000000bc       ?__LINE__Var@?0??CreateGlobalBrush@@9@9 1000e0bc     PortalObject.obj
+ 0003:000000c0       ?__LINE__Var@?0??CreateInstance@@9@9 1000e0c0     PortalObject.obj
+ 0003:000000c4       ?__LINE__Var@?0??DuplicateInstance@@9@9 1000e0c4     PortalObject.obj
+ 0003:000000c8       ?__LINE__Var@?0??CreateRef@@9@9 1000e0c8     PortalObject.obj
+ 0003:000000cc       ?__LINE__Var@?0??Destroy@@9@9 1000e0cc     PortalObject.obj
+ 0003:000000d0       ?__LINE__Var@?0??AttachWorld@@9@9 1000e0d0     PortalObject.obj
+ 0003:000000d4       ?__LINE__Var@?0??DettachWorld@@9@9 1000e0d4     PortalObject.obj
+ 0003:000000d8       ?__LINE__Var@?0??GetExtBox@@9@9 1000e0d8     PortalObject.obj
+ 0003:000000dc       ?__LINE__Var@?0??CreateFromFile@@9@9 1000e0dc     PortalObject.obj
+ 0003:000000e0       ?__LINE__Var@?0??WriteToFile@@9@9 1000e0e0     PortalObject.obj
+ 0003:000000e4       ?__LINE__Var@?0??GetPropertyList@@9@9 1000e0e4     PortalObject.obj
+ 0003:000000e8       ?__LINE__Var@?0??SetProperty@@9@9 1000e0e8     PortalObject.obj
+ 0003:000000ec       ?__LINE__Var@?0??GetProperty@@9@9 1000e0ec     PortalObject.obj
+ 0003:000000f0       ?__LINE__Var@?0??SetXForm@@9@9 1000e0f0     PortalObject.obj
+ 0003:000000f4       ?__LINE__Var@?0??GetXForm@@9@9 1000e0f4     PortalObject.obj
+ 0003:000000f8       ?__LINE__Var@?0??SendMsg@@9@9 1000e0f8     PortalObject.obj
+ 0003:000000fc       __fltused                  1000e0fc     MSVCRTD:fltused.obj
+ 0003:00000100       ?_RTC_ErrorLevels@@3PAHA   1000e100     MSVCRTD:error.obj
+ 0003:00000118       ___security_cookie         1000e118     MSVCRTD:gs_cookie.obj
+ 0003:0000011c       ___security_cookie_complement 1000e11c     MSVCRTD:gs_cookie.obj
+ 0003:00000124       ___scrt_native_dllmain_reason 1000e124     MSVCRTD:utility.obj
+ 0003:00000128       ___isa_enabled             1000e128     MSVCRTD:cpu_disp.obj
+ 0003:0000012c       ___scrt_ucrt_dll_is_in_use 1000e12c     MSVCRTD:ucrt_stubs.obj
+ 0003:00000268       ?_OptionsStorage@?1??__local_stdio_printf_options@@9@4_KA 1000e268     MSVCRTD:error.obj
+ 0003:00000650       ?__type_info_root_node@@3U__type_info_node@@A 1000e650     MSVCRTD:tncleanup.obj
+ 0003:00000660       ?_OptionsStorage@?1??__local_stdio_scanf_options@@9@4_KA 1000e660     MSVCRTD:default_local_stdio_options.obj
+ 0003:0000066c       ___scrt_current_native_startup_state 1000e66c     MSVCRTD:utility.obj
+ 0003:00000670       ___scrt_native_startup_lock 1000e670     MSVCRTD:utility.obj
+ 0003:00000698       ___scrt_debugger_hook_flag 1000e698     MSVCRTD:utility_desktop.obj
+ 0003:0000069c       ___isa_available           1000e69c     MSVCRTD:cpu_disp.obj
+ 0003:000006a0       ___favor                   1000e6a0     MSVCRTD:cpu_disp.obj
+ 0003:000006b0       _NameList                  1000e6b0     <common>
+ 0003:00000700       _PortalProperties          1000e700     <common>
+ 0003:00000820       _Brush                     1000e820     <common>
+ 0003:00000824       ___dyn_tls_init_callback   1000e824     <common>
+ 0004:00000000       __imp__jeObject_RegisterGlobalObjectDef@4 1000f000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000004       __imp__jeVec3d_Set@16      1000f004     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000008       __imp__jeVec3d_Clear@4     1000f008     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000000c       __imp__jeVFile_Read@12     1000f00c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000010       __imp__jeVFile_Write@12    1000f010     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000014       __imp__jeVFile_Seek@12     1000f014     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000018       __imp__jeXForm3d_Copy@8    1000f018     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000001c       __imp__jeXForm3d_Orthonormalize@4 1000f01c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000020       __imp__jeXForm3d_RotateX@8 1000f020     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000024       __imp__jeXForm3d_RotateY@8 1000f024     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000028       __imp__jeXForm3d_RotateZ@8 1000f028     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000002c       __imp__jeXForm3d_Multiply@12 1000f02c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000030       __imp__jeXForm3d_Transform@12 1000f030     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000034       __imp__jeXForm3d_GetTranspose@8 1000f034     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000038       __imp__jeCamera_SetXForm@8 1000f038     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000003c       __imp__jeCamera_GetXForm@8 1000f03c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000040       __imp__jeCamera_GetTransposeXForm@8 1000f040     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000044       __imp__jeCamera_GetAttributes@12 1000f044     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000048       __imp__jeCamera_SetAttributes@12 1000f048     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000004c       __imp__jeCamera_SetZScale@8 1000f04c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000050       __imp__jeCamera_GetZScale@4 1000f050     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000054       __imp__jeExtBox_IsValid@4  1000f054     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000058       __imp__jeExtBox_SetToPoint@8 1000f058     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000005c       __imp__jeExtBox_ExtendToEnclose@8 1000f05c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000060       __imp__jePlane_Transform@12 1000f060     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000064       __imp__jeFrustum_AddPlane@12 1000f064     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000068       __imp__jeProperty_ListCopy@4 1000f068     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000006c       __imp__jeProperty_FillCheck@16 1000f06c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000070       __imp__jeProperty_FillRadio@16 1000f070     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000074       __imp__jeProperty_FillFloat@28 1000f074     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000078       __imp__jePortal_Create@0   1000f078     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000007c       __imp__jePortal_Destroy@4  1000f07c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000080       __imp__jeFaceInfo_SetDefaults@4 1000f080     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000084       __imp__jeBrush_Create@4    1000f084     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000088       __imp__jeBrush_Destroy@4   1000f088     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000008c       __imp__jeBrush_SetXForm@12 1000f08c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000090       __imp__jeBrush_GetXForm@4  1000f090     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000094       __imp__jeBrush_CreateFace@8 1000f094     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000098       __imp__jeBrush_GetNextFace@8 1000f098     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000009c       __imp__jeBrush_FaceGetVertCount@4 1000f09c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000a0       __imp__jeBrush_FaceSetVertByIndex@12 1000f0a0     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000a4       __imp__jeBrush_FaceGetVertByIndex@8 1000f0a4     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000a8       __imp__jeBrush_FaceSetFaceInfo@8 1000f0a8     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000ac       __imp__jeWorld_Render@12   1000f0ac     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000b0       __imp___jeRam_DebugAllocate@12 1000f0b0     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000b4       __imp__jeRam_AllocateClear@4 1000f0b4     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000b8       __imp__jeRam_Free_@4       1000f0b8     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000bc       __imp__jeErrorLog_AddExplicit@24 1000f0bc     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:000000c0       \177Jet3DClassic11d_NULL_THUNK_DATA 1000f0c0     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000110       __imp__GetModuleHandleW@4  1000f110     kernel32:KERNEL32.dll
+ 0004:00000114       __imp__GetStartupInfoW@4   1000f114     kernel32:KERNEL32.dll
+ 0004:00000118       __imp__InitializeSListHead@4 1000f118     kernel32:KERNEL32.dll
+ 0004:0000011c       __imp__RaiseException@16   1000f11c     kernel32:KERNEL32.dll
+ 0004:00000120       __imp__GetSystemTimeAsFileTime@4 1000f120     kernel32:KERNEL32.dll
+ 0004:00000124       __imp__GetCurrentThreadId@0 1000f124     kernel32:KERNEL32.dll
+ 0004:00000128       __imp__GetCurrentProcessId@0 1000f128     kernel32:KERNEL32.dll
+ 0004:0000012c       __imp__QueryPerformanceCounter@4 1000f12c     kernel32:KERNEL32.dll
+ 0004:00000130       __imp__GetProcAddress@8    1000f130     kernel32:KERNEL32.dll
+ 0004:00000134       __imp__FreeLibrary@4       1000f134     kernel32:KERNEL32.dll
+ 0004:00000138       __imp__VirtualQuery@12     1000f138     kernel32:KERNEL32.dll
+ 0004:0000013c       __imp__GetProcessHeap@0    1000f13c     kernel32:KERNEL32.dll
+ 0004:00000140       __imp__HeapFree@12         1000f140     kernel32:KERNEL32.dll
+ 0004:00000144       __imp__HeapAlloc@12        1000f144     kernel32:KERNEL32.dll
+ 0004:00000148       __imp__GetLastError@0      1000f148     kernel32:KERNEL32.dll
+ 0004:0000014c       __imp__IsProcessorFeaturePresent@4 1000f14c     kernel32:KERNEL32.dll
+ 0004:00000150       __imp__TerminateProcess@8  1000f150     kernel32:KERNEL32.dll
+ 0004:00000154       __imp__GetCurrentProcess@0 1000f154     kernel32:KERNEL32.dll
+ 0004:00000158       __imp__SetUnhandledExceptionFilter@4 1000f158     kernel32:KERNEL32.dll
+ 0004:0000015c       __imp__UnhandledExceptionFilter@4 1000f15c     kernel32:KERNEL32.dll
+ 0004:00000160       __imp__WideCharToMultiByte@32 1000f160     kernel32:KERNEL32.dll
+ 0004:00000164       __imp__MultiByteToWideChar@24 1000f164     kernel32:KERNEL32.dll
+ 0004:00000168       __imp__IsDebuggerPresent@0 1000f168     kernel32:KERNEL32.dll
+ 0004:0000016c       \177KERNEL32_NULL_THUNK_DATA 1000f16c     kernel32:KERNEL32.dll
+ 0004:000001a8       __imp____current_exception 1000f1a8     vcruntimed:VCRUNTIME140D.dll
+ 0004:000001ac       __imp____vcrt_LoadLibraryExW 1000f1ac     vcruntimed:VCRUNTIME140D.dll
+ 0004:000001b0       __imp____current_exception_context 1000f1b0     vcruntimed:VCRUNTIME140D.dll
+ 0004:000001b4       __imp____std_type_info_destroy_list 1000f1b4     vcruntimed:VCRUNTIME140D.dll
+ 0004:000001b8       __imp__memset              1000f1b8     vcruntimed:VCRUNTIME140D.dll
+ 0004:000001bc       __imp___except_handler4_common 1000f1bc     vcruntimed:VCRUNTIME140D.dll
+ 0004:000001c0       __imp____vcrt_GetModuleFileNameW 1000f1c0     vcruntimed:VCRUNTIME140D.dll
+ 0004:000001c4       __imp____vcrt_GetModuleHandleW 1000f1c4     vcruntimed:VCRUNTIME140D.dll
+ 0004:000001c8       \177VCRUNTIME140D_NULL_THUNK_DATA 1000f1c8     vcruntimed:VCRUNTIME140D.dll
+ 0004:000001f8       __imp___seh_filter_dll     1000f1f8     ucrtd:ucrtbased.dll
+ 0004:000001fc       __imp__terminate           1000f1fc     ucrtd:ucrtbased.dll
+ 0004:00000200       __imp__wcscpy_s            1000f200     ucrtd:ucrtbased.dll
+ 0004:00000204       __imp___wsplitpath_s       1000f204     ucrtd:ucrtbased.dll
+ 0004:00000208       __imp___wmakepath_s        1000f208     ucrtd:ucrtbased.dll
+ 0004:0000020c       __imp___initialize_narrow_environment 1000f20c     ucrtd:ucrtbased.dll
+ 0004:00000210       __imp___initterm           1000f210     ucrtd:ucrtbased.dll
+ 0004:00000214       __imp____stdio_common_vsprintf_s 1000f214     ucrtd:ucrtbased.dll
+ 0004:00000218       __imp__strcat_s            1000f218     ucrtd:ucrtbased.dll
+ 0004:0000021c       __imp__strcpy_s            1000f21c     ucrtd:ucrtbased.dll
+ 0004:00000220       __imp___CrtDbgReportW      1000f220     ucrtd:ucrtbased.dll
+ 0004:00000224       __imp___CrtDbgReport       1000f224     ucrtd:ucrtbased.dll
+ 0004:00000228       __imp___wassert            1000f228     ucrtd:ucrtbased.dll
+ 0004:0000022c       __imp___configure_narrow_argv 1000f22c     ucrtd:ucrtbased.dll
+ 0004:00000230       __imp___cexit              1000f230     ucrtd:ucrtbased.dll
+ 0004:00000234       __imp___crt_at_quick_exit  1000f234     ucrtd:ucrtbased.dll
+ 0004:00000238       __imp___crt_atexit         1000f238     ucrtd:ucrtbased.dll
+ 0004:0000023c       __imp___execute_onexit_table 1000f23c     ucrtd:ucrtbased.dll
+ 0004:00000240       __imp___register_onexit_function 1000f240     ucrtd:ucrtbased.dll
+ 0004:00000244       __imp___initterm_e         1000f244     ucrtd:ucrtbased.dll
+ 0004:00000248       __imp___initialize_onexit_table 1000f248     ucrtd:ucrtbased.dll
+ 0004:0000024c       \177ucrtbased_NULL_THUNK_DATA 1000f24c     ucrtd:ucrtbased.dll
+ 0004:00000288       __IMPORT_DESCRIPTOR_Jet3DClassic11d 1000f288     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:0000029c       __IMPORT_DESCRIPTOR_VCRUNTIME140D 1000f29c     vcruntimed:VCRUNTIME140D.dll
+ 0004:000002b0       __IMPORT_DESCRIPTOR_ucrtbased 1000f2b0     ucrtd:ucrtbased.dll
+ 0004:000002c4       __IMPORT_DESCRIPTOR_KERNEL32 1000f2c4     kernel32:KERNEL32.dll
+ 0004:000002d8       __NULL_IMPORT_DESCRIPTOR   1000f2d8     jet3DClassic11d:Jet3DClassic11d.dll
+ 0005:00000000       ___guard_check_icall_fptr  10011000     MSVCRTD:guard_support.obj
+ 0005:00000004       ___guard_xfg_check_icall_fptr 10011004     MSVCRTD:guard_support.obj
+ 0005:00000008       ___castguard_check_failure_os_handled_fptr 10011008     MSVCRTD:guard_support.obj
+
+ entry point at        0001:0000026c
+
+ Static symbols
+
+ 0000:fffec000       .debug$S                   10000000     PortalObj.exp
+ 0000:00000000       _volmd                     10000000     PortalObject.obj
+ 0000:00000000       _volmd                     10000000     PortalObject.obj
+ 0000:00000000       _volmd                     10000000     PortalObject.obj
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     jet3DClassic11d:Jet3DClassic11d.dll
+ 0000:fffec000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffec000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffec000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffec000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffec000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffec000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffec000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffec000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffec000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffec000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffec000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffec000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffec000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffec000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffec000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffec000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffec000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffec000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffec000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffec000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffec000       .debug$S                   10000000     ucrtd:ucrtbased.dll
+ 0000:fffec000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffec000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffec000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffec000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffec000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffec000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffec000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffec000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffec000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffec000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffec000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffec000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffec000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffec000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffec000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffec000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffec000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffec000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffec000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffec000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffec000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffec000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffec000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffef000       __guard_fids___except_handler4 10000000     MSVCRTD:chandler4gs.obj
+ 0000:00000000       _volmd                     10000000     MSVCRTD:cpu_disp.obj
+ 0000:fffef000       __guard_fids_?dllmain_dispatch@@YAHQAUHINSTANCE__@@KQAX@Z 10000000     MSVCRTD:dll_dllmain.obj
+ 0000:00000000       _volmd                     10000000     MSVCRTD:gs_report.obj
+ 0000:fffef000       __guard_fids__             10000000     MSVCRTD:guard_support.obj
+ 0000:fffef000       __guard_fids__             10000000     MSVCRTD:guard_support.obj
+ 0000:fffef000       __guard_fids___guard_icall_checks_enforced 10000000     MSVCRTD:guard_support.obj
+ 0000:00000000       _volmd                     10000000     MSVCRTD:guard_support.obj
+ 0000:00000000       _volmd                     10000000     MSVCRTD:guard_support.obj
+ 0000:fffef000       __guard_fids___CRT_RTC_INIT 10000000     MSVCRTD:init.obj
+ 0000:fffef000       __guard_fids___CRT_RTC_INITW 10000000     MSVCRTD:init.obj
+ 0000:fffef000       __guard_fids____scrt_set_unhandled_exception_filter 10000000     MSVCRTD:utility_desktop.obj
+ 0000:fffec000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffec000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffec000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffec000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffec000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffec000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffec000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0000:fffec000       .debug$S                   10000000     vcruntimed:VCRUNTIME140D.dll
+ 0001:00000730       _BrushExtBox               10001730 f   PortalObject.obj
+ 0001:00000970       $LN15                      10001970     PortalObject.obj
+ 0001:00000978       $LN14                      10001978     PortalObject.obj
+ 0001:00000990       $LN13                      10001990     PortalObject.obj
+ 0001:00000995       $LN12                      10001995     PortalObject.obj
+ 0001:00000d34       $LN18                      10001d34     PortalObject.obj
+ 0001:00000d3c       $LN17                      10001d3c     PortalObject.obj
+ 0001:00000d54       $LN16                      10001d54     PortalObject.obj
+ 0001:00000d58       $LN15                      10001d58     PortalObject.obj
+ 0001:00002368       $LN20                      10003368     PortalObject.obj
+ 0001:00002370       $LN19                      10003370     PortalObject.obj
+ 0001:00002394       $LN18                      10003394     PortalObject.obj
+ 0001:0000239d       $LN17                      1000339d     PortalObject.obj
+ 0001:000023a7       $LN16                      100033a7     PortalObject.obj
+ 0001:000034d0       _Portal_CreateFace         100044d0 f   PortalObject.obj
+ 0001:00003690       _RenderPortalObjectInstance2 10004690 f   PortalObject.obj
+ 0001:00003a98       $LN25                      10004a98     PortalObject.obj
+ 0001:00003aa0       $LN24                      10004aa0     PortalObject.obj
+ 0001:00003af4       $LN23                      10004af4     PortalObject.obj
+ 0001:00003b07       $LN22                      10004b07     PortalObject.obj
+ 0001:00003b12       $LN21                      10004b12     PortalObject.obj
+ 0001:00003b17       $LN20                      10004b17     PortalObject.obj
+ 0001:00003b1b       $LN19                      10004b1b     PortalObject.obj
+ 0001:00003b24       $LN18                      10004b24     PortalObject.obj
+ 0001:00003b2d       $LN17                      10004b2d     PortalObject.obj
+ 0001:00003b33       $LN15                      10004b33     PortalObject.obj
+ 0001:00004000       $LN18                      10005000     PortalObject.obj
+ 0001:000043d0       $LN12                      100053d0     PortalObject.obj
+ 0001:000043d8       $LN11                      100053d8     PortalObject.obj
+ 0001:000043f0       $LN10                      100053f0     PortalObject.obj
+ 0001:000043f4       $LN9                       100053f4     PortalObject.obj
+ 0001:00004840       ?DebuggerProbe@@YA_NK@Z    10005840 f   MSVCRTD:error.obj
+ 0001:00004890       ?DebuggerRuntime@@YA_NKHPAXPB_W@Z 10005890 f   MSVCRTD:error.obj
+ 0001:00004b60       ?_getMemBlockDataString@@YAXPAD0PBDI@Z 10005b60 f   MSVCRTD:error.obj
+ 0001:00004bf0       ?_strlen_priv@@YAIPBD@Z    10005bf0 f   MSVCRTD:error.obj
+ 0001:00004c10       ?failwithmessage@@YAXPAXHHPBD@Z 10005c10 f   MSVCRTD:error.obj
+ 0001:00004e90       ?notify_debugger@@YAXABUtagEXCEPTION_VISUALCPP_DEBUG_INFO@@@Z 10005e90 f   MSVCRTD:error.obj
+ 0001:00005090       ?dllmain_crt_dispatch@@YGHQAUHINSTANCE__@@KQAX@Z 10006090 f   MSVCRTD:dll_dllmain.obj
+ 0001:000050fc       $LN11                      100060fc     MSVCRTD:dll_dllmain.obj
+ 0001:00005130       ?dllmain_crt_process_attach@@YAHQAUHINSTANCE__@@QAX@Z 10006130 f   MSVCRTD:dll_dllmain.obj
+ 0001:00005300       ?dllmain_crt_process_detach@@YAH_N@Z 10006300 f   MSVCRTD:dll_dllmain.obj
+ 0001:00005440       ?dllmain_dispatch@@YAHQAUHINSTANCE__@@KQAX@Z 10006440 f   MSVCRTD:dll_dllmain.obj
+ 0001:00005630       ?dllmain_raw@@YGHQAUHINSTANCE__@@KQAX@Z 10006630 f   MSVCRTD:dll_dllmain.obj
+ 0001:00005be0       ?GetPdbDll@@YAPAUHINSTANCE__@@XZ 10006be0 f   MSVCRTD:pdblkup.obj
+ 0001:00005d80       ?GetPdbDllFromInstallPath@@YAPAUHINSTANCE__@@XZ 10006d80 f   MSVCRTD:pdblkup.obj
+ 0001:00006070       ?GetPdbDllPathFromFilePath@@YAHPB_WPA_WI@Z 10007070 f   MSVCRTD:pdblkup.obj
+ 0001:00006740       ___castguard_check_failure_os_handled_wrapper 10007740 f   MSVCRTD:guard_support.obj
+ 0001:00006770       ___castguard_compat_check  10007770 f   MSVCRTD:guard_support.obj
+ 0001:000068b0       ___castguard_slow_path_compat_check 100078b0 f   MSVCRTD:guard_support.obj
+ 0001:00006940       ___get_entropy             10007940 f   MSVCRTD:gs_support.obj
+ 0001:00006b30       ?find_pe_section@@YAPAU_IMAGE_SECTION_HEADER@@QAEI@Z 10007b30 f   MSVCRTD:utility.obj
+ 0001:00006bf0       ?is_potentially_valid_image_base@@YA_NQAX@Z 10007bf0 f   MSVCRTD:utility.obj
+ 0002:00000dd4       ?_RTC_ErrorMessages@@3QBQBDB 1000bdd4     MSVCRTD:error.obj
+ 0002:00000dec       ?_RTC_NoFalsePositives@@3QBHB 1000bdec     MSVCRTD:error.obj
+ 0002:00000e04       ?stack_premsg@@3QBDB       1000be04     MSVCRTD:error.obj
+ 0002:00000e20       ?stack_postmsg@@3QBDB      1000be20     MSVCRTD:error.obj
+ 0002:00000e34       ?uninit_premsg@@3QBDB      1000be34     MSVCRTD:error.obj
+ 0002:00000e44       ?uninit_postmsg@@3QBDB     1000be44     MSVCRTD:error.obj
+ 0002:00001494       ?_RTC_errlist@@3QBQBDB     1000c494     MSVCRTD:userapi.obj
+ 0002:00001578       _GS_ExceptionPointers      1000c578     MSVCRTD:gs_report.obj
+ 0002:00001584       ?mspdbName@@3QB_WB         1000c584     MSVCRTD:pdblkup.obj
+ 0002:000015a8       ?debugCrtFileName@@3QB_WB  1000c5a8     MSVCRTD:pdblkup.obj
+ 0002:00001738       ?dllExt@?1??GetPdbDllPathFromFilePath@@YAHPB_WPA_WI@Z@4QB_WB 1000c738     MSVCRTD:pdblkup.obj
+ 0002:00001744       ?mspdbFilename@?1??GetPdbDllPathFromFilePath@@YAHPB_WPA_WI@Z@4QB_WB 1000c744     MSVCRTD:pdblkup.obj
+ 0002:000020bc       __RTC_InitBase.rtc$IMZ     1000d0bc     ObjectDef.obj
+ 0002:000020c0       __RTC_InitBase.rtc$IMZ     1000d0c0     PortalObject.obj
+ 0002:000023d0       __RTC_Shutdown.rtc$TMZ     1000d3d0     ObjectDef.obj
+ 0002:000023d4       __RTC_Shutdown.rtc$TMZ     1000d3d4     PortalObject.obj
+ 0002:000025e0       __sehtable$?notify_debugger@@YAXABUtagEXCEPTION_VISUALCPP_DEBUG_INFO@@@Z 1000d5e0     MSVCRTD:error.obj
+ 0002:00002600       __sehtable$?dllmain_crt_process_attach@@YAHQAUHINSTANCE__@@QAX@Z 1000d600     MSVCRTD:dll_dllmain.obj
+ 0002:00002620       __sehtable$?dllmain_crt_process_detach@@YAH_N@Z 1000d620     MSVCRTD:dll_dllmain.obj
+ 0002:00002650       __sehtable$?dllmain_dispatch@@YAHQAUHINSTANCE__@@KQAX@Z 1000d650     MSVCRTD:dll_dllmain.obj
+ 0002:00002670       __sehtable$___scrt_is_nonwritable_in_current_image 1000d670     MSVCRTD:utility.obj
+ 0002:000027b0       .edata                     1000d7b0     PortalObj.exp
+ 0002:000027d8       rgpv                       1000d7d8     PortalObj.exp
+ 0002:000027dc       rgszName                   1000d7dc     PortalObj.exp
+ 0002:000027e0       rgwOrd                     1000d7e0     PortalObj.exp
+ 0002:000027e2       szName                     1000d7e2     PortalObj.exp
+ 0002:000027f0       $N00001                    1000d7f0     PortalObj.exp
+ 0003:00000260       ?init@?1??_RTC_InitBase@@9@4_NA 1000e260     MSVCRTD:init.obj
+ 0003:00000274       ?__proc_attached@@3HA      1000e274     MSVCRTD:dll_dllmain.obj
+ 0003:00000278       ?_RTC_ErrorReportFunc@@3P6AHHPBDH00ZZA 1000e278     MSVCRTD:userapi.obj
+ 0003:0000027c       ?_RTC_ErrorReportFuncW@@3P6AHHPB_WH00ZZA 1000e27c     MSVCRTD:userapi.obj
+ 0003:00000288       _GS_ExceptionRecord        1000e288     MSVCRTD:gs_report.obj
+ 0003:000002d8       _GS_ContextRecord          1000e2d8     MSVCRTD:gs_report.obj
+ 0003:00000644       ?mspdb@@3PAUHINSTANCE__@@A 1000e644     MSVCRTD:pdblkup.obj
+ 0003:00000648       ?alreadyTried@?1??GetPdbDll@@YAPAUHINSTANCE__@@XZ@4_NA 1000e648     MSVCRTD:pdblkup.obj
+ 0003:00000649       ?PDBOK@?1??_RTC_GetSrcLine@@YAHPAEPA_WKPAH1K@Z@4_NA 1000e649     MSVCRTD:pdblkup.obj
+ 0003:00000674       ?is_initialized_as_dll@@3_NA 1000e674     MSVCRTD:utility.obj
+ 0003:00000675       ?module_local_atexit_table_initialized@@3_NA 1000e675     MSVCRTD:utility.obj
+ 0003:00000678       ?module_local_atexit_table@@3U_onexit_table_t@@A 1000e678     MSVCRTD:utility.obj
+ 0003:00000684       ?module_local_at_quick_exit_table@@3U_onexit_table_t@@A 1000e684     MSVCRTD:utility.obj
+ 0004:00000a3c       .idata$6                   1000fa3c     jet3DClassic11d:Jet3DClassic11d.dll
+ 0004:00000b16       .idata$6                   1000fb16     vcruntimed:VCRUNTIME140D.dll
+ 0004:00000ca8       .idata$6                   1000fca8     ucrtd:ucrtbased.dll
+ 0004:00000e8c       .idata$6                   1000fe8c     kernel32:KERNEL32.dll
+ 0006:00000170       $R000000                   10012170     * linker generated manifest res *

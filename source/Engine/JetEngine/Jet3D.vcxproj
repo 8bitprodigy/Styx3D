@@ -1,0 +1,519 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>Jet3DClassic11</ProjectName>
+    <ProjectGuid>{DA9C671F-1998-42EC-8D3C-F14AE13AD4AD}</ProjectGuid>
+    <Keyword>AtlProj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <UseOfAtl>false</UseOfAtl>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <UseOfAtl>false</UseOfAtl>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)bin\</OutDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Release\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectName)d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <SourcePath>$(EXECUTABLEPATH);$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.\;..\..\..\include;..\..\Tools\Editor;World;Engine;Particle;Engine\Drivers;Actor;Pool;BSP;Math;Entities;Support;Physics;VFile;Bitmap;Bitmap\Compression;guWorld;Mp3Mgr;..\External\VorbisSDK\include;..\External\EAXSDK\include;..\External\DXSDK_81\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;WIN32;_WINDOWS;_USRDLL;JETENGINE_EXPORTS;JET_VERSION_2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <StructMemberAlignment>16Bytes</StructMemberAlignment>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <PrecompiledHeaderOutputFile>.\Debug/Jet3D.pch</PrecompiledHeaderOutputFile>
+      <BrowseInformation>true</BrowseInformation>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/MACHINE:I386 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>amstrmid.lib;oldnames.lib;urlmon.lib;winmm.lib;quartz.lib;dxguid.lib;ddraw.lib;vorbis_static_d.lib;vorbisfile_static_d.lib;ogg_static_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>..\..\..\lib;..\External\VorbisSDK\lib;..\External\EAXSDK\lib;..\External\DXSDK_81\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateMapFile>true</GenerateMapFile>
+      <ImportLibrary>..\..\..\lib\$(TargetName).lib</ImportLibrary>
+      <MapFileName>$(SolutionDir)bin\$(TargetName).map</MapFileName>
+      <OutputFile>$(SolutionDir)bin\$(TargetName)$(TargetExt)</OutputFile>
+      <ProgramDatabaseFile>$(SolutionDir)bin\$(TargetName).pdb</ProgramDatabaseFile>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+    </Link>
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\../../../lib/jet/Debug/Jet3D.tlb</TypeLibraryName>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.\;..\..\..\include;..\..\Tools\Editor;World;Engine;Particle;Engine\Drivers;Actor;Pool;BSP;Math;Entities;Support;Physics;VFile;Bitmap;Bitmap\Compression;guWorld;Mp3Mgr;..\External\VorbisSDK\include;..\External\EAXSDK\include;..\External\DXSDK_81\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;WIN32;_WINDOWS;_USRDLL;JET_VERSION_2;JETENGINE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <StructMemberAlignment>16Bytes</StructMemberAlignment>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <PrecompiledHeaderOutputFile>.\Release/Jet3D.pch</PrecompiledHeaderOutputFile>
+      <BrowseInformation>true</BrowseInformation>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/MACHINE:I386 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>amstrmid.lib;oldnames.lib;urlmon.lib;winmm.lib;quartz.lib;dxguid.lib;ddraw.lib;ogg_static.lib;vorbis_static.lib;vorbisfile_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>..\..\..\lib;..\External\VorbisSDK\lib;..\External\EAXSDK\lib;..\External\DXSDK_81\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(SolutionDir)bin\$(TargetName).map</MapFileName>
+      <ImportLibrary>..\..\..\lib\$(TargetName).lib</ImportLibrary>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <OutputFile>..\..\..\bin\$(TargetName)$(TargetExt)</OutputFile>
+      <ProgramDatabaseFile>$(SolutionDir)bin\$(TargetName).pdb</ProgramDatabaseFile>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+    </Link>
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\../../../lib/jet/Jet3D.tlb</TypeLibraryName>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="List.c" />
+    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="OGGStream.cpp" />
+    <ClCompile Include="Report.cpp" />
+    <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="Sound3d.cpp" />
+    <ClCompile Include="TClip.cpp" />
+    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Tsc.cpp" />
+    <ClCompile Include="UVMap.cpp" />
+    <ClCompile Include="Actor\Actor.cpp" />
+    <ClCompile Include="Actor\ActorObj.cpp" />
+    <ClCompile Include="Actor\Body.cpp" />
+    <ClCompile Include="Actor\BodyInst.cpp" />
+    <ClCompile Include="Actor\Motion.cpp" />
+    <ClCompile Include="Actor\Path.cpp" />
+    <ClCompile Include="Actor\Pose.cpp" />
+    <ClCompile Include="Actor\Puppet.cpp" />
+    <ClCompile Include="Actor\QKFrame.cpp" />
+    <ClCompile Include="Actor\StrBlock.cpp" />
+    <ClCompile Include="Actor\TKArray.cpp" />
+    <ClCompile Include="Actor\TKEvents.cpp" />
+    <ClCompile Include="Actor\VKFrame.cpp" />
+    <ClCompile Include="Actor\XFArray.cpp" />
+    <ClCompile Include="Bitmap\bitmap.c" />
+    <ClCompile Include="Bitmap\bitmap_blitdata.c" />
+    <ClCompile Include="Bitmap\bitmap_gamma.c" />
+    <ClCompile Include="Bitmap\pixelformat.c" />
+    <ClCompile Include="Bitmap\Compression\arithc.c" />
+    <ClCompile Include="Bitmap\Compression\codealphas.c" />
+    <ClCompile Include="Bitmap\Compression\codeimage.c" />
+    <ClCompile Include="Bitmap\Compression\codepal.c" />
+    <ClCompile Include="Bitmap\Compression\coder.c" />
+    <ClCompile Include="Bitmap\Compression\coder_bp.c" />
+    <ClCompile Include="Bitmap\Compression\coder_bpb2.c" />
+    <ClCompile Include="Bitmap\Compression\coder_bpbf.c" />
+    <ClCompile Include="Bitmap\Compression\coder_bpbfr.c" />
+    <ClCompile Include="Bitmap\Compression\coder_bpbfrl.c" />
+    <ClCompile Include="Bitmap\Compression\coder_f.c" />
+    <ClCompile Include="Bitmap\Compression\coder_f2.c" />
+    <ClCompile Include="Bitmap\Compression\coder_f3.c" />
+    <ClCompile Include="Bitmap\Compression\codeutil.c" />
+    <ClCompile Include="Bitmap\Compression\colorconv.c" />
+    <ClCompile Include="Bitmap\Compression\context.c" />
+    <ClCompile Include="Bitmap\Compression\huffa.c" />
+    <ClCompile Include="Bitmap\Compression\huffman2.c" />
+    <ClCompile Include="Bitmap\Compression\image.c" />
+    <ClCompile Include="Bitmap\Compression\intmath.c" />
+    <ClCompile Include="Bitmap\Compression\katcache.c" />
+    <ClCompile Include="Bitmap\Compression\ladder.c" />
+    <ClCompile Include="Bitmap\Compression\lbitio.c" />
+    <ClCompile Include="Bitmap\Compression\lza.c" />
+    <ClCompile Include="Bitmap\Compression\lzh.c" />
+    <ClCompile Include="Bitmap\Compression\o0coder.c" />
+    <ClCompile Include="Bitmap\Compression\o1coder.c" />
+    <ClCompile Include="Bitmap\Compression\palcreate.c" />
+    <ClCompile Include="Bitmap\Compression\palettize.c" />
+    <ClCompile Include="Bitmap\Compression\paloptimize.c" />
+    <ClCompile Include="Bitmap\Compression\rungae.c" />
+    <ClCompile Include="Bitmap\Compression\rungo1.c" />
+    <ClCompile Include="Bitmap\Compression\runtrans.c" />
+    <ClCompile Include="Bitmap\Compression\scontext.c" />
+    <ClCompile Include="Bitmap\Compression\sortpal.c" />
+    <ClCompile Include="Bitmap\Compression\sortpalx.c" />
+    <ClCompile Include="Bitmap\Compression\soz.c" />
+    <ClCompile Include="Bitmap\Compression\strutil.c" />
+    <ClCompile Include="Bitmap\Compression\tblock.c" />
+    <ClCompile Include="Bitmap\Compression\trans_bcw3.c" />
+    <ClCompile Include="Bitmap\Compression\trans_cdf22.c" />
+    <ClCompile Include="Bitmap\Compression\trans_cdf22q.c" />
+    <ClCompile Include="Bitmap\Compression\trans_cdf24.c" />
+    <ClCompile Include="Bitmap\Compression\trans_d4.c" />
+    <ClCompile Include="Bitmap\Compression\trans_l97.c" />
+    <ClCompile Include="Bitmap\Compression\trans_spt.c" />
+    <ClCompile Include="Bitmap\Compression\transform.c" />
+    <ClCompile Include="Bitmap\Compression\utility.c" />
+    <ClCompile Include="Bitmap\Compression\wavelet.c" />
+    <ClCompile Include="Bitmap\Compression\yuv.c" />
+    <ClCompile Include="Bsp\jeBSP.cpp" />
+    <ClCompile Include="Bsp\jeBSP_Brush.cpp" />
+    <ClCompile Include="Bsp\jeBSP_TopBrush.cpp" />
+    <ClCompile Include="Bsp\jeBSPNode.cpp" />
+    <ClCompile Include="Bsp\jeBSPNode_Area.cpp" />
+    <ClCompile Include="Bsp\jeBSPNode_DrawFace.cpp" />
+    <ClCompile Include="Bsp\jeBSPNode_Face.cpp" />
+    <ClCompile Include="Bsp\jeBSPNode_Leaf.cpp" />
+    <ClCompile Include="Bsp\jeBSPNode_Light.cpp" />
+    <ClCompile Include="Bsp\jeBSPNode_Portal.cpp" />
+    <ClCompile Include="Engine\BitmapList.cpp" />
+    <ClCompile Include="Engine\Engine.cpp" />
+    <ClCompile Include="Engine\FontBmp.cpp" />
+    <ClCompile Include="Engine\jePolyMgr.cpp" />
+    <ClCompile Include="Engine\jeTexture.cpp" />
+    <ClCompile Include="Engine\splash_bmp.cpp" />
+    <ClCompile Include="Engine\Drivers\D3DDrv\d3d_DDMemMgr.cpp" />
+    <ClCompile Include="Engine\Drivers\D3DDrv\d3d_err.cpp" />
+    <ClCompile Include="Engine\Drivers\D3DDrv\d3d_fx.cpp" />
+    <ClCompile Include="Engine\Drivers\D3DDrv\d3d_gspan.cpp" />
+    <ClCompile Include="Engine\Drivers\D3DDrv\d3d_main.cpp" />
+    <ClCompile Include="Engine\Drivers\D3DDrv\d3d_pcache.cpp" />
+    <ClCompile Include="Engine\Drivers\D3DDrv\d3d_render.cpp" />
+    <ClCompile Include="Engine\Drivers\D3DDrv\d3d_Scene.cpp" />
+    <ClCompile Include="Engine\Drivers\D3DDrv\d3d_thandle.cpp" />
+    <ClCompile Include="Engine\Drivers\D3DDrv\d3d_tpage.cpp" />
+    <ClCompile Include="Engine\Drivers\D3DDrv\d3dcache.cpp" />
+    <ClCompile Include="Engine\Drivers\D3DDrv\d3ddrv.cpp" />
+    <ClCompile Include="guWorld\jeBrush.cpp" />
+    <ClCompile Include="guWorld\jeFaceInfo.cpp" />
+    <ClCompile Include="guWorld\jeFrustum.cpp" />
+    <ClCompile Include="guWorld\jeGArray.cpp" />
+    <ClCompile Include="guWorld\jeIndexPoly.cpp" />
+    <ClCompile Include="guWorld\jeLight.cpp" />
+    <ClCompile Include="guWorld\jeMaterial.cpp" />
+    <ClCompile Include="guWorld\jeMaterialSpec.cpp" />
+    <ClCompile Include="guWorld\jeModel.cpp" />
+    <ClCompile Include="guWorld\jePlane.cpp" />
+    <ClCompile Include="guWorld\jePlaneArray.cpp" />
+    <ClCompile Include="guWorld\jePoly.cpp" />
+    <ClCompile Include="guWorld\jePortal.cpp" />
+    <ClCompile Include="guWorld\jeStaticMesh.cpp" />
+    <ClCompile Include="guWorld\jeTexVec.cpp" />
+    <ClCompile Include="guWorld\jeUserPoly.cpp" />
+    <ClCompile Include="guWorld\jeVertArray.cpp" />
+    <ClCompile Include="guWorld\jeWorld.cpp" />
+    <ClCompile Include="guWorld\VisObject.cpp" />
+    <ClCompile Include="Math\asmxform3d.cpp" />
+    <ClCompile Include="Math\Box.cpp" />
+    <ClCompile Include="Math\crc32.cpp" />
+    <ClCompile Include="Math\ExtBox.cpp" />
+    <ClCompile Include="Math\jeRay.cpp" />
+    <ClCompile Include="Math\jeVec3d_Katmai.cpp" />
+    <ClCompile Include="Math\ObjectPos.cpp" />
+    <ClCompile Include="Math\Quatern.cpp" />
+    <ClCompile Include="Math\Vec2d.cpp" />
+    <ClCompile Include="Math\Vec3d.cpp" />
+    <ClCompile Include="Math\Xform3d.cpp" />
+    <ClCompile Include="Physics\Part.cpp" />
+    <ClCompile Include="Physics\Spring.cpp" />
+    <ClCompile Include="Support\Array.cpp" />
+    <ClCompile Include="Support\Cpu.cpp" />
+    <ClCompile Include="Support\Errorlog.cpp" />
+    <ClCompile Include="Support\jeAssert.cpp" />
+    <ClCompile Include="Support\jeChain.cpp" />
+    <ClCompile Include="Support\jeMemAllocInfo.cpp" />
+    <ClCompile Include="Support\jeNameMgr.cpp" />
+    <ClCompile Include="Support\jeProperty.cpp" />
+    <ClCompile Include="Support\jePtrMgr.cpp" />
+    <ClCompile Include="Support\jeResource.cpp" />
+    <ClCompile Include="Support\Log.cpp" />
+    <ClCompile Include="Support\MemPool.cpp" />
+    <ClCompile Include="Support\Ram.cpp" />
+    <ClCompile Include="Support\ThreadLog.cpp" />
+    <ClCompile Include="Support\ThreadQueue.cpp" />
+    <ClCompile Include="Support\Util.cpp" />
+    <ClCompile Include="VFile\dirtree.c" />
+    <ClCompile Include="VFile\fsdos.c" />
+    <ClCompile Include="VFile\fsfakenet.c" />
+    <ClCompile Include="VFile\Fsinet.cpp" />
+    <ClCompile Include="VFile\fslz.c" />
+    <ClCompile Include="VFile\Fsmemory.c" />
+    <ClCompile Include="VFile\fsvfs.c" />
+    <ClCompile Include="VFile\vfile.c" />
+    <ClCompile Include="Terrain\Quad.cpp" />
+    <ClCompile Include="Terrain\Terrain.cpp" />
+    <ClCompile Include="Particle\jeParticle.cpp" />
+    <ClCompile Include="Mp3Mgr\Mp3Mgr.cpp" />
+    <ClCompile Include="VideoMgr\VideoMgr.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\Camera.h" />
+    <ClInclude Include="CSNetMgr.h" />
+    <ClInclude Include="..\..\..\include\jeTypes.h" />
+    <ClInclude Include="..\..\..\include\jeVersion.h" />
+    <ClInclude Include="list.h" />
+    <ClInclude Include="..\..\..\include\OBJECT.H" />
+    <ClInclude Include="OGGStream.h" />
+    <ClInclude Include="Ptrtypes.h" />
+    <ClInclude Include="report.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="..\..\..\include\Sound.h" />
+    <ClInclude Include="..\..\..\include\Sound3d.h" />
+    <ClInclude Include="tclip.h" />
+    <ClInclude Include="timer.h" />
+    <ClInclude Include="tsc.h" />
+    <ClInclude Include="..\..\..\include\UVMAP.H" />
+    <ClInclude Include="..\..\..\include\ACTOR.H" />
+    <ClInclude Include="Actor\ActorObj.h" />
+    <ClInclude Include="Actor\ActorObjLists.h" />
+    <ClInclude Include="Actor\ActorPropertyList.h" />
+    <ClInclude Include="Actor\ActorUtil.h" />
+    <ClInclude Include="..\..\..\include\BODY.H" />
+    <ClInclude Include="Actor\bodyinst.h" />
+    <ClInclude Include="Actor\motion.h" />
+    <ClInclude Include="..\..\..\include\PATH.H" />
+    <ClInclude Include="Actor\pose.h" />
+    <ClInclude Include="Actor\puppet.h" />
+    <ClInclude Include="Actor\QKFrame.h" />
+    <ClInclude Include="Actor\strblock.h" />
+    <ClInclude Include="Actor\tkarray.h" />
+    <ClInclude Include="Actor\tkevents.h" />
+    <ClInclude Include="Actor\vkframe.h" />
+    <ClInclude Include="Actor\xfarray.h" />
+    <ClInclude Include="..\..\..\include\BITMAP.H" />
+    <ClInclude Include="Bitmap\bitmap_blitdata.h" />
+    <ClInclude Include="Bitmap\bitmap_gamma.h" />
+    <ClInclude Include="..\..\..\include\pixelformat.h" />
+    <ClInclude Include="Bitmap\Compression\arithc.h" />
+    <ClInclude Include="bitmap\compression\cache3dn.h" />
+    <ClInclude Include="Bitmap\Compression\codealphas.h" />
+    <ClInclude Include="Bitmap\Compression\codeimage.h" />
+    <ClInclude Include="Bitmap\Compression\codepal.h" />
+    <ClInclude Include="Bitmap\Compression\coder.h" />
+    <ClInclude Include="Bitmap\Compression\codeutil.h" />
+    <ClInclude Include="Bitmap\Compression\colorconv.h" />
+    <ClInclude Include="Bitmap\Compression\context.h" />
+    <ClInclude Include="Bitmap\Compression\huffa.h" />
+    <ClInclude Include="Bitmap\Compression\huffman2.h" />
+    <ClInclude Include="Bitmap\Compression\image.h" />
+    <ClInclude Include="Bitmap\Compression\intmath.h" />
+    <ClInclude Include="Bitmap\Compression\katcache.h" />
+    <ClInclude Include="Bitmap\Compression\ladder.h" />
+    <ClInclude Include="Bitmap\Compression\lbitio.h" />
+    <ClInclude Include="Bitmap\Compression\lza.h" />
+    <ClInclude Include="Bitmap\Compression\lzh.h" />
+    <ClInclude Include="Bitmap\Compression\o0coder.h" />
+    <ClInclude Include="Bitmap\Compression\o1coder.h" />
+    <ClInclude Include="Bitmap\Compression\palcreate.h" />
+    <ClInclude Include="Bitmap\Compression\palettize.h" />
+    <ClInclude Include="Bitmap\Compression\paloptimize.h" />
+    <ClInclude Include="Bitmap\Compression\rungae.h" />
+    <ClInclude Include="Bitmap\Compression\rungo1.h" />
+    <ClInclude Include="Bitmap\Compression\runtrans.h" />
+    <ClInclude Include="Bitmap\Compression\scontext.h" />
+    <ClInclude Include="Bitmap\Compression\sortpal.h" />
+    <ClInclude Include="Bitmap\Compression\sortpalx.h" />
+    <ClInclude Include="Bitmap\Compression\soz.h" />
+    <ClInclude Include="Bitmap\Compression\strutil.h" />
+    <ClInclude Include="Bitmap\Compression\tblock.h" />
+    <ClInclude Include="Bitmap\Compression\transform.h" />
+    <ClInclude Include="Bitmap\Compression\utility.h" />
+    <ClInclude Include="Bitmap\Compression\wavelet.h" />
+    <ClInclude Include="Bitmap\Compression\yuv.h" />
+    <ClInclude Include="..\..\..\include\jeBSP.h" />
+    <ClInclude Include="Engine\BitmapList.h" />
+    <ClInclude Include="..\..\..\include\ENGINE.H" />
+    <ClInclude Include="Engine\jePolyMgr.h" />
+    <ClInclude Include="..\..\..\include\jeTexture.h" />
+    <ClInclude Include="Engine\Drivers\Dcommon.h" />
+    <ClInclude Include="Engine\Drivers\D3DDrv\d3d_DDMemMgr.h" />
+    <ClInclude Include="Engine\Drivers\D3DDrv\D3d_err.h" />
+    <ClInclude Include="Engine\Drivers\D3DDrv\D3d_fx.h" />
+    <ClInclude Include="Engine\Drivers\D3DDrv\d3d_GSPAN.H" />
+    <ClInclude Include="Engine\Drivers\D3DDrv\D3d_main.h" />
+    <ClInclude Include="Engine\Drivers\D3DDrv\d3d_Pcache.h" />
+    <ClInclude Include="Engine\Drivers\D3DDrv\d3d_RENDER.H" />
+    <ClInclude Include="Engine\Drivers\D3DDrv\d3d_Scene.h" />
+    <ClInclude Include="Engine\Drivers\D3DDrv\d3d_THandle.h" />
+    <ClInclude Include="Engine\Drivers\D3DDrv\d3d_TPage.h" />
+    <ClInclude Include="Engine\Drivers\D3DDrv\D3dcache.h" />
+    <ClInclude Include="Engine\Drivers\D3DDrv\D3ddrv.h" />
+    <ClInclude Include="..\..\..\include\jeBrush.h" />
+    <ClInclude Include="..\..\..\include\jeFaceInfo.h" />
+    <ClInclude Include="..\..\..\include\jeFrustum.h" />
+    <ClInclude Include="..\..\..\include\jeGArray.h" />
+    <ClInclude Include="guWorld\jeIndexPoly.h" />
+    <ClInclude Include="..\..\..\include\jeLight.h" />
+    <ClInclude Include="..\..\..\include\jeMaterial.h" />
+    <ClInclude Include="..\..\..\include\JEMODEL.H" />
+    <ClInclude Include="..\..\..\include\jePlane.h" />
+    <ClInclude Include="guWorld\jePlaneArray.h" />
+    <ClInclude Include="..\..\..\include\jePoly.h" />
+    <ClInclude Include="..\..\..\include\jePortal.h" />
+    <ClInclude Include="..\..\..\include\jeStaticMesh.h" />
+    <ClInclude Include="guWorld\jeTexVec.h" />
+    <ClInclude Include="..\..\..\include\jeUserPoly.h" />
+    <ClInclude Include="..\..\..\include\jeVertArray.h" />
+    <ClInclude Include="..\..\..\include\JEWORLD.H" />
+    <ClInclude Include="guWorld\visobject.h" />
+    <ClInclude Include="Math\asmxform3d.h" />
+    <ClInclude Include="Math\Box.h" />
+    <ClInclude Include="Math\crc32.h" />
+    <ClInclude Include="..\..\..\include\ExtBox.h" />
+    <ClInclude Include="..\..\..\include\jeRay.h" />
+    <ClInclude Include="Math\jeVec3d_Katmai.h" />
+    <ClInclude Include="..\..\..\include\ObjectPos.h" />
+    <ClInclude Include="..\..\..\include\QUATERN.H" />
+    <ClInclude Include="Math\vec2d.h" />
+    <ClInclude Include="..\..\..\include\Vec3d.h" />
+    <ClInclude Include="..\..\..\include\Xform3d.h" />
+    <ClInclude Include="Physics\part.h" />
+    <ClInclude Include="Physics\spring.h" />
+    <ClInclude Include="..\..\..\include\ARRAY.H" />
+    <ClInclude Include="..\..\..\include\Basetype.h" />
+    <ClInclude Include="Support\cpu.h" />
+    <ClInclude Include="..\..\..\include\Errorlog.h" />
+    <ClInclude Include="Support\jeAssert.h" />
+    <ClInclude Include="..\..\..\include\jeChain.h" />
+    <ClInclude Include="..\..\..\include\jeNameMgr.h" />
+    <ClInclude Include="..\..\..\include\jeProperty.h" />
+    <ClInclude Include="..\..\..\include\jePtrMgr.h" />
+    <ClInclude Include="..\..\..\include\jeResource.h" />
+    <ClInclude Include="Support\log.h" />
+    <ClInclude Include="Support\mempool.h" />
+    <ClInclude Include="..\..\..\include\Ram.h" />
+    <ClInclude Include="Support\ThreadLog.h" />
+    <ClInclude Include="Support\ThreadQueue.h" />
+    <ClInclude Include="Support\Util.h" />
+    <ClInclude Include="VFile\dirtree.h" />
+    <ClInclude Include="VFile\fsdos.h" />
+    <ClInclude Include="VFile\fsfakenet.h" />
+    <ClInclude Include="VFile\fsINet.h" />
+    <ClInclude Include="VFile\fslz.H" />
+    <ClInclude Include="VFile\Fsmemory.h" />
+    <ClInclude Include="VFile\fsvfs.h" />
+    <ClInclude Include="..\..\..\include\VFILE.H" />
+    <ClInclude Include="Terrain\quad.h" />
+    <ClInclude Include="..\..\..\include\TERRAIN.H" />
+    <ClInclude Include="..\..\..\include\jeParticle.h" />
+    <ClInclude Include="..\..\..\include\Mp3Mgr.h" />
+    <ClInclude Include="Mp3Mgr\Mp3Mgr_h.h" />
+    <ClInclude Include="..\..\..\include\VideoMgr.h" />
+    <ClInclude Include="VideoMgr\VideoMgr_h.h" />
+    <ClInclude Include="..\..\..\include\jeCamera.h" />
+    <ClInclude Include="..\..\..\include\jeEngine.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="jet.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Actor\Actor._h" />
+    <None Include="Bitmap\bitmap.__h" />
+    <None Include="Bitmap\bitmap._h" />
+    <CustomBuild Include="bitmap\compression\cache3dn.asm">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(VCInstallDir)Tools\MSVC\14.34.31933\bin\Hostx64\x86\ml.exe" -c -coff  /Fo "$(IntDir)%(Filename).obj" "%(FullPath)"
+</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename).obj;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(VCInstallDir)Tools\MSVC\14.34.31933\bin\Hostx64\x86\ml.exe" -c -coff  /Fo "$(IntDir)%(Filename).obj" "%(FullPath)"
+</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename).obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="Bitmap\Compression\rungasm.asm">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Step on %(FullPath) to $(IntDir)%(Filename)</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(VCInstallDir)Tools\MSVC\14.34.31933\bin\Hostx64\x86\ml.exe" -Zi -c -coff  /Fo "$(IntDir)%(Filename).obj" "%(FullPath)"
+</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename).obj;%(Outputs)</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing Custom Build Step on %(FullPath) to $(IntDir)%(Filename)</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(VCInstallDir)Tools\MSVC\14.34.31933\bin\Hostx64\x86\ml.exe" -Zi -c -coff  /Fo "$(IntDir)%(Filename).obj" "%(FullPath)"
+</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename).obj;%(Outputs)</Outputs>
+    </CustomBuild>
+    <None Include="Bsp\jeBSP._h" />
+    <None Include="Engine\engine._h" />
+    <None Include="guWorld\jeMaterial._h" />
+    <None Include="guWorld\jeModel._h" />
+    <None Include="Support\jeMemAllocInfo._h" />
+    <CustomBuildStep Include="Terrain\terrain._h">
+      <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </CustomBuildStep>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

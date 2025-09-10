@@ -1,0 +1,708 @@
+/****************************************************************************************/
+/*  JEBSP._H                                                                            */
+/*                                                                                      */
+/*  Author:  John Pollard                                                               */
+/*  Description:                                                                        */
+/*                                                                                      */
+/*  The contents of this file are subject to the Jet3D Public License                   */
+/*  Version 1.02 (the "License"); you may not use this file except in                   */
+/*  compliance with the License. You may obtain a copy of the License at                */
+/*  http://www.jet3d.com                                                                */
+/*                                                                                      */
+/*  Software distributed under the License is distributed on an "AS IS"                 */
+/*  basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.  See                */
+/*  the License for the specific language governing rights and limitations              */
+/*  under the License.                                                                  */
+/*                                                                                      */
+/*  The Original Code is Jet3D, released December 12, 1999.                             */
+/*  Copyright (C) 1996-1999 Eclipse Entertainment, L.L.C. All Rights Reserved           */
+/*                                                                                      */
+/****************************************************************************************/
+#include <memory.h>		// memset
+
+#ifndef JEBSP__H
+#define JEBSP__H
+
+#include "Dcommon.h"
+#include "jeBSP.h"
+
+#include "jePlaneArray.h"
+#include "jePlane.h"
+#include "BaseType.h"
+#include "Vec3d.h"
+#include "jeBrush.h"
+#include "jeFaceInfo.h"
+#include "jePoly.h"
+#include "jeIndexPoly.h"
+#include "jeVertArray.h"
+#include "ExtBox.h"
+#include "Bitmap.h"
+#include "Array.h"
+#include "jePortal.h"
+#include "jeGArray.h"
+#include "jeTexVec.h"
+#include "jeLight.h"
+#include "List.h"
+#include "VisObject.h"
+#include "jeChain.h"
+#include "Engine.h"
+#include "jeWorld.h"
+
+#define MAX_TEMP_VERTS		128
+
+extern void LogOut(const char *Str, ...);
+
+extern jeWorld_DebugInfo		g_WorldDebugInfo;
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#define ZeroMem(a) memset(a, 0, sizeof(*a))
+#define ZeroMemArray(a, s) memset(a, 0, sizeof(*a)*s)
+
+#define JE_BSP_MINMAX_BOUNDS		9999.0f
+#define JE_BSP_TINY_AREA			0.1f
+#define JE_BSP_TINY_VOLUME			0.5f
+#define JE_BSP_PLANESIDE_EPSILON	0.001f
+#define JE_BSP_ON_EPSILON			0.05f
+
+#define BSP_UPDATE_FACES			(1<<0)
+#define BSP_UPDATE_LIGHTS			(1<<1)
+
+#define LGRID_SIZE					16.0f
+#define MAX_LIGHTMAP_WH				18			// Max Width/Height
+#define MaxLight					255.0f		// To allow for overbright dlights
+#define RadiusScale					1.0f
+#define LightScale					1.0f
+
+typedef struct
+{
+	jeVec3d		Pos;
+	jeFloat		Radius;
+	jeVec3d		Color;
+	int32		R, G, B;
+	uint32		Flags;
+} jeBSPNode_Light;
+
+// jeBSP is the heart and soul object.  It is the BSPTree.
+typedef struct jeBSP
+{
+	jeExtBox				Box;			// Box of entire tree (In original bsp space)
+	jeExtBox				WorldSpaceBox;
+
+	uint32					UpdateFlags;
+
+	jeBSPNode				*RootNode;		// Top level node of tree
+	jeBSPNode				*OutsideNode;	// This is the outside node, for flood filling
+
+	// These arrays are	inherited from the bsp's parent
+	jeFaceInfo_Array		*FaceInfoArray;
+	jeMaterial_Array		*MaterialArray;
+	jeChain					*LightChain;		// Chain of jeBSPNode_Lights
+	jeChain					*DLightChain;
+
+	// jeBSP owns these	arrays:
+	jePlaneArray			*PlaneArray;
+	jeVertArray				*VertArray;
+	jeTexVec_Array			*TexVecArray;
+	jeArray					*NodeArray;
+	jeArray					*DrawFaceArray;
+
+	uint32					NumBrushes;
+	jeBSP_TopBrush			*TopBrushes;
+
+	int32					NumDLights;
+	jeBSPNode_Light			DLights[MAX_VISIBLE_DLIGHTS];		// Dynamic light stack
+	uint32					DLightVisFrame;
+
+	jeBSPNode_DrawFaceCB	*DrawFaceCB;
+	void					*DrawFaceCBContext;
+
+	jeBSP_RenderMode		RenderMode;
+	jeBrush_Contents		DefaultContents;
+
+	jeEngine				*Engine;
+	DRV_Driver				*Driver;			// Current rendering driver the engine is using
+	jeEngine_ChangeDriverCB	*ChangeDriverCB;
+
+	jeBSP_DebugInfo			DebugInfo;
+
+	jeXForm3d				ModelToWorldXForm;
+	jeXForm3d				WorldToModelXForm;
+
+	int32					RenderRecursion;
+
+	jeChain					*BSPObjectChain;
+
+	jeChain					*AreaChain;			// Linked list of all areas (NULL if none)
+#ifdef AREA_DRAWFACE_TEST
+	LinkNode				LeafList;
+#endif
+
+	jeChain					*RenderDataList;  // The jeRenderSectionData array - added by Krouer
+	jeChain					*FacesPerMaterialList; // The sort of faces per material - added by Krouer
+
+	jeWorld					*World; //The world object (added by cyrius) (if we can ever figure out how to set it!)
+
+	jeVertexBuffer			*pVertexBuffer;
+	jeIndexBuffer			*pIndexBuffer;
+} jeBSP;
+
+typedef struct 
+{
+	jeCamera				*Camera;
+	jeXForm3d				ModelToCameraXForm;
+	jeVec3d					POV;
+	jeFrustum				*Frustum;
+	uint32					RecursionBit;
+
+	uint32					DefaultRenderFlags;
+} jeBSPNode_SceneInfo;
+
+typedef struct
+{
+	jeObject		*Object;
+	jeBSPNode_Area	*Area;		// Area the object occupies (NOTE - Objects can only occupy one area at a time)
+} jeBSP_Object;
+
+typedef struct 
+{
+	jeBSP					*BSP;
+	jeBSPNode_DrawFace		*DFace;
+} jeBSPNode_DrawFaceRenderCB;
+
+typedef uint8			jeBSP_SideFlag;
+
+// jeBSP_Side flags
+#define SIDE_VISIBLE		(1<<0)
+#define SIDE_TESTED			(1<<1)
+#define SIDE_HINT			(1<<2)	
+#define SIDE_NODE			(1<<3)		// Side used as a node in the teee 
+#define SIDE_VIS_PORTAL		(1<<4)		// Side is a vis portal
+#define SIDE_SHEET			(1<<5)
+#define SIDE_SKIP			(1<<6)
+#define SIDE_SPLIT			(1<<7)		// Side was a result of a brush being split
+
+// Sides are what jeBSP_Brushes use to link polys.  
+typedef struct jeBSP_Side
+{
+	jePoly					*Poly;
+	jePlaneArray_Index		PlaneIndex;
+	jeBSP_SideFlag			Flags;
+
+} jeBSP_Side;
+
+#define JE_BSP_BRUSH_DEFAULT_SIDES		6
+
+#define BSPBRUSH_FORCEBOTH				(1<<0)
+
+// jeBSP_Brushes are the brushes that get cut up to make the tree
+typedef struct jeBSP_Brush
+{
+	jeBSP_TopBrush		*Original;		// Original top level jeBSPBrush
+	jeBSP_Brush			*Next;
+	jeExtBox			Box;			// Box of brush
+
+	uint8				Flags;
+
+	jePlane_Side		Side;			// Side of node during construction
+	jePlane_Side		TestSide;
+
+	uint16				NumSides;
+	jeBSP_Side			Sides[JE_BSP_BRUSH_DEFAULT_SIDES];
+
+} jeBSP_Brush;
+
+#define TOPSIDE_UPDATE_LIGHT			(1<<0)		// This side need to have light re-built
+#define TOPSIDE_CALL_CB					(1<<1)		// DrawFaces resulting from topside should call CB func
+
+typedef struct jeBSP_TopSide
+{
+	jePlaneArray_Index		PlaneIndex;
+	jeFaceInfo_ArrayIndex	FaceInfoIndex;
+	jeTexVec_ArrayIndex		TexVecIndex;
+	jeBSP_SideFlag			Flags;
+
+	uint8					TopSideFlags;
+
+	jeBrush_Face			*jeBrushFace;		// jeBrush_Face that created this TopSide
+} jeBSP_TopSide;
+
+// jeBSP_TopBrushes are the toplevel brushes, that BSPBrushes are built from
+// jeBSP_TopBrushes are the convex volumes, that make up jeBrushes...
+// Once a TopBrush is created froma jeBrush, there is no more dependencies on jeBrush...
+typedef struct jeBSP_TopBrush
+{
+	jeBSP_TopBrush		*Next;
+	jeBrush				*Original;		// Editor brush that this top brush was created from
+
+	jeBrush_Contents	Contents;
+	uint32				Order;			// Order that brush was put in list
+
+	uint16				NumSides;
+	jeBSP_TopSide		TopSides[JE_BSP_BRUSH_DEFAULT_SIDES];
+
+} jeBSP_TopBrush;
+
+//================================================================================
+//					*** jeBSPNode ***
+//================================================================================
+typedef struct		jeBSPNode_Leaf		jeBSPNode_Leaf;
+typedef struct		jeBSPNode_Area		jeBSPNode_Area;
+
+// Node children index defines
+#define NODE_FRONT		0
+#define NODE_BACK		1
+
+// jeBSPNode flags
+#define NODE_DETAIL			(1<<0)		// NODE_DETAIL and NODE_LEAF are mutually exclusive
+#define NODE_LEAF			(1<<1)		// Node is a leaf (Leaf member will be valid)
+#define NODE_OUTSIDE		(1<<2)		// Node is in the outside area
+#define NODE_REBUILD_FACES	(1<<3)		// Node got new BSP faces, needs to merge/split, make drawfaces, etc...
+#define NODE_UPDATELIGHTS	(1<<4)		// Node got new BSP faces, needs to relight
+
+#define JE_BSP_MAX_DRAW_FACES	65535	// (~(uint32))
+
+#define jepBSPNode_DrawFace		jeBSPNode_DrawFace*
+
+/*!	
+	a jeBSPNode seperates 2 halfspaces.  When no more nodes are available,
+	the node is a leaf...
+*/
+typedef struct jeBSPNode
+{
+	// Info about a node as a node only
+	struct jeBSPNode	*Parent;		//<! Parent of this node (NULL if this is the RootNode)
+	struct jeBSPNode	*Children[2];	//<! Front and back child (FRONT_NODE/BACK_NODE)
+
+	uint8				Flags;		
+	jeExtBox			Box;			//<! Box of node, and all its children
+	jePlaneArray_Index	PlaneIndex;		//<! PlaneIndex 
+	jeBSPNode_Face		*Faces;
+
+	uint16				NumDrawFaces;	//<! Number of draw faces
+	jepBSPNode_DrawFace	*DrawFaces;		//<! Array of DrawFaces
+
+	jeBSP_Side			*Side;			//<! The Side that this node used to split all other brushes
+	jeBSP_Brush			*Volume;		//<! Current volume of node
+
+	// Info about a node as a node, and leaf
+	// (portals are on nodes temporally, until they get distributed to the leafs)
+	jeBSPNode_Portal	*Portals;		//<! Portals that bound the leaf 
+
+	uint32				RecursionBits;	//<! If Leaf/Node visible this recursion level, recursion bit will be set
+
+	// Info about a node as a leaf only
+	jeBSPNode_Leaf		*Leaf;			//<! Extra info, when a node is a leaf
+
+} jeBSPNode;
+
+typedef struct
+{
+	jeBoolean		HitSet;
+	jePlane			*Plane;
+	jeVec3d			*Impact;
+} jeBSPNode_CollisionInfo;
+
+typedef struct
+{
+	jeBoolean		HitSet;
+	jeBoolean		HitLeaf;
+	jeFloat			BestDist;
+
+	const jeVec3d	*Front;
+	jeVec3d			*Impact;
+	jePlane			*Plane;
+} jeBSPNode_CollisionInfo2;
+
+typedef struct	// Added by Icestorm
+{
+	jeBoolean		HitSet;
+	jeBoolean		HitLeaf;
+	jeFloat			BestDist;
+
+	const jeExtBox	*FrontBox;
+	jeExtBox		*ImpactBox;
+	jePlane			*Plane;
+} jeBSPNode_CollisionInfo3;
+
+// Portal flags
+#define PORTAL_SIDE_FOUND		(1<<0)		// Side was found for a portal
+
+typedef struct jeBSPNode_Portal
+{
+	uint8				Flags;
+
+	jePoly				*Poly;				// Convex poly that holds the shape of the portal
+	jeBSPNode			*Nodes[2];			// Node on each side of the portal
+	jeBSPNode_Portal	*Next[2];			// Next portal for each node
+	jePlaneArray_Index	PlaneIndex;
+
+	jeBSPNode			*OnNode;			// Node that created this portal
+
+	jeBSPNode_Face		*Face[2];			// Face on each side of the portal
+	jeBSP_TopSide		*Side;				// TopSide that portal maps too
+} jeBSPNode_Portal;
+
+// Face flag defs
+#define BSPFACE_MERGED_SPLIT				(1<<0)	// NOT an original face in the list.  This face was produced by split/merge
+#define BSPFACE_SPAN_MULTIPLE_BRUSH_FACES	(1<<1)	// Face was merged accross multiple brush faces
+
+// jeBSPNode_Faces are put on the visible portals
+typedef struct jeBSPNode_Face
+{
+	jeBSPNode_Face			*Next;		// Next face in the list
+	jePoly					*Poly;		// Poly that defines the winding of vertices for the face
+	uint8					Flags;		// FaceFlags
+	jeBrush_Contents		Contents;	// Contents of the leaf that the face looks into
+
+	jePlaneArray_Index		PlaneIndex;
+
+	jeBSPNode_Portal		*Portal;	// Portal that created the face
+
+	jeBSPNode_Face			*Split[2];	// If face was split, this is the resulting 2 faces
+	jeBSPNode_Face			*Merged;	// If merged with another face, this is the resulting face
+
+	jeBSPNode_DrawFace		*DrawFace;	// DrawFace that was created off this BSPFace (it also looks at the BSPFace)
+
+	uint8					TopSideFlags;	// These flags are inherited from TopSides
+
+} jeBSPNode_Face;
+
+typedef struct
+{
+	float				u, v;
+	float				r, g, b;			// Should these be shared as well???
+} jeTexVert;
+
+#define JE_LIGHTMAP_MAX_STYLES			4
+
+typedef struct jeBSPNode_Lightmap
+{
+	uint16				Width;			// Width of lightmap
+	uint16				Height;			// Height of lightmap
+	jeFloat				MinU;
+	jeFloat				MinV;
+	jeFloat				MaxU;
+	jeFloat				MaxV;
+	jeFloat				StartU;			// Upper left u in worldspace
+	jeFloat				StartV;			// Upper left v in worldspace
+	jeVec3d				Tex2WorldVecU;
+	jeVec3d				Tex2WorldVecV;
+	jeVec3d				TexOrigin;
+
+	int32				XStep;			// Lightmap step values (1:21:10 fixed)
+	int32				YStep;
+	int32				XScale;
+	int32				YScale;
+
+	uint8				Styles[4];		// 255 == No lightmap on that style
+	uint8				*RGBData[JE_LIGHTMAP_MAX_STYLES];		// Normalized Lightdata for ((uint8*3)*(Width*Height))
+
+	jeTexture	*THandle;
+
+	jeVec3d				*Points;		// For cacheing out points
+
+	uint8				Dynamic;		// Set everytime the lightmap gets new light data
+} jeBSPNode_Lightmap;
+
+#define DRAWFACE_CALL_CB		(1<<0)
+
+typedef struct jeBSPNode_DrawFace
+{
+	uint8					TopSideFlags;	// Inherited from jeBSP_TopSide TopSideFlags
+
+	jeBSP					*BSP;			
+
+	jeIndexPoly				*Poly;			// NumVerts is storeed in IndexPoly
+	jeTexVert				*TVerts;
+	jeFaceInfo_ArrayIndex	FaceInfoIndex;
+	jePlaneArray_Index		PlaneIndex;
+	jeTexVec_ArrayIndex		TexVecIndex;
+	uint8					NodeSide;
+
+	uint32					Contents;
+
+	jeBSPNode_Lightmap		*Lightmap;		// If face has a lightmap, this will contain the lightmap data
+
+	jeObject				*PortalObject;	// If this face is a portal face, this will be valid (Not NULL)
+	jeXForm3d				*PortalXForm;	// XForm that describes the Src location of the portal before it is XFormed against the tru portal XForm
+
+	jeFloat					FixShiftU;		// How much UV's were shifted from worldspace locations
+	jeFloat					FixShiftV;
+
+	jeVec3d					Center;
+	jeFloat					Radius;
+
+	uint32					DLights;		// Up to 32 lights can touch face, bit number of light
+	uint32					DLightVisFrame;
+	
+	uint32					RecursionBits;
+
+	jeBrush_Face			*jeBrushFace;	// If set, this face only touches one jeBrushFace
+} jeBSPNode_DrawFace;
+
+typedef struct jeBSPNode_LeafSide
+{
+	jePlaneArray_Index	PlaneIndex;
+} jeBSPNode_LeafSide;
+
+typedef struct jeBSPNode_Leaf
+{
+	LinkNode			LN;
+
+	jeBSPNode			*Node;			// Node that leaf is on
+	jeBrush_Contents	BrushContents;	// Contents of all brushes in this leaf
+	jeBrush_Contents	Contents;		// Contents of leaf
+	jeBSP_Brush			*Brushes;		// Fragments of brushes in this leaf
+
+	jeBSPNode_Area		*Area;			// Area
+		 
+	int32				CurrentFrame;	// Flood filling...
+
+	int32				NumDrawFaces;
+	jepBSPNode_DrawFace	*DrawFaces;		// Array of pointers to draw faces that are inside this leaf 
+
+	// Beveled Convex hull data
+	int32				NumSides;		
+	jeBSPNode_LeafSide	*Sides;
+
+} jeBSPNode_Leaf;
+
+typedef struct
+{
+	jeBSPNode_Leaf		*Leaf;
+} jeBSPNode_AreaLeaf;
+
+typedef struct
+{
+	jePoly				*Poly;
+	jePlane				Plane;
+	jeBSPNode_Area		*Target;
+
+} jeBSPNode_AreaPortal;
+
+typedef struct jeBSPNode_Area
+{
+#ifdef AREA_DRAWFACE_TEST
+	LinkNode				LN;
+#endif
+	uint32					RecursionBits;
+
+	uint32					RefCount;
+	
+	int32					NumWorkAreaPortals;
+	int32					NumAreaPortals;
+	jeBSPNode_AreaPortal	*AreaPortals;
+	
+	jeArray					*LeafArray;		// An array of AreaLeafs
+
+	jeChain					*ObjectChain;
+
+	jeChain					*RenderDataList;  // The jeRenderSectionData array - added by Krouer
+	jeChain					*FacesPerMaterialList; // The sort of faces per material - added by Krouer
+
+#ifdef AREA_DRAWFACE_TEST
+	List *					VisObjectList;
+
+	int32					NumDrawFaces;
+	jepBSPNode_DrawFace		*DrawFaces;
+#endif
+} jeBSPNode_Area;
+
+//==========================
+//	Function prototypes..
+//==========================
+
+//
+// jeBSP_TopBrush
+//
+
+jeBSP_TopBrush	*jeBSP_TopBrushCreate(int32 NumSides, uint32 Order);
+void			jeBSP_TopBrushDestroy(jeBSP_TopBrush **Brush, jeBSP *BSP);
+void			jeBSP_TopBrushDestroyList(jeBSP_TopBrush **Brushes, jeBSP *BSP);
+jeBSP_TopBrush	*jeBSP_TopBrushCreateFromBrush(jeBrush *Brush, jeBSP *BSP, uint32 Order);
+jeBSP_TopBrush	*jeBSP_TopBrushCreateListFromBrushChain(jeChain *BrushChain, jeBSP *BSP, uint32 *Order);
+jeBoolean		jeBSP_TopBrushSideCalcFaceInfo(jeBSP_TopBrush *TopBrush, jeBSP *BSP, jeBSP_TopSide *Side, const jeBrush_Face *jeFace);
+jeBSP_TopBrush	*jeBSP_TopBrushCullList(jeBSP_TopBrush *List, jeBSP *BSP, jeBSP_TopBrush *Skip1);
+
+//
+// jeBSP_Brush
+//
+
+jeBSP_Brush *jeBSP_BrushCreate(int32 NumSides);
+jeBSP_Brush *jeBSP_BrushCreateFromBox(jeBSP *BSP, const jeExtBox *Box);
+void		jeBSP_BrushDestroy(jeBSP_Brush **Brush);
+int32		jeBSP_BrushGetActiveCount(void);
+int32		jeBSP_BrushGetPeekCount(void);
+void		jeBSP_BrushDestroyList(jeBSP_Brush **Brushes);
+jeBSP_Brush *jeBSP_BrushCullList(jeBSP_Brush *List, jeBSP_Brush *Skip1);
+jeBSP_Brush *jeBSP_BrushCreateFromBSPBrush(const jeBSP_Brush *Brush);
+void		jeBSP_SideSetFromTopSide(jeBSP_Side *Side, const jeBSP_TopSide *TopSide);
+jeBSP_Brush *jeBSP_BrushCreateFromTopBrush(jeBSP_TopBrush *TopBrush, jeBSP *BSP);
+jeBSP_Brush *jeBSP_BrushCreateListFromTopBrushList(jeBSP_TopBrush *TopBrushList, jeBSP *BSP);
+jeBoolean	jeBSP_BrushCalcBounds(jeBSP_Brush *BSPBrush);
+jeBoolean	jeBSP_BrushIsValidGeometry(jeBSP_Brush *BSPBrush);
+jeBoolean	jeBSP_BrushDisjoint(const jeBSP_Brush *b1, const jeBSP_Brush *b2);
+jeBoolean	jeBSP_BrushCanBite(const jeBSP_Brush *b1, const jeBSP_Brush *b2);
+float		jeBSP_BrushVolume(jeBSP_Brush *Brush, jeBSP *BSP);
+jePlane_Side jeBSP_BrushMostlyOnPlaneSide(const jeBSP_Brush *Brush, const jePlane *Plane);
+int32		jeBSP_BrushCountList(const jeBSP_Brush *Brushes);
+jeBoolean	jeBSP_BrushCreatePolys(jeBSP_Brush *Brush, jeBSP *BSP);
+jeBSP_Brush *jeBSP_BrushListAddToTail(jeBSP_Brush *List, jeBSP_Brush *Tail);
+jeBoolean	jeBSP_BrushSplit(jeBSP_Brush *Brush, jeBSP *BSP, jePlaneArray_Index Index, jeBSP_SideFlag MidFlags, jeBSP_Brush **Front, jeBSP_Brush **Back);
+jeBoolean	jeBSP_BrushSubtract(jeBSP_Brush *a, jeBSP_Brush *b, jeBSP *BSP, jeBSP_Brush **Result);
+jeBSP_Brush *jeBSP_BrushCSGList(jeBSP_Brush *List, jeBSP *BSP);
+
+//
+//	jeBSPNode
+//
+
+jeBSPNode *jeBSPNode_Create(jeBSP *BSP);
+void jeBSPNode_Destroy_r(jeBSPNode **Node, jeBSP *BSP);
+jeBoolean jeBSPNode_IsValid(const jeBSPNode *Node);
+void jeBSPNode_DestroyPortals_r(jeBSPNode *Node, jeBSP *BSP);
+void jeBSPNode_DestroyBSPFaces_r(jeBSPNode *Node, jeBSP *BSP, jeBoolean KeepOriginal);
+void jeBSPNode_DestroyBSPFaces(jeBSPNode *Node, jeBSP *BSP, jeBoolean KeepOriginal);
+jeBoolean jeBSPNode_DirtyNodes_r(jeBSPNode *Node, jeBSP *BSP, jeBSP_TopSide *Side);
+jeBoolean jeBSPNode_PropogateTopSideFlags_r(jeBSPNode *Node, jeBSP *BSP, jeBSP_TopSide *Side, int32 *NumPropogated);
+void jeBSPNode_DestroyDrawFaces(jeBSPNode *Node, jeBSP *BSP);
+void jeBSPNode_DestroyPortals(jeBSPNode *Node, jeBSP *BSP);
+jeBSPNode *jeBSPNode_InitializeRootPortals(jeBSPNode *Node, jeBSP *BSP);
+jeBoolean jeBSPNode_PartitionPortals_r(jeBSPNode *Node, jeBSP *BSP, jeBoolean IncludeDetail);
+jeBoolean jeBSPNode_CreatePoly(const jeBSPNode *Node, jeBSP *BSP, jePoly **PolyOut);
+jeBoolean jeBSPNode_InitializePortal(jeBSPNode *Node, jeBSP *BSP);
+jeBoolean jeBSPNode_DistributePortalsToChildren(jeBSPNode *Node, jeBSP *BSP);
+void jeBSPNode_AddPortal(jeBSPNode *Node, jeBSPNode_Portal *Portal, int32 Side);
+void jeBSPNode_RemovePortal(jeBSPNode *Node, jeBSPNode_Portal *Portal);
+jeBoolean jeBSPNode_InitializeLeaf(jeBSPNode *Node, jeBSP *BSP, jeBSP_Brush *Brushes);
+void jeBSPNode_MergeLeafs_r(jeBSPNode *Node, jeBSP *BSP);
+void jeBSPNode_MergeLeafs(jeBSPNode *Node, jeBSP *BSP);
+jeBSPNode_Leaf *jeBSPNode_FindLeaf(const jeBSPNode *Node, jeBSP *BSP, const jeVec3d *Pos);
+void jeBSPNode_FillUnTouchedLeafs_r(jeBSPNode *Node, int32 Fill);
+jeBoolean jeBSPNode_MakeFaces(jeBSPNode *Node, jeBSP *BSP, jeBoolean FreeMergedSplit);
+jeBoolean jeBSPNode_MakeFaces_r(jeBSPNode *Node, jeBSP *BSP, jeBoolean FreeMergedSplit);
+jeBoolean jeBSPNode_MakeFaces_Callr(jeBSPNode *Node, jeBSP *BSP, jeBoolean FreeMergedSplit);
+jeBoolean jeBSPNode_MakeDrawFaces(jeBSPNode *Node, jeBSP *BSP);
+jeBoolean jeBSPNode_MakeDrawFaces_r(jeBSPNode *Node, jeBSP *BSP);
+jeBoolean jeBSPNode_MakeDrawFaces_Callr(jeBSPNode *Node, jeBSP *BSP);
+jeBoolean jeBSPNode_UpdateLeafSides_r(jeBSPNode *Node, jeBSP *BSP);
+void jeBSPNode_RenderFrontToBack_r(jeBSPNode *Node, jeBSP *BSP, jeBSPNode_SceneInfo *SceneInfo, uint32 ClipFlags);
+jeBoolean jeBSPNode_RemoveTopBrush_r(jeBSPNode *Node, jeBSP *BSP, jeBSP_TopBrush *TopBrush);
+void jeBSPNode_RebuildFaces_r(jeBSPNode *Node, jeBSP *BSP);
+jeBoolean jeBSPNode_SplitBrushList(jeBSPNode *Node, jeBSP *BSP, jeBSP_Brush *Brushes, jeBSP_Brush **Front, jeBSP_Brush **Back);
+jeBoolean jeBSPNode_MakeAreas_r(jeBSPNode *Node, jeBSP *BSP, jeChain *AreaChain);
+jeBoolean jeBSPNode_MakeLeafList_r(jeBSPNode *Node,LinkNode *pList);
+jeBoolean jeBSPNode_CountAreaVisPortals_r(jeBSPNode *Node);
+jeBoolean jeBSPNode_MakeAreaVisPortals_r(jeBSPNode *Node, jeBSP *BSP);
+jeBoolean jeBSPNode_DestroyAreas_r(jeBSPNode *Node);
+jeBSPNode_Area *jeBSPNode_FindArea(jeBSPNode *Node, jeBSP *BSP, const jeVec3d *Pos);
+jeBSPNode_Area *jeBSPNode_FindClosestArea(jeBSPNode *Node, jeBSP *BSP, const jeVec3d *Pos);
+jeBoolean	jeBSPNode_DoAllAreasInBox(jeBSPNode *Node,jeBSP *BSP, jeExtBox *BBox,jeBSP_DoAreaFunc CB,void * Context);
+jeBoolean jeBSPNode_RayIntersects_r(const jeBSPNode *Node, jeBSP *BSP, const jeVec3d *Front, const jeVec3d *Back);
+jeBoolean jeBSPNode_CollisionExact_r(const jeBSPNode *Node, jeBSP *BSP, const jeVec3d *Front, const jeVec3d *Back, jeBSPNode_CollisionInfo *Info);
+jeBoolean jeBSPNode_CollisionBBox_r(const jeBSPNode *Node, jeBSP *BSP, const jeExtBox *Box1, const jeExtBox *Box2, const jeVec3d *Front, const jeVec3d *Back, jeBSPNode_CollisionInfo2 *Info);
+jeBoolean jeBSPNode_MakeDrawFaceListOnLeafs_r(jeBSPNode *Node, jeBSP *BSP);
+uint32 jeBSPNode_VisibleContents(uint32 Contents);
+void jeBSPNode_GetTopSideSeperatingLeafs(jeBSP *BSP, const jeBSPNode_Leaf *Leaf1, const jeBSPNode_Leaf *Leaf2, jePlaneArray_Index PlaneIndex, jeBSP_TopBrush **DstTopBrush, jeBSP_TopSide **DstTopSide);
+jeBoolean jeBSPNode_RayIntersectsBrushes(const jeBSPNode *Node, jeBSP *BSP, const jeVec3d *Front, const jeVec3d *Back, jeBrushRayInfo *Info);
+jeBoolean jeBSPNode_SetDLight_r(jeBSPNode *Node, jeBSP *BSP, jeBSPNode_Light *Light, uint32 LBit, uint32 DLightVisFrame);
+jeBoolean jeBSPNode_CreateLightmapTHandles_r(jeBSPNode *Node, DRV_Driver *Driver);
+jeBoolean jeBSPNode_DestroyLightmapTHandles_r(jeBSPNode *Node, DRV_Driver *Driver);
+jeBoolean jeBSPNode_WeldDrawFaceVerts_r(jeBSPNode *Node, jeBSP *BSP, jeVertArray_Optimizer *Optimizer);
+jeBoolean jeBSPNode_FixDrawFaceTJuncts_r(jeBSPNode *Node, jeBSP *BSP, jeVertArray_Optimizer *Optimizer);
+// Added by Icestorm
+jeBoolean jeBSPNode_ChangeBoxCollisionBBox_r(const jeBSPNode *Node, jeBSP *BSP, const jeExtBox *Box1, const jeVec3d *Pos, const jeExtBox *FrontBox, const jeExtBox *BackBox, jeBSPNode_CollisionInfo3 *Info);
+
+//
+//	jeBSPNode_Leaf
+//	
+
+jeBSPNode_Leaf *jeBSPNode_LeafCreate(jeBSP *BSP);
+void jeBSPNode_LeafDestroy(jeBSPNode_Leaf **Leaf, jeBSP *BSP);
+jeBoolean jeBSPNode_LeafInitializeSides(jeBSPNode_Leaf *Leaf, jeBSP *BSP);
+jeBoolean jeBSPNode_LeafFill_r(jeBSPNode_Leaf *Leaf, int32 Fill);
+jeBoolean jeBSPNode_LeafFloodAreas_r(jeBSPNode_Leaf *Leaf, jeBSPNode_Area *Area);
+jeBoolean jeBSPNode_LeafMakeAreas(jeBSPNode_Leaf *Leaf, jeBSP *BSP, jeChain *AreaChain);
+jeBoolean jeBSPNode_LeafCountAreaVisPortals(jeBSPNode_Leaf *Leaf);
+jeBoolean jeBSPNode_LeafMakeAreaVisPortals(jeBSPNode_Leaf *Leaf, jeBSP *BSP);
+jeBoolean jeBSPNode_LeafMakeDrawFaceList(jeBSPNode_Leaf *Leaf, jeBSP *BSP);
+void jeBSPNode_LeafDestroyDrawFaceList(jeBSPNode_Leaf *Leaf, jeBSP *BSP);
+void jeBSPNode_LeafSetRecursionBit(jeBSPNode_Leaf *Leaf, uint32 RecursionBit);
+jeBoolean jeBSPNode_LeafCollision_r(const jeBSPNode_Leaf *Leaf, jeBSP *BSP, int32 Side, int32 PSide, const jeExtBox *Box, const jeVec3d *Front, const jeVec3d *Back, jeBSPNode_CollisionInfo2 *Info);
+// Added by Icestorm
+jeBoolean jeBSPNode_LeafChangeBoxCollision_r(const jeBSPNode_Leaf *Leaf, jeBSP *BSP, int32 Side, int32 PSide, const jeVec3d *Pos, const jeExtBox *FrontBox, const jeExtBox *BackBox, jeBSPNode_CollisionInfo3 *Info);
+
+//
+//	jeBSPNode_Face
+//
+
+jeBSPNode_Face *jeBSPNode_FaceCreate(void);
+jeBSPNode_Face *jeBSPNode_FaceCreateFromPortal(jeBSPNode_Portal *p, int32 s);
+void jeBSPNode_FaceDestroy(jeBSPNode_Face **Face);
+int32 jeBSPNode_FaceGetActiveCount(void);
+int32 jeBSPNode_FaceGetPeekCount(void);
+jeBoolean jeBSPNode_FaceMerge(jeBSPNode_Face *Face1, jeBSPNode_Face *Face2, jeBSP *BSP, jeBSPNode_Face **Out);
+jeBoolean jeBSPNode_FaceIsValidGeometry(const jeBSPNode_Face *Face, jeBSP *BSP);
+jeBoolean jeBSPNode_FaceMergeList(jeBSPNode_Face *Faces, jeBSP *BSP, int32 *NumMerged);
+jeBoolean jeBSPNode_FaceSubdivide(jeBSPNode_Face *Face, jeBSP *BSP, jeBSPNode *Node, jeFloat SubdivideSize, int32 *NumSubdivided);
+jeBSPNode_Face *jeBSPNode_FaceCullList(jeBSPNode_Face *List, jeBSPNode_Face **Skip1);
+
+//
+//	jeBSPNode_Portal
+//
+
+jeBSPNode_Portal *jeBSPNode_PortalCreate(jePoly *Poly, jeBSP *BSP);
+void jeBSPNode_PortalDestroy(jeBSPNode_Portal **Portal, jeBSP *BSP);
+jeBoolean jeBSPNode_PortalIsValid(const jeBSPNode_Portal *Portal);
+void jeBSPNode_PortalFindTopSide(jeBSPNode_Portal *Portal, jeBSP *BSP, int32 Side);
+void jeBSPNode_PortalResetTopSide(jeBSPNode_Portal *Portal);
+int32 jeBSPNode_PortalGetActiveCount(void);
+int32 jeBSPNode_PortalGetPeekCount(void);
+
+//
+//	jeBSPNode_DrawFace
+//
+jeBSPNode_DrawFace *jeBSPNode_DrawFaceCreate(jeBSP *BSP);
+void jeBSPNode_DrawFaceDestroy(jeBSPNode_DrawFace **Face, jeBSP *BSP);
+jeBoolean jeBSPNode_DrawFaceSetFaceInfoIndex(jeBSPNode_DrawFace *DFace, jeBSP *BSP, jeFaceInfo_ArrayIndex Index);
+jeBoolean jeBSPNode_DrawFaceCreateUVInfo(jeBSPNode_DrawFace *Face, jeBSP *BSP);
+void jeBSPNode_DrawFaceRender(const jeBSPNode_DrawFace *Face, jeBSP *BSP, jeBSPNode_SceneInfo *SceneInfo, uint32 ClipFlags);
+void jeBSPNode_DrawFaceRenderPortal(const jeBSPNode_DrawFace *Face, jeBSP *BSP, jeBSPNode_SceneInfo *SceneInfo, uint32 ClipFlags);
+
+//
+//	jeBSPNode_Area
+//
+jeBSPNode_Area *jeBSPNode_AreaCreate(void);
+jeBoolean jeBSPNode_AreaCreateRef(jeBSPNode_Area *Area);
+void jeBSPNode_AreaDestroy(jeBSPNode_Area **Area);
+jeBoolean jeBSPNode_AreaVisFlood_r(jeBSPNode_Area *Area, const jeVec3d *Pos, const jeFrustum *Frustum, uint32 RecursionBit, jeBSPNode_Area *FromArea);
+
+void jeBSPNode_AreaAddObject(jeBSPNode_Area *Area,jeVisObject *VO);
+jeBoolean jeBSPNode_AreaRemoveObject(jeBSPNode_Area *Area,jeVisObject *VO);
+
+jeBoolean jeBSPNode_AreaMakeDrawFaces(jeBSPNode_Area *Area);
+
+jeBoolean jeBSPNode_AreaRenderFlood_r(jeBSPNode_Area *Area, jeBSP *BSP, const jeCamera *Camera, const jeFrustum *Frustum, uint32 RecursionBit, jeBSPNode_Area *FromArea);
+jeBoolean jeBSPNode_AreaRenderVertexBuffer(jeBSPNode_Area *Area, jeBSP *BSP);
+
+//
+//	jeBSPNode_Light
+//
+jeBSPNode_Lightmap *jeBSPNode_LightmapCreate(jeBSP *BSP, const jeTexVert *TVerts, int32 NumVerts, const jePlane *Plane, const jeTexVec *TexVec, jeBSPNode *RootNode, jeFloat ShiftU, jeFloat ShiftV);
+void jeBSPNode_LightmapDestroy(jeBSPNode_Lightmap **Lightmap, jeBSP *BSP);
+
+jeBoolean jeBSPNode_LightUpdate_r(jeBSPNode *Node, jeBSP *BSP, jeBSPNode *RootNode, jeBoolean UpdateAll);
+jeBoolean jeBSPNode_LightPatch_r(jeBSPNode *Node, jeBSP *BSP, jeBSPNode *RootNode);
+jeBoolean jeBSPNode_LightUpdateFromPoint_r(jeBSPNode *Node, jeBSP *BSP, jeBSPNode *RootNode, const jeVec3d *Pos, jeFloat Radius);
+
+void DetermineSupportedLightmapFormat(jePixelFormat goalFormat, DRV_Driver *Driver);
+jeTexture * jeBitmap_CreateTHandle(DRV_Driver *Driver,int Width,int Height,int NumMipLevels,
+			jePixelFormat SeekFormat1,jePixelFormat SeekFormat2,jeBoolean SeekCK,jeBoolean SeekAlpha,jeBoolean SeekSeparates,uint32 DriverFlags);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
